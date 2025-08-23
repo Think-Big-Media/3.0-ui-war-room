@@ -142,7 +142,7 @@ const SettingsPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Profile Settings */}
         <SettingsSection title="Profile Settings" icon={User} delay={0.1}>
-          <div className="space-y-4 pb-16">
+          <div className="space-y-4 pb-10">
             <div>
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Display Name
@@ -150,7 +150,7 @@ const SettingsPage: React.FC = () => {
               <input
                 type="text"
                 defaultValue="John Smith"
-                className="w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300"
+                className="w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 opacity-95"
               />
             </div>
             <div>
@@ -160,7 +160,7 @@ const SettingsPage: React.FC = () => {
               <input
                 type="email"
                 defaultValue="john@agency.com"
-                className="w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300"
+                className="w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 opacity-95"
               />
             </div>
             <div>
@@ -170,7 +170,7 @@ const SettingsPage: React.FC = () => {
               <input
                 type="text"
                 defaultValue="Elite Marketing Agency"
-                className="w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300"
+                className="w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 opacity-95"
               />
             </div>
           </div>
@@ -178,7 +178,7 @@ const SettingsPage: React.FC = () => {
 
         {/* Notification Settings */}
         <SettingsSection title="Notifications" icon={Bell} delay={0.2}>
-          <div className="space-y-4 pb-16">
+          <div className="space-y-4 pb-10">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-white/75" />
@@ -232,12 +232,12 @@ const SettingsPage: React.FC = () => {
 
         {/* Appearance Settings */}
         <SettingsSection title="Appearance" icon={Palette} delay={0.3}>
-          <div className="space-y-4 pb-16">
+          <div className="space-y-4 pb-10">
             <div>
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Theme
               </label>
-              <select className="w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer">
+              <select className="w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer opacity-95">
                 {themes.map((theme) => (
                   <option
                     key={theme}
@@ -262,7 +262,7 @@ const SettingsPage: React.FC = () => {
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Language
               </label>
-              <select className="w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer">
+              <select className="w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer opacity-95">
                 {languages.map((lang) => (
                   <option
                     key={lang}
@@ -279,7 +279,7 @@ const SettingsPage: React.FC = () => {
 
         {/* Security Settings */}
         <SettingsSection title="Security" icon={Shield} delay={0.4}>
-          <div className="space-y-4 pb-16">
+          <div className="space-y-4 pb-10">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <Key className="w-5 h-5 text-white/75" />
@@ -309,7 +309,7 @@ const SettingsPage: React.FC = () => {
 
         {/* Data & Privacy */}
         <SettingsSection title="Data & Privacy" icon={Database} delay={0.5}>
-          <div className="space-y-4 pb-16">
+          <div className="space-y-4 pb-10">
             <div className="flex items-center justify-between">
               <div className="ml-1.5">
                 <p className="text-white/90 font-medium">Data Sharing</p>
@@ -334,12 +334,12 @@ const SettingsPage: React.FC = () => {
 
         {/* Regional Settings */}
         <SettingsSection title="Regional" icon={Globe} delay={0.6}>
-          <div className="space-y-4 pb-16">
+          <div className="space-y-4 pb-10">
             <div>
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Timezone
               </label>
-              <select className="w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer">
+              <select className="w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer opacity-95">
                 {timezones.map((tz) => (
                   <option key={tz} value={tz} className="bg-gray-800">
                     {tz}
@@ -351,7 +351,7 @@ const SettingsPage: React.FC = () => {
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Date Format
               </label>
-              <select className="w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer">
+              <select className="w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer opacity-95">
                 <option className="bg-gray-800">MM/DD/YYYY</option>
                 <option className="bg-gray-800">DD/MM/YYYY</option>
                 <option className="bg-gray-800">YYYY-MM-DD</option>
