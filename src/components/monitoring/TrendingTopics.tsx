@@ -39,7 +39,7 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
       >
         TRENDING TOPICS (Issue Spike Detector)
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {topics.map((topic) => (
           <motion.div
             key={topic.id}

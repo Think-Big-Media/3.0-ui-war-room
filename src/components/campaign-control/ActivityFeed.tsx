@@ -32,7 +32,7 @@ const ActivityFeed: React.FC<ActivityFeedProps> = ({ activities }) => {
         >
           RECENT ACTIVITY
         </h3>
-        <div className="space-y-1">
+        <div className="space-y-3">
           {activities.map((activity) => (
             <div key={activity.id} className="flex items-start space-x-3">
               <div className="p-5 bg-black/20 rounded-lg">

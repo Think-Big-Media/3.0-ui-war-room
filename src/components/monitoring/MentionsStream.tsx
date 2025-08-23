@@ -118,7 +118,7 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
         </div>
       </div>
 
-      <div className="space-y-1 max-h-96 overflow-y-auto scroll-fade">
+      <div className="space-y-3 max-h-96 overflow-y-auto scroll-fade">
         {mentions.map((mention) => (
           <motion.div
             key={mention.id}
