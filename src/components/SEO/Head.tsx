@@ -154,7 +154,7 @@ export const AlertCenterHead: React.FC<Partial<HeadProps>> = (props) => (
 
 export const CampaignControlHead: React.FC<Partial<HeadProps>> = (props) => (
   <Head
-    title="Campaign Control"
+    title="War Room"
     description="Manage campaign assets, projects, and operational workflows."
     keywords={['campaign management', 'project control', 'asset management']}
     {...props}
@@ -163,7 +163,7 @@ export const CampaignControlHead: React.FC<Partial<HeadProps>> = (props) => (
 
 export const IntelligenceHubHead: React.FC<Partial<HeadProps>> = (props) => (
   <Head
-    title="Intelligence Hub"
+    title="Intelligence"
     description="AI-powered document intelligence and information analysis platform."
     keywords={['document intelligence', 'AI analysis', 'information hub']}
     {...props}
@@ -172,7 +172,7 @@ export const IntelligenceHubHead: React.FC<Partial<HeadProps>> = (props) => (
 
 export const RealTimeMonitoringHead: React.FC<Partial<HeadProps>> = (props) => (
   <Head
-    title="Real-Time Monitoring"
+    title="Live Monitoring"
     description="Live monitoring of campaign performance, social media, and public sentiment."
     keywords={['real-time monitoring', 'social media monitoring', 'sentiment analysis']}
     {...props}
