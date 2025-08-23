@@ -112,7 +112,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
             className={cn(
-              'absolute z-[100] mt-1 w-[130%] -ml-[15%]',
+              'absolute z-[9999] mt-1 w-[130%] -ml-[15%]',
               'bg-black/[0.97] backdrop-blur-md',
               'rounded',
               'overflow-hidden'
