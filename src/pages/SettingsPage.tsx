@@ -191,10 +191,12 @@ const SettingsPage: React.FC = () => {
                   </p>
                 </div>
               </div>
-              <ToggleSwitch
-                enabled={emailNotifications}
-                onChange={setEmailNotifications}
-              />
+              <div className="mt-1">
+                <ToggleSwitch
+                  enabled={emailNotifications}
+                  onChange={setEmailNotifications}
+                />
+              </div>
             </div>
             <div className="flex items-start justify-between">
               <div className="flex items-start space-x-3">
@@ -208,10 +210,12 @@ const SettingsPage: React.FC = () => {
                   </p>
                 </div>
               </div>
-              <ToggleSwitch
-                enabled={pushNotifications}
-                onChange={setPushNotifications}
-              />
+              <div className="mt-1">
+                <ToggleSwitch
+                  enabled={pushNotifications}
+                  onChange={setPushNotifications}
+                />
+              </div>
             </div>
             <div className="flex items-start justify-between">
               <div className="flex items-start space-x-3">
@@ -225,7 +229,9 @@ const SettingsPage: React.FC = () => {
                   </p>
                 </div>
               </div>
-              <ToggleSwitch enabled={autoPublish} onChange={setAutoPublish} />
+              <div className="mt-1">
+                <ToggleSwitch enabled={autoPublish} onChange={setAutoPublish} />
+              </div>
             </div>
           </div>
         </SettingsSection>
@@ -256,7 +262,9 @@ const SettingsPage: React.FC = () => {
                   Use dark theme across the platform
                 </p>
               </div>
-              <ToggleSwitch enabled={darkMode} onChange={setDarkMode} />
+              <div className="mt-1">
+                <ToggleSwitch enabled={darkMode} onChange={setDarkMode} />
+              </div>
             </div>
             <div>
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
@@ -292,7 +300,9 @@ const SettingsPage: React.FC = () => {
                   </p>
                 </div>
               </div>
-              <ToggleSwitch enabled={twoFactor} onChange={setTwoFactor} />
+              <div className="mt-1">
+                <ToggleSwitch enabled={twoFactor} onChange={setTwoFactor} />
+              </div>
             </div>
             <div>
               <button className="w-full bg-black/20 backdrop-blur-sm rounded-xl px-4 py-3 border border-purple-400/20 text-white/90 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 text-left">
@@ -317,7 +327,9 @@ const SettingsPage: React.FC = () => {
                   Share anonymized data for improvements
                 </p>
               </div>
-              <ToggleSwitch enabled={dataSharing} onChange={setDataSharing} />
+              <div className="mt-1">
+                <ToggleSwitch enabled={dataSharing} onChange={setDataSharing} />
+              </div>
             </div>
             <div>
               <button className="w-full bg-black/20 backdrop-blur-sm rounded-xl px-4 py-3 border border-purple-400/20 text-white/90 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 text-left">
