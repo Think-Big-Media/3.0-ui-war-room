@@ -61,21 +61,8 @@ const RealTimeMonitoring: React.FC = () => {
       {/* Slate gradient background */}
       <div className="fixed inset-0 bg-gradient-to-br from-slate-600 via-slate-700 to-slate-800 -z-10" />
 
-      {/* Critical Alert Banner */}
-      <div className="mb-4 bg-red-900/80 backdrop-blur-sm border border-red-500/50 rounded-xl p-4 flex items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse" />
-          <span className="text-red-100 font-medium text-sm lg:text-base">
-            Alert: Negative mentions about crime policy up 234% in last 12h — trending in District 8
-          </span>
-        </div>
-        <button
-          onClick={handleAlertAction}
-          className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-mono text-sm rounded-lg transition-all duration-200 whitespace-nowrap"
-        >
-          Respond Now
-        </button>
-      </div>
+      {/* Dynamic Alert Banner - Moved to top */}
+      <MonitoringAlert onAction={handleAlertAction} />
 
       {/* Live Status & Controls */}
       <MonitoringControls isLive={isLive} onToggleLive={handleToggleLive} />
