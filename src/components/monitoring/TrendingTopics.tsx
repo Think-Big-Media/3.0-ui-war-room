@@ -69,7 +69,7 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
               <span>{topic.region}</span>
               <span>LAST {topic.timeframe}</span>
             </div>
-            <div className="flex items-center space-x-2 mt-8 -ml-2">
+            <div className="flex items-center space-x-2 mt-4 -ml-2">
               <button
                 onClick={() => handleViewMentions(topic)}
                 className="btn-secondary-action"
