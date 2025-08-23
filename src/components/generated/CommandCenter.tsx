@@ -347,7 +347,7 @@ const CampaignOperationsHub: React.FC = () => {
           >
             ACTIVE PROJECTS
           </h4>
-          <div className="space-y-1 lg:space-y-1.5">
+          <div className="space-y-0.5 lg:space-y-1">
             {activeProjects.map((cluster, index) => (
               <motion.div
                 key={index}
@@ -397,7 +397,7 @@ const CampaignOperationsHub: React.FC = () => {
           >
             &nbsp;CONTENT TEMPLATES
           </h4>
-          <div className="grid grid-cols-2 gap-1 lg:gap-2">
+          <div className="grid grid-cols-2 gap-0.5 lg:gap-1">
             {contentTemplates.map((template, index) => (
               <motion.div
                 key={index}
