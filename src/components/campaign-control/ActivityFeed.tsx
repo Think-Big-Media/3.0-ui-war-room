@@ -44,7 +44,7 @@ const ActivityFeed: React.FC<ActivityFeedProps> = ({ activities }) => {
                   <span className="text-white/70"> {activity.action} </span>
                   <span className="font-medium">{activity.target}</span>
                 </div>
-                <div className="text-white/60 text-xs mt-1">
+                <div className="text-white/90 text-xs -mt-1">
                   {activity.timestamp}
                 </div>
               </div>
