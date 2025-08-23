@@ -60,6 +60,14 @@ class GoogleAdsAuthService {
    * Get Google Ads OAuth2 authorization URL
    */
   async getAuthUrl(state?: string): Promise<GoogleAdsAuthUrl> {
+    // In demo mode, return a mock URL
+    if (this.isDemoMode) {
+      return {
+        authorization_url: '#',
+        message: 'Demo mode - OAuth flow not available',
+      };
+    }
+
     try {
       const response = await api.post<GoogleAdsAuthUrl>(`${this.baseUrl}/auth/google-ads/redirect`, {
         state,
@@ -75,6 +83,14 @@ class GoogleAdsAuthService {
    * Manually refresh Google Ads access token
    */
   async refreshToken(): Promise<GoogleAdsAuthResponse> {
+    // In demo mode, return mock success
+    if (this.isDemoMode) {
+      return {
+        success: true,
+        message: 'Demo mode - token refresh simulated',
+      };
+    }
+
     try {
       const response = await api.post<GoogleAdsAuthResponse>(`${this.baseUrl}/auth/google-ads/refresh`);
       return response.data;
@@ -88,6 +104,14 @@ class GoogleAdsAuthService {
    * Revoke Google Ads access
    */
   async revokeAccess(): Promise<GoogleAdsAuthResponse> {
+    // In demo mode, return mock success
+    if (this.isDemoMode) {
+      return {
+        success: true,
+        message: 'Demo mode - access revocation simulated',
+      };
+    }
+
     try {
       const response = await api.post<GoogleAdsAuthResponse>(`${this.baseUrl}/auth/google-ads/revoke`);
       return response.data;
