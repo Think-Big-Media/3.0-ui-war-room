@@ -237,7 +237,7 @@ const IntelligenceHub: React.FC = () => {
           {/* File Options */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-0.5 ml-1.5">
+              <label className="block text-sm font-medium text-white/80 mb-1 ml-1.5">
                 Category
               </label>
               <CustomDropdown
@@ -255,7 +255,7 @@ const IntelligenceHub: React.FC = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-0.5 ml-1.5">
+              <label className="block text-sm font-medium text-white/80 mb-1 ml-1.5">
                 Tags
               </label>
               <input
@@ -267,7 +267,7 @@ const IntelligenceHub: React.FC = () => {
           </div>
 
           <div className="mt-4">
-            <label className="block text-sm font-medium text-white/80 mb-0.5 ml-1.5">
+            <label className="block text-sm font-medium text-white/80 mb-1 ml-1.5">
               Add Notes
             </label>
             <textarea
