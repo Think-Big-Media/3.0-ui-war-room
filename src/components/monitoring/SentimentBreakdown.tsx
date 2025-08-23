@@ -28,7 +28,7 @@ const SentimentBreakdown: React.FC<SentimentBreakdownProps> = ({
       >
         SENTIMENT BREAKDOWN
       </h3>
-      <div className="space-y-4">
+      <div className="space-y-4 px-2.5">
         <div className="flex items-center justify-between">
           <span className="text-white/80">Positive</span>
           <span className="text-green-400 font-medium">
