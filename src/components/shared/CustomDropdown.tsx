@@ -77,14 +77,14 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
         onKeyDown={handleKeyDown}
         className={cn(
           'flex items-center justify-between',
-          'px-4 py-1 rounded-lg text-sm font-mono uppercase',
+          'px-3 py-0.5 rounded-lg text-xs font-mono uppercase',
           'bg-transparent backdrop-blur-sm',
           'border border-white/30',
           'text-white/70',
           'hover:bg-white/5 hover:border-white/40',
           'transition-all duration-300',
           'focus:outline-none focus:ring-2 focus:ring-white/20',
-          'min-w-[140px] h-7',
+          'min-w-[112px] h-6',
           className
         )}
       >
@@ -112,7 +112,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
             className={cn(
-              'absolute z-[100] mt-2 w-full',
+              'absolute z-[100] mt-2 w-[130%]',
               'bg-black/70 backdrop-blur-sm',
               'border border-white/20 rounded-lg',
               'shadow-2xl shadow-black/30',
@@ -120,7 +120,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
             )}
           >
             <div className="py-2 max-h-60 overflow-y-auto custom-scrollbar">
-              {options.map((option) => (
+              {options.filter(option => option.value !== value).map((option) => (
                 <button
                   key={option.value}
                   type="button"
@@ -129,9 +129,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
                     'w-full px-4 py-2 text-left text-sm font-mono uppercase',
                     'flex items-center justify-between',
                     'transition-all duration-300',
-                    value === option.value
-                      ? 'bg-white/20 text-white'
-                      : 'text-white/80 hover:bg-black/20 hover:text-white'
+                    'text-white/80 hover:bg-white/30 hover:text-white'
                   )}
                 >
                   <div className="flex items-center space-x-2">
@@ -140,9 +138,6 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
                     )}
                     <span className="font-mono uppercase">{option.label}</span>
                   </div>
-                  {value === option.value && (
-                    <Check className="w-4 h-4 text-white/70 ml-2" />
-                  )}
                 </button>
               ))}
             </div>
