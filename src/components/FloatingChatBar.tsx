@@ -233,7 +233,7 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
                       Recent Conversations
                     </h3>
                   </div>
-                  <div className="flex-1 overflow-y-auto p-4">
+                  <div className="flex-1 overflow-y-auto p-4 scroll-fade scroll-fade-subtle">
                     <div className="space-y-2">
                       {chatHistory.map((chat) => (
                         <motion.button
