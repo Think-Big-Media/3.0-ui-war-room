@@ -186,7 +186,7 @@ const SettingsPage: React.FC = () => {
                   <p className="text-white/90 font-medium">
                     Email Notifications
                   </p>
-                  <p className="text-sm text-white/90 font-condensed tracking-wide -mt-1">
+                  <p className="text-sm text-white/60 font-condensed tracking-wide -mt-1">
                     Receive campaign updates via email
                   </p>
                 </div>
@@ -205,7 +205,7 @@ const SettingsPage: React.FC = () => {
                   <p className="text-white/90 font-medium">
                     Push Notifications
                   </p>
-                  <p className="text-sm text-white/90 font-condensed tracking-wide -mt-1">
+                  <p className="text-sm text-white/60 font-condensed tracking-wide -mt-1">
                     Get instant alerts on your device
                   </p>
                 </div>
@@ -224,7 +224,7 @@ const SettingsPage: React.FC = () => {
                   <p className="text-white/90 font-medium">
                     Auto-Publish Content
                   </p>
-                  <p className="text-sm text-white/90 font-condensed tracking-wide -mt-1">
+                  <p className="text-sm text-white/60 font-condensed tracking-wide -mt-1">
                     Automatically publish scheduled content
                   </p>
                 </div>
@@ -258,7 +258,7 @@ const SettingsPage: React.FC = () => {
             <div className="flex items-start justify-between">
               <div className="ml-4">
                 <p className="text-white/90 font-medium">Dark Mode</p>
-                <p className="text-sm text-white/60 font-condensed tracking-wide">
+                <p className="text-sm text-white/60 font-condensed tracking-wide -mt-1">
                   Use dark theme across the platform
                 </p>
               </div>
@@ -295,7 +295,7 @@ const SettingsPage: React.FC = () => {
                   <p className="text-white/90 font-medium">
                     Two-Factor Authentication
                   </p>
-                  <p className="text-sm text-white/90 font-condensed tracking-wide -mt-1">
+                  <p className="text-sm text-white/60 font-condensed tracking-wide -mt-1">
                     Add an extra layer of security
                   </p>
                 </div>
@@ -323,7 +323,7 @@ const SettingsPage: React.FC = () => {
             <div className="flex items-start justify-between">
               <div className="ml-4">
                 <p className="text-white/90 font-medium">Data Sharing</p>
-                <p className="text-sm text-white/60 font-condensed tracking-wide">
+                <p className="text-sm text-white/60 font-condensed tracking-wide -mt-1">
                   Share anonymized data for improvements
                 </p>
               </div>
