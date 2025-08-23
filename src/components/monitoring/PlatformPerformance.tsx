@@ -32,10 +32,13 @@ const PlatformPerformance: React.FC<PlatformPerformanceProps> = ({
   return (
     <Card padding="md" variant="glass">
       <h3
-        className="text-xl font-semibold text-white/20 mb-4 font-condensed tracking-wide"
+        className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide"
         style={{
           textRendering: 'optimizeLegibility',
           WebkitFontSmoothing: 'antialiased',
+          MozOsxFontSmoothing: 'grayscale',
+          fontKerning: 'normal',
+          textSizeAdjust: '100%',
         }}
       >
         PLATFORM PERFORMANCE
