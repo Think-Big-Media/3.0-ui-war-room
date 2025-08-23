@@ -77,20 +77,20 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
         onKeyDown={handleKeyDown}
         className={cn(
           'flex items-center justify-between',
-          'px-3 py-1.5 rounded-lg text-sm font-mono',
-          'bg-black/20 backdrop-blur-sm',
-          'border border-white/20',
-          'text-white/90',
-          'hover:bg-black/30 hover:border-white/30',
+          'px-4 py-1 rounded-lg text-sm font-mono uppercase',
+          'bg-transparent backdrop-blur-sm',
+          'border border-white/30',
+          'text-white/70',
+          'hover:bg-white/5 hover:border-white/40',
           'transition-all duration-300',
           'focus:outline-none focus:ring-2 focus:ring-white/20',
-          'min-w-[140px]',
+          'min-w-[140px] h-7',
           className
         )}
       >
         <div className="flex items-center space-x-2">
           {icon && <span className="text-white/70">{icon}</span>}
-          <span className="truncate font-mono">
+          <span className="truncate font-mono uppercase">
             {selectedOption ? selectedOption.label : placeholder}
           </span>
         </div>
@@ -112,21 +112,21 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
             className={cn(
-              'absolute z-50 mt-2 w-full',
-              'bg-black/20 backdrop-blur-sm',
+              'absolute z-[100] mt-2 w-full',
+              'bg-black/70 backdrop-blur-sm',
               'border border-white/20 rounded-lg',
               'shadow-2xl shadow-black/30',
               'overflow-hidden'
             )}
           >
-            <div className="py-1 max-h-60 overflow-y-auto custom-scrollbar">
+            <div className="py-2 max-h-60 overflow-y-auto custom-scrollbar">
               {options.map((option) => (
                 <button
                   key={option.value}
                   type="button"
                   onClick={() => handleOptionClick(option.value)}
                   className={cn(
-                    'w-full px-3 py-1.5 text-left text-sm font-mono',
+                    'w-full px-4 py-2 text-left text-sm font-mono uppercase',
                     'flex items-center justify-between',
                     'transition-all duration-300',
                     value === option.value
