@@ -62,40 +62,95 @@
 @layer base {
   /* Set default font and background */
   body {
-    @apply font-sans antialiased bg-gray-50 text-gray-900;
+    @apply font-condensed antialiased bg-gray-50 text-gray-900;
+    letter-spacing: 0.025em; /* Slight letter spacing for condensed font */
   }
 
-  /* Heading styles */
+  /* Heading styles - Using Barlow Condensed */
   h1 {
-    @apply text-4xl font-bold;
+    @apply text-4xl font-bold font-condensed tracking-tight;
   }
 
   h2 {
-    @apply text-3xl font-semibold;
+    @apply text-3xl font-semibold font-condensed tracking-tight;
   }
 
   h3 {
-    @apply text-2xl font-semibold;
+    @apply text-2xl font-semibold font-condensed;
   }
 
   h4 {
-    @apply text-xl font-medium;
+    @apply text-xl font-medium font-condensed;
   }
 
   h5 {
-    @apply text-lg font-medium;
+    @apply text-lg font-medium font-condensed;
   }
 
   h6 {
-    @apply text-base font-medium;
+    @apply text-base font-medium font-condensed;
+  }
+  
+  /* Interface elements use JetBrains Mono */
+  button, input, select, textarea {
+    @apply font-mono text-sm;
+    letter-spacing: -0.025em; /* Tighter spacing for mono font */
+  }
+  
+  /* Code and technical text */
+  code, kbd, samp, pre {
+    @apply font-mono text-sm;
+  }
+  
+  /* Labels and small UI text */
+  label, .label {
+    @apply font-mono text-xs uppercase tracking-wider;
+  }
+  
+  /* Navigation items */
+  nav a, .nav-item {
+    @apply font-mono text-sm font-medium;
+  }
+  
+  /* Status badges, metrics */
+  .badge, .metric, .stat {
+    @apply font-mono text-xs;
+  }
+  
+  /* Data tables */
+  table th {
+    @apply font-mono text-xs uppercase tracking-wider;
+  }
+  
+  table td {
+    @apply font-condensed;
   }
 }
 
 /* Custom component styles */
 @layer components {
-  /* Primary button style */
+  /* Primary button style - Using JetBrains Mono */
   .btn-primary {
-    @apply px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors;
+    @apply px-4 py-2 bg-blue-600 text-white font-mono font-medium text-sm rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors;
+  }
+  
+  /* Card titles should use Barlow Condensed */
+  .card-title {
+    @apply font-condensed font-semibold text-lg;
+  }
+  
+  /* Sidebar and menu items */
+  .sidebar-item, .menu-item {
+    @apply font-mono text-sm;
+  }
+  
+  /* Dashboard metrics and numbers */
+  .metric-value {
+    @apply font-mono font-semibold;
+  }
+  
+  .metric-label {
+    @apply font-mono text-xs uppercase tracking-wider opacity-75;
   }
 
   /* Secondary button style */

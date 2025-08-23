@@ -6,6 +6,13 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'sans': ['Barlow Condensed', 'system-ui', 'sans-serif'],
+        'condensed': ['Barlow Condensed', 'sans-serif'],
+        'mono': ['JetBrains Mono', 'monospace'],
+        'display': ['Barlow Condensed', 'sans-serif'],
+        'body': ['Barlow Condensed', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

@@ -56,6 +56,25 @@ export default defineConfig(({ mode }) => {
       port: env.VITE_PORT ? parseInt(env.VITE_PORT) : 5173,
       open: true,
       host: true, // Listen on all addresses
+      watch: {
+        // Exclude directories that shouldn't be watched to prevent ENOSPC errors
+        ignored: [
+          '**/src/backend/**',
+          '**/venv/**',
+          '**/.venv/**',
+          '**/node_modules/**',
+          '**/.git/**',
+          '**/dist/**',
+          '**/build/**',
+          '**/__pycache__/**',
+          '**/*.pyc',
+          '**/env/**',
+          '**/migrations/**',
+          '**/logs/**',
+          '**/tmp/**',
+          '**/temp/**'
+        ]
+      }
     },
   }
 })

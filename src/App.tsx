@@ -43,6 +43,10 @@ import TestAuth from './pages/TestAuth';
 import OAuthDiagnostics from './pages/OAuthDiagnostics';
 import SettingsPage from './pages/SettingsPage';
 
+// Import Builder.io components
+import BuilderPage from './pages/BuilderPage';
+import './builder-registry'; // Register components with Builder
+
 // Loading component for lazy-loaded routes
 const LazyLoadFallback = ({ componentName }: { componentName: string }) => (
   <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -263,6 +267,10 @@ function App() {
             <Dashboard />
           </React.Suspense>
         } />
+
+        {/* Builder.io Routes - Visual Editor Pages */}
+        <Route path="/builder/*" element={<BuilderPage />} />
+        <Route path="/builder" element={<BuilderPage />} />
 
         {/* 404 Route */}
         <Route
