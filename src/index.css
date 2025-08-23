@@ -245,9 +245,19 @@
     @apply text-white/90 font-condensed tracking-wide -mt-1;
   }
 
-  /* Container spacing fix - double card padding reduced by 47.5% (40px * 0.525 = 21px = pb-5) */
+  /* Container spacing fix - optimized bottom spacing (21px = pb-5) */
   .space-with-bottom {
     @apply pb-5;
+  }
+
+  /* Icon alignment fix - 2px down to align with headline baselines */
+  .war-room-icon-aligned {
+    @apply mt-0.5;
+  }
+
+  /* Content indentation - 10px from box edges */
+  .war-room-content-indent {
+    @apply ml-2.5;
   }
 
   /* Card component */
