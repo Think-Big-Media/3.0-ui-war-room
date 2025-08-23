@@ -59,99 +59,108 @@ const severityConfig = {
 };
 
 // Individual alert component
-const AlertItem = memo<{ alert: RealTimeAlert; onAcknowledge: (id: string) => void }>(
-  ({ alert, onAcknowledge }) => {
-    const config = severityConfig[alert.severity as keyof typeof severityConfig] || severityConfig.medium;
-    const Icon = config.icon;
+const AlertItem = memo<{
+  alert: RealTimeAlert;
+  onAcknowledge: (id: string) => void;
+}>(({ alert, onAcknowledge }) => {
+  const config =
+    severityConfig[alert.severity as keyof typeof severityConfig] ||
+    severityConfig.medium;
+  const Icon = config.icon;
 
-    return (
-      <motion.div
-        layout
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: 50 }}
-        whileHover={{ scale: 1.02 }}
-        className={`
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, x: -50 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 50 }}
+      whileHover={{ scale: 1.02 }}
+      className={`
           relative overflow-hidden rounded-lg border p-4
           ${config.lightColor} ${config.borderColor}
           transition-all duration-200
         `}
-      >
-        {/* Priority indicator */}
-        <div className={`absolute left-0 top-0 bottom-0 w-1 ${config.color}`} />
+    >
+      {/* Priority indicator */}
+      <div className={`absolute left-0 top-0 bottom-0 w-1 ${config.color}`} />
 
-        <div className="flex items-start justify-between">
-          <div className="flex items-start space-x-3 flex-1">
-            <div className={`p-2 rounded-lg ${config.color} bg-opacity-20`}>
-              <Icon size={20} className={config.textColor} />
-            </div>
-
-            <div className="flex-1">
-              <h4 className={`font-semibold ${config.textColor}`}>
-                {alert.campaign_name ? `${alert.campaign_name}: ${alert.alert_type.replace('_', ' ')}` : alert.message}
-              </h4>
-
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                {alert.message}
-              </p>
-
-              {/* Alert metadata */}
-              <div className="flex flex-wrap items-center gap-3 mt-3 text-xs text-gray-500 dark:text-gray-400">
-                <div className="flex items-center gap-1">
-                  <Clock size={14} />
-                  <span>{new Date(alert.timestamp).toLocaleTimeString()}</span>
-                </div>
-
-                <div className="flex items-center gap-1">
-                  <span className="font-medium">Platform:</span>
-                  <span className="capitalize">{alert.platform}</span>
-                </div>
-
-                {alert.current_value && (
-                  <div className="flex items-center gap-1">
-                    <TrendingUp size={14} />
-                    <span>Current: {typeof alert.current_value === 'number' ?
-                      alert.current_value.toFixed(2) : alert.current_value}</span>
-                  </div>
-                )}
-
-                {alert.threshold_value && (
-                  <div className="flex items-center gap-1">
-                    <span className="font-medium">Threshold:</span>
-                    <span>{alert.threshold_value.toFixed(2)}</span>
-                  </div>
-                )}
-              </div>
-            </div>
+      <div className="flex items-start justify-between">
+        <div className="flex items-start space-x-3 flex-1">
+          <div className={`p-2 rounded-lg ${config.color} bg-opacity-20`}>
+            <Icon size={20} className={config.textColor} />
           </div>
 
-          {/* Actions */}
-          <div className="flex items-center space-x-2 ml-4">
-            {/* TODO: Add acknowledged state management */}
-            {true && (
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={() => onAcknowledge(alert.campaign_id)}
-                className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                title="Acknowledge alert"
-              >
-                <CheckCircle size={18} className="text-green-600" />
-              </motion.button>
-            )}
+          <div className="flex-1">
+            <h4 className={`font-semibold ${config.textColor}`}>
+              {alert.campaign_name
+                ? `${alert.campaign_name}: ${alert.alert_type.replace('_', ' ')}`
+                : alert.message}
+            </h4>
 
-            <button
-              className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-              title="Dismiss"
-            >
-              <X size={18} className="text-gray-500" />
-            </button>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              {alert.message}
+            </p>
+
+            {/* Alert metadata */}
+            <div className="flex flex-wrap items-center gap-3 mt-3 text-xs text-gray-500 dark:text-gray-400">
+              <div className="flex items-center gap-1">
+                <Clock size={14} />
+                <span>{new Date(alert.timestamp).toLocaleTimeString()}</span>
+              </div>
+
+              <div className="flex items-center gap-1">
+                <span className="font-medium">Platform:</span>
+                <span className="uppercase font-mono">{alert.platform}</span>
+              </div>
+
+              {alert.current_value && (
+                <div className="flex items-center gap-1">
+                  <TrendingUp size={14} />
+                  <span>
+                    Current:{' '}
+                    {typeof alert.current_value === 'number'
+                      ? alert.current_value.toFixed(2)
+                      : alert.current_value}
+                  </span>
+                </div>
+              )}
+
+              {alert.threshold_value && (
+                <div className="flex items-center gap-1">
+                  <span className="font-medium">Threshold:</span>
+                  <span>{alert.threshold_value.toFixed(2)}</span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </motion.div>
-    );
-  },
-);
+
+        {/* Actions */}
+        <div className="flex items-center space-x-2 ml-4">
+          {/* TODO: Add acknowledged state management */}
+          {true && (
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => onAcknowledge(alert.campaign_id)}
+              className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              title="Acknowledge alert"
+            >
+              <CheckCircle size={18} className="text-green-600" />
+            </motion.button>
+          )}
+
+          <button
+            className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            title="Dismiss"
+          >
+            <X size={18} className="text-gray-500" />
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  );
+});
 
 AlertItem.displayName = 'AlertItem';
 
@@ -178,7 +187,9 @@ export const AlertCenter: React.FC = memo(() => {
     if (notificationsEnabled && criticalAlertsCount > 0) {
       // Play sound (implementation would depend on audio setup)
       const audio = new Audio('/sounds/critical-alert.mp3');
-      audio.play().catch(err => console.error('Failed to play alert sound:', err));
+      audio
+        .play()
+        .catch((err) => console.error('Failed to play alert sound:', err));
     }
   }, [criticalAlertsCount, notificationsEnabled]);
 
@@ -226,10 +237,11 @@ export const AlertCenter: React.FC = memo(() => {
                   onClick={() => setFilter(f)}
                   className={`
                     px-3 py-1 text-sm rounded transition-colors
-                    ${filter === f
-                  ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm'
-                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-                }
+                    ${
+                      filter === f
+                        ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm'
+                        : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                    }
                   `}
                 >
                   {f.charAt(0).toUpperCase() + f.slice(1)}
@@ -242,21 +254,28 @@ export const AlertCenter: React.FC = memo(() => {
               onClick={() => setNotificationsEnabled(!notificationsEnabled)}
               className={`
                 p-2 rounded-lg transition-colors
-                ${notificationsEnabled
-      ? 'bg-blue-100 dark:bg-blue-900 text-blue-600'
-      : 'bg-gray-100 dark:bg-gray-700 text-gray-500'
-    }
+                ${
+                  notificationsEnabled
+                    ? 'bg-blue-100 dark:bg-blue-900 text-blue-600'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-500'
+                }
               `}
-              title={notificationsEnabled ? 'Notifications on' : 'Notifications off'}
+              title={
+                notificationsEnabled ? 'Notifications on' : 'Notifications off'
+              }
             >
-              {notificationsEnabled ? <Bell size={18} /> : <BellOff size={18} />}
+              {notificationsEnabled ? (
+                <Bell size={18} />
+              ) : (
+                <BellOff size={18} />
+              )}
             </button>
           </div>
         </div>
       </div>
 
       {/* Alert list */}
-      <div className="max-h-96 overflow-y-auto">
+      <div className="max-h-96 overflow-y-auto scroll-fade-subtle">
         <AnimatePresence mode="popLayout">
           {filteredAlerts.length === 0 ? (
             <motion.div
@@ -287,13 +306,15 @@ export const AlertCenter: React.FC = memo(() => {
         <div className="p-4 border-t border-gray-200 dark:border-gray-700">
           <div className="grid grid-cols-4 gap-4 text-center">
             {Object.entries(severityConfig).map(([severity, config]) => {
-              const count = alerts.filter((a: RealTimeAlert) => a.severity === severity).length;
+              const count = alerts.filter(
+                (a: RealTimeAlert) => a.severity === severity
+              ).length;
               return (
                 <div key={severity} className="text-sm">
                   <div className={`text-2xl font-bold ${config.textColor}`}>
                     {count}
                   </div>
-                  <div className="text-gray-500 dark:text-gray-400 capitalize">
+                  <div className="text-gray-500 dark:text-gray-400 uppercase font-mono">
                     {severity}
                   </div>
                 </div>

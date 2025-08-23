@@ -29,7 +29,7 @@ const AssetCard: React.FC<AssetCardProps> = ({
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center space-x-2">
           {getAssetIcon(asset.type)}
-          <span className="text-white/80 text-sm font-medium capitalize">
+          <span className="text-white/80 text-sm font-medium uppercase font-mono">
             {asset.type}
           </span>
         </div>

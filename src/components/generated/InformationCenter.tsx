@@ -29,7 +29,10 @@ import PageLayout from '../shared/PageLayout';
 import PageHeader from '../shared/PageHeader';
 import Card from '../shared/Card';
 import { informationService } from '../../services/informationService';
-import { type InformationItem, type InformationFilters } from '../../types/information';
+import {
+  type InformationItem,
+  type InformationFilters,
+} from '../../types/information';
 
 const InformationCenter: React.FC = () => {
   const [activeTab, setActiveTab] = useState('live-stream');
@@ -71,7 +74,10 @@ const InformationCenter: React.FC = () => {
 
     if (category && category !== 'all') {
       setActiveTab('notification-center');
-      setFilters((prev) => ({ ...prev, category: category as InformationFilters['category'] }));
+      setFilters((prev) => ({
+        ...prev,
+        category: category as InformationFilters['category'],
+      }));
     }
 
     if (itemId) {
@@ -153,7 +159,7 @@ const InformationCenter: React.FC = () => {
     const date = new Date(timestamp);
     const now = new Date();
     const diffMinutes = Math.floor(
-      (now.getTime() - date.getTime()) / (1000 * 60),
+      (now.getTime() - date.getTime()) / (1000 * 60)
     );
 
     if (diffMinutes < 60) {
@@ -162,7 +168,6 @@ const InformationCenter: React.FC = () => {
       return `${Math.floor(diffMinutes / 60)}h ago`;
     }
     return `${Math.floor(diffMinutes / 1440)}d ago`;
-
   };
 
   return (
@@ -223,7 +228,7 @@ const InformationCenter: React.FC = () => {
               {
                 title: 'Smart Recommendations',
                 count: items.filter(
-                  (i) => i.category === 'smart-recommendations',
+                  (i) => i.category === 'smart-recommendations'
                 ).length,
                 icon: Target,
                 color: 'text-orange-400',
@@ -251,10 +256,7 @@ const InformationCenter: React.FC = () => {
           </div>
 
           {/* Live Stream Items */}
-          <Card
-            padding="md"
-            variant="glass"
-          >
+          <Card padding="md" variant="glass">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-white/95">
                 Live Stream
@@ -267,7 +269,7 @@ const InformationCenter: React.FC = () => {
               </button>
             </div>
 
-            <div className="space-y-4 max-h-96 overflow-y-auto">
+            <div className="space-y-4 max-h-96 overflow-y-auto scroll-fade">
               {items.slice(0, 20).map((item) => {
                 const IconComponent = getIcon(item);
                 return (
@@ -304,13 +306,11 @@ const InformationCenter: React.FC = () => {
                         <p className="text-white/70 text-sm mb-2">
                           {item.text}
                         </p>
-                        <div className="flex items-center space-x-4 text-xs text-white/60">
+                        <div className="flex items-center space-x-4 text-xs text-white/60 font-mono uppercase">
                           <span>{formatTimestamp(item.timestamp)}</span>
-                          <span className="capitalize">
-                            {item.category.replace('-', ' ')}
-                          </span>
+                          <span>{item.category.replace('-', ' ')}</span>
                           {item.actionable && (
-                            <span className="text-green-400">• Actionable</span>
+                            <span className="text-green-400">• ACTIONABLE</span>
                           )}
                         </div>
                       </div>
@@ -331,10 +331,7 @@ const InformationCenter: React.FC = () => {
           className="space-y-6"
         >
           {/* Filters */}
-          <Card
-            padding="sm"
-            variant="glass"
-          >
+          <Card padding="sm" variant="glass">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div className="flex items-center space-x-4">
                 <div className="relative">
@@ -357,7 +354,8 @@ const InformationCenter: React.FC = () => {
                   onChange={(e) =>
                     setFilters((prev) => ({
                       ...prev,
-                      category: e.target.value as InformationFilters['category'],
+                      category: e.target
+                        .value as InformationFilters['category'],
                     }))
                   }
                   className="bg-black/20 border border-white/30 rounded-lg px-3 py-2 text-white"
@@ -374,7 +372,8 @@ const InformationCenter: React.FC = () => {
                   onChange={(e) =>
                     setFilters((prev) => ({
                       ...prev,
-                      priority: e.target.value as InformationFilters['priority'],
+                      priority: e.target
+                        .value as InformationFilters['priority'],
                     }))
                   }
                   className="bg-black/20 border border-white/30 rounded-lg px-3 py-2 text-white"

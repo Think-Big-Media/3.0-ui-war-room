@@ -19,7 +19,8 @@ interface HeadProps {
 
 const defaultMeta = {
   title: 'War Room - Political Campaign Management Platform',
-  description: 'Comprehensive campaign management platform for political campaigns, advocacy groups, and non-profit organizations. Manage volunteers, events, communications, and data analytics.',
+  description:
+    'Comprehensive campaign management platform for political campaigns, advocacy groups, and non-profit organizations. Manage volunteers, events, communications, and data analytics.',
   image: 'https://war-room-oa9t.onrender.com/og-image.png',
   url: 'https://war-room-oa9t.onrender.com',
   type: 'website' as const,
@@ -53,7 +54,9 @@ export const Head: React.FC<HeadProps> = ({
   noIndex = false,
   canonicalUrl,
 }) => {
-  const siteTitle = title ? `${title} | ${defaultMeta.title}` : defaultMeta.title;
+  const siteTitle = title
+    ? `${title} | ${defaultMeta.title}`
+    : defaultMeta.title;
   const metaDescription = description || defaultMeta.description;
   const metaImage = image || defaultMeta.image;
   const metaUrl = url || defaultMeta.url;
@@ -88,9 +91,15 @@ export const Head: React.FC<HeadProps> = ({
       {/* Article specific Open Graph tags */}
       {type === 'article' && (
         <>
-          {publishedTime && <meta property="article:published_time" content={publishedTime} />}
-          {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
-          {metaAuthor && <meta property="article:author" content={metaAuthor} />}
+          {publishedTime && (
+            <meta property="article:published_time" content={publishedTime} />
+          )}
+          {modifiedTime && (
+            <meta property="article:modified_time" content={modifiedTime} />
+          )}
+          {metaAuthor && (
+            <meta property="article:author" content={metaAuthor} />
+          )}
           {section && <meta property="article:section" content={section} />}
           {tags.map((tag, index) => (
             <meta key={index} property="article:tag" content={tag} />
@@ -116,9 +125,23 @@ export const Head: React.FC<HeadProps> = ({
 
       {/* Favicon and app icons */}
       <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/favicon-16x16.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="/favicon-32x32.png"
+      />
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="/apple-touch-icon.png"
+      />
       <link rel="manifest" href="/site.webmanifest" />
     </Helmet>
   );
@@ -129,7 +152,11 @@ export const DashboardHead: React.FC<Partial<HeadProps>> = (props) => (
   <Head
     title="Dashboard"
     description="Campaign command center with real-time monitoring, analytics, and crisis management tools."
-    keywords={['campaign dashboard', 'real-time monitoring', 'campaign metrics']}
+    keywords={[
+      'campaign dashboard',
+      'real-time monitoring',
+      'campaign metrics',
+    ]}
     {...props}
   />
 );
@@ -154,7 +181,7 @@ export const AlertCenterHead: React.FC<Partial<HeadProps>> = (props) => (
 
 export const CampaignControlHead: React.FC<Partial<HeadProps>> = (props) => (
   <Head
-    title="Campaign Control"
+    title="War Room"
     description="Manage campaign assets, projects, and operational workflows."
     keywords={['campaign management', 'project control', 'asset management']}
     {...props}
@@ -163,7 +190,7 @@ export const CampaignControlHead: React.FC<Partial<HeadProps>> = (props) => (
 
 export const IntelligenceHubHead: React.FC<Partial<HeadProps>> = (props) => (
   <Head
-    title="Intelligence Hub"
+    title="Intelligence"
     description="AI-powered document intelligence and information analysis platform."
     keywords={['document intelligence', 'AI analysis', 'information hub']}
     {...props}
@@ -172,9 +199,13 @@ export const IntelligenceHubHead: React.FC<Partial<HeadProps>> = (props) => (
 
 export const RealTimeMonitoringHead: React.FC<Partial<HeadProps>> = (props) => (
   <Head
-    title="Real-Time Monitoring"
+    title="Live Monitoring"
     description="Live monitoring of campaign performance, social media, and public sentiment."
-    keywords={['real-time monitoring', 'social media monitoring', 'sentiment analysis']}
+    keywords={[
+      'real-time monitoring',
+      'social media monitoring',
+      'sentiment analysis',
+    ]}
     {...props}
   />
 );

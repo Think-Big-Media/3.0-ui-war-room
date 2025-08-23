@@ -31,20 +31,33 @@ const PlatformPerformance: React.FC<PlatformPerformanceProps> = ({
 
   return (
     <Card padding="md" variant="glass">
-      <h3 className="text-lg font-semibold text-white/95 mb-4">Platform Performance</h3>
-      <div className="space-y-3">
+      <h3
+        className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide ml-1.5"
+        style={{
+          textRendering: 'optimizeLegibility',
+          WebkitFontSmoothing: 'antialiased',
+          MozOsxFontSmoothing: 'grayscale',
+          fontKerning: 'normal',
+          textSizeAdjust: '100%',
+        }}
+      >
+        PLATFORM PERFORMANCE
+      </h3>
+      <div className="space-y-3 px-1.5">
         {platformData.map((platform, index) => (
           <div key={index} className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               {getPlatformIcon(platform.icon)}
               <span className="text-white/80">{platform.platform}</span>
             </div>
-            <span className="text-white/90 font-medium">{platform.percentage}%</span>
+            <span className="text-white/90 font-medium">
+              {platform.percentage}%
+            </span>
           </div>
         ))}
       </div>
-      <div className="mt-4 p-3 bg-black/20 rounded-lg">
-        <p className="text-xs text-white/70">
+      <div className="mt-4 mx-1 p-3 bg-black/20 rounded-lg">
+        <p className="text-xs text-white/70 font-mono uppercase">
           <span className="text-blue-400">{insights}</span>
         </p>
       </div>

@@ -18,7 +18,7 @@ export const WebSocketTester: React.FC = () => {
 
   const addLog = (message: string) => {
     const timestamp = new Date().toLocaleTimeString();
-    setTestLog(prev => [`[${timestamp}] ${message}`, ...prev.slice(0, 9)]);
+    setTestLog((prev) => [`[${timestamp}] ${message}`, ...prev.slice(0, 9)]);
   };
 
   const runConnectionTest = async () => {
@@ -34,7 +34,7 @@ export const WebSocketTester: React.FC = () => {
       }
 
       // Wait for connection
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // Test 2: Send test messages
       addLog('Test 2: Sending test messages');
@@ -44,7 +44,7 @@ export const WebSocketTester: React.FC = () => {
           payload: { test_id: i, timestamp: Date.now() },
         });
         addLog(`Message ${i} sent: ${success ? 'Success' : 'Failed'}`);
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 500));
       }
 
       // Test 3: Alert subscription
@@ -58,7 +58,6 @@ export const WebSocketTester: React.FC = () => {
       addLog('Requested spend update');
 
       addLog('✅ Connection test completed successfully');
-
     } catch (error) {
       addLog(`❌ Test failed: ${error}`);
     } finally {
@@ -89,8 +88,12 @@ export const WebSocketTester: React.FC = () => {
     >
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-lg font-semibold text-gray-900">WebSocket Connection Tester</h3>
-          <p className="text-sm text-gray-500">Test connection resilience and reconnection logic</p>
+          <h3 className="text-lg font-semibold text-gray-900">
+            WebSocket Connection Tester
+          </h3>
+          <p className="text-sm text-gray-500">
+            Test connection resilience and reconnection logic
+          </p>
         </div>
         <div className="flex items-center space-x-2">
           <Wifi className="w-5 h-5 text-blue-500" />
@@ -116,7 +119,7 @@ export const WebSocketTester: React.FC = () => {
         <button
           onClick={runConnectionTest}
           disabled={isRunningTest}
-          className="flex items-center justify-center space-x-2 px-3 py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="btn-secondary-action flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isRunningTest ? (
             <>
@@ -134,7 +137,7 @@ export const WebSocketTester: React.FC = () => {
         <button
           onClick={simulateDisconnection}
           disabled={isRunningTest}
-          className="flex items-center justify-center space-x-2 px-3 py-1.5 bg-orange-600 text-white rounded-lg hover:bg-orange-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="btn-secondary-alert flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <AlertTriangle className="w-4 h-4" />
           <span>Simulate Disconnect</span>
@@ -142,7 +145,7 @@ export const WebSocketTester: React.FC = () => {
 
         <button
           onClick={clearLogs}
-          className="flex items-center justify-center space-x-2 px-3 py-1.5 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+          className="btn-secondary-neutral flex items-center justify-center space-x-2"
         >
           <RotateCcw className="w-4 h-4" />
           <span>Clear Logs</span>
@@ -185,7 +188,9 @@ export const WebSocketTester: React.FC = () => {
         <h4 className="text-sm font-medium text-gray-700 mb-3">Test Log</h4>
         <div className="bg-gray-900 text-green-400 p-4 rounded-lg h-64 overflow-y-auto font-mono text-sm">
           {testLog.length === 0 ? (
-            <div className="text-gray-500">No logs yet. Run a test to see output.</div>
+            <div className="text-gray-500">
+              No logs yet. Run a test to see output.
+            </div>
           ) : (
             testLog.map((log, index) => (
               <div key={index} className="mb-1">
@@ -199,7 +204,9 @@ export const WebSocketTester: React.FC = () => {
       {/* Last Message Display */}
       {ws.lastJsonMessage && (
         <div className="mt-4">
-          <h4 className="text-sm font-medium text-gray-700 mb-2">Last WebSocket Message</h4>
+          <h4 className="text-sm font-medium text-gray-700 mb-2">
+            Last WebSocket Message
+          </h4>
           <pre className="bg-gray-100 p-3 rounded-lg text-xs overflow-x-auto">
             {JSON.stringify(ws.lastJsonMessage, null, 2)}
           </pre>

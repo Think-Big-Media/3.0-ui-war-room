@@ -20,15 +20,21 @@ api.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  },
+  }
 );
 
 // Response interceptor for error handling
 api.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
-    // Log error for debugging
-    console.error('API Error:', error.message);
+    // Only log errors that aren't expected (e.g., Google Ads 404s are expected when backend is off)
+    const isGoogleAdsEndpoint =
+      error.config?.url?.includes('/auth/google-ads/');
+    const is404 = error.response?.status === 404;
+
+    if (!(isGoogleAdsEndpoint && is404)) {
+      console.error('API Error:', error.message);
+    }
 
     // Handle specific error cases
     if (error.response) {
@@ -57,7 +63,7 @@ api.interceptors.response.use(
     } else {
       throw new Error('An unexpected error occurred.');
     }
-  },
+  }
 );
 
 export default api;

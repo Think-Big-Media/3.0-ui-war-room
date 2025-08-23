@@ -7,6 +7,7 @@ export interface CardProps extends HTMLMotionProps<'div'> {
   variant?: 'glass' | 'solid' | 'elevated' | 'bordered';
   hover?: boolean;
   padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
+  noShadow?: boolean;
   children: React.ReactNode;
 }
 
@@ -14,6 +15,7 @@ const Card: React.FC<CardProps> = ({
   variant = 'glass',
   hover = true,
   padding = 'md',
+  noShadow = false,
   className,
   children,
   ...props
@@ -30,8 +32,8 @@ const Card: React.FC<CardProps> = ({
   const paddingStyles = {
     none: '',
     sm: 'p-4',
-    md: 'p-6',
-    lg: 'p-8',
+    md: 'p-4',
+    lg: 'p-5',
     xl: 'p-10',
   };
 
@@ -39,8 +41,10 @@ const Card: React.FC<CardProps> = ({
     ? 'hover:bg-white/5 hover:border-white/30 hover:shadow-lg'
     : '';
 
-  // Box shadow for glass effect
-  const boxShadow = '0 4px 8px -2px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.08)';
+  // Box shadow for glass effect (unless disabled)
+  const boxShadow = noShadow
+    ? undefined
+    : '0 4px 8px -2px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.08)';
 
   return (
     <motion.div
@@ -49,9 +53,9 @@ const Card: React.FC<CardProps> = ({
         variantStyles[variant],
         paddingStyles[padding],
         hoverStyles,
-        className,
+        className
       )}
-      style={{ boxShadow }}
+      style={boxShadow ? { boxShadow } : {}}
       {...(hover ? ANIMATION_CONFIGS.card : {})}
       {...props}
     >

@@ -52,14 +52,16 @@ const RealTimeMonitoring: React.FC = () => {
     return matchesSource && matchesSentiment && matchesRegion;
   });
 
-
   return (
     <PageLayout
-      pageTitle="Real-Time Monitoring"
+      pageTitle="Live Monitoring"
       placeholder="Ask War Room about monitoring data..."
     >
       {/* Slate gradient background */}
       <div className="fixed inset-0 bg-gradient-to-br from-slate-600 via-slate-700 to-slate-800 -z-10" />
+
+      {/* Dynamic Alert Banner - Moved to top */}
+      <MonitoringAlert onAction={handleAlertAction} />
 
       {/* Live Status & Controls */}
       <MonitoringControls isLive={isLive} onToggleLive={handleToggleLive} />
@@ -82,9 +84,6 @@ const RealTimeMonitoring: React.FC = () => {
           <InfluencerTracker influencers={mockInfluencers} />
         </div>
       </div>
-
-      {/* Dynamic Alert Banner */}
-      <MonitoringAlert onAction={handleAlertAction} />
     </PageLayout>
   );
 };

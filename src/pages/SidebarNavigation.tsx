@@ -66,37 +66,37 @@ const TopNavigation: React.FC = () => {
   const navItems = [
     {
       icon: Home,
-      label: 'Command Center',
+      label: 'DASHBOARD',
       path: '/',
       active: location.pathname === '/',
     },
     {
       icon: BarChart3,
-      label: 'Real-Time Monitoring',
+      label: 'LIVE MONITORING',
       path: '/real-time-monitoring',
       active: location.pathname === '/real-time-monitoring',
     },
     {
       icon: Target,
-      label: 'Campaign Control',
+      label: 'WAR ROOM',
       path: '/campaign-control',
       active: location.pathname === '/campaign-control',
     },
     {
       icon: Brain,
-      label: 'Intelligence Hub',
+      label: 'INTELLIGENCE',
       path: '/intelligence-hub',
       active: location.pathname === '/intelligence-hub',
     },
     {
       icon: Bell,
-      label: 'Alert Center',
+      label: 'ALERT CENTER',
       path: '/alert-center',
       active: location.pathname === '/alert-center',
     },
     {
       icon: Settings,
-      label: 'Settings',
+      label: 'SETTINGS',
       path: '/settings',
       active: location.pathname === '/settings',
     },
@@ -116,7 +116,7 @@ const TopNavigation: React.FC = () => {
     const date = new Date(timestamp);
     const now = new Date();
     const diffMinutes = Math.floor(
-      (now.getTime() - date.getTime()) / (1000 * 60),
+      (now.getTime() - date.getTime()) / (1000 * 60)
     );
 
     if (diffMinutes < 60) {
@@ -125,7 +125,6 @@ const TopNavigation: React.FC = () => {
       return `${Math.floor(diffMinutes / 60)}h ago`;
     }
     return `${Math.floor(diffMinutes / 1440)}d ago`;
-
   };
 
   const getPriorityColor = (priority: string) => {
@@ -164,7 +163,7 @@ const TopNavigation: React.FC = () => {
           </div>
 
           {/* Navigation Items - Compact spacing */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center space-x-2">
             {navItems.map((item, index) => (
               <motion.button
                 key={index}
@@ -177,8 +176,12 @@ const TopNavigation: React.FC = () => {
                     : 'text-white/70 hover:text-white hover:bg-white/10'
                 }`}
               >
-                <item.icon className="w-4 h-4" />
-                <span className="whitespace-nowrap overflow-hidden text-ellipsis">{item.label}</span>
+                <item.icon
+                  className={`w-4 h-4 flex-shrink-0 ${item.icon === Home ? '-translate-y-0.5' : ''}`}
+                />
+                <span className="whitespace-nowrap overflow-hidden text-ellipsis">
+                  {item.label}
+                </span>
               </motion.button>
             ))}
           </div>
@@ -357,7 +360,7 @@ const TopNavigation: React.FC = () => {
                         : 'text-white/80 hover:bg-white/10'
                     }`}
                   >
-                    <item.icon className="w-5 h-5" />
+                    <item.icon className="w-5 h-5 flex-shrink-0" />
                     <span className="text-lg">{item.label}</span>
                   </motion.button>
                 ))}

@@ -50,19 +50,39 @@ interface ChatQuery {
 const IntelligenceHub: React.FC = () => {
   const [activeTab, setActiveTab] = useState('upload');
   const [selectedFile, setSelectedFile] = useState<IntelligenceFile | null>(
-    null,
+    null
   );
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('all');
 
   // Dropdown options
   const filterOptions = [
-    { value: 'all', label: 'All Files', icon: <BarChart3 className="w-4 h-4" /> },
+    {
+      value: 'all',
+      label: 'All Files',
+      icon: <BarChart3 className="w-4 h-4" />,
+    },
     { value: 'polling', label: 'Polling', icon: <Brain className="w-4 h-4" /> },
-    { value: 'field-report', label: 'Field Reports', icon: <FileText className="w-4 h-4" /> },
-    { value: 'opposition-research', label: 'Opposition Research', icon: <Eye className="w-4 h-4" /> },
-    { value: 'messaging', label: 'Messaging Assets', icon: <MessageSquare className="w-4 h-4" /> },
-    { value: 'news-media', label: 'News & Media', icon: <Link className="w-4 h-4" /> },
+    {
+      value: 'field-report',
+      label: 'Field Reports',
+      icon: <FileText className="w-4 h-4" />,
+    },
+    {
+      value: 'opposition-research',
+      label: 'Opposition Research',
+      icon: <Eye className="w-4 h-4" />,
+    },
+    {
+      value: 'messaging',
+      label: 'Messaging Assets',
+      icon: <MessageSquare className="w-4 h-4" />,
+    },
+    {
+      value: 'news-media',
+      label: 'News & Media',
+      icon: <Link className="w-4 h-4" />,
+    },
   ];
 
   const intelligenceFiles: IntelligenceFile[] = [
@@ -138,7 +158,7 @@ const IntelligenceHub: React.FC = () => {
     const matchesSearch =
       file.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       file.tags.some((tag) =>
-        tag.toLowerCase().includes(searchTerm.toLowerCase()),
+        tag.toLowerCase().includes(searchTerm.toLowerCase())
       );
     const matchesFilter = filterType === 'all' || file.type === filterType;
     return matchesSearch && matchesFilter;
@@ -180,7 +200,7 @@ const IntelligenceHub: React.FC = () => {
 
   return (
     <PageLayout
-      pageTitle="Intelligence Hub"
+      pageTitle="Intelligence"
       placeholder="Ask War Room about campaign intelligence..."
     >
       {/* Slate/Gray gradient background matching Settings page */}
@@ -237,20 +257,28 @@ const IntelligenceHub: React.FC = () => {
           {/* File Options */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-white/80 mb-1 ml-1.5">
                 Category
               </label>
-              <select className="w-full bg-black/20 border border-white/30 rounded-lg px-3 py-1.5 text-sm text-white">
-                <option>Auto-detect</option>
-                <option>Polling</option>
-                <option>Field Reports</option>
-                <option>Opposition Research</option>
-                <option>Messaging Assets</option>
-                <option>News & Media</option>
-              </select>
+              <CustomDropdown
+                value="auto-detect"
+                onChange={(value) => console.log('Category changed:', value)}
+                options={[
+                  { value: 'auto-detect', label: 'Auto-detect' },
+                  { value: 'polling', label: 'Polling' },
+                  { value: 'field-reports', label: 'Field Reports' },
+                  {
+                    value: 'opposition-research',
+                    label: 'Opposition Research',
+                  },
+                  { value: 'messaging-assets', label: 'Messaging Assets' },
+                  { value: 'news-media', label: 'News & Media' },
+                ]}
+                className="w-full"
+              />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-white/80 mb-1 ml-1.5">
                 Tags
               </label>
               <input
@@ -262,7 +290,7 @@ const IntelligenceHub: React.FC = () => {
           </div>
 
           <div className="mt-4">
-            <label className="block text-sm font-medium text-white/80 mb-2">
+            <label className="block text-sm font-medium text-white/80 mb-1 ml-1.5">
               Add Notes
             </label>
             <textarea
@@ -388,11 +416,7 @@ const IntelligenceHub: React.FC = () => {
           </div>
 
           {chatQueries.map((query) => (
-            <Card
-              key={query.id}
-              whileHover={{ scale: 1.01 }}
-              padding="sm"
-            >
+            <Card key={query.id} whileHover={{ scale: 1.01 }} padding="sm">
               <div className="flex items-start justify-between mb-2">
                 <div className="flex items-center space-x-2">
                   <MessageSquare className="w-4 h-4 text-blue-400" />

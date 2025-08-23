@@ -27,19 +27,30 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
 
   return (
     <Card padding="md" variant="glass">
-      <h3 className="text-lg font-semibold text-white/95 mb-4">
-        Trending Topics (Issue Spike Detector)
+      <h3
+        className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide ml-2"
+        style={{
+          textRendering: 'optimizeLegibility',
+          WebkitFontSmoothing: 'antialiased',
+          MozOsxFontSmoothing: 'grayscale',
+          fontKerning: 'normal',
+          textSizeAdjust: '100%',
+        }}
+      >
+        TRENDING TOPICS (Issue Spike Detector)
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {topics.map((topic) => (
           <motion.div
             key={topic.id}
             whileHover={{ scale: 1.02 }}
-            className="bg-black/20 rounded-lg p-4 border border-white/10 cursor-pointer"
+            className="bg-black/20 rounded-lg p-6 border border-white/10 cursor-pointer"
           >
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center justify-between mb-2 -mt-2">
               <h4 className="font-medium text-white/95">{topic.keyword}</h4>
-              <div className={`flex items-center space-x-1 ${getTrendColor(topic.change)}`}>
+              <div
+                className={`flex items-center space-x-1 ${getTrendColor(topic.change)}`}
+              >
                 {topic.change > 0 ? (
                   <TrendingUp className="w-4 h-4" />
                 ) : (
@@ -51,23 +62,23 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
                 </span>
               </div>
             </div>
-            <div className="text-sm text-white/70 mb-2">
-              {formatNumber(topic.mentions)} mentions
+            <div className="text-sm text-white/70 mb-2 font-mono uppercase">
+              {formatNumber(topic.mentions)} MENTIONS
             </div>
-            <div className="flex items-center justify-between text-xs text-white/60">
+            <div className="flex items-center justify-between text-xs text-white/60 font-mono uppercase">
               <span>{topic.region}</span>
-              <span>Last {topic.timeframe}</span>
+              <span>LAST {topic.timeframe}</span>
             </div>
-            <div className="flex items-center space-x-2 mt-2">
+            <div className="flex items-center space-x-2 mt-4 -ml-2">
               <button
                 onClick={() => handleViewMentions(topic)}
-                className="text-xs text-blue-400 hover:text-blue-300"
+                className="btn-secondary-action"
               >
                 View mentions
               </button>
               <button
                 onClick={() => handleDraftResponse(topic)}
-                className="text-xs text-white/70 hover:text-white"
+                className="btn-secondary-neutral"
               >
                 Draft response
               </button>

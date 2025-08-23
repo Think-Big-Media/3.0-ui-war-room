@@ -42,23 +42,58 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
   ];
 
   const sentimentOptions = [
-    { value: 'all', label: 'All Sentiment', icon: <BarChart3 className="w-4 h-4" /> },
-    { value: 'positive', label: 'Positive', icon: <TrendingUp className="w-4 h-4 text-green-400" /> },
-    { value: 'negative', label: 'Negative', icon: getSentimentIcon('negative') },
+    {
+      value: 'all',
+      label: 'All Sentiment',
+      icon: <BarChart3 className="w-4 h-4" />,
+    },
+    {
+      value: 'positive',
+      label: 'Positive',
+      icon: <TrendingUp className="w-4 h-4 text-green-400" />,
+    },
+    {
+      value: 'negative',
+      label: 'Negative',
+      icon: getSentimentIcon('negative'),
+    },
     { value: 'neutral', label: 'Neutral', icon: getSentimentIcon('neutral') },
   ];
 
   const regionOptions = [
     { value: 'all', label: 'All Regions', icon: <Globe className="w-4 h-4" /> },
-    { value: 'District 3', label: 'District 3', icon: <MapPin className="w-4 h-4" /> },
-    { value: 'District 7', label: 'District 7', icon: <MapPin className="w-4 h-4" /> },
-    { value: 'Statewide', label: 'Statewide', icon: <MapPin className="w-4 h-4" /> },
+    {
+      value: 'District 3',
+      label: 'District 3',
+      icon: <MapPin className="w-4 h-4" />,
+    },
+    {
+      value: 'District 7',
+      label: 'District 7',
+      icon: <MapPin className="w-4 h-4" />,
+    },
+    {
+      value: 'Statewide',
+      label: 'Statewide',
+      icon: <MapPin className="w-4 h-4" />,
+    },
   ];
 
   return (
     <Card padding="md" variant="glass">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-lg font-semibold text-white/95">Live Mentions Stream</h3>
+        <h3
+          className="text-xl font-semibold text-white/40 font-condensed tracking-wide ml-2"
+          style={{
+            textRendering: 'optimizeLegibility',
+            WebkitFontSmoothing: 'antialiased',
+            MozOsxFontSmoothing: 'grayscale',
+            fontKerning: 'normal',
+            textSizeAdjust: '100%',
+          }}
+        >
+          LIVE MENTIONS STREAM
+        </h3>
         <div className="flex items-center space-x-2">
           <CustomDropdown
             value={filters.source}
@@ -68,7 +103,9 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
           />
           <CustomDropdown
             value={filters.sentiment}
-            onChange={(value) => onFiltersChange({ ...filters, sentiment: value })}
+            onChange={(value) =>
+              onFiltersChange({ ...filters, sentiment: value })
+            }
             options={sentimentOptions}
             className="min-w-[140px]"
           />
@@ -81,30 +118,34 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
         </div>
       </div>
 
-      <div className="space-y-4 max-h-96 overflow-y-auto">
+      <div className="space-y-3 max-h-96 overflow-y-auto scroll-fade">
         {mentions.map((mention) => (
           <motion.div
             key={mention.id}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-black/20 rounded-lg p-4 border border-white/10"
+            className="bg-black/20 rounded-lg p-6 border border-white/10"
           >
             <div className="flex items-start justify-between mb-2">
               <div className="flex items-center space-x-2">
                 {getPlatformIcon(mention.platform)}
-                <span className="text-white/90 font-medium">{mention.username}</span>
-                <span className="text-white/60 text-sm">{mention.timestamp}</span>
+                <span className="text-white/90 font-medium">
+                  {mention.username}
+                </span>
+                <span className="text-white/60 text-sm font-mono uppercase -mt-1">
+                  {mention.timestamp}
+                </span>
               </div>
               <div className="flex items-center space-x-2">
                 {getSentimentIcon(mention.sentiment)}
-                <span className="text-white/70 text-sm">
-                  Influence: {mention.influence}
+                <span className="text-white/70 text-sm font-mono uppercase">
+                  INFLUENCE: {mention.influence}
                 </span>
               </div>
             </div>
-            <p className="text-white/80 mb-3">{mention.content}</p>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4 text-sm text-white/60">
+            <p className="text-white/80">{mention.content}</p>
+            <div className="flex items-center justify-between mt-4">
+              <div className="flex items-center space-x-4 text-sm text-white/60 font-mono uppercase">
                 <span className="flex items-center space-x-1">
                   <Heart className="w-3 h-3" />
                   <span>{mention.engagement}</span>
@@ -117,13 +158,13 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
               <div className="flex items-center space-x-2">
                 <button
                   onClick={() => handleAddToAlert(mention)}
-                  className="text-xs text-blue-400 hover:text-blue-300"
+                  className="btn-secondary-action"
                 >
                   Add to Alert
                 </button>
                 <button
                   onClick={() => handleGenerateResponse(mention)}
-                  className="text-xs text-white/70 hover:text-white"
+                  className="btn-secondary-neutral"
                 >
                   Generate Response
                 </button>

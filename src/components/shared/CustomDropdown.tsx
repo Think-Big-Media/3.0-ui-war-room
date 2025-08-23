@@ -1,5 +1,6 @@
 import type React from 'react';
 import { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Check } from 'lucide-react';
 import { cn } from '../../lib/utils';
@@ -28,7 +29,13 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
   icon,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownPosition, setDropdownPosition] = useState({
+    top: 0,
+    left: 0,
+    width: 0,
+  });
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   // Find the selected option
   const selectedOption = options.find((opt) => opt.value === value);
@@ -68,99 +75,142 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
     setIsOpen(false);
   };
 
+  // Calculate dropdown position when opening
+  const updateDropdownPosition = () => {
+    if (buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      const scrollY = window.scrollY;
+      setDropdownPosition({
+        top: rect.bottom + scrollY + 4, // 4px gap (mt-1)
+        left: rect.left - rect.width * 0.15, // Center with 130% width
+        width: rect.width * 1.3,
+      });
+    }
+  };
+
+  // Update position when opening dropdown
+  useEffect(() => {
+    if (isOpen) {
+      updateDropdownPosition();
+      // Update position on scroll/resize
+      const handleUpdate = () => updateDropdownPosition();
+      window.addEventListener('scroll', handleUpdate);
+      window.addEventListener('resize', handleUpdate);
+      return () => {
+        window.removeEventListener('scroll', handleUpdate);
+        window.removeEventListener('resize', handleUpdate);
+      };
+    }
+  }, [isOpen]);
+
   return (
     <div className="relative" ref={dropdownRef}>
       {/* Dropdown Trigger */}
       <button
+        ref={buttonRef}
         type="button"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          if (!isOpen) {
+            updateDropdownPosition();
+          }
+          setIsOpen(!isOpen);
+        }}
         onKeyDown={handleKeyDown}
         className={cn(
           'flex items-center justify-between',
-          'px-3 py-1.5 rounded-lg text-sm',
-          'bg-black/20 backdrop-blur-lg',
+          'px-3 py-0.5 rounded-lg text-xs font-mono uppercase',
+          'bg-transparent backdrop-blur-sm',
           'border border-white/30',
-          'text-white',
-          'hover:bg-white/10 hover:border-white/40',
-          'transition-all duration-200',
-          'focus:outline-none focus:ring-2 focus:ring-white/30',
-          'min-w-[180px]',
-          className,
+          'text-white/70',
+          'hover:bg-white/5 hover:border-white/40',
+          'transition-all duration-300',
+          'focus:outline-none focus:ring-2 focus:ring-white/20',
+          'min-w-[112px] h-6',
+          className
         )}
       >
-        <div className="flex items-center space-x-2.5">
+        <div className="flex items-center space-x-2">
           {icon && <span className="text-white/70">{icon}</span>}
-          <span className="truncate">
+          <span className="truncate font-mono uppercase">
             {selectedOption ? selectedOption.label : placeholder}
           </span>
         </div>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.2 }}
+          className="ml-2 flex-shrink-0"
         >
-          <ChevronDown className="w-4 h-4 text-white/70 ml-2" />
+          <ChevronDown className="w-4 h-4 text-white/70" />
         </motion.div>
       </button>
 
-      {/* Dropdown Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className={cn(
-              'absolute z-50 mt-2 w-full',
-              'bg-black/30 backdrop-blur-xl',
-              'border border-white/30 rounded-lg',
-              'shadow-2xl shadow-black/20',
-              'overflow-hidden',
+      {/* Dropdown Menu - Rendered via Portal */}
+      {typeof document !== 'undefined' &&
+        createPortal(
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className={cn(
+                  'fixed z-[99999]',
+                  'bg-black/[0.97] backdrop-blur-md',
+                  'rounded',
+                  'overflow-hidden'
+                )}
+                style={{
+                  top: dropdownPosition.top,
+                  left: dropdownPosition.left,
+                  width: dropdownPosition.width,
+                  zIndex: 99999,
+                }}
+              >
+                <div className="py-2 max-h-60 overflow-y-auto custom-scrollbar">
+                  {options
+                    .filter((option) => option.value !== value)
+                    .map((option) => (
+                      <button
+                        key={option.value}
+                        type="button"
+                        onClick={() => handleOptionClick(option.value)}
+                        className={cn(
+                          'w-full px-4 py-2 text-left text-sm font-mono uppercase',
+                          'flex items-center justify-between',
+                          'transition-all duration-300',
+                          'text-white/80 hover:bg-white/30 hover:text-white'
+                        )}
+                      >
+                        <div className="flex items-center space-x-2">
+                          {option.icon && (
+                            <span className="text-white/70">{option.icon}</span>
+                          )}
+                          <span className="font-mono uppercase">
+                            {option.label}
+                          </span>
+                        </div>
+                      </button>
+                    ))}
+                </div>
+              </motion.div>
             )}
-          >
-            <div className="py-1 max-h-60 overflow-y-auto custom-scrollbar">
-              {options.map((option) => (
-                <button
-                  key={option.value}
-                  type="button"
-                  onClick={() => handleOptionClick(option.value)}
-                  className={cn(
-                    'w-full px-3 py-1.5 text-left text-sm',
-                    'flex items-center justify-between',
-                    'transition-all duration-200',
-                    value === option.value
-                      ? 'bg-white/20 text-white'
-                      : 'text-white/80 hover:bg-white/10 hover:text-white',
-                  )}
-                >
-                  <div className="flex items-center space-x-2.5">
-                    {option.icon && (
-                      <span className="text-white/70">{option.icon}</span>
-                    )}
-                    <span>{option.label}</span>
-                  </div>
-                  {value === option.value && (
-                    <Check className="w-4 h-4 text-white/70" />
-                  )}
-                </button>
-              ))}
-            </div>
-          </motion.div>
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
 
       {/* Custom scrollbar styles */}
       <style>{`
         .custom-scrollbar::-webkit-scrollbar {
-          width: 6px;
+          width: 4px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.05);
-          border-radius: 3px;
+          background: rgba(0, 0, 0, 0.1);
+          border-radius: 2px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
           background: rgba(255, 255, 255, 0.2);
-          border-radius: 3px;
+          border-radius: 2px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
           background: rgba(255, 255, 255, 0.3);

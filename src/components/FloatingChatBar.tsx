@@ -40,7 +40,7 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
   const [isExpanded, setIsExpanded] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [chatState, setChatState] = useState<'history' | 'chat' | 'closed'>(
-    'closed',
+    'closed'
   );
   const [activeChat, setActiveChat] = useState<ChatSession | null>(null);
   const [currentMessages, setCurrentMessages] = useState<ChatMessage[]>([]);
@@ -170,12 +170,18 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
   const formatTime = (date: Date) => {
     const now = new Date();
     const diffInDays = Math.floor(
-      (now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24),
+      (now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24)
     );
 
-    if (diffInDays === 0) {return 'Today';}
-    if (diffInDays === 1) {return 'Yesterday';}
-    if (diffInDays < 7) {return `${diffInDays} days ago`;}
+    if (diffInDays === 0) {
+      return 'Today';
+    }
+    if (diffInDays === 1) {
+      return 'Yesterday';
+    }
+    if (diffInDays < 7) {
+      return `${diffInDays} days ago`;
+    }
     return date.toLocaleDateString();
   };
 
@@ -233,7 +239,7 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
                       Recent Conversations
                     </h3>
                   </div>
-                  <div className="flex-1 overflow-y-auto p-4">
+                  <div className="flex-1 overflow-y-auto p-4 scroll-fade-subtle">
                     <div className="space-y-2">
                       {chatHistory.map((chat) => (
                         <motion.button
@@ -273,7 +279,7 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
                   )}
 
                   {/* Messages Area */}
-                  <div className="flex-1 p-4 overflow-y-auto">
+                  <div className="flex-1 p-4 overflow-y-auto scroll-fade-subtle">
                     <div className="space-y-3">
                       {currentMessages.map((msg) => (
                         <div
@@ -372,7 +378,7 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
               onChange={(e) => setMessage(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder={placeholder}
-              className="w-full bg-white/90 text-black placeholder-gray-500 rounded-xl px-4 py-4 pr-12 border border-white/50 focus:border-white/70 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200"
+              className="w-full bg-white/70 text-gray-600 placeholder-gray-500 rounded-xl px-4 py-4 pr-12 border border-white/50 focus:border-white/70 focus:outline-none focus:ring-0 transition-all duration-200"
             />
 
             {/* AI Indicator */}

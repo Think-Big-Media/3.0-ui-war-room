@@ -56,7 +56,11 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
   const feedRef = useRef<HTMLDivElement>(null);
 
   // Live activity data from API
-  const { data: activityData, isLoading, error } = useRecentActivities({
+  const {
+    data: activityData,
+    isLoading,
+    error,
+  } = useRecentActivities({
     limit,
     types: filter,
     autoRefresh: true,
@@ -66,7 +70,8 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
   const wsConnection = useAdMonitorWebSocket();
 
   const activities = (activityData as any)?.activities || [];
-  const isConnected = (!error && activities.length > 0) || wsConnection.isConnected;
+  const isConnected =
+    (!error && activities.length > 0) || wsConnection.isConnected;
 
   // Activity icon mapping
   const getActivityIcon = (type: string) => {
@@ -92,10 +97,18 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
 
   // Activity color mapping
   const getActivityColor = (type: string, severity?: string) => {
-    if (severity === 'critical') {return 'text-red-600 bg-red-50';}
-    if (severity === 'high') {return 'text-orange-600 bg-orange-50';}
-    if (severity === 'medium') {return 'text-yellow-600 bg-yellow-50';}
-    if (severity === 'low') {return 'text-gray-600 bg-gray-50';}
+    if (severity === 'critical') {
+      return 'text-red-600 bg-red-50';
+    }
+    if (severity === 'high') {
+      return 'text-orange-600 bg-orange-50';
+    }
+    if (severity === 'medium') {
+      return 'text-yellow-600 bg-yellow-50';
+    }
+    if (severity === 'low') {
+      return 'text-gray-600 bg-gray-50';
+    }
 
     const colorMap: Record<string, string> = {
       campaign_update: 'text-blue-600 bg-blue-50',
@@ -121,7 +134,9 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
   const getPriorityIndicator = (priority?: string) => {
     switch (priority) {
       case 'critical':
-        return <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />;
+        return (
+          <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+        );
       case 'high':
         return <div className="w-2 h-2 bg-orange-500 rounded-full" />;
       case 'medium':
@@ -149,10 +164,14 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
             >
               <Icon className="w-4 h-4 text-gray-400" />
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-gray-900 truncate">{activity.title}</p>
+                <p className="text-sm text-gray-900 truncate">
+                  {activity.title}
+                </p>
               </div>
               <span className="text-xs text-gray-400">
-                {formatDistanceToNow(new Date(activity.timestamp), { addSuffix: true })}
+                {formatDistanceToNow(new Date(activity.timestamp), {
+                  addSuffix: true,
+                })}
               </span>
             </div>
           );
@@ -162,7 +181,7 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 pb-5">
       {/* Enhanced Connection Status */}
       <ConnectionStatus
         isConnected={wsConnection.isConnected}
@@ -176,7 +195,10 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
       />
 
       {/* Activity Feed */}
-      <div ref={feedRef} className="space-y-3 max-h-[600px] overflow-y-auto pr-2">
+      <div
+        ref={feedRef}
+        className="space-y-3 max-h-[600px] overflow-y-auto pr-2 scroll-fade-subtle"
+      >
         {filteredActivities.map((activity: ActivityEvent) => {
           const Icon = getActivityIcon(activity.type);
           const colorClass = getActivityColor(activity.type, activity.severity);
@@ -185,7 +207,9 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
             <div
               key={activity.id}
               className={`group relative flex items-start space-x-3 p-4 rounded-xl border border-gray-100 hover:border-gray-200 hover:shadow-md transition-all cursor-pointer ${
-                activity.priority === 'critical' ? 'border-red-200 bg-red-50/30' : 'bg-white'
+                activity.priority === 'critical'
+                  ? 'border-red-200 bg-red-50/30'
+                  : 'bg-white'
               }`}
               onClick={() => onActivityClick?.(activity)}
             >
@@ -208,7 +232,9 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
                     <p className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
                       {activity.title}
                     </p>
-                    <p className="text-sm text-gray-600 mt-0.5">{activity.description}</p>
+                    <p className="text-sm text-gray-600 mt-0.5">
+                      {activity.description}
+                    </p>
 
                     {/* Metadata */}
                     {activity.metadata && (
@@ -247,7 +273,7 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
                             {activity.user.name.charAt(0).toUpperCase()}
                           </span>
                         </div>
-                        <span className="text-xs text-gray-500">
+                        <span className="text-xs text-gray-500 font-mono uppercase">
                           {activity.user.name}
                         </span>
                       </div>
@@ -257,7 +283,9 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
                   {/* Timestamp */}
                   {showTimestamps && (
                     <span className="text-xs text-gray-400 ml-4 whitespace-nowrap">
-                      {formatDistanceToNow(new Date(activity.timestamp), { addSuffix: true })}
+                      {formatDistanceToNow(new Date(activity.timestamp), {
+                        addSuffix: true,
+                      })}
                     </span>
                   )}
                 </div>
@@ -277,12 +305,17 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
                     {activity.status === 'warning' && (
                       <AlertCircle className="w-3 h-3 text-amber-500" />
                     )}
-                    <span className={`text-xs capitalize ${
-                      activity.status === 'success' ? 'text-green-600' :
-                        activity.status === 'pending' ? 'text-yellow-600' :
-                          activity.status === 'error' ? 'text-red-600' :
-                            'text-amber-600'
-                    }`}>
+                    <span
+                      className={`text-xs capitalize ${
+                        activity.status === 'success'
+                          ? 'text-green-600'
+                          : activity.status === 'pending'
+                            ? 'text-yellow-600'
+                            : activity.status === 'error'
+                              ? 'text-red-600'
+                              : 'text-amber-600'
+                      }`}
+                    >
                       {activity.status}
                     </span>
                   </div>

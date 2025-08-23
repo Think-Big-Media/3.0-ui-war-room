@@ -12,7 +12,9 @@ interface InfluencerTrackerProps {
   influencers: Influencer[];
 }
 
-const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({ influencers }) => {
+const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({
+  influencers,
+}) => {
   const handleAddToWatchlist = (influencer: Influencer) => {
     logger.info('Add influencer to watchlist:', influencer.username);
     // Handle adding influencer to watchlist
@@ -25,10 +27,21 @@ const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({ influencers }) =>
 
   return (
     <Card padding="md" variant="glass">
-      <h3 className="text-lg font-semibold text-white/95 mb-4">Influencer Tracker</h3>
-      <div className="space-y-4">
+      <h3
+        className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide ml-1.5"
+        style={{
+          textRendering: 'optimizeLegibility',
+          WebkitFontSmoothing: 'antialiased',
+          MozOsxFontSmoothing: 'grayscale',
+          fontKerning: 'normal',
+          textSizeAdjust: '100%',
+        }}
+      >
+        INFLUENCER TRACKER
+      </h3>
+      <div className="space-y-3 px-1.5">
         {influencers.map((influencer) => (
-          <div key={influencer.id} className="bg-black/20 rounded-lg p-3">
+          <div key={influencer.id} className="bg-black/20 rounded-lg p-5">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center space-x-2">
                 {getPlatformIcon(influencer.platform)}
@@ -36,32 +49,35 @@ const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({ influencers }) =>
                   {influencer.username}
                 </span>
               </div>
-              <span className="text-white/70 text-xs">{influencer.lastPost}</span>
+              <span className="text-white/70 text-xs font-mono uppercase">
+                {influencer.lastPost}
+              </span>
             </div>
-            <div className="text-xs text-white/60 mb-2">
-              {formatNumber(influencer.followers)} followers • Reach: {influencer.reach}
+            <div className="text-xs text-white/60 -mt-1 mb-2 font-mono uppercase">
+              {formatNumber(influencer.followers)} FOLLOWERS • REACH:{' '}
+              {influencer.reach}
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
                 {getSentimentIcon(influencer.sentiment)}
-                <span className="text-xs text-white/70">
-                  Eng: {influencer.engagement}%
+                <span className="text-xs text-white/70 font-mono uppercase">
+                  ENG: {influencer.engagement}%
                 </span>
               </div>
-              <div className="flex items-center space-x-2">
-                <button
-                  onClick={() => handleAddToWatchlist(influencer)}
-                  className="text-xs text-blue-400 hover:text-blue-300"
-                >
-                  Add to Watchlist
-                </button>
-                <button
-                  onClick={() => handleAmplify(influencer)}
-                  className="text-xs text-white/70 hover:text-white"
-                >
-                  Amplify
-                </button>
-              </div>
+            </div>
+            <div className="flex items-center space-x-2 mt-4">
+              <button
+                onClick={() => handleAddToWatchlist(influencer)}
+                className="btn-secondary-action"
+              >
+                Add to Watchlist
+              </button>
+              <button
+                onClick={() => handleAmplify(influencer)}
+                className="btn-secondary-neutral"
+              >
+                Amplify
+              </button>
             </div>
           </div>
         ))}

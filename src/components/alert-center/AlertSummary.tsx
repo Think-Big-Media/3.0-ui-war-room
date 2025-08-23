@@ -9,10 +9,12 @@ interface AlertSummaryProps {
 
 const AlertSummary: React.FC<AlertSummaryProps> = ({ alerts }) => {
   const criticalCount = alerts.filter(
-    (a) => a.priority === 'critical' && a.status !== 'resolved',
+    (a) => a.priority === 'critical' && a.status !== 'resolved'
   ).length;
   const newCount = alerts.filter((a) => a.status === 'new').length;
-  const inProgressCount = alerts.filter((a) => a.status === 'in-progress').length;
+  const inProgressCount = alerts.filter(
+    (a) => a.status === 'in-progress'
+  ).length;
   const resolvedCount = alerts.filter((a) => a.status === 'resolved').length;
 
   const summaryItems = [
@@ -48,7 +50,9 @@ const AlertSummary: React.FC<AlertSummaryProps> = ({ alerts }) => {
 
   return (
     <Card padding="sm" variant="glass">
-      <h3 className="text-lg font-semibold text-white/95 mb-4">Quick Stats</h3>
+      <h3 className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide">
+        QUICK STATS
+      </h3>
       <div className="space-y-3">
         {summaryItems.map((item, index) => (
           <div key={index} className="flex items-center justify-between">

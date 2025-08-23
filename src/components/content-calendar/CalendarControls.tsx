@@ -36,9 +36,9 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
                 <button
                   key={view}
                   onClick={() => onViewChange(view)}
-                  className={`px-3 py-1.5 rounded-md capitalize transition-all duration-200 ${
+                  className={`px-3 py-1.5 rounded-md uppercase font-mono text-sm transition-all duration-200 ${
                     currentView === view
-                      ? 'bg-orange-500 text-white'
+                      ? 'bg-white/20 text-white'
                       : 'text-white/70 hover:text-white hover:bg-white/10'
                   }`}
                 >
@@ -73,7 +73,7 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
           <div className="flex items-center space-x-3">
             <button
               onClick={onNavigateToEngine}
-              className="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1.5 rounded-lg flex items-center space-x-2 transition-colors"
+              className="btn-secondary-action px-3 py-1.5 flex items-center space-x-2"
             >
               <Calendar className="w-4 h-4" />
               <span>Create Content</span>

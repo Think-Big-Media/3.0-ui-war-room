@@ -35,13 +35,17 @@ const MonitoringControls: React.FC<MonitoringControlsProps> = ({
             onClick={onToggleLive}
             className="flex items-center space-x-2 bg-white/20 hover:bg-white/30 text-white px-3 py-1.5 rounded-lg transition-colors"
           >
-            {isLive ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+            {isLive ? (
+              <Pause className="w-4 h-4" />
+            ) : (
+              <Play className="w-4 h-4" />
+            )}
             <span>{isLive ? 'Pause' : 'Start'}</span>
           </button>
         </div>
-        <div className="flex items-center space-x-4 text-sm text-white/70">
-          <span>Last updated: {lastUpdated}</span>
-          <span>Total mentions: {totalMentions.toLocaleString()}</span>
+        <div className="flex items-center space-x-6 text-sm text-white/70 font-mono uppercase pr-6">
+          <span>LAST UPDATED: {lastUpdated}</span>
+          <span>TOTAL MENTIONS: {totalMentions.toLocaleString()}</span>
         </div>
       </div>
     </Card>

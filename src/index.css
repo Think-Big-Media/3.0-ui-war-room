@@ -11,7 +11,7 @@
   :root {
     /* Base font size optimized for 95% browser scaling */
     font-size: 16.5px; /* Adjusted for 95% zoom - larger text */
-    
+
     /* Glassmorphic theme - transparent with subtle tints */
     --background: 249 250 251; /* gray-50 base */
     --foreground: 15 23 42; /* slate-800 */
@@ -62,68 +62,116 @@
 @layer base {
   /* Set default font and background */
   body {
-    @apply font-condensed antialiased bg-gray-50 text-gray-900;
-    letter-spacing: 0.025em; /* Slight letter spacing for condensed font */
+    @apply font-body antialiased bg-gray-50 text-gray-900;
+    letter-spacing: 0em; /* Normal letter spacing for Inter */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Heading styles - Using Barlow Condensed */
+  /* Heading styles - Using Inter for content headings, Barlow Condensed for display */
   h1 {
-    @apply text-4xl font-bold font-condensed tracking-tight;
+    @apply text-4xl font-bold font-sans tracking-tight;
   }
 
   h2 {
-    @apply text-3xl font-semibold font-condensed tracking-tight;
+    @apply text-3xl font-semibold font-sans tracking-tight;
   }
 
   h3 {
-    @apply text-2xl font-semibold font-condensed;
+    @apply text-2xl font-semibold font-sans;
   }
 
   h4 {
-    @apply text-xl font-medium font-condensed;
+    @apply text-xl font-medium font-sans;
   }
 
   h5 {
-    @apply text-lg font-medium font-condensed;
+    @apply text-lg font-medium font-sans;
   }
 
   h6 {
-    @apply text-base font-medium font-condensed;
+    @apply text-base font-medium font-sans;
   }
-  
+
   /* Interface elements use JetBrains Mono */
-  button, input, select, textarea {
+  button,
+  input,
+  select,
+  textarea {
     @apply font-mono text-sm;
     letter-spacing: -0.025em; /* Tighter spacing for mono font */
   }
-  
+
   /* Code and technical text */
-  code, kbd, samp, pre {
+  code,
+  kbd,
+  samp,
+  pre {
     @apply font-mono text-sm;
   }
-  
+
   /* Labels and small UI text */
-  label, .label {
+  label,
+  .label {
     @apply font-mono text-xs uppercase tracking-wider;
   }
-  
+
   /* Navigation items */
-  nav a, .nav-item {
+  nav a,
+  .nav-item {
     @apply font-mono text-sm font-medium;
   }
-  
+
   /* Status badges, metrics */
-  .badge, .metric, .stat {
+  .badge,
+  .metric,
+  .stat {
     @apply font-mono text-xs;
   }
-  
+
   /* Data tables */
   table th {
     @apply font-mono text-xs uppercase tracking-wider;
   }
-  
+
   table td {
+    @apply font-sans;
+  }
+
+  /* Content text areas - mentions, news, polling data, etc. */
+  .content-text,
+  .mention-text,
+  .news-text,
+  .feed-text {
+    @apply font-sans;
+  }
+
+  /* Paragraphs and content areas */
+  p,
+  .text-content {
+    @apply font-sans;
+  }
+
+  /* Sub-headlines and section titles */
+  .section-title,
+  .sub-headline {
     @apply font-condensed;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Technical labels and metadata */
+  .technical-label,
+  .metadata-text {
+    @apply font-mono text-xs;
+  }
+
+  /* Action buttons and interactive labels */
+  .action-button,
+  .interactive-label {
+    @apply font-mono text-xs;
   }
 }
 
@@ -133,22 +181,23 @@
   .btn-primary {
     @apply px-4 py-2 bg-blue-600 text-white font-mono font-medium text-sm rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors;
   }
-  
-  /* Card titles should use Barlow Condensed */
+
+  /* Card titles should use Inter for content readability */
   .card-title {
-    @apply font-condensed font-semibold text-lg;
+    @apply font-sans font-semibold text-lg;
   }
-  
+
   /* Sidebar and menu items */
-  .sidebar-item, .menu-item {
+  .sidebar-item,
+  .menu-item {
     @apply font-mono text-sm;
   }
-  
+
   /* Dashboard metrics and numbers */
   .metric-value {
     @apply font-mono font-semibold;
   }
-  
+
   .metric-label {
     @apply font-mono text-xs uppercase tracking-wider opacity-75;
   }
@@ -158,9 +207,85 @@
     @apply px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors;
   }
 
+  /* Secondary Alert button style - for urgent actions */
+  .btn-secondary-alert {
+    @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap text-center;
+    letter-spacing: -0.05em; /* Halved spacing for multi-word buttons */
+  }
+
+  /* Secondary Action button style - for primary actions */
+  .btn-secondary-action {
+    @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap text-center;
+    letter-spacing: -0.05em; /* Halved spacing for multi-word buttons */
+  }
+
+  /* Secondary Neutral button style - for general actions */
+  .btn-secondary-neutral {
+    @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap text-center;
+    letter-spacing: -0.05em; /* Halved spacing for multi-word buttons */
+  }
+
+  /* Primary Alert button style - bigger urgent actions */
+  .btn-primary-alert {
+    @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase text-center;
+    letter-spacing: -0.05em;
+  }
+
+  /* Primary Action button style - bigger primary actions */
+  .btn-primary-action {
+    @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase text-center;
+    letter-spacing: -0.05em;
+  }
+
+  /* Primary Neutral button style - bigger general actions */
+  .btn-primary-neutral {
+    @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase text-center;
+    letter-spacing: -0.05em;
+  }
+
+  /* Icon alignment in buttons - move up 2px for better alignment */
+  .btn-secondary-alert svg,
+  .btn-secondary-action svg,
+  .btn-secondary-neutral svg,
+  .btn-primary-alert svg,
+  .btn-primary-action svg,
+  .btn-primary-neutral svg {
+    @apply -mt-0.5;
+  }
+
   /* Form input style */
   .form-input {
     @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm;
+  }
+
+  /* War Room input style - 70% opacity background, gray text for transparency */
+  .war-room-input {
+    @apply w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300;
+  }
+
+  /* War Room select style - 70% opacity background, gray text for transparency */
+  .war-room-select {
+    @apply w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer;
+  }
+
+  /* War Room sub-headline style - 60% opacity, moved up 3px (STANDARDIZED) */
+  .war-room-subheading {
+    @apply text-white/60 font-condensed tracking-wide -mt-1;
+  }
+
+  /* Container spacing fix - optimized bottom spacing (21px = pb-5) */
+  .space-with-bottom {
+    @apply pb-5;
+  }
+
+  /* Icon alignment fix - 2px down to align with headline baselines */
+  .war-room-icon-aligned {
+    @apply mt-0.5;
+  }
+
+  /* Content indentation - 10px from box edges */
+  .war-room-content-indent {
+    @apply ml-2.5;
   }
 
   /* Card component */
@@ -185,7 +310,73 @@
   nav button span {
     @apply whitespace-nowrap overflow-hidden text-ellipsis;
   }
-  
+
+  /* Scroll fade effects - fades content itself, no overlays */
+  .scroll-fade {
+    mask: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 24px,
+        black calc(100% - 24px),
+        transparent 100%
+      )
+      no-repeat;
+    -webkit-mask: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 24px,
+        black calc(100% - 24px),
+        transparent 100%
+      )
+      no-repeat;
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+  }
+
+  /* Subtle fade variant with less fade distance */
+  .scroll-fade-subtle {
+    mask: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 16px,
+        black calc(100% - 16px),
+        transparent 100%
+      )
+      no-repeat;
+    -webkit-mask: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 16px,
+        black calc(100% - 16px),
+        transparent 100%
+      )
+      no-repeat;
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+  }
+
+  /* Strong fade variant for dark backgrounds */
+  .scroll-fade-strong {
+    mask: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 32px,
+        black calc(100% - 32px),
+        transparent 100%
+      )
+      no-repeat;
+    -webkit-mask: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 32px,
+        black calc(100% - 32px),
+        transparent 100%
+      )
+      no-repeat;
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+  }
+
   /* Animations */
   .animate-fade-in {
     animation: fadeIn 0.5s ease-in-out;

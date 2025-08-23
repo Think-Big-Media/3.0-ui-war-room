@@ -7,7 +7,16 @@
 import type React from 'react';
 import { memo, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TrendingUp, TrendingDown, DollarSign, Eye, MousePointer, Target, Wifi, WifiOff } from 'lucide-react';
+import {
+  TrendingUp,
+  TrendingDown,
+  DollarSign,
+  Eye,
+  MousePointer,
+  Target,
+  Wifi,
+  WifiOff,
+} from 'lucide-react';
 import { useAdInsights, usePlatformMetrics } from '../../hooks/useAdInsights';
 
 // Types
@@ -29,157 +38,192 @@ interface PlatformMetricsProps {
 }
 
 // Memoized metric card for performance
-const MetricCard = memo<MetricCardProps>(({
-  label,
-  value,
-  change,
-  icon,
-  color,
-  prefix = '',
-  suffix = '',
-  loading = false,
-}) => {
-  const isPositiveChange = change && change > 0;
+const MetricCard = memo<MetricCardProps>(
+  ({
+    label,
+    value,
+    change,
+    icon,
+    color,
+    prefix = '',
+    suffix = '',
+    loading = false,
+  }) => {
+    const isPositiveChange = change && change > 0;
 
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700"
-    >
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
-          {label}
-        </span>
-        <div className={`p-2 rounded-lg ${color}`}>
-          {icon}
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700"
+      >
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+            {label}
+          </span>
+          <div className={`p-2 rounded-lg ${color}`}>{icon}</div>
         </div>
-      </div>
 
-      <div className="flex items-baseline justify-between">
-        <AnimatePresence mode="wait">
-          {loading ? (
-            <motion.div
-              key="loading"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="h-8 w-24 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"
-            />
-          ) : (
-            <motion.span
-              key={value}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              className="text-2xl font-bold text-gray-900 dark:text-white"
+        <div className="flex items-baseline justify-between">
+          <AnimatePresence mode="wait">
+            {loading ? (
+              <motion.div
+                key="loading"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="h-8 w-24 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"
+              />
+            ) : (
+              <motion.span
+                key={value}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                className="text-2xl font-bold text-gray-900 dark:text-white"
+              >
+                {prefix}
+                {value}
+                {suffix}
+              </motion.span>
+            )}
+          </AnimatePresence>
+
+          {change !== undefined && !loading && (
+            <div
+              className={`flex items-center text-sm ${
+                isPositiveChange ? 'text-green-600' : 'text-red-600'
+              }`}
             >
-              {prefix}{value}{suffix}
-            </motion.span>
+              {isPositiveChange ? (
+                <TrendingUp size={16} />
+              ) : (
+                <TrendingDown size={16} />
+              )}
+              <span className="ml-1">{formatPercentage(Math.abs(change))}</span>
+            </div>
           )}
-        </AnimatePresence>
-
-        {change !== undefined && !loading && (
-          <div className={`flex items-center text-sm ${
-            isPositiveChange ? 'text-green-600' : 'text-red-600'
-          }`}>
-            {isPositiveChange ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
-            <span className="ml-1">{formatPercentage(Math.abs(change))}</span>
-          </div>
-        )}
-      </div>
-    </motion.div>
-  );
-});
+        </div>
+      </motion.div>
+    );
+  }
+);
 
 MetricCard.displayName = 'MetricCard';
 
 // Platform-specific metrics display
-const PlatformMetrics = memo<PlatformMetricsProps>(({ platform, metrics, color }) => {
-  if (!metrics || metrics.length === 0) {
-    return (
-      <div className={`rounded-lg p-4 ${color} bg-opacity-10`}>
-        <h3 className="text-lg font-semibold mb-3 capitalize">{platform} Ads</h3>
-        <div className="grid grid-cols-2 gap-3">
-          {[1, 2, 3, 4].map(i => (
-            <div key={i} className="h-16 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
-          ))}
+const PlatformMetrics = memo<PlatformMetricsProps>(
+  ({ platform, metrics, color }) => {
+    if (!metrics || metrics.length === 0) {
+      return (
+        <div className={`rounded-lg p-4 ${color} bg-opacity-10`}>
+          <h3 className="text-lg font-semibold mb-3 uppercase font-condensed tracking-wide text-white/40">
+            {platform} ADS
+          </h3>
+          <div className="grid grid-cols-2 gap-3">
+            {[1, 2, 3, 4].map((i) => (
+              <div
+                key={i}
+                className="h-16 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      );
+    }
+
+    // Aggregate metrics from campaigns array
+    const aggregated = metrics.reduce(
+      (acc: any, campaign: any) => ({
+        spend: acc.spend + campaign.spend,
+        impressions: acc.impressions + campaign.impressions,
+        clicks: acc.clicks + campaign.clicks,
+        conversions: acc.conversions + campaign.conversions,
+        ctr: acc.ctr + campaign.ctr,
+        cpc: acc.cpc + campaign.cpc,
+      }),
+      { spend: 0, impressions: 0, clicks: 0, conversions: 0, ctr: 0, cpc: 0 }
+    );
+
+    const avgCtr = metrics.length > 0 ? aggregated.ctr / metrics.length : 0;
+    const avgCpc = metrics.length > 0 ? aggregated.cpc / metrics.length : 0;
+    const roas =
+      aggregated.spend > 0
+        ? (aggregated.conversions * 50) / aggregated.spend
+        : 0; // Estimated conversion value
+
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.3 }}
+        className={`rounded-lg p-4 ${color} bg-opacity-10 backdrop-blur-sm`}
+      >
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="text-lg font-semibold uppercase font-condensed tracking-wide text-white/40">
+            {platform} ADS
+          </h3>
+          <span className="text-sm text-gray-500 dark:text-gray-400">
+            {metrics.length} campaign{metrics.length !== 1 ? 's' : ''}
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <div className="bg-white dark:bg-gray-800 rounded p-3">
+            <p className="text-sm text-gray-600 dark:text-gray-400">Spend</p>
+            <p className="text-lg font-bold">
+              {formatCurrency(aggregated.spend)}
+            </p>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded p-3">
+            <p className="text-sm text-gray-600 dark:text-gray-400">ROAS</p>
+            <p className="text-lg font-bold">{roas.toFixed(2)}x</p>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded p-3">
+            <p className="text-sm text-gray-600 dark:text-gray-400">CTR</p>
+            <p className="text-lg font-bold">{formatPercentage(avgCtr)}</p>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded p-3">
+            <p className="text-sm text-gray-600 dark:text-gray-400">CPC</p>
+            <p className="text-lg font-bold">{formatCurrency(avgCpc)}</p>
+          </div>
+        </div>
+      </motion.div>
     );
   }
-
-  // Aggregate metrics from campaigns array
-  const aggregated = metrics.reduce((acc: any, campaign: any) => ({
-    spend: acc.spend + campaign.spend,
-    impressions: acc.impressions + campaign.impressions,
-    clicks: acc.clicks + campaign.clicks,
-    conversions: acc.conversions + campaign.conversions,
-    ctr: acc.ctr + campaign.ctr,
-    cpc: acc.cpc + campaign.cpc,
-  }), { spend: 0, impressions: 0, clicks: 0, conversions: 0, ctr: 0, cpc: 0 });
-
-  const avgCtr = metrics.length > 0 ? aggregated.ctr / metrics.length : 0;
-  const avgCpc = metrics.length > 0 ? aggregated.cpc / metrics.length : 0;
-  const roas = aggregated.spend > 0 ? (aggregated.conversions * 50) / aggregated.spend : 0; // Estimated conversion value
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.3 }}
-      className={`rounded-lg p-4 ${color} bg-opacity-10 backdrop-blur-sm`}
-    >
-      <div className="flex items-center justify-between mb-3">
-        <h3 className="text-lg font-semibold capitalize">{platform} Ads</h3>
-        <span className="text-sm text-gray-500 dark:text-gray-400">
-          {metrics.length} campaign{metrics.length !== 1 ? 's' : ''}
-        </span>
-      </div>
-
-      <div className="grid grid-cols-2 gap-3">
-        <div className="bg-white dark:bg-gray-800 rounded p-3">
-          <p className="text-sm text-gray-600 dark:text-gray-400">Spend</p>
-          <p className="text-lg font-bold">{formatCurrency(aggregated.spend)}</p>
-        </div>
-
-        <div className="bg-white dark:bg-gray-800 rounded p-3">
-          <p className="text-sm text-gray-600 dark:text-gray-400">ROAS</p>
-          <p className="text-lg font-bold">{roas.toFixed(2)}x</p>
-        </div>
-
-        <div className="bg-white dark:bg-gray-800 rounded p-3">
-          <p className="text-sm text-gray-600 dark:text-gray-400">CTR</p>
-          <p className="text-lg font-bold">{formatPercentage(avgCtr)}</p>
-        </div>
-
-        <div className="bg-white dark:bg-gray-800 rounded p-3">
-          <p className="text-sm text-gray-600 dark:text-gray-400">CPC</p>
-          <p className="text-lg font-bold">{formatCurrency(avgCpc)}</p>
-        </div>
-      </div>
-    </motion.div>
-  );
-});
+);
 
 PlatformMetrics.displayName = 'PlatformMetrics';
 
 // Main MetricsDisplay component
 export const MetricsDisplay: React.FC = memo(() => {
   // Live API data
-  const { data: campaignData, isLoading, error } = useAdInsights({
+  const {
+    data: campaignData,
+    isLoading,
+    error,
+  } = useAdInsights({
     date_preset: 'last_7d',
     real_time: true,
   });
 
-  const { data: metaMetrics, isLoading: metaLoading } = usePlatformMetrics('meta', {
-    date_preset: 'last_7d',
-  });
+  const { data: metaMetrics, isLoading: metaLoading } = usePlatformMetrics(
+    'meta',
+    {
+      date_preset: 'last_7d',
+    }
+  );
 
-  const { data: googleMetrics, isLoading: googleLoading } = usePlatformMetrics('google', {
-    date_preset: 'last_7d',
-  });
+  const { data: googleMetrics, isLoading: googleLoading } = usePlatformMetrics(
+    'google',
+    {
+      date_preset: 'last_7d',
+    }
+  );
 
   const totalSpend = campaignData?.total_spend || 0;
   const isAnyLoading = isLoading || metaLoading || googleLoading;
@@ -207,7 +251,10 @@ export const MetricsDisplay: React.FC = memo(() => {
       };
     }
 
-    const totalConversions = campaignData.campaigns.reduce((sum: number, c: any) => sum + c.conversions, 0);
+    const totalConversions = campaignData.campaigns.reduce(
+      (sum: number, c: any) => sum + c.conversions,
+      0
+    );
 
     return {
       spend: {
@@ -261,7 +308,8 @@ export const MetricsDisplay: React.FC = memo(() => {
             <div className="flex items-center space-x-2">
               <Wifi size={16} className="text-green-600" />
               <p className="text-sm text-green-800 dark:text-green-200">
-                Live data connected • Last sync: {new Date(campaignData.last_sync).toLocaleTimeString()}
+                Live data connected • Last sync:{' '}
+                {new Date(campaignData.last_sync).toLocaleTimeString()}
               </p>
             </div>
           </motion.div>
@@ -357,7 +405,11 @@ export const MetricsDisplay: React.FC = memo(() => {
                         animate={{
                           width: `${(googleSpend / totalSpend) * 100}%`,
                         }}
-                        transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
+                        transition={{
+                          duration: 0.5,
+                          ease: 'easeOut',
+                          delay: 0.1,
+                        }}
                         className="bg-green-500"
                       />
                     </>
@@ -379,11 +431,16 @@ export const MetricsDisplay: React.FC = memo(() => {
                   <>
                     <div className="flex items-center">
                       <div className="w-3 h-3 bg-blue-500 rounded mr-2" />
-                      <span>Meta: {formatPercentage((metaSpend / totalSpend) * 100)}</span>
+                      <span>
+                        Meta: {formatPercentage((metaSpend / totalSpend) * 100)}
+                      </span>
                     </div>
                     <div className="flex items-center">
                       <div className="w-3 h-3 bg-green-500 rounded mr-2" />
-                      <span>Google: {formatPercentage((googleSpend / totalSpend) * 100)}</span>
+                      <span>
+                        Google:{' '}
+                        {formatPercentage((googleSpend / totalSpend) * 100)}
+                      </span>
                     </div>
                   </>
                 );

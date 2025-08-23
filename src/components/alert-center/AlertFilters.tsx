@@ -49,7 +49,7 @@ const AlertFilters: React.FC<AlertFiltersProps> = ({
       <div className="flex items-center space-x-4">
         <div className="flex items-center space-x-2 text-white/70">
           <Filter className="w-4 h-4" />
-          <span className="text-sm font-medium">Filters:</span>
+          <span className="text-sm font-medium">FILTERS</span>
         </div>
 
         <CustomDropdown

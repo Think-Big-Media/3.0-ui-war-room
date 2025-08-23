@@ -117,12 +117,16 @@ const IntelligenceDashboard: React.FC = () => {
   const navigate = useNavigate();
 
   const handleDashboardClick = () => {
-    logger.debug('Intelligence Dashboard clicked - navigating to /intelligence-hub');
+    logger.debug(
+      'Intelligence Dashboard clicked - navigating to /intelligence-hub'
+    );
     navigate('/intelligence-hub');
   };
 
   const handleMetricClick = (metricLabel: string) => {
-    logger.debug(`Metric clicked: ${metricLabel} - navigating to /intelligence-hub`);
+    logger.debug(
+      `Metric clicked: ${metricLabel} - navigating to /intelligence-hub`
+    );
     navigate('/intelligence-hub');
   };
 
@@ -240,12 +244,16 @@ const CampaignOperationsHub: React.FC = () => {
   const navigate = useNavigate();
 
   const handleProjectClick = (projectTitle: string) => {
-    logger.debug(`Project clicked: ${projectTitle} - navigating to /campaign-control`);
+    logger.debug(
+      `Project clicked: ${projectTitle} - navigating to /campaign-control`
+    );
     navigate('/campaign-control');
   };
 
   const handleTemplateClick = (templateName: string) => {
-    logger.debug(`Template clicked: ${templateName} - navigating to /campaign-control`);
+    logger.debug(
+      `Template clicked: ${templateName} - navigating to /campaign-control`
+    );
     navigate('/campaign-control');
   };
 
@@ -327,8 +335,17 @@ const CampaignOperationsHub: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
         {/* Active Projects */}
         <div className="space-y-3 lg:space-y-4">
-          <h4 className="text-base lg:text-lg font-medium text-white/90 mb-3">
-            🔧 Active Projects
+          <h4
+            className="text-lg lg:text-xl font-medium text-white/40 mb-3 uppercase font-condensed tracking-wide ml-2"
+            style={{
+              textRendering: 'optimizeLegibility',
+              WebkitFontSmoothing: 'antialiased',
+              MozOsxFontSmoothing: 'grayscale',
+              fontKerning: 'normal',
+              textSizeAdjust: '100%',
+            }}
+          >
+            ACTIVE PROJECTS
           </h4>
           <div className="space-y-2 lg:space-y-3">
             {activeProjects.map((cluster, index) => (
@@ -347,7 +364,7 @@ const CampaignOperationsHub: React.FC = () => {
                     duration: 0.1,
                   },
                 }}
-                className="bg-black/20 backdrop-blur-sm rounded-xl p-3 lg:p-4 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 cursor-pointer"
+                className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-2">
                   <h5 className="font-medium text-white/95 text-xs lg:text-sm">
@@ -368,8 +385,17 @@ const CampaignOperationsHub: React.FC = () => {
 
         {/* Content Templates */}
         <div className="space-y-3 lg:space-y-4">
-          <h4 className="text-base lg:text-lg font-medium text-white/90 mb-3">
-            📄 Content Templates (Quick Actions)
+          <h4
+            className="text-lg lg:text-xl font-medium text-white/40 mb-3 uppercase font-condensed tracking-wide ml-2"
+            style={{
+              textRendering: 'optimizeLegibility',
+              WebkitFontSmoothing: 'antialiased',
+              MozOsxFontSmoothing: 'grayscale',
+              fontKerning: 'normal',
+              textSizeAdjust: '100%',
+            }}
+          >
+            &nbsp;CONTENT TEMPLATES
           </h4>
           <div className="grid grid-cols-2 gap-2 lg:gap-3">
             {contentTemplates.map((template, index) => (
@@ -388,7 +414,7 @@ const CampaignOperationsHub: React.FC = () => {
                     duration: 0.1,
                   },
                 }}
-                className="bg-black/20 backdrop-blur-sm rounded-xl p-3 lg:p-4 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 text-center cursor-pointer"
+                className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 text-center cursor-pointer"
               >
                 <h5 className="font-medium text-white/95 text-xs lg:text-sm mb-1">
                   {template.name}
@@ -407,12 +433,12 @@ const CommandCenter: React.FC = () => {
   logger.info('CommandCenter: Component mounting...');
   logger.debug('CommandCenter: Should show purple gradient background');
   logger.debug(
-    'CommandCenter: Three main cards + Campaign Operations Hub + Intelligence Dashboard + Quick Actions',
+    'CommandCenter: Three main cards + Campaign Operations Hub + Intelligence Dashboard + Quick Actions'
   );
 
   return (
     <PageLayout
-      pageTitle="War Room Command Center"
+      pageTitle="Dashboard"
       placeholder="Ask War Room about your campaign status..."
     >
       {/* Purple gradient background per THEME_CONSTANTS.md */}
@@ -420,7 +446,7 @@ const CommandCenter: React.FC = () => {
 
       {/* Header - Global Standard */}
       <PageHeader
-        title="War Room Command Center"
+        title="Dashboard"
         subtitle="Real-time political intelligence and campaign management"
       />
 

@@ -13,8 +13,7 @@ const AssignedAlertsTracker: React.FC<AssignedAlertsTrackerProps> = ({
 }) => {
   const getAssignedAlerts = (memberName: string) => {
     return alerts.filter(
-      (alert) =>
-        alert.assignedTo === memberName && alert.status !== 'resolved',
+      (alert) => alert.assignedTo === memberName && alert.status !== 'resolved'
     );
   };
 
@@ -33,8 +32,8 @@ const AssignedAlertsTracker: React.FC<AssignedAlertsTrackerProps> = ({
 
   return (
     <Card padding="sm" variant="glass">
-      <h3 className="text-lg font-semibold text-white/95 mb-4">
-        Team Assignments
+      <h3 className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide">
+        TEAM ASSIGNMENTS
       </h3>
       <div className="space-y-3">
         {teamMembers.map((member) => {
@@ -51,7 +50,7 @@ const AssignedAlertsTracker: React.FC<AssignedAlertsTrackerProps> = ({
                   </div>
                   <div
                     className={`absolute bottom-0 right-0 w-3 h-3 rounded-full ${getStatusDot(
-                      member.status,
+                      member.status
                     )} border-2 border-black/20`}
                   />
                 </div>

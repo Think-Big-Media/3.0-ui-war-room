@@ -105,7 +105,7 @@ const AlertCenter: React.FC = () => {
           />
 
           {/* Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-6">
             {/* Main Content - Alerts */}
             <div className="lg:col-span-2 space-y-4">
               {alerts.map((alert) => (
@@ -161,4 +161,3 @@ const AlertCenter: React.FC = () => {
 };
 
 export default AlertCenter;
-
