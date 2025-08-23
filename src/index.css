@@ -1,0 +1,164 @@
+/**
+ * War Room Platform - Global Styles
+ * Using Tailwind CSS for utility-first styling
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Base font size optimized for 95% browser scaling */
+    font-size: 16.5px; /* Adjusted for 95% zoom - larger text */
+    
+    /* Glassmorphic theme - transparent with subtle tints */
+    --background: 249 250 251; /* gray-50 base */
+    --foreground: 15 23 42; /* slate-800 */
+    --card: 255 255 255 / 0.1; /* White with 10% opacity for glass effect */
+    --card-foreground: 15 23 42;
+    --popover: 255 255 255 / 0.95; /* More opaque for readability */
+    --popover-foreground: 15 23 42;
+    --primary: 59 130 246; /* blue-500 */
+    --primary-foreground: 248 250 252; /* slate-50 */
+    --secondary: 148 163 184 / 0.1; /* slate-400 with transparency */
+    --secondary-foreground: 30 41 59; /* slate-800 */
+    --muted: 148 163 184 / 0.1; /* slate-400 with transparency */
+    --muted-foreground: 100 116 139; /* slate-500 */
+    --accent: 168 85 247 / 0.1; /* purple-500 with transparency */
+    --accent-foreground: 30 41 59; /* slate-800 */
+    --destructive: 239 68 68; /* red-500 */
+    --destructive-foreground: 248 250 252;
+    --border: 226 232 240 / 0.2; /* slate-200 with transparency */
+    --input: 226 232 240 / 0.3; /* slate-200 with transparency */
+    --ring: 59 130 246; /* blue-500 */
+    --radius: 1rem; /* 16px - matches rounded-2xl for glass effect */
+  }
+
+  .dark {
+    --background: 2 6 23; /* slate-950 */
+    --foreground: 248 250 252;
+    --card: 0 0 0 / 0.2; /* Black with 20% opacity for dark glass */
+    --card-foreground: 248 250 252;
+    --popover: 2 6 23; /* slate-950 */
+    --popover-foreground: 248 250 252;
+    --primary: 168 85 247; /* purple-500 for dark mode accent */
+    --primary-foreground: 15 23 42;
+    --secondary: 30 41 59 / 0.3; /* slate-800 with transparency */
+    --secondary-foreground: 226 232 240;
+    --muted: 30 41 59 / 0.3;
+    --muted-foreground: 148 163 184;
+    --accent: 249 115 22 / 0.2; /* orange-500 with transparency */
+    --accent-foreground: 248 250 252;
+    --destructive: 220 38 38;
+    --destructive-foreground: 248 250 252;
+    --border: 30 41 59 / 0.3;
+    --input: 30 41 59 / 0.3;
+    --ring: 168 85 247;
+  }
+}
+
+/* Custom global styles */
+@layer base {
+  /* Set default font and background */
+  body {
+    @apply font-sans antialiased bg-gray-50 text-gray-900;
+  }
+
+  /* Heading styles */
+  h1 {
+    @apply text-4xl font-bold;
+  }
+
+  h2 {
+    @apply text-3xl font-semibold;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold;
+  }
+
+  h4 {
+    @apply text-xl font-medium;
+  }
+
+  h5 {
+    @apply text-lg font-medium;
+  }
+
+  h6 {
+    @apply text-base font-medium;
+  }
+}
+
+/* Custom component styles */
+@layer components {
+  /* Primary button style */
+  .btn-primary {
+    @apply px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors;
+  }
+
+  /* Secondary button style */
+  .btn-secondary {
+    @apply px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors;
+  }
+
+  /* Form input style */
+  .form-input {
+    @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm;
+  }
+
+  /* Card component */
+  .card {
+    @apply bg-white overflow-hidden shadow rounded-lg;
+  }
+
+  /* Card header */
+  .card-header {
+    @apply px-4 py-5 sm:px-6 border-b border-gray-200;
+  }
+
+  /* Card body */
+  .card-body {
+    @apply px-4 py-5 sm:p-6;
+  }
+}
+
+/* Custom utilities */
+@layer utilities {
+  /* Navigation text wrapping fix for 80% browser scaling */
+  nav button span {
+    @apply whitespace-nowrap overflow-hidden text-ellipsis;
+  }
+  
+  /* Animations */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Loading spinner */
+  .spinner {
+    @apply inline-block w-8 h-8 border-4 border-gray-200 border-t-blue-600 rounded-full animate-spin;
+  }
+}
+
+/* Override Tailwind's default focus styles for better accessibility */
+.focus-visible:focus {
+  @apply outline-none ring-2 ring-offset-2 ring-blue-500;
+}
+
+/* Ensure proper stacking context for modals */
+#modal-root {
+  @apply relative z-50;
+}

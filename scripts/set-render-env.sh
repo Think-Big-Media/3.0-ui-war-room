@@ -1,0 +1,28 @@
+#!/bin/bash
+# This script contains the actual environment variables for Render deployment
+
+cat << 'EOF' > /Users/rodericandrews/WarRoom_Development/1.0-war-room/.env.production
+DATABASE_URL=${DATABASE_URL}
+REDIS_URL=${REDIS_URL}
+JWT_SECRET=war-room-secure-jwt-2025-production
+JWT_ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+FACEBOOK_APP_ID=917316510623086
+FACEBOOK_APP_SECRET=a5c0f9c8c939797bbfc1b623c1e8e8e5
+FACEBOOK_ACCESS_TOKEN=EAAK4NWxHofgBPB898ZAXnQEdYQ4fwp9PebhQFZBJxvD7QeykdG11pQYzePbovGrazbWVAAUth0GmqS9QWRdbsfvjTRyGVgqegPlZAyNmnByU13Uh04CfBg44VbIwr7ZAwbiQufJa5YGV1jt9kDIfvTudnGdBIzP2T2DRqnPRWom9vGDrP8rgzAnmsNquUKBtQlgavVvm
+FACEBOOK_SANDBOX_TOKEN=EAAK4NWxHofgBPLyA0ZCB7tx9na6qFZCZCEQJxl21yIfpR7CdaoCRT4l8jsxBDPSXjajzE1bJg4Q2VdGzRZBqtyxeiDRYiDpyZCPtIZB6L0SchBFdizgjxPl3HbMMvZBJogkgZC4cA7sa5yqt9jXnIdnbUBMCR20ZBPyFkekU4mweUEl6lc9JGoYm8H8ibIJ0xX8XoloOxjZBWZC
+GOOGLE_ADS_CLIENT_ID=808203781238-dgqv5sga2q1r1ls6n77fc40g3idu8h1o.apps.googleusercontent.com
+GOOGLE_ADS_CLIENT_SECRET=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
+GOOGLE_ADS_DEVELOPER_TOKEN=h3cQ3ss7lesG9dP0tC56ig
+SENDGRID_FROM_EMAIL=Info@wethinkbig.io
+SUPABASE_URL=https://ksnrafwskxaxhaczvwjs.supabase.co
+SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtzbnJhZndza3hheGhhY3p2d2pzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwNjc2MTQsImV4cCI6MjA2NzY0MzYxNH0.d7lM7Jp6CVxPesip1JVYPMUEkifQ39biLQNzEhNfd-w
+TWILIO_PHONE_NUMBER=+18139652725
+RENDER_ENV=production
+NODE_ENV=production
+PYTHON_ENV=production
+VERSION=1.0.0
+BACKEND_CORS_ORIGINS=["https://war-room-oa9t.onrender.com","http://localhost:3000","http://localhost:5173"]
+RATE_LIMIT_PER_MINUTE=60
+LOG_LEVEL=INFO
+EOF

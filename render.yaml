@@ -1,0 +1,40 @@
+services:
+  # Main War Room service - Combined frontend and backend
+  # This is the actual service running at war-room-oa9t.onrender.com
+  - type: web
+    name: war-room-oa9t
+    runtime: python
+    plan: starter
+    
+    # Build command - Python only, frontend is pre-built
+    buildCommand: |
+      cd src/backend && pip install -r requirements.txt
+    
+    # Start Command - serves both frontend and backend
+    startCommand: cd src/backend && python3 serve_bulletproof.py
+    
+    # Health Check Configuration
+    healthCheckPath: /health
+    
+    # Environment Variables (set in Render dashboard)
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.0"
+      - key: PORT
+        value: "10000"
+      - key: NODE_ENV
+        value: "production"
+      - key: RENDER_ENV
+        value: "production"
+      
+    # Auto-deploy from GitHub
+    repo: https://github.com/Think-Big-Media/1.0-war-room
+    branch: main
+    autoDeploy: true
+
+# Database Configuration (if using Render PostgreSQL)
+databases:
+  - name: warroom-db
+    plan: starter
+    databaseName: warroom
+    user: warroom

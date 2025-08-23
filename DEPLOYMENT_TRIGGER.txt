@@ -1,0 +1,3 @@
+Deployment triggered at Mon Aug 11 14:56:38 CEST 2025
+Build command fix: Remove package-lock.json before npm install
+Environment: ROLLUP_SKIP_NODE_BUILD=true

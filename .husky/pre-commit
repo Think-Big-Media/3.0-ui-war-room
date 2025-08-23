@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run quality checks before commit
+echo "🔍 Running pre-commit quality checks..."
+
+# Run ESLint
+echo "📏 Running ESLint..."
+npm run lint:fix
+if [ $? -ne 0 ]; then
+  echo "❌ ESLint failed. Please fix the issues before committing."
+  exit 1
+fi
+
+# Run TypeScript check
+echo "🔧 Running TypeScript check..."
+npm run type-check
+if [ $? -ne 0 ]; then
+  echo "❌ TypeScript check failed. Please fix the issues before committing."
+  exit 1
+fi
+
+# Run stable tests
+echo "🧪 Running stable tests..."
+npm run test:stable
+if [ $? -ne 0 ]; then
+  echo "❌ Tests failed. Please fix the issues before committing."
+  exit 1
+fi
+
+echo "✅ All pre-commit checks passed!"
