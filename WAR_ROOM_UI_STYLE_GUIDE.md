@@ -248,4 +248,64 @@ When applying these standards to new components:
 - [ ] Content text remains lowercase with appropriate font
 - [ ] Proper opacity levels applied (40% for sub-headers, 70% for metadata)
 
+## Single-Column Card Content Indentation
+
+### Standard for Right-Hand Side Components
+Single-column cards (like Sentiment Breakdown, Platform Performance, Influencer Tracker) require consistent content indentation to align with the overall visual grid.
+
+#### Implementation
+```tsx
+// Apply to content containers within single-column cards
+<div className="space-y-3 px-2.5">
+  {/* Content items */}
+</div>
+
+// For insights boxes and sub-containers
+<div className="mt-4 mx-2.5 p-3 bg-black/20 rounded-lg">
+  {/* Insights content */}
+</div>
+```
+
+#### Measurements
+- **Content Indentation**: `px-2.5` (10px horizontal padding)
+- **Card Outer Padding**: `p-4` (16px) via Card component
+- **Total Content Offset**: 26px from card edge
+
+#### Visual Alignment
+This creates proper visual hierarchy where:
+- Multi-column components (left side) have natural content flow
+- Single-column components (right side) have indented content that aligns with grid guidelines
+- All percentages and data points align consistently
+
+#### Examples
+```tsx
+// Sentiment Breakdown
+<Card padding="md" variant="glass">
+  <h3 className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide">
+    SENTIMENT BREAKDOWN
+  </h3>
+  <div className="space-y-4 px-2.5">
+    {/* Sentiment items with proper indentation */}
+  </div>
+</Card>
+
+// Platform Performance
+<Card padding="md" variant="glass">
+  <h3 className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide">
+    PLATFORM PERFORMANCE
+  </h3>
+  <div className="space-y-3 px-2.5">
+    {/* Platform items with proper indentation */}
+  </div>
+  <div className="mt-4 mx-2.5 p-3 bg-black/20 rounded-lg">
+    {/* Insights with consistent indentation */}
+  </div>
+</Card>
+```
+
+#### Application Rules
+- **Single-column cards**: Always apply `px-2.5` to main content container
+- **Multi-column cards**: Use natural grid alignment without forced indentation
+- **Sub-containers**: Use `mx-2.5` for horizontal margin consistency
+
 This style guide ensures consistent visual hierarchy and user experience across the entire War Room application.
