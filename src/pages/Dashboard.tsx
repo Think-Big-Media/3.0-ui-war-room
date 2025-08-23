@@ -254,7 +254,7 @@ const Dashboard: React.FC = () => {
         </div>
 
         {/* Metrics Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <MetricCard
             title="Active Volunteers"
             value={2847}
@@ -300,7 +300,7 @@ const Dashboard: React.FC = () => {
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Activity Feed */}
           <div className="lg:col-span-2">
             <div className="bg-black/20 backdrop-blur-md rounded-2xl border border-[#8B956D]/30 shadow-sm p-6">
