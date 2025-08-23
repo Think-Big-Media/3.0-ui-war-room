@@ -19,7 +19,7 @@ const ActivityFeed: React.FC<ActivityFeedProps> = ({ activities }) => {
     >
       <Card padding="md" variant="glass">
         <h3
-          className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide"
+          className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide ml-1.5"
           style={{
             textRendering: 'optimizeLegibility',
             WebkitFontSmoothing: 'antialiased',
@@ -32,7 +32,7 @@ const ActivityFeed: React.FC<ActivityFeedProps> = ({ activities }) => {
         >
           RECENT ACTIVITY
         </h3>
-        <div className="space-y-3 px-2.5">
+        <div className="space-y-3 px-1.5">
           {activities.map((activity) => (
             <div key={activity.id} className="flex items-start space-x-3">
               <div className="p-5 bg-black/20 rounded-lg">
