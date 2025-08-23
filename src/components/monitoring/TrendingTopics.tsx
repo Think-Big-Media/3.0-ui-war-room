@@ -61,13 +61,13 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
             <div className="flex items-center space-x-2 mt-2">
               <button
                 onClick={() => handleViewMentions(topic)}
-                className="text-xs text-blue-400 hover:text-blue-300"
+                className="text-xs text-blue-400 hover:text-blue-300 font-mono"
               >
                 View mentions
               </button>
               <button
                 onClick={() => handleDraftResponse(topic)}
-                className="text-xs text-white/70 hover:text-white"
+                className="text-xs text-white/70 hover:text-white font-mono"
               >
                 Draft response
               </button>
