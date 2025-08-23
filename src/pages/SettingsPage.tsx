@@ -24,6 +24,7 @@ import {
 import Card from '../components/shared/Card';
 import PageLayout from '../components/shared/PageLayout';
 import PageHeader from '../components/shared/PageHeader';
+import CustomDropdown from '../components/shared/CustomDropdown';
 import { MetaIntegration, GoogleAdsIntegration } from '../components/integrations';
 
 // Lightweight runtime diagnostics to validate prod behavior
@@ -112,6 +113,12 @@ const SettingsPage: React.FC = () => {
   const [darkMode, setDarkMode] = useState(true);
   const [twoFactor, setTwoFactor] = useState(false);
   const [dataSharing, setDataSharing] = useState(true);
+
+  // Dropdown states
+  const [selectedTheme, setSelectedTheme] = useState('Purple Fire');
+  const [selectedLanguage, setSelectedLanguage] = useState('English');
+  const [selectedTimezone, setSelectedTimezone] = useState('EST');
+  const [selectedDateFormat, setSelectedDateFormat] = useState('MM/DD/YYYY');
 
   const themes = [
     'Purple Fire',
