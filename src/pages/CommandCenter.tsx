@@ -324,7 +324,7 @@ const CampaignOperationsHub: React.FC = () => {
         {/* Active Projects */}
         <div className="space-y-2 lg:space-y-3">
           <h4
-            className="text-lg lg:text-xl font-medium text-white/40 mb-3 uppercase font-condensed tracking-wide"
+            className="text-lg lg:text-xl font-medium text-white/40 mb-3 uppercase font-condensed tracking-wide ml-4"
             style={{
               textRendering: 'optimizeLegibility',
               WebkitFontSmoothing: 'antialiased',
@@ -335,7 +335,7 @@ const CampaignOperationsHub: React.FC = () => {
           >
             Active Projects
           </h4>
-          <div className="space-y-1.5 lg:space-y-2 ml-3">
+          <div className="space-y-1.5 lg:space-y-2">
             {activeProjects.map((cluster, index) => (
               <div
                 key={index}
@@ -362,7 +362,7 @@ const CampaignOperationsHub: React.FC = () => {
         {/* Content Templates */}
         <div className="space-y-2 lg:space-y-3">
           <h4
-            className="text-lg lg:text-xl font-medium text-white/40 mb-3 uppercase font-condensed tracking-wide"
+            className="text-lg lg:text-xl font-medium text-white/40 mb-3 uppercase font-condensed tracking-wide ml-4"
             style={{
               textRendering: 'optimizeLegibility',
               WebkitFontSmoothing: 'antialiased',
@@ -373,7 +373,7 @@ const CampaignOperationsHub: React.FC = () => {
           >
             &nbsp;Content Templates
           </h4>
-          <div className="grid grid-cols-2 gap-3 lg:gap-4 ml-3">
+          <div className="grid grid-cols-2 gap-3 lg:gap-4">
             {contentTemplates.map((template, index) => (
               <div
                 key={index}
