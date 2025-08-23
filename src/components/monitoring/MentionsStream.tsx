@@ -143,7 +143,7 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
                 </span>
               </div>
             </div>
-            <p className="text-white/80 mb-3">{mention.content}</p>
+            <p className="text-white/80 mb-6">{mention.content}</p>
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4 text-sm text-white/60 font-mono">
                 <span className="flex items-center space-x-1">

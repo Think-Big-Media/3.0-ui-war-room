@@ -46,7 +46,7 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
             whileHover={{ scale: 1.02 }}
             className="bg-black/20 rounded-lg p-6 border border-white/10 cursor-pointer"
           >
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center justify-between mb-2 -mt-2">
               <h4 className="font-medium text-white/95">{topic.keyword}</h4>
               <div
                 className={`flex items-center space-x-1 ${getTrendColor(topic.change)}`}
@@ -69,7 +69,7 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
               <span>{topic.region}</span>
               <span>Last {topic.timeframe}</span>
             </div>
-            <div className="flex items-center space-x-2 mt-3">
+            <div className="flex items-center space-x-2 mt-8 -ml-2">
               <button
                 onClick={() => handleViewMentions(topic)}
                 className="btn-secondary-action"
