@@ -29,7 +29,9 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
   icon,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0, width: 0 });
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   // Find the selected option
   const selectedOption = options.find((opt) => opt.value === value);
@@ -69,12 +71,46 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
     setIsOpen(false);
   };
 
+  // Calculate dropdown position when opening
+  const updateDropdownPosition = () => {
+    if (buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      const scrollY = window.scrollY;
+      setDropdownPosition({
+        top: rect.bottom + scrollY + 4, // 4px gap (mt-1)
+        left: rect.left - (rect.width * 0.15), // Center with 130% width
+        width: rect.width * 1.3
+      });
+    }
+  };
+
+  // Update position when opening dropdown
+  useEffect(() => {
+    if (isOpen) {
+      updateDropdownPosition();
+      // Update position on scroll/resize
+      const handleUpdate = () => updateDropdownPosition();
+      window.addEventListener('scroll', handleUpdate);
+      window.addEventListener('resize', handleUpdate);
+      return () => {
+        window.removeEventListener('scroll', handleUpdate);
+        window.removeEventListener('resize', handleUpdate);
+      };
+    }
+  }, [isOpen]);
+
   return (
     <div className="relative z-[99998]" ref={dropdownRef}>
       {/* Dropdown Trigger */}
       <button
+        ref={buttonRef}
         type="button"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          if (!isOpen) {
+            updateDropdownPosition();
+          }
+          setIsOpen(!isOpen);
+        }}
         onKeyDown={handleKeyDown}
         className={cn(
           'flex items-center justify-between',
