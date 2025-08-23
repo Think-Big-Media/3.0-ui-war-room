@@ -213,6 +213,18 @@
     letter-spacing: -0.05em; /* Halved spacing for multi-word buttons */
   }
 
+  /* Secondary Action button style - for primary actions */
+  .btn-secondary-action {
+    @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap;
+    letter-spacing: -0.05em; /* Halved spacing for multi-word buttons */
+  }
+
+  /* Secondary Neutral button style - for general actions */
+  .btn-secondary-neutral {
+    @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap;
+    letter-spacing: -0.05em; /* Halved spacing for multi-word buttons */
+  }
+
   /* Form input style */
   .form-input {
     @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm;
