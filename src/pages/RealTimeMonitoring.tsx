@@ -54,7 +54,7 @@ const RealTimeMonitoring: React.FC = () => {
 
   return (
     <PageLayout
-      pageTitle="Real-Time Monitoring"
+      pageTitle="Live Monitoring"
       placeholder="Ask War Room about monitoring data..."
     >
       {/* Slate gradient background */}

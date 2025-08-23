@@ -180,7 +180,7 @@ const IntelligenceHub: React.FC = () => {
 
   return (
     <PageLayout
-      pageTitle="Intelligence Hub"
+      pageTitle="Intelligence"
       placeholder="Ask War Room about campaign intelligence..."
     >
       {/* Slate/Gray gradient background matching Settings page */}

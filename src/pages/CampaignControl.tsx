@@ -89,14 +89,14 @@ const CampaignControl: React.FC = () => {
 
   return (
     <PageLayout
-      pageTitle="Campaign Control"
+      pageTitle="War Room"
       placeholder="Ask War Room about campaign operations..."
     >
       {/* Purple gradient background */}
       <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 -z-10" />
 
       <PageHeader
-        title="Campaign Control"
+        title="War Room"
         subtitle="Strategic project management, asset organization, and team coordination"
       />
 

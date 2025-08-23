@@ -405,7 +405,7 @@ const CommandCenter: React.FC = () => {
 
   return (
     <PageLayout
-      pageTitle="War Room Command Center"
+      pageTitle="Dashboard"
       placeholder="Ask War Room about your campaign status..."
     >
       {/* Slate/Gray gradient background matching Settings page */}
