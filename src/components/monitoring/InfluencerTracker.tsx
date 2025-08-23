@@ -57,27 +57,27 @@ const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({
               {formatNumber(influencer.followers)} followers • Reach:{' '}
               {influencer.reach}
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mb-3">
               <div className="flex items-center space-x-2">
                 {getSentimentIcon(influencer.sentiment)}
                 <span className="text-xs text-white/70 font-mono">
                   Eng: {influencer.engagement}%
                 </span>
               </div>
-              <div className="flex items-center space-x-2">
-                <button
-                  onClick={() => handleAddToWatchlist(influencer)}
-                  className="text-xs text-blue-400 hover:text-blue-300 font-mono"
-                >
-                  Add to Watchlist
-                </button>
-                <button
-                  onClick={() => handleAmplify(influencer)}
-                  className="text-xs text-white/70 hover:text-white font-mono"
-                >
-                  Amplify
-                </button>
-              </div>
+            </div>
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={() => handleAddToWatchlist(influencer)}
+                className="btn-secondary-action"
+              >
+                Add to Watchlist
+              </button>
+              <button
+                onClick={() => handleAmplify(influencer)}
+                className="btn-secondary-neutral"
+              >
+                Amplify
+              </button>
             </div>
           </div>
         ))}
