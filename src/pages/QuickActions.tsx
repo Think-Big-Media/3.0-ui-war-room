@@ -96,7 +96,7 @@ const QuickActions: React.FC = () => {
             <Zap className="w-5 h-5 lg:w-6 lg:h-6 text-white/95" />
           </div>
           <h3 className="text-lg lg:text-xl font-semibold text-white/95">
-            Quick Actions
+            QUICK ACTIONS
           </h3>
         </div>
       </div>
