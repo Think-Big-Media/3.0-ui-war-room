@@ -31,7 +31,7 @@ const PlatformPerformance: React.FC<PlatformPerformanceProps> = ({
 
   return (
     <Card padding="md" variant="glass">
-      <h3 className="text-xl font-semibold text-white/80 mb-4 font-condensed tracking-wide">PLATFORM PERFORMANCE</h3>
+      <h3 className="text-xl font-semibold text-white/60 mb-4 font-condensed tracking-wide" style={{ textRendering: 'optimizeLegibility', WebkitFontSmoothing: 'antialiased' }}>PLATFORM PERFORMANCE</h3>
       <div className="space-y-3">
         {platformData.map((platform, index) => (
           <div key={index} className="flex items-center justify-between">
