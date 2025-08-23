@@ -10,8 +10,17 @@ import KanbanBoard from '../campaign-control/KanbanBoard';
 import AssetControls from '../campaign-control/AssetControls';
 import AssetGrid from '../campaign-control/AssetGrid';
 import ActivityFeed from '../campaign-control/ActivityFeed';
-import { type CampaignTab, type Project, type ProjectFilters, type AssetFilters } from '../../types/campaign';
-import { mockProjects, mockAssets, mockActivities } from '../../data/campaignData';
+import {
+  type CampaignTab,
+  type Project,
+  type ProjectFilters,
+  type AssetFilters,
+} from '../../types/campaign';
+import {
+  mockProjects,
+  mockAssets,
+  mockActivities,
+} from '../../data/campaignData';
 import { createLogger } from '../../utils/logger';
 
 const logger = createLogger('CampaignControl');
@@ -47,10 +56,15 @@ const CampaignControl: React.FC = () => {
   // Filter functions
   const filteredProjects = mockProjects.filter((project) => {
     const matchesSearch =
-      project.title.toLowerCase().includes(projectFilters.search.toLowerCase()) ||
-      project.description.toLowerCase().includes(projectFilters.search.toLowerCase());
+      project.title
+        .toLowerCase()
+        .includes(projectFilters.search.toLowerCase()) ||
+      project.description
+        .toLowerCase()
+        .includes(projectFilters.search.toLowerCase());
     const matchesStatus =
-      projectFilters.status === 'all' || project.status === projectFilters.status;
+      projectFilters.status === 'all' ||
+      project.status === projectFilters.status;
     return matchesSearch && matchesStatus;
   });
 
@@ -58,13 +72,13 @@ const CampaignControl: React.FC = () => {
     const matchesSearch =
       asset.name.toLowerCase().includes(assetFilters.search.toLowerCase()) ||
       asset.tags.some((tag) =>
-        tag.toLowerCase().includes(assetFilters.search.toLowerCase()),
+        tag.toLowerCase().includes(assetFilters.search.toLowerCase())
       );
     const matchesCategory =
-      assetFilters.category === 'all' || asset.category === assetFilters.category;
+      assetFilters.category === 'all' ||
+      asset.category === assetFilters.category;
     return matchesSearch && matchesCategory;
   });
-
 
   return (
     <PageLayout
@@ -110,9 +124,7 @@ const CampaignControl: React.FC = () => {
       )}
 
       {/* Team Activity */}
-      {activeTab === 'activity' && (
-        <ActivityFeed activities={mockActivities} />
-      )}
+      {activeTab === 'activity' && <ActivityFeed activities={mockActivities} />}
     </PageLayout>
   );
 };

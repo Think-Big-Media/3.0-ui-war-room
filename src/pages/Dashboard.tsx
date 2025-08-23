@@ -29,7 +29,11 @@ import { MetricCard } from '../components/dashboard/MetricCard';
 import { ActivityFeed } from '../components/dashboard/ActivityFeed';
 import { CampaignHealth } from '../components/dashboard/CampaignHealth';
 import { AnalyticsOverview } from '../components/dashboard/AnalyticsOverview';
-import { DashboardHead, DashboardStructuredData, OrganizationStructuredData } from '../components/SEO';
+import {
+  DashboardHead,
+  DashboardStructuredData,
+  OrganizationStructuredData,
+} from '../components/SEO';
 
 // Type definitions for military status bar
 interface StatusIndicator {
@@ -58,8 +62,10 @@ const CamoBackground: React.FC = () => {
             radial-gradient(circle at 90% 60%, rgba(107, 123, 71, 0.6) 16%, transparent 17%),
             radial-gradient(circle at 10% 90%, rgba(160, 149, 107, 0.8) 13%, transparent 14%)
           `,
-          backgroundSize: '120px 120px, 80px 80px, 100px 100px, 90px 90px, 110px 110px, 70px 70px',
-          backgroundPosition: '0 0, 40px 40px, 80px 20px, 20px 80px, 60px 60px, 100px 10px',
+          backgroundSize:
+            '120px 120px, 80px 80px, 100px 100px, 90px 90px, 110px 110px, 70px 70px',
+          backgroundPosition:
+            '0 0, 40px 40px, 80px 20px, 20px 80px, 60px 60px, 100px 10px',
         }}
       />
 
@@ -136,7 +142,9 @@ const StatusBar: React.FC = () => {
             </h2>
             <div className="flex items-center space-x-1">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span className="text-sm text-[#C5C1A8] font-mono">OPERATIONAL</span>
+              <span className="text-sm text-[#C5C1A8] font-mono">
+                OPERATIONAL
+              </span>
             </div>
           </div>
 
@@ -182,7 +190,10 @@ const Dashboard: React.FC = () => {
 
   // Mock sparkline data
   const generateSparkline = () => {
-    return Array.from({ length: 7 }, () => Math.floor(Math.random() * 100) + 20);
+    return Array.from(
+      { length: 7 },
+      () => Math.floor(Math.random() * 100) + 20
+    );
   };
 
   // Loading effect with error handling
@@ -231,8 +242,12 @@ const Dashboard: React.FC = () => {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-[#E8E4D0]">Campaign Dashboard</h1>
-            <p className="mt-1 text-[#C5C1A8]">Welcome back, {user?.email?.split('@')[0]}</p>
+            <h1 className="text-3xl font-bold text-[#E8E4D0]">
+              Campaign Dashboard
+            </h1>
+            <p className="mt-1 text-[#C5C1A8]">
+              Welcome back, {user?.email?.split('@')[0]}
+            </p>
           </div>
 
           {/* Time Range Selector */}
@@ -305,7 +320,9 @@ const Dashboard: React.FC = () => {
           <div className="lg:col-span-2">
             <div className="bg-black/20 backdrop-blur-md rounded-2xl border border-[#8B956D]/30 shadow-sm p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-semibold text-[#E8E4D0]">Recent Activity</h2>
+                <h2 className="text-lg font-semibold text-[#E8E4D0]">
+                  Recent Activity
+                </h2>
                 <button className="text-sm text-[#8B956D] hover:text-[#A0956B] font-medium flex items-center space-x-1">
                   <span>View All</span>
                   <ArrowRight className="w-4 h-4" />
@@ -364,7 +381,9 @@ const Dashboard: React.FC = () => {
                   <Clock className="w-5 h-5 text-[#A0956B]" />
                   <span>Upcoming Tasks</span>
                 </h3>
-                <span className="text-xs text-[#C5C1A8] bg-black/30 px-2 py-1 rounded-full">3 pending</span>
+                <span className="text-xs text-[#C5C1A8] bg-black/30 px-2 py-1 rounded-full">
+                  3 pending
+                </span>
               </div>
               <div className="space-y-3">
                 <div className="group flex items-start space-x-3 p-3 rounded-xl hover:bg-black/30 transition-colors cursor-pointer">
@@ -373,21 +392,29 @@ const Dashboard: React.FC = () => {
                     <div className="absolute inset-0 w-2 h-2 bg-red-400 rounded-full mt-1.5 animate-ping" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm font-medium text-[#E8E4D0] group-hover:text-[#8B956D]">Review donor report</p>
+                    <p className="text-sm font-medium text-[#E8E4D0] group-hover:text-[#8B956D]">
+                      Review donor report
+                    </p>
                     <p className="text-xs text-[#A0956B]">Due in 2 hours</p>
                   </div>
                 </div>
                 <div className="group flex items-start space-x-3 p-3 rounded-xl hover:bg-black/30 transition-colors cursor-pointer">
                   <div className="w-2 h-2 bg-yellow-500 rounded-full mt-1.5" />
                   <div className="flex-1">
-                    <p className="text-sm font-medium text-[#E8E4D0] group-hover:text-[#8B956D]">Call volunteer leads</p>
-                    <p className="text-xs text-[#A0956B]">Due today at 5:00 PM</p>
+                    <p className="text-sm font-medium text-[#E8E4D0] group-hover:text-[#8B956D]">
+                      Call volunteer leads
+                    </p>
+                    <p className="text-xs text-[#A0956B]">
+                      Due today at 5:00 PM
+                    </p>
                   </div>
                 </div>
                 <div className="group flex items-start space-x-3 p-3 rounded-xl hover:bg-black/30 transition-colors cursor-pointer">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-1.5" />
                   <div className="flex-1">
-                    <p className="text-sm font-medium text-[#E8E4D0] group-hover:text-[#8B956D]">Prepare town hall slides</p>
+                    <p className="text-sm font-medium text-[#E8E4D0] group-hover:text-[#8B956D]">
+                      Prepare town hall slides
+                    </p>
                     <p className="text-xs text-[#A0956B]">Due tomorrow</p>
                   </div>
                 </div>

@@ -50,19 +50,39 @@ interface ChatQuery {
 const IntelligenceHub: React.FC = () => {
   const [activeTab, setActiveTab] = useState('upload');
   const [selectedFile, setSelectedFile] = useState<IntelligenceFile | null>(
-    null,
+    null
   );
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('all');
 
   // Dropdown options
   const filterOptions = [
-    { value: 'all', label: 'All Files', icon: <BarChart3 className="w-4 h-4" /> },
+    {
+      value: 'all',
+      label: 'All Files',
+      icon: <BarChart3 className="w-4 h-4" />,
+    },
     { value: 'polling', label: 'Polling', icon: <Brain className="w-4 h-4" /> },
-    { value: 'field-report', label: 'Field Reports', icon: <FileText className="w-4 h-4" /> },
-    { value: 'opposition-research', label: 'Opposition Research', icon: <Eye className="w-4 h-4" /> },
-    { value: 'messaging', label: 'Messaging Assets', icon: <MessageSquare className="w-4 h-4" /> },
-    { value: 'news-media', label: 'News & Media', icon: <Link className="w-4 h-4" /> },
+    {
+      value: 'field-report',
+      label: 'Field Reports',
+      icon: <FileText className="w-4 h-4" />,
+    },
+    {
+      value: 'opposition-research',
+      label: 'Opposition Research',
+      icon: <Eye className="w-4 h-4" />,
+    },
+    {
+      value: 'messaging',
+      label: 'Messaging Assets',
+      icon: <MessageSquare className="w-4 h-4" />,
+    },
+    {
+      value: 'news-media',
+      label: 'News & Media',
+      icon: <Link className="w-4 h-4" />,
+    },
   ];
 
   const intelligenceFiles: IntelligenceFile[] = [
@@ -138,7 +158,7 @@ const IntelligenceHub: React.FC = () => {
     const matchesSearch =
       file.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       file.tags.some((tag) =>
-        tag.toLowerCase().includes(searchTerm.toLowerCase()),
+        tag.toLowerCase().includes(searchTerm.toLowerCase())
       );
     const matchesFilter = filterType === 'all' || file.type === filterType;
     return matchesSearch && matchesFilter;
@@ -393,11 +413,7 @@ const IntelligenceHub: React.FC = () => {
           </div>
 
           {chatQueries.map((query) => (
-            <Card
-              key={query.id}
-              whileHover={{ scale: 1.01 }}
-              padding="sm"
-            >
+            <Card key={query.id} whileHover={{ scale: 1.01 }} padding="sm">
               <div className="flex items-start justify-between mb-2">
                 <div className="flex items-center space-x-2">
                   <MessageSquare className="w-4 h-4 text-blue-400" />

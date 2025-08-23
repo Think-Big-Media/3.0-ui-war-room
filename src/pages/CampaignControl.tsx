@@ -11,7 +11,12 @@ import AssetControls from '../components/campaign-control/AssetControls';
 import AssetGrid from '../components/campaign-control/AssetGrid';
 import ActivityFeed from '../components/campaign-control/ActivityFeed';
 import PlatformAnalytics from '../components/campaign-control/PlatformAnalytics';
-import { type CampaignTab, type Project, type ProjectFilters, type AssetFilters } from '../types/campaign';
+import {
+  type CampaignTab,
+  type Project,
+  type ProjectFilters,
+  type AssetFilters,
+} from '../types/campaign';
 import { mockProjects, mockAssets, mockActivities } from '../data/campaignData';
 import { createLogger } from '../utils/logger';
 import { useLocation } from 'react-router-dom';
@@ -22,7 +27,9 @@ const logger = createLogger('CampaignControl');
 const CampaignControl: React.FC = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState<CampaignTab>('projects');
-  const [analyticsPlatform, setAnalyticsPlatform] = useState<'meta' | 'google' | 'both'>('both');
+  const [analyticsPlatform, setAnalyticsPlatform] = useState<
+    'meta' | 'google' | 'both'
+  >('both');
 
   // Check if we're coming from Settings with a specific platform
   useEffect(() => {
@@ -68,10 +75,15 @@ const CampaignControl: React.FC = () => {
   // Filter functions
   const filteredProjects = mockProjects.filter((project) => {
     const matchesSearch =
-      project.title.toLowerCase().includes(projectFilters.search.toLowerCase()) ||
-      project.description.toLowerCase().includes(projectFilters.search.toLowerCase());
+      project.title
+        .toLowerCase()
+        .includes(projectFilters.search.toLowerCase()) ||
+      project.description
+        .toLowerCase()
+        .includes(projectFilters.search.toLowerCase());
     const matchesStatus =
-      projectFilters.status === 'all' || project.status === projectFilters.status;
+      projectFilters.status === 'all' ||
+      project.status === projectFilters.status;
     return matchesSearch && matchesStatus;
   });
 
@@ -79,13 +91,13 @@ const CampaignControl: React.FC = () => {
     const matchesSearch =
       asset.name.toLowerCase().includes(assetFilters.search.toLowerCase()) ||
       asset.tags.some((tag) =>
-        tag.toLowerCase().includes(assetFilters.search.toLowerCase()),
+        tag.toLowerCase().includes(assetFilters.search.toLowerCase())
       );
     const matchesCategory =
-      assetFilters.category === 'all' || asset.category === assetFilters.category;
+      assetFilters.category === 'all' ||
+      asset.category === assetFilters.category;
     return matchesSearch && matchesCategory;
   });
-
 
   return (
     <PageLayout
@@ -131,9 +143,7 @@ const CampaignControl: React.FC = () => {
       )}
 
       {/* Team Activity */}
-      {activeTab === 'activity' && (
-        <ActivityFeed activities={mockActivities} />
-      )}
+      {activeTab === 'activity' && <ActivityFeed activities={mockActivities} />}
 
       {/* Analytics & AI Insights Tab */}
       {activeTab === 'analytics' && (

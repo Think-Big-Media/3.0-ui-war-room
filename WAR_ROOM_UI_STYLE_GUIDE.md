@@ -5,11 +5,13 @@ This document defines the comprehensive styling standards for the War Room appli
 ## Typography Hierarchy
 
 ### Font Stack
+
 - **Content Text**: Inter (primary sans-serif)
 - **Sub-headers**: Barlow Condensed (condensed display font)
 - **Technical Labels & Action Buttons**: JetBrains Mono (monospace)
 
 ### Configuration
+
 ```javascript
 // tailwind.config.js
 fontFamily: {
@@ -20,6 +22,7 @@ fontFamily: {
 ```
 
 ### Google Fonts Import
+
 ```css
 /* src/index.css */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
@@ -28,6 +31,7 @@ fontFamily: {
 ## Sub-header Styling Standards
 
 ### Primary Rules
+
 - **Case**: ALL UPPERCASE for secondary text and metadata
 - **Opacity**: 40% (`text-white/40`)
 - **Font**: Barlow Condensed (`font-condensed`)
@@ -35,6 +39,7 @@ fontFamily: {
 - **Size**: One point larger than default for category
 
 ### Text Rendering Optimization
+
 ```css
 style={{
   textRendering: 'optimizeLegibility',
@@ -46,10 +51,12 @@ style={{
 ```
 
 ### Indentation Rules
+
 - **With boxes below**: `ml-2` (8px) or `ml-4` (16px) for sub-headers
 - **Without boxes**: No left margin
 
 ### Examples
+
 ```tsx
 // Standard sub-header
 <h3 className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide ml-2">
@@ -65,21 +72,26 @@ style={{
 ## Secondary Button System
 
 ### Button Variants
+
 Three standardized secondary button types with specific use cases:
 
 #### Alert Buttons (`.btn-secondary-alert`)
+
 - **Use**: Urgent actions, critical responses
 - **Color**: Red theme (`bg-red-500/20 hover:bg-red-500/30 text-red-400`)
 
 #### Action Buttons (`.btn-secondary-action`)
+
 - **Use**: Primary interactive actions
 - **Color**: Blue theme (`bg-blue-500/20 hover:bg-blue-500/30 text-blue-400`)
 
 #### Neutral Buttons (`.btn-secondary-neutral`)
+
 - **Use**: Secondary actions, supplementary functions
 - **Color**: Neutral theme (`bg-white/10 hover:bg-white/20 text-white/80`)
 
 ### Button Specifications
+
 ```css
 /* src/index.css */
 .btn-secondary-alert {
@@ -99,6 +111,7 @@ Three standardized secondary button types with specific use cases:
 ```
 
 ### Key Features
+
 - **Height**: Reduced by 10% (`py-0.5` instead of `py-1`)
 - **Letter Spacing**: Halved (`letter-spacing: -0.05em`)
 - **Font**: Monospace (`font-mono`)
@@ -108,44 +121,86 @@ Three standardized secondary button types with specific use cases:
 ## Spacing Standards
 
 ### Content to Button Spacing
+
 - **Standard**: `mt-4` (16px) between content and secondary buttons
 - **Applied consistently** across all components with secondary buttons
 
 ### Component Interior Spacing
+
 - **Interior box padding**: Increased (`p-5`, `p-6`)
 - **Gaps between interior boxes**: Reduced (`space-y-3`, `gap-3`)
 - **Exterior container padding**: Standard (`p-4`, `p-5`)
 - **Exterior container gaps**: Standard (`gap-4`, `space-y-4`)
 
 ### Monitoring Controls Specific
+
 - **Right padding**: 50% increase (`pr-6`) for metadata alignment
 - **Metadata spacing**: Increased horizontal gaps (`space-x-6`)
 
 ### Stacked Components
+
 - **Alert to monitoring bar**: Reduced margin (`mb-2` instead of `mb-4`)
 
 ## Scroll Effects
 
 ### CSS Mask-based Fade System
+
 ```css
 /* src/index.css */
 .scroll-fade {
-  mask: linear-gradient(180deg, transparent 0%, black 10%, black 90%, transparent 100%);
-  -webkit-mask: linear-gradient(180deg, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask: linear-gradient(
+    180deg,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(
+    180deg,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
 }
 
 .scroll-fade-glass {
-  mask: linear-gradient(180deg, transparent 0%, black 15%, black 85%, transparent 100%);
-  -webkit-mask: linear-gradient(180deg, transparent 0%, black 15%, black 85%, transparent 100%);
+  mask: linear-gradient(
+    180deg,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(
+    180deg,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
 }
 
 .scroll-fade-subtle {
-  mask: linear-gradient(180deg, transparent 0%, black 5%, black 95%, transparent 100%);
-  -webkit-mask: linear-gradient(180deg, transparent 0%, black 5%, black 95%, transparent 100%);
+  mask: linear-gradient(
+    180deg,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(
+    180deg,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
 }
 ```
 
 ### Application
+
 - Apply to scrollable containers to eliminate harsh cutoffs
 - Use `.scroll-fade` for standard fade
 - Use `.scroll-fade-glass` for glass-effect containers
@@ -154,32 +209,38 @@ Three standardized secondary button types with specific use cases:
 ## Z-Index Management
 
 ### Dropdown System
+
 - **Implementation**: React Portals for all dropdowns
 - **Container z-index**: `z-[99998]`
 - **Dropdown menu z-index**: `z-[99999]`
 - **Render target**: `document.body`
 
 ### Example Implementation
+
 ```tsx
-{typeof document !== 'undefined' && createPortal(
-  <motion.div
-    className="fixed z-[99999] bg-black/[0.97] backdrop-blur-md rounded"
-    style={{
-      top: dropdownPosition.top,
-      left: dropdownPosition.left,
-      width: dropdownPosition.width,
-      zIndex: 99999
-    }}
-  >
-    {/* Dropdown content */}
-  </motion.div>,
-  document.body
-)}
+{
+  typeof document !== 'undefined' &&
+    createPortal(
+      <motion.div
+        className="fixed z-[99999] bg-black/[0.97] backdrop-blur-md rounded"
+        style={{
+          top: dropdownPosition.top,
+          left: dropdownPosition.left,
+          width: dropdownPosition.width,
+          zIndex: 99999,
+        }}
+      >
+        {/* Dropdown content */}
+      </motion.div>,
+      document.body
+    );
+}
 ```
 
 ## Secondary Text Rules
 
 ### Metadata vs Content Classification
+
 - **Metadata** (make UPPERCASE):
   - Timestamps ("LAST UPDATED: 30 seconds ago")
   - Counts ("TOTAL MENTIONS: 12,847")
@@ -194,6 +255,7 @@ Three standardized secondary button types with specific use cases:
   - Names and proper nouns
 
 ### Styling Application
+
 ```tsx
 // Metadata - UPPERCASE
 <span className="text-white/70 text-sm font-mono uppercase">
@@ -209,6 +271,7 @@ Three standardized secondary button types with specific use cases:
 ## Component-Specific Applications
 
 ### Monitoring Components
+
 - **MentionsStream**: Content in `<p>` tags, metadata in `<span>` with `font-mono uppercase`
 - **TrendingTopics**: Keywords as content, stats as metadata
 - **InfluencerTracker**: Usernames as content, follower counts and metrics as metadata
@@ -216,6 +279,7 @@ Three standardized secondary button types with specific use cases:
 - **MonitoringControls**: All status indicators as metadata
 
 ### Alert Components
+
 - **Alert titles**: UPPERCASE as they're categorical labels
 - **Alert content**: lowercase as they're descriptive messages
 - **Action buttons**: UPPERCASE as they're technical controls
@@ -225,25 +289,30 @@ Three standardized secondary button types with specific use cases:
 When applying these standards to new components:
 
 ### Typography
+
 - [ ] Font hierarchy properly applied (Inter/Barlow Condensed/JetBrains Mono)
 - [ ] Sub-headers use condensed font with proper opacity and spacing
 - [ ] Text rendering optimizations applied where needed
 
 ### Buttons
+
 - [ ] Secondary buttons use appropriate variant class
 - [ ] Button heights and letter spacing follow standards
 - [ ] UPPERCASE and monospace font applied
 
 ### Spacing
+
 - [ ] Content to button spacing is `mt-4`
 - [ ] Interior and exterior spacing follows established patterns
 - [ ] Component-specific spacing rules applied
 
 ### Effects
+
 - [ ] Scroll fades applied to scrollable containers
 - [ ] Z-index management uses Portal system for dropdowns
 
 ### Text Classification
+
 - [ ] Metadata text is UPPERCASE with mono font
 - [ ] Content text remains lowercase with appropriate font
 - [ ] Proper opacity levels applied (40% for sub-headers, 70% for metadata)
@@ -251,9 +320,11 @@ When applying these standards to new components:
 ## Single-Column Card Content Indentation
 
 ### Standard for Right-Hand Side Components
+
 Single-column cards (like Sentiment Breakdown, Platform Performance, Influencer Tracker) require consistent content indentation to align with the overall visual grid.
 
 #### Implementation
+
 ```tsx
 // Apply to headers and content containers within single-column cards
 <h3 className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide ml-1.5">
@@ -270,6 +341,7 @@ Single-column cards (like Sentiment Breakdown, Platform Performance, Influencer 
 ```
 
 #### Measurements
+
 - **Header Indentation**: `ml-1.5` (6px left margin)
 - **Content Indentation**: `px-1.5` (6px horizontal padding)
 - **Rounded Elements**: `mx-1` (4px horizontal margin)
@@ -277,12 +349,15 @@ Single-column cards (like Sentiment Breakdown, Platform Performance, Influencer 
 - **Total Content Offset**: 22px from card edge
 
 #### Visual Alignment
+
 This creates proper visual hierarchy where:
+
 - Multi-column components (left side) have natural content flow
 - Single-column components (right side) have indented content that aligns with grid guidelines
 - All percentages and data points align consistently
 
 #### Examples
+
 ```tsx
 // Sentiment Breakdown
 <Card padding="md" variant="glass">
@@ -309,6 +384,7 @@ This creates proper visual hierarchy where:
 ```
 
 #### Application Rules
+
 - **Single-column card headers**: Apply `ml-1.5` for consistent header indentation
 - **Single-column card content**: Apply `px-1.5` to main content container
 - **Multi-column cards**: Use natural grid alignment without forced indentation
@@ -318,6 +394,7 @@ This creates proper visual hierarchy where:
 ## Site-wide Implementation Status
 
 ### ✅ **Components Updated with Style Guide:**
+
 - **Alert Center**: Subheaders, spacing (gap-4), label positioning
 - **Settings Page**: All form labels (mb-1 ml-1.5), toggle switch indentation, diagnostic text removed
 - **Intelligence Hub**: Dropdown replaced with CustomDropdown, label positioning
@@ -326,6 +403,7 @@ This creates proper visual hierarchy where:
 - **Campaign Control**: ActivityFeed indentation and spacing
 
 ### 📋 **Standards Applied Consistently:**
+
 - **Grid Spacing**: All page-level grids use `gap-4` to match Live Monitoring
 - **Label Positioning**: All form labels use `mb-1 ml-1.5` (5px indent, 4px from field)
 - **Toggle Switch Labels**: All use `ml-1.5` indentation to match form labels
@@ -334,6 +412,7 @@ This creates proper visual hierarchy where:
 - **Content Indentation**: Single-column cards use `px-1.5` for content, `ml-1.5` for headers
 
 ### 🎯 **Design System Compliance:**
+
 - **Typography Hierarchy**: Inter, Barlow Condensed, JetBrains Mono properly applied
 - **Button System**: Secondary button variants used consistently
 - **Spacing Standards**: 4px gap for grids, 4px spacing for component stacks

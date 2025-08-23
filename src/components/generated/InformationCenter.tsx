@@ -308,9 +308,7 @@ const InformationCenter: React.FC = () => {
                         </p>
                         <div className="flex items-center space-x-4 text-xs text-white/60 font-mono uppercase">
                           <span>{formatTimestamp(item.timestamp)}</span>
-                          <span>
-                            {item.category.replace('-', ' ')}
-                          </span>
+                          <span>{item.category.replace('-', ' ')}</span>
                           {item.actionable && (
                             <span className="text-green-400">• ACTIONABLE</span>
                           )}

@@ -3,11 +3,13 @@
 ## Typography Hierarchy
 
 ### Fonts
+
 - **Content Text**: Inter (font-sans)
-- **Sub-headers**: Barlow Condensed (font-condensed) 
+- **Sub-headers**: Barlow Condensed (font-condensed)
 - **Technical Labels/Buttons**: JetBrains Mono (font-mono)
 
 ### Text Styles
+
 - **Main Headings**: `text-white/90 font-medium`
 - **Sub-descriptions**: `text-white/60 font-condensed tracking-wide -mt-1` (moved up 3px, 60% opacity - STANDARDIZED)
 - **Section Headers**: `font-condensed tracking-wide text-white/40` (uppercase)
@@ -15,6 +17,7 @@
 ## Form Elements
 
 ### Input Fields
+
 - **Base Style**: `w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300`
 - **Background**: 70% opacity to show layer underneath
 - **Text Color**: Mid-dark gray (`text-gray-600`) instead of black
@@ -22,10 +25,12 @@
 - **Corner Radius**: `rounded-xl` (matches floating chat input)
 
 ### Select Dropdowns
+
 - **Base Style**: Same as inputs + `appearance-none cursor-pointer`
 - **Consistency**: Match input styling exactly
 
 ### Button Hierarchy
+
 - **Primary Buttons**: Large important actions (`btn-primary-alert`, `btn-primary-action`, `btn-primary-neutral`)
   - Use for: Settings actions, main CTA buttons, destructive actions
   - Size: `px-6 py-3` with `text-base`
@@ -36,6 +41,7 @@
   - Text: Always centered (`text-center`)
 
 ### Button Icon Standards
+
 - **Icons**: Always use semantic icons (Link for connecting, not ExternalLink)
 - **Alignment**: Icons automatically positioned 2px up for proper text alignment
 - **Connection Icons**: Use `Link` icon for connect actions, not `ExternalLink`
@@ -43,27 +49,33 @@
 ## Layout & Spacing
 
 ### Container Spacing
+
 - **Bottom Spacing**: `pb-5` (21px) - 47.5% reduction from original double padding
 - **Icon Indentation**: `ml-2.5` (10px from box edge)
 - **Content Indentation**: `ml-4` for text-only items
 
 ### Icon Alignment
+
 - **Vertical Position**: `mt-0.5` (2px down to align with headline baselines)
 - **Layout**: `items-start` (align with headings, not centered with sub-text)
 
 ### Toggle Switches
+
 - **Alignment**: `mt-1` wrapper for proper positioning with headlines
 
 ## Component Structure
 
 ### Notification/Security Items
+
 ```tsx
 <div className="flex items-start justify-between">
   <div className="flex items-start space-x-3 ml-2.5">
     <Icon className="w-5 h-5 text-white/75 mt-0.5" />
     <div className="ml-1.5">
       <p className="text-white/90 font-medium">Main Heading</p>
-      <p className="text-white/60 font-condensed tracking-wide -mt-1">Sub-description (60% opacity, up 3px)</p>
+      <p className="text-white/60 font-condensed tracking-wide -mt-1">
+        Sub-description (60% opacity, up 3px)
+      </p>
     </div>
   </div>
   <div className="mt-1">
@@ -73,6 +85,7 @@
 ```
 
 ### CSS Utilities
+
 ```css
 .war-room-input {
   @apply w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300;
@@ -129,6 +142,7 @@
 6. **Typography**: Apply Barlow Condensed to all sub-descriptions with proper kerning
 
 ### CRITICAL: ALL sub-descriptions must follow the standardized pattern:
+
 - 60% opacity (`text-white/60`)
 - Barlow Condensed font (`font-condensed`)
 - Proper kerning (`tracking-wide`)

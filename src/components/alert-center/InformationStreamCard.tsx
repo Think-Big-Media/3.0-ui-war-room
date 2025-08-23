@@ -38,9 +38,7 @@ const InformationStreamCard: React.FC<InformationStreamCardProps> = ({
       onClick={() => onClick(item)}
     >
       <div className="flex items-start space-x-4">
-        <div
-          className={`p-2 rounded-lg ${getCategoryColor(item.category)}`}
-        >
+        <div className={`p-2 rounded-lg ${getCategoryColor(item.category)}`}>
           <IconComponent className="w-5 h-5" />
         </div>
         <div className="flex-1">
@@ -48,7 +46,7 @@ const InformationStreamCard: React.FC<InformationStreamCardProps> = ({
             <h4 className="font-medium text-white/95">{item.title}</h4>
             <span
               className={`px-2 py-1 rounded-full text-xs ${getPriorityColor(
-                item.priority,
+                item.priority
               )} border`}
             >
               {item.priority}
@@ -61,9 +59,7 @@ const InformationStreamCard: React.FC<InformationStreamCardProps> = ({
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4 text-sm text-white/60 font-mono uppercase">
               <span>{formatTimestamp(item.timestamp)}</span>
-              <span>
-                {item.category.replace('-', ' ')}
-              </span>
+              <span>{item.category.replace('-', ' ')}</span>
               {item.actionable && (
                 <span className="text-green-400">• ACTIONABLE</span>
               )}

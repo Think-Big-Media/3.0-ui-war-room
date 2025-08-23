@@ -13,8 +13,7 @@ const AssignedAlertsTracker: React.FC<AssignedAlertsTrackerProps> = ({
 }) => {
   const getAssignedAlerts = (memberName: string) => {
     return alerts.filter(
-      (alert) =>
-        alert.assignedTo === memberName && alert.status !== 'resolved',
+      (alert) => alert.assignedTo === memberName && alert.status !== 'resolved'
     );
   };
 
@@ -51,7 +50,7 @@ const AssignedAlertsTracker: React.FC<AssignedAlertsTrackerProps> = ({
                   </div>
                   <div
                     className={`absolute bottom-0 right-0 w-3 h-3 rounded-full ${getStatusDot(
-                      member.status,
+                      member.status
                     )} border-2 border-black/20`}
                   />
                 </div>

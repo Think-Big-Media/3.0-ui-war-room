@@ -17,15 +17,15 @@ import {
   Smartphone,
   Link2,
 } from 'lucide-react';
-import {
-  pageGradients,
-  fireAccentOverlay,
-} from '../lib/utils';
+import { pageGradients, fireAccentOverlay } from '../lib/utils';
 import Card from '../components/shared/Card';
 import PageLayout from '../components/shared/PageLayout';
 import PageHeader from '../components/shared/PageHeader';
 import CustomDropdown from '../components/shared/CustomDropdown';
-import { MetaIntegration, GoogleAdsIntegration } from '../components/integrations';
+import {
+  MetaIntegration,
+  GoogleAdsIntegration,
+} from '../components/integrations';
 
 // Lightweight runtime diagnostics to validate prod behavior
 const BUILD_DIAG = {
@@ -35,7 +35,6 @@ const BUILD_DIAG = {
   hasGoogleAdsIntegration: !!GoogleAdsIntegration,
   buildTime: new Date().toISOString(),
 };
-
 
 interface SettingsSectionProps {
   title: string;
@@ -62,7 +61,9 @@ const SettingsSection: React.FC<SettingsSectionProps> = ({
         <div className="p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-purple-400/20">
           <Icon className="w-6 h-6 text-white/95" />
         </div>
-        <h3 className="text-xl font-semibold text-white/40 font-condensed tracking-wide">{title.toUpperCase()}</h3>
+        <h3 className="text-xl font-semibold text-white/40 font-condensed tracking-wide">
+          {title.toUpperCase()}
+        </h3>
       </div>
       {children}
     </Card>
@@ -88,12 +89,13 @@ const ToggleSwitch: React.FC<{
 );
 
 const SettingsPage: React.FC = () => {
-
   logger.debug('Settings loaded successfully');
   logger.debug('Settings rendered successfully');
 
   // Diagnostic: Log standardized style guide implementation
-  console.log('🎯 STANDARDIZED Style Guide: pb-5 spacing, icons +2px down + 10px indent, inputs 70% transparent + gray text, sub-descriptions 60% opacity + 3px up, buttons text-centered + icons aligned + semantic icons, autosave enabled (SITE-WIDE)');
+  console.log(
+    '🎯 STANDARDIZED Style Guide: pb-5 spacing, icons +2px down + 10px indent, inputs 70% transparent + gray text, sub-descriptions 60% opacity + 3px up, buttons text-centered + icons aligned + semantic icons, autosave enabled (SITE-WIDE)'
+  );
 
   // Diagnostics: track integrations section visibility on mount
   const integrationsRef = useRef<HTMLDivElement | null>(null);
@@ -131,19 +133,20 @@ const SettingsPage: React.FC = () => {
   const timezones = ['EST', 'PST', 'CST', 'GMT', 'CET'];
 
   // Dropdown options
-  const themeOptions = themes.map(theme => ({ value: theme, label: theme }));
-  const languageOptions = languages.map(lang => ({ value: lang, label: lang }));
-  const timezoneOptions = timezones.map(tz => ({ value: tz, label: tz }));
+  const themeOptions = themes.map((theme) => ({ value: theme, label: theme }));
+  const languageOptions = languages.map((lang) => ({
+    value: lang,
+    label: lang,
+  }));
+  const timezoneOptions = timezones.map((tz) => ({ value: tz, label: tz }));
   const dateFormatOptions = [
     { value: 'MM/DD/YYYY', label: 'MM/DD/YYYY' },
     { value: 'DD/MM/YYYY', label: 'DD/MM/YYYY' },
     { value: 'YYYY-MM-DD', label: 'YYYY-MM-DD' },
   ];
 
-
   return (
     <PageLayout pageTitle="Settings" placeholder="Ask about settings...">
-
       {/* Slate/Gray gradient background with fire accents */}
       <div
         className={`fixed inset-0 bg-gradient-to-br ${pageGradients.settings} -z-10`}
@@ -400,7 +403,6 @@ const SettingsPage: React.FC = () => {
         </SettingsSection>
       </div>
 
-
       {/* Platform Integrations Section - Full Width */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -410,25 +412,33 @@ const SettingsPage: React.FC = () => {
         id="integrations-section"
         ref={integrationsRef}
       >
-        <Card
-          padding="lg"
-          variant="glass"
-        >
+        <Card padding="lg" variant="glass">
           <div className="flex items-center space-x-3 mb-6">
             <div className="p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-purple-400/20">
               <Link2 className="w-6 h-6 text-white/95" />
             </div>
-            <h3 className="text-xl font-semibold text-white/95">Platform Integrations</h3>
+            <h3 className="text-xl font-semibold text-white/95">
+              Platform Integrations
+            </h3>
           </div>
           {/* DIAGNOSTIC INFO */}
           <div className="mb-4 p-3 bg-yellow-500/20 border border-yellow-500/50 rounded text-xs text-yellow-200">
             <div>🔍 OAuth Import Status:</div>
-            <div>- MetaIntegration: {typeof MetaIntegration} ({typeof MetaIntegration !== 'undefined' ? 'loaded' : 'missing'})</div>
-            <div>- GoogleAdsIntegration: {typeof GoogleAdsIntegration} ({typeof GoogleAdsIntegration !== 'undefined' ? 'loaded' : 'missing'})</div>
+            <div>
+              - MetaIntegration: {typeof MetaIntegration} (
+              {typeof MetaIntegration !== 'undefined' ? 'loaded' : 'missing'})
+            </div>
+            <div>
+              - GoogleAdsIntegration: {typeof GoogleAdsIntegration} (
+              {typeof GoogleAdsIntegration !== 'undefined'
+                ? 'loaded'
+                : 'missing'}
+              )
+            </div>
             <div>- Environment: {import.meta.env.MODE}</div>
             <div>- Build time: {new Date().toISOString()}</div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* ALWAYS RENDER SOMETHING */}
             <div className="oauth-meta-container">
@@ -446,10 +456,16 @@ const SettingsPage: React.FC = () => {
                 })()
               ) : (
                 <div className="p-6 bg-black/30 backdrop-blur-sm rounded-xl border border-white/20">
-                  <h4 className="text-lg font-semibold text-white mb-2">Meta Business Suite</h4>
-                  <p className="text-white/60 text-sm mb-4">OAuth integration not loaded</p>
+                  <h4 className="text-lg font-semibold text-white mb-2">
+                    Meta Business Suite
+                  </h4>
+                  <p className="text-white/60 text-sm mb-4">
+                    OAuth integration not loaded
+                  </p>
                   <div className="p-3 bg-yellow-500/20 border border-yellow-500 rounded">
-                    <p className="text-yellow-200 text-xs">Component import failed</p>
+                    <p className="text-yellow-200 text-xs">
+                      Component import failed
+                    </p>
                   </div>
                 </div>
               )}
@@ -470,10 +486,16 @@ const SettingsPage: React.FC = () => {
                 })()
               ) : (
                 <div className="p-6 bg-black/30 backdrop-blur-sm rounded-xl border border-white/20">
-                  <h4 className="text-lg font-semibold text-white mb-2">Google Ads</h4>
-                  <p className="text-white/60 text-sm mb-4">OAuth integration not loaded</p>
+                  <h4 className="text-lg font-semibold text-white mb-2">
+                    Google Ads
+                  </h4>
+                  <p className="text-white/60 text-sm mb-4">
+                    OAuth integration not loaded
+                  </p>
                   <div className="p-3 bg-yellow-500/20 border border-yellow-500 rounded">
-                    <p className="text-yellow-200 text-xs">Component import failed</p>
+                    <p className="text-yellow-200 text-xs">
+                      Component import failed
+                    </p>
                   </div>
                 </div>
               )}
@@ -483,7 +505,6 @@ const SettingsPage: React.FC = () => {
       </motion.div>
 
       {/* Autosave - no manual save button needed */}
-
     </PageLayout>
   );
 };

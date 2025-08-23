@@ -10,8 +10,16 @@ interface KanbanBoardProps {
   onProjectSelect: (project: Project) => void;
 }
 
-const KanbanBoard: React.FC<KanbanBoardProps> = ({ projects, onProjectSelect }) => {
-  const statusColumns: ProjectStatus[] = ['planning', 'in-progress', 'review', 'completed'];
+const KanbanBoard: React.FC<KanbanBoardProps> = ({
+  projects,
+  onProjectSelect,
+}) => {
+  const statusColumns: ProjectStatus[] = [
+    'planning',
+    'in-progress',
+    'review',
+    'completed',
+  ];
 
   const getStatusLabel = (status: ProjectStatus): string => {
     return status.replace('-', ' ');

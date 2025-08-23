@@ -116,7 +116,7 @@ const TopNavigation: React.FC = () => {
     const date = new Date(timestamp);
     const now = new Date();
     const diffMinutes = Math.floor(
-      (now.getTime() - date.getTime()) / (1000 * 60),
+      (now.getTime() - date.getTime()) / (1000 * 60)
     );
 
     if (diffMinutes < 60) {
@@ -125,7 +125,6 @@ const TopNavigation: React.FC = () => {
       return `${Math.floor(diffMinutes / 60)}h ago`;
     }
     return `${Math.floor(diffMinutes / 1440)}d ago`;
-
   };
 
   const getPriorityColor = (priority: string) => {
@@ -151,8 +150,8 @@ const TopNavigation: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo/Brand */}
           <div className="flex items-center ml-[10px]">
-            <img 
-              src="/images/WarRoom_Logo_White.png" 
+            <img
+              src="/images/WarRoom_Logo_White.png"
               alt="War Room"
               className="h-[26px] w-auto"
             />
@@ -170,7 +169,9 @@ const TopNavigation: React.FC = () => {
                     : 'text-white/70 hover:text-white hover:bg-white/10'
                 }`}
               >
-                <item.icon className={`w-4 h-4 flex-shrink-0 ${item.icon === Home ? '-translate-y-0.5' : ''}`} />
+                <item.icon
+                  className={`w-4 h-4 flex-shrink-0 ${item.icon === Home ? '-translate-y-0.5' : ''}`}
+                />
                 <span>{item.label}</span>
               </button>
             ))}

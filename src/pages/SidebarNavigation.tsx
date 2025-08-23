@@ -116,7 +116,7 @@ const TopNavigation: React.FC = () => {
     const date = new Date(timestamp);
     const now = new Date();
     const diffMinutes = Math.floor(
-      (now.getTime() - date.getTime()) / (1000 * 60),
+      (now.getTime() - date.getTime()) / (1000 * 60)
     );
 
     if (diffMinutes < 60) {
@@ -125,7 +125,6 @@ const TopNavigation: React.FC = () => {
       return `${Math.floor(diffMinutes / 60)}h ago`;
     }
     return `${Math.floor(diffMinutes / 1440)}d ago`;
-
   };
 
   const getPriorityColor = (priority: string) => {
@@ -177,8 +176,12 @@ const TopNavigation: React.FC = () => {
                     : 'text-white/70 hover:text-white hover:bg-white/10'
                 }`}
               >
-                <item.icon className={`w-4 h-4 flex-shrink-0 ${item.icon === Home ? '-translate-y-0.5' : ''}`} />
-                <span className="whitespace-nowrap overflow-hidden text-ellipsis">{item.label}</span>
+                <item.icon
+                  className={`w-4 h-4 flex-shrink-0 ${item.icon === Home ? '-translate-y-0.5' : ''}`}
+                />
+                <span className="whitespace-nowrap overflow-hidden text-ellipsis">
+                  {item.label}
+                </span>
               </motion.button>
             ))}
           </div>

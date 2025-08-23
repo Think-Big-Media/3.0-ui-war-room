@@ -41,7 +41,9 @@ class GoogleAdsAuthService {
    */
   async getAuthStatus(): Promise<GoogleAdsAuthStatus> {
     try {
-      const response = await api.get<GoogleAdsAuthStatus>(`${this.baseUrl}/auth/google-ads/status`);
+      const response = await api.get<GoogleAdsAuthStatus>(
+        `${this.baseUrl}/auth/google-ads/status`
+      );
       return response.data;
     } catch (error: any) {
       // If we get a 404, the endpoint doesn't exist - use demo mode
@@ -58,7 +60,9 @@ class GoogleAdsAuthService {
       return {
         is_authenticated: false,
         scopes: [],
-        error: error?.response?.data?.detail || 'Failed to get authentication status',
+        error:
+          error?.response?.data?.detail ||
+          'Failed to get authentication status',
       };
     }
   }
@@ -76,13 +80,18 @@ class GoogleAdsAuthService {
     }
 
     try {
-      const response = await api.post<GoogleAdsAuthUrl>(`${this.baseUrl}/auth/google-ads/redirect`, {
-        state,
-      });
+      const response = await api.post<GoogleAdsAuthUrl>(
+        `${this.baseUrl}/auth/google-ads/redirect`,
+        {
+          state,
+        }
+      );
       return response.data;
     } catch (error: any) {
       console.error('Error getting Google Ads auth URL:', error);
-      throw new Error(error?.response?.data?.detail || 'Failed to generate authorization URL');
+      throw new Error(
+        error?.response?.data?.detail || 'Failed to generate authorization URL'
+      );
     }
   }
 
@@ -99,11 +108,15 @@ class GoogleAdsAuthService {
     }
 
     try {
-      const response = await api.post<GoogleAdsAuthResponse>(`${this.baseUrl}/auth/google-ads/refresh`);
+      const response = await api.post<GoogleAdsAuthResponse>(
+        `${this.baseUrl}/auth/google-ads/refresh`
+      );
       return response.data;
     } catch (error: any) {
       console.error('Error refreshing Google Ads token:', error);
-      throw new Error(error?.response?.data?.detail || 'Failed to refresh token');
+      throw new Error(
+        error?.response?.data?.detail || 'Failed to refresh token'
+      );
     }
   }
 
@@ -120,11 +133,15 @@ class GoogleAdsAuthService {
     }
 
     try {
-      const response = await api.post<GoogleAdsAuthResponse>(`${this.baseUrl}/auth/google-ads/revoke`);
+      const response = await api.post<GoogleAdsAuthResponse>(
+        `${this.baseUrl}/auth/google-ads/revoke`
+      );
       return response.data;
     } catch (error: any) {
       console.error('Error revoking Google Ads access:', error);
-      throw new Error(error?.response?.data?.detail || 'Failed to revoke access');
+      throw new Error(
+        error?.response?.data?.detail || 'Failed to revoke access'
+      );
     }
   }
 
@@ -152,7 +169,11 @@ class GoogleAdsAuthService {
   /**
    * Check if user is coming back from OAuth2 callback
    */
-  checkOAuthCallback(): { success?: boolean; error?: string; org_id?: string } | null {
+  checkOAuthCallback(): {
+    success?: boolean;
+    error?: string;
+    org_id?: string;
+  } | null {
     const urlParams = new URLSearchParams(window.location.search);
 
     if (urlParams.has('success') || urlParams.has('error')) {
