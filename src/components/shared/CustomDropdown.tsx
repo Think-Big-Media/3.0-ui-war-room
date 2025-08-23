@@ -77,28 +77,29 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
         onKeyDown={handleKeyDown}
         className={cn(
           'flex items-center justify-between',
-          'px-3 py-1.5 rounded-lg text-sm',
-          'bg-black/20 backdrop-blur-lg',
-          'border border-white/30',
-          'text-white',
-          'hover:bg-white/10 hover:border-white/40',
-          'transition-all duration-200',
-          'focus:outline-none focus:ring-2 focus:ring-white/30',
-          'min-w-[180px]',
+          'px-3 py-1.5 rounded-lg text-sm font-mono',
+          'bg-black/20 backdrop-blur-sm',
+          'border border-white/20',
+          'text-white/90',
+          'hover:bg-black/30 hover:border-white/30',
+          'transition-all duration-300',
+          'focus:outline-none focus:ring-2 focus:ring-white/20',
+          'min-w-[140px]',
           className,
         )}
       >
-        <div className="flex items-center space-x-2.5">
+        <div className="flex items-center space-x-2">
           {icon && <span className="text-white/70">{icon}</span>}
-          <span className="truncate">
+          <span className="truncate font-mono">
             {selectedOption ? selectedOption.label : placeholder}
           </span>
         </div>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.2 }}
+          className="ml-2 flex-shrink-0"
         >
-          <ChevronDown className="w-4 h-4 text-white/70 ml-2" />
+          <ChevronDown className="w-4 h-4 text-white/70" />
         </motion.div>
       </button>
 
@@ -112,9 +113,9 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
             transition={{ duration: 0.2 }}
             className={cn(
               'absolute z-50 mt-2 w-full',
-              'bg-black/30 backdrop-blur-xl',
-              'border border-white/30 rounded-lg',
-              'shadow-2xl shadow-black/20',
+              'bg-black/20 backdrop-blur-sm',
+              'border border-white/20 rounded-lg',
+              'shadow-2xl shadow-black/30',
               'overflow-hidden',
             )}
           >
@@ -125,22 +126,22 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
                   type="button"
                   onClick={() => handleOptionClick(option.value)}
                   className={cn(
-                    'w-full px-3 py-1.5 text-left text-sm',
+                    'w-full px-3 py-1.5 text-left text-sm font-mono',
                     'flex items-center justify-between',
-                    'transition-all duration-200',
+                    'transition-all duration-300',
                     value === option.value
                       ? 'bg-white/20 text-white'
-                      : 'text-white/80 hover:bg-white/10 hover:text-white',
+                      : 'text-white/80 hover:bg-black/20 hover:text-white',
                   )}
                 >
-                  <div className="flex items-center space-x-2.5">
+                  <div className="flex items-center space-x-2">
                     {option.icon && (
                       <span className="text-white/70">{option.icon}</span>
                     )}
-                    <span>{option.label}</span>
+                    <span className="font-mono">{option.label}</span>
                   </div>
                   {value === option.value && (
-                    <Check className="w-4 h-4 text-white/70" />
+                    <Check className="w-4 h-4 text-white/70 ml-2" />
                   )}
                 </button>
               ))}
