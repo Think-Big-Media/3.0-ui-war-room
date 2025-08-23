@@ -210,7 +210,7 @@ const SettingsPage: React.FC = () => {
                 onChange={setPushNotifications}
               />
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mb-8">
               <div className="flex items-center space-x-3">
                 <Globe className="w-5 h-5 text-white/75" />
                 <div className="ml-1.5">
