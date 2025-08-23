@@ -327,7 +327,7 @@ const CampaignOperationsHub: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
         {/* Active Projects */}
         <div className="space-y-3 lg:space-y-4">
-          <h4 className="text-base lg:text-lg font-medium text-white/90 mb-3 uppercase">
+          <h4 className="text-lg lg:text-xl font-medium text-white/80 mb-3 uppercase font-condensed tracking-wide">
             ACTIVE PROJECTS
           </h4>
           <div className="space-y-2 lg:space-y-3">
