@@ -358,7 +358,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({ platform: initial
       <div className="bg-white rounded-xl border border-gray-200 p-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            <button className="btn-secondary-action flex items-center gap-2 px-4 py-2">
               <Plus className="h-4 w-4" />
               Create New Campaign
             </button>
@@ -367,7 +367,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({ platform: initial
               <button
                 onClick={() => setBulkActionOpen(!bulkActionOpen)}
                 disabled={selectedCampaigns.size === 0}
-                className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="btn-secondary-neutral flex items-center gap-2 px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Settings className="h-4 w-4" />
                 Bulk Actions ({selectedCampaigns.size})
@@ -378,9 +378,9 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({ platform: initial
                 <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
                   <button
                     onClick={() => handleBulkAction('pause')}
-                    className="w-full text-left px-4 py-2 hover:bg-gray-50 text-sm"
+                    className="w-full text-left px-4 py-2 hover:bg-gray-50 text-sm font-mono uppercase"
                   >
-                    Pause Selected
+                    PAUSE SELECTED
                   </button>
                   <button
                     onClick={() => handleBulkAction('resume')}
