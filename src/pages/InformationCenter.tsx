@@ -342,7 +342,7 @@ const InformationCenter: React.FC = () => {
                         searchTerm: e.target.value,
                       }))
                     }
-                    className="pl-10 bg-black/20 border border-white/30 rounded-lg px-3 py-2 text-white placeholder-white/50"
+                    className="pl-10 bg-black/20 border border-white/30 rounded-xl px-3 py-2.5 text-white placeholder-white/50 focus:outline-none focus:ring-0 transition-all duration-300 opacity-95"
                   />
                 </div>
                 <select
