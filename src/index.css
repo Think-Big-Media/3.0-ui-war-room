@@ -240,9 +240,9 @@
     @apply w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer opacity-95;
   }
 
-  /* Container spacing fix - double card padding reduced by 30% (40px * 0.7 = 28px = pb-7) */
+  /* Container spacing fix - double card padding reduced by 47.5% (40px * 0.525 = 21px = pb-5) */
   .space-with-bottom {
-    @apply pb-7;
+    @apply pb-5;
   }
 
   /* Card component */
