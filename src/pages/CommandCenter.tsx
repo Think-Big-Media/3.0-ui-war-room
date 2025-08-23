@@ -102,7 +102,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
         <div className="text-2xl lg:text-3xl font-bold text-white/95">
           {number}
         </div>
-        <h3 className="text-base lg:text-lg font-semibold text-white/90 uppercase">
+        <h3 className="text-base lg:text-lg font-semibold text-white/90 uppercase" style={{ font: "600 19px/29px Barlow Condensed, sans-serif" }}>
           {title}
         </h3>
         <p className="text-xs lg:text-sm text-white leading-relaxed uppercase">
@@ -396,7 +396,7 @@ const CampaignOperationsHub: React.FC = () => {
 };
 
 const CommandCenter: React.FC = () => {
-  console.error('🟢🟢🟢 COMMANDCENTER IS RENDERING! 🟢🟢🟢');
+  console.error('🟢🟢🟢 COMMANDCENTER IS RENDERING! 🟢��🟢');
   logger.info('CommandCenter: Component mounting...');
   logger.debug('CommandCenter: Should show purple gradient background');
   logger.debug(
