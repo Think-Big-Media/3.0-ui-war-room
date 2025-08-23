@@ -411,7 +411,7 @@ const InformationCenter: React.FC = () => {
           </Card>
 
           {/* Organized Items */}
-          <div className="space-y-4 pb-7">
+          <div className="space-y-4 pb-5">
             {items.map((item) => {
               const IconComponent = getIcon(item);
               return (
