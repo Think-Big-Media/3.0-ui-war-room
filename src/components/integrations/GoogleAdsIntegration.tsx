@@ -245,7 +245,7 @@ const GoogleAdsIntegration: React.FC = () => {
           <button
             onClick={handleConnect}
             disabled={isConnecting}
-            className="w-full bg-[#4285F4] hover:bg-[#357AE8] text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="btn-secondary-action w-full py-3 px-6 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isConnecting ? (
               <>
