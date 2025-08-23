@@ -196,64 +196,56 @@
     @apply whitespace-nowrap overflow-hidden text-ellipsis;
   }
 
-  /* Scroll fade effects - prevents harsh text cutoffs */
+  /* Scroll fade effects - fades content itself, no overlays */
   .scroll-fade {
-    position: relative;
-  }
-
-  .scroll-fade::before,
-  .scroll-fade::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 24px;
-    pointer-events: none;
-    z-index: 10;
-  }
-
-  .scroll-fade::before {
-    top: 0;
-    background: linear-gradient(to bottom,
-      rgba(0, 0, 0, 0.15) 0%,
+    mask: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 24px,
+      black calc(100% - 24px),
+      transparent 100%
+    );
+    -webkit-mask: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 24px,
+      black calc(100% - 24px),
       transparent 100%
     );
   }
 
-  .scroll-fade::after {
-    bottom: 0;
-    background: linear-gradient(to top,
-      rgba(0, 0, 0, 0.15) 0%,
+  /* Subtle fade variant with less fade distance */
+  .scroll-fade-subtle {
+    mask: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 16px,
+      black calc(100% - 16px),
+      transparent 100%
+    );
+    -webkit-mask: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 16px,
+      black calc(100% - 16px),
       transparent 100%
     );
   }
 
-  /* Variant for glass cards with different background */
-  .scroll-fade-glass::before {
-    background: linear-gradient(to bottom,
-      rgba(0, 0, 0, 0.2) 0%,
+  /* Strong fade variant for dark backgrounds */
+  .scroll-fade-strong {
+    mask: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 32px,
+      black calc(100% - 32px),
       transparent 100%
     );
-  }
-
-  .scroll-fade-glass::after {
-    background: linear-gradient(to top,
-      rgba(0, 0, 0, 0.2) 0%,
-      transparent 100%
-    );
-  }
-
-  /* Subtle fade for lighter content */
-  .scroll-fade-subtle::before {
-    background: linear-gradient(to bottom,
-      rgba(0, 0, 0, 0.08) 0%,
-      transparent 100%
-    );
-  }
-
-  .scroll-fade-subtle::after {
-    background: linear-gradient(to top,
-      rgba(0, 0, 0, 0.08) 0%,
+    -webkit-mask: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 32px,
+      black calc(100% - 32px),
       transparent 100%
     );
   }
