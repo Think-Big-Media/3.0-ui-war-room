@@ -112,20 +112,41 @@ const AdCampaigns: React.FC = () => {
 
   const checkAuthStatus = async () => {
     try {
-      // Check Google Ads auth
-      const googleResponse = await fetch('/api/v1/auth/google-ads/status');
-      const googleData = await googleResponse.json();
-      
-      // Check Meta auth
-      const metaResponse = await fetch('/api/v1/auth/meta/status');
-      const metaData = await metaResponse.json();
-      
+      // Check Google Ads auth - handle 404 gracefully
+      let googleAuth = false;
+      try {
+        const googleResponse = await fetch('/api/v1/auth/google-ads/status');
+        if (googleResponse.status !== 404) {
+          const googleData = await googleResponse.json();
+          googleAuth = googleData.authenticated || false;
+        }
+      } catch (error) {
+        console.log('Google Ads auth endpoint not available - using demo mode');
+      }
+
+      // Check Meta auth - handle 404 gracefully
+      let metaAuth = false;
+      try {
+        const metaResponse = await fetch('/api/v1/auth/meta/status');
+        if (metaResponse.status !== 404) {
+          const metaData = await metaResponse.json();
+          metaAuth = metaData.authenticated || false;
+        }
+      } catch (error) {
+        console.log('Meta auth endpoint not available - using demo mode');
+      }
+
       setAuthStatus({
-        googleAds: googleData.authenticated || false,
-        meta: metaData.authenticated || false
+        googleAds: googleAuth,
+        meta: metaAuth
       });
     } catch (error) {
       console.error('Error checking auth status:', error);
+      // Set default demo state
+      setAuthStatus({
+        googleAds: false,
+        meta: false
+      });
     }
   };
 
