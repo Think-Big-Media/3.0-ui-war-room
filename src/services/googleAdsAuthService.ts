@@ -56,6 +56,7 @@ class GoogleAdsAuthService {
         };
       }
 
+      // Only log other errors, not 404s (which are expected when backend is off)
       console.error('Error getting Google Ads auth status:', error);
       return {
         is_authenticated: false,
