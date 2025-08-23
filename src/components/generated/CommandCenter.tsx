@@ -327,8 +327,8 @@ const CampaignOperationsHub: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
         {/* Active Projects */}
         <div className="space-y-3 lg:space-y-4">
-          <h4 className="text-base lg:text-lg font-medium text-white/90 mb-3">
-            🔧 Active Projects
+          <h4 className="text-base lg:text-lg font-medium text-white/90 mb-3 uppercase">
+            ACTIVE PROJECTS
           </h4>
           <div className="space-y-2 lg:space-y-3">
             {activeProjects.map((cluster, index) => (
@@ -368,8 +368,8 @@ const CampaignOperationsHub: React.FC = () => {
 
         {/* Content Templates */}
         <div className="space-y-3 lg:space-y-4">
-          <h4 className="text-base lg:text-lg font-medium text-white/90 mb-3">
-            📄 Content Templates (Quick Actions)
+          <h4 className="text-base lg:text-lg font-medium text-white/90 mb-3 uppercase">
+            &nbsp;CONTENT TEMPLATES
           </h4>
           <div className="grid grid-cols-2 gap-2 lg:gap-3">
             {contentTemplates.map((template, index) => (
