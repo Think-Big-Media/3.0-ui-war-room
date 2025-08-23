@@ -54,7 +54,7 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       port: env.VITE_PORT ? parseInt(env.VITE_PORT) : 5173,
-      open: true,
+      open: false, // Disable auto-browser opening in headless environments
       host: true, // Listen on all addresses
       watch: {
         // Exclude directories that shouldn't be watched to prevent ENOSPC errors
