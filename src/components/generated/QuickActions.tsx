@@ -96,8 +96,13 @@ const QuickActions: React.FC = () => {
             <Zap className="w-5 h-5 lg:w-6 lg:h-6 text-white/95" />
           </div>
           <h3
-            className="text-xl lg:text-2xl font-semibold text-white/20 font-condensed tracking-wide"
+            className="text-xl lg:text-2xl font-semibold text-white/40 font-condensed tracking-wide"
             style={{
+              textRendering: 'optimizeLegibility',
+              WebkitFontSmoothing: 'antialiased',
+              MozOsxFontSmoothing: 'grayscale',
+              fontKerning: 'normal',
+              textSizeAdjust: '100%',
               textRendering: 'optimizeLegibility',
               WebkitFontSmoothing: 'antialiased',
             }}

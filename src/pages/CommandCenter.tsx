@@ -324,10 +324,13 @@ const CampaignOperationsHub: React.FC = () => {
         {/* Active Projects */}
         <div className="space-y-2 lg:space-y-3">
           <h4
-            className="text-lg lg:text-xl font-medium text-white/20 mb-3 uppercase font-condensed tracking-wide"
+            className="text-lg lg:text-xl font-medium text-white/40 mb-3 uppercase font-condensed tracking-wide"
             style={{
               textRendering: 'optimizeLegibility',
               WebkitFontSmoothing: 'antialiased',
+              MozOsxFontSmoothing: 'grayscale',
+              fontKerning: 'normal',
+              textSizeAdjust: '100%'
             }}
           >
             Active Projects
@@ -359,10 +362,13 @@ const CampaignOperationsHub: React.FC = () => {
         {/* Content Templates */}
         <div className="space-y-2 lg:space-y-3">
           <h4
-            className="text-lg lg:text-xl font-medium text-white/20 mb-3 uppercase font-condensed tracking-wide"
+            className="text-lg lg:text-xl font-medium text-white/40 mb-3 uppercase font-condensed tracking-wide"
             style={{
               textRendering: 'optimizeLegibility',
               WebkitFontSmoothing: 'antialiased',
+              MozOsxFontSmoothing: 'grayscale',
+              fontKerning: 'normal',
+              textSizeAdjust: '100%'
             }}
           >
             &nbsp;Content Templates
