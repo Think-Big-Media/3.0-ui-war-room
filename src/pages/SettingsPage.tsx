@@ -370,23 +370,31 @@ const SettingsPage: React.FC = () => {
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Timezone
               </label>
-              <select className="w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer">
-                {timezones.map((tz) => (
-                  <option key={tz} value={tz} className="bg-gray-800">
-                    {tz}
-                  </option>
-                ))}
-              </select>
+              <div className="flex justify-center">
+                <CustomDropdown
+                  value={selectedTimezone}
+                  onChange={setSelectedTimezone}
+                  options={timezoneOptions}
+                  placeholder="Select Timezone"
+                  icon={<Globe className="w-4 h-4" />}
+                  className="w-48"
+                />
+              </div>
             </div>
             <div>
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Date Format
               </label>
-              <select className="w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer">
-                <option className="bg-gray-800">MM/DD/YYYY</option>
-                <option className="bg-gray-800">DD/MM/YYYY</option>
-                <option className="bg-gray-800">YYYY-MM-DD</option>
-              </select>
+              <div className="flex justify-center">
+                <CustomDropdown
+                  value={selectedDateFormat}
+                  onChange={setSelectedDateFormat}
+                  options={dateFormatOptions}
+                  placeholder="Select Date Format"
+                  icon={<Globe className="w-4 h-4" />}
+                  className="w-48"
+                />
+              </div>
             </div>
           </div>
         </SettingsSection>
