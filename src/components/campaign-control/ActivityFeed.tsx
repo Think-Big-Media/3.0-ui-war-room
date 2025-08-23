@@ -18,7 +18,7 @@ const ActivityFeed: React.FC<ActivityFeedProps> = ({ activities }) => {
       className="space-y-6"
     >
       <Card padding="md" variant="glass">
-        <h3 className="text-lg font-semibold text-white/95 mb-4 font-condensed">
+        <h3 className="text-xl font-semibold text-white/80 mb-4 font-condensed tracking-wide">
           RECENT ACTIVITY
         </h3>
         <div className="space-y-4">
