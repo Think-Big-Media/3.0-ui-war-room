@@ -209,7 +209,8 @@
 
   /* Secondary Alert button style - for urgent actions */
   .btn-secondary-alert {
-    @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-3 py-1 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap;
+    @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap;
+    letter-spacing: -0.05em; /* Halved spacing for multi-word buttons */
   }
 
   /* Form input style */
