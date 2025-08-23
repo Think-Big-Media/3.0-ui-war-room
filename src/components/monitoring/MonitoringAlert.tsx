@@ -40,7 +40,7 @@ const MonitoringAlert: React.FC<MonitoringAlertProps> = ({
               style={{
                 textRendering: 'optimizeLegibility',
                 WebkitFontSmoothing: 'antialiased',
-                MozOsxFontSmoothing: 'grayscale'
+                MozOsxFontSmoothing: 'grayscale',
               }}
             >
               {title}

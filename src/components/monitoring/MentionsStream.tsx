@@ -89,7 +89,7 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
             WebkitFontSmoothing: 'antialiased',
             MozOsxFontSmoothing: 'grayscale',
             fontKerning: 'normal',
-            textSizeAdjust: '100%'
+            textSizeAdjust: '100%',
           }}
         >
           LIVE MENTIONS STREAM

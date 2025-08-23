@@ -52,7 +52,6 @@ const RealTimeMonitoring: React.FC = () => {
     return matchesSource && matchesSentiment && matchesRegion;
   });
 
-
   return (
     <PageLayout
       pageTitle="Real-Time Monitoring"

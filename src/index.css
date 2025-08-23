@@ -287,19 +287,21 @@
   /* Strong fade variant for dark backgrounds */
   .scroll-fade-strong {
     mask: linear-gradient(
-      to bottom,
-      transparent 0%,
-      black 32px,
-      black calc(100% - 32px),
-      transparent 100%
-    ) no-repeat;
+        to bottom,
+        transparent 0%,
+        black 32px,
+        black calc(100% - 32px),
+        transparent 100%
+      )
+      no-repeat;
     -webkit-mask: linear-gradient(
-      to bottom,
-      transparent 0%,
-      black 32px,
-      black calc(100% - 32px),
-      transparent 100%
-    ) no-repeat;
+        to bottom,
+        transparent 0%,
+        black 32px,
+        black calc(100% - 32px),
+        transparent 100%
+      )
+      no-repeat;
     mask-composite: intersect;
     -webkit-mask-composite: source-in;
   }

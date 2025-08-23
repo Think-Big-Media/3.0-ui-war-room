@@ -34,7 +34,7 @@ const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({
           WebkitFontSmoothing: 'antialiased',
           MozOsxFontSmoothing: 'grayscale',
           fontKerning: 'normal',
-          textSizeAdjust: '100%'
+          textSizeAdjust: '100%',
         }}
       >
         INFLUENCER TRACKER

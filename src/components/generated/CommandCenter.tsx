@@ -342,7 +342,7 @@ const CampaignOperationsHub: React.FC = () => {
               WebkitFontSmoothing: 'antialiased',
               MozOsxFontSmoothing: 'grayscale',
               fontKerning: 'normal',
-              textSizeAdjust: '100%'
+              textSizeAdjust: '100%',
             }}
           >
             ACTIVE PROJECTS
@@ -392,7 +392,7 @@ const CampaignOperationsHub: React.FC = () => {
               WebkitFontSmoothing: 'antialiased',
               MozOsxFontSmoothing: 'grayscale',
               fontKerning: 'normal',
-              textSizeAdjust: '100%'
+              textSizeAdjust: '100%',
             }}
           >
             &nbsp;CONTENT TEMPLATES

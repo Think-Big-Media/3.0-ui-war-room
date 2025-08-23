@@ -29,7 +29,11 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
   icon,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0, width: 0 });
+  const [dropdownPosition, setDropdownPosition] = useState({
+    top: 0,
+    left: 0,
+    width: 0,
+  });
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -78,8 +82,8 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
       const scrollY = window.scrollY;
       setDropdownPosition({
         top: rect.bottom + scrollY + 4, // 4px gap (mt-1)
-        left: rect.left - (rect.width * 0.15), // Center with 130% width
-        width: rect.width * 1.3
+        left: rect.left - rect.width * 0.15, // Center with 130% width
+        width: rect.width * 1.3,
       });
     }
   };
@@ -160,30 +164,34 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
                   top: dropdownPosition.top,
                   left: dropdownPosition.left,
                   width: dropdownPosition.width,
-                  zIndex: 99999
+                  zIndex: 99999,
                 }}
               >
                 <div className="py-2 max-h-60 overflow-y-auto custom-scrollbar">
-                  {options.filter(option => option.value !== value).map((option) => (
-                    <button
-                      key={option.value}
-                      type="button"
-                      onClick={() => handleOptionClick(option.value)}
-                      className={cn(
-                        'w-full px-4 py-2 text-left text-sm font-mono uppercase',
-                        'flex items-center justify-between',
-                        'transition-all duration-300',
-                        'text-white/80 hover:bg-white/30 hover:text-white'
-                      )}
-                    >
-                      <div className="flex items-center space-x-2">
-                        {option.icon && (
-                          <span className="text-white/70">{option.icon}</span>
+                  {options
+                    .filter((option) => option.value !== value)
+                    .map((option) => (
+                      <button
+                        key={option.value}
+                        type="button"
+                        onClick={() => handleOptionClick(option.value)}
+                        className={cn(
+                          'w-full px-4 py-2 text-left text-sm font-mono uppercase',
+                          'flex items-center justify-between',
+                          'transition-all duration-300',
+                          'text-white/80 hover:bg-white/30 hover:text-white'
                         )}
-                        <span className="font-mono uppercase">{option.label}</span>
-                      </div>
-                    </button>
-                  ))}
+                      >
+                        <div className="flex items-center space-x-2">
+                          {option.icon && (
+                            <span className="text-white/70">{option.icon}</span>
+                          )}
+                          <span className="font-mono uppercase">
+                            {option.label}
+                          </span>
+                        </div>
+                      </button>
+                    ))}
                 </div>
               </motion.div>
             )}
