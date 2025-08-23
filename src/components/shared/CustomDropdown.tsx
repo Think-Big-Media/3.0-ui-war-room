@@ -85,7 +85,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
           'transition-all duration-300',
           'focus:outline-none focus:ring-2 focus:ring-white/20',
           'min-w-[140px]',
-          className,
+          className
         )}
       >
         <div className="flex items-center space-x-2">
@@ -116,7 +116,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
               'bg-black/20 backdrop-blur-sm',
               'border border-white/20 rounded-lg',
               'shadow-2xl shadow-black/30',
-              'overflow-hidden',
+              'overflow-hidden'
             )}
           >
             <div className="py-1 max-h-60 overflow-y-auto custom-scrollbar">
@@ -131,7 +131,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
                     'transition-all duration-300',
                     value === option.value
                       ? 'bg-white/20 text-white'
-                      : 'text-white/80 hover:bg-black/20 hover:text-white',
+                      : 'text-white/80 hover:bg-black/20 hover:text-white'
                   )}
                 >
                   <div className="flex items-center space-x-2">

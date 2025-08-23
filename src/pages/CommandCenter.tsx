@@ -117,12 +117,16 @@ const IntelligenceDashboard: React.FC = () => {
   const navigate = useNavigate();
 
   const handleDashboardClick = () => {
-    logger.debug('Intelligence Dashboard clicked - navigating to /intelligence-hub');
+    logger.debug(
+      'Intelligence Dashboard clicked - navigating to /intelligence-hub'
+    );
     navigate('/intelligence-hub');
   };
 
   const handleMetricClick = (metricLabel: string) => {
-    logger.debug(`Metric clicked: ${metricLabel} - navigating to /intelligence-hub`);
+    logger.debug(
+      `Metric clicked: ${metricLabel} - navigating to /intelligence-hub`
+    );
     navigate('/intelligence-hub');
   };
 
@@ -228,12 +232,16 @@ const CampaignOperationsHub: React.FC = () => {
   const navigate = useNavigate();
 
   const handleProjectClick = (projectTitle: string) => {
-    logger.debug(`Project clicked: ${projectTitle} - navigating to /campaign-control`);
+    logger.debug(
+      `Project clicked: ${projectTitle} - navigating to /campaign-control`
+    );
     navigate('/campaign-control');
   };
 
   const handleTemplateClick = (templateName: string) => {
-    logger.debug(`Template clicked: ${templateName} - navigating to /campaign-control`);
+    logger.debug(
+      `Template clicked: ${templateName} - navigating to /campaign-control`
+    );
     navigate('/campaign-control');
   };
 
@@ -315,7 +323,13 @@ const CampaignOperationsHub: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4">
         {/* Active Projects */}
         <div className="space-y-2 lg:space-y-3">
-          <h4 className="text-lg lg:text-xl font-medium text-white/20 mb-3 uppercase font-condensed tracking-wide" style={{ textRendering: 'optimizeLegibility', WebkitFontSmoothing: 'antialiased' }}>
+          <h4
+            className="text-lg lg:text-xl font-medium text-white/20 mb-3 uppercase font-condensed tracking-wide"
+            style={{
+              textRendering: 'optimizeLegibility',
+              WebkitFontSmoothing: 'antialiased',
+            }}
+          >
             Active Projects
           </h4>
           <div className="space-y-1.5 lg:space-y-2">
@@ -344,7 +358,13 @@ const CampaignOperationsHub: React.FC = () => {
 
         {/* Content Templates */}
         <div className="space-y-2 lg:space-y-3">
-          <h4 className="text-lg lg:text-xl font-medium text-white/20 mb-3 uppercase font-condensed tracking-wide" style={{ textRendering: 'optimizeLegibility', WebkitFontSmoothing: 'antialiased' }}>
+          <h4
+            className="text-lg lg:text-xl font-medium text-white/20 mb-3 uppercase font-condensed tracking-wide"
+            style={{
+              textRendering: 'optimizeLegibility',
+              WebkitFontSmoothing: 'antialiased',
+            }}
+          >
             &nbsp;Content Templates
           </h4>
           <div className="grid grid-cols-2 gap-3 lg:gap-4">
@@ -357,7 +377,9 @@ const CampaignOperationsHub: React.FC = () => {
                 <h5 className="font-medium text-white/95 text-xs lg:text-sm mb-1 uppercase">
                   {template.name}
                 </h5>
-                <p className="text-xs text-white/65 uppercase">{template.type}</p>
+                <p className="text-xs text-white/65 uppercase">
+                  {template.type}
+                </p>
               </div>
             ))}
           </div>
@@ -372,66 +394,66 @@ const CommandCenter: React.FC = () => {
   logger.info('CommandCenter: Component mounting...');
   logger.debug('CommandCenter: Should show purple gradient background');
   logger.debug(
-    'CommandCenter: Three main cards + Campaign Operations Hub + Intelligence Dashboard + Quick Actions',
+    'CommandCenter: Three main cards + Campaign Operations Hub + Intelligence Dashboard + Quick Actions'
   );
 
   return (
     <PageLayout
-        pageTitle="War Room Command Center"
-        placeholder="Ask War Room about your campaign status..."
-      >
+      pageTitle="War Room Command Center"
+      placeholder="Ask War Room about your campaign status..."
+    >
       {/* Slate/Gray gradient background matching Settings page */}
       <div className="fixed inset-0 bg-gradient-to-br from-slate-600 via-slate-700 to-slate-800 -z-10" />
 
       {/* Top Row - 4 KPI Tiles */}
       <div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-4 lg:mb-5">
-        <DashboardCard
-          title="Real-Time Alerts"
-          number={7}
-          subtitle="Active crisis detections"
-          icon={Bell}
-          delay={0.1}
-          navigateTo="/alert-center"
-        />
-        <DashboardCard
-          title="Ad Spend Today"
-          number="$47.2K"
-          subtitle="Meta + Google Ads (+12% vs yesterday)"
-          icon={TrendingUp}
-          delay={0.2}
-          navigateTo="/campaign-control"
-        />
-        <DashboardCard
-          title="Mention Volume"
-          number="2,847"
-          subtitle="Mentions across platforms"
-          icon={MessageSquare}
-          delay={0.3}
-          navigateTo="/real-time-monitoring"
-        />
-        <DashboardCard
-          title="Sentiment Score"
-          number="74%"
-          subtitle="Positive sentiment"
-          icon={Brain}
-          delay={0.4}
-          navigateTo="/intelligence-hub"
-        />
-      </div>
+          <DashboardCard
+            title="Real-Time Alerts"
+            number={7}
+            subtitle="Active crisis detections"
+            icon={Bell}
+            delay={0.1}
+            navigateTo="/alert-center"
+          />
+          <DashboardCard
+            title="Ad Spend Today"
+            number="$47.2K"
+            subtitle="Meta + Google Ads (+12% vs yesterday)"
+            icon={TrendingUp}
+            delay={0.2}
+            navigateTo="/campaign-control"
+          />
+          <DashboardCard
+            title="Mention Volume"
+            number="2,847"
+            subtitle="Mentions across platforms"
+            icon={MessageSquare}
+            delay={0.3}
+            navigateTo="/real-time-monitoring"
+          />
+          <DashboardCard
+            title="Sentiment Score"
+            number="74%"
+            subtitle="Positive sentiment"
+            icon={Brain}
+            delay={0.4}
+            navigateTo="/intelligence-hub"
+          />
+        </div>
 
-      {/* Middle Row - 2 Wider Cards */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4 mb-5">
-        <CampaignOperationsHub />
-        <QuickActions />
-      </div>
+        {/* Middle Row - 2 Wider Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4 mb-5">
+          <CampaignOperationsHub />
+          <QuickActions />
+        </div>
 
-      {/* Bottom Row - Intelligence Dashboard */}
-      <div className="mb-4">
-        <IntelligenceDashboard />
+        {/* Bottom Row - Intelligence Dashboard */}
+        <div className="mb-4">
+          <IntelligenceDashboard />
+        </div>
       </div>
-      </div>
-      </PageLayout>
+    </PageLayout>
   );
 };
 

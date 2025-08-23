@@ -11,7 +11,7 @@
   :root {
     /* Base font size optimized for 95% browser scaling */
     font-size: 16.5px; /* Adjusted for 95% zoom - larger text */
-    
+
     /* Glassmorphic theme - transparent with subtle tints */
     --background: 249 250 251; /* gray-50 base */
     --foreground: 15 23 42; /* slate-800 */
@@ -93,33 +93,43 @@
   h6 {
     @apply text-base font-medium font-sans;
   }
-  
+
   /* Interface elements use JetBrains Mono */
-  button, input, select, textarea {
+  button,
+  input,
+  select,
+  textarea {
     @apply font-mono text-sm;
     letter-spacing: -0.025em; /* Tighter spacing for mono font */
   }
-  
+
   /* Code and technical text */
-  code, kbd, samp, pre {
+  code,
+  kbd,
+  samp,
+  pre {
     @apply font-mono text-sm;
   }
-  
+
   /* Labels and small UI text */
-  label, .label {
+  label,
+  .label {
     @apply font-mono text-xs uppercase tracking-wider;
   }
-  
+
   /* Navigation items */
-  nav a, .nav-item {
+  nav a,
+  .nav-item {
     @apply font-mono text-sm font-medium;
   }
-  
+
   /* Status badges, metrics */
-  .badge, .metric, .stat {
+  .badge,
+  .metric,
+  .stat {
     @apply font-mono text-xs;
   }
-  
+
   /* Data tables */
   table th {
     @apply font-mono text-xs uppercase tracking-wider;
@@ -130,17 +140,22 @@
   }
 
   /* Content text areas - mentions, news, polling data, etc. */
-  .content-text, .mention-text, .news-text, .feed-text {
+  .content-text,
+  .mention-text,
+  .news-text,
+  .feed-text {
     @apply font-sans;
   }
 
   /* Paragraphs and content areas */
-  p, .text-content {
+  p,
+  .text-content {
     @apply font-sans;
   }
 
   /* Sub-headlines and section titles */
-  .section-title, .sub-headline {
+  .section-title,
+  .sub-headline {
     @apply font-condensed;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -148,12 +163,14 @@
   }
 
   /* Technical labels and metadata */
-  .technical-label, .metadata-text {
+  .technical-label,
+  .metadata-text {
     @apply font-mono text-xs;
   }
 
   /* Action buttons and interactive labels */
-  .action-button, .interactive-label {
+  .action-button,
+  .interactive-label {
     @apply font-mono text-xs;
   }
 }
@@ -164,22 +181,23 @@
   .btn-primary {
     @apply px-4 py-2 bg-blue-600 text-white font-mono font-medium text-sm rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors;
   }
-  
+
   /* Card titles should use Inter for content readability */
   .card-title {
     @apply font-sans font-semibold text-lg;
   }
-  
+
   /* Sidebar and menu items */
-  .sidebar-item, .menu-item {
+  .sidebar-item,
+  .menu-item {
     @apply font-mono text-sm;
   }
-  
+
   /* Dashboard metrics and numbers */
   .metric-value {
     @apply font-mono font-semibold;
   }
-  
+
   .metric-label {
     @apply font-mono text-xs uppercase tracking-wider opacity-75;
   }
@@ -220,19 +238,21 @@
   /* Scroll fade effects - fades content itself, no overlays */
   .scroll-fade {
     mask: linear-gradient(
-      to bottom,
-      transparent 0%,
-      black 24px,
-      black calc(100% - 24px),
-      transparent 100%
-    ) no-repeat;
+        to bottom,
+        transparent 0%,
+        black 24px,
+        black calc(100% - 24px),
+        transparent 100%
+      )
+      no-repeat;
     -webkit-mask: linear-gradient(
-      to bottom,
-      transparent 0%,
-      black 24px,
-      black calc(100% - 24px),
-      transparent 100%
-    ) no-repeat;
+        to bottom,
+        transparent 0%,
+        black 24px,
+        black calc(100% - 24px),
+        transparent 100%
+      )
+      no-repeat;
     mask-composite: intersect;
     -webkit-mask-composite: source-in;
   }
@@ -240,19 +260,21 @@
   /* Subtle fade variant with less fade distance */
   .scroll-fade-subtle {
     mask: linear-gradient(
-      to bottom,
-      transparent 0%,
-      black 16px,
-      black calc(100% - 16px),
-      transparent 100%
-    ) no-repeat;
+        to bottom,
+        transparent 0%,
+        black 16px,
+        black calc(100% - 16px),
+        transparent 100%
+      )
+      no-repeat;
     -webkit-mask: linear-gradient(
-      to bottom,
-      transparent 0%,
-      black 16px,
-      black calc(100% - 16px),
-      transparent 100%
-    ) no-repeat;
+        to bottom,
+        transparent 0%,
+        black 16px,
+        black calc(100% - 16px),
+        transparent 100%
+      )
+      no-repeat;
     mask-composite: intersect;
     -webkit-mask-composite: source-in;
   }
@@ -274,7 +296,7 @@
       transparent 100%
     );
   }
-  
+
   /* Animations */
   .animate-fade-in {
     animation: fadeIn 0.5s ease-in-out;

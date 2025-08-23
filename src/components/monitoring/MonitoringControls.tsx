@@ -35,7 +35,11 @@ const MonitoringControls: React.FC<MonitoringControlsProps> = ({
             onClick={onToggleLive}
             className="flex items-center space-x-2 bg-white/20 hover:bg-white/30 text-white px-3 py-1.5 rounded-lg transition-colors"
           >
-            {isLive ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+            {isLive ? (
+              <Pause className="w-4 h-4" />
+            ) : (
+              <Play className="w-4 h-4" />
+            )}
             <span>{isLive ? 'Pause' : 'Start'}</span>
           </button>
         </div>

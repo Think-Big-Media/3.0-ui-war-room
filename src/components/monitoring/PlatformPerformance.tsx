@@ -31,7 +31,15 @@ const PlatformPerformance: React.FC<PlatformPerformanceProps> = ({
 
   return (
     <Card padding="md" variant="glass">
-      <h3 className="text-xl font-semibold text-white/20 mb-4 font-condensed tracking-wide" style={{ textRendering: 'optimizeLegibility', WebkitFontSmoothing: 'antialiased' }}>PLATFORM PERFORMANCE</h3>
+      <h3
+        className="text-xl font-semibold text-white/20 mb-4 font-condensed tracking-wide"
+        style={{
+          textRendering: 'optimizeLegibility',
+          WebkitFontSmoothing: 'antialiased',
+        }}
+      >
+        PLATFORM PERFORMANCE
+      </h3>
       <div className="space-y-3">
         {platformData.map((platform, index) => (
           <div key={index} className="flex items-center justify-between">
@@ -39,7 +47,9 @@ const PlatformPerformance: React.FC<PlatformPerformanceProps> = ({
               {getPlatformIcon(platform.icon)}
               <span className="text-white/80">{platform.platform}</span>
             </div>
-            <span className="text-white/90 font-medium">{platform.percentage}%</span>
+            <span className="text-white/90 font-medium">
+              {platform.percentage}%
+            </span>
           </div>
         ))}
       </div>

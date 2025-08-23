@@ -42,23 +42,55 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
   ];
 
   const sentimentOptions = [
-    { value: 'all', label: 'All Sentiment', icon: <BarChart3 className="w-4 h-4" /> },
-    { value: 'positive', label: 'Positive', icon: <TrendingUp className="w-4 h-4 text-green-400" /> },
-    { value: 'negative', label: 'Negative', icon: getSentimentIcon('negative') },
+    {
+      value: 'all',
+      label: 'All Sentiment',
+      icon: <BarChart3 className="w-4 h-4" />,
+    },
+    {
+      value: 'positive',
+      label: 'Positive',
+      icon: <TrendingUp className="w-4 h-4 text-green-400" />,
+    },
+    {
+      value: 'negative',
+      label: 'Negative',
+      icon: getSentimentIcon('negative'),
+    },
     { value: 'neutral', label: 'Neutral', icon: getSentimentIcon('neutral') },
   ];
 
   const regionOptions = [
     { value: 'all', label: 'All Regions', icon: <Globe className="w-4 h-4" /> },
-    { value: 'District 3', label: 'District 3', icon: <MapPin className="w-4 h-4" /> },
-    { value: 'District 7', label: 'District 7', icon: <MapPin className="w-4 h-4" /> },
-    { value: 'Statewide', label: 'Statewide', icon: <MapPin className="w-4 h-4" /> },
+    {
+      value: 'District 3',
+      label: 'District 3',
+      icon: <MapPin className="w-4 h-4" />,
+    },
+    {
+      value: 'District 7',
+      label: 'District 7',
+      icon: <MapPin className="w-4 h-4" />,
+    },
+    {
+      value: 'Statewide',
+      label: 'Statewide',
+      icon: <MapPin className="w-4 h-4" />,
+    },
   ];
 
   return (
     <Card padding="md" variant="glass">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-xl font-semibold text-white/20 font-condensed tracking-wide" style={{ textRendering: 'optimizeLegibility', WebkitFontSmoothing: 'antialiased' }}>LIVE MENTIONS STREAM</h3>
+        <h3
+          className="text-xl font-semibold text-white/20 font-condensed tracking-wide"
+          style={{
+            textRendering: 'optimizeLegibility',
+            WebkitFontSmoothing: 'antialiased',
+          }}
+        >
+          LIVE MENTIONS STREAM
+        </h3>
         <div className="flex items-center space-x-2">
           <CustomDropdown
             value={filters.source}
@@ -68,7 +100,9 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
           />
           <CustomDropdown
             value={filters.sentiment}
-            onChange={(value) => onFiltersChange({ ...filters, sentiment: value })}
+            onChange={(value) =>
+              onFiltersChange({ ...filters, sentiment: value })
+            }
             options={sentimentOptions}
             className="min-w-[140px]"
           />
@@ -92,8 +126,12 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
             <div className="flex items-start justify-between mb-2">
               <div className="flex items-center space-x-2">
                 {getPlatformIcon(mention.platform)}
-                <span className="text-white/90 font-medium">{mention.username}</span>
-                <span className="text-white/60 text-sm font-mono">{mention.timestamp}</span>
+                <span className="text-white/90 font-medium">
+                  {mention.username}
+                </span>
+                <span className="text-white/60 text-sm font-mono">
+                  {mention.timestamp}
+                </span>
               </div>
               <div className="flex items-center space-x-2">
                 {getSentimentIcon(mention.sentiment)}

@@ -12,7 +12,9 @@ interface InfluencerTrackerProps {
   influencers: Influencer[];
 }
 
-const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({ influencers }) => {
+const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({
+  influencers,
+}) => {
   const handleAddToWatchlist = (influencer: Influencer) => {
     logger.info('Add influencer to watchlist:', influencer.username);
     // Handle adding influencer to watchlist
@@ -25,7 +27,15 @@ const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({ influencers }) =>
 
   return (
     <Card padding="md" variant="glass">
-      <h3 className="text-xl font-semibold text-white/20 mb-4 font-condensed tracking-wide" style={{ textRendering: 'optimizeLegibility', WebkitFontSmoothing: 'antialiased' }}>INFLUENCER TRACKER</h3>
+      <h3
+        className="text-xl font-semibold text-white/20 mb-4 font-condensed tracking-wide"
+        style={{
+          textRendering: 'optimizeLegibility',
+          WebkitFontSmoothing: 'antialiased',
+        }}
+      >
+        INFLUENCER TRACKER
+      </h3>
       <div className="space-y-4">
         {influencers.map((influencer) => (
           <div key={influencer.id} className="bg-black/20 rounded-lg p-3">
@@ -36,10 +46,13 @@ const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({ influencers }) =>
                   {influencer.username}
                 </span>
               </div>
-              <span className="text-white/70 text-xs font-mono">{influencer.lastPost}</span>
+              <span className="text-white/70 text-xs font-mono">
+                {influencer.lastPost}
+              </span>
             </div>
             <div className="text-xs text-white/60 mb-2 font-mono">
-              {formatNumber(influencer.followers)} followers • Reach: {influencer.reach}
+              {formatNumber(influencer.followers)} followers • Reach:{' '}
+              {influencer.reach}
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">

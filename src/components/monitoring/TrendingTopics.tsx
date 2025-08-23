@@ -27,7 +27,13 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
 
   return (
     <Card padding="md" variant="glass">
-      <h3 className="text-xl font-semibold text-white/20 mb-4 font-condensed tracking-wide" style={{ textRendering: 'optimizeLegibility', WebkitFontSmoothing: 'antialiased' }}>
+      <h3
+        className="text-xl font-semibold text-white/20 mb-4 font-condensed tracking-wide"
+        style={{
+          textRendering: 'optimizeLegibility',
+          WebkitFontSmoothing: 'antialiased',
+        }}
+      >
         TRENDING TOPICS (Issue Spike Detector)
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -39,7 +45,9 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
           >
             <div className="flex items-center justify-between mb-2">
               <h4 className="font-medium text-white/95">{topic.keyword}</h4>
-              <div className={`flex items-center space-x-1 ${getTrendColor(topic.change)}`}>
+              <div
+                className={`flex items-center space-x-1 ${getTrendColor(topic.change)}`}
+              >
                 {topic.change > 0 ? (
                   <TrendingUp className="w-4 h-4" />
                 ) : (

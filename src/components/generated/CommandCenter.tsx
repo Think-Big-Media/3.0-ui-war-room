@@ -117,12 +117,16 @@ const IntelligenceDashboard: React.FC = () => {
   const navigate = useNavigate();
 
   const handleDashboardClick = () => {
-    logger.debug('Intelligence Dashboard clicked - navigating to /intelligence-hub');
+    logger.debug(
+      'Intelligence Dashboard clicked - navigating to /intelligence-hub'
+    );
     navigate('/intelligence-hub');
   };
 
   const handleMetricClick = (metricLabel: string) => {
-    logger.debug(`Metric clicked: ${metricLabel} - navigating to /intelligence-hub`);
+    logger.debug(
+      `Metric clicked: ${metricLabel} - navigating to /intelligence-hub`
+    );
     navigate('/intelligence-hub');
   };
 
@@ -240,12 +244,16 @@ const CampaignOperationsHub: React.FC = () => {
   const navigate = useNavigate();
 
   const handleProjectClick = (projectTitle: string) => {
-    logger.debug(`Project clicked: ${projectTitle} - navigating to /campaign-control`);
+    logger.debug(
+      `Project clicked: ${projectTitle} - navigating to /campaign-control`
+    );
     navigate('/campaign-control');
   };
 
   const handleTemplateClick = (templateName: string) => {
-    logger.debug(`Template clicked: ${templateName} - navigating to /campaign-control`);
+    logger.debug(
+      `Template clicked: ${templateName} - navigating to /campaign-control`
+    );
     navigate('/campaign-control');
   };
 
@@ -327,7 +335,13 @@ const CampaignOperationsHub: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
         {/* Active Projects */}
         <div className="space-y-3 lg:space-y-4">
-          <h4 className="text-lg lg:text-xl font-medium text-white/20 mb-3 uppercase font-condensed tracking-wide" style={{ textRendering: 'optimizeLegibility', WebkitFontSmoothing: 'antialiased' }}>
+          <h4
+            className="text-lg lg:text-xl font-medium text-white/20 mb-3 uppercase font-condensed tracking-wide"
+            style={{
+              textRendering: 'optimizeLegibility',
+              WebkitFontSmoothing: 'antialiased',
+            }}
+          >
             ACTIVE PROJECTS
           </h4>
           <div className="space-y-2 lg:space-y-3">
@@ -368,7 +382,13 @@ const CampaignOperationsHub: React.FC = () => {
 
         {/* Content Templates */}
         <div className="space-y-3 lg:space-y-4">
-          <h4 className="text-lg lg:text-xl font-medium text-white/20 mb-3 uppercase font-condensed tracking-wide" style={{ textRendering: 'optimizeLegibility', WebkitFontSmoothing: 'antialiased' }}>
+          <h4
+            className="text-lg lg:text-xl font-medium text-white/20 mb-3 uppercase font-condensed tracking-wide"
+            style={{
+              textRendering: 'optimizeLegibility',
+              WebkitFontSmoothing: 'antialiased',
+            }}
+          >
             &nbsp;CONTENT TEMPLATES
           </h4>
           <div className="grid grid-cols-2 gap-2 lg:gap-3">
@@ -407,7 +427,7 @@ const CommandCenter: React.FC = () => {
   logger.info('CommandCenter: Component mounting...');
   logger.debug('CommandCenter: Should show purple gradient background');
   logger.debug(
-    'CommandCenter: Three main cards + Campaign Operations Hub + Intelligence Dashboard + Quick Actions',
+    'CommandCenter: Three main cards + Campaign Operations Hub + Intelligence Dashboard + Quick Actions'
   );
 
   return (
