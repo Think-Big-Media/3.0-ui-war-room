@@ -91,6 +91,9 @@ const SettingsPage: React.FC = () => {
   logger.debug('Settings loaded successfully');
   logger.debug('Settings rendered successfully');
 
+  // Diagnostic: Log spacing fix implementation
+  console.log('🎯 Settings spacing fix applied: pb-16 added to space-y-4 containers to prevent margin collapse');
+
   // Diagnostics: track integrations section visibility on mount
   const integrationsRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
