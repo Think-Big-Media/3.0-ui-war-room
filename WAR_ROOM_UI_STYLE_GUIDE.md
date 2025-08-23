@@ -255,21 +255,26 @@ Single-column cards (like Sentiment Breakdown, Platform Performance, Influencer 
 
 #### Implementation
 ```tsx
-// Apply to content containers within single-column cards
-<div className="space-y-3 px-2.5">
+// Apply to headers and content containers within single-column cards
+<h3 className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide ml-1.5">
+  COMPONENT TITLE
+</h3>
+<div className="space-y-3 px-1.5">
   {/* Content items */}
 </div>
 
-// For insights boxes and sub-containers
-<div className="mt-4 mx-2.5 p-3 bg-black/20 rounded-lg">
+// For insights boxes and sub-containers (less indented)
+<div className="mt-4 mx-1 p-3 bg-black/20 rounded-lg">
   {/* Insights content */}
 </div>
 ```
 
 #### Measurements
-- **Content Indentation**: `px-2.5` (10px horizontal padding)
+- **Header Indentation**: `ml-1.5` (6px left margin)
+- **Content Indentation**: `px-1.5` (6px horizontal padding)
+- **Rounded Elements**: `mx-1` (4px horizontal margin)
 - **Card Outer Padding**: `p-4` (16px) via Card component
-- **Total Content Offset**: 26px from card edge
+- **Total Content Offset**: 22px from card edge
 
 #### Visual Alignment
 This creates proper visual hierarchy where:
@@ -281,31 +286,33 @@ This creates proper visual hierarchy where:
 ```tsx
 // Sentiment Breakdown
 <Card padding="md" variant="glass">
-  <h3 className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide">
+  <h3 className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide ml-1.5">
     SENTIMENT BREAKDOWN
   </h3>
-  <div className="space-y-4 px-2.5">
+  <div className="space-y-4 px-1.5">
     {/* Sentiment items with proper indentation */}
   </div>
 </Card>
 
 // Platform Performance
 <Card padding="md" variant="glass">
-  <h3 className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide">
+  <h3 className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide ml-1.5">
     PLATFORM PERFORMANCE
   </h3>
-  <div className="space-y-3 px-2.5">
+  <div className="space-y-3 px-1.5">
     {/* Platform items with proper indentation */}
   </div>
-  <div className="mt-4 mx-2.5 p-3 bg-black/20 rounded-lg">
-    {/* Insights with consistent indentation */}
+  <div className="mt-4 mx-1 p-3 bg-black/20 rounded-lg">
+    {/* Insights with subtle indentation */}
   </div>
 </Card>
 ```
 
 #### Application Rules
-- **Single-column cards**: Always apply `px-2.5` to main content container
+- **Single-column card headers**: Apply `ml-1.5` for consistent header indentation
+- **Single-column card content**: Apply `px-1.5` to main content container
 - **Multi-column cards**: Use natural grid alignment without forced indentation
-- **Sub-containers**: Use `mx-2.5` for horizontal margin consistency
+- **Rounded sub-containers**: Use `mx-1` for subtle horizontal margin (buttons, insights boxes)
+- **Visual Balance**: Headers and content align consistently, rounded elements slightly less indented
 
 This style guide ensures consistent visual hierarchy and user experience across the entire War Room application.
