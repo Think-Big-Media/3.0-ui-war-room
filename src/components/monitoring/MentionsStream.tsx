@@ -58,7 +58,7 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
   return (
     <Card padding="md" variant="glass">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-xl font-semibold text-white/60 font-condensed tracking-wide" style={{ textRendering: 'optimizeLegibility', WebkitFontSmoothing: 'antialiased' }}>LIVE MENTIONS STREAM</h3>
+        <h3 className="text-xl font-semibold text-white/20 font-condensed tracking-wide" style={{ textRendering: 'optimizeLegibility', WebkitFontSmoothing: 'antialiased' }}>LIVE MENTIONS STREAM</h3>
         <div className="flex items-center space-x-2">
           <CustomDropdown
             value={filters.source}
