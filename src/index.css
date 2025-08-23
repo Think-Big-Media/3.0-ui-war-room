@@ -144,9 +144,9 @@
     @apply px-4 py-2 bg-blue-600 text-white font-mono font-medium text-sm rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors;
   }
   
-  /* Card titles should use Barlow Condensed */
+  /* Card titles should use Inter for content readability */
   .card-title {
-    @apply font-condensed font-semibold text-lg;
+    @apply font-sans font-semibold text-lg;
   }
   
   /* Sidebar and menu items */
