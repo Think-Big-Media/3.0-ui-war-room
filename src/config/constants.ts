@@ -6,7 +6,7 @@
 // Use relative URL in production to avoid cross-origin issues on Render
 const inferredHost = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
 export const API_BASE_URL =
-  import.meta.env.VITE_API_URL ?? (inferredHost === 'localhost' ? 'http://localhost:8000' : '');
+  import.meta.env.VITE_API_URL ?? (inferredHost === 'localhost' ? 'http://localhost:10000' : '');
 export const API_VERSION = '/api/v1';
 
 // WebSocket Configuration
