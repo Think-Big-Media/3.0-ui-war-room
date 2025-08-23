@@ -26,7 +26,7 @@ const MonitoringAlert: React.FC<MonitoringAlertProps> = ({
   };
 
   return (
-    <div className="mb-4">
+    <div className="mb-2">
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
