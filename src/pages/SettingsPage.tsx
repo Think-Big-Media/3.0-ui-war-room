@@ -152,11 +152,7 @@ const SettingsPage: React.FC = () => {
         className={`fixed inset-0 bg-gradient-to-br ${pageGradients.settings} -z-10`}
       />
       <div className={`fixed inset-0 ${fireAccentOverlay} -z-10`} />
-      {/* Header - Global Standard */}
-      <PageHeader
-        title="Settings"
-        subtitle="Customize your War Room experience"
-      />
+      <div />
 
       {/* Settings Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
