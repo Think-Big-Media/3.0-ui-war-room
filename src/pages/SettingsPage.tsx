@@ -260,14 +260,14 @@ const SettingsPage: React.FC = () => {
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Theme
               </label>
-              <div className="flex justify-center">
+              <div className="ml-1.5">
                 <CustomDropdown
                   value={selectedTheme}
                   onChange={setSelectedTheme}
                   options={themeOptions}
                   placeholder="Select Theme"
                   icon={<Palette className="w-4 h-4" />}
-                  className="w-48"
+                  className="min-w-[140px]"
                 />
               </div>
             </div>
@@ -286,14 +286,14 @@ const SettingsPage: React.FC = () => {
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Language
               </label>
-              <div className="flex justify-center">
+              <div className="ml-1.5">
                 <CustomDropdown
                   value={selectedLanguage}
                   onChange={setSelectedLanguage}
                   options={languageOptions}
                   placeholder="Select Language"
                   icon={<Globe className="w-4 h-4" />}
-                  className="w-48"
+                  className="min-w-[140px]"
                 />
               </div>
             </div>
@@ -370,14 +370,14 @@ const SettingsPage: React.FC = () => {
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Timezone
               </label>
-              <div className="flex justify-center">
+              <div className="ml-1.5">
                 <CustomDropdown
                   value={selectedTimezone}
                   onChange={setSelectedTimezone}
                   options={timezoneOptions}
                   placeholder="Select Timezone"
                   icon={<Globe className="w-4 h-4" />}
-                  className="w-48"
+                  className="min-w-[140px]"
                 />
               </div>
             </div>
@@ -385,14 +385,14 @@ const SettingsPage: React.FC = () => {
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Date Format
               </label>
-              <div className="flex justify-center">
+              <div className="ml-1.5">
                 <CustomDropdown
                   value={selectedDateFormat}
                   onChange={setSelectedDateFormat}
                   options={dateFormatOptions}
                   placeholder="Select Date Format"
                   icon={<Globe className="w-4 h-4" />}
-                  className="w-48"
+                  className="min-w-[140px]"
                 />
               </div>
             </div>
