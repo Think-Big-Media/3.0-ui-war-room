@@ -130,6 +130,16 @@ const SettingsPage: React.FC = () => {
   const languages = ['English', 'Spanish', 'French', 'German', 'Portuguese'];
   const timezones = ['EST', 'PST', 'CST', 'GMT', 'CET'];
 
+  // Dropdown options
+  const themeOptions = themes.map(theme => ({ value: theme, label: theme }));
+  const languageOptions = languages.map(lang => ({ value: lang, label: lang }));
+  const timezoneOptions = timezones.map(tz => ({ value: tz, label: tz }));
+  const dateFormatOptions = [
+    { value: 'MM/DD/YYYY', label: 'MM/DD/YYYY' },
+    { value: 'DD/MM/YYYY', label: 'DD/MM/YYYY' },
+    { value: 'YYYY-MM-DD', label: 'YYYY-MM-DD' },
+  ];
+
 
   return (
     <PageLayout pageTitle="Settings" placeholder="Ask about settings...">
