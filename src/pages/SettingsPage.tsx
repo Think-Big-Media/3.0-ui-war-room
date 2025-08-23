@@ -92,7 +92,7 @@ const SettingsPage: React.FC = () => {
   logger.debug('Settings rendered successfully');
 
   // Diagnostic: Log standardized style guide implementation
-  console.log('🎯 STANDARDIZED Style Guide: pb-5 spacing, icons +2px down + 10px indent, inputs 70% transparent + gray text, sub-descriptions 60% opacity + 3px up (SITE-WIDE)');
+  console.log('🎯 STANDARDIZED Style Guide: pb-5 spacing, icons +2px down + 10px indent, inputs 70% transparent + gray text, sub-descriptions 60% opacity + 3px up, primary buttons implemented, autosave enabled (SITE-WIDE)');
 
   // Diagnostics: track integrations section visibility on mount
   const integrationsRef = useRef<HTMLDivElement | null>(null);
@@ -455,17 +455,7 @@ const SettingsPage: React.FC = () => {
         </Card>
       </motion.div>
 
-      {/* Save Button */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.8 }}
-        className="mt-8 flex justify-center"
-      >
-        <button className="bg-gray-600/80 hover:bg-gray-600 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
-          Save Settings
-        </button>
-      </motion.div>
+      {/* Autosave - no manual save button needed */}
 
     </PageLayout>
   );

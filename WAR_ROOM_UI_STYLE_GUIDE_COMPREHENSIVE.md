@@ -25,6 +25,14 @@
 - **Base Style**: Same as inputs + `appearance-none cursor-pointer`
 - **Consistency**: Match input styling exactly
 
+### Button Hierarchy
+- **Primary Buttons**: Large important actions (`btn-primary-alert`, `btn-primary-action`, `btn-primary-neutral`)
+  - Use for: Settings actions, main CTA buttons, destructive actions
+  - Size: `px-6 py-3` with `text-base`
+- **Secondary Buttons**: Smaller inline actions (`btn-secondary-alert`, `btn-secondary-action`, `btn-secondary-neutral`)
+  - Use for: Quick actions, toolbar buttons, supporting actions
+  - Size: `px-3 py-0.5` with `text-sm`
+
 ## Layout & Spacing
 
 ### Container Spacing
