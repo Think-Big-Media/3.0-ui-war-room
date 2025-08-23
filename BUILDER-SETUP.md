@@ -17,10 +17,12 @@ This guide will help you set up Builder.io for visual editing of the War Room UI
 
 ## 2. Configure Your Local Environment
 
-1. **Update the .env file**:
+✅ **ALREADY CONFIGURED** - Your API key is set!
+
+1. **API Key is configured in .env**:
 ```bash
-# Edit the .env file
-VITE_BUILDER_IO_KEY=your-actual-api-key-here
+# Already set in .env file
+VITE_BUILDER_IO_KEY=8686f311497044c0932b7d2247296478
 ```
 
 2. **Restart your dev server**:
@@ -30,33 +32,30 @@ npm run dev
 
 ## 3. Set Up Render Deployment
 
-The app auto-deploys to Render when you push to GitHub.
+✅ **ALREADY DEPLOYED** - Your app is live!
 
-### Option A: Using Render Dashboard (Easiest)
-1. Go to [Render Dashboard](https://dashboard.render.com)
-2. Click "New +" → "Static Site"
-3. Connect your GitHub repository: `Think-Big-Media/3.0-ui-war-room`
-4. Use these settings:
-   - **Name**: war-room-3-ui
-   - **Branch**: main
-   - **Build Command**: `npm install && npm run build`
-   - **Publish Directory**: `dist`
-5. Click "Create Static Site"
-6. Copy your site URL (e.g., `https://war-room-3-ui.onrender.com`)
+**Your Production URL**: https://war-room-3-ui.onrender.com
+
+### Deployment Details:
+- **Service Name**: war-room-3-ui  
+- **Repository**: Think-Big-Media/3.0-ui-war-room
+- **Branch**: main
+- **Build Command**: `npm install && npm run build`
+- **Publish Directory**: `dist`
+- **Status**: ✅ Active and running
 
 ### Option B: Using render.yaml (Already configured)
 The `render.yaml` file is already set up. Render will automatically detect it when you connect the repository.
 
 ## 4. Configure Builder.io Preview URL
 
-1. **In Builder.io Dashboard**:
-   - Go to Settings → Advanced Settings
-   - Set "Preview URL" to your Render URL: `https://war-room-3-ui.onrender.com`
-   - Save changes
+✅ **ALREADY CONFIGURED** - Preview URL is set!
 
-2. **Test the preview**:
-   - Create a new page in Builder
-   - The preview should show your deployed app
+1. **Builder.io Space**: War Room Platform
+2. **Preview URL**: https://war-room-3-ui.onrender.com ✅ Configured
+3. **Status**: Ready for visual editing
+
+**Next Step**: Create a test page at `/builder/test` to verify integration
 
 ## 5. Create Your First Page in Builder
 
