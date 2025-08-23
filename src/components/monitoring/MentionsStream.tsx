@@ -132,7 +132,7 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
                 <span className="text-white/90 font-medium">
                   {mention.username}
                 </span>
-                <span className="text-white/90 text-sm font-mono uppercase -mt-1">
+                <span className="text-white/60 text-sm font-mono uppercase -mt-1">
                   {mention.timestamp}
                 </span>
               </div>

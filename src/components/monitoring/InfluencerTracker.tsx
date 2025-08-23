@@ -53,7 +53,7 @@ const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({
                 {influencer.lastPost}
               </span>
             </div>
-            <div className="text-xs text-white/90 -mt-1 mb-2 font-mono uppercase">
+            <div className="text-xs text-white/60 -mt-1 mb-2 font-mono uppercase">
               {formatNumber(influencer.followers)} FOLLOWERS • REACH:{' '}
               {influencer.reach}
             </div>
