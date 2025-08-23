@@ -273,7 +273,7 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
                             {activity.user.name.charAt(0).toUpperCase()}
                           </span>
                         </div>
-                        <span className="text-xs text-gray-500">
+                        <span className="text-xs text-gray-500 font-mono uppercase">
                           {activity.user.name}
                         </span>
                       </div>

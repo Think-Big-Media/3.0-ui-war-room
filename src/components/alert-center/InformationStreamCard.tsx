@@ -59,16 +59,16 @@ const InformationStreamCard: React.FC<InformationStreamCardProps> = ({
           </div>
           <p className="text-white/80 mb-3">{item.text}</p>
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4 text-sm text-white/60">
+            <div className="flex items-center space-x-4 text-sm text-white/60 font-mono uppercase">
               <span>{formatTimestamp(item.timestamp)}</span>
-              <span className="capitalize">
+              <span>
                 {item.category.replace('-', ' ')}
               </span>
               {item.actionable && (
-                <span className="text-green-400">• Actionable</span>
+                <span className="text-green-400">• ACTIONABLE</span>
               )}
               {item.metadata?.assignee && (
-                <span>• {item.metadata.assignee}</span>
+                <span>• {item.metadata.assignee.toUpperCase()}</span>
               )}
             </div>
           </div>
