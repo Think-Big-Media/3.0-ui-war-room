@@ -9,7 +9,7 @@
 
 ### Text Styles
 - **Main Headings**: `text-white/90 font-medium`
-- **Sub-headlines**: `text-white/90 font-condensed tracking-wide -mt-1` (moved up 3px, 90% opacity)
+- **Sub-descriptions**: `text-white/60 font-condensed tracking-wide -mt-1` (moved up 3px, 60% opacity - STANDARDIZED)
 - **Section Headers**: `font-condensed tracking-wide text-white/40` (uppercase)
 
 ## Form Elements
@@ -47,7 +47,7 @@
     <Icon className="w-5 h-5 text-white/75 mt-0.5" />
     <div className="ml-1.5">
       <p className="text-white/90 font-medium">Main Heading</p>
-      <p className="text-white/90 font-condensed tracking-wide -mt-1">Sub-headline moved up 3px</p>
+      <p className="text-white/60 font-condensed tracking-wide -mt-1">Sub-description (60% opacity, up 3px)</p>
     </div>
   </div>
   <div className="mt-1">
@@ -67,7 +67,7 @@
 }
 
 .war-room-subheading {
-  @apply text-white/90 font-condensed tracking-wide -mt-1;
+  @apply text-white/60 font-condensed tracking-wide -mt-1;
 }
 
 .space-with-bottom {
@@ -75,14 +75,22 @@
 }
 ```
 
-## Implementation Standards
+## Implementation Standards (SITE-WIDE STANDARDIZATION)
 
 1. **Icon Alignment**: Always use `mt-0.5` on icons in notification/security layouts
 2. **Content Indentation**: 10px (`ml-2.5`) from box edges for icon containers
-3. **Sub-headline Positioning**: Always use `-mt-1` to move sub-text up 3px
+3. **Sub-description Standard**: ALWAYS use `text-white/60 font-condensed tracking-wide -mt-1` (60% opacity, moved up 3px)
 4. **Input Visibility**: No opacity reduction on form fields (100% opacity)
 5. **Consistent Spacing**: Use `pb-5` for container bottom spacing site-wide
-6. **Typography**: Apply Barlow Condensed to all sub-headlines with proper kerning
+6. **Typography**: Apply Barlow Condensed to all sub-descriptions with proper kerning
+
+### CRITICAL: ALL sub-descriptions must follow the standardized pattern:
+- 60% opacity (`text-white/60`)
+- Barlow Condensed font (`font-condensed`)
+- Proper kerning (`tracking-wide`)
+- Moved up 3px (`-mt-1`)
+
+This applies to ALL descriptive text under main headings across the entire platform.
 
 ## Color Specifications
 
