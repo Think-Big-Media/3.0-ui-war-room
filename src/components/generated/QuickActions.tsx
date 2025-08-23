@@ -95,7 +95,7 @@ const QuickActions: React.FC = () => {
           <div className="p-2 lg:p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-purple-400/20 group-hover:border-orange-400/30 group-hover:shadow-lg group-hover:shadow-purple-400/10 transition-all duration-300">
             <Zap className="w-5 h-5 lg:w-6 lg:h-6 text-white/95" />
           </div>
-          <h3 className="text-xl lg:text-2xl font-semibold text-white/80 font-condensed tracking-wide">
+          <h3 className="text-xl lg:text-2xl font-semibold text-white/60 font-condensed tracking-wide" style={{ textRendering: 'optimizeLegibility', WebkitFontSmoothing: 'antialiased' }}>
             QUICK ACTIONS
           </h3>
         </div>
