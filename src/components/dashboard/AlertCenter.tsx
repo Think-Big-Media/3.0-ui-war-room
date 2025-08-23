@@ -110,7 +110,7 @@ const AlertItem = memo<{
 
               <div className="flex items-center gap-1">
                 <span className="font-medium">Platform:</span>
-                <span className="capitalize">{alert.platform}</span>
+                <span className="uppercase font-mono">{alert.platform}</span>
               </div>
 
               {alert.current_value && (
@@ -314,7 +314,7 @@ export const AlertCenter: React.FC = memo(() => {
                   <div className={`text-2xl font-bold ${config.textColor}`}>
                     {count}
                   </div>
-                  <div className="text-gray-500 dark:text-gray-400 capitalize">
+                  <div className="text-gray-500 dark:text-gray-400 uppercase font-mono">
                     {severity}
                   </div>
                 </div>
