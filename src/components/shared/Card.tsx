@@ -41,9 +41,10 @@ const Card: React.FC<CardProps> = ({
     ? 'hover:bg-white/5 hover:border-white/30 hover:shadow-lg'
     : '';
 
-  // Box shadow for glass effect
-  const boxShadow =
-    '0 4px 8px -2px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.08)';
+  // Box shadow for glass effect (unless disabled)
+  const boxShadow = noShadow
+    ? undefined
+    : '0 4px 8px -2px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.08)';
 
   return (
     <motion.div
@@ -54,7 +55,7 @@ const Card: React.FC<CardProps> = ({
         hoverStyles,
         className
       )}
-      style={{ boxShadow }}
+      style={boxShadow ? { boxShadow } : {}}
       {...(hover ? ANIMATION_CONFIGS.card : {})}
       {...props}
     >
