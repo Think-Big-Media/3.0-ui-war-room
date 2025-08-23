@@ -39,9 +39,9 @@ const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({
       >
         INFLUENCER TRACKER
       </h3>
-      <div className="space-y-4">
+      <div className="space-y-2">
         {influencers.map((influencer) => (
-          <div key={influencer.id} className="bg-black/20 rounded-lg p-4">
+          <div key={influencer.id} className="bg-black/20 rounded-lg p-5">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center space-x-2">
                 {getPlatformIcon(influencer.platform)}

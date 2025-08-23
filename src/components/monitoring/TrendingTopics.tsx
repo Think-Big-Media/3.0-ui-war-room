@@ -39,12 +39,12 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
       >
         TRENDING TOPICS (Issue Spike Detector)
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
         {topics.map((topic) => (
           <motion.div
             key={topic.id}
             whileHover={{ scale: 1.02 }}
-            className="bg-black/20 rounded-lg p-5 border border-white/10 cursor-pointer"
+            className="bg-black/20 rounded-lg p-6 border border-white/10 cursor-pointer"
           >
             <div className="flex items-center justify-between mb-2">
               <h4 className="font-medium text-white/95">{topic.keyword}</h4>

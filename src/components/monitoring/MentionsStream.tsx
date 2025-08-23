@@ -118,13 +118,13 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
         </div>
       </div>
 
-      <div className="space-y-4 max-h-96 overflow-y-auto scroll-fade">
+      <div className="space-y-2 max-h-96 overflow-y-auto scroll-fade">
         {mentions.map((mention) => (
           <motion.div
             key={mention.id}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-black/20 rounded-lg p-5 border border-white/10"
+            className="bg-black/20 rounded-lg p-6 border border-white/10"
           >
             <div className="flex items-start justify-between mb-2">
               <div className="flex items-center space-x-2">

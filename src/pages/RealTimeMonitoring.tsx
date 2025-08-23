@@ -67,9 +67,9 @@ const RealTimeMonitoring: React.FC = () => {
       {/* Live Status & Controls */}
       <MonitoringControls isLive={isLive} onToggleLive={handleToggleLive} />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
         {/* Left Column - Live Feed */}
-        <div className="lg:col-span-2 space-y-4">
+        <div className="lg:col-span-2 space-y-2">
           <MentionsStream
             mentions={filteredMentions}
             filters={filters}
@@ -79,7 +79,7 @@ const RealTimeMonitoring: React.FC = () => {
         </div>
 
         {/* Right Column - Visual Dashboards */}
-        <div className="space-y-4">
+        <div className="space-y-2">
           <SentimentBreakdown sentimentData={mockSentimentData} />
           <PlatformPerformance platformData={mockPlatformPerformance} />
           <InfluencerTracker influencers={mockInfluencers} />

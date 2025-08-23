@@ -347,7 +347,7 @@ const CampaignOperationsHub: React.FC = () => {
           >
             ACTIVE PROJECTS
           </h4>
-          <div className="space-y-2 lg:space-y-3">
+          <div className="space-y-1 lg:space-y-1.5">
             {activeProjects.map((cluster, index) => (
               <motion.div
                 key={index}
@@ -364,7 +364,7 @@ const CampaignOperationsHub: React.FC = () => {
                     duration: 0.1,
                   },
                 }}
-                className="bg-black/20 backdrop-blur-sm rounded-xl p-4 lg:p-5 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 cursor-pointer"
+                className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-2">
                   <h5 className="font-medium text-white/95 text-xs lg:text-sm">
@@ -397,7 +397,7 @@ const CampaignOperationsHub: React.FC = () => {
           >
             &nbsp;CONTENT TEMPLATES
           </h4>
-          <div className="grid grid-cols-2 gap-2 lg:gap-3">
+          <div className="grid grid-cols-2 gap-1 lg:gap-2">
             {contentTemplates.map((template, index) => (
               <motion.div
                 key={index}
@@ -414,7 +414,7 @@ const CampaignOperationsHub: React.FC = () => {
                     duration: 0.1,
                   },
                 }}
-                className="bg-black/20 backdrop-blur-sm rounded-xl p-4 lg:p-5 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 text-center cursor-pointer"
+                className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 text-center cursor-pointer"
               >
                 <h5 className="font-medium text-white/95 text-xs lg:text-sm mb-1">
                   {template.name}
