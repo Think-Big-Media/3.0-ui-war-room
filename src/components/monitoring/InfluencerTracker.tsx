@@ -51,13 +51,13 @@ const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({ influencers }) =>
               <div className="flex items-center space-x-2">
                 <button
                   onClick={() => handleAddToWatchlist(influencer)}
-                  className="text-xs text-blue-400 hover:text-blue-300"
+                  className="text-xs text-blue-400 hover:text-blue-300 font-mono"
                 >
                   Add to Watchlist
                 </button>
                 <button
                   onClick={() => handleAmplify(influencer)}
-                  className="text-xs text-white/70 hover:text-white"
+                  className="text-xs text-white/70 hover:text-white font-mono"
                 >
                   Amplify
                 </button>

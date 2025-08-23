@@ -12,7 +12,7 @@ interface SentimentBreakdownProps {
 const SentimentBreakdown: React.FC<SentimentBreakdownProps> = ({ sentimentData }) => {
   return (
     <Card padding="md" variant="glass">
-      <h3 className="text-lg font-semibold text-white/95 mb-4">Sentiment Breakdown</h3>
+      <h3 className="text-lg font-semibold text-white/95 mb-4 font-condensed">Sentiment Breakdown</h3>
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <span className="text-white/80">Positive</span>
