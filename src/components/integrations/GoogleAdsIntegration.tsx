@@ -279,13 +279,13 @@ const GoogleAdsIntegration: React.FC = () => {
             <div className="flex space-x-2 mt-3">
               <button
                 onClick={() => navigate('/campaign-control?platform=google&tab=analytics')}
-                className="flex-1 px-3 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+                className="btn-primary-action flex-1 text-center"
               >
                 View Campaigns
               </button>
               <button
                 onClick={handleDisconnect}
-                className="px-3 py-2 bg-white border border-red-300 rounded-md text-sm font-medium text-red-700 hover:bg-red-50"
+                className="btn-primary-alert"
               >
                 Disconnect
               </button>
