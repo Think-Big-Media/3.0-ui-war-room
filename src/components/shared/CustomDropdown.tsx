@@ -140,47 +140,56 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
         </motion.div>
       </button>
 
-      {/* Dropdown Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className={cn(
-              'absolute z-[99999] mt-1 w-[130%] -ml-[15%]',
-              'bg-black/[0.97] backdrop-blur-md',
-              'rounded',
-              'overflow-hidden'
+      {/* Dropdown Menu - Rendered via Portal */}
+      {typeof document !== 'undefined' &&
+        createPortal(
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className={cn(
+                  'fixed z-[99999]',
+                  'bg-black/[0.97] backdrop-blur-md',
+                  'rounded',
+                  'overflow-hidden'
+                )}
+                style={{
+                  top: dropdownPosition.top,
+                  left: dropdownPosition.left,
+                  width: dropdownPosition.width,
+                  zIndex: 99999
+                }}
+              >
+                <div className="py-2 max-h-60 overflow-y-auto custom-scrollbar">
+                  {options.filter(option => option.value !== value).map((option) => (
+                    <button
+                      key={option.value}
+                      type="button"
+                      onClick={() => handleOptionClick(option.value)}
+                      className={cn(
+                        'w-full px-4 py-2 text-left text-sm font-mono uppercase',
+                        'flex items-center justify-between',
+                        'transition-all duration-300',
+                        'text-white/80 hover:bg-white/30 hover:text-white'
+                      )}
+                    >
+                      <div className="flex items-center space-x-2">
+                        {option.icon && (
+                          <span className="text-white/70">{option.icon}</span>
+                        )}
+                        <span className="font-mono uppercase">{option.label}</span>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
             )}
-            style={{ zIndex: 99999 }}
-          >
-            <div className="py-2 max-h-60 overflow-y-auto custom-scrollbar">
-              {options.filter(option => option.value !== value).map((option) => (
-                <button
-                  key={option.value}
-                  type="button"
-                  onClick={() => handleOptionClick(option.value)}
-                  className={cn(
-                    'w-full px-4 py-2 text-left text-sm font-mono uppercase',
-                    'flex items-center justify-between',
-                    'transition-all duration-300',
-                    'text-white/80 hover:bg-white/30 hover:text-white'
-                  )}
-                >
-                  <div className="flex items-center space-x-2">
-                    {option.icon && (
-                      <span className="text-white/70">{option.icon}</span>
-                    )}
-                    <span className="font-mono uppercase">{option.label}</span>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </motion.div>
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
 
       {/* Custom scrollbar styles */}
       <style>{`
