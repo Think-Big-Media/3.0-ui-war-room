@@ -83,7 +83,7 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
     <Card padding="md" variant="glass">
       <div className="flex items-center justify-between mb-3">
         <h3
-          className="text-xl font-semibold text-white/40 font-condensed tracking-wide"
+          className="text-xl font-semibold text-white/40 font-condensed tracking-wide ml-4"
           style={{
             textRendering: 'optimizeLegibility',
             WebkitFontSmoothing: 'antialiased',
@@ -118,7 +118,7 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
         </div>
       </div>
 
-      <div className="space-y-4 max-h-96 overflow-y-auto scroll-fade ml-3">
+      <div className="space-y-4 max-h-96 overflow-y-auto scroll-fade">
         {mentions.map((mention) => (
           <motion.div
             key={mention.id}

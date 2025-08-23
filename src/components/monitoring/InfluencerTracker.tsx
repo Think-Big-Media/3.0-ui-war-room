@@ -28,7 +28,7 @@ const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({
   return (
     <Card padding="md" variant="glass">
       <h3
-        className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide"
+        className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide ml-4"
         style={{
           textRendering: 'optimizeLegibility',
           WebkitFontSmoothing: 'antialiased',
@@ -39,7 +39,7 @@ const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({
       >
         INFLUENCER TRACKER
       </h3>
-      <div className="space-y-4 ml-3">
+      <div className="space-y-4">
         {influencers.map((influencer) => (
           <div key={influencer.id} className="bg-black/20 rounded-lg p-2">
             <div className="flex items-center justify-between mb-2">
