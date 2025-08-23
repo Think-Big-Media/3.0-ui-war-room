@@ -44,7 +44,7 @@ const PlatformPerformance: React.FC<PlatformPerformanceProps> = ({
         ))}
       </div>
       <div className="mt-4 p-3 bg-black/20 rounded-lg">
-        <p className="text-xs text-white/70">
+        <p className="text-xs text-white/70 font-mono">
           <span className="text-blue-400">{insights}</span>
         </p>
       </div>
