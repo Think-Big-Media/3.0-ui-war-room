@@ -28,7 +28,7 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
   return (
     <Card padding="md" variant="glass">
       <h3
-        className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide ml-4"
+        className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide ml-2"
         style={{
           textRendering: 'optimizeLegibility',
           WebkitFontSmoothing: 'antialiased',
@@ -44,7 +44,7 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
           <motion.div
             key={topic.id}
             whileHover={{ scale: 1.02 }}
-            className="bg-black/20 rounded-lg p-3 border border-white/10 cursor-pointer"
+            className="bg-black/20 rounded-lg p-5 border border-white/10 cursor-pointer"
           >
             <div className="flex items-center justify-between mb-2">
               <h4 className="font-medium text-white/95">{topic.keyword}</h4>

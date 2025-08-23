@@ -324,7 +324,7 @@ const CampaignOperationsHub: React.FC = () => {
         {/* Active Projects */}
         <div className="space-y-2 lg:space-y-3">
           <h4
-            className="text-lg lg:text-xl font-medium text-white/40 mb-3 uppercase font-condensed tracking-wide ml-4"
+            className="text-lg lg:text-xl font-medium text-white/40 mb-3 uppercase font-condensed tracking-wide ml-2"
             style={{
               textRendering: 'optimizeLegibility',
               WebkitFontSmoothing: 'antialiased',
@@ -340,7 +340,7 @@ const CampaignOperationsHub: React.FC = () => {
               <div
                 key={index}
                 onClick={() => handleProjectClick(cluster.title)}
-                className="bg-black/20 backdrop-blur-sm rounded-xl p-3 lg:p-4 border border-white/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 cursor-pointer"
+                className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-white/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-2">
                   <h5 className="font-medium text-white/95 text-xs lg:text-sm uppercase">
@@ -362,7 +362,7 @@ const CampaignOperationsHub: React.FC = () => {
         {/* Content Templates */}
         <div className="space-y-2 lg:space-y-3">
           <h4
-            className="text-lg lg:text-xl font-medium text-white/40 mb-3 uppercase font-condensed tracking-wide ml-4"
+            className="text-lg lg:text-xl font-medium text-white/40 mb-3 uppercase font-condensed tracking-wide ml-2"
             style={{
               textRendering: 'optimizeLegibility',
               WebkitFontSmoothing: 'antialiased',
@@ -378,7 +378,7 @@ const CampaignOperationsHub: React.FC = () => {
               <div
                 key={index}
                 onClick={() => handleTemplateClick(template.name)}
-                className="bg-black/20 backdrop-blur-sm rounded-xl p-2 lg:p-3 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 text-center cursor-pointer"
+                className="bg-black/20 backdrop-blur-sm rounded-xl p-4 lg:p-5 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 text-center cursor-pointer"
               >
                 <h5 className="font-medium text-white/95 text-xs lg:text-sm mb-1 uppercase">
                   {template.name}
