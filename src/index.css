@@ -209,38 +209,48 @@
 
   /* Secondary Alert button style - for urgent actions */
   .btn-secondary-alert {
-    @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap;
+    @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap text-center;
     letter-spacing: -0.05em; /* Halved spacing for multi-word buttons */
   }
 
   /* Secondary Action button style - for primary actions */
   .btn-secondary-action {
-    @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap;
+    @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap text-center;
     letter-spacing: -0.05em; /* Halved spacing for multi-word buttons */
   }
 
   /* Secondary Neutral button style - for general actions */
   .btn-secondary-neutral {
-    @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap;
+    @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap text-center;
     letter-spacing: -0.05em; /* Halved spacing for multi-word buttons */
   }
 
   /* Primary Alert button style - bigger urgent actions */
   .btn-primary-alert {
-    @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase;
+    @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase text-center;
     letter-spacing: -0.05em;
   }
 
   /* Primary Action button style - bigger primary actions */
   .btn-primary-action {
-    @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase;
+    @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase text-center;
     letter-spacing: -0.05em;
   }
 
   /* Primary Neutral button style - bigger general actions */
   .btn-primary-neutral {
-    @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase;
+    @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase text-center;
     letter-spacing: -0.05em;
+  }
+
+  /* Icon alignment in buttons - move up 2px for better alignment */
+  .btn-secondary-alert svg,
+  .btn-secondary-action svg,
+  .btn-secondary-neutral svg,
+  .btn-primary-alert svg,
+  .btn-primary-action svg,
+  .btn-primary-neutral svg {
+    @apply -mt-0.5;
   }
 
   /* Form input style */
