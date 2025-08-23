@@ -116,7 +116,7 @@ export const WebSocketTester: React.FC = () => {
         <button
           onClick={runConnectionTest}
           disabled={isRunningTest}
-          className="flex items-center justify-center space-x-2 px-3 py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="btn-secondary-action flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isRunningTest ? (
             <>
@@ -134,7 +134,7 @@ export const WebSocketTester: React.FC = () => {
         <button
           onClick={simulateDisconnection}
           disabled={isRunningTest}
-          className="flex items-center justify-center space-x-2 px-3 py-1.5 bg-orange-600 text-white rounded-lg hover:bg-orange-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="btn-secondary-alert flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <AlertTriangle className="w-4 h-4" />
           <span>Simulate Disconnect</span>
@@ -142,7 +142,7 @@ export const WebSocketTester: React.FC = () => {
 
         <button
           onClick={clearLogs}
-          className="flex items-center justify-center space-x-2 px-3 py-1.5 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+          className="btn-secondary-neutral flex items-center justify-center space-x-2"
         >
           <RotateCcw className="w-4 h-4" />
           <span>Clear Logs</span>
