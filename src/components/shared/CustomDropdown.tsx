@@ -138,7 +138,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
                     {option.icon && (
                       <span className="text-white/70">{option.icon}</span>
                     )}
-                    <span className="font-mono">{option.label}</span>
+                    <span className="font-mono uppercase">{option.label}</span>
                   </div>
                   {value === option.value && (
                     <Check className="w-4 h-4 text-white/70 ml-2" />
