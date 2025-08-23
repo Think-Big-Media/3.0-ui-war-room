@@ -160,7 +160,7 @@ const SettingsPage: React.FC = () => {
                 className="w-full bg-white/95 rounded-2xl px-4 py-3 border border-slate-200 text-slate-800 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-400/20 transition-all duration-300"
               />
             </div>
-            <div>
+            <div className="mb-8">
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Company Name
               </label>
