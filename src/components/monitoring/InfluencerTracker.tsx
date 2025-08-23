@@ -57,7 +57,7 @@ const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({
               {formatNumber(influencer.followers)} FOLLOWERS • REACH:{' '}
               {influencer.reach}
             </div>
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
                 {getSentimentIcon(influencer.sentiment)}
                 <span className="text-xs text-white/70 font-mono uppercase">
@@ -65,7 +65,7 @@ const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({
                 </span>
               </div>
             </div>
-            <div className="flex items-center space-x-2 mt-2">
+            <div className="flex items-center space-x-2 mt-4">
               <button
                 onClick={() => handleAddToWatchlist(influencer)}
                 className="btn-secondary-action"
