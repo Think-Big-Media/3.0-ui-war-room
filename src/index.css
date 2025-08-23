@@ -62,33 +62,33 @@
 @layer base {
   /* Set default font and background */
   body {
-    @apply font-condensed antialiased bg-gray-50 text-gray-900;
-    letter-spacing: 0.025em; /* Slight letter spacing for condensed font */
+    @apply font-body antialiased bg-gray-50 text-gray-900;
+    letter-spacing: 0em; /* Normal letter spacing for Inter */
   }
 
-  /* Heading styles - Using Barlow Condensed */
+  /* Heading styles - Using Inter for content headings, Barlow Condensed for display */
   h1 {
-    @apply text-4xl font-bold font-condensed tracking-tight;
+    @apply text-4xl font-bold font-sans tracking-tight;
   }
 
   h2 {
-    @apply text-3xl font-semibold font-condensed tracking-tight;
+    @apply text-3xl font-semibold font-sans tracking-tight;
   }
 
   h3 {
-    @apply text-2xl font-semibold font-condensed;
+    @apply text-2xl font-semibold font-sans;
   }
 
   h4 {
-    @apply text-xl font-medium font-condensed;
+    @apply text-xl font-medium font-sans;
   }
 
   h5 {
-    @apply text-lg font-medium font-condensed;
+    @apply text-lg font-medium font-sans;
   }
 
   h6 {
-    @apply text-base font-medium font-condensed;
+    @apply text-base font-medium font-sans;
   }
   
   /* Interface elements use JetBrains Mono */
@@ -121,9 +121,19 @@
   table th {
     @apply font-mono text-xs uppercase tracking-wider;
   }
-  
+
   table td {
-    @apply font-condensed;
+    @apply font-sans;
+  }
+
+  /* Content text areas - mentions, news, polling data, etc. */
+  .content-text, .mention-text, .news-text, .feed-text {
+    @apply font-sans;
+  }
+
+  /* Paragraphs and content areas */
+  p, .text-content {
+    @apply font-sans;
   }
 }
 
