@@ -7,6 +7,7 @@ export interface CardProps extends HTMLMotionProps<'div'> {
   variant?: 'glass' | 'solid' | 'elevated' | 'bordered';
   hover?: boolean;
   padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
+  noShadow?: boolean;
   children: React.ReactNode;
 }
 
