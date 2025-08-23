@@ -135,13 +135,6 @@ const SettingsPage: React.FC = () => {
         subtitle="Customize your War Room experience"
       />
 
-      {/* Diagnostics badge (non-intrusive) */}
-      <div className="mt-2 mb-4 text-xs text-white/60">
-        <span className="px-2 py-1 rounded bg-black/30 border border-white/10">
-          diag: env={String(BUILD_DIAG.env)} googleAuth={String(BUILD_DIAG.enableGoogleAuth)} meta={String(BUILD_DIAG.hasMetaIntegration)} google={String(BUILD_DIAG.hasGoogleAdsIntegration)}
-        </span>
-      </div>
-
       {/* Settings Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Profile Settings */}
