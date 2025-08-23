@@ -186,7 +186,7 @@ const SettingsPage: React.FC = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-white/75" />
-                <div>
+                <div className="ml-1.5">
                   <p className="text-white/90 font-medium">
                     Email Notifications
                   </p>
@@ -203,7 +203,7 @@ const SettingsPage: React.FC = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <Smartphone className="w-5 h-5 text-white/75" />
-                <div>
+                <div className="ml-1.5">
                   <p className="text-white/90 font-medium">
                     Push Notifications
                   </p>
@@ -220,7 +220,7 @@ const SettingsPage: React.FC = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <Globe className="w-5 h-5 text-white/75" />
-                <div>
+                <div className="ml-1.5">
                   <p className="text-white/90 font-medium">
                     Auto-Publish Content
                   </p>
@@ -254,7 +254,7 @@ const SettingsPage: React.FC = () => {
               </select>
             </div>
             <div className="flex items-center justify-between">
-              <div>
+              <div className="ml-1.5">
                 <p className="text-white/90 font-medium">Dark Mode</p>
                 <p className="text-sm text-white/60">
                   Use dark theme across the platform
@@ -287,7 +287,7 @@ const SettingsPage: React.FC = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <Key className="w-5 h-5 text-white/75" />
-                <div>
+                <div className="ml-1.5">
                   <p className="text-white/90 font-medium">
                     Two-Factor Authentication
                   </p>
@@ -315,7 +315,7 @@ const SettingsPage: React.FC = () => {
         <SettingsSection title="Data & Privacy" icon={Database} delay={0.5}>
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <div>
+              <div className="ml-1.5">
                 <p className="text-white/90 font-medium">Data Sharing</p>
                 <p className="text-sm text-white/60">
                   Share anonymized data for improvements
