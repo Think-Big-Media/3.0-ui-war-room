@@ -368,7 +368,7 @@ const CampaignOperationsHub: React.FC = () => {
 
         {/* Content Templates */}
         <div className="space-y-3 lg:space-y-4">
-          <h4 className="text-base lg:text-lg font-medium text-white/90 mb-3 uppercase">
+          <h4 className="text-lg lg:text-xl font-medium text-white/80 mb-3 uppercase font-condensed tracking-wide">
             &nbsp;CONTENT TEMPLATES
           </h4>
           <div className="grid grid-cols-2 gap-2 lg:gap-3">
