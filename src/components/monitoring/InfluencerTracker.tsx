@@ -36,7 +36,7 @@ const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({ influencers }) =>
                   {influencer.username}
                 </span>
               </div>
-              <span className="text-white/70 text-xs">{influencer.lastPost}</span>
+              <span className="text-white/70 text-xs font-mono">{influencer.lastPost}</span>
             </div>
             <div className="text-xs text-white/60 mb-2 font-mono">
               {formatNumber(influencer.followers)} followers • Reach: {influencer.reach}

@@ -93,11 +93,11 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
               <div className="flex items-center space-x-2">
                 {getPlatformIcon(mention.platform)}
                 <span className="text-white/90 font-medium">{mention.username}</span>
-                <span className="text-white/60 text-sm">{mention.timestamp}</span>
+                <span className="text-white/60 text-sm font-mono">{mention.timestamp}</span>
               </div>
               <div className="flex items-center space-x-2">
                 {getSentimentIcon(mention.sentiment)}
-                <span className="text-white/70 text-sm">
+                <span className="text-white/70 text-sm font-mono">
                   Influence: {mention.influence}
                 </span>
               </div>
