@@ -25,7 +25,7 @@ const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({ influencers }) =>
 
   return (
     <Card padding="md" variant="glass">
-      <h3 className="text-lg font-semibold text-white/95 mb-4">Influencer Tracker</h3>
+      <h3 className="text-lg font-semibold text-white/95 mb-4 font-condensed">Influencer Tracker</h3>
       <div className="space-y-4">
         {influencers.map((influencer) => (
           <div key={influencer.id} className="bg-black/20 rounded-lg p-3">
@@ -38,13 +38,13 @@ const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({ influencers }) =>
               </div>
               <span className="text-white/70 text-xs">{influencer.lastPost}</span>
             </div>
-            <div className="text-xs text-white/60 mb-2">
+            <div className="text-xs text-white/60 mb-2 font-mono">
               {formatNumber(influencer.followers)} followers • Reach: {influencer.reach}
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
                 {getSentimentIcon(influencer.sentiment)}
-                <span className="text-xs text-white/70">
+                <span className="text-xs text-white/70 font-mono">
                   Eng: {influencer.engagement}%
                 </span>
               </div>
