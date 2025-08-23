@@ -54,7 +54,7 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
             <div className="text-sm text-white/70 mb-2">
               {formatNumber(topic.mentions)} mentions
             </div>
-            <div className="flex items-center justify-between text-xs text-white/60">
+            <div className="flex items-center justify-between text-xs text-white/60 font-mono">
               <span>{topic.region}</span>
               <span>Last {topic.timeframe}</span>
             </div>
