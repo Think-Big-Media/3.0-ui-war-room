@@ -1,40 +1,40 @@
 services:
-  # Main War Room service - Combined frontend and backend
-  # This is the actual service running at war-room-oa9t.onrender.com
+  # War Room 3.0 UI - React Frontend with Builder.io Integration
   - type: web
-    name: war-room-oa9t
-    runtime: python
-    plan: starter
+    name: war-room-3-ui
+    runtime: static
+    plan: free
     
-    # Build command - Python only, frontend is pre-built
-    buildCommand: |
-      cd src/backend && pip install -r requirements.txt
+    # Build command - Install dependencies and build React app
+    buildCommand: npm install && npm run build
     
-    # Start Command - serves both frontend and backend
-    startCommand: cd src/backend && python3 serve_bulletproof.py
+    # Static files location after build
+    staticPublishPath: ./dist
     
-    # Health Check Configuration
-    healthCheckPath: /health
+    # SPA routing - redirect all routes to index.html
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
     
-    # Environment Variables (set in Render dashboard)
+    # Environment Variables
     envVars:
-      - key: PYTHON_VERSION
-        value: "3.11.0"
-      - key: PORT
-        value: "10000"
-      - key: NODE_ENV
-        value: "production"
-      - key: RENDER_ENV
-        value: "production"
+      - key: NODE_VERSION
+        value: "18.17.0"
       
     # Auto-deploy from GitHub
-    repo: https://github.com/Think-Big-Media/1.0-war-room
+    repo: https://github.com/Think-Big-Media/3.0-ui-war-room
     branch: main
     autoDeploy: true
-
-# Database Configuration (if using Render PostgreSQL)
-databases:
-  - name: warroom-db
-    plan: starter
-    databaseName: warroom
-    user: warroom
+    
+    # Security Headers
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: X-XSS-Protection
+        value: 1; mode=block
