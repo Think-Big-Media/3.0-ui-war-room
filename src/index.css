@@ -64,6 +64,9 @@
   body {
     @apply font-body antialiased bg-gray-50 text-gray-900;
     letter-spacing: 0em; /* Normal letter spacing for Inter */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   /* Heading styles - Using Inter for content headings, Barlow Condensed for display */
@@ -139,6 +142,9 @@
   /* Sub-headlines and section titles */
   .section-title, .sub-headline {
     @apply font-condensed;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   /* Technical labels and metadata */
@@ -219,14 +225,16 @@
       black 24px,
       black calc(100% - 24px),
       transparent 100%
-    );
+    ) no-repeat;
     -webkit-mask: linear-gradient(
       to bottom,
       transparent 0%,
       black 24px,
       black calc(100% - 24px),
       transparent 100%
-    );
+    ) no-repeat;
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
   }
 
   /* Subtle fade variant with less fade distance */
@@ -237,14 +245,16 @@
       black 16px,
       black calc(100% - 16px),
       transparent 100%
-    );
+    ) no-repeat;
     -webkit-mask: linear-gradient(
       to bottom,
       transparent 0%,
       black 16px,
       black calc(100% - 16px),
       transparent 100%
-    );
+    ) no-repeat;
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
   }
 
   /* Strong fade variant for dark backgrounds */
