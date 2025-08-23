@@ -15,9 +15,9 @@ interface MonitoringAlertProps {
 }
 
 const MonitoringAlert: React.FC<MonitoringAlertProps> = ({
-  title = 'Alert:',
+  title = 'Alert',
   message = 'Negative mentions about crime policy up 234% in last 12h — trending in District 8',
-  actionText = 'Respond Now',
+  actionText = 'RESPOND NOW',
   onAction,
 }) => {
   const handleAction = () => {
@@ -26,21 +26,32 @@ const MonitoringAlert: React.FC<MonitoringAlertProps> = ({
   };
 
   return (
-    <div className="mt-6">
+    <div className="mb-4">
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-red-500/20 border border-red-500/30 rounded-lg p-4 flex items-center space-x-3"
+        className="bg-red-500/20 border border-red-500/30 rounded-lg p-4 flex items-center justify-between"
       >
-        <AlertCircle className="w-5 h-5 text-red-400" />
-        <div>
-          <span className="text-red-400 font-medium">{title} </span>
-          <span className="text-white/90">{message}</span>
+        <div className="flex items-center space-x-3">
+          <AlertCircle className="w-5 h-5 text-red-400" />
+          <div>
+            <span
+              className="text-red-400 font-medium font-condensed tracking-wide"
+              style={{
+                textRendering: 'optimizeLegibility',
+                WebkitFontSmoothing: 'antialiased',
+                MozOsxFontSmoothing: 'grayscale'
+              }}
+            >
+              {title}
+            </span>
+            <span className="text-white/90 font-mono ml-1">{message}</span>
+          </div>
         </div>
         {actionText && (
           <button
             onClick={handleAction}
-            className="ml-auto bg-red-500/20 hover:bg-red-500/30 text-red-400 px-3 py-1.5 rounded-lg transition-colors"
+            className="bg-red-500/20 hover:bg-red-500/30 text-red-400 px-3 py-1 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap"
           >
             {actionText}
           </button>

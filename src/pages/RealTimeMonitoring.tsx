@@ -85,9 +85,6 @@ const RealTimeMonitoring: React.FC = () => {
           <InfluencerTracker influencers={mockInfluencers} />
         </div>
       </div>
-
-      {/* Dynamic Alert Banner */}
-      <MonitoringAlert onAction={handleAlertAction} />
     </PageLayout>
   );
 };
