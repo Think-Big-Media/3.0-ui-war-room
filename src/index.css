@@ -230,14 +230,19 @@
     @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm;
   }
 
-  /* War Room input style - matches floating chat input with 95% opacity */
+  /* War Room input style - matches floating chat input, full opacity for visibility */
   .war-room-input {
-    @apply w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 opacity-95;
+    @apply w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300;
   }
 
-  /* War Room select style with 95% opacity */
+  /* War Room select style - full opacity for visibility */
   .war-room-select {
-    @apply w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer opacity-95;
+    @apply w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer;
+  }
+
+  /* War Room sub-headline style - 90% opacity, moved up 3px */
+  .war-room-subheading {
+    @apply text-white/90 font-condensed tracking-wide -mt-1;
   }
 
   /* Container spacing fix - double card padding reduced by 47.5% (40px * 0.525 = 21px = pb-5) */
