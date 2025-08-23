@@ -54,7 +54,7 @@ const SettingsSection: React.FC<SettingsSectionProps> = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay }}
-      padding="md"
+      padding="lg"
       variant="glass"
     >
       <div className="flex items-center space-x-3 mb-6">
@@ -183,7 +183,7 @@ const SettingsPage: React.FC = () => {
                   <p className="text-white/90 font-medium">
                     Email Notifications
                   </p>
-                  <p className="text-sm text-white/60">
+                  <p className="text-sm text-white/60 font-condensed tracking-wide">
                     Receive campaign updates via email
                   </p>
                 </div>
@@ -200,7 +200,7 @@ const SettingsPage: React.FC = () => {
                   <p className="text-white/90 font-medium">
                     Push Notifications
                   </p>
-                  <p className="text-sm text-white/60">
+                  <p className="text-sm text-white/60 font-condensed tracking-wide">
                     Get instant alerts on your device
                   </p>
                 </div>
@@ -217,7 +217,7 @@ const SettingsPage: React.FC = () => {
                   <p className="text-white/90 font-medium">
                     Auto-Publish Content
                   </p>
-                  <p className="text-sm text-white/60">
+                  <p className="text-sm text-white/60 font-condensed tracking-wide">
                     Automatically publish scheduled content
                   </p>
                 </div>
@@ -249,7 +249,7 @@ const SettingsPage: React.FC = () => {
             <div className="flex items-center justify-between">
               <div className="ml-1.5">
                 <p className="text-white/90 font-medium">Dark Mode</p>
-                <p className="text-sm text-white/60">
+                <p className="text-sm text-white/60 font-condensed tracking-wide">
                   Use dark theme across the platform
                 </p>
               </div>
@@ -284,7 +284,7 @@ const SettingsPage: React.FC = () => {
                   <p className="text-white/90 font-medium">
                     Two-Factor Authentication
                   </p>
-                  <p className="text-sm text-white/60">
+                  <p className="text-sm text-white/60 font-condensed tracking-wide">
                     Add an extra layer of security
                   </p>
                 </div>
@@ -310,7 +310,7 @@ const SettingsPage: React.FC = () => {
             <div className="flex items-center justify-between">
               <div className="ml-1.5">
                 <p className="text-white/90 font-medium">Data Sharing</p>
-                <p className="text-sm text-white/60">
+                <p className="text-sm text-white/60 font-condensed tracking-wide">
                   Share anonymized data for improvements
                 </p>
               </div>
@@ -369,7 +369,7 @@ const SettingsPage: React.FC = () => {
         ref={integrationsRef}
       >
         <Card
-          padding="md"
+          padding="lg"
           variant="glass"
         >
           <div className="flex items-center space-x-3 mb-6">
