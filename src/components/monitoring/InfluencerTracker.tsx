@@ -49,19 +49,19 @@ const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({
                   {influencer.username}
                 </span>
               </div>
-              <span className="text-white/70 text-xs font-mono">
+              <span className="text-white/70 text-xs font-mono uppercase">
                 {influencer.lastPost}
               </span>
             </div>
-            <div className="text-xs text-white/60 mb-2 font-mono">
-              {formatNumber(influencer.followers)} followers • Reach:{' '}
+            <div className="text-xs text-white/60 mb-2 font-mono uppercase">
+              {formatNumber(influencer.followers)} FOLLOWERS • REACH:{' '}
               {influencer.reach}
             </div>
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center space-x-2">
                 {getSentimentIcon(influencer.sentiment)}
-                <span className="text-xs text-white/70 font-mono">
-                  Eng: {influencer.engagement}%
+                <span className="text-xs text-white/70 font-mono uppercase">
+                  ENG: {influencer.engagement}%
                 </span>
               </div>
             </div>
