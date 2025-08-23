@@ -262,7 +262,7 @@ const IntelligenceHub: React.FC = () => {
           </div>
 
           <div className="mt-4">
-            <label className="block text-sm font-medium text-white/80 mb-2">
+            <label className="block text-sm font-medium text-white/80 mb-0.5 ml-1.5">
               Add Notes
             </label>
             <textarea
