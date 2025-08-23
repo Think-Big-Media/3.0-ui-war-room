@@ -69,7 +69,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
   };
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative z-[99998]" ref={dropdownRef}>
       {/* Dropdown Trigger */}
       <button
         type="button"
