@@ -298,8 +298,11 @@ const GoogleAdsIntegration: React.FC = () => {
           <div className="flex items-start space-x-2">
             <AlertCircle className="w-4 h-4 text-blue-600 mt-0.5" />
             <p className="text-xs text-gray-600">
-              By connecting, you authorize War Room to access your Google Ads data.
-              We use OAuth 2.0 and industry-standard encryption to protect your information.
+              {googleAdsAuthService.isInDemoMode ? (
+                'Demo mode: Google Ads integration endpoints are not available. This is a UI demonstration.'
+              ) : (
+                'By connecting, you authorize War Room to access your Google Ads data. We use OAuth 2.0 and industry-standard encryption to protect your information.'
+              )}
             </p>
           </div>
         </div>
