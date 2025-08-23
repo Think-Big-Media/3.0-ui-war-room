@@ -230,14 +230,14 @@
     @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm;
   }
 
-  /* War Room input style - matches floating chat input, full opacity for visibility */
+  /* War Room input style - 70% opacity background, gray text for transparency */
   .war-room-input {
-    @apply w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300;
+    @apply w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300;
   }
 
-  /* War Room select style - full opacity for visibility */
+  /* War Room select style - 70% opacity background, gray text for transparency */
   .war-room-select {
-    @apply w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer;
+    @apply w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer;
   }
 
   /* War Room sub-headline style - 60% opacity, moved up 3px (STANDARDIZED) */
