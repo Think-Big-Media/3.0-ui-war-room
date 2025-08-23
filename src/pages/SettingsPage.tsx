@@ -91,8 +91,8 @@ const SettingsPage: React.FC = () => {
   logger.debug('Settings loaded successfully');
   logger.debug('Settings rendered successfully');
 
-  // Diagnostic: Log style guide implementation
-  console.log('🎯 Style Guide Applied: pb-5 spacing, icons +2px down + 10px indent, inputs 100% opacity, sub-headlines 90% opacity + 3px up');
+  // Diagnostic: Log standardized style guide implementation
+  console.log('🎯 STANDARDIZED Style Guide: pb-5 spacing, icons +2px down + 10px indent, inputs 100% opacity, sub-descriptions 60% opacity + 3px up (SITE-WIDE)');
 
   // Diagnostics: track integrations section visibility on mount
   const integrationsRef = useRef<HTMLDivElement | null>(null);
