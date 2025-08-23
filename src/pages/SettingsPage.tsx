@@ -142,7 +142,7 @@ const SettingsPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Profile Settings */}
         <SettingsSection title="Profile Settings" icon={User} delay={0.1}>
-          <div className="space-y-4 pb-7">
+          <div className="space-y-4 pb-5">
             <div>
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Display Name
@@ -178,10 +178,10 @@ const SettingsPage: React.FC = () => {
 
         {/* Notification Settings */}
         <SettingsSection title="Notifications" icon={Bell} delay={0.2}>
-          <div className="space-y-4 pb-7">
+          <div className="space-y-4 pb-5">
             <div className="flex items-start justify-between">
-              <div className="flex items-start space-x-3">
-                <Mail className="w-5 h-5 text-white/75" />
+              <div className="flex items-start space-x-3 ml-2.5">
+                <Mail className="w-5 h-5 text-white/75 mt-0.5" />
                 <div className="ml-1.5">
                   <p className="text-white/90 font-medium">
                     Email Notifications
@@ -199,8 +199,8 @@ const SettingsPage: React.FC = () => {
               </div>
             </div>
             <div className="flex items-start justify-between">
-              <div className="flex items-start space-x-3">
-                <Smartphone className="w-5 h-5 text-white/75" />
+              <div className="flex items-start space-x-3 ml-2.5">
+                <Smartphone className="w-5 h-5 text-white/75 mt-0.5" />
                 <div className="ml-1.5">
                   <p className="text-white/90 font-medium">
                     Push Notifications
@@ -218,8 +218,8 @@ const SettingsPage: React.FC = () => {
               </div>
             </div>
             <div className="flex items-start justify-between">
-              <div className="flex items-start space-x-3">
-                <Globe className="w-5 h-5 text-white/75" />
+              <div className="flex items-start space-x-3 ml-2.5">
+                <Globe className="w-5 h-5 text-white/75 mt-0.5" />
                 <div className="ml-1.5">
                   <p className="text-white/90 font-medium">
                     Auto-Publish Content
@@ -238,7 +238,7 @@ const SettingsPage: React.FC = () => {
 
         {/* Appearance Settings */}
         <SettingsSection title="Appearance" icon={Palette} delay={0.3}>
-          <div className="space-y-4 pb-7">
+          <div className="space-y-4 pb-5">
             <div>
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Theme
@@ -256,7 +256,7 @@ const SettingsPage: React.FC = () => {
               </select>
             </div>
             <div className="flex items-start justify-between">
-              <div className="ml-1.5">
+              <div className="ml-4">
                 <p className="text-white/90 font-medium">Dark Mode</p>
                 <p className="text-sm text-white/60 font-condensed tracking-wide">
                   Use dark theme across the platform
@@ -287,10 +287,10 @@ const SettingsPage: React.FC = () => {
 
         {/* Security Settings */}
         <SettingsSection title="Security" icon={Shield} delay={0.4}>
-          <div className="space-y-4 pb-7">
+          <div className="space-y-4 pb-5">
             <div className="flex items-start justify-between">
-              <div className="flex items-start space-x-3">
-                <Key className="w-5 h-5 text-white/75" />
+              <div className="flex items-start space-x-3 ml-2.5">
+                <Key className="w-5 h-5 text-white/75 mt-0.5" />
                 <div className="ml-1.5">
                   <p className="text-white/90 font-medium">
                     Two-Factor Authentication
@@ -319,9 +319,9 @@ const SettingsPage: React.FC = () => {
 
         {/* Data & Privacy */}
         <SettingsSection title="Data & Privacy" icon={Database} delay={0.5}>
-          <div className="space-y-4 pb-7">
+          <div className="space-y-4 pb-5">
             <div className="flex items-start justify-between">
-              <div className="ml-1.5">
+              <div className="ml-4">
                 <p className="text-white/90 font-medium">Data Sharing</p>
                 <p className="text-sm text-white/60 font-condensed tracking-wide">
                   Share anonymized data for improvements
@@ -346,7 +346,7 @@ const SettingsPage: React.FC = () => {
 
         {/* Regional Settings */}
         <SettingsSection title="Regional" icon={Globe} delay={0.6}>
-          <div className="space-y-4 pb-7">
+          <div className="space-y-4 pb-5">
             <div>
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Timezone
