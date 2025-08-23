@@ -7,11 +7,11 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['Barlow Condensed', 'system-ui', 'sans-serif'],
+        'sans': ['Inter', 'system-ui', 'sans-serif'],
         'condensed': ['Barlow Condensed', 'sans-serif'],
         'mono': ['JetBrains Mono', 'monospace'],
         'display': ['Barlow Condensed', 'sans-serif'],
-        'body': ['Barlow Condensed', 'sans-serif'],
+        'body': ['Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
