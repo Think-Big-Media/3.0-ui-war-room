@@ -136,7 +136,7 @@ const SettingsPage: React.FC = () => {
       />
 
       {/* Settings Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Profile Settings */}
         <SettingsSection title="Profile Settings" icon={User} delay={0.1}>
           <div className="space-y-4">
@@ -387,7 +387,7 @@ const SettingsPage: React.FC = () => {
             <div>- Build time: {new Date().toISOString()}</div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* ALWAYS RENDER SOMETHING */}
             <div className="oauth-meta-container">
               {MetaIntegration ? (
