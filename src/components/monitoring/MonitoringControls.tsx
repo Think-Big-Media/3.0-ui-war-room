@@ -39,7 +39,7 @@ const MonitoringControls: React.FC<MonitoringControlsProps> = ({
             <span>{isLive ? 'Pause' : 'Start'}</span>
           </button>
         </div>
-        <div className="flex items-center space-x-4 text-sm text-white/70">
+        <div className="flex items-center space-x-4 text-sm text-white/70 font-mono">
           <span>Last updated: {lastUpdated}</span>
           <span>Total mentions: {totalMentions.toLocaleString()}</span>
         </div>

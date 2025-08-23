@@ -135,6 +135,21 @@
   p, .text-content {
     @apply font-sans;
   }
+
+  /* Sub-headlines and section titles */
+  .section-title, .sub-headline {
+    @apply font-condensed;
+  }
+
+  /* Technical labels and metadata */
+  .technical-label, .metadata-text {
+    @apply font-mono text-xs;
+  }
+
+  /* Action buttons and interactive labels */
+  .action-button, .interactive-label {
+    @apply font-mono text-xs;
+  }
 }
 
 /* Custom component styles */

@@ -58,7 +58,7 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
   return (
     <Card padding="md" variant="glass">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-lg font-semibold text-white/95">Live Mentions Stream</h3>
+        <h3 className="text-lg font-semibold text-white/95 font-condensed">Live Mentions Stream</h3>
         <div className="flex items-center space-x-2">
           <CustomDropdown
             value={filters.source}
@@ -117,13 +117,13 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
               <div className="flex items-center space-x-2">
                 <button
                   onClick={() => handleAddToAlert(mention)}
-                  className="text-xs text-blue-400 hover:text-blue-300"
+                  className="text-xs text-blue-400 hover:text-blue-300 font-mono"
                 >
                   Add to Alert
                 </button>
                 <button
                   onClick={() => handleGenerateResponse(mention)}
-                  className="text-xs text-white/70 hover:text-white"
+                  className="text-xs text-white/70 hover:text-white font-mono"
                 >
                   Generate Response
                 </button>
