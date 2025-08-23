@@ -237,7 +237,7 @@ const IntelligenceHub: React.FC = () => {
           {/* File Options */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-white/80 mb-0.5 ml-1.5">
                 Category
               </label>
               <select className="w-full bg-black/20 border border-white/30 rounded-lg px-3 py-1.5 text-sm text-white">
@@ -250,7 +250,7 @@ const IntelligenceHub: React.FC = () => {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-white/80 mb-0.5 ml-1.5">
                 Tags
               </label>
               <input
