@@ -39,7 +39,7 @@ const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({
       >
         INFLUENCER TRACKER
       </h3>
-      <div className="space-y-4">
+      <div className="space-y-4 ml-3">
         {influencers.map((influencer) => (
           <div key={influencer.id} className="bg-black/20 rounded-lg p-3">
             <div className="flex items-center justify-between mb-2">
