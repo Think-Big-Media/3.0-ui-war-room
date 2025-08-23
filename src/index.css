@@ -207,6 +207,11 @@
     @apply px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors;
   }
 
+  /* Secondary Alert button style - for urgent actions */
+  .btn-secondary-alert {
+    @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-3 py-1 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap;
+  }
+
   /* Form input style */
   .form-input {
     @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm;

@@ -34,9 +34,9 @@ const MonitoringAlert: React.FC<MonitoringAlertProps> = ({
       >
         <div className="flex items-center space-x-3">
           <AlertCircle className="w-5 h-5 text-red-400" />
-          <div>
+          <div className="flex items-center">
             <span
-              className="text-red-400 font-medium font-condensed tracking-wide"
+              className="text-red-400 font-medium font-condensed tracking-wide text-lg uppercase"
               style={{
                 textRendering: 'optimizeLegibility',
                 WebkitFontSmoothing: 'antialiased',
@@ -45,13 +45,13 @@ const MonitoringAlert: React.FC<MonitoringAlertProps> = ({
             >
               {title}
             </span>
-            <span className="text-white/90 font-mono ml-1">{message}</span>
+            <span className="text-white/90 font-mono ml-5">{message}</span>
           </div>
         </div>
         {actionText && (
           <button
             onClick={handleAction}
-            className="bg-red-500/20 hover:bg-red-500/30 text-red-400 px-3 py-1 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap"
+            className="btn-secondary-alert bg-red-500/20 hover:bg-red-500/30 text-red-400 px-3 py-1 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap"
           >
             {actionText}
           </button>
