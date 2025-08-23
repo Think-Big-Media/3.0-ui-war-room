@@ -15,6 +15,7 @@ const Card: React.FC<CardProps> = ({
   variant = 'glass',
   hover = true,
   padding = 'md',
+  noShadow = false,
   className,
   children,
   ...props
