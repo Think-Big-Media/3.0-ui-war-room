@@ -354,7 +354,7 @@ const InformationCenter: React.FC = () => {
                         .value as InformationFilters['category'],
                     }))
                   }
-                  className="bg-black/20 border border-white/30 rounded-lg px-3 py-2 text-white"
+                  className="bg-black/20 border border-white/30 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:ring-0 transition-all duration-300 opacity-95 appearance-none cursor-pointer"
                 >
                   <option value="all">All Categories</option>
                   <option value="political-news">Political News</option>
@@ -372,7 +372,7 @@ const InformationCenter: React.FC = () => {
                         .value as InformationFilters['priority'],
                     }))
                   }
-                  className="bg-black/20 border border-white/30 rounded-lg px-3 py-2 text-white"
+                  className="bg-black/20 border border-white/30 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:ring-0 transition-all duration-300 opacity-95 appearance-none cursor-pointer"
                 >
                   <option value="all">All Priorities</option>
                   <option value="critical">Critical</option>
@@ -388,7 +388,7 @@ const InformationCenter: React.FC = () => {
                       status: e.target.value as InformationFilters['status'],
                     }))
                   }
-                  className="bg-black/20 border border-white/30 rounded-lg px-3 py-2 text-white"
+                  className="bg-black/20 border border-white/30 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:ring-0 transition-all duration-300 opacity-95 appearance-none cursor-pointer"
                 >
                   <option value="all">All Status</option>
                   <option value="unread">Unread</option>
