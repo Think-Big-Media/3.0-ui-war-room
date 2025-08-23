@@ -260,17 +260,16 @@ const SettingsPage: React.FC = () => {
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Theme
               </label>
-              <select className="w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer">
-                {themes.map((theme) => (
-                  <option
-                    key={theme}
-                    value={theme}
-                    className="bg-white text-slate-800"
-                  >
-                    {theme}
-                  </option>
-                ))}
-              </select>
+              <div className="flex justify-center">
+                <CustomDropdown
+                  value={selectedTheme}
+                  onChange={setSelectedTheme}
+                  options={themeOptions}
+                  placeholder="Select Theme"
+                  icon={<Palette className="w-4 h-4" />}
+                  className="w-48"
+                />
+              </div>
             </div>
             <div className="flex items-start justify-between">
               <div className="ml-4">
@@ -287,17 +286,16 @@ const SettingsPage: React.FC = () => {
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Language
               </label>
-              <select className="w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer">
-                {languages.map((lang) => (
-                  <option
-                    key={lang}
-                    value={lang}
-                    className="bg-white text-slate-800"
-                  >
-                    {lang}
-                  </option>
-                ))}
-              </select>
+              <div className="flex justify-center">
+                <CustomDropdown
+                  value={selectedLanguage}
+                  onChange={setSelectedLanguage}
+                  options={languageOptions}
+                  placeholder="Select Language"
+                  icon={<Globe className="w-4 h-4" />}
+                  className="w-48"
+                />
+              </div>
             </div>
           </div>
         </SettingsSection>
