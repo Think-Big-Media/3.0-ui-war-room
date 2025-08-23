@@ -378,7 +378,7 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
               onChange={(e) => setMessage(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder={placeholder}
-              className="w-full bg-white/90 text-black placeholder-gray-500 rounded-xl px-4 py-4 pr-12 border border-white/50 focus:border-white/70 focus:outline-none focus:ring-0 transition-all duration-200 opacity-95"
+              className="w-full bg-white/90 text-black placeholder-gray-500 rounded-xl px-4 py-4 pr-12 border border-white/50 focus:border-white/70 focus:outline-none focus:ring-0 transition-all duration-200"
             />
 
             {/* AI Indicator */}
