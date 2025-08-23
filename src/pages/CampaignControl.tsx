@@ -107,10 +107,7 @@ const CampaignControl: React.FC = () => {
       {/* Purple gradient background */}
       <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 -z-10" />
 
-      <PageHeader
-        title="War Room"
-        subtitle="Strategic project management, asset organization, and team coordination"
-      />
+      <div />
 
       {/* Tab Navigation */}
       <CampaignTabs activeTab={activeTab} onTabChange={setActiveTab} />
