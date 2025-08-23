@@ -27,6 +27,7 @@ export interface GoogleAdsAuthResponse {
 
 class GoogleAdsAuthService {
   private readonly baseUrl = '/api/v1';
+  private isDemoMode = false;
 
   /**
    * Get Google Ads authentication status for current user's organization
@@ -36,6 +37,16 @@ class GoogleAdsAuthService {
       const response = await api.get<GoogleAdsAuthStatus>(`${this.baseUrl}/auth/google-ads/status`);
       return response.data;
     } catch (error: any) {
+      // If we get a 404, the endpoint doesn't exist - use demo mode
+      if (error?.response?.status === 404) {
+        console.log('Google Ads API endpoints not available - using demo mode');
+        this.isDemoMode = true;
+        return {
+          is_authenticated: false,
+          scopes: [],
+        };
+      }
+
       console.error('Error getting Google Ads auth status:', error);
       return {
         is_authenticated: false,
