@@ -30,6 +30,13 @@ class GoogleAdsAuthService {
   private isDemoMode = false;
 
   /**
+   * Check if service is running in demo mode
+   */
+  get isInDemoMode(): boolean {
+    return this.isDemoMode;
+  }
+
+  /**
    * Get Google Ads authentication status for current user's organization
    */
   async getAuthStatus(): Promise<GoogleAdsAuthStatus> {
