@@ -108,7 +108,10 @@ const GoogleAdsIntegration: React.FC = () => {
       // Don't show campaigns inline - keep card compact
       setShowCampaigns(false);
 
-      if (status.error) {
+      // In demo mode, don't show errors
+      if (googleAdsAuthService.isInDemoMode) {
+        setError(null);
+      } else if (status.error) {
         // Don't show error for initial "not connected" state
         if (!status.error.includes('not connected')) {
           setError(status.error);
@@ -123,7 +126,6 @@ const GoogleAdsIntegration: React.FC = () => {
       console.log('Auth check failed - treating as not connected');
       setAuthStatus({ is_authenticated: false, scopes: [] });
       setError(null);
-      setIsLoading(false);
     } finally {
       setIsLoading(false);
     }
