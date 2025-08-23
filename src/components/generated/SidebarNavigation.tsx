@@ -159,7 +159,7 @@ const TopNavigation: React.FC = () => {
           </div>
 
           {/* Navigation Items - Compact spacing */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center space-x-1.5">
             {navItems.map((item, index) => (
               <button
                 key={index}
@@ -170,7 +170,7 @@ const TopNavigation: React.FC = () => {
                     : 'text-white/70 hover:text-white hover:bg-white/10'
                 }`}
               >
-                <item.icon className="w-4 h-4 flex-shrink-0" />
+                <item.icon className={`w-4 h-4 flex-shrink-0 ${item.icon === Home ? '-translate-y-1' : ''}`} />
                 <span>{item.label}</span>
               </button>
             ))}
