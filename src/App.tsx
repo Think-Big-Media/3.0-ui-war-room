@@ -47,6 +47,9 @@ import SettingsPage from './pages/SettingsPage';
 import BuilderPage from './pages/BuilderPage';
 import './builder-registry'; // Register components with Builder
 
+// Import Data Toggle Button
+import { DataToggleButton } from './components/DataToggleButton';
+
 // Loading component for lazy-loaded routes
 const LazyLoadFallback = ({ componentName }: { componentName: string }) => (
   <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -145,6 +148,9 @@ function App() {
 
   return (
     <Router>
+      {/* Data Toggle Button - Always visible */}
+      <DataToggleButton />
+      
       <Routes>
         {/* Public Routes - Redirect to dashboard if authenticated */}
         <Route
