@@ -305,13 +305,15 @@ const SettingsPage: React.FC = () => {
               </div>
             </div>
             <div>
-              <button className="btn-primary-action w-full text-left">
-                Change Password
+              <button className="btn-secondary-action w-full py-3 px-6 flex items-center justify-center space-x-2">
+                <Key className="w-5 h-5" />
+                <span>Change Password</span>
               </button>
             </div>
             <div>
-              <button className="btn-primary-neutral w-full text-left">
-                View Login History
+              <button className="btn-secondary-neutral w-full py-3 px-6 flex items-center justify-center space-x-2">
+                <Shield className="w-5 h-5" />
+                <span>View Login History</span>
               </button>
             </div>
           </div>
@@ -332,13 +334,15 @@ const SettingsPage: React.FC = () => {
               </div>
             </div>
             <div>
-              <button className="btn-primary-action w-full text-left">
-                Download My Data
+              <button className="btn-secondary-action w-full py-3 px-6 flex items-center justify-center space-x-2">
+                <Database className="w-5 h-5" />
+                <span>Download My Data</span>
               </button>
             </div>
             <div>
-              <button className="btn-primary-alert w-full text-left">
-                Delete My Account
+              <button className="btn-secondary-alert w-full py-3 px-6 flex items-center justify-center space-x-2">
+                <Database className="w-5 h-5" />
+                <span>Delete My Account</span>
               </button>
             </div>
           </div>
