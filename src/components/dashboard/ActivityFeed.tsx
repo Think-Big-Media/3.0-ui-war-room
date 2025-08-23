@@ -181,7 +181,7 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
   }
 
   return (
-    <div className="space-y-4 pb-10">
+    <div className="space-y-4 pb-7">
       {/* Enhanced Connection Status */}
       <ConnectionStatus
         isConnected={wsConnection.isConnected}
