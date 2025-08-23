@@ -15,8 +15,9 @@
 ## Form Elements
 
 ### Input Fields
-- **Base Style**: `w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300`
-- **Opacity**: 100% (no opacity reduction for maximum visibility)
+- **Base Style**: `w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300`
+- **Background**: 70% opacity to show layer underneath
+- **Text Color**: Mid-dark gray (`text-gray-600`) instead of black
 - **Height**: Reduced by 15% (py-2.5 instead of py-3)
 - **Corner Radius**: `rounded-xl` (matches floating chat input)
 
@@ -95,9 +96,9 @@ This applies to ALL descriptive text under main headings across the entire platf
 ## Color Specifications
 
 - **Main Text**: `text-white/90` (90% opacity)
-- **Sub-text**: `text-white/90` (90% opacity, moved up 3px)
+- **Sub-text**: `text-white/60` (60% opacity, moved up 3px)
 - **Section Headers**: `text-white/40` (40% opacity, uppercase)
 - **Icons**: `text-white/75` (75% opacity)
-- **Form Fields**: Full opacity for maximum readability
+- **Form Fields**: 70% transparent background (`bg-white/70`) with gray text (`text-gray-600`)
 
 This style guide ensures consistent, accessible, and visually appealing interfaces across the entire War Room platform.

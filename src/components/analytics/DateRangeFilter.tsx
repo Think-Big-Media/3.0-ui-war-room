@@ -278,7 +278,7 @@ export const DateRangeFilter: React.FC<DateRangeFilterProps> = ({
                     type="date"
                     value={tempStartDate}
                     onChange={(e) => setTempStartDate(e.target.value)}
-                    className="w-full px-3 py-2.5 text-sm border border-gray-300 rounded-xl focus:outline-none focus:ring-0 transition-all duration-300"
+                    className="w-full px-3 py-2.5 text-sm border border-gray-300 rounded-xl bg-white/70 text-gray-600 focus:outline-none focus:ring-0 transition-all duration-300"
                     placeholder="Start date"
                   />
                 </div>
@@ -291,7 +291,7 @@ export const DateRangeFilter: React.FC<DateRangeFilterProps> = ({
                     type="date"
                     value={tempEndDate}
                     onChange={(e) => setTempEndDate(e.target.value)}
-                    className="w-full px-3 py-2.5 text-sm border border-gray-300 rounded-xl focus:outline-none focus:ring-0 transition-all duration-300"
+                    className="w-full px-3 py-2.5 text-sm border border-gray-300 rounded-xl bg-white/70 text-gray-600 focus:outline-none focus:ring-0 transition-all duration-300"
                     placeholder="End date"
                   />
                 </div>
