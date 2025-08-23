@@ -32,7 +32,7 @@ const PlatformPerformance: React.FC<PlatformPerformanceProps> = ({
   return (
     <Card padding="md" variant="glass">
       <h3
-        className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide"
+        className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide ml-1.5"
         style={{
           textRendering: 'optimizeLegibility',
           WebkitFontSmoothing: 'antialiased',
@@ -43,7 +43,7 @@ const PlatformPerformance: React.FC<PlatformPerformanceProps> = ({
       >
         PLATFORM PERFORMANCE
       </h3>
-      <div className="space-y-3 px-2.5">
+      <div className="space-y-3 px-1.5">
         {platformData.map((platform, index) => (
           <div key={index} className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
@@ -56,7 +56,7 @@ const PlatformPerformance: React.FC<PlatformPerformanceProps> = ({
           </div>
         ))}
       </div>
-      <div className="mt-4 mx-2.5 p-3 bg-black/20 rounded-lg">
+      <div className="mt-4 mx-1 p-3 bg-black/20 rounded-lg">
         <p className="text-xs text-white/70 font-mono uppercase">
           <span className="text-blue-400">{insights}</span>
         </p>
