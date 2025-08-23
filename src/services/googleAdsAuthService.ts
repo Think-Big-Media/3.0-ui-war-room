@@ -125,6 +125,12 @@ class GoogleAdsAuthService {
    * Start OAuth2 flow by redirecting user to Google
    */
   async startOAuthFlow(state?: string): Promise<void> {
+    // In demo mode, don't redirect - just log
+    if (this.isDemoMode) {
+      console.log('Demo mode - OAuth flow would start here');
+      return;
+    }
+
     try {
       const { authorization_url } = await this.getAuthUrl(state);
 
