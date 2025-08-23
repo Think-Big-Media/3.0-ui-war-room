@@ -147,7 +147,7 @@ const SettingsPage: React.FC = () => {
               <input
                 type="text"
                 defaultValue="John Smith"
-                className="w-full bg-white/95 rounded-2xl px-4 py-3 border border-slate-200 text-slate-800 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-400/20 transition-all duration-300"
+                className="w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300"
               />
             </div>
             <div>
@@ -157,7 +157,7 @@ const SettingsPage: React.FC = () => {
               <input
                 type="email"
                 defaultValue="john@agency.com"
-                className="w-full bg-white/95 rounded-2xl px-4 py-3 border border-slate-200 text-slate-800 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-400/20 transition-all duration-300"
+                className="w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300"
               />
             </div>
             <div className="mb-16">
@@ -167,7 +167,7 @@ const SettingsPage: React.FC = () => {
               <input
                 type="text"
                 defaultValue="Elite Marketing Agency"
-                className="w-full bg-white/95 rounded-2xl px-4 py-3 border border-slate-200 text-slate-800 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-400/20 transition-all duration-300"
+                className="w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300"
               />
             </div>
           </div>
