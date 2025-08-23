@@ -364,7 +364,7 @@ const CampaignOperationsHub: React.FC = () => {
                     duration: 0.1,
                   },
                 }}
-                className="bg-black/20 backdrop-blur-sm rounded-xl p-3 lg:p-4 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 cursor-pointer"
+                className="bg-black/20 backdrop-blur-sm rounded-xl p-2 lg:p-3 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-2">
                   <h5 className="font-medium text-white/95 text-xs lg:text-sm">
@@ -414,7 +414,7 @@ const CampaignOperationsHub: React.FC = () => {
                     duration: 0.1,
                   },
                 }}
-                className="bg-black/20 backdrop-blur-sm rounded-xl p-3 lg:p-4 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 text-center cursor-pointer"
+                className="bg-black/20 backdrop-blur-sm rounded-xl p-2 lg:p-3 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 text-center cursor-pointer"
               >
                 <h5 className="font-medium text-white/95 text-xs lg:text-sm mb-1">
                   {template.name}

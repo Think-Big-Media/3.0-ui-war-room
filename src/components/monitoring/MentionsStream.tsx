@@ -124,7 +124,7 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
             key={mention.id}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-black/20 rounded-lg p-4 border border-white/10"
+            className="bg-black/20 rounded-lg p-3 border border-white/10"
           >
             <div className="flex items-start justify-between mb-2">
               <div className="flex items-center space-x-2">
