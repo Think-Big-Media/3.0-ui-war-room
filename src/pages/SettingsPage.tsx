@@ -255,7 +255,7 @@ const SettingsPage: React.FC = () => {
               </div>
               <ToggleSwitch enabled={darkMode} onChange={setDarkMode} />
             </div>
-            <div>
+            <div className="mb-8">
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Language
               </label>
@@ -296,7 +296,7 @@ const SettingsPage: React.FC = () => {
                 Change Password
               </button>
             </div>
-            <div>
+            <div className="mb-8">
               <button className="w-full bg-black/20 backdrop-blur-sm rounded-xl px-4 py-3 border border-purple-400/20 text-white/90 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 text-left">
                 View Login History
               </button>
@@ -321,7 +321,7 @@ const SettingsPage: React.FC = () => {
                 Download My Data
               </button>
             </div>
-            <div>
+            <div className="mb-8">
               <button className="w-full bg-black/20 backdrop-blur-sm rounded-xl px-4 py-3 border border-red-400/20 text-red-400 hover:border-red-400/30 hover:bg-red-900/10 transition-all duration-300 text-left">
                 Delete My Account
               </button>
@@ -344,7 +344,7 @@ const SettingsPage: React.FC = () => {
                 ))}
               </select>
             </div>
-            <div>
+            <div className="mb-8">
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Date Format
               </label>
