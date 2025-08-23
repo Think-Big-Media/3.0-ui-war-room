@@ -56,14 +56,14 @@ const RealTimeMonitoring: React.FC = () => {
 
   return (
     <PageLayout
-      pageTitle="Real-Time Monitoring"
+      pageTitle="Live Monitoring"
       placeholder="Ask War Room about monitoring data..."
     >
       {/* Purple gradient background */}
       <div className="fixed inset-0 bg-gradient-to-br from-purple-600 via-purple-700 to-indigo-800 -z-10" />
 
       <PageHeader
-        title="Real-Time Monitoring"
+        title="Live Monitoring"
         subtitle="Live social media and news monitoring with instant campaign intelligence"
       />
 

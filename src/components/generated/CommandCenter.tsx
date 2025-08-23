@@ -438,7 +438,7 @@ const CommandCenter: React.FC = () => {
 
   return (
     <PageLayout
-      pageTitle="War Room Command Center"
+      pageTitle="Dashboard"
       placeholder="Ask War Room about your campaign status..."
     >
       {/* Purple gradient background per THEME_CONSTANTS.md */}
@@ -446,7 +446,7 @@ const CommandCenter: React.FC = () => {
 
       {/* Header - Global Standard */}
       <PageHeader
-        title="War Room Command Center"
+        title="Dashboard"
         subtitle="Real-time political intelligence and campaign management"
       />
 

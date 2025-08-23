@@ -180,14 +180,14 @@ const IntelligenceHub: React.FC = () => {
 
   return (
     <PageLayout
-      pageTitle="Intelligence Hub"
+      pageTitle="Intelligence"
       placeholder="Ask War Room about campaign intelligence..."
     >
       {/* Purple gradient background */}
       <div className="fixed inset-0 bg-gradient-to-br from-purple-600 via-purple-700 to-indigo-800 -z-10" />
 
       <PageHeader
-        title="Intelligence Hub"
+        title="Intelligence"
         subtitle="The central brain of your campaign. Upload assets, organize intelligence, and power up War Room AI."
       />
 
