@@ -100,7 +100,7 @@ const PlatformMetrics = memo<PlatformMetricsProps>(({ platform, metrics, color }
   if (!metrics || metrics.length === 0) {
     return (
       <div className={`rounded-lg p-4 ${color} bg-opacity-10`}>
-        <h3 className="text-lg font-semibold mb-3 capitalize">{platform} Ads</h3>
+        <h3 className="text-lg font-semibold mb-3 uppercase font-condensed tracking-wide text-white/40">{platform} ADS</h3>
         <div className="grid grid-cols-2 gap-3">
           {[1, 2, 3, 4].map(i => (
             <div key={i} className="h-16 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
@@ -132,7 +132,7 @@ const PlatformMetrics = memo<PlatformMetricsProps>(({ platform, metrics, color }
       className={`rounded-lg p-4 ${color} bg-opacity-10 backdrop-blur-sm`}
     >
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-lg font-semibold capitalize">{platform} Ads</h3>
+        <h3 className="text-lg font-semibold uppercase font-condensed tracking-wide text-white/40">{platform} ADS</h3>
         <span className="text-sm text-gray-500 dark:text-gray-400">
           {metrics.length} campaign{metrics.length !== 1 ? 's' : ''}
         </span>
