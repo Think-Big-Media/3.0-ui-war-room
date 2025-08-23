@@ -92,7 +92,7 @@ const SettingsPage: React.FC = () => {
   logger.debug('Settings rendered successfully');
 
   // Diagnostic: Log standardized style guide implementation
-  console.log('🎯 STANDARDIZED Style Guide: pb-5 spacing, icons +2px down + 10px indent, inputs 70% transparent + gray text, sub-descriptions 60% opacity + 3px up, primary buttons implemented, autosave enabled (SITE-WIDE)');
+  console.log('🎯 STANDARDIZED Style Guide: pb-5 spacing, icons +2px down + 10px indent, inputs 70% transparent + gray text, sub-descriptions 60% opacity + 3px up, buttons text-centered + icons aligned + semantic icons, autosave enabled (SITE-WIDE)');
 
   // Diagnostics: track integrations section visibility on mount
   const integrationsRef = useRef<HTMLDivElement | null>(null);

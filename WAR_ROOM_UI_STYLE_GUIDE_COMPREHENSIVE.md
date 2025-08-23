@@ -29,9 +29,16 @@
 - **Primary Buttons**: Large important actions (`btn-primary-alert`, `btn-primary-action`, `btn-primary-neutral`)
   - Use for: Settings actions, main CTA buttons, destructive actions
   - Size: `px-6 py-3` with `text-base`
+  - Text: Always centered (`text-center`)
 - **Secondary Buttons**: Smaller inline actions (`btn-secondary-alert`, `btn-secondary-action`, `btn-secondary-neutral`)
   - Use for: Quick actions, toolbar buttons, supporting actions
   - Size: `px-3 py-0.5` with `text-sm`
+  - Text: Always centered (`text-center`)
+
+### Button Icon Standards
+- **Icons**: Always use semantic icons (Link for connecting, not ExternalLink)
+- **Alignment**: Icons automatically positioned 2px up for proper text alignment
+- **Connection Icons**: Use `Link` icon for connect actions, not `ExternalLink`
 
 ## Layout & Spacing
 
@@ -85,16 +92,31 @@
 
 /* Primary Button Styles - Bigger versions of secondary buttons */
 .btn-primary-alert {
-  @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase;
+  @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase text-center;
 }
 
 .btn-primary-action {
-  @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase;
+  @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase text-center;
 }
 
 .btn-primary-neutral {
-  @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase;
+  @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase text-center;
 }
+
+/* Secondary Button Styles - Text centered, icons aligned */
+.btn-secondary-alert {
+  @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap text-center;
+}
+
+.btn-secondary-action {
+  @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap text-center;
+}
+
+.btn-secondary-neutral {
+  @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap text-center;
+}
+
+/* All button icons automatically aligned 2px up for proper text alignment */
 ```
 
 ## Implementation Standards (SITE-WIDE STANDARDIZATION)

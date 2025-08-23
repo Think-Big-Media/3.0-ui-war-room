@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Check,
   X,
-  ExternalLink,
+  Link,
   Shield,
   BarChart3,
   TrendingUp,
@@ -256,7 +256,7 @@ const GoogleAdsIntegration: React.FC = () => {
               </>
             ) : (
               <>
-                <ExternalLink className="w-5 h-5" />
+                <Link className="w-5 h-5" />
                 <span>Connect to Google Ads</span>
               </>
             )}
