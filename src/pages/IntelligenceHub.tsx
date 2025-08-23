@@ -240,14 +240,19 @@ const IntelligenceHub: React.FC = () => {
               <label className="block text-sm font-medium text-white/80 mb-0.5 ml-1.5">
                 Category
               </label>
-              <select className="w-full bg-black/20 border border-white/30 rounded-lg px-3 py-1.5 text-sm text-white">
-                <option>Auto-detect</option>
-                <option>Polling</option>
-                <option>Field Reports</option>
-                <option>Opposition Research</option>
-                <option>Messaging Assets</option>
-                <option>News & Media</option>
-              </select>
+              <CustomDropdown
+                value="auto-detect"
+                onChange={(value) => console.log('Category changed:', value)}
+                options={[
+                  { value: 'auto-detect', label: 'Auto-detect' },
+                  { value: 'polling', label: 'Polling' },
+                  { value: 'field-reports', label: 'Field Reports' },
+                  { value: 'opposition-research', label: 'Opposition Research' },
+                  { value: 'messaging-assets', label: 'Messaging Assets' },
+                  { value: 'news-media', label: 'News & Media' }
+                ]}
+                className="w-full"
+              />
             </div>
             <div>
               <label className="block text-sm font-medium text-white/80 mb-0.5 ml-1.5">
