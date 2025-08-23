@@ -148,7 +148,7 @@ const SettingsPage: React.FC = () => {
         <SettingsSection title="Profile Settings" icon={User} delay={0.1}>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-white/75 mb-2">
+              <label className="block text-sm font-medium text-white/75 mb-0.5 ml-1.5">
                 Display Name
               </label>
               <input
@@ -158,7 +158,7 @@ const SettingsPage: React.FC = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/75 mb-2">
+              <label className="block text-sm font-medium text-white/75 mb-0.5 ml-1.5">
                 Email Address
               </label>
               <input
@@ -168,7 +168,7 @@ const SettingsPage: React.FC = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/75 mb-2">
+              <label className="block text-sm font-medium text-white/75 mb-0.5 ml-1.5">
                 Company Name
               </label>
               <input
@@ -238,7 +238,7 @@ const SettingsPage: React.FC = () => {
         <SettingsSection title="Appearance" icon={Palette} delay={0.3}>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-white/75 mb-2">
+              <label className="block text-sm font-medium text-white/75 mb-0.5 ml-1.5">
                 Theme
               </label>
               <select className="w-full bg-white/95 rounded-2xl px-4 py-3 border border-slate-200 text-slate-800 focus:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-400/20 transition-all duration-300 appearance-none cursor-pointer">
@@ -263,7 +263,7 @@ const SettingsPage: React.FC = () => {
               <ToggleSwitch enabled={darkMode} onChange={setDarkMode} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/75 mb-2">
+              <label className="block text-sm font-medium text-white/75 mb-0.5 ml-1.5">
                 Language
               </label>
               <select className="w-full bg-white/95 rounded-2xl px-4 py-3 border border-slate-200 text-slate-800 focus:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-400/20 transition-all duration-300 appearance-none cursor-pointer">
@@ -340,7 +340,7 @@ const SettingsPage: React.FC = () => {
         <SettingsSection title="Regional" icon={Globe} delay={0.6}>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-white/75 mb-2">
+              <label className="block text-sm font-medium text-white/75 mb-0.5 ml-1.5">
                 Timezone
               </label>
               <select className="w-full bg-white/95 rounded-2xl px-4 py-3 border border-slate-200 text-slate-800 focus:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-400/20 transition-all duration-300 appearance-none cursor-pointer">
@@ -352,7 +352,7 @@ const SettingsPage: React.FC = () => {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/75 mb-2">
+              <label className="block text-sm font-medium text-white/75 mb-0.5 ml-1.5">
                 Date Format
               </label>
               <select className="w-full bg-white/95 rounded-2xl px-4 py-3 border border-slate-200 text-slate-800 focus:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-400/20 transition-all duration-300 appearance-none cursor-pointer">
