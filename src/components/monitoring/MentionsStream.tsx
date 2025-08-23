@@ -158,13 +158,13 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
               <div className="flex items-center space-x-2">
                 <button
                   onClick={() => handleAddToAlert(mention)}
-                  className="text-xs text-blue-400 hover:text-blue-300 font-mono"
+                  className="btn-secondary-action"
                 >
                   Add to Alert
                 </button>
                 <button
                   onClick={() => handleGenerateResponse(mention)}
-                  className="text-xs text-white/70 hover:text-white font-mono"
+                  className="btn-secondary-neutral"
                 >
                   Generate Response
                 </button>

@@ -69,16 +69,16 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
               <span>{topic.region}</span>
               <span>Last {topic.timeframe}</span>
             </div>
-            <div className="flex items-center space-x-2 mt-2">
+            <div className="flex items-center space-x-2 mt-3">
               <button
                 onClick={() => handleViewMentions(topic)}
-                className="text-xs text-blue-400 hover:text-blue-300 font-mono"
+                className="btn-secondary-action"
               >
                 View mentions
               </button>
               <button
                 onClick={() => handleDraftResponse(topic)}
-                className="text-xs text-white/70 hover:text-white font-mono"
+                className="btn-secondary-neutral"
               >
                 Draft response
               </button>
