@@ -139,7 +139,7 @@ const SettingsPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Profile Settings */}
         <SettingsSection title="Profile Settings" icon={User} delay={0.1}>
-          <div className="space-y-4">
+          <div className="space-y-4 pb-16">
             <div>
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Display Name
@@ -175,7 +175,7 @@ const SettingsPage: React.FC = () => {
 
         {/* Notification Settings */}
         <SettingsSection title="Notifications" icon={Bell} delay={0.2}>
-          <div className="space-y-4">
+          <div className="space-y-4 pb-16">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-white/75" />
@@ -229,7 +229,7 @@ const SettingsPage: React.FC = () => {
 
         {/* Appearance Settings */}
         <SettingsSection title="Appearance" icon={Palette} delay={0.3}>
-          <div className="space-y-4">
+          <div className="space-y-4 pb-16">
             <div>
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Theme
@@ -276,7 +276,7 @@ const SettingsPage: React.FC = () => {
 
         {/* Security Settings */}
         <SettingsSection title="Security" icon={Shield} delay={0.4}>
-          <div className="space-y-4">
+          <div className="space-y-4 pb-16">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <Key className="w-5 h-5 text-white/75" />
@@ -306,7 +306,7 @@ const SettingsPage: React.FC = () => {
 
         {/* Data & Privacy */}
         <SettingsSection title="Data & Privacy" icon={Database} delay={0.5}>
-          <div className="space-y-4">
+          <div className="space-y-4 pb-16">
             <div className="flex items-center justify-between">
               <div className="ml-1.5">
                 <p className="text-white/90 font-medium">Data Sharing</p>
@@ -331,7 +331,7 @@ const SettingsPage: React.FC = () => {
 
         {/* Regional Settings */}
         <SettingsSection title="Regional" icon={Globe} delay={0.6}>
-          <div className="space-y-4">
+          <div className="space-y-4 pb-16">
             <div>
               <label className="block text-sm font-medium text-white/75 mb-1 ml-1.5">
                 Timezone
