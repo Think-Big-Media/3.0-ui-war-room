@@ -176,7 +176,7 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
       />
 
       {/* Activity Feed */}
-      <div ref={feedRef} className="space-y-3 max-h-[600px] overflow-y-auto pr-2 scroll-fade scroll-fade-subtle">
+      <div ref={feedRef} className="space-y-3 max-h-[600px] overflow-y-auto pr-2 scroll-fade-subtle">
         {filteredActivities.map((activity: ActivityEvent) => {
           const Icon = getActivityIcon(activity.type);
           const colorClass = getActivityColor(activity.type, activity.severity);

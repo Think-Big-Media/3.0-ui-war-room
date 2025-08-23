@@ -256,7 +256,7 @@ export const AlertCenter: React.FC = memo(() => {
       </div>
 
       {/* Alert list */}
-      <div className="max-h-96 overflow-y-auto scroll-fade scroll-fade-subtle">
+      <div className="max-h-96 overflow-y-auto scroll-fade-subtle">
         <AnimatePresence mode="popLayout">
           {filteredAlerts.length === 0 ? (
             <motion.div

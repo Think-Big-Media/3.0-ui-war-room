@@ -261,7 +261,7 @@ const InformationCenter: React.FC = () => {
               </button>
             </div>
 
-            <div className="space-y-4 max-h-96 overflow-y-auto scroll-fade scroll-fade-glass">
+            <div className="space-y-4 max-h-96 overflow-y-auto scroll-fade">
               {items.slice(0, 20).map((item) => {
                 const IconComponent = getIcon(item);
                 return (
