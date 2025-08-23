@@ -306,13 +306,13 @@ const InformationCenter: React.FC = () => {
                         <p className="text-white/70 text-sm mb-2">
                           {item.text}
                         </p>
-                        <div className="flex items-center space-x-4 text-xs text-white/60">
+                        <div className="flex items-center space-x-4 text-xs text-white/60 font-mono uppercase">
                           <span>{formatTimestamp(item.timestamp)}</span>
-                          <span className="capitalize">
+                          <span>
                             {item.category.replace('-', ' ')}
                           </span>
                           {item.actionable && (
-                            <span className="text-green-400">• Actionable</span>
+                            <span className="text-green-400">• ACTIONABLE</span>
                           )}
                         </div>
                       </div>

@@ -33,7 +33,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ projects, onProjectSelect }) 
         return (
           <div key={status} className="space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-white/95 capitalize">
+              <h3 className="text-lg font-semibold text-white/40 uppercase font-condensed tracking-wide">
                 {getStatusLabel(status)}
               </h3>
               <span className="bg-white/20 text-white/80 px-2 py-1 rounded-full text-sm">
