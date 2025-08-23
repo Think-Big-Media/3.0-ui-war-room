@@ -68,11 +68,11 @@
 ### CSS Utilities
 ```css
 .war-room-input {
-  @apply w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300;
+  @apply w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300;
 }
 
 .war-room-select {
-  @apply w-full bg-white/95 rounded-xl px-4 py-2.5 border border-slate-200 text-slate-800 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer;
+  @apply w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer;
 }
 
 .war-room-subheading {
@@ -81,6 +81,19 @@
 
 .space-with-bottom {
   @apply pb-5;
+}
+
+/* Primary Button Styles - Bigger versions of secondary buttons */
+.btn-primary-alert {
+  @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase;
+}
+
+.btn-primary-action {
+  @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase;
+}
+
+.btn-primary-neutral {
+  @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase;
 }
 ```
 
