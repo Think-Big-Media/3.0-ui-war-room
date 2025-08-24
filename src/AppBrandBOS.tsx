@@ -38,7 +38,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
         {/* Ticker runs independently at app level */}
-        <TickerTape />
+        <TickerTapeSimple />
       </ErrorBoundary>
     </Router>
   );
