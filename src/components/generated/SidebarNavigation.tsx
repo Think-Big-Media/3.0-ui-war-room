@@ -108,6 +108,7 @@ const TopNavigation: React.FC = () => {
       route: 'intelligence',
       active: location.pathname === '/intelligence-hub',
       theme: getSectionTheme('/intelligence-hub'),
+      accent: 'var(--accent-intelligence)',
     },
     {
       icon: Bell,
@@ -116,6 +117,7 @@ const TopNavigation: React.FC = () => {
       route: 'alert-center',
       active: location.pathname === '/alert-center',
       theme: getSectionTheme('/alert-center'),
+      accent: 'var(--accent-alert-center)',
     },
     {
       icon: Settings,
@@ -124,6 +126,7 @@ const TopNavigation: React.FC = () => {
       route: 'settings',
       active: location.pathname === '/settings',
       theme: getSectionTheme('/settings'),
+      accent: 'var(--accent-settings)',
     },
   ];
 
