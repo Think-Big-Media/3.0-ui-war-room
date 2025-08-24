@@ -323,18 +323,8 @@ const CampaignOperationsHub: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4">
         {/* Active Projects */}
         <div className="space-y-2 lg:space-y-3">
-          <h4
-            className="text-lg lg:text-xl text-white/40 mb-3 uppercase font-condensed tracking-wide ml-2"
-            style={{
-              font: '300 21px/29px "Barlow Condensed", sans-serif',
-              textRendering: 'optimizeLegibility',
-              WebkitFontSmoothing: 'antialiased',
-              MozOsxFontSmoothing: 'grayscale',
-              fontKerning: 'normal',
-              textSizeAdjust: '100%',
-            }}
-          >
-            Active Projects
+          <h4 className="text-lg lg:text-xl font-medium text-white/40 mb-3 uppercase font-condensed tracking-wide ml-2">
+            ACTIVE PROJECTS
           </h4>
           <div className="space-y-2 lg:space-y-3">
             {activeProjects.map((cluster, index) => (
