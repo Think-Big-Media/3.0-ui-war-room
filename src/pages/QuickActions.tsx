@@ -86,17 +86,16 @@ const QuickActions: React.FC = () => {
         {actions.map((action, index) => (
           <motion.button
             key={index}
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ y: -2 }}
             whileTap={{ scale: 0.95 }}
-            className={`${action.bgColor} backdrop-blur-sm rounded-xl p-4 lg:p-5 border ${action.borderColor} ${action.hoverBorderColor} hover:bg-black/25 ${action.hoverShadowColor} transition-all duration-300 flex flex-col items-center space-y-2`}
+            className="bg-black/20 backdrop-blur-sm rounded-xl p-4 lg:p-5 border border-white/20 hover:bg-black/25 hoverable transition-all duration-300 flex flex-col items-center space-y-2"
+            style={{
+              '--page-accent': action.accentColor,
+            } as React.CSSProperties}
           >
             <action.icon
-              className={`w-6 h-6 lg:w-8 lg:h-8 ${action.color}`}
-              style={
-                action.label === 'Live Monitor'
-                  ? { color: 'rgba(126, 211, 33, 1)' }
-                  : {}
-              }
+              className="w-6 h-6 lg:w-8 lg:h-8"
+              style={{ color: action.accentColor }}
             />
             <span className="content-title text-white/90">{action.label}</span>
           </motion.button>
