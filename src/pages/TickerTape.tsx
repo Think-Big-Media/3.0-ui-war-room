@@ -188,7 +188,7 @@ const TickerTape: React.FC = () => {
                   )}
                 </div>
               );
-            },
+            }
           )}
         </div>
       </div>

@@ -118,7 +118,11 @@ const TickerTape: React.FC = () => {
   };
 
   // Render individual ticker item
-  const renderTickerItem = (item: InformationItem, index: number, keyPrefix: string) => {
+  const renderTickerItem = (
+    item: InformationItem,
+    index: number,
+    keyPrefix: string
+  ) => {
     const IconComponent = getIcon(item);
     return (
       <div
@@ -153,7 +157,9 @@ const TickerTape: React.FC = () => {
   if (tickerItems.length === 0) {
     return (
       <div className="fixed bottom-0 left-0 right-0 z-40 bg-black/90 border-t border-white/20 h-12 flex items-center justify-center">
-        <span className="text-white/50 text-sm font-mono">Loading ticker...</span>
+        <span className="text-white/50 text-sm font-mono">
+          Loading ticker...
+        </span>
       </div>
     );
   }
@@ -207,16 +213,20 @@ const TickerTape: React.FC = () => {
           flex-shrink: 0;
         }
       `}</style>
-      
+
       <div className="ticker-track">
         {/* First copy of content */}
         <div className="ticker-content">
-          {tickerItems.map((item, index) => renderTickerItem(item, index, 'first'))}
+          {tickerItems.map((item, index) =>
+            renderTickerItem(item, index, 'first')
+          )}
         </div>
-        
+
         {/* Second copy for seamless loop - positioned immediately after first */}
         <div className="ticker-content">
-          {tickerItems.map((item, index) => renderTickerItem(item, index, 'second'))}
+          {tickerItems.map((item, index) =>
+            renderTickerItem(item, index, 'second')
+          )}
         </div>
       </div>
 
