@@ -464,7 +464,7 @@ All settings page toggle items (notifications, security, appearance, privacy) us
 ```tsx
 <div className="flex items-start justify-between">
   <div className="flex items-start space-x-3 ml-2.5">
-    <Icon className="w-5 h-5 text-white/75 mt-0.5" />
+    <Icon className="w-5 h-5 text-white/75" />
     <div className="ml-1.5">
       <p className="content-title">Setting Name</p>
       <p className="content-subtitle">Setting description</p>
@@ -478,11 +478,13 @@ All settings page toggle items (notifications, security, appearance, privacy) us
 
 ### Implementation Rules
 
-- **Typography**: Main text uses `.content-title` (Barlow Semi-Condensed Bold), descriptions use `.content-subtitle` (Barlow Semi-Condensed)
+- **Typography**:
+  - Main text uses `.content-title` (Barlow Semi-Condensed Bold, 15px/17px desktop, 95% opacity)
+  - Descriptions use `.content-subtitle` (Barlow Condensed, 50% opacity, 8px top margin for proper spacing)
 - **Icon Spacing**: Container uses `ml-2.5` (10px), text container uses `ml-1.5` (6px)
-- **Icon Styling**: `w-5 h-5` size, `text-white/75` color, `mt-0.5` positioning for alignment
+- **Icon Styling**: `w-5 h-5` size, `text-white/75` color, aligned with title text (no mt-0.5)
 - **Toggle Alignment**: `mt-1` for vertical alignment with text
-- **Icon Selection**: Use semantic icons (Mail for email, Shield for security, Palette for appearance, etc.)
+- **Icon Selection**: Use semantic icons (Mail for email, Shield for security, Moon for dark mode, etc.)
 
 ### Applied To
 
