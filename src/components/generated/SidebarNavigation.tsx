@@ -81,6 +81,7 @@ const TopNavigation: React.FC = () => {
       route: 'dashboard',
       active: location.pathname === '/',
       theme: getSectionTheme('/'),
+      accent: 'var(--accent-dashboard)',
     },
     {
       icon: BarChart3,
@@ -89,6 +90,7 @@ const TopNavigation: React.FC = () => {
       route: 'live-monitoring',
       active: location.pathname === '/real-time-monitoring',
       theme: getSectionTheme('/real-time-monitoring'),
+      accent: 'var(--accent-live-monitoring)',
     },
     {
       icon: Target,
@@ -97,6 +99,7 @@ const TopNavigation: React.FC = () => {
       route: 'war-room',
       active: location.pathname === '/campaign-control',
       theme: getSectionTheme('/campaign-control'),
+      accent: 'var(--accent-war-room)',
     },
     {
       icon: Brain,
