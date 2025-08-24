@@ -2,14 +2,16 @@
 
 This document defines the comprehensive styling standards for the War Room application, established through iterative refinement of the monitoring components and extended site-wide.
 
-## Typography Hierarchy (Inter Eliminated)
+## Typography Hierarchy (2025 Update)
 
-### NEW Font Stack - War Room 2025
+### Refined Font Stack - War Room 2025
 
-- **Headers & Titles**: Barlow Condensed (all headings, titles, major labels)
-- **Numbers & Metrics**: Barlow 600 Semi-Condensed (dollars, percentages, counts)
-- **Secondary Labels**: JetBrains Mono (status indicators, metadata, technical labels)
-- **Body Content**: Barlow Regular (paragraph text, descriptions)
+- **Major Section Headers**: Barlow Condensed 600 (Campaign Operations, Quick Actions, Intelligence Dashboard)
+- **Numbers & Metrics**: Barlow Condensed 400 (dollars, percentages, counts, statistics)
+- **Content Titles**: Barlow Semi-Condensed Bold (Crisis Response Protocol, Alert Response)
+- **Content Subtitles**: Barlow Semi-Condensed (Active crisis detections, Meta + Google Ads)
+- **Status Indicators**: JetBrains Mono Uppercase (Live, Active, Ready, Today)
+- **Footer Text**: JetBrains Mono Uppercase (Last updated, Quick access to key features)
 
 ### Configuration
 
@@ -23,29 +25,80 @@ fontFamily: {
 }
 ```
 
-### Google Fonts Import
+### Site-wide Typography Classes
 
 ```css
 /* src/index.css */
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* Section Header - Major headings across the site */
+.section-header {
+  @apply text-white/50 uppercase;
+  font: 600 20px/29px "Barlow Condensed", sans-serif;
+}
+
+/* Content Typography Classes */
+.content-subtitle {
+  @apply text-xs lg:text-sm text-white/75 leading-relaxed;
+  font-family: "Barlow Semi Condensed", sans-serif;
+}
+
+.content-title {
+  @apply font-bold text-white/95 text-xs lg:text-sm;
+  font-family: "Barlow Semi Condensed", sans-serif;
+  line-height: 16px;
+}
+
+.status-indicator {
+  @apply text-xs font-mono uppercase;
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* Footer text - always uppercase JetBrains Mono */
+.footer-text {
+  @apply text-xs font-mono uppercase;
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* Color-coded status indicators */
+.status-active {
+  @apply text-green-400;
+}
+
+.status-running {
+  @apply text-blue-400;
+}
+
+.status-planning {
+  @apply text-yellow-400;
+}
 ```
 
-### CSS Utility Classes
+### Typography Usage Examples
 
-```css
-/* Numbers & Metrics */
-.font-numbers {
-  font-family: 'Barlow Semi Condensed', sans-serif;
-  font-weight: 600;
-}
+```tsx
+// Major section headers
+<h3 className="section-header">
+  Campaign Operations
+</h3>
 
-/* Secondary Labels (Status, Metadata) */
-.font-labels {
-  font-family: 'JetBrains Mono', monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 500;
-}
+// Content subtitles (descriptions, metadata)
+<p className="content-subtitle">
+  Active crisis detections
+</p>
+
+// Content titles (project names, template names)
+<h5 className="content-title">
+  Crisis Response Protocol
+</h5>
+
+// Status indicators with semantic colors
+<span className="status-indicator status-active">Live</span>
+<span className="status-indicator status-running">Today</span>
+<span className="status-indicator status-planning">Next Week</span>
+
+// Footer text
+<span className="footer-text text-white/75">Last updated</span>
+<span className="footer-text text-white/90">30 seconds ago</span>
 ```
 
 ## Sub-header Styling Standards
