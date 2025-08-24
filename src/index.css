@@ -177,6 +177,55 @@
 
 /* Custom component styles */
 @layer components {
+  /* Page-accent theming CSS variables */
+  .page-dashboard {
+    --page-accent: #6366f1; /* indigo-500 */
+  }
+
+  .page-monitoring {
+    --page-accent: #22c55e; /* green-500 */
+  }
+
+  .page-warroom {
+    --page-accent: #ef4444; /* red-500 */
+  }
+
+  .page-intelligence {
+    --page-accent: #3b82f6; /* blue-500 */
+  }
+
+  .page-alerts {
+    --page-accent: #f59e0b; /* amber-500 */
+  }
+
+  .page-settings {
+    --page-accent: #a855f7; /* purple-500 */
+  }
+
+  /* Navigation active state classes using CSS variables */
+  .nav-active-bg {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-active-icon {
+    color: var(--page-accent);
+  }
+
+  /* Hoverable border system - replaces transform/scale with border-color changes */
+  .hoverable {
+    @apply transition-all duration-200 ease-out;
+    transition-property: border-color, background-color;
+  }
+
+  .hoverable:hover {
+    border-color: var(--page-accent);
+  }
+
+  /* Targeted word spacing for specific nav labels */
+  .nav-label {
+    word-spacing: 0.15em;
+  }
+
   /* Card titles should use Inter for content readability */
   .card-title {
     @apply font-sans font-semibold text-lg;
