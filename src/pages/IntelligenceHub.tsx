@@ -236,7 +236,7 @@ const IntelligenceHub: React.FC = () => {
           padding="md"
           className="mb-6"
         >
-          <h3 className="text-lg font-semibold text-white/95 mb-4">
+          <h3 className="text-lg font-semibold font-condensed text-white/95 mb-4">
             Upload Intelligence
           </h3>
 

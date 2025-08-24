@@ -252,7 +252,7 @@ const InformationCenter: React.FC = () => {
           {/* Live Stream Items */}
           <Card padding="md" variant="glass">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-white/95">
+              <h3 className="text-lg font-semibold font-condensed text-white/95">
                 Live Stream
               </h3>
               <button
