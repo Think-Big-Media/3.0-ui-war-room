@@ -312,7 +312,7 @@
 
   /* Global button letter spacing - ensure all buttons have reduced spacing */
   button {
-    letter-spacing: -0.05em;
+    letter-spacing: -0.05em !important;
   }
 
   /* Form input style */
