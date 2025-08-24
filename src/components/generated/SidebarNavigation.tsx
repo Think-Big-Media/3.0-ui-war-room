@@ -368,14 +368,14 @@ const TopNavigation: React.FC = () => {
                   aria-current={item.active ? 'page' : undefined}
                 >
                   <item.icon
-                    className={`w-5 h-5 ${
+                    className={`icon w-5 h-5 ${
                       item.active
                         ? getNavIconActiveClasses(item.theme)
                         : getNavIconHoverClasses(item.theme)
                     }`}
                   />
                   <span
-                    className={`text-lg ${item.active ? 'text-white font-semibold' : getNavHoverClasses(item.theme)} ${
+                    className={`label text-lg ${item.active ? 'text-white font-semibold' : getNavHoverClasses(item.theme)} ${
                       ['LIVE MONITORING', 'WAR ROOM', 'ALERT CENTER'].includes(
                         item.label
                       )
