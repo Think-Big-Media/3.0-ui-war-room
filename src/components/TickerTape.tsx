@@ -140,10 +140,6 @@ const TickerTape: React.FC = () => {
         minHeight: '48px'
       }}
     >
-      {/* DIAGNOSTIC INDICATOR - Visible proof component is mounting */}
-      <div className="absolute top-0 right-0 bg-red-500 text-white px-2 py-1 text-xs z-50">
-        TICKER: {tickerItems.length} items
-      </div>
 
       <div className="h-12 flex items-center">
         <style>{`
