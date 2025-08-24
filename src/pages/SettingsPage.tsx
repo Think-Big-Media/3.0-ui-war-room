@@ -146,12 +146,13 @@ const SettingsPage: React.FC = () => {
   ];
 
   return (
-    <PageLayout pageTitle="Settings" placeholder="Ask about settings...">
-      {/* Slate/Gray gradient background with fire accents */}
-      <div
-        className={`fixed inset-0 bg-gradient-to-br ${pageGradients.settings} -z-10`}
-      />
-      <div className={`fixed inset-0 ${fireAccentOverlay} -z-10`} />
+    <div className="page-settings">
+      <PageLayout pageTitle="Settings" placeholder="Ask about settings...">
+        {/* Slate/Gray gradient background with fire accents */}
+        <div
+          className={`fixed inset-0 bg-gradient-to-br ${pageGradients.settings} -z-10`}
+        />
+        <div className={`fixed inset-0 ${fireAccentOverlay} -z-10`} />
       <div />
 
       {/* Settings Grid */}
@@ -492,8 +493,9 @@ const SettingsPage: React.FC = () => {
         </Card>
       </motion.div>
 
-      {/* Autosave - no manual save button needed */}
-    </PageLayout>
+        {/* Autosave - no manual save button needed */}
+      </PageLayout>
+    </div>
   );
 };
 
