@@ -79,7 +79,7 @@ const QuickActions: React.FC = () => {
   ];
 
   return (
-    <motion.div
+    <Card
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.4 }}
@@ -87,9 +87,9 @@ const QuickActions: React.FC = () => {
         y: -2,
         transition: { duration: 0.2 },
       }}
-      className="bg-black/15 backdrop-blur-lg rounded-2xl p-4 lg:p-6 hover:bg-black/20 hover:border-orange-500/40 transition-all duration-300 group"
-      style={{ border: '1px solid rgba(255, 255, 255, 0.3)' }}
-      style={{ boxShadow: perfectCardShadow }}
+      className="group hover:border-orange-400/50 hover:bg-black/25"
+      padding="md"
+      variant="glass"
     >
       <div className="flex items-start justify-between mb-4 lg:mb-6">
         <div className="flex items-center space-x-3">
@@ -127,7 +127,7 @@ const QuickActions: React.FC = () => {
           <span className="text-white/90" style={{ fontFamily: "JetBrains Mono, monospace", backgroundColor: "rgba(126, 211, 33, 1)" }}><span style={{ color: "rgba(126, 211, 33, 1)" }}>READY</span></span>
         </div>
       </div>
-    </motion.div>
+    </Card>
   );
 };
 
