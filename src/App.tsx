@@ -44,6 +44,7 @@ const DocumentIntelligence = React.lazy(
 
 // Lazy load other heavy components
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
+const CommandCenter = React.lazy(() => import('./pages/CommandCenter'));
 const DebugDashboard = React.lazy(() => import('./pages/DebugDashboard'));
 
 // Import light components normally
@@ -318,6 +319,18 @@ function App() {
               fallback={<LazyLoadFallback componentName="Dashboard" />}
             >
               <Dashboard />
+            </React.Suspense>
+          }
+        />
+
+        {/* CommandCenter Route */}
+        <Route
+          path="/CommandCenter"
+          element={
+            <React.Suspense
+              fallback={<LazyLoadFallback componentName="CommandCenter" />}
+            >
+              <CommandCenter />
             </React.Suspense>
           }
         />
