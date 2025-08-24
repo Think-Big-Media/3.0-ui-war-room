@@ -328,6 +328,41 @@
     color: var(--page-accent);
   }
 
+  /* File type icons using design tokens */
+  .file-icon-intelligence {
+    color: var(--accent-intelligence);
+  }
+
+  .file-icon-monitoring {
+    color: var(--accent-live-monitoring);
+  }
+
+  .file-icon-warroom {
+    color: var(--accent-war-room);
+  }
+
+  .file-icon-settings {
+    color: var(--accent-settings);
+  }
+
+  .file-icon-alerts {
+    color: var(--accent-alert-center);
+  }
+
+  /* Chat elements using page accent */
+  .chat-icon {
+    color: var(--page-accent);
+  }
+
+  .chat-button {
+    color: var(--page-accent);
+    @apply transition-colors duration-200;
+  }
+
+  .chat-button:hover {
+    opacity: 0.7;
+  }
+
   /* Card titles should use Inter for content readability */
   .card-title {
     @apply font-sans font-semibold text-lg;
