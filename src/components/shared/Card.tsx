@@ -20,12 +20,12 @@ const Card: React.FC<CardProps> = ({
   children,
   ...props
 }) => {
-  const baseStyles = 'rounded-2xl transition-all duration-300';
+  const baseStyles = 'rounded-2xl transition-colors duration-200';
 
   const variantStyles = {
-    glass: 'bg-black/15 backdrop-blur-lg border border-white/20',
-    solid: 'bg-white/10 backdrop-blur-md',
-    elevated: 'bg-black/20 backdrop-blur-xl shadow-2xl',
+    glass: 'bg-black/15 border border-white/20',
+    solid: 'bg-white/10',
+    elevated: 'bg-black/20 shadow-lg',
     bordered: 'bg-transparent border-2 border-white/30',
   };
 
@@ -38,7 +38,7 @@ const Card: React.FC<CardProps> = ({
   };
 
   const hoverStyles = hover
-    ? 'hover:bg-black/25 hover:border-orange-400/50'
+    ? 'hover:bg-black/25 hover:border-orange-400/50 transform hover:scale-[1.01] will-change-transform'
     : '';
 
   // Box shadow for glass effect (unless disabled)
@@ -56,7 +56,7 @@ const Card: React.FC<CardProps> = ({
         className
       )}
       style={boxShadow ? { boxShadow } : {}}
-      {...(hover ? ANIMATION_CONFIGS.card : {})}
+      {...(hover ? { transition: { duration: 0.15 } } : {})}
       {...props}
     >
       {children}
