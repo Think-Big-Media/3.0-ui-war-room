@@ -26,7 +26,9 @@ import { informationService } from '../services/informationService';
 import { type InformationItem } from '../types/information';
 
 const TickerTape: React.FC = () => {
+  console.log('🎫 TICKER: Component function executing');
   const [tickerItems, setTickerItems] = useState<InformationItem[]>([]);
+  console.log('🎫 TICKER: Current tickerItems:', tickerItems.length, tickerItems);
   const navigate = useNavigate();
 
   // Icon mapping for information items
