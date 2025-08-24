@@ -102,7 +102,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
         <div className="text-2xl lg:text-3xl font-bold text-white/95">
           {number}
         </div>
-        <h3 className="text-base lg:text-lg font-semibold text-white/90">
+        <h3 className="section-header">
           {title}
         </h3>
         <p className="text-xs lg:text-sm text-white/75 leading-relaxed">
@@ -189,7 +189,7 @@ const IntelligenceDashboard: React.FC = () => {
           <div className="p-2 lg:p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-purple-400/20 group-hover:border-orange-400/30 transition-all duration-300">
             <Target className="w-5 h-5 lg:w-6 lg:h-6 text-white/95" />
           </div>
-          <h3 className="text-lg lg:text-xl font-semibold text-white/95">
+          <h3 className="text-xl lg:text-2xl section-header">
             Intelligence Dashboard
           </h3>
         </div>
@@ -326,8 +326,8 @@ const CampaignOperationsHub: React.FC = () => {
           <div className="p-2 lg:p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-purple-400/20 group-hover:border-orange-400/30 transition-all duration-300">
             <Target className="w-5 h-5 lg:w-6 lg:h-6 text-white/95" />
           </div>
-          <h3 className="text-lg lg:text-xl font-semibold text-white/95">
-            Campaign Operations Hub
+          <h3 className="text-xl lg:text-2xl section-header">
+            Campaign Operations
           </h3>
         </div>
       </div>
