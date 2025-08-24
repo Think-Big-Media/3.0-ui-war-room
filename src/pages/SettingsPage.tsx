@@ -16,6 +16,8 @@ import {
   Mail,
   Smartphone,
   Link2,
+  Moon,
+  Share2,
 } from 'lucide-react';
 import { pageGradients, fireAccentOverlay } from '../lib/utils';
 import Card from '../components/shared/Card';
