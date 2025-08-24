@@ -148,19 +148,6 @@ const TickerTape: React.FC = () => {
     }
   };
 
-  console.log('🎫 TICKER: About to render. Items length:', tickerItems.length);
-
-  // ALWAYS render something to test if component mounts
-  if (tickerItems.length === 0) {
-    console.log('🎫 TICKER: No items - rendering fallback');
-    return (
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-red-500 border-t border-white/20 h-12 flex items-center justify-center">
-        <span className="text-white font-mono text-sm">🎫 TICKER LOADING (NO DATA)</span>
-      </div>
-    );
-  }
-
-  console.log('🎫 TICKER: Rendering with', tickerItems.length, 'items');
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 bg-black/90 border-t border-white/20 overflow-hidden contain-layout">
