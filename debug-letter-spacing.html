@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Spacing Debug</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+        
+        /* Our button classes */
+        .btn-secondary-action {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: rgb(59 130 246 / 0.2);
+            color: rgb(96 165 250);
+            padding: 0.125rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            white-space: nowrap;
+            letter-spacing: -0.05em;
+        }
+        
+        /* Test with higher specificity */
+        .btn-secondary-action.force-spacing {
+            letter-spacing: -0.05em !important;
+        }
+        
+        /* Global button rule */
+        button {
+            letter-spacing: -0.05em;
+        }
+        
+        /* Test very specific override */
+        button.btn-secondary-action {
+            letter-spacing: -0.05em !important;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 p-8">
+    <h1 class="text-white text-2xl mb-8">Letter Spacing Debug Test</h1>
+    
+    <!-- Test 1: Our button class only -->
+    <div class="mb-8">
+        <h2 class="text-white text-lg mb-4">Test 1: Our Button Class Only</h2>
+        <button class="btn-secondary-action">Add to Alert</button>
+        <button class="btn-secondary-action">Generate Response</button>
+        <button class="btn-secondary-action">View Mentions</button>
+    </div>
+    
+    <!-- Test 2: With Tailwind classes (like our real buttons) -->
+    <div class="mb-8">
+        <h2 class="text-white text-lg mb-4">Test 2: With Tailwind Classes (Real World)</h2>
+        <button class="btn-secondary-action bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap text-center">Add to Alert</button>
+        <button class="btn-secondary-action bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap text-center ml-2">Generate Response</button>
+    </div>
+    
+    <!-- Test 3: Force with !important -->
+    <div class="mb-8">
+        <h2 class="text-white text-lg mb-4">Test 3: Force with !important</h2>
+        <button class="btn-secondary-action force-spacing bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap text-center">Add to Alert</button>
+    </div>
+    
+    <!-- Test 4: Inline style -->
+    <div class="mb-8">
+        <h2 class="text-white text-lg mb-4">Test 4: Inline Style</h2>
+        <button 
+            class="bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap text-center"
+            style="letter-spacing: -0.05em; font-family: 'JetBrains Mono', monospace;"
+        >Add to Alert</button>
+    </div>
+
+    <script>
+        // Log computed letter-spacing for each test
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach((button, index) => {
+                const computedStyle = window.getComputedStyle(button);
+                console.log(`Button ${index + 1}:`, {
+                    text: button.textContent,
+                    letterSpacing: computedStyle.letterSpacing,
+                    fontFamily: computedStyle.fontFamily,
+                    fontSize: computedStyle.fontSize,
+                    textTransform: computedStyle.textTransform
+                });
+            });
+        });
+    </script>
+</body>
+</html>
