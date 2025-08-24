@@ -1,8 +1,7 @@
 services:
   # War Room 3.0 UI - React Frontend with Builder.io Integration
-  - type: web
+  - type: static
     name: war-room-3-ui
-    runtime: static
     plan: free
     
     # Build command - Install dependencies and build React app
@@ -11,21 +10,23 @@ services:
     # Static files location after build
     staticPublishPath: ./dist
     
-    # SPA routing - redirect all routes to index.html
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
-    
     # Environment Variables
     envVars:
       - key: NODE_VERSION
-        value: "18.17.0"
+        value: "20.19.0"
+      - key: VITE_BUILDER_IO_KEY
+        value: "8686f311497044c0932b7d2247296478"
       
     # Auto-deploy from GitHub
     repo: https://github.com/Think-Big-Media/3.0-ui-war-room
     branch: main
     autoDeploy: true
+    
+    # SPA routing - redirect all routes to index.html
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
     
     # Security Headers
     headers:

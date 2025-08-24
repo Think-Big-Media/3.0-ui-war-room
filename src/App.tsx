@@ -1,6 +1,6 @@
 /**
  * War Room Platform - Main Application Component
- * Configured to use Supabase Authentication
+ * Configured with Builder.io Integration
  * Build timestamp: 2025-08-09T08:02:53Z
  */
 
@@ -49,6 +49,12 @@ import EnvCheck from './pages/EnvCheck';
 import TestAuth from './pages/TestAuth';
 import OAuthDiagnostics from './pages/OAuthDiagnostics';
 import SettingsPage from './pages/SettingsPage';
+import ContentCalendarPage from './pages/ContentCalendarPage';
+import ContentEnginePage from './pages/ContentEnginePage';
+import RealTimeMonitoring from './pages/RealTimeMonitoring';
+import CampaignControl from './pages/CampaignControl';
+import IntelligenceHub from './pages/IntelligenceHub';
+import AlertCenter from './pages/AlertCenter';
 
 // Import Builder.io components
 import BuilderPage from './pages/BuilderPage';
@@ -213,6 +219,14 @@ function App() {
         <Route path="/env-check" element={<EnvCheck />} />
         <Route path="/test-auth" element={<TestAuth />} />
         <Route path="/oauth-diagnostics" element={<OAuthDiagnostics />} />
+        
+        {/* Main Routes */}
+        <Route path="/real-time-monitoring" element={<RealTimeMonitoring />} />
+        <Route path="/campaign-control" element={<CampaignControl />} />
+        <Route path="/intelligence-hub" element={<IntelligenceHub />} />
+        <Route path="/alert-center" element={<AlertCenter />} />
+        <Route path="/content-calendar" element={<ContentCalendarPage />} />
+        <Route path="/content-engine" element={<ContentEnginePage />} />
 
         {/* Protected Routes with Layout - TEMPORARILY DISABLED */}
         <Route element={<MainLayout />}>

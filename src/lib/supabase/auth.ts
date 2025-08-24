@@ -1,10 +1,21 @@
 /**
- * Supabase Authentication Layer
- * Replaces FastAPI auth endpoints with Supabase Auth
+ * Mock Authentication Layer for frontend-only operation
+ * This will be replaced when connecting to Leap.new backend
  */
 
 import { supabase } from './client';
-import type { User, Session } from '@supabase/supabase-js';
+
+// Mock types - remove Supabase dependency
+export interface User {
+  id: string;
+  email?: string;
+  user_metadata?: any;
+}
+
+export interface Session {
+  access_token: string;
+  user: User;
+}
 
 export interface AuthState {
   user: User | null;
@@ -26,92 +37,67 @@ export interface RegisterCredentials {
 }
 
 /**
- * Sign up new user with email verification
+ * Mock sign up
  */
 export async function signUp(credentials: RegisterCredentials) {
-  const { data, error } = await supabase.auth.signUp({
-    email: credentials.email,
-    password: credentials.password,
-    options: {
-      data: {
-        first_name: credentials.firstName,
-        last_name: credentials.lastName,
-        organization_name: credentials.organizationName,
-      },
-      emailRedirectTo: `${window.location.origin}/auth/callback`,
-    },
-  });
-
-  if (error) {throw error;}
-  return data;
+  console.log('Mock sign up:', credentials.email);
+  return {
+    user: { id: '1', email: credentials.email },
+    session: { access_token: 'mock-token', user: { id: '1', email: credentials.email } }
+  };
 }
 
 /**
- * Sign in existing user
+ * Mock sign in
  */
 export async function signIn(credentials: LoginCredentials) {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email: credentials.email,
-    password: credentials.password,
-  });
-
-  if (error) {throw error;}
-  return data;
+  const result = await supabase.auth.signIn(credentials.email, credentials.password);
+  return result;
 }
 
 /**
- * Sign out current user
+ * Mock sign out
  */
 export async function signOut() {
-  const { error } = await supabase.auth.signOut();
-  if (error) {throw error;}
+  const result = await supabase.auth.signOut();
+  return result;
 }
 
 /**
- * Get current session
+ * Mock get session
  */
 export async function getSession() {
-  const { data, error } = await supabase.auth.getSession();
-  if (error) {throw error;}
-  return data.session;
+  const result = await supabase.auth.getSession();
+  return result?.session || null;
 }
 
 /**
- * Get current user
+ * Mock get current user
  */
 export async function getCurrentUser() {
-  const { data, error } = await supabase.auth.getUser();
-  if (error) {throw error;}
-  return data.user;
+  return { id: '1', email: 'user@example.com' };
 }
 
 /**
- * Reset password
+ * Mock reset password
  */
 export async function resetPassword(email: string) {
-  const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${window.location.origin}/auth/reset-password`,
-  });
-
-  if (error) {throw error;}
-  return data;
+  console.log('Mock reset password:', email);
+  return { data: null, error: null };
 }
 
 /**
- * Update password
+ * Mock update password
  */
 export async function updatePassword(password: string) {
-  const { data, error } = await supabase.auth.updateUser({
-    password,
-  });
-
-  if (error) {throw error;}
-  return data;
+  console.log('Mock update password');
+  return { user: { id: '1', email: 'user@example.com' } };
 }
 
 /**
- * Listen to auth state changes
+ * Mock auth state listener
  */
 export function onAuthStateChange(callback: (event: string, session: Session | null) => void) {
-  return supabase.auth.onAuthStateChange(callback);
+  // Return mock unsubscribe function
+  return { data: { subscription: { unsubscribe: () => {} } } };
 }

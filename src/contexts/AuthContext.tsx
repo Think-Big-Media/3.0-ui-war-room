@@ -5,8 +5,7 @@
 
 import React, { createContext, useContext, useEffect, useReducer, type ReactNode } from 'react';
 import { supabase } from '../lib/supabase/client';
-import { signIn, signOut, getCurrentUser, onAuthStateChange, type AuthState as SupabaseAuthState } from '../lib/supabase/auth';
-import type { User } from '@supabase/supabase-js';
+import { signIn, signOut, getCurrentUser, onAuthStateChange, type AuthState as SupabaseAuthState, type User } from '../lib/supabase/auth';
 
 // Auth state types - migrated to Supabase
 interface AuthState {

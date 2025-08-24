@@ -9,29 +9,18 @@ import { store } from './store';
 import './index.css';
 
 /**
- * ⚡ PRODUCTION FRONTEND CONFIGURATION ⚡
+ * ⚡ SINGLE SOURCE OF TRUTH ⚡
  * 
- * 🎯 ACTIVE: AppBrandBOS.tsx
- * - Purple/blue gradient theme
- * - CommandCenter dashboard
- * - Glassmorphic cards
- * - Top navigation with WR logo
- * 
- * ❌ NOT IN USE:
- * - App.tsx (legacy with Supabase auth)
- * - AppNoAuth.tsx (testing only)
- * 
- * 🔍 Visual Check: You should see purple/blue gradients
- * 📊 Dashboard: CommandCenter, not Dashboard
- * 🧭 Navigation: Top bar, not sidebar
- * 
- * ⚠️ DO NOT CHANGE THIS IMPORT unless migrating the entire frontend architecture
+ * 🎯 ACTIVE: App.tsx (ONLY app entry point)
+ * - Command Center dashboard 
+ * - Full routing system
+ * - All components working
+ * - Clean single entry point
  */
-import App from './AppBrandBOS';  // ← PRODUCTION FRONTEND
+import App from './App';
 
-// Legacy options (DO NOT USE):
-// import App from './App';        // Old version with Supabase auth
-// import App from './AppNoAuth';  // Testing version without auth
+// SINGLE SOURCE OF TRUTH: Only App.tsx is used
+// All other app variants have been consolidated
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 // Get root element

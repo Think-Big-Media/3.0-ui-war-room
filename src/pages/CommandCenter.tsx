@@ -119,7 +119,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
           {number}
         </div>
         <h3 className="section-header mb-1">{title}</h3>
-        <p className="content-subtitle">{subtitle}</p>
+        <p className="content-subtitle">{subtitle}</p> main
       </div>
     </Card>
   );
@@ -473,7 +473,7 @@ const CommandCenter: React.FC = () => {
           <div className="mb-4">
             <IntelligenceDashboard />
           </div>
-        </div>
+        </div> main
       </PageLayout>
     </div>
   );

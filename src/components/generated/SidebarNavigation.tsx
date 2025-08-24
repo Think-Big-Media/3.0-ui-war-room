@@ -173,7 +173,7 @@ const TopNavigation: React.FC = () => {
   const unreadAlerts = teamAlerts.filter((alert) => alert.status === 'unread');
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-xl">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/98 backdrop-blur-xl border-b border-slate-700/40">
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo/Brand */}
@@ -186,7 +186,7 @@ const TopNavigation: React.FC = () => {
           </div>
 
           {/* Navigation Items - Compact spacing */}
-          <div className="hidden md:flex items-center space-x-2">
+          <div className="hidden md:flex items-center space-x-2"> main
             {navItems.map((item, index) => (
               <button
                 key={index}
@@ -197,8 +197,13 @@ const TopNavigation: React.FC = () => {
                 className={`nav-item group px-3 py-1 rounded-lg text-sm transition-all duration-200 flex items-center space-x-1 ${
                   item.active
                     ? getNavActiveClasses(item.theme)
-                    : 'text-white/70 hover:bg-white/10'
+                    : 'text-white/70 hover:bg-white/10' main
                 }`}
+                style={{
+                  letterSpacing: '0.05em',
+                  fontSize: '15px',
+                  fontWeight: '700'
+                }}
               >
                 <item.icon
                   className={`icon w-4 h-4 flex-shrink-0 ${item.icon === Home ? '-translate-y-0.5' : ''} ${
@@ -217,7 +222,7 @@ const TopNavigation: React.FC = () => {
                   }`}
                 >
                   {item.label}
-                </span>
+                </span> main
               </button>
             ))}
           </div>

@@ -4,7 +4,7 @@
 
 import type React from 'react';
 import { createContext, useContext, useState, useEffect } from 'react';
-import { supabase } from '../lib/supabase';
+import { supabase } from '../lib/supabase/client';
 
 interface SimpleAuthContextType {
   isLoading: boolean;

@@ -1,32 +1,11 @@
 /**
- * Supabase Client Configuration
- * Replaces FastAPI backend with Supabase Edge Functions
+ * Mock Supabase Client for frontend-only operation
+ * This will be replaced when connecting to Leap.new backend
  */
 
-import { createClient } from '@supabase/supabase-js';
+import mockDataService from '../../services/mockDataService';
 import { type Database } from './database.types';
 
-// Use fallback values to prevent crash when env vars are missing
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://placeholder.supabase.co';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'placeholder-key';
-
-if (!import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE_SUPABASE_ANON_KEY) {
-  console.warn(
-    'Missing Supabase environment variables. App running in demo mode.',
-  );
-}
-
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    autoRefreshToken: true,
-    persistSession: true,
-    detectSessionInUrl: true,
-  },
-  realtime: {
-    params: {
-      eventsPerSecond: 10,
-    },
-  },
-});
-
+// Export mock as supabase for compatibility
+export const supabase = mockDataService as any;
 export default supabase;

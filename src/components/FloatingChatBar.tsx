@@ -10,7 +10,6 @@ import {
   X,
   Clock,
 } from 'lucide-react';
-import { perfectCardShadow } from '../lib/utils';
 
 interface ChatMessage {
   id: string;
@@ -343,6 +342,7 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
         )}
       </AnimatePresence>
 
+<<<<<<< HEAD
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -446,8 +446,33 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
               </div>
             </div>
           </div>
+=======
+      {/* Simple chat bar matching Builder.io design */}
+      <div className="bg-slate-800/80 backdrop-blur-lg border border-slate-600/50 rounded-lg">
+        <form onSubmit={handleSubmit} className="flex items-center p-3">
+          <input
+            ref={inputRef}
+            type="text"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder={placeholder}
+            className="flex-1 bg-transparent text-white placeholder-slate-400 px-4 py-2 focus:outline-none text-sm"
+          />
+          <button
+            type="submit"
+            disabled={!message.trim()}
+            className={`p-2 rounded-md transition-colors ${
+              message.trim()
+                ? 'text-white hover:bg-slate-700/50'
+                : 'text-slate-500 cursor-not-allowed'
+            }`}
+          >
+            <Send className="w-4 h-4" />
+          </button>
+>>>>>>> main
         </form>
-      </motion.div>
+      </div>
     </div>
   );
 };

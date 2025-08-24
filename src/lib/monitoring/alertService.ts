@@ -4,8 +4,10 @@
  */
 
 import { type CrisisAlert, type MonitoringEvent } from './types';
-import { createClient } from '@supabase/supabase-js';
-import { WebSocket as WS } from 'ws';
+// Mock Supabase client
+const createClient = (url: string, key: string) => ({ /* mock */ });
+// Use browser WebSocket
+const WS = WebSocket;
 
 interface AlertServiceConfig {
   supabaseUrl: string;
