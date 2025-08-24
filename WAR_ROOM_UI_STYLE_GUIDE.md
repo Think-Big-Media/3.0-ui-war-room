@@ -249,13 +249,16 @@ Three standardized secondary button types with specific use cases:
 }
 ```
 
-### Key Features
+### Key Features (All Buttons)
 
-- **Height**: Reduced by 10% (`py-0.5` instead of `py-1`)
-- **Letter Spacing**: Halved (`letter-spacing: -0.05em`)
-- **Font**: Monospace (`font-mono`)
-- **Case**: UPPERCASE
+- **Letter Spacing**: Halved (`letter-spacing: -0.05em`) - **SITE-WIDE RULE**
+- **Font**: Monospace (`font-mono`) for technical actions
+- **Case**: UPPERCASE for action buttons
 - **Wrap**: Prevent wrapping (`whitespace-nowrap`)
+
+#### Secondary Button Specific Features
+- **Height**: Reduced (`py-0.5` for compact appearance)
+- **Themes**: Alert (red), Action (blue), Neutral (white/gray)
 
 ## Spacing Standards
 
