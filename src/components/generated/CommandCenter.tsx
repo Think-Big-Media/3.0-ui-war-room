@@ -99,7 +99,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
       </div>
 
       <div className="space-y-1 lg:space-y-2">
-        <div className="text-2xl lg:text-3xl font-medium text-white/95">
+        <div className="text-2xl lg:text-3xl font-medium text-white/95" style={{ font: "500 31px/37px Barlow, sans-serif" }}>
           {number}
         </div>
         <h3 className="section-header">
