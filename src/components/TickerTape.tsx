@@ -147,6 +147,10 @@ const TickerTape: React.FC = () => {
             width: max-content !important;
           }
 
+          .ticker-content:hover {
+            animation-play-state: paused !important;
+          }
+
           .ticker-item {
             transition: transform 0.2s ease, background-color 0.2s ease;
             contain: layout style;
