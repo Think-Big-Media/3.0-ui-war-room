@@ -30,6 +30,10 @@ export default {
     'border-blue-400/50',
     'border-amber-400/50',
     'border-purple-400/50',
+    // Notification badge classes
+    'bg-red-500/20',
+    'border-red-500/30',
+    'text-red-400',
   ],
   theme: {
     extend: {
