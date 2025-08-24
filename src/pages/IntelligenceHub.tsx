@@ -199,7 +199,7 @@ const IntelligenceHub: React.FC = () => {
   };
 
   return (
-    <div className="page-intelligence">
+    <div className="page-intelligence" data-route="intelligence-hub">
       <PageLayout
         pageTitle="Intelligence"
         placeholder="Ask War Room about campaign intelligence..."
@@ -232,10 +232,10 @@ const IntelligenceHub: React.FC = () => {
         {/* Upload Intelligence Tab */}
         {activeTab === 'upload' && (
           <Card
+            className="hoverable mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             padding="md"
-            className="mb-6"
           >
             <h3 className="section-header mb-4">Upload Intelligence</h3>
 
@@ -315,7 +315,7 @@ const IntelligenceHub: React.FC = () => {
             className="space-y-6"
           >
             {/* Filter & Search */}
-            <Card padding="sm">
+            <Card className="hoverable" padding="sm">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div className="flex items-center space-x-2">
                   <Search className="w-5 h-5 text-white/50" />
@@ -344,9 +344,8 @@ const IntelligenceHub: React.FC = () => {
               {filteredFiles.map((file) => (
                 <Card
                   key={file.id}
-                  whileHover={{}}
+                  className="hoverable cursor-pointer"
                   padding="none"
-                  className="cursor-pointer"
                   onClick={() => setSelectedFile(file)}
                 >
                   <div className="px-4 pt-4 pb-4">
@@ -412,7 +411,7 @@ const IntelligenceHub: React.FC = () => {
             </div>
 
             {chatQueries.map((query) => (
-              <Card key={query.id} whileHover={{}} padding="none">
+              <Card key={query.id} className="hoverable" padding="none">
                 <div className="px-4 pt-4 pb-4">
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex items-center space-x-2">

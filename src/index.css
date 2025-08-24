@@ -307,6 +307,10 @@
     border-color: var(--accent-settings) !important;
   }
 
+  [data-route='intelligence-hub'] .hoverable:hover {
+    border-color: var(--accent-intelligence) !important;
+  }
+
   /* Shared selectors for consistency */
   .card.hoverable,
   .panel.hoverable {
