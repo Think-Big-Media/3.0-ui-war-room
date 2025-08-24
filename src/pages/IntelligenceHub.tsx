@@ -413,7 +413,7 @@ const IntelligenceHub: React.FC = () => {
             </div>
 
             {chatQueries.map((query) => (
-              <Card key={query.id} whileHover={{ scale: 1.01 }} padding="sm">
+              <Card key={query.id} whileHover={{}} padding="sm">
                 <div className="flex items-start justify-between mb-2">
                   <div className="flex items-center space-x-2">
                     <MessageSquare className="w-4 h-4 text-blue-400" />
