@@ -175,17 +175,19 @@ style={{
 
 ### Site-Wide Button Spacing Rule
 
-**All buttons** use reduced letter spacing for optimal readability of multi-word labels:
-- **Letter Spacing**: `letter-spacing: -0.05em !important` within `@layer components`
+**All buttons** use reduced spacing between letters AND words for optimal readability:
+- **Letter Spacing**: `letter-spacing: -0.05em !important` (character spacing)
+- **Word Spacing**: `word-spacing: -0.3em !important` (space between words)
 - **Enforcement**: Proper CSS cascade using Tailwind's layer system
 - **Applies to**: Primary buttons, Secondary buttons, Action buttons, inline buttons
 - **Examples**: "RESPOND NOW", "Add to Alert", "Generate Response", "View Mentions"
-- **Implementation**: Button classes wrapped in `@layer components` with `!important` declaration
+- **Implementation**: Button classes wrapped in `@layer components` with `!important` declarations
 
 ### Critical Implementation Rules:
 1. **Use CSS classes only**: Never mix CSS classes with redundant utility classes
 2. **Avoid utility conflicts**: Don't use `btn-secondary-alert` + `font-mono text-sm uppercase` together
 3. **Layer specificity**: All button components must be in `@layer components`
+4. **Dual spacing control**: Both letter and word spacing are reduced for compact button text
 
 ### Secondary Button Variants
 
