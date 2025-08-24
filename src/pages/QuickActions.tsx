@@ -20,14 +20,9 @@ interface QuickAction {
 const QuickActions: React.FC = () => {
   const actions: QuickAction[] = [
     {
-      icon: TrendingUp,
-      label: 'Viral Opps',
-      accentKey: 'warRoom',
-    },
-    {
-      icon: Search,
-      label: 'Trend Opps',
-      accentKey: 'intelligence',
+      icon: Zap,
+      label: 'Quick Campaign',
+      accentKey: 'dashboard',
     },
     {
       icon: Activity,
@@ -37,16 +32,21 @@ const QuickActions: React.FC = () => {
     {
       icon: FileText,
       label: 'Make Content',
-      accentKey: 'dashboard',
+      accentKey: 'warRoom',
     },
     {
-      icon: Zap,
-      label: 'Quick Campaign',
-      accentKey: 'dashboard',
+      icon: Search,
+      label: 'Trend Opps',
+      accentKey: 'intelligence',
     },
     {
       icon: Share2,
       label: 'Social Media',
+      accentKey: 'settings',
+    },
+    {
+      icon: TrendingUp,
+      label: 'Alert Center',
       accentKey: 'alertCenter',
     },
   ];
