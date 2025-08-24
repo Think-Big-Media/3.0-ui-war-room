@@ -19,7 +19,7 @@ const DayView: React.FC<DayViewProps> = ({
     <div className="space-y-4">
       {/* Day View Header */}
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-2xl font-bold text-white">
+        <h3 className="text-2xl font-bold font-condensed text-white">
           Today -{' '}
           {new Date().toLocaleDateString('en-US', {
             weekday: 'long',
