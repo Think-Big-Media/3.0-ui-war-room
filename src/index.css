@@ -319,22 +319,9 @@
     color: var(--accent-settings);
   }
 
-  /* NAVIGATION FONT FIX - Force Barlow Condensed with maximum specificity */
-  nav.fixed button span,
-  nav button span.label,
-  .nav-item span.label,
-  .nav-item .label {
-    font-family: 'Barlow Condensed', sans-serif !important;
-    font-weight: 500 !important;
-    font-size: 16px !important;
-  }
-
   /* Targeted word spacing for specific nav labels */
   .nav-label {
     word-spacing: 0.15em;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 500;
-    font-size: 16px; /* 2 points bigger than default 14px */
   }
 
   /* Quick Actions using design tokens */
