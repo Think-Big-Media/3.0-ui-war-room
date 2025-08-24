@@ -93,12 +93,14 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
           className={`p-3 lg:p-4 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 hoverable transition-all duration-300`}
         >
           <Icon
-            className={`w-6 h-6 lg:w-8 lg:h-8 text-white/95 group-hover:text-${sectionTheme.colors.text} transition-colors duration-300`}
+            className={`w-6 h-6 lg:w-8 lg:h-8 text-white/95 transition-colors duration-300`}
+            style={{"--icon-hover-color": "var(--page-accent)"} as React.CSSProperties}
           />
         </div>
         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <div
-            className={`text-xs text-${sectionTheme.colors.text} font-medium`}
+            className={`text-xs font-medium`}
+            style={{color: "var(--page-accent)"}}
           >
             Click to explore →
           </div>
