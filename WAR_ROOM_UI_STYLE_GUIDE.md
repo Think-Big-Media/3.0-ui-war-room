@@ -236,18 +236,15 @@ button {
 }
 
 .btn-primary-alert {
-  @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase;
-  letter-spacing: -0.05em;
+  @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase text-center tracking-[-0.05em];
 }
 
 .btn-primary-action {
-  @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase;
-  letter-spacing: -0.05em;
+  @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase text-center tracking-[-0.05em];
 }
 
 .btn-primary-neutral {
-  @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase;
-  letter-spacing: -0.05em;
+  @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase text-center tracking-[-0.05em];
 }
 ```
 
