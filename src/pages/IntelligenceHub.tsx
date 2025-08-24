@@ -210,9 +210,9 @@ const IntelligenceHub: React.FC = () => {
         {/* Tab Navigation */}
         <div className="flex space-x-4 mb-3">
           {[
+            { id: 'chat', label: 'Chat History', icon: MessageSquare },
             { id: 'upload', label: 'Upload Intelligence', icon: Upload },
             { id: 'library', label: 'Knowledge Library', icon: Search },
-            { id: 'chat', label: 'Chat History', icon: MessageSquare },
           ].map((tab) => (
             <button
               key={tab.id}
