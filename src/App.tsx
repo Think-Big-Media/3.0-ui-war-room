@@ -44,16 +44,7 @@ const DocumentIntelligence = React.lazy(
 
 // Lazy load other heavy components
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
-const CommandCenter = React.lazy(() => {
-  console.log('🔧 IMPORTING CommandCenter...');
-  return import('./pages/CommandCenter').then(module => {
-    console.log('✅ CommandCenter imported successfully:', module);
-    return module;
-  }).catch(error => {
-    console.error('❌ CommandCenter import failed:', error);
-    throw error;
-  });
-});
+const CommandCenter = React.lazy(() => import('./pages/CommandCenter'));
 const DebugDashboard = React.lazy(() => import('./pages/DebugDashboard'));
 
 // Import light components normally
@@ -332,51 +323,25 @@ function App() {
           }
         />
 
-        {/* DEBUG: Simple test route */}
-        <Route
-          path="/test-route"
-          element={
-            <div style={{padding: '20px', background: 'green', color: 'white'}}>
-              {console.log('🎯 TEST ROUTE HIT: /test-route') || null}
-              <h1>TEST ROUTE WORKS!</h1>
-              <p>Current path: {window.location.pathname}</p>
-            </div>
-          }
-        />
-
-        {/* DEBUG: CommandCenter Routes with console logs */}
-        <Route
-          path="/command-center"
-          element={
-            <div>
-              {console.log('🎯 ROUTE HIT: /command-center') || null}
-              <div style={{padding: '20px', background: 'blue', color: 'white'}}>
-                <h1>CommandCenter Route Hit!</h1>
-                <p>About to load CommandCenter component...</p>
-              </div>
-              <React.Suspense
-                fallback={<LazyLoadFallback componentName="CommandCenter" />}
-              >
-                <CommandCenter />
-              </React.Suspense>
-            </div>
-          }
-        />
+        {/* CommandCenter Routes */}
         <Route
           path="/CommandCenter"
           element={
-            <div>
-              {console.log('🎯 ROUTE HIT: /CommandCenter') || null}
-              <div style={{padding: '20px', background: 'purple', color: 'white'}}>
-                <h1>CommandCenter Route Hit (uppercase)!</h1>
-                <p>About to load CommandCenter component...</p>
-              </div>
-              <React.Suspense
-                fallback={<LazyLoadFallback componentName="CommandCenter" />}
-              >
-                <CommandCenter />
-              </React.Suspense>
-            </div>
+            <React.Suspense
+              fallback={<LazyLoadFallback componentName="CommandCenter" />}
+            >
+              <CommandCenter />
+            </React.Suspense>
+          }
+        />
+        <Route
+          path="/command-center"
+          element={
+            <React.Suspense
+              fallback={<LazyLoadFallback componentName="CommandCenter" />}
+            >
+              <CommandCenter />
+            </React.Suspense>
           }
         />
 
