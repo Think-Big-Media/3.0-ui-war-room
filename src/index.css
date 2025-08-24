@@ -219,6 +219,11 @@
     color: var(--page-accent);
   }
 
+  /* Ensure only current page nav items use page accent */
+  [aria-current="page"] .nav-active-icon {
+    color: var(--page-accent);
+  }
+
   /* Navigation hover states - neutral styling only */
   .nav-hover-text {
     @apply transition-colors duration-200;
