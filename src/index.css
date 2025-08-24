@@ -554,6 +554,7 @@
   .status-indicator {
     @apply text-xs font-mono uppercase;
     font-family: 'JetBrains Mono', monospace;
+    color: rgba(255, 255, 255, 0.75); /* Neutral contrast-safe text color */
   }
 
   /* Footer text - always uppercase JetBrains Mono */
@@ -562,9 +563,17 @@
     font-family: 'JetBrains Mono', monospace;
   }
 
-  /* Color-coded status indicators */
+  /* Color-coded status indicators - text only */
   .status-active {
-    @apply text-green-400;
+    color: #4ade80; /* green-400 */
+  }
+
+  .status-running {
+    color: var(--accent-war-room);
+  }
+
+  .status-planning {
+    color: var(--accent-intelligence);
   }
 
   /* Duplicate status classes removed - using only the neutral background versions above */
