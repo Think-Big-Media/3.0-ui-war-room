@@ -39,18 +39,30 @@ const TopNavigation: React.FC = () => {
   // Get current section theme
   const currentTheme = getSectionTheme(location.pathname);
 
-  // Load team alerts
+  // Load team alerts with proper cleanup
   useEffect(() => {
+    let isSubscribed = true;
+
     const loadTeamAlerts = () => {
-      const alerts = informationService.getTeamAlerts();
-      setTeamAlerts(alerts);
+      if (isSubscribed) {
+        const alerts = informationService.getTeamAlerts();
+        setTeamAlerts(alerts);
+      }
     };
 
     loadTeamAlerts();
 
-    // Refresh every 30 seconds
-    const interval = setInterval(loadTeamAlerts, 30000);
-    return () => clearInterval(interval);
+    // Only refresh if component is still mounted and user is active
+    const interval = setInterval(() => {
+      if (isSubscribed && !document.hidden) {
+        loadTeamAlerts();
+      }
+    }, 30000);
+
+    return () => {
+      isSubscribed = false;
+      clearInterval(interval);
+    };
   }, []);
 
   // Close notifications when clicking outside
