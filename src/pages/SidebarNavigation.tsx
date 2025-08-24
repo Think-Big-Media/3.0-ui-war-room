@@ -146,15 +146,15 @@ const TopNavigation: React.FC = () => {
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case 'critical':
-        return 'bg-red-500/20 text-red-600';
+        return 'priority-critical';
       case 'high':
-        return 'bg-orange-500/20 text-orange-600';
+        return 'priority-high';
       case 'medium':
-        return 'bg-blue-500/20 text-blue-600';
+        return 'priority-medium';
       case 'low':
-        return 'bg-gray-500/20 text-gray-600';
+        return 'priority-low';
       default:
-        return 'bg-blue-500/20 text-blue-600';
+        return 'priority-medium';
     }
   };
 
@@ -183,7 +183,6 @@ const TopNavigation: React.FC = () => {
             {navItems.map((item, index) => (
               <motion.button
                 key={index}
-                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleNavigation(item.path)}
                 className={`group px-3 py-1 rounded-lg text-sm transition-all duration-200 flex items-center space-x-1 ${
