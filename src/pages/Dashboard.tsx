@@ -133,7 +133,7 @@ const StatusBar: React.FC = () => {
   };
 
   return (
-    <section className="bg-black/20 backdrop-blur-md border-b border-[#8B956D]/30 px-6 py-4">
+    <section className="bg-black/20 border-b border-[#8B956D]/30 px-6 py-4">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-6">
