@@ -366,8 +366,9 @@ const CampaignOperationsHub: React.FC = () => {
         {/* Content Templates */}
         <div className="space-y-2 lg:space-y-3">
           <h4
-            className="text-lg lg:text-xl font-medium text-white/40 mb-3 uppercase font-condensed tracking-wide ml-2"
+            className="text-lg lg:text-xl text-white/40 mb-3 uppercase font-condensed tracking-wide ml-2"
             style={{
+              font: '300 21px/29px "Barlow Condensed", sans-serif',
               textRendering: 'optimizeLegibility',
               WebkitFontSmoothing: 'antialiased',
               MozOsxFontSmoothing: 'grayscale',
@@ -384,10 +385,10 @@ const CampaignOperationsHub: React.FC = () => {
                 onClick={() => handleTemplateClick(template.name)}
                 className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 text-center cursor-pointer"
               >
-                <h5 className="font-medium text-white/95 text-xs lg:text-sm mb-1 uppercase">
+                <h5 className="font-medium text-white/70 text-xs lg:text-sm mb-1 uppercase" style={{ lineHeight: "16px" }}>
                   {template.name}
                 </h5>
-                <p className="text-xs text-white/65 uppercase">
+                <p className="text-xs text-white/65 uppercase" style={{ font: "400 12px/16.5px JetBrains Mono, monospace" }}>
                   {template.type}
                 </p>
               </div>
