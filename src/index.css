@@ -363,6 +363,19 @@
     opacity: 0.7;
   }
 
+  /* Platform colors using design tokens */
+  .platform-social {
+    color: var(--accent-intelligence);
+  }
+
+  .platform-forum {
+    color: var(--accent-alert-center);
+  }
+
+  .platform-news {
+    color: var(--accent-live-monitoring);
+  }
+
   /* Card titles should use Inter for content readability */
   .card-title {
     @apply font-sans font-semibold text-lg;
