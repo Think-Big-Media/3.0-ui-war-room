@@ -162,6 +162,14 @@ export function useSectionTheme(pathname: string) {
 }
 
 /**
+ * Get the page accent color for setting CSS variables
+ */
+export function getPageAccentColor(pathname: string): string {
+  const theme = getSectionTheme(pathname);
+  return theme.pageAccent;
+}
+
+/**
  * Generate dynamic CSS for section theming
  */
 export function generateSectionCSS(theme: SectionTheme): string {
@@ -169,7 +177,7 @@ export function generateSectionCSS(theme: SectionTheme): string {
     .section-accent { color: rgb(var(--${theme.colors.primary})); }
     .section-border { border-color: rgb(var(--${theme.colors.border})); }
     .section-bg { background-color: rgb(var(--${theme.colors.background})); }
-    .section-hover:hover { 
+    .section-hover:hover {
       border-color: rgb(var(--${theme.colors.border}));
       background-color: rgb(var(--${theme.colors.background}));
       color: rgb(var(--${theme.colors.text}));
