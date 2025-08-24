@@ -124,8 +124,8 @@ const TickerTape: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-black/90 border-t border-white/20 overflow-hidden contain-layout">
-      <div className="h-12 flex items-center">
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-black/90 border-t border-white/20 overflow-hidden">
+      <div className="h-12 relative">
         <style>{`
           @keyframes ticker-scroll {
             0% {
