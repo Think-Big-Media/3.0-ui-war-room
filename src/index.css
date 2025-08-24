@@ -280,13 +280,28 @@
     transition: border-color 160ms ease;
   }
 
+  /* Generic rule - applies to all hoverable elements */
   .hoverable:hover {
     border-color: var(--page-accent);
+    transition: border-color 160ms ease;
   }
 
-  /* Page-scoped reinforcement for Live Monitoring */
+  /* Page-scoped reinforcement for Live Monitoring - overrides any conflicts */
   [data-route='live-monitoring'] .hoverable:hover {
+    border-color: var(--accent-live-monitoring) !important;
+  }
+
+  /* Shared selectors for consistency */
+  .card.hoverable,
+  .panel.hoverable {
+    border: 1px solid var(--border-neutral, rgba(255, 255, 255, 0.15));
+    transition: border-color 160ms ease;
+  }
+
+  .card.hoverable:hover,
+  .panel.hoverable:hover {
     border-color: var(--page-accent);
+    transition: border-color 160ms ease;
   }
 
   /* Quick Actions accent classes */
