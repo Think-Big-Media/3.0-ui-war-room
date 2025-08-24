@@ -401,7 +401,7 @@ const CommandCenter: React.FC = () => {
 
       {/* Top Row - 4 KPI Tiles */}
       <div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-4 lg:mb-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
           <DashboardCard
             title="Real-Time Alerts"
             number={7}
@@ -437,7 +437,7 @@ const CommandCenter: React.FC = () => {
         </div>
 
         {/* Middle Row - 2 Wider Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4 mb-5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
           <CampaignOperationsHub />
           <QuickActions />
         </div>

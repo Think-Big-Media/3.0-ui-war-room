@@ -459,7 +459,7 @@ const CommandCenter: React.FC = () => {
       />
 
       {/* Top Row - 4 KPI Tiles */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-6 lg:mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
         <DashboardCard
           title="Real-Time Alerts"
           number={7}
@@ -495,13 +495,13 @@ const CommandCenter: React.FC = () => {
       </div>
 
       {/* Middle Row - 2 Wider Cards */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
         <CampaignOperationsHub />
         <QuickActions />
       </div>
 
       {/* Bottom Row - Intelligence Dashboard */}
-      <div className="mb-8">
+      <div className="mb-4">
         <IntelligenceDashboard />
       </div>
     </PageLayout>
