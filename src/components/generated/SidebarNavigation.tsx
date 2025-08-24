@@ -194,7 +194,7 @@ const TopNavigation: React.FC = () => {
                   }`}
                 />
                 <span
-                  className={`${item.active ? 'text-white font-semibold' : getNavHoverClasses(item.theme)} ${
+                  className={`${item.active ? 'nav-active-text' : getNavHoverClasses(item.theme)} ${
                     ['LIVE MONITORING', 'WAR ROOM', 'ALERT CENTER'].includes(
                       item.label
                     )
