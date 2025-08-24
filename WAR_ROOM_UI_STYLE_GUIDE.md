@@ -558,7 +558,7 @@ This creates proper visual hierarchy where:
 ### ✅ **Components Updated with Style Guide:**
 
 - **Alert Center**: Subheaders, spacing (gap-4), label positioning
-- **Settings Page**: All form labels (mb-1 ml-1.5), toggle switch indentation, diagnostic text removed
+- **Settings Page**: All typography updated to content-title/content-subtitle classes, consistent toggle layout with icons (Dark Mode, Data Sharing), form labels standardized
 - **Intelligence Hub**: Dropdown replaced with CustomDropdown, label positioning
 - **Dashboard**: Grid spacing updated to gap-4
 - **Monitoring Components**: Reference implementation (SentimentBreakdown, PlatformPerformance, InfluencerTracker)
