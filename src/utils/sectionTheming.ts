@@ -98,7 +98,7 @@ export function getNavIconHoverClasses(theme: SectionTheme): string {
  * Get the page accent color for setting CSS variables
  */
 export function getPageAccentColor(pathname: string): string {
-  return getRouteAccentColor(pathname);
+  return getRouteAccent(pathname);
 }
 
 /**
