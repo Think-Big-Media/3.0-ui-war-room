@@ -133,8 +133,8 @@ const TickerTape: React.FC = () => {
           }
           
           .ticker-content {
-            animation: ticker-scroll 120s linear infinite !important;
-            animation-duration: 120s !important;
+            animation: ticker-scroll 240s linear infinite !important;
+            animation-duration: 240s !important;
             animation-timing-function: linear !important;
             animation-iteration-count: infinite !important;
             will-change: transform;
@@ -148,8 +148,8 @@ const TickerTape: React.FC = () => {
           /* Override reduced motion for ticker - it's essential functionality */
           @media (prefers-reduced-motion: reduce) {
             .ticker-content {
-              animation: ticker-scroll 120s linear infinite !important;
-              animation-duration: 120s !important;
+              animation: ticker-scroll 240s linear infinite !important;
+              animation-duration: 240s !important;
               animation-timing-function: linear !important;
               animation-iteration-count: infinite !important;
             }
