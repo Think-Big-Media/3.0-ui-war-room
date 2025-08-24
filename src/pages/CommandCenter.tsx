@@ -211,7 +211,7 @@ const IntelligenceDashboard: React.FC = () => {
               e.stopPropagation();
               handleMetricClick(metric.label);
             }}
-            className="bg-black/20 backdrop-blur-sm rounded-xl p-3 lg:p-4 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 cursor-pointer"
+            className="bg-black/20 backdrop-blur-sm rounded-xl p-3 lg:p-4 border border-white/20 hoverable hover:bg-black/25 transition-all duration-300 cursor-pointer"
           >
             <div
               className="text-xl lg:text-2xl text-white/95 mb-1"
