@@ -67,14 +67,14 @@ const AlertCenter: React.FC = () => {
         <div className="flex space-x-4 mb-3 overflow-x-auto">
           {[
             {
-              id: 'traditional-alerts',
-              label: 'Critical Alerts',
-              icon: AlertCircle,
-            },
-            {
               id: 'information-streams',
               label: 'Information Streams',
               icon: Activity,
+            },
+            {
+              id: 'traditional-alerts',
+              label: 'Critical Alerts',
+              icon: AlertCircle,
             },
           ].map((tab) => (
             <button
