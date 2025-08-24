@@ -61,7 +61,7 @@ const SettingsSection: React.FC<SettingsSectionProps> = ({
         <div className="p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-purple-400/20">
           <Icon className="w-6 h-6 text-white/95" />
         </div>
-        <h3 className="text-xl font-semibold text-white/40 font-condensed tracking-wide">
+        <h3 className="section-header tracking-wide">
           {title.toUpperCase()}
         </h3>
       </div>
