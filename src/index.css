@@ -266,6 +266,25 @@
     font-family: "JetBrains Mono", monospace;
   }
 
+  /* Footer text - always uppercase JetBrains Mono */
+  .footer-text {
+    @apply text-xs font-mono uppercase;
+    font-family: "JetBrains Mono", monospace;
+  }
+
+  /* Color-coded status indicators */
+  .status-active {
+    @apply text-green-400;
+  }
+
+  .status-running {
+    @apply text-blue-400;
+  }
+
+  .status-planning {
+    @apply text-yellow-400;
+  }
+
   /* Icon alignment in buttons - move up 2px for better alignment */
   .btn-secondary-alert svg,
   .btn-secondary-action svg,
