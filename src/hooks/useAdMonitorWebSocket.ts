@@ -27,7 +27,6 @@ interface AdAlert {
   timestamp: string;
 }
 
-}
 
 interface SpendUpdate {
   platform: 'meta' | 'google';
@@ -39,7 +38,6 @@ interface SpendUpdate {
   timestamp: string;
 }
 
-}
 
 interface AdMonitorMessage {
   type: 'spend_alert' | 'spend_update' | 'campaign_status' | 'connection_status';
@@ -47,7 +45,6 @@ interface AdMonitorMessage {
   timestamp: string;
 }
 
-}
 
 export function useAdMonitorWebSocket() {
   const queryClient = useQueryClient();
@@ -151,3 +148,4 @@ export function useAdMonitorWebSocket() {
     requestSpendUpdate,
     subscribeToAlerts,
   }), [ws, dismissAlert, requestSpendUpdate, subscribeToAlerts]);
+}

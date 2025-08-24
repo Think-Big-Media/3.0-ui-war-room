@@ -52,8 +52,6 @@ const MetricCard = memo<MetricCardProps>(
 
  return (
  <div
- }
- }
  className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700 will-change-transform"
  >
  <div className="flex items-center justify-between mb-2">
@@ -68,15 +66,11 @@ const MetricCard = memo<MetricCardProps>(
  {loading ? (
  <div
  key="loading"
- }
- }
  className="h-8 w-24 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"
  />
  ) : (
  <span
  key={value}
- }
- }
  className="text-2xl font-bold text-gray-900 dark:text-white"
  >
  {prefix}
@@ -151,8 +145,6 @@ const PlatformMetrics = memo<PlatformMetricsProps>(
 
  return (
  <div
- }
- }
  className={`rounded-lg p-4 ${color} bg-opacity-10`}
  >
  <div className="flex items-center justify-between mb-3">
@@ -280,8 +272,6 @@ export const MetricsDisplay: React.FC = memo(() => {
  
  {showConnectionWarning && (
  <div
- }
- }
  className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3"
  >
  <div className="flex items-center space-x-2">
@@ -294,8 +284,6 @@ export const MetricsDisplay: React.FC = memo(() => {
  )}
  {!showConnectionWarning && campaignData && (
  <div
- }
- }
  className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3"
  >
  <div className="flex items-center space-x-2">
@@ -366,8 +354,6 @@ export const MetricsDisplay: React.FC = memo(() => {
  {/* Spend Distribution Chart */}
  {campaignData && totalSpend > 0 && (
  <div
- }
- }
  className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm"
  >
  <h3 className="text-lg font-semibold mb-4">Spend Distribution</h3>
@@ -385,7 +371,6 @@ export const MetricsDisplay: React.FC = memo(() => {
  return (
  <>
  <div
- }
  animate={{
  width: `${(metaSpend / totalSpend) * 100}%`,
  }}
@@ -393,7 +378,6 @@ export const MetricsDisplay: React.FC = memo(() => {
  className="bg-blue-500"
  />
  <div
- }
  animate={{
  width: `${(googleSpend / totalSpend) * 100}%`,
  }}

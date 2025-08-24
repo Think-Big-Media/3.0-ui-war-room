@@ -12,7 +12,6 @@ interface ActivityFeedProps {
 const ActivityFeed: React.FC<ActivityFeedProps> = ({ activities }) => {
  return (
  <div
- }
  className="space-y-6"
  >
  <Card padding="md" variant="glass">

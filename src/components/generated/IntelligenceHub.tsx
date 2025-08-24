@@ -235,7 +235,6 @@ const IntelligenceHub: React.FC = () => {
  {/* Upload Intelligence Tab */}
  {activeTab === 'upload' && (
  <Card
- }
  padding="md"
  className="mb-6"
  >
@@ -306,7 +305,6 @@ const IntelligenceHub: React.FC = () => {
  {/* Knowledge Library Tab */}
  {activeTab === 'library' && (
  <div
- }
  className="space-y-6"
  >
  {/* Filter & Search */}
@@ -339,7 +337,6 @@ const IntelligenceHub: React.FC = () => {
  {filteredFiles.map((file) => (
  <Card
  key={file.id}
- }
  padding="sm"
  className="cursor-pointer"
  onClick={() => setSelectedFile(file)}
@@ -390,7 +387,6 @@ const IntelligenceHub: React.FC = () => {
  {/* Chat History Tab */}
  {activeTab === 'chat' && (
  <div
- }
  className="space-y-4"
  >
  <div className="flex items-center justify-between">

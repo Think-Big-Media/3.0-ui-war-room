@@ -78,3 +78,4 @@ export function useAlertManagement() {
     setInfoFilters,
     handleMarkAllAsRead,
   };
+}

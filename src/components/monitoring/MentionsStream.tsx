@@ -112,7 +112,6 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
  {mentions.map((mention) => (
  <div
  key={mention.id}
- }
  className="bg-black/20 rounded-lg p-6 hoverable"
  >
  <div className="flex items-start justify-between mb-2">

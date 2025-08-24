@@ -295,8 +295,7 @@ const GoogleAdsIntegration: React.FC = () => {
  <button
  onClick={() =>
  navigate('/campaign-control?platform=google&tab=analytics')
- }
- className="btn-primary-action flex-1 text-center"
+} className="btn-primary-action flex-1 text-center"
  >
  View Campaigns
  </button>
@@ -324,8 +323,6 @@ const GoogleAdsIntegration: React.FC = () => {
  
  {false && (
  <div
- }
- }
  className="mt-6 space-y-4"
  >
  <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">

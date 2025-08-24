@@ -11,6 +11,8 @@ export interface CardProps extends HTMLMotionProps<'div'> {
  noShadow?: boolean;
  themeOverride?: string; // Allow override of automatic theme detection
  children: React.ReactNode;
+}
+
 const Card: React.FC<CardProps> = ({
  variant = 'glass',
  hover = true,

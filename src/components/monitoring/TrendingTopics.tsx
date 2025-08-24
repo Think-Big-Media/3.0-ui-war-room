@@ -33,7 +33,6 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
  {topics.map((topic) => (
  <div
  key={topic.id}
- }
  className="bg-black/20 rounded-lg p-6 hoverable cursor-pointer"
  >
  <div className="flex items-center justify-between mb-2 -mt-2">

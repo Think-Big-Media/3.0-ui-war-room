@@ -210,7 +210,6 @@ const InformationCenter: React.FC = () => {
  {/* Live Stream Tab */}
  {activeTab === 'live-stream' && (
  <div
- }
  className="space-y-6"
  >
  {/* Stats Cards */}
@@ -273,7 +272,6 @@ const InformationCenter: React.FC = () => {
  return (
  <div
  key={item.id}
- }
  className={`p-4 rounded-lg border cursor-pointer transition-all duration-200 ${
  item.status === 'unread'
  ? 'bg-white/10 border-white/20'
@@ -324,7 +322,6 @@ const InformationCenter: React.FC = () => {
  {/* Notification Center Tab */}
  {activeTab === 'notification-center' && (
  <div
- }
  className="space-y-6"
  >
  {/* Filters */}
@@ -418,7 +415,6 @@ const InformationCenter: React.FC = () => {
  return (
  <Card
  key={item.id}
- }
  className={`cursor-pointer border-l-4 ${getPriorityColor(item.priority)}`}
  padding="sm"
  variant="glass"

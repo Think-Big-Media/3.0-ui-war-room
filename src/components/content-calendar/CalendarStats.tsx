@@ -55,8 +55,6 @@ const CalendarStats: React.FC<CalendarStatsProps> = ({
 
  return (
  <div
- }
- }
  className="mb-6"
  >
  <Card padding="md" variant="glass">

@@ -39,14 +39,10 @@ const CollaborationModal: React.FC<CollaborationModalProps> = ({
  return (
  
  <div
- }
- }
  className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
  onClick={onClose}
  >
  <div
- }
- }
  className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 max-w-md w-full"
  onClick={(e: React.MouseEvent) => e.stopPropagation()}
  >

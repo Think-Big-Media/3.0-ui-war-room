@@ -21,8 +21,6 @@ const ContentFormatCard: React.FC<ContentFormatCardProps> = ({
 
  return (
  <div
- }
- }
  >
  <Card
  padding="md"

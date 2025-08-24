@@ -137,7 +137,6 @@ const AlertItem = memo<{
  {/* TODO: Add acknowledged state management */}
  {true && (
  <button
- }
  onClick={() => onAcknowledge(alert.campaign_id)}
  className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
  title="Acknowledge alert"
@@ -210,7 +209,6 @@ export const AlertCenter: React.FC = memo(() => {
  <h2 className="text-lg font-semibold">Alert Center</h2>
  {criticalAlertsCount > 0 && (
  <span
- }
  className="px-2 py-1 text-xs font-medium bg-red-500 text-white rounded-full"
  >
  {criticalAlertsCount} critical
@@ -274,7 +272,6 @@ export const AlertCenter: React.FC = memo(() => {
  
  {filteredAlerts.length === 0 ? (
  <div
- }
  className="p-8 text-center text-gray-500 dark:text-gray-400"
  >
  <Bell size={48} className="mx-auto mb-3 opacity-20" />

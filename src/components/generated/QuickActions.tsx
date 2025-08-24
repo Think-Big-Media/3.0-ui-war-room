@@ -51,8 +51,6 @@ const QuickActions: React.FC = () => {
 
  return (
  <div
- }
- }
  whileHover={{
  y: -2,
  transition: { duration: 0.2 },
@@ -74,7 +72,6 @@ const QuickActions: React.FC = () => {
  {actions.map((action, index) => (
  <button
  key={index}
- }
  className={`bg-black/20 backdrop-blur-sm rounded-xl p-4 lg:p-5 border border-white/20 hover:bg-black/25 hoverable transition-all duration-300 flex flex-col items-center space-y-2 quick-action-${action.accentKey}`}
  >
  <action.icon className="w-6 h-6 lg:w-8 lg:h-8 quick-action-icon" />

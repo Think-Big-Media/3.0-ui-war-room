@@ -25,8 +25,6 @@ const ContentClusterHeader: React.FC<ContentClusterHeaderProps> = ({
 }) => {
  return (
  <div
- }
- }
  className="mb-8"
  >
  <Card padding="md" variant="glass">

@@ -74,7 +74,6 @@ const MetricCard: React.FC<MetricCardProps> = ({
  </div>
 
  <div
- }
  className={cn(
  'p-3 rounded-xl bg-white/10 backdrop-blur-sm',
  iconColor,

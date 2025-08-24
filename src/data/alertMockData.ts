@@ -1,4 +1,3 @@
-}
 import { type Alert, type TeamMember } from '../types/alert';
 
 export const mockAlerts: Alert[] = [

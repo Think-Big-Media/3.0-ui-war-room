@@ -135,7 +135,6 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
  </span>
  </div>
  <div
- }
  className="ml-2 flex-shrink-0"
  >
  <ChevronDown className="w-4 h-4 text-white/70" />
@@ -143,13 +142,9 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
  </button>
 
  {/* Dropdown Menu - Rendered via Portal */}
- {typeof document !== 'undefined' &&
+ {typeof document !== 'undefined' && isOpen &&
  createPortal(
- 
- {isOpen && (
  <div
- }
- }
  className={cn(
  'fixed z-[99999]',
  'bg-black/95',
@@ -190,7 +185,6 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
  ))}
  </div>
  </div>
- )}
  ,
  document.body
  )}

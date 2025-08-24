@@ -30,7 +30,6 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({
 
  return (
  <div
- }
  className="grid grid-cols-1 lg:grid-cols-4 gap-6"
  >
  {statusColumns.map((status) => {

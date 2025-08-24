@@ -31,10 +31,10 @@ import {
  Check,
 } from 'lucide-react';
 
-interface PlatformAnalyticsProps {
- platform: 'meta' | 'google' | 'both';
 type DensityMode = 'compact' | 'normal' | 'comfortable';
 
+interface PlatformAnalyticsProps {
+ platform: 'meta' | 'google' | 'both';
 }
 
 const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
@@ -662,7 +662,6 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
  <motion.tr
  key={campaign.id}
  className="hover:bg-gray-50"
- }
  >
  <td
  className={`${densityStyles.padding} sticky left-0 bg-white`}

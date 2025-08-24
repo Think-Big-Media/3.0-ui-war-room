@@ -81,7 +81,6 @@ export const WebSocketTester: React.FC = () => {
 
  return (
  <div
- }
  className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm"
  >
  <div className="flex items-center justify-between mb-6">

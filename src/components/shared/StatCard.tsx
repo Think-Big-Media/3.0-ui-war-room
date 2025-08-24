@@ -68,7 +68,6 @@ const StatCardComponent: React.FC<StatCardProps> = ({
  <div className="flex flex-col gap-3">
  {Icon && (
  <div
- }
  className="self-start"
  >
  <Icon className={cn('text-white/70', iconSize)} />

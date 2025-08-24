@@ -191,3 +191,4 @@ export function useDataMode() {
     mode: isMock ? 'MOCK' : 'LIVE',
     apiUrl: import.meta.env.VITE_API_URL,
   };
+};

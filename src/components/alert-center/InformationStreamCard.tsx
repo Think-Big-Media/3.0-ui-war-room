@@ -30,7 +30,6 @@ const InformationStreamCard: React.FC<InformationStreamCardProps> = ({
  return (
  <Card
  key={item.id}
- }
  className={`cursor-pointer border-l-4 ${getPriorityColor(item.priority)}`}
  padding="sm"
  variant="glass"

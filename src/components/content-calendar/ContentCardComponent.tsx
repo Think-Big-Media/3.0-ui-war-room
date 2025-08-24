@@ -20,7 +20,6 @@ const ContentCardComponent: React.FC<ContentCardComponentProps> = ({
  // Detailed view for day view
  return (
  <div
- }
  className={`${getPlatformColor(content.platform)} rounded-lg p-4 flex items-center justify-between`}
  >
  <div className="flex items-center space-x-3">
@@ -50,7 +49,6 @@ const ContentCardComponent: React.FC<ContentCardComponentProps> = ({
  // Compact view for week/month view
  return (
  <div
- }
  className={`absolute inset-1 ${getPlatformColor(content.platform)} rounded-md p-2 cursor-pointer`}
  >
  <div className="flex items-center justify-between mb-1">

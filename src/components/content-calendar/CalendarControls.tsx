@@ -21,8 +21,6 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
 }) => {
  return (
  <div
- }
- }
  className="mb-6"
  >
  <Card padding="sm" variant="glass">

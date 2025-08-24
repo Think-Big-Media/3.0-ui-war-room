@@ -65,7 +65,6 @@ const InformationStreamsTab: React.FC<InformationStreamsTabProps> = ({
 
  return (
  <div
- }
  className="space-y-6"
  >
  {/* Stats Cards */}

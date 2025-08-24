@@ -21,7 +21,6 @@ interface WebSocketOptions {
   onReconnect?: (attempt: number) => void;
 }
 
-}
 
 interface WebSocketMessage {
   type: string;
@@ -29,7 +28,6 @@ interface WebSocketMessage {
   timestamp: string;
 }
 
-}
 
 interface UseWebSocketReturn {
   isConnected: boolean;
@@ -46,7 +44,6 @@ interface UseWebSocketReturn {
   subscribeToMetrics: (metrics: string[]) => void;
 }
 
-}
 
 export const useWebSocket = (
   url: string | null,

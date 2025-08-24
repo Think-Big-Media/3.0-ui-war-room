@@ -74,8 +74,6 @@ const ContentCalendarPage: React.FC = () => {
 
  {/* Calendar Grid */}
  <div
- }
- }
  className="mb-8"
  >
  <Card padding="md" variant="glass">

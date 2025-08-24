@@ -34,7 +34,6 @@ const AlertCard: React.FC<AlertCardProps> = ({
 }) => {
  return (
  <Card
- }
  className={`cursor-pointer border-l-4 ${getPriorityColor(alert.priority)}`}
  padding="sm"
  variant="glass"
@@ -66,8 +65,6 @@ const AlertCard: React.FC<AlertCardProps> = ({
  {/* Expanded Content */}
  {isExpanded && (
  <div
- }
- }
  className="mt-4 pt-4 border-t border-white/10"
  >
  <div className="space-y-3">

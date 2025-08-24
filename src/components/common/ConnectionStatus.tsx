@@ -85,7 +85,6 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
 
  return (
  <div
- }
  className={cn(
  'flex items-center justify-between p-3 rounded-lg border',
  config.color.includes('green') ? 'border-green-200' :
@@ -127,8 +126,6 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
  
  {error && onReconnect && reconnectAttempts < maxReconnectAttempts && (
  <button
- }
- }
  onClick={onReconnect}
  className="px-3 py-1 text-xs font-medium text-blue-600 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors"
  >

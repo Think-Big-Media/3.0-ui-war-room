@@ -22,8 +22,6 @@ const ScheduledPosts: React.FC = () => {
 
  return (
  <div
- }
- }
  >
  <Card padding="md" variant="glass">
  <h3 className="text-lg font-semibold text-white/95 mb-4">
