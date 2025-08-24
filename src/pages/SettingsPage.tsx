@@ -216,7 +216,7 @@ const SettingsPage: React.FC = () => {
             </div>
             <div className="flex items-start justify-between">
               <div className="flex items-start space-x-3 ml-2.5">
-                <Smartphone className="w-5 h-5 text-white/75 mt-0.5" />
+                <Smartphone className="w-5 h-5 text-white/75" />
                 <div className="ml-1.5">
                   <p className="content-title">
                     Push Notifications
@@ -235,7 +235,7 @@ const SettingsPage: React.FC = () => {
             </div>
             <div className="flex items-start justify-between">
               <div className="flex items-start space-x-3 ml-2.5">
-                <Globe className="w-5 h-5 text-white/75 mt-0.5" />
+                <Globe className="w-5 h-5 text-white/75" />
                 <div className="ml-1.5">
                   <p className="content-title">
                     Auto-Publish Content
@@ -272,7 +272,7 @@ const SettingsPage: React.FC = () => {
             </div>
             <div className="flex items-start justify-between">
               <div className="flex items-start space-x-3 ml-2.5">
-                <Moon className="w-5 h-5 text-white/75 mt-0.5" />
+                <Moon className="w-5 h-5 text-white/75" />
                 <div className="ml-1.5">
                   <p className="content-title">Dark Mode</p>
                   <p className="content-subtitle">
@@ -307,7 +307,7 @@ const SettingsPage: React.FC = () => {
           <div className="space-y-4 pb-5">
             <div className="flex items-start justify-between">
               <div className="flex items-start space-x-3 ml-2.5">
-                <Key className="w-5 h-5 text-white/75 mt-0.5" />
+                <Key className="w-5 h-5 text-white/75" />
                 <div className="ml-1.5">
                   <p className="content-title">
                     Two-Factor Authentication
@@ -341,7 +341,7 @@ const SettingsPage: React.FC = () => {
           <div className="space-y-4 pb-5">
             <div className="flex items-start justify-between">
               <div className="flex items-start space-x-3 ml-2.5">
-                <Share2 className="w-5 h-5 text-white/75 mt-0.5" />
+                <Share2 className="w-5 h-5 text-white/75" />
                 <div className="ml-1.5">
                   <p className="content-title">Data Sharing</p>
                   <p className="content-subtitle">
