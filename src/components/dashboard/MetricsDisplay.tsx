@@ -53,10 +53,10 @@ const MetricCard = memo<MetricCardProps>(
 
     return (
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700"
+        transition={{ duration: 0.2 }}
+        className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700 will-change-transform"
       >
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
