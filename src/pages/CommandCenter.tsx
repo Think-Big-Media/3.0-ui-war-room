@@ -74,13 +74,11 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
       }}
       whileHover={{
         y: -4,
-        scale: 1.02,
         transition: {
           duration: 0.2,
         },
       }}
       whileTap={{
-        scale: 0.98,
         transition: {
           duration: 0.1,
         },
