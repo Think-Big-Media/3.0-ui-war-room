@@ -336,10 +336,10 @@ const TopNavigation: React.FC = () => {
                     handleNavigation(item.path);
                     setIsMobileMenuOpen(false);
                   }}
-                  className={`w-full px-6 py-4 rounded-lg font-semibold transition-all duration-200 flex items-center space-x-3 ${
+                  className={`group w-full px-6 py-4 rounded-lg font-semibold transition-all duration-200 flex items-center space-x-3 ${
                     item.active
-                      ? 'text-white font-bold'
-                      : 'text-white/80 hover:bg-white/10'
+                      ? `text-white font-extrabold border-l-4 border-${item.theme.colors.border}`
+                      : `text-white/80 hover:bg-white/10 ${getNavHoverClasses(item.theme)}`
                   }`}
                 >
                   <item.icon
