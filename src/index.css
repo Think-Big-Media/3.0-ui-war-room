@@ -249,29 +249,19 @@
   }
 
   /* Per-item navigation hover behavior - each nav item uses its own accent */
-  .nav-item[data-route]:hover .icon,
-  .nav-item[data-route]:hover .label {
-    color: var(--accent-for-item);
+  .nav-item:hover .icon,
+  .nav-item:hover .label {
+    color: var(--item-accent) !important;
   }
 
-  /* Per-item accent mappings */
-  .nav-item[data-route='dashboard']:hover {
-    --accent-for-item: var(--accent-dashboard);
+  /* Ensure active state overrides hover for active items */
+  .nav-item[aria-current='page'] .icon {
+    color: var(--page-accent) !important;
   }
-  .nav-item[data-route='live-monitoring']:hover {
-    --accent-for-item: var(--accent-live-monitoring);
-  }
-  .nav-item[data-route='war-room']:hover {
-    --accent-for-item: var(--accent-war-room);
-  }
-  .nav-item[data-route='intelligence']:hover {
-    --accent-for-item: var(--accent-intelligence);
-  }
-  .nav-item[data-route='alert-center']:hover {
-    --accent-for-item: var(--accent-alert-center);
-  }
-  .nav-item[data-route='settings']:hover {
-    --accent-for-item: var(--accent-settings);
+
+  /* Active item text color unchanged unless specified */
+  .nav-item[aria-current='page'] .label {
+    color: var(--active-text, #fff) !important;
   }
 
   /* Active page navigation styling */
