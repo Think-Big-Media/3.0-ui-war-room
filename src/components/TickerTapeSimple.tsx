@@ -64,15 +64,17 @@ const TickerTapeSimple: React.FC = () => {
           }
         `}</style>
         <div className="ticker-content-simple">
-          {/* Repeat items 8 times for absolutely seamless loop */}
-          {[...testItems, ...testItems, ...testItems, ...testItems, ...testItems, ...testItems, ...testItems, ...testItems].map((item, index) => (
-            <div
-              key={`simple-ticker-${index}`}
-              className="ticker-item-simple"
-            >
-              {item}
-            </div>
-          ))}
+          {/* Create multiple sets to ensure continuous flow */}
+          {Array.from({ length: 15 }, (_, setIndex) =>
+            testItems.map((item, itemIndex) => (
+              <div
+                key={`simple-ticker-${setIndex}-${itemIndex}`}
+                className="ticker-item-simple"
+              >
+                {item}
+              </div>
+            ))
+          ).flat()}
         </div>
       </div>
       
