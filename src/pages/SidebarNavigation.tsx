@@ -321,7 +321,6 @@ const TopNavigation: React.FC = () => {
 
             {/* User Profile */}
             <motion.button
-              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/settings')}
               className="p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200"
@@ -331,7 +330,6 @@ const TopNavigation: React.FC = () => {
 
             {/* Mobile Menu Button - Far Right */}
             <motion.button
-              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200"
