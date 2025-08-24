@@ -425,8 +425,8 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
               <motion.button
                 type="submit"
                 disabled={!message.trim()}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{}}
+                whileTap={{}}
                 className={`p-2 rounded-xl transition-all duration-200 ${
                   message.trim()
                     ? 'bg-white/80 text-gray-800 shadow-lg hover:bg-white'
