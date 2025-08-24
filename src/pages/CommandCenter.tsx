@@ -407,6 +407,12 @@ const CampaignOperationsHub: React.FC = () => {
 };
 
 const CommandCenter: React.FC = () => {
+  console.error('🟢🟢🟢 COMMANDCENTER IS RENDERING! 🟢🟢🟢');
+  logger.info('CommandCenter: Component mounting...');
+  logger.debug('CommandCenter: Should show purple gradient background');
+  logger.debug(
+    'CommandCenter: Three main cards + Campaign Operations Hub + Intelligence Dashboard + Quick Actions'
+  );
 
   return (
     <PageLayout

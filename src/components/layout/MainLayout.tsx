@@ -32,6 +32,9 @@ interface NavItem {
 }
 
 export function MainLayout() {
+  console.error(
+    '🚨🚨🚨 MAINLAYOUT LOADED - DEBUG BANNER SHOULD BE VISIBLE 🚨🚨🚨'
+  );
   const navigate = useNavigate();
   const location = useLocation();
   // const { user, signOut } = useSupabaseAuth();
