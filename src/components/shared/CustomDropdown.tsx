@@ -178,7 +178,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
                         className={cn(
                           'w-full px-4 py-2 text-left text-sm font-mono uppercase',
                           'flex items-center justify-between',
-                          'transition-all duration-300',
+                          'transition-colors duration-200',
                           'text-white/80 hover:bg-white/30 hover:text-white'
                         )}
                       >
