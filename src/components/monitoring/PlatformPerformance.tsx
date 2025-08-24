@@ -31,16 +31,7 @@ const PlatformPerformance: React.FC<PlatformPerformanceProps> = ({
 
   return (
     <Card padding="md" variant="glass">
-      <h3
-        className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide ml-1.5"
-        style={{
-          textRendering: 'optimizeLegibility',
-          WebkitFontSmoothing: 'antialiased',
-          MozOsxFontSmoothing: 'grayscale',
-          fontKerning: 'normal',
-          textSizeAdjust: '100%',
-        }}
-      >
+      <h3 className="section-header mb-4 tracking-wide ml-1.5">
         PLATFORM PERFORMANCE
       </h3>
       <div className="space-y-3 px-1.5">

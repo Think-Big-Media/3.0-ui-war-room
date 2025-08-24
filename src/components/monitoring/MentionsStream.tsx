@@ -82,16 +82,7 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
   return (
     <Card padding="md" variant="glass">
       <div className="flex items-center justify-between mb-3">
-        <h3
-          className="text-xl font-semibold text-white/40 font-condensed tracking-wide ml-2"
-          style={{
-            textRendering: 'optimizeLegibility',
-            WebkitFontSmoothing: 'antialiased',
-            MozOsxFontSmoothing: 'grayscale',
-            fontKerning: 'normal',
-            textSizeAdjust: '100%',
-          }}
-        >
+        <h3 className="section-header tracking-wide ml-2">
           LIVE MENTIONS STREAM
         </h3>
         <div className="flex items-center space-x-2">
