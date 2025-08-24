@@ -317,7 +317,7 @@ const CampaignOperationsHub: React.FC = () => {
           duration: 0.2,
         },
       }}
-      className="group"
+      className="group hover:border-orange-400/50 hover:bg-black/25"
       padding="md"
       variant="glass"
     >
