@@ -81,14 +81,10 @@ const QuickActions: React.FC = () => {
             key={index}
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-black/20 backdrop-blur-sm rounded-xl p-4 lg:p-5 border border-white/20 hover:bg-black/25 hoverable transition-all duration-300 flex flex-col items-center space-y-2"
-            style={{
-              '--page-accent': action.accentColor,
-            } as React.CSSProperties}
+            className={`bg-black/20 backdrop-blur-sm rounded-xl p-4 lg:p-5 border border-white/20 hover:bg-black/25 hoverable transition-all duration-300 flex flex-col items-center space-y-2 quick-action-${action.accentKey}`}
           >
             <action.icon
-              className="w-6 h-6 lg:w-8 lg:h-8"
-              style={{ color: action.accentColor }}
+              className="w-6 h-6 lg:w-8 lg:h-8 quick-action-icon"
             />
             <span className="content-title text-white/90">{action.label}</span>
           </motion.button>
