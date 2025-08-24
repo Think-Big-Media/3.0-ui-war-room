@@ -176,11 +176,11 @@ style={{
 ### Site-Wide Button Spacing Rule
 
 **All buttons** use reduced letter spacing for optimal readability of multi-word labels:
-- **Letter Spacing**: `letter-spacing: -0.05em` (halved spacing)
-- **Enforcement**: Global CSS rule applied to all `button` elements
+- **Letter Spacing**: `tracking-[-0.05em]` (Tailwind arbitrary value) or `letter-spacing: -0.05em`
+- **Enforcement**: Tailwind utility classes + global CSS rule with `!important`
 - **Applies to**: Primary buttons, Secondary buttons, Action buttons, inline buttons
-- **Examples**: "RESPOND NOW", "Add to Alert", "Generate Response", "Go to Login Page"
-- **Implementation**: Added to all button classes + global `button` selector
+- **Examples**: "RESPOND NOW", "Add to Alert", "Generate Response", "View Mentions"
+- **Implementation**: `tracking-[-0.05em]` in all button @apply directives + global fallback
 
 ### Secondary Button Variants
 
