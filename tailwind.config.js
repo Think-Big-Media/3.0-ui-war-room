@@ -1,6 +1,36 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  safelist: [
+    // Navigation hover states - ensure these dynamic classes are never purged
+    'group-hover:text-orange-500',
+    'group-hover:text-green-500',
+    'group-hover:text-red-500',
+    'group-hover:text-blue-500',
+    'group-hover:text-amber-500',
+    'group-hover:text-purple-500',
+    // Active state classes
+    'text-orange-500',
+    'text-green-500',
+    'text-red-500',
+    'text-blue-500',
+    'text-amber-500',
+    'text-purple-500',
+    // Background classes for active states
+    'bg-orange-400/10',
+    'bg-green-400/10',
+    'bg-red-400/10',
+    'bg-blue-400/10',
+    'bg-amber-400/10',
+    'bg-purple-400/10',
+    // Border classes for active states
+    'border-orange-400/50',
+    'border-green-400/50',
+    'border-red-400/50',
+    'border-blue-400/50',
+    'border-amber-400/50',
+    'border-purple-400/50',
+  ],
   theme: {
     extend: {
       fontFamily: {
