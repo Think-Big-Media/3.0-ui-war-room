@@ -258,6 +258,7 @@
 
   /* Hoverable border system - replaces transform/scale with border-color changes */
   .hoverable {
+    border: 1px solid var(--border-neutral, rgba(255,255,255,0.15));
     transition: border-color 160ms ease;
   }
 
