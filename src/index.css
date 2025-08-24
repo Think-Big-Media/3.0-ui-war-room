@@ -197,6 +197,10 @@
     --page-accent: var(--accent-live-monitoring);
   }
 
+  .page-live-monitoring {
+    --page-accent: var(--accent-live-monitoring);
+  }
+
   .page-warroom {
     --page-accent: var(--accent-war-room);
   }
