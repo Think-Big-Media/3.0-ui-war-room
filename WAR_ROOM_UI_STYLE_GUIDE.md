@@ -40,10 +40,18 @@ fontFamily: {
 
 /* Content Typography Classes */
 .content-subtitle {
-  @apply text-xs lg:text-sm text-white/50;
+  @apply text-white/50;
   font-family: 'Barlow Condensed', sans-serif;
-  line-height: 16px;
-  margin-top: 8px;
+  font-size: 13px;
+  line-height: 17px;
+  margin-top: 6px;
+}
+
+@media (min-width: 1024px) {
+  .content-subtitle {
+    font-size: 15px;
+    line-height: 19px;
+  }
 }
 
 .content-title {
