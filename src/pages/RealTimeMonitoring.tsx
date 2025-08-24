@@ -53,7 +53,8 @@ const RealTimeMonitoring: React.FC = () => {
   });
 
   return (
-    <PageLayout
+    <div className="page-monitoring">
+      <PageLayout
       pageTitle="Live Monitoring"
       placeholder="Ask War Room about monitoring data..."
     >
@@ -84,7 +85,8 @@ const RealTimeMonitoring: React.FC = () => {
           <InfluencerTracker influencers={mockInfluencers} />
         </div>
       </div>
-    </PageLayout>
+      </PageLayout>
+    </div>
   );
 };
 
