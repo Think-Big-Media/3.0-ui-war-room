@@ -148,11 +148,8 @@ const SettingsPage: React.FC = () => {
   return (
     <div className="page-settings">
       <PageLayout pageTitle="Settings" placeholder="Ask about settings...">
-        {/* Slate/Gray gradient background with fire accents */}
-        <div
-          className={`fixed inset-0 bg-gradient-to-br ${pageGradients.settings} -z-10`}
-        />
-        <div className={`fixed inset-0 ${fireAccentOverlay} -z-10`} />
+        {/* Consistent slate background */}
+        <div className="fixed inset-0 bg-gradient-to-br from-slate-600 via-slate-700 to-slate-800 -z-10" />
         <div />
 
         {/* Settings Grid */}
