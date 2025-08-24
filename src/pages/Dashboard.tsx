@@ -251,7 +251,7 @@ const Dashboard: React.FC = () => {
           </div>
 
           {/* Time Range Selector */}
-          <div className="flex items-center space-x-2 bg-black/20 backdrop-blur-md rounded-lg border border-[#8B956D]/30 p-1">
+          <div className="flex items-center space-x-2 bg-black/20 rounded-lg border border-[#8B956D]/30 p-1">
             {['24h', '7d', '30d', '90d'].map((range) => (
               <button
                 key={range}
