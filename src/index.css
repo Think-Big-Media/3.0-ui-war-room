@@ -246,7 +246,7 @@
   /* Section Header - Major headings across the site */
   .section-header {
     @apply text-white/50 uppercase;
-    font: 600 20px/29px "Barlow Semi Condensed", sans-serif;
+    font: 600 20px/29px "Barlow Condensed", sans-serif;
   }
 
   /* Icon alignment in buttons - move up 2px for better alignment */
