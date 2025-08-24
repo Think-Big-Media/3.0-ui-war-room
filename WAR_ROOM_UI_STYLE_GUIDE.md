@@ -171,9 +171,16 @@ style={{
 </span>
 ```
 
-## Secondary Button System
+## Button System (Primary & Secondary)
 
-### Button Variants
+### Site-Wide Button Spacing Rule
+
+**All buttons** use reduced letter spacing for optimal readability of multi-word labels:
+- **Letter Spacing**: `letter-spacing: -0.05em` (halved spacing)
+- **Applies to**: Primary buttons, Secondary buttons, Action buttons
+- **Examples**: "RESPOND NOW", "Add to Alert", "Generate Response"
+
+### Secondary Button Variants
 
 Three standardized secondary button types with specific use cases:
 
