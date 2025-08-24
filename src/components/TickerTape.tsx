@@ -155,7 +155,7 @@ const TickerTape: React.FC = () => {
             background-color: rgba(255, 255, 255, 0.1);
           }
         `}</style>
-        <div className="ticker-content space-x-8 whitespace-nowrap">
+        <div className="ticker-content">
           {/* Repeat items multiple times to ensure seamless loop */}
           {[...tickerItems, ...tickerItems, ...tickerItems].map(
             (item, index) => {
