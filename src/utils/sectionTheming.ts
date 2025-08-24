@@ -94,10 +94,10 @@ export function getSectionTheme(pathname: string): SectionTheme {
 }
 
 /**
- * Get CSS classes for navigation active state based on theme (icon only)
+ * Get CSS classes for navigation active state based on theme
  */
 export function getNavActiveClasses(theme: SectionTheme): string {
-  return `text-white font-medium`;
+  return `bg-${theme.colors.background} text-white font-extrabold border border-${theme.colors.border}`;
 }
 
 /**
@@ -105,6 +105,20 @@ export function getNavActiveClasses(theme: SectionTheme): string {
  */
 export function getNavIconActiveClasses(theme: SectionTheme): string {
   return `text-${theme.colors.primary}`;
+}
+
+/**
+ * Get CSS classes for navigation hover state based on theme (both icon and text)
+ */
+export function getNavHoverClasses(theme: SectionTheme): string {
+  return `hover:text-${theme.colors.primary}`;
+}
+
+/**
+ * Get CSS classes for navigation icon hover state based on theme
+ */
+export function getNavIconHoverClasses(theme: SectionTheme): string {
+  return `group-hover:text-${theme.colors.primary}`;
 }
 
 /**
