@@ -34,6 +34,8 @@ export default {
     'bg-red-500/20',
     'border-red-500/30',
     'text-red-400',
+    // Button letter spacing
+    'tracking-[-0.05em]',
   ],
   theme: {
     extend: {
