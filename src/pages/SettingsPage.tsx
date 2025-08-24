@@ -199,9 +199,7 @@ const SettingsPage: React.FC = () => {
               <div className="flex items-start space-x-3 ml-2.5">
                 <Mail className="w-5 h-5 text-white/75" />
                 <div className="ml-1.5">
-                  <p className="content-title">
-                    Email Notifications
-                  </p>
+                  <p className="content-title">Email Notifications</p>
                   <p className="content-subtitle">
                     Receive campaign updates via email
                   </p>
@@ -218,9 +216,7 @@ const SettingsPage: React.FC = () => {
               <div className="flex items-start space-x-3 ml-2.5">
                 <Smartphone className="w-5 h-5 text-white/75" />
                 <div className="ml-1.5">
-                  <p className="content-title">
-                    Push Notifications
-                  </p>
+                  <p className="content-title">Push Notifications</p>
                   <p className="content-subtitle">
                     Get instant alerts on your device
                   </p>
@@ -237,9 +233,7 @@ const SettingsPage: React.FC = () => {
               <div className="flex items-start space-x-3 ml-2.5">
                 <Globe className="w-5 h-5 text-white/75" />
                 <div className="ml-1.5">
-                  <p className="content-title">
-                    Auto-Publish Content
-                  </p>
+                  <p className="content-title">Auto-Publish Content</p>
                   <p className="content-subtitle">
                     Automatically publish scheduled content
                   </p>
@@ -309,9 +303,7 @@ const SettingsPage: React.FC = () => {
               <div className="flex items-start space-x-3 ml-2.5">
                 <Key className="w-5 h-5 text-white/75" />
                 <div className="ml-1.5">
-                  <p className="content-title">
-                    Two-Factor Authentication
-                  </p>
+                  <p className="content-title">Two-Factor Authentication</p>
                   <p className="content-subtitle">
                     Add an extra layer of security
                   </p>
@@ -456,9 +448,7 @@ const SettingsPage: React.FC = () => {
                 })()
               ) : (
                 <div className="p-6 bg-black/30 backdrop-blur-sm rounded-xl border border-white/20">
-                  <h4 className="content-title mb-2">
-                    Meta Business Suite
-                  </h4>
+                  <h4 className="content-title mb-2">Meta Business Suite</h4>
                   <p className="content-subtitle mb-4">
                     OAuth integration not loaded
                   </p>
@@ -486,9 +476,7 @@ const SettingsPage: React.FC = () => {
                 })()
               ) : (
                 <div className="p-6 bg-black/30 backdrop-blur-sm rounded-xl border border-white/20">
-                  <h4 className="content-title mb-2">
-                    Google Ads
-                  </h4>
+                  <h4 className="content-title mb-2">Google Ads</h4>
                   <p className="content-subtitle mb-4">
                     OAuth integration not loaded
                   </p>

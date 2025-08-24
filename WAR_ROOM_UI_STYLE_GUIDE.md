@@ -501,11 +501,13 @@ All settings page toggle items (notifications, security, appearance, privacy) us
 ### Applied To
 
 **Toggle Items** (use content-title/content-subtitle):
+
 - Email Notifications, Push Notifications, Auto-Publish Content
 - Two-Factor Authentication, Dark Mode, Data Sharing
 - Any future toggle-based settings items
 
 **Form Labels** (use JetBrains Mono):
+
 - Display Name, Email Address, Company Name
 - Theme, Language, Timezone, Date Format
 - Any input field labels
