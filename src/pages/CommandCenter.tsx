@@ -95,7 +95,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
           <Icon className={`w-6 h-6 lg:w-8 lg:h-8 text-white/95 group-hover:text-${sectionTheme.colors.text} transition-colors duration-300`} />
         </div>
         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div className="text-xs text-orange-300 font-medium">
+          <div className={`text-xs text-${sectionTheme.colors.text} font-medium`}>
             Click to explore →
           </div>
         </div>
