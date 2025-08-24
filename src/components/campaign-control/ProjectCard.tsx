@@ -15,7 +15,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
   return (
     <Card
       whileHover={{ scale: 1.02 }}
-      className={`cursor-pointer border-l-4 ${getPriorityColor(project.priority)}`}
+      className={`cursor-pointer ${getPriorityColor(project.priority)} hoverable`}
       padding="sm"
       variant="glass"
       onClick={() => onClick(project)}
@@ -39,8 +39,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
         </div>
         <div className="w-full bg-black/20 rounded-full h-1">
           <div
-            className="bg-blue-400 h-1 rounded-full transition-all duration-300"
-            style={{ width: `${project.progress}%` }}
+            className="h-1 rounded-full transition-all duration-300"
+            style={{
+              width: `${project.progress}%`,
+              backgroundColor: 'var(--page-accent)'
+            }}
           />
         </div>
       </div>

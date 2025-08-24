@@ -15,35 +15,35 @@ import {
 
 import { type ProjectStatus, type ProjectPriority, type AssetType, type ActivityType } from '../../types/campaign';
 
-// Status color utilities
+// Status color utilities - using neutral backgrounds with accent borders
 export const getStatusColor = (status: ProjectStatus): string => {
   switch (status) {
     case 'planning':
-      return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
+      return 'bg-transparent text-white/90 border border-white/20';
     case 'in-progress':
-      return 'bg-blue-500/20 text-blue-400 border-blue-500/30';
+      return 'bg-transparent text-white/90 border border-white/20';
     case 'review':
-      return 'bg-orange-500/20 text-orange-400 border-orange-500/30';
+      return 'bg-transparent text-white/90 border border-white/20';
     case 'completed':
-      return 'bg-green-500/20 text-green-400 border-green-500/30';
+      return 'bg-transparent text-white/90 border border-white/20';
     default:
-      return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
+      return 'bg-transparent text-white/90 border border-white/20';
   }
 };
 
-// Priority color utilities
+// Priority color utilities - using neutral backgrounds with accent text
 export const getPriorityColor = (priority: ProjectPriority): string => {
   switch (priority) {
     case 'urgent':
-      return 'border-red-500 bg-red-500/10';
+      return 'border-l-4 border-l-red-500 bg-transparent';
     case 'high':
-      return 'border-orange-500 bg-orange-500/10';
+      return 'border-l-4 border-l-orange-500 bg-transparent';
     case 'medium':
-      return 'border-yellow-500 bg-yellow-500/10';
+      return 'border-l-4 border-l-yellow-500 bg-transparent';
     case 'low':
-      return 'border-gray-500 bg-gray-500/10';
+      return 'border-l-4 border-l-gray-500 bg-transparent';
     default:
-      return 'border-gray-500 bg-gray-500/10';
+      return 'border-l-4 border-l-gray-500 bg-transparent';
   }
 };
 
