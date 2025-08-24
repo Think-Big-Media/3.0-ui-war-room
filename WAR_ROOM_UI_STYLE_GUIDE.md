@@ -44,7 +44,7 @@ fontFamily: {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 13px;
   line-height: 17px;
-  margin-top: 6px;
+  margin-top: -1px;
 }
 
 @media (min-width: 1024px) {
@@ -55,8 +55,9 @@ fontFamily: {
 }
 
 .content-title {
-  @apply font-bold text-white/95;
+  @apply text-white/95;
   font-family: 'Barlow Semi Condensed', sans-serif;
+  font-weight: 500;
   font-size: 15px;
   line-height: 19px;
 }
