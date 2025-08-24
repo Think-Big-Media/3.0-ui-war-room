@@ -160,7 +160,7 @@ const SettingsPage: React.FC = () => {
         <SettingsSection title="Profile Settings" icon={User} delay={0.1}>
           <div className="space-y-4 pb-5">
             <div>
-              <label className="content-title ml-1.5">
+              <label className="block text-sm font-mono text-white/75 mb-1 ml-1.5 uppercase tracking-wider">
                 Display Name
               </label>
               <input
@@ -170,7 +170,7 @@ const SettingsPage: React.FC = () => {
               />
             </div>
             <div>
-              <label className="content-title ml-1.5">
+              <label className="block text-sm font-mono text-white/75 mb-1 ml-1.5 uppercase tracking-wider">
                 Email Address
               </label>
               <input
@@ -180,7 +180,7 @@ const SettingsPage: React.FC = () => {
               />
             </div>
             <div>
-              <label className="content-title ml-1.5">
+              <label className="block text-sm font-mono text-white/75 mb-1 ml-1.5 uppercase tracking-wider">
                 Company Name
               </label>
               <input
@@ -256,7 +256,7 @@ const SettingsPage: React.FC = () => {
         <SettingsSection title="Appearance" icon={Palette} delay={0.3}>
           <div className="space-y-4 pb-5">
             <div>
-              <label className="content-title ml-1.5">
+              <label className="block text-sm font-mono text-white/75 mb-1 ml-1.5 uppercase tracking-wider">
                 Theme
               </label>
               <div className="ml-1.5">
@@ -285,7 +285,7 @@ const SettingsPage: React.FC = () => {
               </div>
             </div>
             <div>
-              <label className="content-title ml-1.5">
+              <label className="block text-sm font-mono text-white/75 mb-1 ml-1.5 uppercase tracking-wider">
                 Language
               </label>
               <div className="ml-1.5">
@@ -372,7 +372,7 @@ const SettingsPage: React.FC = () => {
         <SettingsSection title="Regional" icon={Globe} delay={0.6}>
           <div className="space-y-4 pb-5">
             <div>
-              <label className="content-title ml-1.5">
+              <label className="block text-sm font-mono text-white/75 mb-1 ml-1.5 uppercase tracking-wider">
                 Timezone
               </label>
               <div className="ml-1.5">
@@ -387,7 +387,7 @@ const SettingsPage: React.FC = () => {
               </div>
             </div>
             <div>
-              <label className="content-title ml-1.5">
+              <label className="block text-sm font-mono text-white/75 mb-1 ml-1.5 uppercase tracking-wider">
                 Date Format
               </label>
               <div className="ml-1.5">
