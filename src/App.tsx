@@ -332,12 +332,28 @@ function App() {
           }
         />
 
+        {/* DEBUG: Simple test route */}
+        <Route
+          path="/test-route"
+          element={
+            <div style={{padding: '20px', background: 'green', color: 'white'}}>
+              {console.log('🎯 TEST ROUTE HIT: /test-route') || null}
+              <h1>TEST ROUTE WORKS!</h1>
+              <p>Current path: {window.location.pathname}</p>
+            </div>
+          }
+        />
+
         {/* DEBUG: CommandCenter Routes with console logs */}
         <Route
           path="/command-center"
           element={
             <div>
               {console.log('🎯 ROUTE HIT: /command-center') || null}
+              <div style={{padding: '20px', background: 'blue', color: 'white'}}>
+                <h1>CommandCenter Route Hit!</h1>
+                <p>About to load CommandCenter component...</p>
+              </div>
               <React.Suspense
                 fallback={<LazyLoadFallback componentName="CommandCenter" />}
               >
@@ -351,6 +367,10 @@ function App() {
           element={
             <div>
               {console.log('🎯 ROUTE HIT: /CommandCenter') || null}
+              <div style={{padding: '20px', background: 'purple', color: 'white'}}>
+                <h1>CommandCenter Route Hit (uppercase)!</h1>
+                <p>About to load CommandCenter component...</p>
+              </div>
               <React.Suspense
                 fallback={<LazyLoadFallback componentName="CommandCenter" />}
               >
