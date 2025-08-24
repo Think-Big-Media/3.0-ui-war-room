@@ -66,37 +66,37 @@ const TopNavigation: React.FC = () => {
   const navItems = [
     {
       icon: Home,
-      label: 'Command Center',
+      label: 'DASHBOARD',
       path: '/',
       active: location.pathname === '/',
     },
     {
       icon: BarChart3,
-      label: 'Real-Time Monitoring',
+      label: 'LIVE MONITORING',
       path: '/real-time-monitoring',
       active: location.pathname === '/real-time-monitoring',
     },
     {
       icon: Target,
-      label: 'Campaign Control',
+      label: 'WAR ROOM',
       path: '/campaign-control',
       active: location.pathname === '/campaign-control',
     },
     {
       icon: Brain,
-      label: 'Intelligence Hub',
+      label: 'INTELLIGENCE',
       path: '/intelligence-hub',
       active: location.pathname === '/intelligence-hub',
     },
     {
       icon: Bell,
-      label: 'Alert Center',
+      label: 'ALERT CENTER',
       path: '/alert-center',
       active: location.pathname === '/alert-center',
     },
     {
       icon: Settings,
-      label: 'Settings',
+      label: 'SETTINGS',
       path: '/settings',
       active: location.pathname === '/settings',
     },
@@ -146,7 +146,7 @@ const TopNavigation: React.FC = () => {
   const unreadAlerts = teamAlerts.filter((alert) => alert.status === 'unread');
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-800/95 backdrop-blur-xl border-b border-slate-600/30">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/98 backdrop-blur-xl border-b border-slate-700/40">
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo/Brand */}
@@ -158,33 +158,26 @@ const TopNavigation: React.FC = () => {
             />
           </div>
 
-          {/* Navigation Items - Match Builder.io Design */}
-          <div className="hidden md:flex items-center space-x-6">
-            {navItems.map((item, index) => {
-              // Map to Builder.io navigation labels
-              const builderLabels: {[key: string]: string} = {
-                'Command Center': 'DASHBOARD',
-                'Real-Time Monitoring': 'LIVE MONITORING', 
-                'Campaign Control': 'WAR ROOM',
-                'Intelligence Hub': 'INTELLIGENCE',
-                'Alert Center': 'ALERT CENTER',
-                'Settings': 'SETTINGS'
-              };
-              
-              return (
-                <button
-                  key={index}
-                  onClick={() => handleNavigation(item.path)}
-                  className={`px-4 py-2 text-sm font-semibold tracking-wide transition-all duration-200 ${
-                    item.active
-                      ? 'text-white border-b-2 border-white'
-                      : 'text-white/80 hover:text-white hover:border-b-2 hover:border-white/50'
-                  }`}
-                >
-                  {builderLabels[item.label] || item.label.toUpperCase()}
-                </button>
-              );
-            })}
+          {/* Navigation Items - Match Builder.io Design EXACTLY */}
+          <div className="hidden md:flex items-center space-x-8">
+            {navItems.map((item, index) => (
+              <button
+                key={index}
+                onClick={() => handleNavigation(item.path)}
+                className={`px-4 py-3 text-base font-bold tracking-wider transition-all duration-200 ${
+                  item.active
+                    ? 'text-white border-b-2 border-blue-400 bg-white/5'
+                    : 'text-white/90 hover:text-white hover:border-b-2 hover:border-blue-400/70 hover:bg-white/5'
+                }`}
+                style={{
+                  letterSpacing: '0.05em',
+                  fontSize: '15px',
+                  fontWeight: '700'
+                }}
+              >
+                {item.label}
+              </button>
+            ))}
           </div>
 
           {/* Right Side Actions */}
