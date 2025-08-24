@@ -1,22 +1,25 @@
 /**
  * Dynamic Section Theming System
  * Provides consistent color theming based on current route/section
+ * Uses CSS variables for dynamic theming
  */
 
 export interface SectionTheme {
   name: string;
+  pageAccent: string; // CSS variable value for --page-accent
   colors: {
-    primary: string; // Main accent color
-    border: string; // Border hover colors
-    text: string; // Text accent colors
-    background: string; // Background accent colors
-    light: string; // Light variant for backgrounds
+    primary: string; // Main accent color (legacy)
+    border: string; // Border hover colors (legacy)
+    text: string; // Text accent colors (legacy)
+    background: string; // Background accent colors (legacy)
+    light: string; // Light variant for backgrounds (legacy)
   };
 }
 
 export const SECTION_THEMES: Record<string, SectionTheme> = {
   dashboard: {
     name: 'Dashboard',
+    pageAccent: '#6366f1', // indigo-500
     colors: {
       primary: 'orange-500',
       border: 'orange-400/50',
@@ -27,6 +30,7 @@ export const SECTION_THEMES: Record<string, SectionTheme> = {
   },
   monitoring: {
     name: 'Live Monitoring',
+    pageAccent: '#22c55e', // green-500
     colors: {
       primary: 'green-500',
       border: 'green-400/50',
@@ -37,6 +41,7 @@ export const SECTION_THEMES: Record<string, SectionTheme> = {
   },
   warroom: {
     name: 'War Room',
+    pageAccent: '#ef4444', // red-500
     colors: {
       primary: 'red-500',
       border: 'red-400/50',
@@ -47,6 +52,7 @@ export const SECTION_THEMES: Record<string, SectionTheme> = {
   },
   intelligence: {
     name: 'Intelligence',
+    pageAccent: '#3b82f6', // blue-500
     colors: {
       primary: 'blue-500',
       border: 'blue-400/50',
@@ -57,6 +63,7 @@ export const SECTION_THEMES: Record<string, SectionTheme> = {
   },
   alerts: {
     name: 'Alert Center',
+    pageAccent: '#f59e0b', // amber-500
     colors: {
       primary: 'amber-500',
       border: 'amber-400/50',
@@ -67,6 +74,7 @@ export const SECTION_THEMES: Record<string, SectionTheme> = {
   },
   settings: {
     name: 'Settings',
+    pageAccent: '#a855f7', // purple-500
     colors: {
       primary: 'purple-500',
       border: 'purple-400/50',
