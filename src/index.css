@@ -100,7 +100,7 @@
   select,
   textarea {
     @apply font-mono text-sm;
-    letter-spacing: -0.025em; /* Tighter spacing for mono font */
+    /* letter-spacing reverted to default - no global override */
   }
 
   /* Code and technical text */
