@@ -71,7 +71,7 @@ export const Head: React.FC<HeadProps> = ({
       <meta name="keywords" content={metaKeywords} />
       <meta name="author" content={metaAuthor} />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="theme-color" content="#3b82f6" />
+      <meta name="theme-color" content="#D97706" />
 
       {/* Canonical URL */}
       {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
