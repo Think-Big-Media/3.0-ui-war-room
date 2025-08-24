@@ -271,11 +271,14 @@ const SettingsPage: React.FC = () => {
               </div>
             </div>
             <div className="flex items-start justify-between">
-              <div className="ml-4">
-                <p className="text-white/90 font-medium">Dark Mode</p>
-                <p className="text-sm text-white/60 font-condensed tracking-wide -mt-1">
-                  Use dark theme across the platform
-                </p>
+              <div className="flex items-start space-x-3 ml-2.5">
+                <Moon className="w-5 h-5 text-white/75 mt-0.5" />
+                <div className="ml-1.5">
+                  <p className="content-title">Dark Mode</p>
+                  <p className="content-subtitle">
+                    Use dark theme across the platform
+                  </p>
+                </div>
               </div>
               <div className="mt-1">
                 <ToggleSwitch enabled={darkMode} onChange={setDarkMode} />
