@@ -239,7 +239,7 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
                         <motion.button
                           key={chat.id}
                           onClick={() => openChat(chat)}
-                          whileHover={{ scale: 1.02 }}
+                          whileHover={{}}
                           className="w-full p-3 bg-white/60 hover:bg-white/80 rounded-xl border border-gray-200/50 hover:border-gray-300/50 transition-all duration-200 text-left"
                         >
                           <div className="flex justify-between items-start mb-1">
