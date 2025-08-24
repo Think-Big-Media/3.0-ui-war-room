@@ -128,8 +128,8 @@ export const mockSentimentData: SentimentData = {
 };
 
 export const mockPlatformPerformance: PlatformPerformance[] = [
-  { platform: 'Twitter', percentage: 45, icon: 'MessageSquare', color: 'text-blue-400' },
-  { platform: 'Facebook', percentage: 28, icon: 'Users', color: 'text-blue-600' },
-  { platform: 'Reddit', percentage: 15, icon: 'Globe', color: 'text-orange-500' },
-  { platform: 'News', percentage: 12, icon: 'BarChart3', color: 'text-green-500' },
+  { platform: 'Twitter', percentage: 45, icon: 'MessageSquare', color: 'platform-social' },
+  { platform: 'Facebook', percentage: 28, icon: 'Users', color: 'platform-social' },
+  { platform: 'Reddit', percentage: 15, icon: 'Globe', color: 'platform-forum' },
+  { platform: 'News', percentage: 12, icon: 'BarChart3', color: 'platform-news' },
 ];
