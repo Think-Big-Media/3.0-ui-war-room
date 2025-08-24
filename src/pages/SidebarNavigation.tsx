@@ -381,7 +381,7 @@ const TopNavigation: React.FC = () => {
                           : getNavIconHoverClasses(item.theme)
                       }`}
                     />
-                    <span className="text-lg">{item.label}</span>
+                    <span className={`text-lg ${item.active ? '' : getNavHoverClasses(item.theme)}`}>{item.label}</span>
                   </motion.button>
                 ))}
               </div>
