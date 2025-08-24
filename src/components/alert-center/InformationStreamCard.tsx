@@ -31,8 +31,7 @@ const InformationStreamCard: React.FC<InformationStreamCardProps> = ({
   return (
     <Card
       key={item.id}
-      whileHover={{ scale: 1.01 }}
-      className={`cursor-pointer border-l-4 ${getPriorityColor(item.priority)}`}
+      className={`hoverable cursor-pointer border-l-4 ${getPriorityColor(item.priority)}`}
       padding="sm"
       variant="glass"
       onClick={() => onClick(item)}

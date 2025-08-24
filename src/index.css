@@ -294,9 +294,17 @@
     transition: border-color 160ms ease;
   }
 
-  /* Page-scoped reinforcement for Live Monitoring - overrides any conflicts */
+  /* Page-scoped reinforcement for specific routes - overrides any conflicts */
   [data-route='live-monitoring'] .hoverable:hover {
     border-color: var(--accent-live-monitoring) !important;
+  }
+
+  [data-route='alert-center'] .hoverable:hover {
+    border-color: var(--accent-alert-center) !important;
+  }
+
+  [data-route='settings'] .hoverable:hover {
+    border-color: var(--accent-settings) !important;
   }
 
   /* Shared selectors for consistency */

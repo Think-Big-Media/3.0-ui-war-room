@@ -55,7 +55,7 @@ const AlertCenter: React.FC = () => {
   };
 
   return (
-    <div className="page-alerts">
+    <div className="page-alerts" data-route="alert-center">
       <PageLayout
         pageTitle="Alert Center"
         placeholder="Ask War Room about campaign alerts..."

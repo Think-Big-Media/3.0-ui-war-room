@@ -75,7 +75,7 @@ const InformationStreamsTab: React.FC<InformationStreamsTabProps> = ({
         {stats.map((stat, index) => (
           <Card
             key={index}
-            className="text-center"
+            className="hoverable text-center"
             padding="sm"
             variant="glass"
           >
@@ -87,7 +87,7 @@ const InformationStreamsTab: React.FC<InformationStreamsTabProps> = ({
       </div>
 
       {/* Filters */}
-      <Card padding="sm" variant="glass">
+      <Card className="hoverable" padding="sm" variant="glass">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div className="flex items-center space-x-4">
             <div className="relative">
