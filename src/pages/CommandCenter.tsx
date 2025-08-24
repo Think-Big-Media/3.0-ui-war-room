@@ -1,7 +1,7 @@
 import type React from 'react';
 // Animation imports removed to prevent flashing
 import { Brain, TrendingUp, MessageSquare, Target, Bell } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import QuickActions from './QuickActions';
 import Card from '../components/shared/Card';
 import PageLayout from '../components/shared/PageLayout';
