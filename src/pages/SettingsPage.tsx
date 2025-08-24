@@ -413,7 +413,7 @@ const SettingsPage: React.FC = () => {
             <div className="p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-purple-400/20">
               <Link2 className="w-6 h-6 text-white/95" />
             </div>
-            <h3 className="text-xl font-semibold font-condensed text-white/95">
+            <h3 className="section-header">
               Platform Integrations
             </h3>
           </div>
