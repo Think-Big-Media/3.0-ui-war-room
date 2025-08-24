@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { informationService } from '../../services/informationService';
 import { type InformationItem } from '../../types/information';
+import { getSectionTheme } from '../../utils/sectionTheming';
 import {
   Home,
   Target,
@@ -28,6 +29,9 @@ const TopNavigation: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const notificationsRef = useRef<HTMLDivElement>(null);
+
+  // Get current section theme
+  const currentTheme = getSectionTheme(location.pathname);
 
   // Load team alerts
   useEffect(() => {
@@ -69,36 +73,42 @@ const TopNavigation: React.FC = () => {
       label: 'DASHBOARD',
       path: '/',
       active: location.pathname === '/',
+      theme: getSectionTheme('/'),
     },
     {
       icon: BarChart3,
       label: 'LIVE MONITORING',
       path: '/real-time-monitoring',
       active: location.pathname === '/real-time-monitoring',
+      theme: getSectionTheme('/real-time-monitoring'),
     },
     {
       icon: Target,
       label: 'WAR ROOM',
       path: '/campaign-control',
       active: location.pathname === '/campaign-control',
+      theme: getSectionTheme('/campaign-control'),
     },
     {
       icon: Brain,
       label: 'INTELLIGENCE',
       path: '/intelligence-hub',
       active: location.pathname === '/intelligence-hub',
+      theme: getSectionTheme('/intelligence-hub'),
     },
     {
       icon: Bell,
       label: 'ALERT CENTER',
       path: '/alert-center',
       active: location.pathname === '/alert-center',
+      theme: getSectionTheme('/alert-center'),
     },
     {
       icon: Settings,
       label: 'SETTINGS',
       path: '/settings',
       active: location.pathname === '/settings',
+      theme: getSectionTheme('/settings'),
     },
   ];
 
@@ -165,7 +175,7 @@ const TopNavigation: React.FC = () => {
                 onClick={() => handleNavigation(item.path)}
                 className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-1 ${
                   item.active
-                    ? 'bg-white/20 text-white border border-white/30'
+                    ? `bg-${item.theme.colors.background} text-${item.theme.colors.text} border border-${item.theme.colors.border}`
                     : 'text-white/70 hover:text-white hover:bg-white/10'
                 }`}
               >
