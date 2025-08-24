@@ -19,7 +19,7 @@ import {
   Moon,
   Share2,
 } from 'lucide-react';
-import { pageGradients, fireAccentOverlay } from '../lib/utils';
+// Removed hardcoded gradient imports - using consistent slate background
 import Card from '../components/shared/Card';
 import PageLayout from '../components/shared/PageLayout';
 import PageHeader from '../components/shared/PageHeader';
