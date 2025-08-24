@@ -197,10 +197,10 @@ const SettingsPage: React.FC = () => {
               <div className="flex items-start space-x-3 ml-2.5">
                 <Mail className="w-5 h-5 text-white/75 mt-0.5" />
                 <div className="ml-1.5">
-                  <p className="text-white/90 font-medium">
+                  <p className="content-title">
                     Email Notifications
                   </p>
-                  <p className="text-sm text-white/60 font-condensed tracking-wide -mt-1">
+                  <p className="content-subtitle">
                     Receive campaign updates via email
                   </p>
                 </div>
@@ -216,10 +216,10 @@ const SettingsPage: React.FC = () => {
               <div className="flex items-start space-x-3 ml-2.5">
                 <Smartphone className="w-5 h-5 text-white/75 mt-0.5" />
                 <div className="ml-1.5">
-                  <p className="text-white/90 font-medium">
+                  <p className="content-title">
                     Push Notifications
                   </p>
-                  <p className="text-sm text-white/60 font-condensed tracking-wide -mt-1">
+                  <p className="content-subtitle">
                     Get instant alerts on your device
                   </p>
                 </div>
@@ -235,10 +235,10 @@ const SettingsPage: React.FC = () => {
               <div className="flex items-start space-x-3 ml-2.5">
                 <Globe className="w-5 h-5 text-white/75 mt-0.5" />
                 <div className="ml-1.5">
-                  <p className="text-white/90 font-medium">
+                  <p className="content-title">
                     Auto-Publish Content
                   </p>
-                  <p className="text-sm text-white/60 font-condensed tracking-wide -mt-1">
+                  <p className="content-subtitle">
                     Automatically publish scheduled content
                   </p>
                 </div>
@@ -304,10 +304,10 @@ const SettingsPage: React.FC = () => {
               <div className="flex items-start space-x-3 ml-2.5">
                 <Key className="w-5 h-5 text-white/75 mt-0.5" />
                 <div className="ml-1.5">
-                  <p className="text-white/90 font-medium">
+                  <p className="content-title">
                     Two-Factor Authentication
                   </p>
-                  <p className="text-sm text-white/60 font-condensed tracking-wide -mt-1">
+                  <p className="content-subtitle">
                     Add an extra layer of security
                   </p>
                 </div>
