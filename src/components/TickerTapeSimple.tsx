@@ -80,7 +80,7 @@ const TickerTapeSimple: React.FC = () => {
       
       {/* Debug indicator */}
       <div className="absolute top-0 left-4 text-xs text-yellow-300 bg-black px-2 py-1">
-        SIMPLE TICKER TEST - {testItems.length} items
+        SIMPLE TICKER TEST - {testItems.length * 15} total items (seamless loop)
       </div>
     </div>
   );
