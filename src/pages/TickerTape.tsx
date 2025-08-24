@@ -129,19 +129,16 @@ const TickerTape: React.FC = () => {
         <style>{`
           @keyframes ticker-scroll {
             0% {
-              transform: translateX(100%);
+              transform: translateX(0%);
             }
             100% {
               transform: translateX(-100%);
             }
           }
-
+          
           .ticker-content {
-            animation: ticker-scroll 15s linear infinite;
+            animation: ticker-scroll 60s linear infinite;
             will-change: transform;
-            min-width: 200%;
-            display: flex;
-            align-items: center;
           }
           
           .ticker-item {
