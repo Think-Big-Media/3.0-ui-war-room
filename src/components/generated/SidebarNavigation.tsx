@@ -146,15 +146,15 @@ const TopNavigation: React.FC = () => {
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case 'critical':
-        return 'bg-red-500/20 text-red-600';
+        return 'priority-critical';
       case 'high':
-        return 'bg-orange-500/20 text-orange-600';
+        return 'priority-high';
       case 'medium':
-        return 'bg-blue-500/20 text-blue-600';
+        return 'priority-medium';
       case 'low':
-        return 'bg-gray-500/20 text-gray-600';
+        return 'priority-low';
       default:
-        return 'bg-blue-500/20 text-blue-600';
+        return 'priority-medium';
     }
   };
 
