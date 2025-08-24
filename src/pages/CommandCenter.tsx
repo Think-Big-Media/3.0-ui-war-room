@@ -86,7 +86,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
         },
       }}
       onClick={handleClick}
-      className="group cursor-pointer hover:border-orange-400/50 hover:bg-black/25"
+      className={`group cursor-pointer hover:border-${sectionTheme.colors.border} hover:bg-black/25`}
       padding="md"
       variant="glass"
     >
