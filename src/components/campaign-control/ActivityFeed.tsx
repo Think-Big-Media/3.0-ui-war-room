@@ -26,8 +26,6 @@ const ActivityFeed: React.FC<ActivityFeedProps> = ({ activities }) => {
             MozOsxFontSmoothing: 'grayscale',
             fontKerning: 'normal',
             textSizeAdjust: '100%',
-            textRendering: 'optimizeLegibility',
-            WebkitFontSmoothing: 'antialiased',
           }}
         >
           RECENT ACTIVITY
