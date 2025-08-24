@@ -276,6 +276,11 @@
     color: var(--accent-settings);
   }
 
+  /* Ticker Tape using page accent */
+  .ticker-accent {
+    color: var(--page-accent);
+  }
+
   /* Card titles should use Inter for content readability */
   .card-title {
     @apply font-sans font-semibold text-lg;
