@@ -4,7 +4,7 @@
  * Uses design tokens from tokens/colors.ts
  */
 
-import { BRAND_ACCENTS, getRouteAccentColor } from '../tokens/colors';
+import { BRAND_TOKENS, getRouteAccent } from '../tokens/colors';
 
 export interface SectionTheme {
   name: string;
