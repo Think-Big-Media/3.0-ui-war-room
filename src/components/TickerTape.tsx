@@ -52,9 +52,13 @@ const TickerTape: React.FC = () => {
   };
 
   useEffect(() => {
+    console.log('🔄 TickerTape: useEffect triggered');
+
     // Load ticker items from information service
     const loadTickerItems = () => {
+      console.log('📡 TickerTape: Loading items from service...');
       const items = informationService.getTickerItems(20);
+      console.log('📋 TickerTape: Service returned', items.length, 'items:', items);
       setTickerItems(items);
     };
 
@@ -62,6 +66,7 @@ const TickerTape: React.FC = () => {
 
     // Refresh ticker items every 30 seconds
     const interval = setInterval(() => {
+      console.log('���� TickerTape: Auto-refresh triggered');
       informationService.refreshData();
       loadTickerItems();
     }, 30000);
