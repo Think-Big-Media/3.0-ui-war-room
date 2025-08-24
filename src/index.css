@@ -14,6 +14,9 @@
 /* Import performance-optimized animations */
 @import './styles/animations.css';
 
+/* Import luxurious page transitions */
+@import './styles/transitions.css';
+
 @layer base {
   :root {
     /* Base font size optimized for 95% browser scaling */
