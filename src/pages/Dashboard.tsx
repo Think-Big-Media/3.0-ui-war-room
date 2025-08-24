@@ -375,7 +375,7 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Upcoming Tasks */}
-            <div className="bg-black/20 backdrop-blur-md rounded-2xl border border-[#8B956D]/30 shadow-sm p-6">
+            <div className="bg-black/20 rounded-2xl border border-[#8B956D]/30 shadow-sm p-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-[#E8E4D0] flex items-center space-x-2">
                   <Clock className="w-5 h-5 text-[#A0956B]" />
