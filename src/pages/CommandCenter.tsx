@@ -189,7 +189,7 @@ const IntelligenceDashboard: React.FC = () => {
           <div className="p-3 lg:p-4 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 group-hover:border-orange-400/30 transition-all duration-300">
             <Target className="w-6 h-6 lg:w-8 lg:h-8 text-white/95" />
           </div>
-          <h3 className="text-lg lg:text-xl font-semibold text-white/95 uppercase">
+          <h3 className="text-lg lg:text-xl font-semibold font-condensed text-white/95 uppercase">
             Intelligence Dashboard
           </h3>
         </div>
@@ -314,7 +314,7 @@ const CampaignOperationsHub: React.FC = () => {
           <div className="p-3 lg:p-4 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 group-hover:border-orange-400/30 transition-all duration-300">
             <Target className="w-6 h-6 lg:w-8 lg:h-8 text-white/95" />
           </div>
-          <h3 className="text-lg lg:text-xl font-semibold text-white/95 uppercase">
+          <h3 className="text-lg lg:text-xl font-semibold font-condensed text-white/95 uppercase">
             Campaign Operations
           </h3>
         </div>
