@@ -340,11 +340,14 @@ const SettingsPage: React.FC = () => {
         <SettingsSection title="Data & Privacy" icon={Database} delay={0.5}>
           <div className="space-y-4 pb-5">
             <div className="flex items-start justify-between">
-              <div className="ml-4">
-                <p className="text-white/90 font-medium">Data Sharing</p>
-                <p className="text-sm text-white/60 font-condensed tracking-wide -mt-1">
-                  Share anonymized data for improvements
-                </p>
+              <div className="flex items-start space-x-3 ml-2.5">
+                <Share2 className="w-5 h-5 text-white/75 mt-0.5" />
+                <div className="ml-1.5">
+                  <p className="content-title">Data Sharing</p>
+                  <p className="content-subtitle">
+                    Share anonymized data for improvements
+                  </p>
+                </div>
               </div>
               <div className="mt-1">
                 <ToggleSwitch enabled={dataSharing} onChange={setDataSharing} />
