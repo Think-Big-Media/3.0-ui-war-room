@@ -240,6 +240,8 @@
   /* Navigation hover states - use page accent for consistent theming */
   .nav-hover-text {
     @apply transition-colors duration-200;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-weight: 500;
   }
 
   .nav-hover-icon {
@@ -280,6 +282,7 @@
   [aria-current='page'] .nav-active-text {
     color: var(--active-text, #fff);
     font-weight: 600;
+    font-family: 'Barlow Semi Condensed', sans-serif;
   }
 
   /* Hoverable border system - replaces transform/scale with border-color changes */
