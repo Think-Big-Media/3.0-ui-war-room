@@ -219,13 +219,14 @@
     color: var(--page-accent);
   }
 
-  /* Navigation hover states using CSS variables */
+  /* Navigation hover states - neutral styling only */
   .nav-hover-text {
     @apply transition-colors duration-200;
   }
 
   .group:hover .nav-hover-text {
-    color: var(--page-accent);
+    color: white;
+    opacity: 1;
   }
 
   .nav-hover-icon {
@@ -233,7 +234,8 @@
   }
 
   .group:hover .nav-hover-icon {
-    color: var(--page-accent);
+    color: white;
+    opacity: 1;
   }
 
   /* Hoverable border system - replaces transform/scale with border-color changes */
