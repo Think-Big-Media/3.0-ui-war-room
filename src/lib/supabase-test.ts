@@ -75,4 +75,3 @@ if (typeof window !== 'undefined') {
 } else {
   // Node environment
   testSupabaseConnection();
-}

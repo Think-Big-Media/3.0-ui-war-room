@@ -1,3 +1,4 @@
+}
 // Custom error classes for Meta API integration
 
 export class MetaAPIError extends Error {
@@ -48,4 +49,3 @@ export class CircuitBreakerOpenError extends Error {
     super('Circuit breaker is OPEN. Service temporarily unavailable.');
     this.name = 'CircuitBreakerOpenError';
   }
-}

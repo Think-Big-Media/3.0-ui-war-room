@@ -11,10 +11,14 @@ interface CrisisDetectorConfig {
   baselineWindow?: number; // minutes for baseline calculation
 }
 
+}
+
 interface BaselineMetrics {
   mentionsPerHour: number;
   sentimentAverage: number;
   lastUpdated: Date;
+}
+
 }
 
 export class CrisisDetector {
@@ -452,4 +456,3 @@ export function createCrisisDetector(customThresholds?: Partial<CrisisThresholds
   return new CrisisDetector({
     thresholds: { ...defaultThresholds, ...customThresholds },
   });
-}

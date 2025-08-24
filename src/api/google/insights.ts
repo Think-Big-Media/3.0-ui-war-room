@@ -1,3 +1,4 @@
+}
 // Google Ads Insights and Reporting Service
 
 import { type GoogleAdsClient } from './client';
@@ -500,4 +501,3 @@ export class GoogleAdsInsightsService {
   async getAccountInsights(customerId: string, params: any = {}) {
     return this.getCustomerOverview(customerId, params);
   }
-}

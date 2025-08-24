@@ -1,52 +1,71 @@
 /**
  * Builder.io Component Registry
- * Registers War Room components for visual editing in Builder
+ * Clean registration of War Room components
  */
 
 import { Builder } from '@builder.io/react';
+
+// Page Components
 import Dashboard from './pages/Dashboard';
-import AnalyticsDashboard from './pages/AnalyticsDashboard';
-import AutomationDashboard from './pages/AutomationDashboard';
-import DocumentIntelligence from './pages/DocumentIntelligence';
+import CommandCenter from './pages/CommandCenter';
+import RealTimeMonitoring from './pages/RealTimeMonitoring';
+import CampaignControl from './pages/CampaignControl';
+import IntelligenceHub from './pages/IntelligenceHub';
+import AlertCenter from './pages/AlertCenter';
 import SettingsPage from './pages/SettingsPage';
 
-// Import layout components
-import { MainLayout } from './components/layout/MainLayout';
+// Initialize Builder with API key
+Builder.init(import.meta.env.VITE_BUILDER_IO_KEY || '8686f311497044c0932b7d2247296478');
 
-// Set your Builder.io API key
-Builder.init(import.meta.env.VITE_BUILDER_IO_KEY || 'YOUR_BUILDER_IO_API_KEY');
+// Register main pages for Builder.io visual editing
+Builder.registerComponent(CommandCenter, {
+  name: 'CommandCenter',
+  description: 'War Room command center dashboard',
+  inputs: [],
+  defaultStyles: {
+    minHeight: '100vh',
+  },
+});
 
-// Register page components
 Builder.registerComponent(Dashboard, {
   name: 'Dashboard',
-  description: 'Main War Room dashboard with overview metrics',
+  description: 'Main War Room dashboard',
   inputs: [],
   defaultStyles: {
     minHeight: '100vh',
   },
 });
 
-Builder.registerComponent(AnalyticsDashboard, {
-  name: 'AnalyticsDashboard',
-  description: 'Campaign analytics and performance metrics',
+Builder.registerComponent(RealTimeMonitoring, {
+  name: 'RealTimeMonitoring',
+  description: 'Live monitoring of campaigns and mentions',
   inputs: [],
   defaultStyles: {
     minHeight: '100vh',
   },
 });
 
-Builder.registerComponent(AutomationDashboard, {
-  name: 'AutomationDashboard',
-  description: 'Workflow automation and campaign rules',
+Builder.registerComponent(CampaignControl, {
+  name: 'CampaignControl',
+  description: 'Campaign management and control center',
   inputs: [],
   defaultStyles: {
     minHeight: '100vh',
   },
 });
 
-Builder.registerComponent(DocumentIntelligence, {
-  name: 'DocumentIntelligence',
-  description: 'AI-powered document analysis and insights',
+Builder.registerComponent(IntelligenceHub, {
+  name: 'IntelligenceHub',
+  description: 'Intelligence gathering and analysis',
+  inputs: [],
+  defaultStyles: {
+    minHeight: '100vh',
+  },
+});
+
+Builder.registerComponent(AlertCenter, {
+  name: 'AlertCenter',
+  description: 'Alert management and crisis response',
   inputs: [],
   defaultStyles: {
     minHeight: '100vh',
@@ -61,19 +80,6 @@ Builder.registerComponent(SettingsPage, {
     minHeight: '100vh',
   },
 });
-
-// Register layout components
-Builder.registerComponent(MainLayout, {
-  name: 'MainLayout',
-  description: 'Main application layout with sidebar and navbar',
-  inputs: [],
-  canHaveChildren: true,
-  defaultStyles: {
-    minHeight: '100vh',
-  },
-});
-
-// Additional component registrations can be added here as they are built
 
 // Export for use in the app
 export { Builder };

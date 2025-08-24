@@ -1,3 +1,4 @@
+}
 // Rate limiter implementation for Google Ads API
 
 import { GoogleAdsRateLimitError, GoogleAdsQuotaError } from './errors';
@@ -10,11 +11,15 @@ interface RateLimitBucket {
   requestTimestamps: number[];
 }
 
+}
+
 interface AccessLevelLimits {
   TEST: number;
   BASIC: number;
   STANDARD: number;
   ADVANCED: number;
+}
+
 }
 
 export class GoogleAdsRateLimiter {
@@ -221,4 +226,3 @@ export class GoogleAdsRateLimiter {
       timestamp => timestamp > cutoff,
     );
   }
-}

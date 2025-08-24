@@ -31,9 +31,9 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   store?: ReturnType<typeof setupStore>;
   route?: string;
   routerType?: 'browser' | 'memory';
+// Mock campaign state
 }
 
-// Mock campaign state
 export const createMockCampaignsState = (overrides = {}) => ({
   campaigns: [],
   currentCampaign: null,
@@ -99,8 +99,6 @@ export function renderWithProviders(
     store,
     ...render(ui, { wrapper: Wrapper, ...renderOptions }),
   };
-}
-
 // Redux-only wrapper (for hook testing)
 export function renderWithRedux(
   ui: React.ReactElement,
@@ -118,8 +116,6 @@ export function renderWithRedux(
     store,
     ...render(ui, { wrapper: Wrapper, ...renderOptions }),
   };
-}
-
 // Router-only wrapper (for components that don't need Redux)
 export function renderWithRouter(
   ui: React.ReactElement,
@@ -137,8 +133,6 @@ export function renderWithRouter(
   }
 
   return render(ui, { wrapper: Wrapper, ...renderOptions });
-}
-
 // Create mock user for tests
 export const createMockUser = (overrides = {}) => ({
   id: '1',

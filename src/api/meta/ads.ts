@@ -1,3 +1,4 @@
+}
 /**
  * Meta Business API Ad Management Service
  * Handles CRUD operations for ads within ad sets
@@ -650,4 +651,3 @@ export class MetaAdService {
       );
     }
   }
-}

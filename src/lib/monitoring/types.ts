@@ -198,4 +198,3 @@ export interface DeduplicationResult {
 
 export interface SentimentWeights {
   mentionlytics: number;
-}

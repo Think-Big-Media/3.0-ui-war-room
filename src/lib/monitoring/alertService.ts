@@ -18,6 +18,8 @@ interface AlertServiceConfig {
   enableWebhook?: boolean;
 }
 
+}
+
 interface AlertSubscriber {
   id: string;
   type: 'websocket' | 'email' | 'sms' | 'webhook';
@@ -27,6 +29,8 @@ interface AlertSubscriber {
     types?: CrisisAlert['type'][];
     keywords?: string[];
   };
+}
+
 }
 
 export class AlertService {
@@ -487,4 +491,3 @@ export class AlertService {
 // Factory function
 export function createAlertService(config: AlertServiceConfig): AlertService {
   return new AlertService(config);
-}

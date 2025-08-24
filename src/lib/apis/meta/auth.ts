@@ -204,4 +204,3 @@ export function createMetaAuth(config: Partial<MetaConfig> = {}): MetaAuth {
   };
 
   return new MetaAuth({ ...defaultConfig, ...config });
-}

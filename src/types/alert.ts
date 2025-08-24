@@ -37,4 +37,3 @@ export interface AlertFilters {
   status: string;
   type: string;
   priority: string;
-}

@@ -448,4 +448,3 @@ export class UnifiedMonitoringPipeline extends EventEmitter {
     await this.alertEngine.updateConfig(this.config);
     this.emit('config_updated', this.config);
   }
-}

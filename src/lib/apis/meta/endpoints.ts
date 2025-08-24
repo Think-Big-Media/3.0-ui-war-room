@@ -292,4 +292,3 @@ export class MetaEndpoints {
 // Factory function
 export function createMetaEndpoints(client: MetaApiClient): MetaEndpoints {
   return new MetaEndpoints(client);
-}

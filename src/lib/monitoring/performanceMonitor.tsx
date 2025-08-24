@@ -1,3 +1,4 @@
+}
 /**
  * Performance monitoring for dashboard components
  * Tracks render times, update latency, and WebSocket performance
@@ -51,7 +52,6 @@ export class PerformanceMonitor {
                 name: entry.name,
               });
             }
-          }
         });
 
         longTaskObserver.observe({ entryTypes: ['longtask'] });
@@ -59,7 +59,6 @@ export class PerformanceMonitor {
       } catch (error) {
         console.error('Failed to initialize long task observer:', error);
       }
-    }
 
     // Paint timing observer
     if ('PerformanceObserver' in window) {
@@ -75,7 +74,6 @@ export class PerformanceMonitor {
       } catch (error) {
         console.error('Failed to initialize paint observer:', error);
       }
-    }
   }
 
   // Start memory monitoring
@@ -92,7 +90,6 @@ export class PerformanceMonitor {
         }
       }, 30000); // Check every 30 seconds
     }
-  }
 
   // Track component render time
   trackComponentRender(componentName: string, renderTime: number): void {
@@ -127,7 +124,6 @@ export class PerformanceMonitor {
         threshold: `${this.thresholds.renderTime}ms`,
       });
     }
-  }
 
   // Track WebSocket latency
   trackWebSocketLatency(latency: number): void {
@@ -140,7 +136,6 @@ export class PerformanceMonitor {
         threshold: `${this.thresholds.websocketLatency}ms`,
       });
     }
-  }
 
   // Track update latency
   trackUpdateLatency(latency: number): void {
@@ -153,7 +148,6 @@ export class PerformanceMonitor {
         threshold: `${this.thresholds.updateLatency}ms`,
       });
     }
-  }
 
   // Get performance report
   getPerformanceReport(): {
@@ -211,8 +205,6 @@ export class PerformanceMonitor {
     this.observers.clear();
     this.metrics.clear();
   }
-}
-
 // Singleton instance
 let performanceMonitor: PerformanceMonitor | null = null;
 
@@ -221,8 +213,6 @@ export function getPerformanceMonitor(): PerformanceMonitor {
     performanceMonitor = new PerformanceMonitor();
   }
   return performanceMonitor;
-}
-
 // React hook for performance tracking
 export function usePerformanceTracking(componentName: string) {
   const monitor = getPerformanceMonitor();
@@ -232,8 +222,6 @@ export function usePerformanceTracking(componentName: string) {
     trackUpdate: (latency: number) => monitor.trackUpdateLatency(latency),
     trackWebSocket: (latency: number) => monitor.trackWebSocketLatency(latency),
   };
-}
-
 // HOC for automatic performance tracking
 export function withPerformanceTracking<P extends object>(
   Component: React.ComponentType<P>,
@@ -250,4 +238,3 @@ export function withPerformanceTracking<P extends object>(
 
     return <Component {...props} />;
   }) as unknown as React.ComponentType<P>;
-}

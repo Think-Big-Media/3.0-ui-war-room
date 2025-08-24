@@ -17,12 +17,16 @@ interface AlertWindow {
   end_time: Date;
 }
 
+}
+
 interface ProcessingMetrics {
   events_analyzed: number;
   alerts_generated: number;
   processing_time_ms: number;
   average_latency_ms: number;
   last_processed: Date;
+}
+
 }
 
 export class AlertEngine extends EventEmitter {
@@ -577,4 +581,3 @@ export class AlertEngine extends EventEmitter {
     // TODO: Implement emergency escalation (SMS, phone calls, etc.)
     this.emit('escalation', { alertId, timestamp: new Date() });
   }
-}

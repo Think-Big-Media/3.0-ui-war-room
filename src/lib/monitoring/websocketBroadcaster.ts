@@ -22,11 +22,15 @@ interface ConnectedClient {
   };
 }
 
+}
+
 interface BroadcastMessage {
   type: 'event' | 'alert' | 'metric' | 'heartbeat' | 'alert_update';
   timestamp: Date;
   data: any;
   channel?: string;
+}
+
 }
 
 interface BroadcastMetrics {
@@ -36,6 +40,8 @@ interface BroadcastMetrics {
   average_latency_ms: number;
   last_broadcast: Date;
   failed_sends: number;
+}
+
 }
 
 export class WebSocketBroadcaster extends EventEmitter {
@@ -573,4 +579,3 @@ export class WebSocketBroadcaster extends EventEmitter {
   isHealthy(): boolean {
     return this.isRunning && this.server !== undefined;
   }
-}

@@ -250,4 +250,3 @@ export class MetaAPIClient {
       circuitBreaker: this.circuitBreaker.getMetrics(),
     };
   }
-}

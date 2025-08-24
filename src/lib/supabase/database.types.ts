@@ -379,4 +379,3 @@ export interface Database {
       donation_type: 'one-time' | 'recurring'
     }
   }
-}

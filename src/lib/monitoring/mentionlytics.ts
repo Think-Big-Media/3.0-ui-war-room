@@ -11,6 +11,8 @@ interface MentionlyticsConfig {
   baseUrl?: string;
 }
 
+}
+
 interface MentionlyticsResponse {
   mentions: Array<{
     id: string;
@@ -43,6 +45,8 @@ interface MentionlyticsResponse {
     page: number;
     per_page: number;
   };
+}
+
 }
 
 export class MentionlyticsClient implements MonitoringClient {
@@ -265,4 +269,3 @@ export class MentionlyticsClient implements MonitoringClient {
 // Factory function
 export function createMentionlyticsClient(apiKey: string, projectId: string): MentionlyticsClient {
   return new MentionlyticsClient({ apiKey, projectId });
-}

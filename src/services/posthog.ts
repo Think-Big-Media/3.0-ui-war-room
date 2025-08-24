@@ -274,4 +274,3 @@ export function trackingProps(
     'data-analytics': JSON.stringify(properties || {}),
     onClick: () => analytics.track(action, properties),
   };
-}

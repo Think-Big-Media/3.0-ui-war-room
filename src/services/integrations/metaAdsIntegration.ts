@@ -35,6 +35,8 @@ interface EnhancedMetaConfig extends MetaConfig {
 }
 
 // Token storage interface
+}
+
 interface TokenStorage {
   getToken(): AccessToken | null;
   setToken(token: AccessToken): void;
@@ -43,6 +45,8 @@ interface TokenStorage {
 }
 
 // Default token storage implementation using localStorage
+}
+
 class LocalStorageTokenStorage implements TokenStorage {
   private readonly tokenKey = 'meta_access_token';
   private readonly expiryKey = 'meta_token_expiry';

@@ -94,4 +94,3 @@ export async function createScheduledReport(config: any): Promise<any> {
   }
   
   return response.json();
-}

@@ -1,3 +1,4 @@
+}
 /**
  * Hook to handle Meta authentication state
  */
@@ -12,6 +13,8 @@ interface MetaAuthState {
   isAuthenticated: boolean;
   isLoading: boolean;
   error: string | null;
+}
+
 }
 
 const META_AUTH_STORAGE_KEY = 'meta_auth';
@@ -254,4 +257,3 @@ export function useRequireMetaAuth() {
   }, [isAuthenticated, login, location.pathname]);
 
   return isAuthenticated;
-}

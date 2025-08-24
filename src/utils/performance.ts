@@ -167,4 +167,3 @@ if (process.env.NODE_ENV === 'development') {
     console.log(monitor.getMetrics());
     console.groupEnd();
   }, 30000);
-}

@@ -25,9 +25,9 @@ interface MetricCardProps {
   metric: 'volunteers' | 'events' | 'reach' | 'donations';
   icon: string;
   color: 'blue' | 'green' | 'purple' | 'yellow';
+// Icon mapping
 }
 
-// Icon mapping
 const iconMap: Record<string, LucideIcon> = {
   users: Users,
   calendar: Calendar,

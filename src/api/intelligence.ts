@@ -80,4 +80,3 @@ export async function getCompetitorIntelligence(competitor: string): Promise<any
     throw new Error('Failed to fetch competitor intelligence');
   }
   return response.json();
-}

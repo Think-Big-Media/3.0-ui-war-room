@@ -238,4 +238,3 @@ if (import.meta.env.DEV) {
   (window as any).runMetaSandboxTests = runSandboxTests;
   console.log('Meta API Sandbox available at window.metaSandbox');
   console.log('Run tests with: window.runMetaSandboxTests()');
-}

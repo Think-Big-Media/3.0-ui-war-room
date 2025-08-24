@@ -216,4 +216,3 @@ export function SupabaseMigrationTest() {
       </div>
     </div>
   );
-}

@@ -1,3 +1,4 @@
+}
 /**
  * React Query hooks for Meta Audience Management
  */
@@ -371,4 +372,3 @@ export function useShareMetaAudience(
     },
     ...options,
   });
-}

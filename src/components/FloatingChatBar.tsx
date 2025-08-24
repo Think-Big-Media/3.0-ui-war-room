@@ -1,6 +1,5 @@
 import type React from 'react';
 import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import {
   Send,
   Mic,
@@ -211,9 +210,9 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
 
   return (
     <div className="max-w-6xl mx-auto">
-      <AnimatePresence>
+      <>
         {isExpanded && (
-          <motion.div
+          <div
             ref={expandedRef}
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -302,32 +301,11 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
                         <div className="flex justify-start">
                           <div className="bg-gray-100 p-3 rounded-lg">
                             <div className="flex space-x-1">
-                              <motion.div
-                                animate={{ scale: [1, 1.2, 1] }}
-                                transition={{
-                                  duration: 0.6,
-                                  repeat: Infinity,
-                                  delay: 0,
-                                }}
-                                className="w-2 h-2 bg-gray-400 rounded-full"
+                              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
                               />
-                              <motion.div
-                                animate={{ scale: [1, 1.2, 1] }}
-                                transition={{
-                                  duration: 0.6,
-                                  repeat: Infinity,
-                                  delay: 0.2,
-                                }}
-                                className="w-2 h-2 bg-gray-400 rounded-full"
+                              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}
                               />
-                              <motion.div
-                                animate={{ scale: [1, 1.2, 1] }}
-                                transition={{
-                                  duration: 0.6,
-                                  repeat: Infinity,
-                                  delay: 0.4,
-                                }}
-                                className="w-2 h-2 bg-gray-400 rounded-full"
+                              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}
                               />
                             </div>
                           </div>
@@ -338,9 +316,9 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
                 </div>
               )}
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
+      </>
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -382,7 +360,7 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
 
             {/* AI Indicator */}
             <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-              <motion.div
+              <div
                 animate={{
                   scale: [1, 1.1, 1],
                   opacity: [0.7, 1, 0.7],

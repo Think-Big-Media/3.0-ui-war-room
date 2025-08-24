@@ -1,3 +1,4 @@
+}
 // Circuit breaker pattern implementation for Google Ads API
 
 import { CircuitBreakerOpenError } from './errors';
@@ -9,6 +10,8 @@ interface CircuitBreakerConfig {
   halfOpenRequests: number;      // Number of requests to test in half-open state
   monitoringPeriod: number;      // Time window for failure counting
   failureTypes?: string[];       // Specific error types to count as failures
+}
+
 }
 
 export class GoogleAdsCircuitBreaker {
@@ -249,4 +252,3 @@ export class GoogleAdsCircuitBreaker {
       this.failureDetails.clear();
     }
   }
-}

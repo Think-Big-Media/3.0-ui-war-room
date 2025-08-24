@@ -1,3 +1,4 @@
+}
 // Rate limiter implementation for Meta API
 
 import { MetaRateLimitError } from './errors';
@@ -6,6 +7,8 @@ interface RateLimitBucket {
   tokens: number;
   lastRefill: number;
   requests: number[];
+}
+
 }
 
 export class MetaRateLimiter {

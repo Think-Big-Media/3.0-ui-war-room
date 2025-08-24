@@ -16,6 +16,8 @@ interface UseDashboardWebSocketOptions {
   };
 }
 
+}
+
 export function useDashboardWebSocket(options: UseDashboardWebSocketOptions = {}) {
   // Memoize options to prevent unnecessary effect re-runs
   const memoizedOptions = useMemo(() => ({
@@ -210,4 +212,3 @@ export function useSentimentData() {
     sentiment,
     sentimentHistory,
   }), [sentiment, sentimentHistory]);
-}

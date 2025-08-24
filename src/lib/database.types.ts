@@ -936,4 +936,3 @@ export interface Database {
       donation_status: 'pending' | 'completed' | 'failed' | 'refunded' | 'cancelled'
     }
   }
-}

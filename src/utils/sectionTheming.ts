@@ -112,4 +112,3 @@ export function useSectionTheme(pathname: string) {
     navActiveClasses: getNavActiveClasses(theme),
     pageAccentColor: getPageAccentColor(pathname),
   };
-}

@@ -95,7 +95,6 @@ export const generateMonthData = (): number[] => {
     } else {
       monthData.push(0);
     }
-  }
   return monthData;
 };
 

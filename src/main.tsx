@@ -1,3 +1,8 @@
+/**
+ * War Room Platform - Application Entry Point
+ * Clean, simple, no legacy code
+ */
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -5,25 +10,28 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
 
-import App from './App';  // ← SINGLE SOURCE OF TRUTH - clean architecture
-import { ErrorBoundary } from './components/ErrorBoundary';
+import App from './App';
 import { store } from './store';
 import './index.css';
 
-// Create a client for React Query
+// Create React Query client
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 60 * 1000, // 1 minute
-      gcTime: 5 * 60 * 1000, // 5 minutes
+      gcTime: 5 * 60 * 1000, // 5 minutes  
       retry: 1,
       refetchOnWindowFocus: false,
     },
   },
 });
 
-// Check if we're in dark mode
-if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+// Check dark mode preference
+if (
+  localStorage.theme === 'dark' ||
+  (!('theme' in localStorage) &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches)
+) {
   document.documentElement.classList.add('dark');
 } else {
   document.documentElement.classList.remove('dark');
@@ -35,15 +43,13 @@ if (!rootElement) {
   throw new Error('Failed to find the root element');
 }
 
-// Create root and render app
+// Render application
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
-        <ErrorBoundary>
-          <App />
-        </ErrorBoundary>
+        <App />
         <Toaster
           position="top-right"
           toastOptions={{
@@ -68,8 +74,8 @@ root.render(
             },
           }}
         />
-        <ReactQueryDevtools initialIsOpen={false} />
+        {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
       </QueryClientProvider>
     </Provider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

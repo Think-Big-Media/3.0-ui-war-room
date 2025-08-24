@@ -62,4 +62,3 @@ export interface MonitoringAlert {
   severity: 'low' | 'medium' | 'high' | 'critical';
   timestamp: string;
   actionRequired: boolean;
-}

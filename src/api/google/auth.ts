@@ -1,3 +1,4 @@
+}
 // Authentication manager for Google Ads API
 
 import { type GoogleAdsConfig, type GoogleOAuthToken } from './types';
@@ -298,4 +299,3 @@ export class GoogleAdsAuthManager {
       'Service account authentication not yet implemented. Use OAuth2 flow instead.',
     );
   }
-}

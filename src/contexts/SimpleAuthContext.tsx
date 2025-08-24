@@ -77,8 +77,6 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
       {children}
     </SimpleAuthContext.Provider>
   );
-}
-
 export const useSimpleAuth = () => {
   const context = useContext(SimpleAuthContext);
   if (!context) {throw new Error('useSimpleAuth must be used within SimpleAuthProvider');}

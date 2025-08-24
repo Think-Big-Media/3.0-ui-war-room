@@ -18,6 +18,8 @@ interface StoredEvent extends Omit<MonitoringEvent, 'timestamp'> {
   updated_at: string;
 }
 
+}
+
 interface StoredAlert extends Omit<CrisisAlert, 'created_at' | 'updated_at'> {
   created_at: string;
   updated_at: string;
@@ -27,9 +29,13 @@ interface StoredAlert extends Omit<CrisisAlert, 'created_at' | 'updated_at'> {
   resolved_at?: string;
 }
 
+}
+
 interface SimilarEvent {
   id: string;
   similarity_score: number;
+}
+
 }
 
 export class EventStore {
@@ -575,4 +581,3 @@ export class EventStore {
       return false;
     }
   }
-}

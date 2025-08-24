@@ -116,7 +116,6 @@ export const DateRangeFilter: React.FC<DateRangeFilterProps> = ({
         const dates = defaultOption.getDates();
         onChange({ from: dates.start, to: dates.end });
       }
-    }
   }, [onChange, value]);
 
   // Get current label

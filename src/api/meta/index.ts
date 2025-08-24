@@ -1,3 +1,4 @@
+}
 // Meta Business API client exports
 
 export * from './types';
@@ -48,4 +49,3 @@ export function createMetaAPI(options: MetaAPIOptions): {
     accounts,
     campaigns,
   };
-}

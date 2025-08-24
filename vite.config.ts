@@ -30,27 +30,67 @@ export default defineConfig(({ mode }) => {
     // No define section needed for env vars
     build: {
       // Bundle size optimization
-      chunkSizeWarningLimit: 1000,
+      chunkSizeWarningLimit: 500,
       rollupOptions: {
         output: {
-          manualChunks: {
-            // Vendor chunks for better caching
-            'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-            'ui-vendor': ['@reduxjs/toolkit', 'react-redux', 'react-hook-form'],
-            'charts-vendor': ['recharts', 'd3-scale'],
-            'maps-vendor': ['react-simple-maps'],
-            'dnd-vendor': ['react-beautiful-dnd'],
-            'analytics-vendor': ['posthog-js'],
-            'builder-vendor': ['@builder.io/react', '@builder.io/sdk'],
-            'utils-vendor': ['date-fns', 'clsx', 'tailwind-merge', 'yup'],
-            'icons-vendor': ['lucide-react']
+          manualChunks: (id) => {
+            // Aggressive code splitting for better caching and smaller chunks
+            if (id.includes('node_modules')) {
+              if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
+                return 'react-vendor';
+              }
+              if (id.includes('@reduxjs') || id.includes('react-redux')) {
+                return 'state-vendor';
+              }
+              if (id.includes('recharts') || id.includes('d3')) {
+                return 'charts-vendor';
+              }
+              if (id.includes('lucide-react')) {
+                return 'icons-vendor';
+              }
+              if (id.includes('@builder.io')) {
+                return 'builder-vendor';
+              }
+              if (id.includes('posthog')) {
+                return 'analytics-vendor';
+              }
+              if (id.includes('date-fns') || id.includes('clsx') || id.includes('tailwind-merge')) {
+                return 'utils-vendor';
+              }
+              // All other node_modules in a shared vendor chunk
+              return 'vendor';
+            }
+            // Split each page into its own chunk
+            if (id.includes('src/pages/')) {
+              const pageName = id.split('/pages/')[1].split('.')[0];
+              return `page-${pageName.toLowerCase()}`;
+            }
+          },
+          // Optimize chunk names for production
+          chunkFileNames: (chunkInfo) => {
+            const facadeModuleId = chunkInfo.facadeModuleId ? chunkInfo.facadeModuleId.split('/').pop() : 'chunk';
+            return `assets/${facadeModuleId}-[hash].js`;
           }
+        },
+        // External dependencies that should not be bundled
+        external: [],
+        // Tree-shaking optimizations
+        treeshake: {
+          moduleSideEffects: false,
+          propertyReadSideEffects: false,
+          tryCatchDeoptimization: false
         }
       },
-      // Enable source maps for production debugging
-      sourcemap: mode === 'production' ? false : true,
-      // Use esbuild for minification (faster than terser)
-      minify: mode === 'production' ? 'esbuild' : false,
+      // Disable source maps in production for smaller bundle
+      sourcemap: false,
+      // Use esbuild for faster minification
+      minify: 'esbuild',
+      // Target modern browsers for smaller output
+      target: 'es2020',
+      // Enable CSS code splitting
+      cssCodeSplit: true,
+      // Compress assets
+      assetsInlineLimit: 4096,
     },
     server: {
       port: env.VITE_PORT ? parseInt(env.VITE_PORT) : 5173,

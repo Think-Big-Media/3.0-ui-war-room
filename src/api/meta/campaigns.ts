@@ -1,3 +1,4 @@
+}
 /**
  * Meta Business API Campaign Management Service
  * Handles CRUD operations for campaigns
@@ -500,4 +501,3 @@ export class MetaCampaignService {
 
     return results;
   }
-}

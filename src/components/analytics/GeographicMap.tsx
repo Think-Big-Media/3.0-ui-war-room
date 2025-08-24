@@ -67,7 +67,6 @@ export const GeographicMap: React.FC = () => {
         if (region) {
           return colorScale(region.volunteers);
         }
-      }
     }
     return '#F3F4F6'; // Default gray
   };

@@ -1,3 +1,4 @@
+}
 /**
  * React Query hooks for Meta Campaign Management
  */
@@ -256,4 +257,3 @@ export function useBatchUpdateMetaCampaigns(
     },
     ...options,
   });
-}

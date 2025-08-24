@@ -1,3 +1,4 @@
+}
 /**
  * Strategic Accessibility Tests
  * Tests our motion preference improvements

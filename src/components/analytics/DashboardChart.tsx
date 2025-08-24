@@ -29,8 +29,6 @@ export interface DashboardChartProps {
   loading?: boolean;
   height?: number;
   yAxisFormatter?: (value: number) => string;
-}
-
 export const DashboardChart: React.FC<DashboardChartProps> = ({
   title,
   data,
@@ -219,7 +217,6 @@ export const DashboardChart: React.FC<DashboardChartProps> = ({
       default:
         return <div />;
     }
-  }
 
   return (
     <div className="w-full space-y-4">

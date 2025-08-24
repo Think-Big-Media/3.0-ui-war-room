@@ -136,4 +136,3 @@ export interface AnalyticsState {
     end: string | null;
   };
   activeExportJob: ExportJobResponse | null;
-}

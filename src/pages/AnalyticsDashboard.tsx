@@ -5,7 +5,6 @@
 import React, { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAppSelector } from '../hooks/redux';
-import { useSupabaseAuth } from '../contexts/SupabaseAuthContext';
 import { DashboardLayout } from '../components/analytics/DashboardLayout';
 import { useGetDashboardQuery } from '../services/analyticsApi';
 import { analytics } from '../services/posthog';

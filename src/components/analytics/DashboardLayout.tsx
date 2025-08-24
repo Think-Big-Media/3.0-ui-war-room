@@ -15,7 +15,6 @@ import { ActivityFeed } from './ActivityFeed';
 // import { ExportButton } from './ExportButton'; // ExportButton is defined below in this file
 import { analytics } from '../../services/posthog';
 import { useAppSelector } from '../../hooks/redux';
-import { useSupabaseAuth } from '../../contexts/SupabaseAuthContext';
 import { Loader2, AlertCircle } from 'lucide-react';
 
 interface DashboardLayoutProps {
@@ -23,6 +22,7 @@ interface DashboardLayoutProps {
 }
 
 // Loading skeleton component
+
 const DashboardSkeleton: React.FC = () => (
   <div className="animate-pulse">
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

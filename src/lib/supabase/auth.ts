@@ -100,4 +100,3 @@ export async function updatePassword(password: string) {
 export function onAuthStateChange(callback: (event: string, session: Session | null) => void) {
   // Return mock unsubscribe function
   return { data: { subscription: { unsubscribe: () => {} } } };
-}

@@ -38,4 +38,3 @@ export interface ContentSchedule {
     scheduleDate: Date;
   };
   status: 'pending' | 'scheduled' | 'published' | 'failed';
-}
