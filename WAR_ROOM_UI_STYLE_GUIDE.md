@@ -441,34 +441,39 @@ Three standardized secondary button types with specific use cases:
 
 When applying these standards to new components:
 
-### Typography
+### Typography Hierarchy
 
-- [ ] Font hierarchy properly applied (Inter/Barlow Condensed/JetBrains Mono)
-- [ ] Sub-headers use condensed font with proper opacity and spacing
-- [ ] Text rendering optimizations applied where needed
+- [ ] Section headers use `.section-header` (Barlow Condensed 600, 50% opacity, uppercase)
+- [ ] Content titles use `.content-title` (Barlow Semi-Condensed 500, 15px/17px)
+- [ ] Content subtitles use `.content-subtitle` (Barlow Condensed, 50% opacity, -1px margin)
+- [ ] Form labels use `.form-label` or JetBrains Mono inline classes
+- [ ] Status indicators use `.status-indicator` (JetBrains Mono uppercase)
 
-### Buttons
+### Settings Page Elements
+
+- [ ] Section headers match dashboard typography (Profile Settings, Notifications, etc.)
+- [ ] Toggle items follow standard layout pattern with proper icons
+- [ ] Form labels use JetBrains Mono with proper spacing (`ml-1.5`)
+- [ ] Icons align with title text (no vertical offset)
+
+### Spacing & Layout
+
+- [ ] Content to button spacing is `mt-4`
+- [ ] Grid spacing uses `gap-4` consistently
+- [ ] Toggle item descriptions have `-1px` top margin for tight spacing
+- [ ] Icon containers use `ml-2.5`, text containers use `ml-1.5`
+
+### Buttons & Interactive Elements
 
 - [ ] Secondary buttons use appropriate variant class
 - [ ] Button heights and letter spacing follow standards
-- [ ] UPPERCASE and monospace font applied
+- [ ] UPPERCASE and monospace font applied to action buttons
 
-### Spacing
+### Effects & Performance
 
-- [ ] Content to button spacing is `mt-4`
-- [ ] Interior and exterior spacing follows established patterns
-- [ ] Component-specific spacing rules applied
-
-### Effects
-
-- [ ] Scroll fades applied to scrollable containers
+- [ ] Icons use semantic choices (Mail, Shield, Moon, etc.)
+- [ ] No `mt-0.5` on icons (proper alignment with text)
 - [ ] Z-index management uses Portal system for dropdowns
-
-### Text Classification
-
-- [ ] Metadata text is UPPERCASE with mono font
-- [ ] Content text remains lowercase with appropriate font
-- [ ] Proper opacity levels applied (40% for sub-headers, 70% for metadata)
 
 ## Settings Item Component Pattern
 
