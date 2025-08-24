@@ -45,8 +45,8 @@ const TickerTapeSimple: React.FC = () => {
           /* Force animation even with reduced motion preference for this specific ticker */
           @media (prefers-reduced-motion: reduce) {
             .ticker-content-simple {
-              animation: ticker-scroll-simple 20s linear infinite !important;
-              animation-duration: 20s !important;
+              animation: ticker-scroll-simple 60s linear infinite !important;
+              animation-duration: 60s !important;
             }
           }
 
