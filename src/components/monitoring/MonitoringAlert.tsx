@@ -49,10 +49,7 @@ const MonitoringAlert: React.FC<MonitoringAlertProps> = ({
           </div>
         </div>
         {actionText && (
-          <button
-            onClick={handleAction}
-            className="btn-secondary-alert"
-          >
+          <button onClick={handleAction} className="btn-secondary-alert">
             {actionText}
           </button>
         )}

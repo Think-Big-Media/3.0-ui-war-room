@@ -176,6 +176,7 @@ style={{
 ### Site-Wide Button Spacing Rule
 
 **All buttons** use reduced spacing between letters AND words for optimal readability:
+
 - **Letter Spacing**: `letter-spacing: -0.05em !important` (character spacing)
 - **Word Spacing**: `word-spacing: -0.3em !important` (space between words)
 - **Enforcement**: Proper CSS cascade using Tailwind's layer system
@@ -184,6 +185,7 @@ style={{
 - **Implementation**: Button classes wrapped in `@layer components` with `!important` declarations
 
 ### Critical Implementation Rules:
+
 1. **Use CSS classes only**: Never mix CSS classes with redundant utility classes
 2. **Avoid utility conflicts**: Don't use `btn-secondary-alert` + `font-mono text-sm uppercase` together
 3. **Layer specificity**: All button components must be in `@layer components`
@@ -265,6 +267,7 @@ button {
 - **Wrap**: Prevent wrapping (`whitespace-nowrap`)
 
 #### Secondary Button Specific Features
+
 - **Height**: Reduced (`py-0.5` for compact appearance)
 - **Themes**: Alert (red), Action (blue), Neutral (white/gray)
 
