@@ -1,87 +1,47 @@
 /**
  * Dynamic Section Theming System
  * Provides consistent color theming based on current route/section
- * Uses CSS variables for dynamic theming
+ * Uses design tokens from tokens/colors.ts
  */
+
+import { BRAND_ACCENTS, getRouteAccentColor } from '../tokens/colors';
 
 export interface SectionTheme {
   name: string;
   pageAccent: string; // CSS variable value for --page-accent
-  colors: {
-    primary: string; // Main accent color (legacy)
-    border: string; // Border hover colors (legacy)
-    text: string; // Text accent colors (legacy)
-    background: string; // Background accent colors (legacy)
-    light: string; // Light variant for backgrounds (legacy)
-  };
+  accentKey: keyof typeof BRAND_ACCENTS; // Design token key
 }
 
 export const SECTION_THEMES: Record<string, SectionTheme> = {
   dashboard: {
     name: 'Dashboard',
-    pageAccent: '#6366f1', // indigo-500
-    colors: {
-      primary: 'orange-500',
-      border: 'orange-400/50',
-      text: 'orange-300',
-      background: 'orange-400/10',
-      light: 'orange-50',
-    },
+    pageAccent: BRAND_ACCENTS.dashboard,
+    accentKey: 'dashboard',
   },
   monitoring: {
     name: 'Live Monitoring',
-    pageAccent: '#22c55e', // green-500
-    colors: {
-      primary: 'green-500',
-      border: 'green-400/50',
-      text: 'green-300',
-      background: 'green-400/10',
-      light: 'green-50',
-    },
+    pageAccent: BRAND_ACCENTS.liveMonitoring,
+    accentKey: 'liveMonitoring',
   },
   warroom: {
     name: 'War Room',
-    pageAccent: '#ef4444', // red-500
-    colors: {
-      primary: 'red-500',
-      border: 'red-400/50',
-      text: 'red-300',
-      background: 'red-400/10',
-      light: 'red-50',
-    },
+    pageAccent: BRAND_ACCENTS.warRoom,
+    accentKey: 'warRoom',
   },
   intelligence: {
     name: 'Intelligence',
-    pageAccent: '#3b82f6', // blue-500
-    colors: {
-      primary: 'blue-500',
-      border: 'blue-400/50',
-      text: 'blue-300',
-      background: 'blue-400/10',
-      light: 'blue-50',
-    },
+    pageAccent: BRAND_ACCENTS.intelligence,
+    accentKey: 'intelligence',
   },
   alerts: {
     name: 'Alert Center',
-    pageAccent: '#f59e0b', // amber-500
-    colors: {
-      primary: 'amber-500',
-      border: 'amber-400/50',
-      text: 'amber-300',
-      background: 'amber-400/10',
-      light: 'amber-50',
-    },
+    pageAccent: BRAND_ACCENTS.alertCenter,
+    accentKey: 'alertCenter',
   },
   settings: {
     name: 'Settings',
-    pageAccent: '#a855f7', // purple-500
-    colors: {
-      primary: 'purple-500',
-      border: 'purple-400/50',
-      text: 'purple-300',
-      background: 'purple-400/10',
-      light: 'purple-50',
-    },
+    pageAccent: BRAND_ACCENTS.settings,
+    accentKey: 'settings',
   },
 };
 
