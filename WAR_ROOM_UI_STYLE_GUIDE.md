@@ -2,22 +2,24 @@
 
 This document defines the comprehensive styling standards for the War Room application, established through iterative refinement of the monitoring components and extended site-wide.
 
-## Typography Hierarchy
+## Typography Hierarchy (Inter Eliminated)
 
-### Font Stack
+### NEW Font Stack - War Room 2025
 
-- **Content Text**: Inter (primary sans-serif)
-- **Sub-headers**: Barlow Condensed (condensed display font)
-- **Technical Labels & Action Buttons**: JetBrains Mono (monospace)
+- **Headers & Titles**: Barlow Condensed (all headings, titles, major labels)
+- **Numbers & Metrics**: Barlow 600 Semi-Condensed (dollars, percentages, counts)
+- **Secondary Labels**: JetBrains Mono (status indicators, metadata, technical labels)
+- **Body Content**: Barlow Regular (paragraph text, descriptions)
 
 ### Configuration
 
 ```javascript
 // tailwind.config.js
 fontFamily: {
-  'sans': ['Inter', 'system-ui', 'sans-serif'], // Primary content
-  'condensed': ['Barlow Condensed', 'system-ui', 'sans-serif'], // Sub-headers
-  'mono': ['JetBrains Mono', 'monospace'], // Technical elements
+  'sans': ['Barlow', 'system-ui', 'sans-serif'], // Body content
+  'condensed': ['Barlow Condensed', 'system-ui', 'sans-serif'], // Headers
+  'semi-condensed': ['Barlow Semi Condensed', 'system-ui', 'sans-serif'], // Numbers
+  'mono': ['JetBrains Mono', 'monospace'], // Technical labels
 }
 ```
 
@@ -25,7 +27,25 @@ fontFamily: {
 
 ```css
 /* src/index.css */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+```
+
+### CSS Utility Classes
+
+```css
+/* Numbers & Metrics */
+.font-numbers {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-weight: 600;
+}
+
+/* Secondary Labels (Status, Metadata) */
+.font-labels {
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
 ```
 
 ## Sub-header Styling Standards
