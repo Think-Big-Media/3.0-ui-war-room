@@ -177,8 +177,10 @@ style={{
 
 **All buttons** use reduced letter spacing for optimal readability of multi-word labels:
 - **Letter Spacing**: `letter-spacing: -0.05em` (halved spacing)
-- **Applies to**: Primary buttons, Secondary buttons, Action buttons
-- **Examples**: "RESPOND NOW", "Add to Alert", "Generate Response"
+- **Enforcement**: Global CSS rule applied to all `button` elements
+- **Applies to**: Primary buttons, Secondary buttons, Action buttons, inline buttons
+- **Examples**: "RESPOND NOW", "Add to Alert", "Generate Response", "Go to Login Page"
+- **Implementation**: Added to all button classes + global `button` selector
 
 ### Secondary Button Variants
 
