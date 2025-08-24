@@ -258,10 +258,10 @@ export class AlertService {
    */
   private getSeverityColor(severity: CrisisAlert['severity']): string {
     const colors = {
-      critical: '#dc3545',
-      high: '#fd7e14',
-      medium: '#ffc107',
-      low: '#28a745',
+      critical: '#DB2777', // War Room Fuchsia
+      high: '#FACC15',     // Alert Center Yellow
+      medium: '#426897',   // Intelligence Blue
+      low: '#2A434A',      // Live Monitoring Green
     };
     return colors[severity];
   }
