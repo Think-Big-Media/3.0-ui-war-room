@@ -102,7 +102,7 @@ const QuickActions: React.FC = () => {
         ))}
       </div>
 
-      <div className="mt-4 lg:mt-6 pt-4 border-t border-purple-400/20">
+      <div className="mt-4 lg:mt-6 pt-4 border-t border-white/20">
         <div className="flex items-center justify-between text-sm">
           <span className="footer-text text-white/75">
             Quick access to key features
