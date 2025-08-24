@@ -221,18 +221,15 @@ Three standardized secondary button types with specific use cases:
 ```css
 /* src/index.css */
 .btn-secondary-alert {
-  @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap;
-  letter-spacing: -0.05em; /* Halved spacing for multi-word buttons */
+  @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap text-center tracking-[-0.05em];
 }
 
 .btn-secondary-action {
-  @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap;
-  letter-spacing: -0.05em;
+  @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap text-center tracking-[-0.05em];
 }
 
 .btn-secondary-neutral {
-  @apply bg-white/10 hover:bg-white/20 text-white/80 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap;
-  letter-spacing: -0.05em;
+  @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap text-center tracking-[-0.05em];
 }
 
 .btn-primary-alert {
