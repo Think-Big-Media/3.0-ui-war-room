@@ -102,53 +102,55 @@ const CampaignControl: React.FC = () => {
   return (
     <div className="page-warroom">
       <PageLayout
-      pageTitle="War Room"
-      placeholder="Ask War Room about campaign operations..."
-    >
-      {/* Purple gradient background */}
-      <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 -z-10" />
+        pageTitle="War Room"
+        placeholder="Ask War Room about campaign operations..."
+      >
+        {/* Purple gradient background */}
+        <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 -z-10" />
 
-      <div />
+        <div />
 
-      {/* Tab Navigation */}
-      <CampaignTabs activeTab={activeTab} onTabChange={setActiveTab} />
+        {/* Tab Navigation */}
+        <CampaignTabs activeTab={activeTab} onTabChange={setActiveTab} />
 
-      {/* Strategic Projects Board */}
-      {activeTab === 'projects' && (
-        <div className="space-y-6">
-          <ProjectControls
-            filters={projectFilters}
-            onFiltersChange={setProjectFilters}
-            onNewProject={handleNewProject}
-          />
-          <KanbanBoard
-            projects={filteredProjects}
-            onProjectSelect={handleProjectSelect}
-          />
-        </div>
-      )}
+        {/* Strategic Projects Board */}
+        {activeTab === 'projects' && (
+          <div className="space-y-6">
+            <ProjectControls
+              filters={projectFilters}
+              onFiltersChange={setProjectFilters}
+              onNewProject={handleNewProject}
+            />
+            <KanbanBoard
+              projects={filteredProjects}
+              onProjectSelect={handleProjectSelect}
+            />
+          </div>
+        )}
 
-      {/* Asset Library */}
-      {activeTab === 'assets' && (
-        <div className="space-y-6">
-          <AssetControls
-            filters={assetFilters}
-            onFiltersChange={setAssetFilters}
-            onUploadAsset={handleUploadAsset}
-          />
-          <AssetGrid assets={filteredAssets} />
-        </div>
-      )}
+        {/* Asset Library */}
+        {activeTab === 'assets' && (
+          <div className="space-y-6">
+            <AssetControls
+              filters={assetFilters}
+              onFiltersChange={setAssetFilters}
+              onUploadAsset={handleUploadAsset}
+            />
+            <AssetGrid assets={filteredAssets} />
+          </div>
+        )}
 
-      {/* Team Activity */}
-      {activeTab === 'activity' && <ActivityFeed activities={mockActivities} />}
+        {/* Team Activity */}
+        {activeTab === 'activity' && (
+          <ActivityFeed activities={mockActivities} />
+        )}
 
-      {/* Analytics & AI Insights Tab */}
-      {activeTab === 'analytics' && (
-        <div className="space-y-6">
-          <PlatformAnalytics platform={analyticsPlatform} />
-        </div>
-      )}
+        {/* Analytics & AI Insights Tab */}
+        {activeTab === 'analytics' && (
+          <div className="space-y-6">
+            <PlatformAnalytics platform={analyticsPlatform} />
+          </div>
+        )}
       </PageLayout>
     </div>
   );

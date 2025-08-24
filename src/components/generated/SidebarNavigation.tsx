@@ -194,7 +194,11 @@ const TopNavigation: React.FC = () => {
                 />
                 <span
                   className={`${item.active ? 'text-white font-semibold' : getNavHoverClasses(item.theme)} ${
-                    ['LIVE MONITORING', 'WAR ROOM', 'ALERT CENTER'].includes(item.label) ? 'nav-label' : ''
+                    ['LIVE MONITORING', 'WAR ROOM', 'ALERT CENTER'].includes(
+                      item.label
+                    )
+                      ? 'nav-label'
+                      : ''
                   }`}
                 >
                   {item.label}
@@ -363,7 +367,11 @@ const TopNavigation: React.FC = () => {
                   />
                   <span
                     className={`text-lg ${item.active ? 'text-white font-semibold' : getNavHoverClasses(item.theme)} ${
-                      ['LIVE MONITORING', 'WAR ROOM', 'ALERT CENTER'].includes(item.label) ? 'nav-label' : ''
+                      ['LIVE MONITORING', 'WAR ROOM', 'ALERT CENTER'].includes(
+                        item.label
+                      )
+                        ? 'nav-label'
+                        : ''
                     }`}
                   >
                     {item.label}

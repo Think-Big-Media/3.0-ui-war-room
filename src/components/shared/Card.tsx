@@ -43,9 +43,7 @@ const Card: React.FC<CardProps> = ({
     xl: 'p-10',
   };
 
-  const hoverStyles = hover
-    ? `hover:bg-black/25 hoverable`
-    : '';
+  const hoverStyles = hover ? `hover:bg-black/25 hoverable` : '';
 
   // Box shadow for glass effect (unless disabled)
   const boxShadow = noShadow

@@ -55,36 +55,36 @@ const RealTimeMonitoring: React.FC = () => {
   return (
     <div className="page-monitoring">
       <PageLayout
-      pageTitle="Live Monitoring"
-      placeholder="Ask War Room about monitoring data..."
-    >
-      {/* Slate gradient background */}
-      <div className="fixed inset-0 bg-gradient-to-br from-slate-600 via-slate-700 to-slate-800 -z-10" />
+        pageTitle="Live Monitoring"
+        placeholder="Ask War Room about monitoring data..."
+      >
+        {/* Slate gradient background */}
+        <div className="fixed inset-0 bg-gradient-to-br from-slate-600 via-slate-700 to-slate-800 -z-10" />
 
-      {/* Dynamic Alert Banner - Moved to top */}
-      <MonitoringAlert onAction={handleAlertAction} />
+        {/* Dynamic Alert Banner - Moved to top */}
+        <MonitoringAlert onAction={handleAlertAction} />
 
-      {/* Live Status & Controls */}
-      <MonitoringControls isLive={isLive} onToggleLive={handleToggleLive} />
+        {/* Live Status & Controls */}
+        <MonitoringControls isLive={isLive} onToggleLive={handleToggleLive} />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        {/* Left Column - Live Feed */}
-        <div className="lg:col-span-2 space-y-4">
-          <MentionsStream
-            mentions={filteredMentions}
-            filters={filters}
-            onFiltersChange={setFilters}
-          />
-          <TrendingTopics topics={mockTrendingTopics} />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          {/* Left Column - Live Feed */}
+          <div className="lg:col-span-2 space-y-4">
+            <MentionsStream
+              mentions={filteredMentions}
+              filters={filters}
+              onFiltersChange={setFilters}
+            />
+            <TrendingTopics topics={mockTrendingTopics} />
+          </div>
+
+          {/* Right Column - Visual Dashboards */}
+          <div className="space-y-4">
+            <SentimentBreakdown sentimentData={mockSentimentData} />
+            <PlatformPerformance platformData={mockPlatformPerformance} />
+            <InfluencerTracker influencers={mockInfluencers} />
+          </div>
         </div>
-
-        {/* Right Column - Visual Dashboards */}
-        <div className="space-y-4">
-          <SentimentBreakdown sentimentData={mockSentimentData} />
-          <PlatformPerformance platformData={mockPlatformPerformance} />
-          <InfluencerTracker influencers={mockInfluencers} />
-        </div>
-      </div>
       </PageLayout>
     </div>
   );

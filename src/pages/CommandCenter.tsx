@@ -417,60 +417,60 @@ const CommandCenter: React.FC = () => {
   return (
     <div className="page-dashboard">
       <PageLayout
-      pageTitle="Dashboard"
-      placeholder="Ask War Room about your campaign status..."
-    >
-      {/* Slate/Gray gradient background matching Settings page */}
-      <div className="fixed inset-0 bg-gradient-to-br from-slate-600 via-slate-700 to-slate-800 -z-10" />
+        pageTitle="Dashboard"
+        placeholder="Ask War Room about your campaign status..."
+      >
+        {/* Slate/Gray gradient background matching Settings page */}
+        <div className="fixed inset-0 bg-gradient-to-br from-slate-600 via-slate-700 to-slate-800 -z-10" />
 
-      {/* Top Row - 4 KPI Tiles */}
-      <div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-          <DashboardCard
-            title="Real-Time Alerts"
-            number={7}
-            subtitle="Active crisis detections"
-            icon={Bell}
-            delay={0.1}
-            navigateTo="/alert-center"
-          />
-          <DashboardCard
-            title="Ad Spend Today"
-            number="$47.2K"
-            subtitle="Meta + Google Ads (+12% vs yesterday)"
-            icon={TrendingUp}
-            delay={0.2}
-            navigateTo="/campaign-control"
-          />
-          <DashboardCard
-            title="Mention Volume"
-            number="2,847"
-            subtitle="Mentions across platforms"
-            icon={MessageSquare}
-            delay={0.3}
-            navigateTo="/real-time-monitoring"
-          />
-          <DashboardCard
-            title="Sentiment Score"
-            number="74%"
-            subtitle="Positive sentiment"
-            icon={Brain}
-            delay={0.4}
-            navigateTo="/intelligence-hub"
-          />
-        </div>
+        {/* Top Row - 4 KPI Tiles */}
+        <div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+            <DashboardCard
+              title="Real-Time Alerts"
+              number={7}
+              subtitle="Active crisis detections"
+              icon={Bell}
+              delay={0.1}
+              navigateTo="/alert-center"
+            />
+            <DashboardCard
+              title="Ad Spend Today"
+              number="$47.2K"
+              subtitle="Meta + Google Ads (+12% vs yesterday)"
+              icon={TrendingUp}
+              delay={0.2}
+              navigateTo="/campaign-control"
+            />
+            <DashboardCard
+              title="Mention Volume"
+              number="2,847"
+              subtitle="Mentions across platforms"
+              icon={MessageSquare}
+              delay={0.3}
+              navigateTo="/real-time-monitoring"
+            />
+            <DashboardCard
+              title="Sentiment Score"
+              number="74%"
+              subtitle="Positive sentiment"
+              icon={Brain}
+              delay={0.4}
+              navigateTo="/intelligence-hub"
+            />
+          </div>
 
-        {/* Middle Row - 2 Wider Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-          <CampaignOperationsHub />
-          <QuickActions />
-        </div>
+          {/* Middle Row - 2 Wider Cards */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+            <CampaignOperationsHub />
+            <QuickActions />
+          </div>
 
-        {/* Bottom Row - Intelligence Dashboard */}
-        <div className="mb-4">
-          <IntelligenceDashboard />
+          {/* Bottom Row - Intelligence Dashboard */}
+          <div className="mb-4">
+            <IntelligenceDashboard />
+          </div>
         </div>
-      </div>
       </PageLayout>
     </div>
   );
