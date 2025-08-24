@@ -23,7 +23,7 @@ const CampaignTabs: React.FC<CampaignTabsProps> = ({ activeTab, onTabChange }) =
         <button
           key={tab.id}
           onClick={() => onTabChange(tab.id)}
-          className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+          className={`flex items-center space-x-2 px-3 py-1.5 text-sm rounded-lg transition-all duration-200 ${
             activeTab === tab.id
               ? 'bg-white/20 text-white border border-white/30'
               : 'text-white/70 hover:text-white hover:bg-white/10'
