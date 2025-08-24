@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createLogger } from '../utils/logger';
 
+console.log('🎫 TickerTape MODULE: Loading TickerTape module');
+
 const logger = createLogger('TickerTape');
 import {
   TrendingUp,
@@ -81,7 +83,7 @@ const TickerTape: React.FC = () => {
 
     // Refresh ticker items every 30 seconds
     const interval = setInterval(() => {
-      console.log('���� TickerTape: Refreshing data...');
+      console.log('🎫 TickerTape: Refreshing data...');
       informationService.refreshData();
       loadTickerItems();
     }, 30000);
