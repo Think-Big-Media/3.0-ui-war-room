@@ -275,6 +275,11 @@
     border-color: var(--page-accent);
   }
 
+  /* Page-scoped reinforcement for Live Monitoring */
+  [data-route="live-monitoring"] .hoverable:hover {
+    border-color: var(--page-accent);
+  }
+
   /* Targeted word spacing for specific nav labels */
   .nav-label {
     word-spacing: 0.15em;
