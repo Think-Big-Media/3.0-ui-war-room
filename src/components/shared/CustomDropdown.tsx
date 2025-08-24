@@ -156,7 +156,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
                 transition={{ duration: 0.2 }}
                 className={cn(
                   'fixed z-[99999]',
-                  'bg-black/[0.97] backdrop-blur-md',
+                  'bg-black/95',
                   'rounded',
                   'overflow-hidden'
                 )}
