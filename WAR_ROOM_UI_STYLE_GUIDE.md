@@ -488,8 +488,8 @@ All settings page toggle items (notifications, security, appearance, privacy) us
 ### Implementation Rules
 
 - **Toggle Item Typography**:
-  - Main text uses `.content-title` (Barlow Semi-Condensed Bold, 15px/17px desktop, 95% opacity)
-  - Descriptions use `.content-subtitle` (Barlow Condensed, 13px/15px desktop, 50% opacity, 6px top margin)
+  - Main text uses `.content-title` (Barlow Semi-Condensed Medium 500, 15px/17px desktop, 95% opacity)
+  - Descriptions use `.content-subtitle` (Barlow Condensed, 13px/15px desktop, 50% opacity, -1px top margin for tight spacing)
 - **Form Label Typography**:
   - Use JetBrains Mono: `text-sm font-mono text-white/75 uppercase tracking-wider`
   - Examples: Display Name, Email Address, Theme, Language labels
