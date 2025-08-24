@@ -31,7 +31,9 @@ function App() {
             element={<RealTimeMonitoring />}
           />
           <Route path="/campaign-control" element={<CampaignControl />} />
+          <Route path="/CampaignControl" element={<CampaignControl />} />
           <Route path="/intelligence-hub" element={<IntelligenceHub />} />
+          <Route path="/IntelligenceHub" element={<IntelligenceHub />} />
           <Route path="/alert-center" element={<AlertCenter />} />
           <Route path="/AlertCenter" element={<AlertCenter />} />
           {/* <Route path="/information-center" element={<InformationCenter />} /> */}
