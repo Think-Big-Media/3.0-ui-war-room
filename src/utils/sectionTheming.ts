@@ -84,14 +84,14 @@ export function getNavIconActiveClasses(theme: SectionTheme): string {
  * Uses CSS custom properties for consistency
  */
 export function getNavHoverClasses(theme: SectionTheme): string {
-  return `group-hover:text-[${theme.pageAccent}]`;
+  return `nav-hover-text`;
 }
 
 /**
  * Get CSS classes for navigation icon hover state based on theme
  */
 export function getNavIconHoverClasses(theme: SectionTheme): string {
-  return `group-hover:text-[${theme.pageAccent}]`;
+  return `nav-hover-icon`;
 }
 
 /**
