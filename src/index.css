@@ -234,8 +234,8 @@
   }
 
   /* Special handling for Live Monitoring navigation icon contrast */
-  /* When page accent is the dark Live Monitoring green, use lighter variant for nav icon */
-  [style*='--page-accent: #2A434A'] [aria-current='page'] .nav-active-icon {
+  /* When page accent is the Live Monitoring green, use the green accent for nav icon */
+  [style*='--page-accent: #3EA66A'] [aria-current='page'] .nav-active-icon {
     color: var(--nav-accent-live-monitoring) !important;
   }
 
