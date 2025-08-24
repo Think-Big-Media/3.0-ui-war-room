@@ -114,7 +114,7 @@ const QuickActions: React.FC = () => {
               className={`w-6 h-6 lg:w-8 lg:h-8 ${action.color}`}
               style={action.label === 'Live Monitor' ? { color: 'rgba(126, 211, 33, 1)' } : {}}
             />
-            <span className="text-xs lg:text-sm font-medium text-white/90">
+            <span className="content-title text-white/90">
               {action.label}
             </span>
           </motion.button>
