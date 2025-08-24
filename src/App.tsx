@@ -1,7 +1,7 @@
 /**
  * War Room Platform - Single Application Entry Point
  * Enterprise Standard: ONE App component, configuration-driven
- * REPLACES: AppBrandBOS.tsx, AppNoAuth.tsx, HomePage.tsx confusion
+ * REPLACES: All legacy app variants with single source of truth
  */
 
 import React from 'react';
@@ -18,15 +18,15 @@ import AlertCenter from './pages/AlertCenter';
 import SettingsPage from './pages/SettingsPage';
 import ContentCalendarPage from './pages/ContentCalendarPage';
 import ContentEnginePage from './pages/ContentEnginePage';
-import ErrorBoundary from './pages/ErrorBoundary';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import NotFound from './pages/NotFound';
 import TickerTape from './components/TickerTape';
-import './brand-bos.css';
+import './warroom.css';
 
 /**
  * Single Application Component - FINAL VERSION
  * This is the ONLY app entry point - no more confusion
- * Replaces AppBrandBOS.tsx permanently
+ * Single application component - enterprise standard
  */
 function App() {
   return (

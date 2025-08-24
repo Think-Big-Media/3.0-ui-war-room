@@ -15,14 +15,12 @@ import './index.css';
  * - Command Center dashboard 
  * - Full routing system
  * - All components working
- * - NO MORE AppBrandBOS confusion
+ * - Clean single entry point
  */
 import App from './App';
 
-// Static options (FALLBACK ONLY):
-// import App from './AppBrandBOS'; // Static version without Builder
-// import App from './App';         // Old version with Supabase auth
-// import App from './AppNoAuth';   // Testing version without auth
+// SINGLE SOURCE OF TRUTH: Only App.tsx is used
+// All other app variants have been consolidated
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 // Get root element

@@ -2,7 +2,7 @@ import type React from 'react';
 import { motion } from 'framer-motion';
 import { Brain, TrendingUp, MessageSquare, Target, Bell, Users, Activity, Calendar, Award } from 'lucide-react';
 
-const BrandBOSDashboard: React.FC = () => {
+const LegacyDashboard: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
       {/* Top Navigation Header */}
@@ -14,7 +14,7 @@ const BrandBOSDashboard: React.FC = () => {
               <div className="w-10 h-10 bg-gradient-to-br from-white to-purple-200 rounded-lg flex items-center justify-center">
                 <Brain className="w-6 h-6 text-purple-800" />
               </div>
-              <span className="ml-3 text-xl font-bold text-white">Brand BOS</span>
+              <span className="ml-3 text-xl font-bold text-white">War Room</span>
             </div>
 
             {/* Top Navigation */}
@@ -43,8 +43,8 @@ const BrandBOSDashboard: React.FC = () => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">Welcome to Brand BOS</h1>
-          <p className="text-purple-200">Professional Authority Platform Dashboard</p>
+          <h1 className="text-3xl font-bold text-white mb-2">Welcome to War Room</h1>
+          <p className="text-purple-200">Crisis Management Platform Dashboard</p>
         </div>
 
         {/* Stats Cards */}
@@ -202,4 +202,4 @@ const BrandBOSDashboard: React.FC = () => {
   );
 };
 
-export default BrandBOSDashboard;
+export default LegacyDashboard;
