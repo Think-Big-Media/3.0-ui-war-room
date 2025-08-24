@@ -155,10 +155,10 @@ const PlatformMetrics = memo<PlatformMetricsProps>(
 
     return (
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
+        initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3 }}
-        className={`rounded-lg p-4 ${color} bg-opacity-10 backdrop-blur-sm`}
+        transition={{ duration: 0.2 }}
+        className={`rounded-lg p-4 ${color} bg-opacity-10`}
       >
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-lg font-semibold uppercase font-condensed tracking-wide text-white/40">
