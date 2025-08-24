@@ -7,6 +7,7 @@ import Card from '../components/shared/Card';
 import PageLayout from '../components/shared/PageLayout';
 // PageHeader removed - no longer using headers on pages
 import { createLogger } from '../utils/logger';
+import { getSectionTheme } from '../utils/sectionTheming';
 
 const logger = createLogger('CommandCenter');
 
