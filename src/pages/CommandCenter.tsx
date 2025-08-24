@@ -180,7 +180,6 @@ const IntelligenceDashboard: React.FC = () => {
         },
       }}
       whileTap={{
-        scale: 0.98,
         transition: {
           duration: 0.1,
         },
