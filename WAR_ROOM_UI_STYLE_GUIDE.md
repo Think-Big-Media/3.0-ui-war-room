@@ -249,6 +249,7 @@ Three standardized secondary button types with specific use cases:
 ```
 
 **Reference implementations:**
+
 - ✅ Intelligence Hub tabs
 - ✅ Alert Center tabs
 - ✅ War Room tabs (fixed)

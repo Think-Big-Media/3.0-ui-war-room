@@ -9,9 +9,16 @@ interface CampaignTabsProps {
   onTabChange: (tab: CampaignTab) => void;
 }
 
-const CampaignTabs: React.FC<CampaignTabsProps> = ({ activeTab, onTabChange }) => {
+const CampaignTabs: React.FC<CampaignTabsProps> = ({
+  activeTab,
+  onTabChange,
+}) => {
   const tabs = [
-    { id: 'projects' as CampaignTab, label: 'Strategic Projects', icon: Target },
+    {
+      id: 'projects' as CampaignTab,
+      label: 'Strategic Projects',
+      icon: Target,
+    },
     { id: 'assets' as CampaignTab, label: 'Asset Library', icon: FileText },
     { id: 'activity' as CampaignTab, label: 'Team Activity', icon: Activity },
     { id: 'analytics' as CampaignTab, label: 'Ad Campaigns', icon: BarChart3 },
