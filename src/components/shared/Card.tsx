@@ -54,8 +54,8 @@ const Card: React.FC<CardProps> = memo(
     }
 
       if (hover && onClick) {
-        baseClasses.push('scale-hover cursor-pointer');
-      }
+      baseClasses.push('scale-hover cursor-pointer hover:shadow-2xl hover:shadow-white/5');
+    }
 
       // Variant styles
       switch (variant) {
