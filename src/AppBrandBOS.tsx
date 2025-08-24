@@ -19,8 +19,6 @@ import TickerTape from './components/TickerTape';
 import './brand-bos.css';
 
 function App() {
-  console.log('🎫 APP: AppBrandBOS rendering, TickerTape import:', typeof TickerTape);
-
   return (
     <Router>
       <ErrorBoundary>
