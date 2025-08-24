@@ -111,7 +111,7 @@ export function getNavIconActiveClasses(theme: SectionTheme): string {
  * Get CSS classes for navigation hover state based on theme (both icon and text)
  */
 export function getNavHoverClasses(theme: SectionTheme): string {
-  return `hover:text-${theme.colors.primary}`;
+  return `group-hover:text-${theme.colors.primary}`;
 }
 
 /**
