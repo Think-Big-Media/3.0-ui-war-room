@@ -87,7 +87,7 @@ export function MainLayout() {
           </div>
           <button
             onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-            className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
+            className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors duration-200"
           >
             {isSidebarCollapsed ? (
               <Menu className="w-5 h-5 text-gray-500" />
