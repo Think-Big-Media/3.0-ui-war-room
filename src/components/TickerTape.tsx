@@ -126,7 +126,7 @@ const TickerTape: React.FC = () => {
         <div
           className={`p-1.5 rounded-full bg-black/20 ${getCategoryColor(item.category)}`}
         >
-          <IconComponent className="w-3 h-3" />
+          <IconComponent className="w-3 h-3 ticker-accent" />
         </div>
         <div className="flex flex-col py-1 space-y-0">
           <span className="text-white/90 text-sm font-medium font-mono uppercase">
