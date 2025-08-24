@@ -8,7 +8,7 @@ import {
   Zap,
   Share2,
 } from 'lucide-react';
-import { perfectCardShadow } from '../lib/utils';
+import Card from '../components/shared/Card';
 
 interface QuickAction {
   icon: React.ComponentType<{ className?: string }>;
