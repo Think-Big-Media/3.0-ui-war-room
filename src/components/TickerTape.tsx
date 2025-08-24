@@ -66,7 +66,7 @@ const TickerTape: React.FC = () => {
 
     // Refresh ticker items every 30 seconds
     const interval = setInterval(() => {
-      console.log('���� TickerTape: Auto-refresh triggered');
+      console.log('🔄 TickerTape: Auto-refresh triggered');
       informationService.refreshData();
       loadTickerItems();
     }, 30000);
@@ -129,8 +129,22 @@ const TickerTape: React.FC = () => {
   };
 
 
+  // DIAGNOSTIC: Log what we're about to render
+  console.log('🎨 TickerTape: About to render with', tickerItems.length, 'items');
+
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-black/90 border-t border-white/20 overflow-hidden contain-layout">
+    <div
+      className="fixed bottom-0 left-0 right-0 z-40 border-t border-white/20 overflow-hidden contain-layout"
+      style={{
+        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+        minHeight: '48px'
+      }}
+    >
+      {/* DIAGNOSTIC INDICATOR - Visible proof component is mounting */}
+      <div className="absolute top-0 right-0 bg-red-500 text-white px-2 py-1 text-xs z-50">
+        TICKER: {tickerItems.length} items
+      </div>
+
       <div className="h-12 flex items-center">
         <style>{`
           @keyframes ticker-scroll {
