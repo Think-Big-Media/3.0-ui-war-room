@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticker Test</title>
+    <style>
+        body { margin: 0; background: #111827; overflow-x: hidden; }
+        
+        .ticker-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 48px;
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            z-index: 40;
+        }
+        
+        @keyframes slide {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .ticker-content {
+            animation: slide 10s linear infinite;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            height: 48px;
+            min-width: 200%;
+        }
+        
+        .item {
+            padding: 0 2rem;
+            color: white;
+            font-family: monospace;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div style="padding: 2rem; color: white;">
+        <h1>Test Page</h1>
+        <p>Look at the bottom for the ticker.</p>
+    </div>
+    
+    <div class="ticker-container">
+        <div class="ticker-content">
+            <span class="item">🔥 TEST ITEM 1</span>
+            <span class="item">⚡ TEST ITEM 2</span>
+            <span class="item">💡 TEST ITEM 3</span>
+        </div>
+    </div>
+</body>
+</html>
