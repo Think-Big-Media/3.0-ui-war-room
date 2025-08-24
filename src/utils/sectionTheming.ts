@@ -80,31 +80,25 @@ export function getNavIconActiveClasses(theme: SectionTheme): string {
 }
 
 /**
- * Get CSS classes for navigation hover state based on theme (both icon and text)
+ * Get CSS classes for navigation hover state based on theme
+ * Uses CSS custom properties for consistency
  */
 export function getNavHoverClasses(theme: SectionTheme): string {
-  return `group-hover:text-${theme.colors.primary}`;
+  return `group-hover:text-[${theme.pageAccent}]`;
 }
 
 /**
  * Get CSS classes for navigation icon hover state based on theme
  */
 export function getNavIconHoverClasses(theme: SectionTheme): string {
-  return `group-hover:text-${theme.colors.primary}`;
+  return `group-hover:text-[${theme.pageAccent}]`;
 }
 
 /**
- * Get CSS classes for card hover effects based on theme
+ * Get the page accent color for setting CSS variables
  */
-export function getCardHoverClasses(theme: SectionTheme): string {
-  return `hover:border-${theme.colors.border} group-hover:border-${theme.colors.border} group-hover:bg-${theme.colors.background} group-hover:text-${theme.colors.text}`;
-}
-
-/**
- * Get CSS classes for button active/accent based on theme
- */
-export function getButtonAccentClasses(theme: SectionTheme): string {
-  return `bg-${theme.colors.background} text-${theme.colors.text} border-${theme.colors.border}`;
+export function getPageAccentColor(pathname: string): string {
+  return getRouteAccentColor(pathname);
 }
 
 /**
@@ -116,31 +110,6 @@ export function useSectionTheme(pathname: string) {
   return {
     theme,
     navActiveClasses: getNavActiveClasses(theme),
-    cardHoverClasses: getCardHoverClasses(theme),
-    buttonAccentClasses: getButtonAccentClasses(theme),
+    pageAccentColor: getPageAccentColor(pathname),
   };
-}
-
-/**
- * Get the page accent color for setting CSS variables
- */
-export function getPageAccentColor(pathname: string): string {
-  const theme = getSectionTheme(pathname);
-  return theme.pageAccent;
-}
-
-/**
- * Generate dynamic CSS for section theming
- */
-export function generateSectionCSS(theme: SectionTheme): string {
-  return `
-    .section-accent { color: rgb(var(--${theme.colors.primary})); }
-    .section-border { border-color: rgb(var(--${theme.colors.border})); }
-    .section-bg { background-color: rgb(var(--${theme.colors.background})); }
-    .section-hover:hover {
-      border-color: rgb(var(--${theme.colors.border}));
-      background-color: rgb(var(--${theme.colors.background}));
-      color: rgb(var(--${theme.colors.text}));
-    }
-  `;
 }
