@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticker Animation Test</title>
+    <style>
+        body {
+            margin: 0;
+            background: #111827;
+            color: white;
+            overflow: hidden;
+        }
+        
+        .ticker-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 48px;
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        
+        @keyframes ticker-scroll {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        
+        .ticker-content {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            animation: ticker-scroll 15s linear infinite;
+            will-change: transform;
+        }
+        
+        .ticker-item {
+            padding: 0 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div style="padding: 2rem;">
+        <h1>Ticker Animation Test</h1>
+        <p>Check the bottom of the screen for a moving ticker tape.</p>
+    </div>
+    
+    <div class="ticker-container">
+        <div class="ticker-content">
+            <div class="ticker-item">🔥 INCREASE VIDEO CONTENT</div>
+            <div class="ticker-item">🗳️ ELECTION SECURITY UPDATE</div>
+            <div class="ticker-item">💡 HEALTHCARE POLICY DEBATE</div>
+            <div class="ticker-item">📈 ECONOMIC POLICY SHIFT</div>
+            <div class="ticker-item">⚡ BIPARTISAN SUPPORT GROWING</div>
+        </div>
+    </div>
+</body>
+</html>
