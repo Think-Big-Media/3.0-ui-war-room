@@ -140,6 +140,17 @@ const TickerTape: React.FC = () => {
     }
   };
 
+  console.log('🎫 TickerTape: Rendering component with', tickerItems.length, 'items');
+
+  if (tickerItems.length === 0) {
+    console.log('🎫 TickerTape: No items to display, rendering empty ticker');
+    return (
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-red-500/50 border-t border-white/20 h-12 flex items-center justify-center">
+        <span className="text-white text-sm">TICKER LOADING...</span>
+      </div>
+    );
+  }
+
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 bg-black/90 border-t border-white/20 overflow-hidden contain-layout">
       <div className="h-12 flex items-center">
