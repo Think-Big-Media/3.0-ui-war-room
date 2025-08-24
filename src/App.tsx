@@ -325,6 +325,16 @@ function App() {
 
         {/* CommandCenter Route */}
         <Route
+          path="/command-center"
+          element={
+            <React.Suspense
+              fallback={<LazyLoadFallback componentName="CommandCenter" />}
+            >
+              <CommandCenter />
+            </React.Suspense>
+          }
+        />
+        <Route
           path="/CommandCenter"
           element={
             <React.Suspense
