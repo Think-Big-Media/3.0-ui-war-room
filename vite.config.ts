@@ -1,24 +1,25 @@
-import { defineConfig, loadEnv } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from 'path'
-import { visualizer } from 'rollup-plugin-visualizer'
+import { defineConfig, loadEnv } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   // Load env file based on `mode` in the current working directory.
   // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
-  const env = loadEnv(mode, '.', '')
-  
+  const env = loadEnv(mode, '.', '');
+
   return {
     plugins: [
       react(),
       // Bundle analyzer - only in production with analyze flag
-      env.ANALYZE && visualizer({
-        filename: 'dist/stats.html',
-        open: true,
-        gzipSize: true,
-        brotliSize: true,
-      }),
+      env.ANALYZE &&
+        visualizer({
+          filename: 'dist/stats.html',
+          open: true,
+          gzipSize: true,
+          brotliSize: true,
+        }),
     ].filter(Boolean),
     resolve: {
       alias: {
@@ -37,7 +38,11 @@ export default defineConfig(({ mode }) => {
           // Optimized manual chunks for better caching and loading
           manualChunks: (id) => {
             // Core React bundle - highest priority
-            if (['react', 'react-dom', 'react-router-dom'].some(pkg => id.includes(pkg))) {
+            if (
+              ['react', 'react-dom', 'react-router-dom'].some((pkg) =>
+                id.includes(pkg)
+              )
+            ) {
               return 'react-core';
             }
 
@@ -45,17 +50,25 @@ export default defineConfig(({ mode }) => {
             // Heavy animation library replaced with CSS animations
 
             // UI and state management
-            if (['@reduxjs/toolkit', 'react-redux', 'zustand'].some(pkg => id.includes(pkg))) {
+            if (
+              ['@reduxjs/toolkit', 'react-redux', 'zustand'].some((pkg) =>
+                id.includes(pkg)
+              )
+            ) {
               return 'state-management';
             }
 
             // Forms and validation
-            if (['react-hook-form', '@hookform/resolvers', 'yup', 'zod'].some(pkg => id.includes(pkg))) {
+            if (
+              ['react-hook-form', '@hookform/resolvers', 'yup', 'zod'].some(
+                (pkg) => id.includes(pkg)
+              )
+            ) {
               return 'forms';
             }
 
             // Charts - lazy load for dashboard
-            if (['recharts', 'd3-scale'].some(pkg => id.includes(pkg))) {
+            if (['recharts', 'd3-scale'].some((pkg) => id.includes(pkg))) {
               return 'charts';
             }
 
@@ -70,7 +83,14 @@ export default defineConfig(({ mode }) => {
             }
 
             // Utilities
-            if (['date-fns', 'clsx', 'tailwind-merge', 'class-variance-authority'].some(pkg => id.includes(pkg))) {
+            if (
+              [
+                'date-fns',
+                'clsx',
+                'tailwind-merge',
+                'class-variance-authority',
+              ].some((pkg) => id.includes(pkg))
+            ) {
               return 'utils';
             }
 
@@ -83,8 +103,8 @@ export default defineConfig(({ mode }) => {
             if (id.includes('node_modules')) {
               return 'vendor';
             }
-          }
-        }
+          },
+        },
       },
       // Disable source maps in production for performance
       sourcemap: false,
@@ -113,9 +133,9 @@ export default defineConfig(({ mode }) => {
           '**/migrations/**',
           '**/logs/**',
           '**/tmp/**',
-          '**/temp/**'
-        ]
-      }
+          '**/temp/**',
+        ],
+      },
     },
-  }
-})
+  };
+});

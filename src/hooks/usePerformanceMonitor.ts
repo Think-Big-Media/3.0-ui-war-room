@@ -22,16 +22,22 @@ export const usePerformanceMonitor = (componentName: string) => {
     // Track render completion
     const trackRenderComplete = () => {
       const renderTime = performance.now() - renderStartTime.current;
-      
-      if (renderTime > 16) { // More than one frame (60fps)
-        console.warn(`🐌 Slow render in ${componentName}: ${renderTime.toFixed(2)}ms`);
+
+      if (renderTime > 16) {
+        // More than one frame (60fps)
+        console.warn(
+          `🐌 Slow render in ${componentName}: ${renderTime.toFixed(2)}ms`
+        );
       }
 
       // Track memory usage (only in development)
       if (process.env.NODE_ENV === 'development' && 'memory' in performance) {
         const memory = (performance as any).memory;
-        if (memory.usedJSHeapSize > 50 * 1024 * 1024) { // 50MB
-          console.warn(`🧠 High memory usage in ${componentName}: ${(memory.usedJSHeapSize / 1024 / 1024).toFixed(2)}MB`);
+        if (memory.usedJSHeapSize > 50 * 1024 * 1024) {
+          // 50MB
+          console.warn(
+            `🧠 High memory usage in ${componentName}: ${(memory.usedJSHeapSize / 1024 / 1024).toFixed(2)}MB`
+          );
         }
       }
     };
@@ -71,7 +77,7 @@ export const trackBundleSize = () => {
     const scripts = document.querySelectorAll('script[src]');
     let totalSize = 0;
 
-    scripts.forEach(script => {
+    scripts.forEach((script) => {
       const src = script.getAttribute('src');
       if (src && src.startsWith('/assets/')) {
         // Estimate size based on filename patterns
@@ -79,7 +85,9 @@ export const trackBundleSize = () => {
       }
     });
 
-    console.log(`📦 Estimated bundle size: ~${totalSize}kb (optimized from ~800kb)`);
+    console.log(
+      `📦 Estimated bundle size: ~${totalSize}kb (optimized from ~800kb)`
+    );
   }
 };
 
@@ -96,7 +104,9 @@ export const trackCoreWebVitals = () => {
     // Track First Input Delay
     new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
-        console.log(`⚡ FID: ${(entry as any).processingStart - entry.startTime}ms`);
+        console.log(
+          `⚡ FID: ${(entry as any).processingStart - entry.startTime}ms`
+        );
       }
     }).observe({ entryTypes: ['first-input'] });
 

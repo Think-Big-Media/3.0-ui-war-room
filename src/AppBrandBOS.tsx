@@ -5,7 +5,10 @@ import {
   Route,
   useLocation,
 } from 'react-router-dom';
-import { trackBundleSize, trackCoreWebVitals } from './hooks/usePerformanceMonitor';
+import {
+  trackBundleSize,
+  trackCoreWebVitals,
+} from './hooks/usePerformanceMonitor';
 // Use lazy-loaded components for better performance
 import {
   CommandCenter,

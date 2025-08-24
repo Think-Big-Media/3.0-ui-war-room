@@ -415,27 +415,29 @@ const IntelligenceHub: React.FC = () => {
               <Card key={query.id} whileHover={{}} padding="none">
                 <div className="px-4 pt-4 pb-4">
                   <div className="flex items-start justify-between mb-2">
+                    <div className="flex items-center space-x-2">
+                      <MessageSquare className="w-4 h-4 chat-icon" />
+                      <span className="text-sm text-white/70">
+                        {query.topic}
+                      </span>
+                    </div>
+                    <div className="flex items-center space-x-2 text-xs text-white/60">
+                      <Clock className="w-3 h-3" />
+                      <span>{query.timestamp}</span>
+                    </div>
+                  </div>
+                  <h4 className="font-medium text-white/95 mb-2">
+                    {query.query}
+                  </h4>
+                  <p className="text-sm text-white/70 mb-3">{query.response}</p>
                   <div className="flex items-center space-x-2">
-                    <MessageSquare className="w-4 h-4 chat-icon" />
-                    <span className="text-sm text-white/70">{query.topic}</span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-xs text-white/60">
-                    <Clock className="w-3 h-3" />
-                    <span>{query.timestamp}</span>
-                  </div>
-                </div>
-                <h4 className="font-medium text-white/95 mb-2">
-                  {query.query}
-                </h4>
-                <p className="text-sm text-white/70 mb-3">{query.response}</p>
-                <div className="flex items-center space-x-2">
-                  <button className="text-xs chat-button">Reopen</button>
-                  <button className="text-xs text-white/70 hover:text-white">
-                    Copy
-                  </button>
-                  <button className="text-xs text-white/70 hover:text-white">
-                    Add to Doc
-                  </button>
+                    <button className="text-xs chat-button">Reopen</button>
+                    <button className="text-xs text-white/70 hover:text-white">
+                      Copy
+                    </button>
+                    <button className="text-xs text-white/70 hover:text-white">
+                      Add to Doc
+                    </button>
                   </div>
                 </div>
               </Card>
