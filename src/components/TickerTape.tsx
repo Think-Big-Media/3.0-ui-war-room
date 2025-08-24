@@ -26,10 +26,6 @@ const TickerTape: React.FC = () => {
   const [tickerItems, setTickerItems] = useState<InformationItem[]>([]);
   const navigate = useNavigate();
 
-  // DIAGNOSTIC LOGGING
-  console.log('🎬 TickerTape: Component rendering');
-  console.log('📦 TickerTape: tickerItems count:', tickerItems.length);
-  console.log('📋 TickerTape: tickerItems data:', tickerItems);
 
   // Icon mapping for information items
   const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -52,13 +48,9 @@ const TickerTape: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log('🔄 TickerTape: useEffect triggered');
-
     // Load ticker items from information service
     const loadTickerItems = () => {
-      console.log('📡 TickerTape: Loading items from service...');
       const items = informationService.getTickerItems(20);
-      console.log('📋 TickerTape: Service returned', items.length, 'items:', items);
       setTickerItems(items);
     };
 
@@ -66,7 +58,6 @@ const TickerTape: React.FC = () => {
 
     // Refresh ticker items every 30 seconds
     const interval = setInterval(() => {
-      console.log('🔄 TickerTape: Auto-refresh triggered');
       informationService.refreshData();
       loadTickerItems();
     }, 30000);
@@ -129,8 +120,6 @@ const TickerTape: React.FC = () => {
   };
 
 
-  // DIAGNOSTIC: Log what we're about to render
-  console.log('🎨 TickerTape: About to render with', tickerItems.length, 'items');
 
   return (
     <div
