@@ -41,6 +41,7 @@
   "dependencies": {
     "@builder.io/react": "^8.2.6",
     "@builder.io/sdk": "^6.1.2",
+    "@builder.io/widgets": "^1.0.0",
     "@hookform/resolvers": "^3.3.2",
     "@radix-ui/react-slot": "^1.2.3",
     "@reduxjs/toolkit": "^2.0.1",
