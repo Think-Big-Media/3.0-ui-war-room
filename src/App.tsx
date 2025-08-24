@@ -45,6 +45,7 @@ import SettingsPage from './pages/SettingsPage';
 
 // Import Builder.io components
 import BuilderPage from './pages/BuilderPage';
+import HomePage from './pages/HomePage';
 import './builder-registry'; // Register components with Builder
 
 // Import Data Toggle Button
@@ -258,14 +259,8 @@ function App() {
           }
         />
 
-        {/* Default Route - TEMPORARILY BYPASS AUTH */}
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={
-            <React.Suspense fallback={<LazyLoadFallback componentName="Dashboard" />}>
-              <Dashboard />
-            </React.Suspense>
-          } />
-        </Route>
+        {/* Default Route - Home Page with Builder.io */}
+        <Route path="/" element={<HomePage />} />
 
         {/* Temporary route to view dashboard without auth for development */}
         <Route path="/preview-dashboard" element={

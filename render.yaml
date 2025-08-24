@@ -14,6 +14,8 @@ services:
     envVars:
       - key: NODE_VERSION
         value: "20.19.0"
+      - key: VITE_BUILDER_IO_KEY
+        value: "8686f311497044c0932b7d2247296478"
       
     # Auto-deploy from GitHub
     repo: https://github.com/Think-Big-Media/3.0-ui-war-room
