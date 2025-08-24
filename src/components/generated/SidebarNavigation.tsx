@@ -186,7 +186,7 @@ const TopNavigation: React.FC = () => {
                       : getNavIconHoverClasses(item.theme)
                   }`}
                 />
-                <span>{item.label}</span>
+                <span className={item.active ? '' : getNavHoverClasses(item.theme)}>{item.label}</span>
               </button>
             ))}
           </div>
