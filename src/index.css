@@ -12,6 +12,14 @@
     /* Base font size optimized for 95% browser scaling */
     font-size: 16.5px; /* Adjusted for 95% zoom - larger text */
 
+    /* Brand Accent Colors - Single Source of Truth */
+    --accent-dashboard: #D97706;
+    --accent-live-monitoring: #2A434A;
+    --accent-war-room: #DB2777;
+    --accent-intelligence: #426897;
+    --accent-alert-center: #FACC15;
+    --accent-settings: #818CF8;
+
     /* Glassmorphic theme - transparent with subtle tints */
     --background: 249 250 251; /* gray-50 base */
     --foreground: 15 23 42; /* slate-800 */
