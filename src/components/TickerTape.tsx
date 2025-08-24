@@ -29,6 +29,11 @@ const TickerTape: React.FC = () => {
   const [tickerItems, setTickerItems] = useState<InformationItem[]>([]);
   const navigate = useNavigate();
 
+  // DEBUG: Log component mounting and state
+  console.log('🎫 TickerTape: Component mounting');
+  console.log('🎫 TickerTape: Current tickerItems length:', tickerItems.length);
+  console.log('🎫 TickerTape: Items:', tickerItems);
+
   // Icon mapping for information items
   const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
     TrendingUp,
