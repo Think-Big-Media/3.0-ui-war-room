@@ -4,7 +4,10 @@ import { Search, Globe, Target, Bell } from 'lucide-react';
 import Card from '../shared/Card';
 import CustomDropdown from '../shared/CustomDropdown';
 import InformationStreamCard from './InformationStreamCard';
-import { type InformationItem, type InformationFilters } from '../../types/information';
+import {
+  type InformationItem,
+  type InformationFilters,
+} from '../../types/information';
 
 interface InformationStreamsTabProps {
   items: InformationItem[];
