@@ -157,7 +157,7 @@ const StatusBar: React.FC = () => {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: index * 0.1 }}
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg border backdrop-blur-sm ${getStatusColor(indicator.status)}`}
+                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg border ${getStatusColor(indicator.status)}`}
                 >
                   <Icon className="w-4 h-4" />
                   <span className="text-xs font-mono font-semibold">
