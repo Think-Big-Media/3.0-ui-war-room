@@ -55,7 +55,8 @@ const AlertCenter: React.FC = () => {
   };
 
   return (
-    <PageLayout
+    <div className="page-alerts">
+      <PageLayout
       pageTitle="Alert Center"
       placeholder="Ask War Room about campaign alerts..."
     >
@@ -156,7 +157,8 @@ const AlertCenter: React.FC = () => {
           onMarkAllRead={handleMarkAllAsRead}
         />
       )}
-    </PageLayout>
+      </PageLayout>
+    </div>
   );
 };
 
