@@ -306,7 +306,7 @@ export class AlertService {
     const colors = {
       critical: '#DB2777', // War Room Fuchsia
       high: '#FACC15', // Alert Center Yellow
-      medium: '#426897', // Intelligence Blue
+      medium: '#60A5FA', // Intelligence Blue
       low: '#2A434A', // Live Monitoring Green
     };
     return colors[severity];

@@ -175,7 +175,7 @@ interface SparklineProps {
 
 const Sparkline: React.FC<SparklineProps> = ({
   data,
-  color = '#426897', // Intelligence Blue from design tokens
+  color = '#60A5FA', // Intelligence Blue from design tokens
   width = 80,
   height = 32,
 }) => {
