@@ -133,23 +133,23 @@ const TickerTape: React.FC = () => {
           }
           
           .ticker-content {
-            animation: ticker-scroll 60s linear infinite !important;
-            animation-duration: 60s !important;
+            animation: ticker-scroll 120s linear infinite !important;
+            animation-duration: 120s !important;
             animation-timing-function: linear !important;
             animation-iteration-count: infinite !important;
             will-change: transform;
             display: flex !important;
             align-items: center !important;
             white-space: nowrap !important;
-            gap: 3rem !important;
+            gap: 2rem !important;
             width: max-content !important;
           }
 
           /* Override reduced motion for ticker - it's essential functionality */
           @media (prefers-reduced-motion: reduce) {
             .ticker-content {
-              animation: ticker-scroll 60s linear infinite !important;
-              animation-duration: 60s !important;
+              animation: ticker-scroll 120s linear infinite !important;
+              animation-duration: 120s !important;
               animation-timing-function: linear !important;
               animation-iteration-count: infinite !important;
             }
@@ -171,7 +171,7 @@ const TickerTape: React.FC = () => {
         `}</style>
         <div className="ticker-content">
           {/* Create seamless continuous loop */}
-          {Array.from({ length: 20 }, (_, setIndex) =>
+          {Array.from({ length: 30 }, (_, setIndex) =>
             tickerItems.map((item, itemIndex) => {
               const IconComponent = getIcon(item);
               const uniqueIndex = setIndex * tickerItems.length + itemIndex;
