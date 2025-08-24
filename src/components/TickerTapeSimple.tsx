@@ -30,16 +30,16 @@ const TickerTapeSimple: React.FC = () => {
           }
           
           .ticker-content-simple {
-            animation: ticker-scroll-simple 20s linear infinite !important;
-            animation-duration: 20s !important;
+            animation: ticker-scroll-simple 60s linear infinite !important;
+            animation-duration: 60s !important;
             will-change: transform;
             display: flex;
             align-items: center;
             white-space: nowrap;
-            gap: 2rem;
+            gap: 3rem;
             width: max-content;
             height: 48px;
-            padding: 0 2rem;
+            padding: 0;
           }
 
           /* Force animation even with reduced motion preference for this specific ticker */
