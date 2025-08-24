@@ -124,7 +124,7 @@ const TickerTape: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-black/20 backdrop-blur-lg border-t border-white/20 overflow-hidden">
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-black/90 border-t border-white/20 overflow-hidden contain-layout">
       <div className="h-12 flex items-center">
         <style>{`
           @keyframes ticker-scroll {
@@ -139,14 +139,16 @@ const TickerTape: React.FC = () => {
           .ticker-content {
             animation: ticker-scroll 420s linear infinite;
             will-change: transform;
+            contain: layout style paint;
           }
-          
+
           .ticker-item {
-            transition: all 0.3s ease;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            contain: layout style;
           }
-          
+
           .ticker-item:hover {
-            transform: scale(1.05);
+            transform: scale(1.02) translateZ(0);
             background-color: rgba(255, 255, 255, 0.1);
           }
         `}</style>
@@ -158,7 +160,7 @@ const TickerTape: React.FC = () => {
               return (
                 <div
                   key={`ticker-${item.id}-${index}`}
-                  className={`ticker-item flex items-center space-x-3 px-4 py-1 cursor-pointer rounded-lg transition-all duration-300 ${getPriorityOpacity(item.priority)}`}
+                  className={`ticker-item flex items-center space-x-3 px-4 py-1 cursor-pointer rounded-lg ${getPriorityOpacity(item.priority)}`}
                   onClick={() => handleItemClick(item, index)}
                   title={`${item.category.replace('-', ' ')} - ${item.priority} priority`}
                 >
