@@ -16,14 +16,14 @@
 
     /* Brand Accent Colors - Single Source of Truth */
     --accent-dashboard: #d97706;
-    --accent-live-monitoring: #2a434a;
+    --accent-live-monitoring: #3ea66a;
     --accent-war-room: #db2777;
     --accent-intelligence: #60a5fa;
     --accent-alert-center: #facc15;
     --accent-settings: #818cf8;
 
     /* Navigation-specific variants for better contrast */
-    --nav-accent-live-monitoring: #4adb7a; /* Lighter green for visibility */
+    --nav-accent-live-monitoring: #3ea66a; /* Use the same green for navigation */
 
     /* Glassmorphic theme - transparent with subtle tints */
     --background: 249 250 251; /* gray-50 base */
