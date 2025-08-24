@@ -1,13 +1,16 @@
 import type React from 'react';
 import { motion, type HTMLMotionProps } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import { cn } from '../../lib/utils';
 import { ANIMATION_CONFIGS } from '../../constants/animations';
+import { getSectionTheme } from '../../utils/sectionTheming';
 
 export interface CardProps extends HTMLMotionProps<'div'> {
   variant?: 'glass' | 'solid' | 'elevated' | 'bordered';
   hover?: boolean;
   padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
   noShadow?: boolean;
+  themeOverride?: string; // Allow override of automatic theme detection
   children: React.ReactNode;
 }
 
@@ -16,10 +19,13 @@ const Card: React.FC<CardProps> = ({
   hover = true,
   padding = 'md',
   noShadow = false,
+  themeOverride,
   className,
   children,
   ...props
 }) => {
+  const location = useLocation();
+  const sectionTheme = getSectionTheme(themeOverride || location.pathname);
   const baseStyles = 'rounded-2xl transition-colors duration-200';
 
   const variantStyles = {
@@ -38,7 +44,7 @@ const Card: React.FC<CardProps> = ({
   };
 
   const hoverStyles = hover
-    ? 'hover:bg-black/25 hover:border-orange-400/50 transform hover:scale-[1.01] will-change-transform'
+    ? `hover:bg-black/25 hover:border-${sectionTheme.colors.border} transform hover:scale-[1.01] will-change-transform`
     : '';
 
   // Box shadow for glass effect (unless disabled)
