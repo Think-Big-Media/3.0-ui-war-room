@@ -9,7 +9,7 @@ import {
   Share2,
 } from 'lucide-react';
 import Card from '../components/shared/Card';
-import { BRAND_TOKENS } from '../tokens/colors'; main
+import { BRAND_TOKENS } from '../tokens/colors';
 
 interface QuickAction {
   icon: React.ComponentType<{ className?: string }>;
@@ -48,65 +48,10 @@ const QuickActions: React.FC = () => {
       icon: TrendingUp,
       label: 'Alert Center',
       accentKey: 'alertCenter',
-=======
-      icon: TrendingUp,
-      label: 'Analytics',
-      color: 'text-blue-500',
-      bgColor: 'bg-blue-500/20',
-      borderColor: 'border-blue-500/30',
-      hoverBorderColor: 'hover:border-blue-400/50',
-      hoverShadowColor: '',
-    },
-    {
-      icon: Search,
-      label: 'Research',
-      color: 'text-purple-500',
-      bgColor: 'bg-purple-500/20',
-      borderColor: 'border-purple-500/30',
-      hoverBorderColor: 'hover:border-purple-400/50',
-      hoverShadowColor: '',
-    },
-    {
-      icon: Activity,
-      label: 'Monitor',
-      color: 'text-green-500',
-      bgColor: 'bg-green-500/20',
-      borderColor: 'border-green-500/30',
-      hoverBorderColor: 'hover:border-green-400/50',
-      hoverShadowColor: '',
-    },
-    {
-      icon: FileText,
-      label: 'Content',
-      color: 'text-orange-500',
-      bgColor: 'bg-orange-500/20',
-      borderColor: 'border-orange-500/30',
-      hoverBorderColor: 'hover:border-orange-400/50',
-      hoverShadowColor: '',
-    },
-    {
-      icon: Zap,
-      label: 'Campaign',
-      color: 'text-yellow-500',
-      bgColor: 'bg-yellow-500/20',
-      borderColor: 'border-yellow-500/30',
-      hoverBorderColor: 'hover:border-yellow-400/50',
-      hoverShadowColor: '',
-    },
-    {
-      icon: Share2,
-      label: 'Social',
-      color: 'text-pink-500',
-      bgColor: 'bg-pink-500/20',
-      borderColor: 'border-pink-500/30',
-      hoverBorderColor: 'hover:border-pink-400/50',
-      hoverShadowColor: '',
->>>>>>> main
     },
   ];
 
   return (
-<<<<<<< HEAD
     <Card
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -124,14 +69,6 @@ const QuickActions: React.FC = () => {
             QUICK ACTIONS
           </h3>
         </div>
-=======
-    <div className="bg-slate-800/60 backdrop-blur-lg border border-slate-600/50 rounded-xl p-6">
-      <div className="mb-6">
-        <h3 className="text-xl font-semibold text-white mb-2">
-          Quick Actions
-        </h3>
-        <p className="text-slate-400 text-sm">Access key features and tools instantly</p>
->>>>>>> main
       </div>
 
       <div className="grid grid-cols-3 gap-4">
@@ -139,7 +76,6 @@ const QuickActions: React.FC = () => {
           <motion.button
             key={index}
             whileTap={{ scale: 0.95 }}
-<<<<<<< HEAD
             className={`bg-black/20 backdrop-blur-sm rounded-xl p-4 lg:p-5 border border-white/20 hover:bg-black/25 hoverable transition-all duration-300 flex flex-col items-center space-y-2 quick-action-${action.accentKey}`}
           >
             <action.icon className="w-6 h-6 lg:w-8 lg:h-8 quick-action-icon" />
@@ -157,18 +93,6 @@ const QuickActions: React.FC = () => {
         </div>
       </div>
     </Card>
-=======
-            className={`${action.bgColor} backdrop-blur-sm rounded-lg p-4 border ${action.borderColor} ${action.hoverBorderColor} hover:bg-slate-700/50 transition-all duration-300 flex flex-col items-center space-y-2`}
-          >
-            <action.icon className={`w-6 h-6 ${action.color}`} />
-            <span className="text-xs font-medium text-white">
-              {action.label}
-            </span>
-          </motion.button>
-        ))}
-      </div>
-    </div>
->>>>>>> main
   );
 };
 

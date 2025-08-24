@@ -12,14 +12,6 @@ import SettingsPage from './pages/SettingsPage';
 
 // Import layout components
 import { MainLayout } from './components/layout/MainLayout';
-import { Sidebar } from './components/layout/Sidebar';
-import { Navbar } from './components/layout/Navbar';
-
-// Import common components
-import { CommandCenter } from './components/CommandCenter';
-import { FeatureCard } from './components/FeatureCard';
-import { RecentActivity } from './components/RecentActivity';
-import { QuickActions } from './components/QuickActions';
 
 // Set your Builder.io API key
 Builder.init(import.meta.env.VITE_BUILDER_IO_KEY || 'YOUR_BUILDER_IO_API_KEY');
@@ -81,97 +73,7 @@ Builder.registerComponent(MainLayout, {
   },
 });
 
-Builder.registerComponent(Sidebar, {
-  name: 'Sidebar',
-  description: 'Navigation sidebar',
-  inputs: [],
-});
-
-Builder.registerComponent(Navbar, {
-  name: 'Navbar',
-  description: 'Top navigation bar',
-  inputs: [],
-});
-
-// Register feature components
-Builder.registerComponent(CommandCenter, {
-  name: 'CommandCenter',
-  description: 'War Room command center with key metrics',
-  inputs: [
-    {
-      name: 'title',
-      type: 'string',
-      defaultValue: 'Command Center',
-    },
-    {
-      name: 'showMetrics',
-      type: 'boolean',
-      defaultValue: true,
-    },
-  ],
-});
-
-Builder.registerComponent(FeatureCard, {
-  name: 'FeatureCard',
-  description: 'Feature showcase card',
-  inputs: [
-    {
-      name: 'title',
-      type: 'string',
-      required: true,
-    },
-    {
-      name: 'description',
-      type: 'string',
-    },
-    {
-      name: 'icon',
-      type: 'string',
-      enum: ['users', 'calendar', 'messages', 'chart', 'file', 'settings'],
-    },
-    {
-      name: 'link',
-      type: 'string',
-    },
-  ],
-});
-
-Builder.registerComponent(RecentActivity, {
-  name: 'RecentActivity',
-  description: 'Recent campaign activity feed',
-  inputs: [
-    {
-      name: 'limit',
-      type: 'number',
-      defaultValue: 5,
-    },
-  ],
-});
-
-Builder.registerComponent(QuickActions, {
-  name: 'QuickActions',
-  description: 'Quick action buttons for common tasks',
-  inputs: [
-    {
-      name: 'actions',
-      type: 'list',
-      subFields: [
-        {
-          name: 'label',
-          type: 'string',
-        },
-        {
-          name: 'action',
-          type: 'string',
-        },
-        {
-          name: 'icon',
-          type: 'string',
-        },
-      ],
-    },
-  ],
-});
+// Additional component registrations can be added here as they are built
 
 // Export for use in the app
 export { Builder };
