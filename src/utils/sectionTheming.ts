@@ -9,7 +9,7 @@ import { BRAND_TOKENS, getRouteAccent } from '../tokens/colors';
 export interface SectionTheme {
   name: string;
   pageAccent: string; // CSS variable value for --page-accent
-  accentKey: keyof typeof BRAND_ACCENTS; // Design token key
+  accentKey: keyof typeof BRAND_TOKENS; // Design token key
 }
 
 export const SECTION_THEMES: Record<string, SectionTheme> = {
