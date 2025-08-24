@@ -185,6 +185,7 @@ const TopNavigation: React.FC = () => {
                 key={index}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleNavigation(item.path)}
+                aria-current={item.active ? 'page' : undefined}
                 className={`group px-3 py-1 rounded-lg text-sm transition-all duration-200 flex items-center space-x-1 ${
                   item.active
                     ? getNavActiveClasses(item.theme)
