@@ -377,10 +377,10 @@
     @apply -mt-0.5;
   }
 
-  /* Global button spacing - ensure all buttons have reduced letter and word spacing */
+  /* Revert global button spacing - remove word-spacing override */
   button {
     letter-spacing: -0.05em !important;
-    word-spacing: -0.3em !important;
+    /* word-spacing reverted to default - no global override */
   }
 
   /* Form input style */
