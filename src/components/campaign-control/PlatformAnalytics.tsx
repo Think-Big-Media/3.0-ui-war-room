@@ -663,7 +663,6 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                 <motion.tr
                   key={campaign.id}
                   className="hover:bg-gray-50"
-                  whileHover={{ scale: 1.001 }}
                   whileTap={{ scale: 0.999 }}
                 >
                   <td

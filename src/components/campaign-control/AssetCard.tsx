@@ -21,8 +21,7 @@ const AssetCard: React.FC<AssetCardProps> = ({
 }) => {
   return (
     <Card
-      whileHover={{ scale: 1.02 }}
-      className="cursor-pointer"
+      className="cursor-pointer hoverable"
       padding="sm"
       variant="glass"
     >
