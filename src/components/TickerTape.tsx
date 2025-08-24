@@ -55,21 +55,33 @@ const TickerTape: React.FC = () => {
   };
 
   useEffect(() => {
+    console.log('🎫 TickerTape: useEffect running');
+
     // Load ticker items from information service
     const loadTickerItems = () => {
-      const items = informationService.getTickerItems(20); // Get more items for continuous scroll
-      setTickerItems(items);
+      console.log('🎫 TickerTape: Loading ticker items...');
+      try {
+        const items = informationService.getTickerItems(20); // Get more items for continuous scroll
+        console.log('🎫 TickerTape: Loaded items:', items.length, items);
+        setTickerItems(items);
+      } catch (error) {
+        console.error('🎫 TickerTape: Error loading items:', error);
+      }
     };
 
     loadTickerItems();
 
     // Refresh ticker items every 30 seconds
     const interval = setInterval(() => {
+      console.log('🎫 TickerTape: Refreshing data...');
       informationService.refreshData();
       loadTickerItems();
     }, 30000);
 
-    return () => clearInterval(interval);
+    return () => {
+      console.log('🎫 TickerTape: Cleaning up interval');
+      clearInterval(interval);
+    };
   }, []);
 
   const handleItemClick = (item: InformationItem, index: number) => {
