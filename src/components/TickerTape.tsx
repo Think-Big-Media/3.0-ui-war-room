@@ -138,13 +138,26 @@ const TickerTape: React.FC = () => {
           }
           
           .ticker-content {
-            animation: ticker-scroll 78s linear infinite !important;
+            animation: ticker-scroll 60s linear infinite !important;
+            animation-duration: 60s !important;
+            animation-timing-function: linear !important;
+            animation-iteration-count: infinite !important;
             will-change: transform;
             display: flex !important;
             align-items: center !important;
             white-space: nowrap !important;
-            gap: 2rem !important;
+            gap: 3rem !important;
             width: max-content !important;
+          }
+
+          /* Override reduced motion for ticker - it's essential functionality */
+          @media (prefers-reduced-motion: reduce) {
+            .ticker-content {
+              animation: ticker-scroll 60s linear infinite !important;
+              animation-duration: 60s !important;
+              animation-timing-function: linear !important;
+              animation-iteration-count: infinite !important;
+            }
           }
 
           .ticker-content:hover {
