@@ -29,28 +29,78 @@ export default defineConfig(({ mode }) => {
     // Vite automatically handles VITE_ prefixed env vars via import.meta.env
     // No define section needed for env vars
     build: {
-      // Bundle size optimization
-      chunkSizeWarningLimit: 1000,
+      // Optimize bundle size and performance
+      chunkSizeWarningLimit: 800,
+      target: 'es2020', // Modern browsers for better optimization
       rollupOptions: {
         output: {
-          manualChunks: {
-            // Vendor chunks for better caching
-            'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-            'ui-vendor': ['@reduxjs/toolkit', 'react-redux', 'react-hook-form'],
-            'charts-vendor': ['recharts', 'd3-scale'],
-            'maps-vendor': ['react-simple-maps'],
-            'dnd-vendor': ['react-beautiful-dnd'],
-            'analytics-vendor': ['posthog-js'],
-            'auth-vendor': ['@supabase/supabase-js'],
-            'utils-vendor': ['date-fns', 'clsx', 'tailwind-merge', 'yup'],
-            'icons-vendor': ['lucide-react']
+          // Optimized manual chunks for better caching and loading
+          manualChunks: (id) => {
+            // Core React bundle - highest priority
+            if (['react', 'react-dom', 'react-router-dom'].some(pkg => id.includes(pkg))) {
+              return 'react-core';
+            }
+
+            // Remove framer-motion from bundle (not used anymore)
+            // Heavy animation library replaced with CSS animations
+
+            // UI and state management
+            if (['@reduxjs/toolkit', 'react-redux', 'zustand'].some(pkg => id.includes(pkg))) {
+              return 'state-management';
+            }
+
+            // Forms and validation
+            if (['react-hook-form', '@hookform/resolvers', 'yup', 'zod'].some(pkg => id.includes(pkg))) {
+              return 'forms';
+            }
+
+            // Charts - lazy load for dashboard
+            if (['recharts', 'd3-scale'].some(pkg => id.includes(pkg))) {
+              return 'charts';
+            }
+
+            // Authentication
+            if (id.includes('@supabase/')) {
+              return 'auth';
+            }
+
+            // Icons - separate chunk as they're used everywhere
+            if (id.includes('lucide-react')) {
+              return 'icons';
+            }
+
+            // Utilities
+            if (['date-fns', 'clsx', 'tailwind-merge', 'class-variance-authority'].some(pkg => id.includes(pkg))) {
+              return 'utils';
+            }
+
+            // Large individual packages
+            if (id.includes('react-beautiful-dnd')) return 'dnd';
+            if (id.includes('react-simple-maps')) return 'maps';
+            if (id.includes('posthog-js')) return 'analytics';
+
+            // Node modules as vendor chunk
+            if (id.includes('node_modules')) {
+              return 'vendor';
+            }
           }
         }
       },
-      // Enable source maps for production debugging
-      sourcemap: mode === 'production' ? false : true,
-      // Use esbuild for minification (faster than terser)
-      minify: mode === 'production' ? 'esbuild' : false,
+      // Disable source maps in production for performance
+      sourcemap: false,
+      // Use esbuild for fastest minification
+      minify: 'esbuild',
+      // CSS optimization
+      cssMinify: true,
+      // Tree shaking optimization
+      rollupOptions: {
+        ...this.rollupOptions,
+        treeshake: {
+          moduleSideEffects: false,
+          propertyReadSideEffects: false,
+          unknownGlobalSideEffects: false,
+        }
+      }
     },
     server: {
       port: env.VITE_PORT ? parseInt(env.VITE_PORT) : 5173,
