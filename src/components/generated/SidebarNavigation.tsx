@@ -211,8 +211,8 @@ const TopNavigation: React.FC = () => {
               >
                 <Bell className="w-5 h-5" />
                 {unreadAlerts.length > 0 && (
-                  <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full border-2 border-black/20 flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">
+                  <div className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-red-500/80 rounded-full border-2 border-black/20 flex items-center justify-center">
+                    <span className="text-white text-[11px] font-bold">
                       {unreadAlerts.length}
                     </span>
                   </div>
