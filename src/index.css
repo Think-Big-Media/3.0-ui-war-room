@@ -658,6 +658,16 @@
   /* Navigation text wrapping fix for 80% browser scaling */
   nav button span {
     @apply whitespace-nowrap overflow-hidden text-ellipsis;
+    font-family: 'Barlow Condensed', sans-serif !important;
+    font-weight: 500 !important;
+    font-size: 16px !important;
+  }
+
+  /* Specific targeting for navigation label spans */
+  nav button span.label {
+    font-family: 'Barlow Condensed', sans-serif !important;
+    font-weight: 500 !important;
+    font-size: 16px !important;
   }
 
   /* Scroll fade effects - fades content itself, no overlays */
