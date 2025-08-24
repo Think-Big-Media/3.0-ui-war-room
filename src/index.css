@@ -304,17 +304,20 @@
     background-color: var(--page-accent);
   }
 
-  /* Status indicators using design tokens */
+  /* Status indicators using neutral backgrounds with accent text */
   .status-live {
-    background-color: var(--accent-war-room); /* Fuchsia for live/critical */
+    @apply bg-black/20 border border-white/20;
+    color: var(--accent-war-room); /* Fuchsia text for live/critical */
   }
 
   .status-running {
-    background-color: var(--accent-live-monitoring); /* Green for running */
+    @apply bg-black/20 border border-white/20;
+    color: var(--accent-live-monitoring); /* Green text for running */
   }
 
   .status-planning {
-    background-color: var(--accent-alert-center); /* Yellow for planning */
+    @apply bg-black/20 border border-white/20;
+    color: var(--accent-alert-center); /* Yellow text for planning */
   }
 
   /* Priority classes using design tokens */
