@@ -64,8 +64,8 @@ const TickerTapeSimple: React.FC = () => {
           }
         `}</style>
         <div className="ticker-content-simple">
-          {/* Repeat items 3 times for continuous loop */}
-          {[...testItems, ...testItems, ...testItems].map((item, index) => (
+          {/* Repeat items 8 times for absolutely seamless loop */}
+          {[...testItems, ...testItems, ...testItems, ...testItems, ...testItems, ...testItems, ...testItems, ...testItems].map((item, index) => (
             <div
               key={`simple-ticker-${index}`}
               className="ticker-item-simple"
