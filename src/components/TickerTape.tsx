@@ -27,6 +27,14 @@ import {
 import { informationService } from '../services/informationService';
 import { type InformationItem } from '../types/information';
 
+// Test service at module level
+try {
+  const testItems = informationService.getTickerItems(5);
+  console.log('🎫 TICKER MODULE: Service test successful:', testItems.length, 'items');
+} catch (error) {
+  console.error('🎫 TICKER MODULE: Service test failed:', error);
+}
+
 const TickerTape: React.FC = () => {
   console.log('🎫 TICKER: Component function executing');
   const [tickerItems, setTickerItems] = useState<InformationItem[]>([]);
