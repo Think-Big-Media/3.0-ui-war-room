@@ -9,15 +9,13 @@ import {
   Share2,
 } from 'lucide-react';
 import Card from '../components/shared/Card';
+import { BRAND_ACCENTS } from '../tokens/colors';
 
 interface QuickAction {
   icon: React.ComponentType<{ className?: string }>;
   label: string;
-  color: string;
-  bgColor: string;
-  borderColor: string;
-  hoverBorderColor: string;
-  hoverShadowColor: string;
+  accentColor: string;
+  accentKey: keyof typeof BRAND_ACCENTS;
 }
 
 const QuickActions: React.FC = () => {
