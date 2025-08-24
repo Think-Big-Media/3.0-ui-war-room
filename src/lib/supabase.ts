@@ -8,6 +8,10 @@ import mockDataService from '../services/mockDataService';
 // Mock Supabase client that returns mock data
 export const supabase = mockDataService;
 
+// Export auth and db for compatibility
+export const auth = mockDataService.auth;
+export const db = mockDataService;
+
 // Mock database types for compatibility
 export type Database = any;
 

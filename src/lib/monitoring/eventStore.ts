@@ -1,12 +1,16 @@
 // Event Store - Supabase-backed Event History & Storage
 
-import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+// Mock Supabase client for frontend-only operation
+type SupabaseClient = any;
 import {
   type MonitoringEvent,
   type CrisisAlert,
   type PipelineMetrics,
 } from './types';
-import { createHash } from 'crypto';
+// Mock crypto for browser
+const createHash = (algo: string) => ({
+  update: (data: string) => ({ digest: (format: string) => 'mock-hash-' + data.substring(0, 8) })
+});
 
 interface StoredEvent extends Omit<MonitoringEvent, 'timestamp'> {
   timestamp: string; // ISO string for Supabase

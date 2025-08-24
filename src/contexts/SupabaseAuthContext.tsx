@@ -4,9 +4,12 @@
  */
 
 import React, { createContext, useContext, useEffect, useReducer, type ReactNode } from 'react';
-import { type User, type Session, type AuthChangeEvent } from '@supabase/supabase-js';
-import { supabase, auth, db } from '../lib/supabase';
+import { type User, type Session } from '../lib/supabase/auth';
+import { supabase } from '../lib/supabase/client';
 import { type UserProfile } from '../services/supabaseAuthApi';
+
+// Mock AuthChangeEvent type
+type AuthChangeEvent = 'SIGNED_IN' | 'SIGNED_OUT' | 'TOKEN_REFRESHED' | 'USER_UPDATED';
 
 // Auth state types
 interface AuthState {

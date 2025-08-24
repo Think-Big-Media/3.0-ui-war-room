@@ -41,7 +41,7 @@ export default defineConfig(({ mode }) => {
             'maps-vendor': ['react-simple-maps'],
             'dnd-vendor': ['react-beautiful-dnd'],
             'analytics-vendor': ['posthog-js'],
-            'auth-vendor': ['@supabase/supabase-js'],
+            'builder-vendor': ['@builder.io/react', '@builder.io/sdk'],
             'utils-vendor': ['date-fns', 'clsx', 'tailwind-merge', 'yup'],
             'icons-vendor': ['lucide-react']
           }
