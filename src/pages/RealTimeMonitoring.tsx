@@ -53,7 +53,7 @@ const RealTimeMonitoring: React.FC = () => {
   });
 
   return (
-    <div className="page-monitoring">
+    <div className="page-monitoring" data-route="live-monitoring">
       <PageLayout
         pageTitle="Live Monitoring"
         placeholder="Ask War Room about monitoring data..."
