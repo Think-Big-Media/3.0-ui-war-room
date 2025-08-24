@@ -345,13 +345,12 @@ const IntelligenceHub: React.FC = () => {
                 <Card
                   key={file.id}
                   whileHover={{}}
-                  padding="sm"
+                  padding="none"
                   className="cursor-pointer"
                   onClick={() => setSelectedFile(file)}
                 >
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-start space-x-3">
-                      {getFileIcon(file.type)}
+                  <div className="px-4 pt-4 pb-4">
+                    <div className="flex items-start justify-between">
                       <div>
                         <h4 className="font-medium text-white/95">
                           {file.title}
@@ -373,17 +372,17 @@ const IntelligenceHub: React.FC = () => {
                           ))}
                         </div>
                       </div>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <button className="p-2 hover:bg-white/10 rounded-lg transition-colors">
-                        <Eye className="w-4 h-4 text-white/70" />
-                      </button>
-                      <button className="p-2 hover:bg-white/10 rounded-lg transition-colors">
-                        <Zap className="w-4 h-4 text-white/70" />
-                      </button>
-                      <button className="p-2 hover:bg-white/10 rounded-lg transition-colors">
-                        <Download className="w-4 h-4 text-white/70" />
-                      </button>
+                      <div className="flex items-center space-x-2">
+                        <button className="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                          <Eye className="w-4 h-4 text-white/70" />
+                        </button>
+                        <button className="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                          <Zap className="w-4 h-4 text-white/70" />
+                        </button>
+                        <button className="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                          <Download className="w-4 h-4 text-white/70" />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </Card>
