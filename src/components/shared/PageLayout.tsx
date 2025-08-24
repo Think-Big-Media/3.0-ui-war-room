@@ -20,14 +20,21 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   pageTitle,
   placeholder,
 }) => {
+  const location = useLocation();
+  const pageAccent = getRouteAccent(location.pathname);
+
   logger.debug(`PageLayout rendering for: ${pageTitle}`);
+  logger.debug(`Route: ${location.pathname}, Accent: ${pageAccent}`);
 
   const handleSendMessage = (message: string) => {
     logger.info(`Message from ${pageTitle}:`, { message });
   };
 
   return (
-    <div className="min-h-screen w-full relative">
+    <div
+      className="min-h-screen w-full relative"
+      style={{ '--page-accent': pageAccent } as React.CSSProperties}
+    >
       {/* Theme-independent layout - each page sets its own gradient background */}
       <div className="min-h-screen w-full flex flex-col relative z-10">
         {/* Fixed Top Nav */}
