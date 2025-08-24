@@ -34,6 +34,14 @@ const TickerTape: React.FC = () => {
   console.log('🎫 TickerTape: Current tickerItems length:', tickerItems.length);
   console.log('🎫 TickerTape: Items:', tickerItems);
 
+  // DEBUG: Test informationService directly
+  try {
+    const testItems = informationService.getTickerItems(5);
+    console.log('🎫 TickerTape: Direct service call result:', testItems);
+  } catch (error) {
+    console.error('🎫 TickerTape: Direct service call failed:', error);
+  }
+
   // Icon mapping for information items
   const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
     TrendingUp,
@@ -73,7 +81,7 @@ const TickerTape: React.FC = () => {
 
     // Refresh ticker items every 30 seconds
     const interval = setInterval(() => {
-      console.log('🎫 TickerTape: Refreshing data...');
+      console.log('���� TickerTape: Refreshing data...');
       informationService.refreshData();
       loadTickerItems();
     }, 30000);
