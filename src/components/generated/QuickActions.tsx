@@ -39,6 +39,16 @@ const QuickActions: React.FC = () => {
       accentKey: 'dashboard',
     },
     {
+      icon: Share2,
+      label: 'Social Media',
+      accentKey: 'settings',
+    },
+    {
+      icon: Zap,
+      label: 'Alert Center',
+      accentKey: 'alertCenter',
+    },
+    {
       icon: Zap,
       label: 'Quick Campaign',
       color: 'text-indigo-400',
