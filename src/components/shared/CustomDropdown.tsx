@@ -119,11 +119,11 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
         className={cn(
           'flex items-center justify-between',
           'px-3 py-0.5 rounded-lg text-xs font-mono uppercase',
-          'bg-transparent backdrop-blur-sm',
+          'bg-black/10',
           'border border-white/30',
           'text-white/70',
           'hover:bg-white/5 hover:border-white/40',
-          'transition-all duration-300',
+          'transition-colors duration-200',
           'focus:outline-none focus:ring-2 focus:ring-white/20',
           'min-w-[112px] h-6',
           className
