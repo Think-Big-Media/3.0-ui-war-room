@@ -334,7 +334,7 @@ const TopNavigation: React.FC = () => {
                   }}
                   className={`w-full px-6 py-4 rounded-lg font-semibold transition-all duration-200 flex items-center space-x-3 ${
                     item.active
-                      ? 'bg-white/20 text-white border-l-4 border-white/60'
+                      ? `bg-${item.theme.colors.background} text-${item.theme.colors.text} border-l-4 border-${item.theme.colors.border}`
                       : 'text-white/80 hover:bg-white/10'
                   }`}
                 >
