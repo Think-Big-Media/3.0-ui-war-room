@@ -33,6 +33,7 @@ function App() {
           <Route path="/campaign-control" element={<CampaignControl />} />
           <Route path="/intelligence-hub" element={<IntelligenceHub />} />
           <Route path="/alert-center" element={<AlertCenter />} />
+          <Route path="/AlertCenter" element={<AlertCenter />} />
           {/* <Route path="/information-center" element={<InformationCenter />} /> */}
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/content-calendar" element={<ContentCalendarPage />} />
