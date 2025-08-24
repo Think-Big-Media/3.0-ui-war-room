@@ -92,15 +92,6 @@ export default defineConfig(({ mode }) => {
       minify: 'esbuild',
       // CSS optimization
       cssMinify: true,
-      // Tree shaking optimization
-      rollupOptions: {
-        ...this.rollupOptions,
-        treeshake: {
-          moduleSideEffects: false,
-          propertyReadSideEffects: false,
-          unknownGlobalSideEffects: false,
-        }
-      }
     },
     server: {
       port: env.VITE_PORT ? parseInt(env.VITE_PORT) : 5173,
