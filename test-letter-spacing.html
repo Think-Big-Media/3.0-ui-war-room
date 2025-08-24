@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Spacing Test</title>
+    <style>
+        body { 
+            background-color: #111827; 
+            color: white; 
+            padding: 2rem; 
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Test our exact CSS structure */
+        @layer components {
+            .btn-secondary-alert {
+                background-color: rgb(239 68 68 / 0.2);
+                color: rgb(248 113 113);
+                padding: 0.125rem 0.75rem;
+                border-radius: 0.5rem;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.875rem;
+                text-transform: uppercase;
+                white-space: nowrap;
+                text-align: center;
+                letter-spacing: -0.05em !important;
+                border: none;
+                cursor: pointer;
+                transition: background-color 0.2s;
+            }
+            
+            .btn-secondary-alert:hover {
+                background-color: rgb(239 68 68 / 0.3);
+            }
+        }
+        
+        .comparison {
+            margin: 1rem 0;
+            padding: 1rem;
+            border: 1px solid #374151;
+            border-radius: 0.5rem;
+        }
+        
+        .normal-spacing {
+            letter-spacing: normal;
+        }
+        
+        .tight-spacing {
+            letter-spacing: -0.05em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Letter Spacing Verification Test</h1>
+    
+    <div class="comparison">
+        <h3>1. Our Button Class (Should have tight spacing)</h3>
+        <button class="btn-secondary-alert">RESPOND NOW</button>
+        <button class="btn-secondary-alert">Add to Alert</button>
+        <button class="btn-secondary-alert">Generate Response</button>
+    </div>
+    
+    <div class="comparison">
+        <h3>2. Normal Letter Spacing (Reference)</h3>
+        <button class="btn-secondary-alert normal-spacing" style="letter-spacing: normal !important;">RESPOND NOW</button>
+        <button class="btn-secondary-alert normal-spacing" style="letter-spacing: normal !important;">Add to Alert</button>
+    </div>
+    
+    <div class="comparison">
+        <h3>3. Explicit Tight Spacing (Should match #1)</h3>
+        <button class="btn-secondary-alert tight-spacing">RESPOND NOW</button>
+        <button class="btn-secondary-alert tight-spacing">Add to Alert</button>
+    </div>
+    
+    <div class="comparison">
+        <h3>4. Text Comparison</h3>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; text-transform: uppercase;">
+            <div class="normal-spacing">Normal: RESPOND NOW</div>
+            <div class="tight-spacing">Tight (-0.05em): RESPOND NOW</div>
+        </div>
+    </div>
+
+    <script>
+        // Check computed styles
+        setTimeout(() => {
+            const buttons = document.querySelectorAll('.btn-secondary-alert');
+            buttons.forEach((btn, index) => {
+                const computed = window.getComputedStyle(btn);
+                console.log(`Button ${index + 1}:`, {
+                    text: btn.textContent,
+                    letterSpacing: computed.letterSpacing,
+                    fontFamily: computed.fontFamily
+                });
+            });
+        }, 500);
+    </script>
+</body>
+</html>
