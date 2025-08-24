@@ -1,9 +1,6 @@
 import type React from 'react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createLogger } from '../utils/logger';
-
-const logger = createLogger('TickerTape');
 import {
   TrendingUp,
   Zap,
