@@ -249,7 +249,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
       <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-6 text-white">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-bold flex items-center gap-2">
+            <h2 className="text-2xl font-bold font-condensed flex items-center gap-2">
               <Brain className="h-6 w-6" />
               AI-Powered Campaign Intelligence
             </h2>
