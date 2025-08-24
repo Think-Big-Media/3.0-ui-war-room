@@ -6,10 +6,11 @@ This document defines the comprehensive styling standards for the War Room appli
 
 ### Refined Font Stack - War Room 2025
 
-- **Major Section Headers**: Barlow Condensed 600 (Campaign Operations, Quick Actions, Intelligence Dashboard)
+- **Major Section Headers**: Barlow Condensed 600, 50% opacity (Campaign Operations, Quick Actions, Profile Settings, Notifications)
 - **Numbers & Metrics**: Barlow Condensed 400 (dollars, percentages, counts, statistics)
-- **Content Titles**: Barlow Semi-Condensed Bold (Crisis Response Protocol, Alert Response)
-- **Content Subtitles**: Barlow Semi-Condensed (Active crisis detections, Meta + Google Ads)
+- **Content Titles**: Barlow Semi-Condensed Medium 500 (Email Notifications, Dark Mode, Two-Factor Authentication)
+- **Content Subtitles**: Barlow Condensed (Receive campaign updates via email, Get instant alerts on your device)
+- **Form Labels**: JetBrains Mono Uppercase (Display Name, Email Address, Company Name)
 - **Status Indicators**: JetBrains Mono Uppercase (Live, Active, Ready, Today)
 - **Footer Text**: JetBrains Mono Uppercase (Last updated, Quick access to key features)
 
