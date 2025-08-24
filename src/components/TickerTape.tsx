@@ -137,7 +137,7 @@ const TickerTape: React.FC = () => {
           }
           
           .ticker-content {
-            animation: ticker-scroll 20s linear infinite;
+            animation: ticker-scroll 10s linear infinite;
             will-change: transform;
             display: flex;
             align-items: center;
