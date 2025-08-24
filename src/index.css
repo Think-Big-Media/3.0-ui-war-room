@@ -801,9 +801,9 @@ button.nav-item .label,
 .nav-item span.label,
 nav .label,
 nav span.label {
-  font-family: 'Barlow Condensed', 'Arial Narrow', 'Arial', sans-serif !important;
+  font-family: 'Barlow Semi Condensed', 'Barlow Condensed', 'Arial Narrow', 'Arial', sans-serif !important;
   font-weight: 500 !important;
-  font-size: 16px !important;
-  font-stretch: condensed !important;
+  font-size: 19px !important;
+  font-stretch: semi-condensed !important;
   letter-spacing: -0.02em !important;
 }
