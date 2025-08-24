@@ -515,13 +515,7 @@
     @apply text-green-400;
   }
 
-  .status-running {
-    @apply text-blue-400;
-  }
-
-  .status-planning {
-    @apply text-yellow-400;
-  }
+  /* Duplicate status classes removed - using only the neutral background versions above */
 
   /* Icon alignment in buttons - move up 2px for better alignment */
   .btn-secondary-alert svg,
