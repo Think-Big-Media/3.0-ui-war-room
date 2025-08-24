@@ -16,7 +16,7 @@
     --accent-dashboard: #d97706;
     --accent-live-monitoring: #2a434a;
     --accent-war-room: #db2777;
-    --accent-intelligence: #60A5FA;
+    --accent-intelligence: #60a5fa;
     --accent-alert-center: #facc15;
     --accent-settings: #818cf8;
 
@@ -253,22 +253,22 @@
   }
 
   /* Per-item accent mappings */
-  .nav-item[data-route="dashboard"]:hover {
+  .nav-item[data-route='dashboard']:hover {
     --accent-for-item: var(--accent-dashboard);
   }
-  .nav-item[data-route="live-monitoring"]:hover {
+  .nav-item[data-route='live-monitoring']:hover {
     --accent-for-item: var(--accent-live-monitoring);
   }
-  .nav-item[data-route="war-room"]:hover {
+  .nav-item[data-route='war-room']:hover {
     --accent-for-item: var(--accent-war-room);
   }
-  .nav-item[data-route="intelligence"]:hover {
+  .nav-item[data-route='intelligence']:hover {
     --accent-for-item: var(--accent-intelligence);
   }
-  .nav-item[data-route="alert-center"]:hover {
+  .nav-item[data-route='alert-center']:hover {
     --accent-for-item: var(--accent-alert-center);
   }
-  .nav-item[data-route="settings"]:hover {
+  .nav-item[data-route='settings']:hover {
     --accent-for-item: var(--accent-settings);
   }
 
@@ -284,7 +284,7 @@
 
   /* Hoverable border system - replaces transform/scale with border-color changes */
   .hoverable {
-    border: 1px solid var(--border-neutral, rgba(255,255,255,0.15));
+    border: 1px solid var(--border-neutral, rgba(255, 255, 255, 0.15));
     transition: border-color 160ms ease;
   }
 
@@ -293,7 +293,7 @@
   }
 
   /* Page-scoped reinforcement for Live Monitoring */
-  [data-route="live-monitoring"] .hoverable:hover {
+  [data-route='live-monitoring'] .hoverable:hover {
     border-color: var(--page-accent);
   }
 
