@@ -69,6 +69,11 @@ fontFamily: {
     line-height: 21px;
   }
 }
+
+/* Form Label Class */
+.form-label {
+  @apply block text-sm font-mono text-white/75 mb-1 ml-1.5 uppercase tracking-wider;
+}
   line-height: 16px;
 }
 
