@@ -8,16 +8,12 @@ import {
   Zap,
   Share2,
 } from 'lucide-react';
-import { perfectCardShadow } from '../../lib/utils';
+import { BRAND_TOKENS } from '../../tokens/colors';
 
 interface QuickAction {
   icon: React.ComponentType<{ className?: string }>;
   label: string;
-  color: string;
-  bgColor: string;
-  borderColor: string;
-  hoverBorderColor: string;
-  hoverShadowColor: string;
+  accentKey: keyof typeof BRAND_TOKENS;
 }
 
 const QuickActions: React.FC = () => {
@@ -25,38 +21,22 @@ const QuickActions: React.FC = () => {
     {
       icon: TrendingUp,
       label: 'Viral Opps',
-      color: 'text-pink-600',
-      bgColor: 'bg-pink-600/10',
-      borderColor: 'border-pink-600/30',
-      hoverBorderColor: 'hover:border-pink-500/50',
-      hoverShadowColor: '',
+      accentKey: 'warRoom',
     },
     {
       icon: Search,
       label: 'Trend Opps',
-      color: 'text-indigo-600',
-      bgColor: 'bg-indigo-600/10',
-      borderColor: 'border-indigo-600/30',
-      hoverBorderColor: 'hover:border-indigo-500/50',
-      hoverShadowColor: '',
+      accentKey: 'intelligence',
     },
     {
       icon: Activity,
       label: 'Live Monitor',
-      color: 'text-green-600',
-      bgColor: 'bg-green-600/10',
-      borderColor: 'border-green-600/30',
-      hoverBorderColor: 'hover:border-green-500/50',
-      hoverShadowColor: '',
+      accentKey: 'liveMonitoring',
     },
     {
       icon: FileText,
       label: 'Make Content',
-      color: 'text-amber-600',
-      bgColor: 'bg-amber-600/10',
-      borderColor: 'border-amber-600/30',
-      hoverBorderColor: 'hover:border-amber-500/50',
-      hoverShadowColor: '',
+      accentKey: 'dashboard',
     },
     {
       icon: Zap,
