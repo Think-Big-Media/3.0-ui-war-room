@@ -38,8 +38,9 @@ fontFamily: {
 
 /* Content Typography Classes */
 .content-subtitle {
-  @apply text-xs lg:text-sm text-white/75 leading-relaxed;
+  @apply text-xs lg:text-sm text-white/75;
   font-family: "Barlow Semi Condensed", sans-serif;
+  line-height: 16px;
 }
 
 .content-title {
