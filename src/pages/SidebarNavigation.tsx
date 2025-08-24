@@ -375,7 +375,11 @@ const TopNavigation: React.FC = () => {
                   }`}
                   >
                     <item.icon
-                      className={`w-5 h-5 flex-shrink-0 ${item.active ? getNavIconActiveClasses(item.theme) : ''}`}
+                      className={`w-5 h-5 flex-shrink-0 ${
+                        item.active
+                          ? getNavIconActiveClasses(item.theme)
+                          : getNavIconHoverClasses(item.theme)
+                      }`}
                     />
                     <span className="text-lg">{item.label}</span>
                   </motion.button>
