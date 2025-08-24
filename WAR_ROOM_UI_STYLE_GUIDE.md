@@ -206,13 +206,16 @@ Three standardized secondary button types with specific use cases:
 ```css
 /* src/index.css */
 .btn-primary {
-  @apply px-4 py-2 bg-blue-600 text-white font-mono font-medium text-sm rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200;
-  letter-spacing: -0.05em; /* Halved spacing for multi-word buttons */
+  @apply px-4 py-2 bg-blue-600 text-white font-mono font-medium text-sm rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 tracking-[-0.05em];
 }
 
 .btn-secondary {
-  @apply px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-200;
-  letter-spacing: -0.05em; /* Halved spacing for multi-word buttons */
+  @apply px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-200 tracking-[-0.05em];
+}
+
+/* Global fallback for all buttons */
+button {
+  letter-spacing: -0.05em !important;
 }
 ```
 
