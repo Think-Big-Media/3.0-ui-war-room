@@ -94,13 +94,17 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
         >
           <Icon
             className={`w-6 h-6 lg:w-8 lg:h-8 text-white/95 transition-colors duration-300`}
-            style={{"--icon-hover-color": "var(--page-accent)"} as React.CSSProperties}
+            style={
+              {
+                '--icon-hover-color': 'var(--page-accent)',
+              } as React.CSSProperties
+            }
           />
         </div>
         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <div
             className={`text-xs font-medium`}
-            style={{color: "var(--page-accent)"}}
+            style={{ color: 'var(--page-accent)' }}
           >
             Click to explore →
           </div>
@@ -221,7 +225,10 @@ const IntelligenceDashboard: React.FC = () => {
             <div className="text-xs lg:text-sm text-white/75 mb-2">
               {metric.label}
             </div>
-            <div className="text-xs font-medium" style={{color: 'var(--page-accent)'}}>
+            <div
+              className="text-xs font-medium"
+              style={{ color: 'var(--page-accent)' }}
+            >
               {metric.trend}
             </div>
           </div>

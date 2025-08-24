@@ -429,9 +429,7 @@ const IntelligenceHub: React.FC = () => {
                 </h4>
                 <p className="text-sm text-white/70 mb-3">{query.response}</p>
                 <div className="flex items-center space-x-2">
-                  <button className="text-xs chat-button">
-                    Reopen
-                  </button>
+                  <button className="text-xs chat-button">Reopen</button>
                   <button className="text-xs text-white/70 hover:text-white">
                     Copy
                   </button>

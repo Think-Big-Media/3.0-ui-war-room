@@ -40,7 +40,7 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
   const [isExpanded, setIsExpanded] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [chatState, setChatState] = useState<'history' | 'chat' | 'closed'>(
-    'closed',
+    'closed'
   );
   const [activeChat, setActiveChat] = useState<ChatSession | null>(null);
   const [currentMessages, setCurrentMessages] = useState<ChatMessage[]>([]);
@@ -170,12 +170,18 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
   const formatTime = (date: Date) => {
     const now = new Date();
     const diffInDays = Math.floor(
-      (now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24),
+      (now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24)
     );
 
-    if (diffInDays === 0) {return 'Today';}
-    if (diffInDays === 1) {return 'Yesterday';}
-    if (diffInDays < 7) {return `${diffInDays} days ago`;}
+    if (diffInDays === 0) {
+      return 'Today';
+    }
+    if (diffInDays === 1) {
+      return 'Yesterday';
+    }
+    if (diffInDays < 7) {
+      return `${diffInDays} days ago`;
+    }
     return date.toLocaleDateString();
   };
 

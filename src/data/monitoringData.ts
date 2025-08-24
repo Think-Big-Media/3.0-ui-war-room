@@ -1,6 +1,12 @@
 // Real-Time Monitoring Mock Data
 
-import { type Mention, type TrendingTopic, type Influencer, type SentimentData, type PlatformPerformance } from '../types/monitoring';
+import {
+  type Mention,
+  type TrendingTopic,
+  type Influencer,
+  type SentimentData,
+  type PlatformPerformance,
+} from '../types/monitoring';
 
 export const mockMentions: Mention[] = [
   {
@@ -128,8 +134,28 @@ export const mockSentimentData: SentimentData = {
 };
 
 export const mockPlatformPerformance: PlatformPerformance[] = [
-  { platform: 'Twitter', percentage: 45, icon: 'MessageSquare', color: 'platform-social' },
-  { platform: 'Facebook', percentage: 28, icon: 'Users', color: 'platform-social' },
-  { platform: 'Reddit', percentage: 15, icon: 'Globe', color: 'platform-forum' },
-  { platform: 'News', percentage: 12, icon: 'BarChart3', color: 'platform-news' },
+  {
+    platform: 'Twitter',
+    percentage: 45,
+    icon: 'MessageSquare',
+    color: 'platform-social',
+  },
+  {
+    platform: 'Facebook',
+    percentage: 28,
+    icon: 'Users',
+    color: 'platform-social',
+  },
+  {
+    platform: 'Reddit',
+    percentage: 15,
+    icon: 'Globe',
+    color: 'platform-forum',
+  },
+  {
+    platform: 'News',
+    percentage: 12,
+    icon: 'BarChart3',
+    color: 'platform-news',
+  },
 ];

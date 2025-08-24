@@ -41,7 +41,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
             className="h-1 rounded-full transition-all duration-300"
             style={{
               width: `${project.progress}%`,
-              backgroundColor: 'var(--page-accent)'
+              backgroundColor: 'var(--page-accent)',
             }}
           />
         </div>

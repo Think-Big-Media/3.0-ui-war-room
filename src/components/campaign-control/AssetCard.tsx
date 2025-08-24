@@ -20,11 +20,7 @@ const AssetCard: React.FC<AssetCardProps> = ({
   onShare,
 }) => {
   return (
-    <Card
-      className="cursor-pointer hoverable"
-      padding="sm"
-      variant="glass"
-    >
+    <Card className="cursor-pointer hoverable" padding="sm" variant="glass">
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center space-x-2">
           {getAssetIcon(asset.type)}

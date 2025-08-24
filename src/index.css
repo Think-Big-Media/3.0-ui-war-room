@@ -13,15 +13,15 @@
     font-size: 16.5px; /* Adjusted for 95% zoom - larger text */
 
     /* Brand Accent Colors - Single Source of Truth */
-    --accent-dashboard: #D97706;
-    --accent-live-monitoring: #2A434A;
-    --accent-war-room: #DB2777;
+    --accent-dashboard: #d97706;
+    --accent-live-monitoring: #2a434a;
+    --accent-war-room: #db2777;
     --accent-intelligence: #426897;
-    --accent-alert-center: #FACC15;
-    --accent-settings: #818CF8;
+    --accent-alert-center: #facc15;
+    --accent-settings: #818cf8;
 
     /* Navigation-specific variants for better contrast */
-    --nav-accent-live-monitoring: #4ADB7A; /* Lighter green for visibility */
+    --nav-accent-live-monitoring: #4adb7a; /* Lighter green for visibility */
 
     /* Glassmorphic theme - transparent with subtle tints */
     --background: 249 250 251; /* gray-50 base */
@@ -227,13 +227,13 @@
   }
 
   /* Ensure only current page nav items use page accent */
-  [aria-current="page"] .nav-active-icon {
+  [aria-current='page'] .nav-active-icon {
     color: var(--page-accent);
   }
 
   /* Special handling for Live Monitoring navigation icon contrast */
   /* When page accent is the dark Live Monitoring green, use lighter variant for nav icon */
-  [style*="--page-accent: #2A434A"] [aria-current="page"] .nav-active-icon {
+  [style*='--page-accent: #2A434A'] [aria-current='page'] .nav-active-icon {
     color: var(--nav-accent-live-monitoring) !important;
   }
 

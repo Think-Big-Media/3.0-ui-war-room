@@ -63,8 +63,13 @@ const metricLabelVariants = cva('font-medium text-gray-600', {
 });
 
 // Format utility functions
-const formatValue = (value: string | number, format?: 'number' | 'currency' | 'percentage' | 'bytes'): string => {
-  if (typeof value === 'string') {return value;}
+const formatValue = (
+  value: string | number,
+  format?: 'number' | 'currency' | 'percentage' | 'bytes'
+): string => {
+  if (typeof value === 'string') {
+    return value;
+  }
 
   switch (format) {
     case 'currency':
@@ -80,7 +85,9 @@ const formatValue = (value: string | number, format?: 'number' | 'currency' | 'p
 
     case 'bytes':
       const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
-      if (value === 0) {return '0 B';}
+      if (value === 0) {
+        return '0 B';
+      }
       const i = Math.floor(Math.log(value) / Math.log(1024));
       return `${(value / Math.pow(1024, i)).toFixed(1)} ${sizes[i]}`;
 
@@ -141,18 +148,16 @@ const TrendIndicator: React.FC<TrendIndicatorProps> = ({
   const Icon = config.icon;
 
   return (
-    <div className={cn(
-      'inline-flex items-center space-x-1.5 px-2 py-1 rounded-full border',
-      config.bgColor,
-      config.borderColor,
-    )}>
+    <div
+      className={cn(
+        'inline-flex items-center space-x-1.5 px-2 py-1 rounded-full border',
+        config.bgColor,
+        config.borderColor
+      )}
+    >
       <Icon className={cn(iconSize[size], config.color)} />
       {change !== undefined && (
-        <span className={cn(
-          'font-semibold',
-          textSize[size],
-          config.color,
-        )}>
+        <span className={cn('font-semibold', textSize[size], config.color)}>
           {Math.abs(change)}%
         </span>
       )}
@@ -174,22 +179,33 @@ const Sparkline: React.FC<SparklineProps> = ({
   width = 80,
   height = 32,
 }) => {
-  if (!data || data.length < 2) {return null;}
+  if (!data || data.length < 2) {
+    return null;
+  }
 
   const max = Math.max(...data);
   const min = Math.min(...data);
   const range = max - min;
 
-  const points = data.map((value, index) => {
-    const x = (index / (data.length - 1)) * width;
-    const y = range === 0 ? height / 2 : height - ((value - min) / range) * height;
-    return `${x},${y}`;
-  }).join(' ');
+  const points = data
+    .map((value, index) => {
+      const x = (index / (data.length - 1)) * width;
+      const y =
+        range === 0 ? height / 2 : height - ((value - min) / range) * height;
+      return `${x},${y}`;
+    })
+    .join(' ');
 
   return (
     <svg width={width} height={height} className="overflow-visible">
       <defs>
-        <linearGradient id="sparkline-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <linearGradient
+          id="sparkline-gradient"
+          x1="0%"
+          y1="0%"
+          x2="0%"
+          y2="100%"
+        >
           <stop offset="0%" style={{ stopColor: color, stopOpacity: 0.3 }} />
           <stop offset="100%" style={{ stopColor: color, stopOpacity: 0 }} />
         </linearGradient>
@@ -233,132 +249,141 @@ export interface MetricDisplayProps
   onAction?: () => void;
 }
 
-const MetricDisplay = forwardRef<HTMLDivElement, MetricDisplayProps>(({
-  className,
-  label,
-  value,
-  change,
-  trend,
-  icon: Icon,
-  format = 'number',
-  sparklineData,
-  subtitle,
-  accent = 'blue',
-  loading = false,
-  interactive = false,
-  onAction,
-  size,
-  layout,
-  ...props
-}, ref) => {
-  if (loading) {
+const MetricDisplay = forwardRef<HTMLDivElement, MetricDisplayProps>(
+  (
+    {
+      className,
+      label,
+      value,
+      change,
+      trend,
+      icon: Icon,
+      format = 'number',
+      sparklineData,
+      subtitle,
+      accent = 'blue',
+      loading = false,
+      interactive = false,
+      onAction,
+      size,
+      layout,
+      ...props
+    },
+    ref
+  ) => {
+    if (loading) {
+      return (
+        <MetricCard
+          ref={ref}
+          className={cn('animate-pulse', className)}
+          accent={accent}
+          {...props}
+        >
+          <CardHeader size="sm">
+            <div className="flex items-start justify-between">
+              <div className="space-y-2 flex-1">
+                <div className="h-4 bg-gray-200 rounded w-20" />
+                <div className="h-8 bg-gray-200 rounded w-24" />
+              </div>
+              <div className="h-6 w-16 bg-gray-200 rounded" />
+            </div>
+          </CardHeader>
+        </MetricCard>
+      );
+    }
+
     return (
       <MetricCard
         ref={ref}
-        className={cn('animate-pulse', className)}
+        className={cn(className)}
         accent={accent}
+        interactive={interactive}
+        onClick={onAction}
         {...props}
       >
         <CardHeader size="sm">
-          <div className="flex items-start justify-between">
-            <div className="space-y-2 flex-1">
-              <div className="h-4 bg-gray-200 rounded w-20" />
-              <div className="h-8 bg-gray-200 rounded w-24" />
+          <div className={cn(metricDisplayVariants({ size, layout }))}>
+            {/* Header with icon and actions */}
+            <div className="flex items-start justify-between">
+              <div className="flex items-center space-x-3">
+                {Icon && (
+                  <div
+                    className={cn(
+                      'rounded-lg p-2 bg-gradient-to-br',
+                      {
+                        blue: 'from-blue-500 to-blue-600',
+                        green: 'from-green-500 to-green-600',
+                        orange: 'from-orange-500 to-orange-600',
+                        red: 'from-red-500 to-red-600',
+                        purple: 'from-purple-500 to-purple-600',
+                      }[accent]
+                    )}
+                  >
+                    <Icon className="w-5 h-5 text-white" />
+                  </div>
+                )}
+
+                <div>
+                  <p className={cn(metricLabelVariants({ size }))}>{label}</p>
+                  {subtitle && (
+                    <p className="text-xs text-gray-500 mt-0.5">{subtitle}</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Trend indicator */}
+              {trend && (
+                <TrendIndicator
+                  trend={trend}
+                  change={change}
+                  size={size || undefined}
+                />
+              )}
+
+              {/* Action menu */}
+              {onAction && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onAction();
+                  }}
+                  className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-gray-100 rounded"
+                >
+                  <MoreVertical className="w-4 h-4 text-gray-400" />
+                </button>
+              )}
             </div>
-            <div className="h-6 w-16 bg-gray-200 rounded" />
+
+            {/* Value display */}
+            <div className="space-y-2">
+              <p className={cn(metricValueVariants({ size }))}>
+                {formatValue(value, format)}
+              </p>
+
+              {/* Sparkline */}
+              {sparklineData && sparklineData.length > 1 && (
+                <div className="flex justify-start">
+                  <Sparkline
+                    data={sparklineData}
+                    color={
+                      {
+                        blue: '#3B82F6',
+                        green: '#10B981',
+                        orange: '#F59E0B',
+                        red: '#EF4444',
+                        purple: '#8B5CF6',
+                      }[accent]
+                    }
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </CardHeader>
       </MetricCard>
     );
   }
-
-  return (
-    <MetricCard
-      ref={ref}
-      className={cn(className)}
-      accent={accent}
-      interactive={interactive}
-      onClick={onAction}
-      {...props}
-    >
-      <CardHeader size="sm">
-        <div className={cn(metricDisplayVariants({ size, layout }))}>
-          {/* Header with icon and actions */}
-          <div className="flex items-start justify-between">
-            <div className="flex items-center space-x-3">
-              {Icon && (
-                <div className={cn(
-                  'rounded-lg p-2 bg-gradient-to-br',
-                  {
-                    blue: 'from-blue-500 to-blue-600',
-                    green: 'from-green-500 to-green-600',
-                    orange: 'from-orange-500 to-orange-600',
-                    red: 'from-red-500 to-red-600',
-                    purple: 'from-purple-500 to-purple-600',
-                  }[accent],
-                )}>
-                  <Icon className="w-5 h-5 text-white" />
-                </div>
-              )}
-
-              <div>
-                <p className={cn(metricLabelVariants({ size }))}>{label}</p>
-                {subtitle && (
-                  <p className="text-xs text-gray-500 mt-0.5">{subtitle}</p>
-                )}
-              </div>
-            </div>
-
-            {/* Trend indicator */}
-            {trend && (
-              <TrendIndicator
-                trend={trend}
-                change={change}
-                size={size || undefined}
-              />
-            )}
-
-            {/* Action menu */}
-            {onAction && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onAction();
-                }}
-                className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-gray-100 rounded"
-              >
-                <MoreVertical className="w-4 h-4 text-gray-400" />
-              </button>
-            )}
-          </div>
-
-          {/* Value display */}
-          <div className="space-y-2">
-            <p className={cn(metricValueVariants({ size }))}>
-              {formatValue(value, format)}
-            </p>
-
-            {/* Sparkline */}
-            {sparklineData && sparklineData.length > 1 && (
-              <div className="flex justify-start">
-                <Sparkline
-                  data={sparklineData}
-                  color={{
-                    blue: '#3B82F6',
-                    green: '#10B981',
-                    orange: '#F59E0B',
-                    red: '#EF4444',
-                    purple: '#8B5CF6',
-                  }[accent]}
-                />
-              </div>
-            )}
-          </div>
-        </div>
-      </CardHeader>
-    </MetricCard>
-  );
-});
+);
 
 MetricDisplay.displayName = 'MetricDisplay';
 
@@ -390,12 +415,9 @@ const MetricGrid: React.FC<MetricGridProps> = ({
   };
 
   return (
-    <div className={cn(
-      'grid',
-      gridClasses[columns],
-      gapClasses[gap],
-      className,
-    )}>
+    <div
+      className={cn('grid', gridClasses[columns], gapClasses[gap], className)}
+    >
       {children}
     </div>
   );

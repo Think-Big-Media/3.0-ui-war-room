@@ -13,7 +13,12 @@ import {
   Zap,
 } from 'lucide-react';
 
-import { type ProjectStatus, type ProjectPriority, type AssetType, type ActivityType } from '../../types/campaign';
+import {
+  type ProjectStatus,
+  type ProjectPriority,
+  type AssetType,
+  type ActivityType,
+} from '../../types/campaign';
 
 // Status color utilities - using neutral backgrounds with accent borders
 export const getStatusColor = (status: ProjectStatus): string => {
