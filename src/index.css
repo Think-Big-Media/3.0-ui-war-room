@@ -185,29 +185,29 @@
 
 /* Custom component styles */
 @layer components {
-  /* Page-accent theming CSS variables */
+  /* Page-accent theming using brand accent tokens */
   .page-dashboard {
-    --page-accent: #6366f1; /* indigo-500 */
+    --page-accent: var(--accent-dashboard);
   }
 
   .page-monitoring {
-    --page-accent: #22c55e; /* green-500 */
+    --page-accent: var(--accent-live-monitoring);
   }
 
   .page-warroom {
-    --page-accent: #ef4444; /* red-500 */
+    --page-accent: var(--accent-war-room);
   }
 
   .page-intelligence {
-    --page-accent: #3b82f6; /* blue-500 */
+    --page-accent: var(--accent-intelligence);
   }
 
   .page-alerts {
-    --page-accent: #f59e0b; /* amber-500 */
+    --page-accent: var(--accent-alert-center);
   }
 
   .page-settings {
-    --page-accent: #a855f7; /* purple-500 */
+    --page-accent: var(--accent-settings);
   }
 
   /* Navigation active state classes using CSS variables */
