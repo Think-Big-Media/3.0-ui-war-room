@@ -78,6 +78,7 @@ const TopNavigation: React.FC = () => {
       icon: Home,
       label: 'DASHBOARD',
       path: '/',
+      route: 'dashboard',
       active: location.pathname === '/',
       theme: getSectionTheme('/'),
     },
@@ -85,6 +86,7 @@ const TopNavigation: React.FC = () => {
       icon: BarChart3,
       label: 'LIVE MONITORING',
       path: '/real-time-monitoring',
+      route: 'live-monitoring',
       active: location.pathname === '/real-time-monitoring',
       theme: getSectionTheme('/real-time-monitoring'),
     },
@@ -92,6 +94,7 @@ const TopNavigation: React.FC = () => {
       icon: Target,
       label: 'WAR ROOM',
       path: '/campaign-control',
+      route: 'war-room',
       active: location.pathname === '/campaign-control',
       theme: getSectionTheme('/campaign-control'),
     },
@@ -99,6 +102,7 @@ const TopNavigation: React.FC = () => {
       icon: Brain,
       label: 'INTELLIGENCE',
       path: '/intelligence-hub',
+      route: 'intelligence',
       active: location.pathname === '/intelligence-hub',
       theme: getSectionTheme('/intelligence-hub'),
     },
@@ -106,6 +110,7 @@ const TopNavigation: React.FC = () => {
       icon: Bell,
       label: 'ALERT CENTER',
       path: '/alert-center',
+      route: 'alert-center',
       active: location.pathname === '/alert-center',
       theme: getSectionTheme('/alert-center'),
     },
@@ -113,6 +118,7 @@ const TopNavigation: React.FC = () => {
       icon: Settings,
       label: 'SETTINGS',
       path: '/settings',
+      route: 'settings',
       active: location.pathname === '/settings',
       theme: getSectionTheme('/settings'),
     },
@@ -180,21 +186,22 @@ const TopNavigation: React.FC = () => {
                 key={index}
                 onClick={() => handleNavigation(item.path)}
                 aria-current={item.active ? 'page' : undefined}
-                className={`group px-3 py-1 rounded-lg text-sm transition-all duration-200 flex items-center space-x-1 ${
+                data-route={item.route}
+                className={`nav-item group px-3 py-1 rounded-lg text-sm transition-all duration-200 flex items-center space-x-1 ${
                   item.active
                     ? getNavActiveClasses(item.theme)
                     : 'text-white/70 hover:bg-white/10'
                 }`}
               >
                 <item.icon
-                  className={`w-4 h-4 flex-shrink-0 ${item.icon === Home ? '-translate-y-0.5' : ''} ${
+                  className={`icon w-4 h-4 flex-shrink-0 ${item.icon === Home ? '-translate-y-0.5' : ''} ${
                     item.active
                       ? getNavIconActiveClasses(item.theme)
                       : getNavIconHoverClasses(item.theme)
                   }`}
                 />
                 <span
-                  className={`${item.active ? 'nav-active-text' : getNavHoverClasses(item.theme)} ${
+                  className={`label ${item.active ? 'nav-active-text' : getNavHoverClasses(item.theme)} ${
                     ['LIVE MONITORING', 'WAR ROOM', 'ALERT CENTER'].includes(
                       item.label
                     )
