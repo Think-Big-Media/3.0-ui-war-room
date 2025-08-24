@@ -351,9 +351,17 @@ const CampaignOperationsHub: React.FC = () => {
                 className="bg-black/20 backdrop-blur-sm rounded-xl p-6 lg:p-7 border border-white/20 hoverable hover:bg-black/25 transition-all duration-300 cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <h5 className="content-title">{cluster.title}</h5>
+                  <h5 className="content-title text-white/90">{cluster.title}</h5>
                   <div
-                    className={`w-2 h-2 rounded-full ${cluster.statusColor}`}
+                    className={`w-2 h-2 rounded-full ${
+                      cluster.status === 'Live'
+                        ? 'bg-green-400'
+                        : cluster.status === 'Running'
+                          ? 'bg-[var(--accent-war-room)]'
+                          : cluster.status === 'Planning'
+                            ? 'bg-[var(--accent-intelligence)]'
+                            : 'bg-white/30'
+                    }`}
                   />
                 </div>
                 <div className="flex items-center justify-between text-xs">
@@ -365,22 +373,12 @@ const CampaignOperationsHub: React.FC = () => {
                           ? 'status-running'
                           : cluster.status === 'Planning'
                             ? 'status-planning'
-                            : 'text-white/75'
+                            : ''
                     }`}
                   >
                     {cluster.status}
                   </span>
-                  <span
-                    className={`status-indicator ${
-                      cluster.timeline === 'Active'
-                        ? 'status-active'
-                        : cluster.timeline === 'Today'
-                          ? 'status-running'
-                          : cluster.timeline === 'Next Week'
-                            ? 'status-planning'
-                            : 'text-white/65'
-                    }`}
-                  >
+                  <span className="status-indicator">
                     {cluster.timeline}
                   </span>
                 </div>
