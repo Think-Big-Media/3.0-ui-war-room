@@ -20,6 +20,9 @@
     --accent-alert-center: #FACC15;
     --accent-settings: #818CF8;
 
+    /* Navigation-specific variants for better contrast */
+    --nav-accent-live-monitoring: #4ADB7A; /* Lighter green for visibility */
+
     /* Glassmorphic theme - transparent with subtle tints */
     --background: 249 250 251; /* gray-50 base */
     --foreground: 15 23 42; /* slate-800 */
@@ -222,6 +225,11 @@
   /* Ensure only current page nav items use page accent */
   [aria-current="page"] .nav-active-icon {
     color: var(--page-accent);
+  }
+
+  /* Special handling for Live Monitoring navigation icon contrast */
+  .page-live-monitoring [aria-current="page"] .nav-active-icon {
+    color: var(--nav-accent-live-monitoring);
   }
 
   /* Navigation hover states - neutral styling only */
