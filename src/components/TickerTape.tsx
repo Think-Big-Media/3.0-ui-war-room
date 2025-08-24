@@ -162,8 +162,8 @@ const TickerTape: React.FC = () => {
           }
         `}</style>
         <div className="ticker-content">
-          {/* Repeat items many times for truly seamless loop */}
-          {[...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems].map(
+          {/* Repeat items extensively for absolutely seamless loop */}
+          {[...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems].map(
             (item, index) => {
               const IconComponent = getIcon(item);
               return (
