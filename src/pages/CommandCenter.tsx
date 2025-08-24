@@ -194,7 +194,7 @@ const IntelligenceDashboard: React.FC = () => {
     >
       <div className="flex items-start justify-between mb-4 lg:mb-6">
         <div className="flex items-center space-x-3">
-          <div className="p-3 lg:p-4 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 group-hover:border-orange-400/30 transition-all duration-300">
+          <div className="p-3 lg:p-4 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 hoverable transition-all duration-300">
             <Target className="w-6 h-6 lg:w-8 lg:h-8 text-white/95" />
           </div>
           <h3 className="text-xl lg:text-2xl section-header">
