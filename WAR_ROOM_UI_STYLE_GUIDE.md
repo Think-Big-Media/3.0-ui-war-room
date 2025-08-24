@@ -227,6 +227,32 @@ Three standardized secondary button types with specific use cases:
 - **Exterior container padding**: Standard (`p-4`, `p-5`)
 - **Exterior container gaps**: **STANDARDIZED** (`gap-4`, `mb-4`)
 
+### Sub-navigation Tab Standards
+
+**CRITICAL RULE**: Sub-navigation tabs must be smaller than primary navigation to create proper hierarchy:
+
+- **Primary Navigation**: `px-3 py-2 text-sm` (larger)
+- **Sub-navigation Tabs**: `px-3 py-1.5 text-sm` (smaller - reduced vertical padding)
+
+### Examples of Correct Implementation
+
+```tsx
+/* ✅ CORRECT - Sub-navigation tabs */
+<button className="flex items-center space-x-2 px-3 py-1.5 text-sm rounded-lg">
+  Strategic Projects
+</button>
+
+/* ❌ INCORRECT - Same size as primary navigation */
+<button className="flex items-center space-x-2 px-4 py-2 rounded-lg">
+  Strategic Projects
+</button>
+```
+
+**Reference implementations:**
+- ✅ Intelligence Hub tabs
+- ✅ Alert Center tabs
+- ✅ War Room tabs (fixed)
+
 ### Content to Button Spacing
 
 - **Standard**: `mt-4` (16px) between content and secondary buttons
