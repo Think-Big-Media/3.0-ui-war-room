@@ -15,7 +15,7 @@ import ContentCalendarPage from './pages/ContentCalendarPage';
 import ContentEnginePage from './pages/ContentEnginePage';
 import ErrorBoundary from './pages/ErrorBoundary';
 import NotFound from './pages/NotFound';
-import TickerTape from './components/TickerTape';
+import TickerTapeSimple from './components/TickerTapeSimple';
 import './brand-bos.css';
 
 function App() {
