@@ -23,6 +23,7 @@ import {
 import ErrorBoundary from './pages/ErrorBoundary';
 import NotFound from './pages/NotFound';
 import TickerTape from './components/TickerTape';
+import PageTransition from './components/shared/PageTransition';
 import './brand-bos.css';
 
 function App() {
