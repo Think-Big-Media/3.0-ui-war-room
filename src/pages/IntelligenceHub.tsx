@@ -236,7 +236,7 @@ const IntelligenceHub: React.FC = () => {
           padding="md"
           className="mb-6"
         >
-          <h3 className="text-lg font-semibold font-condensed text-white/95 mb-4">
+          <h3 className="section-header mb-4">
             Upload Intelligence
           </h3>
 
@@ -401,7 +401,7 @@ const IntelligenceHub: React.FC = () => {
           className="space-y-4"
         >
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold font-condensed text-white/95">
+            <h3 className="section-header">
               Chat History & Saved Queries
             </h3>
             <div className="flex items-center space-x-2">
