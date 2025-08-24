@@ -14,7 +14,6 @@ interface ProjectCardProps {
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
   return (
     <Card
-      whileHover={{ scale: 1.02 }}
       className={`cursor-pointer ${getPriorityColor(project.priority)} hoverable`}
       padding="sm"
       variant="glass"
