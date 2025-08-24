@@ -36,7 +36,7 @@
     "check:process": "! grep -r 'process\\.' src/ --include='*.ts' --include='*.tsx' --include='*.js' --include='*.jsx' --exclude-dir='__tests__' --exclude-dir='dist' --exclude='*.test.*' --exclude='*.spec.*' | grep -v 'test' | grep -v 'spec' | grep -v '// Browser' || echo '✅ No process references in frontend code'",
     "check:built": "! grep -l 'process\\.' dist/assets/*.js 2>/dev/null || (echo '❌ ERROR: Found process references in built files!' && exit 1)",
     "build:safe": "npm run check:process && npm run build && npm run check:built",
-    "build": "vite build"
+    "build": "vite build && cp public/_redirects dist/_redirects"
   },
   "dependencies": {
     "@builder.io/react": "^8.2.6",
