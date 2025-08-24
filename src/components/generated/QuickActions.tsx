@@ -119,8 +119,8 @@ const QuickActions: React.FC = () => {
 
       <div className="mt-4 lg:mt-6 pt-4 border-t border-purple-400/20">
         <div className="flex items-center justify-between text-sm">
-          <span className="content-subtitle">Quick access to key features</span>
-          <span className="status-indicator text-white/90">Ready</span>
+          <span className="footer-text text-white/75">Quick access to key features</span>
+          <span className="footer-text status-active">Ready</span>
         </div>
       </div>
     </motion.div>

@@ -232,8 +232,8 @@ const IntelligenceDashboard: React.FC = () => {
 
       <div className="mt-4 lg:mt-6 pt-4 border-t border-purple-400/20">
         <div className="flex items-center justify-between text-sm">
-          <span className="text-white/75">Last updated</span>
-          <span className="text-white/90">30 seconds ago</span>
+          <span className="footer-text text-white/75">Last updated</span>
+          <span className="footer-text text-white/90">30 seconds ago</span>
         </div>
       </div>
     </Card>
@@ -375,8 +375,16 @@ const CampaignOperationsHub: React.FC = () => {
                   />
                 </div>
                 <div className="flex items-center justify-between text-xs">
-                  <span className="status-indicator text-white/75">{cluster.status}</span>
-                  <span className="status-indicator text-white/65">{cluster.timeline}</span>
+                  <span className={`status-indicator ${
+                    cluster.status === 'Live' ? 'status-active' :
+                    cluster.status === 'Running' ? 'status-running' :
+                    cluster.status === 'Planning' ? 'status-planning' : 'text-white/75'
+                  }`}>{cluster.status}</span>
+                  <span className={`status-indicator ${
+                    cluster.timeline === 'Active' ? 'status-active' :
+                    cluster.timeline === 'Today' ? 'status-running' :
+                    cluster.timeline === 'Next Week' ? 'status-planning' : 'text-white/65'
+                  }`}>{cluster.timeline}</span>
                 </div>
               </motion.div>
             ))}
