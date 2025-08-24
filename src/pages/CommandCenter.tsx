@@ -102,7 +102,10 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
         <div className="text-2xl lg:text-3xl font-bold text-white/95 font-condensed">
           {number}
         </div>
-        <h3 className="text-base lg:text-lg font-semibold text-white/90 uppercase" style={{ font: "600 19px/29px Barlow Condensed, sans-serif" }}>
+        <h3
+          className="text-base lg:text-lg font-semibold text-white/90 uppercase"
+          style={{ font: '600 19px/29px Barlow Condensed, sans-serif' }}
+        >
           {title}
         </h3>
         <p className="text-xs lg:text-sm text-white leading-relaxed uppercase">

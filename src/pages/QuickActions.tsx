@@ -88,7 +88,7 @@ const QuickActions: React.FC = () => {
         transition: { duration: 0.2 },
       }}
       className="bg-black/15 backdrop-blur-lg rounded-2xl p-4 lg:p-6 hover:bg-black/20 hover:border-orange-500/40 transition-all duration-300 group"
-      style={{ border: "1px solid rgba(255, 255, 255, 0.3)" }}
+      style={{ border: '1px solid rgba(255, 255, 255, 0.3)' }}
       style={{ boxShadow: perfectCardShadow }}
     >
       <div className="flex items-start justify-between mb-4 lg:mb-6">

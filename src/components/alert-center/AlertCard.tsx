@@ -9,7 +9,12 @@ import {
 } from 'lucide-react';
 import Card from '../shared/Card';
 import { type Alert } from '../../types/alert';
-import { getAlertIcon, getPriorityColor, getStatusColor, getStatusIcon } from './utils';
+import {
+  getAlertIcon,
+  getPriorityColor,
+  getStatusColor,
+  getStatusIcon,
+} from './utils';
 
 interface AlertCardProps {
   alert: Alert;
@@ -41,10 +46,12 @@ const AlertCard: React.FC<AlertCardProps> = ({
           {getAlertIcon(alert.type)}
           <div className="flex-1">
             <div className="flex items-center space-x-2 mb-1">
-              <h3 className="font-semibold font-condensed text-white/95">{alert.title}</h3>
+              <h3 className="font-semibold font-condensed text-white/95">
+                {alert.title}
+              </h3>
               <span
                 className={`px-2 py-1 rounded-full text-xs ${getStatusColor(
-                  alert.status,
+                  alert.status
                 )} text-white flex items-center space-x-1`}
               >
                 {getStatusIcon(alert.status)}
@@ -121,7 +128,7 @@ const AlertCard: React.FC<AlertCardProps> = ({
                               alert.id,
                               alert.status === 'new'
                                 ? 'in-progress'
-                                : 'resolved',
+                                : 'resolved'
                             );
                           }}
                           className="bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded-lg text-sm transition-colors"

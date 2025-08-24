@@ -17,7 +17,9 @@ const MonthView: React.FC<MonthViewProps> = ({
     <div className="space-y-4">
       {/* Month View Header */}
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-2xl font-bold font-condensed text-white">{currentMonth}</h3>
+        <h3 className="text-2xl font-bold font-condensed text-white">
+          {currentMonth}
+        </h3>
         <div className="text-white/70 text-sm">
           <span className="font-medium text-white">{totalPosts}</span> posts
           this month
