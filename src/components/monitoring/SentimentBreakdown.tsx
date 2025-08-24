@@ -13,7 +13,7 @@ const SentimentBreakdown: React.FC<SentimentBreakdownProps> = ({
   sentimentData,
 }) => {
   return (
-    <Card padding="md" variant="glass">
+    <Card padding="md" variant="glass" className="hoverable">
       <h3 className="section-header mb-4 tracking-wide ml-1.5">
         SENTIMENT BREAKDOWN
       </h3>

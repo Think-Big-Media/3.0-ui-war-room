@@ -26,7 +26,7 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
   };
 
   return (
-    <Card padding="md" variant="glass">
+    <Card padding="md" variant="glass" className="hoverable">
       <h3 className="section-header mb-4 tracking-wide ml-2">
         TRENDING TOPICS (Issue Spike Detector)
       </h3>
@@ -35,7 +35,7 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
           <motion.div
             key={topic.id}
             whileHover={{ scale: 1.02 }}
-            className="bg-black/20 rounded-lg p-6 border border-white/10 cursor-pointer"
+            className="bg-black/20 rounded-lg p-6 hoverable cursor-pointer"
           >
             <div className="flex items-center justify-between mb-2 -mt-2">
               <h4 className="font-medium text-white/95">{topic.keyword}</h4>
