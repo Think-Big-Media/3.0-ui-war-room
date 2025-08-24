@@ -63,7 +63,7 @@
   /* Set default font and background */
   body {
     @apply font-body antialiased bg-gray-50 text-gray-900;
-    letter-spacing: 0em; /* Normal letter spacing for Inter */
+    /* letter-spacing reverted to default - no global override */
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
