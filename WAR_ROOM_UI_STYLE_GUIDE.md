@@ -250,7 +250,9 @@ button {
 
 ### Key Features (All Buttons)
 
-- **Letter Spacing**: Halved (`letter-spacing: -0.05em`) - **SITE-WIDE RULE**
+- **Letter Spacing**: Halved (`tracking-[-0.05em]`) - **SITE-WIDE RULE**
+- **Implementation**: Tailwind arbitrary value within @apply directive
+- **Fallback**: Global CSS rule with `!important` for non-class buttons
 - **Font**: Monospace (`font-mono`) for technical actions
 - **Case**: UPPERCASE for action buttons
 - **Wrap**: Prevent wrapping (`whitespace-nowrap`)
