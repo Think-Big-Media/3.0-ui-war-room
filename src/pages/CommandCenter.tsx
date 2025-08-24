@@ -334,7 +334,7 @@ const CampaignOperationsHub: React.FC = () => {
                 className="bg-black/20 backdrop-blur-sm rounded-xl p-6 lg:p-7 border border-white/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <h5 className="font-medium text-white/70 text-xs lg:text-sm uppercase" style={{ lineHeight: "16px" }}>
+                  <h5 className="font-medium text-white/95 text-xs lg:text-sm">
                     {cluster.title}
                   </h5>
                   <div
@@ -342,8 +342,8 @@ const CampaignOperationsHub: React.FC = () => {
                   />
                 </div>
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-white" style={{ fontFamily: "JetBrains Mono, monospace" }}>{cluster.status}</span>
-                  <span style={{ color: "rgba(126, 211, 33, 1)", fontFamily: "JetBrains Mono, monospace" }}>{cluster.timeline.toUpperCase()}</span>
+                  <span className="text-white/75">{cluster.status}</span>
+                  <span className="text-white/65">{cluster.timeline}</span>
                 </div>
               </div>
             ))}
