@@ -15,32 +15,32 @@ export interface SectionTheme {
 export const SECTION_THEMES: Record<string, SectionTheme> = {
   dashboard: {
     name: 'Dashboard',
-    pageAccent: BRAND_ACCENTS.dashboard,
+    pageAccent: BRAND_TOKENS.dashboard,
     accentKey: 'dashboard',
   },
   monitoring: {
     name: 'Live Monitoring',
-    pageAccent: BRAND_ACCENTS.liveMonitoring,
+    pageAccent: BRAND_TOKENS.liveMonitoring,
     accentKey: 'liveMonitoring',
   },
   warroom: {
     name: 'War Room',
-    pageAccent: BRAND_ACCENTS.warRoom,
+    pageAccent: BRAND_TOKENS.warRoom,
     accentKey: 'warRoom',
   },
   intelligence: {
     name: 'Intelligence',
-    pageAccent: BRAND_ACCENTS.intelligence,
+    pageAccent: BRAND_TOKENS.intelligence,
     accentKey: 'intelligence',
   },
   alerts: {
     name: 'Alert Center',
-    pageAccent: BRAND_ACCENTS.alertCenter,
+    pageAccent: BRAND_TOKENS.alertCenter,
     accentKey: 'alertCenter',
   },
   settings: {
     name: 'Settings',
-    pageAccent: BRAND_ACCENTS.settings,
+    pageAccent: BRAND_TOKENS.settings,
     accentKey: 'settings',
   },
 };
