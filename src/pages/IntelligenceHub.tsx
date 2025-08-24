@@ -48,7 +48,7 @@ interface ChatQuery {
 }
 
 const IntelligenceHub: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('upload');
+  const [activeTab, setActiveTab] = useState('chat');
   const [selectedFile, setSelectedFile] = useState<IntelligenceFile | null>(
     null
   );
