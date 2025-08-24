@@ -4,7 +4,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { informationService } from '../services/informationService';
 import { type InformationItem } from '../types/information';
-import { getSectionTheme, getNavActiveClasses, getNavIconActiveClasses, getNavHoverClasses, getNavIconHoverClasses } from '../utils/sectionTheming';
+import {
+  getSectionTheme,
+  getNavActiveClasses,
+  getNavIconActiveClasses,
+  getNavHoverClasses,
+  getNavIconHoverClasses,
+} from '../utils/sectionTheming';
 import {
   Home,
   Target,
@@ -193,7 +199,9 @@ const TopNavigation: React.FC = () => {
                       : getNavIconHoverClasses(item.theme)
                   }`}
                 />
-                <span className={`whitespace-nowrap overflow-hidden text-ellipsis ${item.active ? '' : getNavHoverClasses(item.theme)}`}>
+                <span
+                  className={`whitespace-nowrap overflow-hidden text-ellipsis ${item.active ? '' : getNavHoverClasses(item.theme)}`}
+                >
                   {item.label}
                 </span>
               </motion.button>
@@ -369,10 +377,10 @@ const TopNavigation: React.FC = () => {
                       setIsMobileMenuOpen(false);
                     }}
                     className={`group w-full px-6 py-4 rounded-lg font-semibold transition-all duration-200 flex items-center space-x-3 ${
-                    item.active
-                      ? `text-white font-extrabold border-l-4 border-${item.theme.colors.border}`
-                      : 'text-white/80 hover:bg-white/10'
-                  }`}
+                      item.active
+                        ? `text-white font-extrabold border-l-4 border-${item.theme.colors.border}`
+                        : 'text-white/80 hover:bg-white/10'
+                    }`}
                   >
                     <item.icon
                       className={`w-5 h-5 flex-shrink-0 ${
@@ -381,7 +389,11 @@ const TopNavigation: React.FC = () => {
                           : getNavIconHoverClasses(item.theme)
                       }`}
                     />
-                    <span className={`text-lg ${item.active ? '' : getNavHoverClasses(item.theme)}`}>{item.label}</span>
+                    <span
+                      className={`text-lg ${item.active ? '' : getNavHoverClasses(item.theme)}`}
+                    >
+                      {item.label}
+                    </span>
                   </motion.button>
                 ))}
               </div>

@@ -6,11 +6,11 @@
 export interface SectionTheme {
   name: string;
   colors: {
-    primary: string;      // Main accent color
-    border: string;       // Border hover colors  
-    text: string;         // Text accent colors
-    background: string;   // Background accent colors
-    light: string;        // Light variant for backgrounds
+    primary: string; // Main accent color
+    border: string; // Border hover colors
+    text: string; // Text accent colors
+    background: string; // Background accent colors
+    light: string; // Light variant for backgrounds
   };
 }
 
@@ -19,21 +19,21 @@ export const SECTION_THEMES: Record<string, SectionTheme> = {
     name: 'Dashboard',
     colors: {
       primary: 'orange-500',
-      border: 'orange-400/50', 
+      border: 'orange-400/50',
       text: 'orange-300',
       background: 'orange-400/10',
       light: 'orange-50',
-    }
+    },
   },
   monitoring: {
-    name: 'Live Monitoring', 
+    name: 'Live Monitoring',
     colors: {
       primary: 'green-500',
       border: 'green-400/50',
-      text: 'green-300', 
+      text: 'green-300',
       background: 'green-400/10',
       light: 'green-50',
-    }
+    },
   },
   warroom: {
     name: 'War Room',
@@ -41,9 +41,9 @@ export const SECTION_THEMES: Record<string, SectionTheme> = {
       primary: 'red-500',
       border: 'red-400/50',
       text: 'red-300',
-      background: 'red-400/10', 
+      background: 'red-400/10',
       light: 'red-50',
-    }
+    },
   },
   intelligence: {
     name: 'Intelligence',
@@ -53,27 +53,27 @@ export const SECTION_THEMES: Record<string, SectionTheme> = {
       text: 'blue-300',
       background: 'blue-400/10',
       light: 'blue-50',
-    }
+    },
   },
   alerts: {
     name: 'Alert Center',
     colors: {
-      primary: 'amber-500', 
+      primary: 'amber-500',
       border: 'amber-400/50',
       text: 'amber-300',
       background: 'amber-400/10',
       light: 'amber-50',
-    }
+    },
   },
   settings: {
     name: 'Settings',
     colors: {
       primary: 'purple-500',
-      border: 'purple-400/50', 
+      border: 'purple-400/50',
       text: 'purple-300',
       background: 'purple-400/10',
       light: 'purple-50',
-    }
+    },
   },
 };
 
@@ -83,12 +83,14 @@ export const SECTION_THEMES: Record<string, SectionTheme> = {
 export function getSectionTheme(pathname: string): SectionTheme {
   // Route to theme mapping
   if (pathname === '/') return SECTION_THEMES.dashboard;
-  if (pathname.startsWith('/real-time-monitoring')) return SECTION_THEMES.monitoring;
+  if (pathname.startsWith('/real-time-monitoring'))
+    return SECTION_THEMES.monitoring;
   if (pathname.startsWith('/campaign-control')) return SECTION_THEMES.warroom;
-  if (pathname.startsWith('/intelligence-hub')) return SECTION_THEMES.intelligence;
+  if (pathname.startsWith('/intelligence-hub'))
+    return SECTION_THEMES.intelligence;
   if (pathname.startsWith('/alert-center')) return SECTION_THEMES.alerts;
   if (pathname.startsWith('/settings')) return SECTION_THEMES.settings;
-  
+
   // Default to dashboard theme
   return SECTION_THEMES.dashboard;
 }
@@ -129,7 +131,7 @@ export function getCardHoverClasses(theme: SectionTheme): string {
 }
 
 /**
- * Get CSS classes for button active/accent based on theme  
+ * Get CSS classes for button active/accent based on theme
  */
 export function getButtonAccentClasses(theme: SectionTheme): string {
   return `bg-${theme.colors.background} text-${theme.colors.text} border-${theme.colors.border}`;
@@ -140,11 +142,11 @@ export function getButtonAccentClasses(theme: SectionTheme): string {
  */
 export function useSectionTheme(pathname: string) {
   const theme = getSectionTheme(pathname);
-  
+
   return {
     theme,
     navActiveClasses: getNavActiveClasses(theme),
-    cardHoverClasses: getCardHoverClasses(theme), 
+    cardHoverClasses: getCardHoverClasses(theme),
     buttonAccentClasses: getButtonAccentClasses(theme),
   };
 }

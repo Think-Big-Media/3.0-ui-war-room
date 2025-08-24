@@ -4,7 +4,13 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { informationService } from '../../services/informationService';
 import { type InformationItem } from '../../types/information';
-import { getSectionTheme, getNavActiveClasses, getNavIconActiveClasses, getNavHoverClasses, getNavIconHoverClasses } from '../../utils/sectionTheming';
+import {
+  getSectionTheme,
+  getNavActiveClasses,
+  getNavIconActiveClasses,
+  getNavHoverClasses,
+  getNavIconHoverClasses,
+} from '../../utils/sectionTheming';
 import {
   Home,
   Target,
@@ -186,7 +192,11 @@ const TopNavigation: React.FC = () => {
                       : getNavIconHoverClasses(item.theme)
                   }`}
                 />
-                <span className={item.active ? '' : getNavHoverClasses(item.theme)}>{item.label}</span>
+                <span
+                  className={item.active ? '' : getNavHoverClasses(item.theme)}
+                >
+                  {item.label}
+                </span>
               </button>
             ))}
           </div>
@@ -349,7 +359,11 @@ const TopNavigation: React.FC = () => {
                         : getNavIconHoverClasses(item.theme)
                     }`}
                   />
-                  <span className={`text-lg ${item.active ? '' : getNavHoverClasses(item.theme)}`}>{item.label}</span>
+                  <span
+                    className={`text-lg ${item.active ? '' : getNavHoverClasses(item.theme)}`}
+                  >
+                    {item.label}
+                  </span>
                 </button>
               ))}
             </div>
