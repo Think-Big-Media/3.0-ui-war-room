@@ -9,29 +9,39 @@ import { store } from './store';
 import './index.css';
 
 /**
- * ⚡ PRODUCTION FRONTEND CONFIGURATION ⚡
+ * ⚡ BUILDER.IO FRONTEND CONFIGURATION ⚡
  * 
- * 🎯 ACTIVE: AppBrandBOS.tsx
- * - Purple/blue gradient theme
- * - CommandCenter dashboard
- * - Glassmorphic cards
- * - Top navigation with WR logo
+ * 🎯 ACTIVE: HomePage.tsx (Builder.io Integration)
+ * - Dynamic content from Builder.io CMS
+ * - Visual editing capabilities
+ * - Navigation with icons from Builder
+ * - Responsive design components
  * 
  * ❌ NOT IN USE:
+ * - AppBrandBOS.tsx (static version without Builder)
  * - App.tsx (legacy with Supabase auth)
  * - AppNoAuth.tsx (testing only)
  * 
- * 🔍 Visual Check: You should see purple/blue gradients
- * 📊 Dashboard: CommandCenter, not Dashboard
- * 🧭 Navigation: Top bar, not sidebar
+ * 🔍 Visual Check: You should see icons in top navigation
+ * 📊 Dashboard: Builder.io managed content
+ * 🧭 Navigation: Icons + text from Builder CMS
  * 
- * ⚠️ DO NOT CHANGE THIS IMPORT unless migrating the entire frontend architecture
+ * ⚠️ Builder.io API Key: VITE_BUILDER_IO_KEY must be set
  */
-import App from './AppBrandBOS';  // ← PRODUCTION FRONTEND
+import HomePage from './pages/HomePage';
+import { BrowserRouter as Router } from 'react-router-dom';
 
-// Legacy options (DO NOT USE):
-// import App from './App';        // Old version with Supabase auth
-// import App from './AppNoAuth';  // Testing version without auth
+// Builder.io App Component
+const App = () => (
+  <Router>
+    <HomePage />
+  </Router>
+);
+
+// Static options (FALLBACK ONLY):
+// import App from './AppBrandBOS'; // Static version without Builder
+// import App from './App';         // Old version with Supabase auth
+// import App from './AppNoAuth';   // Testing version without auth
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 // Get root element
