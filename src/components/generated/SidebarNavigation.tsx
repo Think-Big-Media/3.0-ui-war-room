@@ -340,7 +340,9 @@ const TopNavigation: React.FC = () => {
                       : 'text-white/80 hover:bg-white/10'
                   }`}
                 >
-                  <item.icon className="w-5 h-5" />
+                  <item.icon
+                    className={`w-5 h-5 ${item.active ? getNavIconActiveClasses(item.theme) : ''}`}
+                  />
                   <span className="text-lg">{item.label}</span>
                 </button>
               ))}
