@@ -187,7 +187,9 @@ const TopNavigation: React.FC = () => {
                 }`}
               >
                 <item.icon
-                  className={`w-4 h-4 flex-shrink-0 ${item.icon === Home ? '-translate-y-0.5' : ''}`}
+                  className={`w-4 h-4 flex-shrink-0 ${item.icon === Home ? '-translate-y-0.5' : ''} ${
+                    item.active ? getNavIconActiveClasses(item.theme) : ''
+                  }`}
                 />
                 <span className="whitespace-nowrap overflow-hidden text-ellipsis">
                   {item.label}
