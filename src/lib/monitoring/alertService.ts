@@ -307,7 +307,7 @@ export class AlertService {
       critical: '#DB2777', // War Room Fuchsia
       high: '#FACC15', // Alert Center Yellow
       medium: '#60A5FA', // Intelligence Blue
-      low: '#2A434A', // Live Monitoring Green
+      low: '#3EA66A', // Live Monitoring Green
     };
     return colors[severity];
   }
