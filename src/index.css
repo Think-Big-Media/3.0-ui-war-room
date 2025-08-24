@@ -297,6 +297,26 @@
     border-color: var(--page-accent);
   }
 
+  /* Quick Actions accent classes */
+  .quick-action-dashboard .quick-action-icon {
+    color: var(--accent-dashboard);
+  }
+  .quick-action-liveMonitoring .quick-action-icon {
+    color: var(--accent-live-monitoring);
+  }
+  .quick-action-warRoom .quick-action-icon {
+    color: var(--accent-war-room);
+  }
+  .quick-action-intelligence .quick-action-icon {
+    color: var(--accent-intelligence);
+  }
+  .quick-action-alertCenter .quick-action-icon {
+    color: var(--accent-alert-center);
+  }
+  .quick-action-settings .quick-action-icon {
+    color: var(--accent-settings);
+  }
+
   /* Targeted word spacing for specific nav labels */
   .nav-label {
     word-spacing: 0.15em;
