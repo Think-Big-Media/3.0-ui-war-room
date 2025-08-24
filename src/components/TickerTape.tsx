@@ -68,8 +68,6 @@ const TickerTape: React.FC = () => {
   }, []);
 
   const handleItemClick = (item: InformationItem, index: number) => {
-    logger.debug(`Ticker item clicked: ${item.title}`);
-
     // Mark as read
     informationService.markAsRead(item.id);
 
