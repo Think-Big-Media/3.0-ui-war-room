@@ -354,10 +354,9 @@ function App() {
           path="*"
           element={
             <div className="min-h-screen flex items-center justify-center">
-              {console.log('🚨 404 ROUTE HIT - Current path:', window.location.pathname) || null}
               <div className="text-center">
                 <h1 className="text-4xl font-bold text-gray-900">404</h1>
-                <p className="mt-2 text-gray-600">Page not found: {window.location.pathname}</p>
+                <p className="mt-2 text-gray-600">Page not found</p>
                 <a
                   href="/dashboard"
                   className="mt-4 inline-block text-blue-600 hover:text-blue-500"
