@@ -60,7 +60,7 @@ const SettingsSection: React.FC<SettingsSectionProps> = ({
       variant="glass"
     >
       <div className="flex items-center space-x-3 mb-6">
-        <div className="p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-purple-400/20">
+        <div className="p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20">
           <Icon className="w-6 h-6 text-white/95" />
         </div>
         <h3 className="section-header">{title.toUpperCase()}</h3>
