@@ -102,10 +102,10 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
         <div className="text-2xl lg:text-3xl text-white/95" style={{ font: "400 31px/37px 'Barlow Condensed', sans-serif" }}>
           {number}
         </div>
-        <h3 className="section-header">
+        <h3 className="section-header mb-1">
           {title}
         </h3>
-        <p className="text-xs lg:text-sm text-white/75 leading-relaxed">
+        <p className="content-subtitle">
           {subtitle}
         </p>
       </div>
@@ -367,7 +367,7 @@ const CampaignOperationsHub: React.FC = () => {
                 className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <h5 className="font-medium text-white/95 text-xs lg:text-sm" style={{ lineHeight: "16px" }}>
+                  <h5 className="content-title">
                     {cluster.title}
                   </h5>
                   <div
@@ -375,8 +375,8 @@ const CampaignOperationsHub: React.FC = () => {
                   />
                 </div>
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-white/75">{cluster.status}</span>
-                  <span className="text-white/65">{cluster.timeline}</span>
+                  <span className="status-indicator text-white/75">{cluster.status}</span>
+                  <span className="status-indicator text-white/65">{cluster.timeline}</span>
                 </div>
               </motion.div>
             ))}
@@ -416,7 +416,7 @@ const CampaignOperationsHub: React.FC = () => {
                 }}
                 className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 text-center cursor-pointer"
               >
-                <h5 className="font-medium text-white/95 text-xs lg:text-sm mb-1" style={{ lineHeight: "16px" }}>
+                <h5 className="content-title mb-1">
                   {template.name}
                 </h5>
                 <p className="text-xs text-white/65">{template.type}</p>
