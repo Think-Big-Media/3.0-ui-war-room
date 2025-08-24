@@ -401,7 +401,7 @@ const IntelligenceHub: React.FC = () => {
           className="space-y-4"
         >
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-white/95">
+            <h3 className="text-lg font-semibold font-condensed text-white/95">
               Chat History & Saved Queries
             </h3>
             <div className="flex items-center space-x-2">
