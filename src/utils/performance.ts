@@ -1,6 +1,7 @@
 /**
  * Performance monitoring utilities for War Room
  */
+import { useEffect } from 'react';
 
 export class PerformanceMonitor {
   private static instance: PerformanceMonitor;
@@ -116,7 +117,7 @@ export class PerformanceMonitor {
 export function usePerformanceMonitor(componentName: string, enabled: boolean = true) {
   const monitor = PerformanceMonitor.getInstance();
   
-  React.useEffect(() => {
+  useEffect(() => {
     if (enabled) {
       monitor.startTiming(componentName);
       
@@ -125,24 +126,6 @@ export function usePerformanceMonitor(componentName: string, enabled: boolean = 
       };
     }
   }, [componentName, enabled]);
-}
-
-/**
- * Higher-order component for automatic performance monitoring
- */
-export function withPerformanceMonitoring<P extends object>(
-  WrappedComponent: React.ComponentType<P>,
-  componentName?: string
-) {
-  const displayName = componentName || WrappedComponent.displayName || WrappedComponent.name || 'Component';
-  
-  const MonitoredComponent = (props: P) => {
-    usePerformanceMonitor(displayName);
-    return <WrappedComponent {...props} />;
-  };
-  
-  MonitoredComponent.displayName = `withPerformanceMonitoring(${displayName})`;
-  return MonitoredComponent;
 }
 
 // Initialize performance monitoring in development
