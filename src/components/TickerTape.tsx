@@ -137,7 +137,7 @@ const TickerTape: React.FC = () => {
           </span>
         </div>
         <div
-          className={`w-1 h-4 rounded-full ${getCategoryColor(item.category).replace('text-', 'bg-')}`}
+          className="w-1 h-4 rounded-full ticker-accent-bg"
         />
         {item.priority === 'critical' && (
           <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
