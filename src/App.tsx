@@ -110,6 +110,7 @@ const AuthLoadingFallback = () => {
           <button
             onClick={() => window.location.href = '/login'}
             className="w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            style={{ letterSpacing: '-0.05em' }}
           >
             Go to Login Page
           </button>
@@ -120,6 +121,7 @@ const AuthLoadingFallback = () => {
               window.location.reload();
             }}
             className="w-full px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+            style={{ letterSpacing: '-0.05em' }}
           >
             Clear Storage & Reload
           </button>
