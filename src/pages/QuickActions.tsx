@@ -37,7 +37,7 @@ const QuickActions: React.FC = () => {
     {
       icon: FileText,
       label: 'Make Content',
-      accentKey: 'alertCenter',
+      accentKey: 'dashboard',
     },
     {
       icon: Zap,
@@ -47,7 +47,7 @@ const QuickActions: React.FC = () => {
     {
       icon: Share2,
       label: 'Social Media',
-      accentKey: 'settings',
+      accentKey: 'alertCenter',
     },
   ];
 
@@ -56,10 +56,6 @@ const QuickActions: React.FC = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.4 }}
-      whileHover={{
-        y: -2,
-        transition: { duration: 0.2 },
-      }}
       className="group hoverable hover:bg-black/25"
       padding="md"
       variant="glass"
@@ -79,7 +75,6 @@ const QuickActions: React.FC = () => {
         {actions.map((action, index) => (
           <motion.button
             key={index}
-            whileHover={{ y: -2 }}
             whileTap={{ scale: 0.95 }}
             className={`bg-black/20 backdrop-blur-sm rounded-xl p-4 lg:p-5 border border-white/20 hover:bg-black/25 hoverable transition-all duration-300 flex flex-col items-center space-y-2 quick-action-${action.accentKey}`}
           >
