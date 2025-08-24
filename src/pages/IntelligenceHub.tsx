@@ -413,8 +413,9 @@ const IntelligenceHub: React.FC = () => {
             </div>
 
             {chatQueries.map((query) => (
-              <Card key={query.id} whileHover={{}} padding="sm">
-                <div className="flex items-start justify-between mb-2">
+              <Card key={query.id} whileHover={{}} padding="none">
+                <div className="px-3.5 pt-3.5 pb-3.5">
+                  <div className="flex items-start justify-between mb-2">
                   <div className="flex items-center space-x-2">
                     <MessageSquare className="w-4 h-4 chat-icon" />
                     <span className="text-sm text-white/70">{query.topic}</span>
@@ -436,6 +437,7 @@ const IntelligenceHub: React.FC = () => {
                   <button className="text-xs text-white/70 hover:text-white">
                     Add to Doc
                   </button>
+                  </div>
                 </div>
               </Card>
             ))}
