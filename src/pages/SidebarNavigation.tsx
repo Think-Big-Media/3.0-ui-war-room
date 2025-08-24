@@ -378,9 +378,10 @@ const TopNavigation: React.FC = () => {
                     }}
                     className={`group w-full px-6 py-4 rounded-lg font-semibold transition-all duration-200 flex items-center space-x-3 ${
                       item.active
-                        ? `text-white font-extrabold border-l-4 border-${item.theme.colors.border}`
+                        ? `text-white font-extrabold border-l-4`
                         : 'text-white/80 hover:bg-white/10'
                     }`}
+                    style={item.active ? {"borderLeftColor": "var(--page-accent)"} : {}}
                   >
                     <item.icon
                       className={`w-5 h-5 flex-shrink-0 ${
