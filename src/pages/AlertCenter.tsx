@@ -20,7 +20,7 @@ import { type InformationItem } from '../types/information';
 const logger = createLogger('AlertCenter');
 
 const AlertCenter: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('traditional-alerts');
+  const [activeTab, setActiveTab] = useState('information-streams');
   const [selectedAlert, setSelectedAlert] = useState<Alert | null>(null);
   const [collaborationModal, setCollaborationModal] = useState({
     isOpen: false,
