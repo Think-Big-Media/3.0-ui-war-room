@@ -9,29 +9,17 @@ import { store } from './store';
 import './index.css';
 
 /**
- * ⚡ BUILDER.IO FRONTEND CONFIGURATION ⚡
+ * ⚡ PRODUCTION FRONTEND CONFIGURATION ⚡
  * 
- * 🎯 ACTIVE: HomePage.tsx (Builder.io Integration)
- * - Dynamic content from Builder.io CMS
- * - Visual editing capabilities
- * - Navigation with icons from Builder
- * - Responsive design components
+ * 🎯 ACTIVE: AppBrandBOS.tsx (Version with Icons)
+ * - Top navigation with icons next to menu items
+ * - Dashboard, Live Monitoring, War Room with icons
+ * - Visual indicator: Icons show this is correct version
  * 
- * ❌ NOT IN USE:
- * - AppBrandBOS.tsx (static version without Builder)
- * - App.tsx (legacy with Supabase auth)
- * - AppNoAuth.tsx (testing only)
- * 
- * 🔍 Visual Check: You should see icons in top navigation
- * 📊 Dashboard: Builder.io managed content
- * 🧭 Navigation: Icons + text from Builder CMS
- * 
- * ⚠️ Builder.io API Key: VITE_BUILDER_IO_KEY must be set
+ * 🔍 SUCCESS INDICATOR: Icons next to menu items
+ * 📊 Dashboard, 📡 Live Monitoring, ⚔️ War Room
  */
-import HomePage from './pages/HomePage';
-
-// Builder.io App Component
-const App = () => <HomePage />;
+import App from './AppBrandBOS';
 
 // Static options (FALLBACK ONLY):
 // import App from './AppBrandBOS'; // Static version without Builder
