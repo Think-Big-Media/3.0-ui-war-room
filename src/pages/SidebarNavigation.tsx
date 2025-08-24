@@ -193,7 +193,7 @@ const TopNavigation: React.FC = () => {
                       : getNavIconHoverClasses(item.theme)
                   }`}
                 />
-                <span className="whitespace-nowrap overflow-hidden text-ellipsis">
+                <span className={`whitespace-nowrap overflow-hidden text-ellipsis ${item.active ? '' : getNavHoverClasses(item.theme)}`}>
                   {item.label}
                 </span>
               </motion.button>
