@@ -180,9 +180,9 @@ const TopNavigation: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleNavigation(item.path)}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-1 ${
+                className={`px-3 py-2 rounded-lg text-sm transition-all duration-200 flex items-center space-x-1 ${
                   item.active
-                    ? `bg-${item.theme.colors.background} text-${item.theme.colors.text} border border-${item.theme.colors.border}`
+                    ? 'text-white font-medium'
                     : 'text-white/70 hover:text-white hover:bg-white/10'
                 }`}
               >
