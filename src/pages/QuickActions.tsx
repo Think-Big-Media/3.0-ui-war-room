@@ -22,37 +22,31 @@ const QuickActions: React.FC = () => {
     {
       icon: TrendingUp,
       label: 'Viral Opps',
-      accentColor: BRAND_ACCENTS.warRoom,
       accentKey: 'warRoom',
     },
     {
       icon: Search,
       label: 'Trend Opps',
-      accentColor: BRAND_ACCENTS.intelligence,
       accentKey: 'intelligence',
     },
     {
       icon: Activity,
       label: 'Live Monitor',
-      accentColor: BRAND_ACCENTS.liveMonitoring,
       accentKey: 'liveMonitoring',
     },
     {
       icon: FileText,
       label: 'Make Content',
-      accentColor: BRAND_ACCENTS.alertCenter,
       accentKey: 'alertCenter',
     },
     {
       icon: Zap,
       label: 'Quick Campaign',
-      accentColor: BRAND_ACCENTS.dashboard,
       accentKey: 'dashboard',
     },
     {
       icon: Share2,
       label: 'Social Media',
-      accentColor: BRAND_ACCENTS.settings,
       accentKey: 'settings',
     },
   ];
