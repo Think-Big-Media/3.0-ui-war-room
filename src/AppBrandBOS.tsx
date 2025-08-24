@@ -5,14 +5,17 @@ import {
   Route,
   useLocation,
 } from 'react-router-dom';
-import CommandCenter from './pages/CommandCenter';
-import RealTimeMonitoring from './pages/RealTimeMonitoring';
-import CampaignControl from './pages/CampaignControl';
-import IntelligenceHub from './pages/IntelligenceHub';
-import AlertCenter from './pages/AlertCenter';
-import SettingsPage from './pages/SettingsPage';
-import ContentCalendarPage from './pages/ContentCalendarPage';
-import ContentEnginePage from './pages/ContentEnginePage';
+// Use lazy-loaded components for better performance
+import {
+  CommandCenter,
+  RealTimeMonitoring,
+  CampaignControl,
+  IntelligenceHub,
+  AlertCenter,
+  SettingsPage,
+  ContentCalendarPage,
+  ContentEnginePage,
+} from './components/LazyComponents';
 import ErrorBoundary from './pages/ErrorBoundary';
 import NotFound from './pages/NotFound';
 import TickerTape from './components/TickerTape';
