@@ -240,8 +240,9 @@
   /* Navigation hover states - use page accent for consistent theming */
   .nav-hover-text {
     @apply transition-colors duration-200;
-    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-family: 'Barlow Condensed', sans-serif;
     font-weight: 500;
+    font-size: 16px; /* 2 points bigger than default 14px */
   }
 
   .nav-hover-icon {
@@ -282,7 +283,8 @@
   [aria-current='page'] .nav-active-text {
     color: var(--active-text, #fff);
     font-weight: 600;
-    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px; /* 2 points bigger than default 14px */
   }
 
   /* Hoverable border system - replaces transform/scale with border-color changes */
@@ -323,8 +325,9 @@
   /* Targeted word spacing for specific nav labels */
   .nav-label {
     word-spacing: 0.15em;
-    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-family: 'Barlow Condensed', sans-serif;
     font-weight: 500;
+    font-size: 16px; /* 2 points bigger than default 14px */
   }
 
   /* Quick Actions using design tokens */
