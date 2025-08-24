@@ -328,9 +328,10 @@
     @apply -mt-0.5;
   }
 
-  /* Global button letter spacing - ensure all buttons have reduced spacing */
+  /* Global button spacing - ensure all buttons have reduced letter and word spacing */
   button {
     letter-spacing: -0.05em !important;
+    word-spacing: -0.3em !important;
   }
 
   /* Form input style */
