@@ -349,7 +349,7 @@ const Dashboard: React.FC = () => {
                   <span>Quick Actions</span>
                 </h3>
                 <div className="space-y-3">
-                  <button className="w-full flex items-center justify-between p-3 bg-white/10 backdrop-blur-sm rounded-xl hover:bg-white/20 transition-all hover:scale-[1.02]">
+                  <button className="w-full flex items-center justify-between p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-colors duration-200 transform hover:scale-[1.01] will-change-transform">
                     <div className="flex items-center space-x-3">
                       <Target className="w-5 h-5" />
                       <span className="font-medium">Launch Campaign</span>
