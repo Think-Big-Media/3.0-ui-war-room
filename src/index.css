@@ -179,7 +179,7 @@
 @layer components {
   /* Primary button style - Using JetBrains Mono */
   .btn-primary {
-    @apply px-4 py-2 bg-blue-600 text-white font-mono font-medium text-sm rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors;
+    @apply px-4 py-2 bg-blue-600 text-white font-mono font-medium text-sm rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200;
   }
 
   /* Card titles should use Inter for content readability */
@@ -204,42 +204,42 @@
 
   /* Secondary button style */
   .btn-secondary {
-    @apply px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors;
+    @apply px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-200;
   }
 
   /* Secondary Alert button style - for urgent actions */
   .btn-secondary-alert {
-    @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap text-center;
+    @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-3 py-0.5 rounded-lg transition-colors duration-200 font-mono text-sm uppercase whitespace-nowrap text-center;
     letter-spacing: -0.05em; /* Halved spacing for multi-word buttons */
   }
 
   /* Secondary Action button style - for primary actions */
   .btn-secondary-action {
-    @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap text-center;
+    @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-3 py-0.5 rounded-lg transition-colors duration-200 font-mono text-sm uppercase whitespace-nowrap text-center;
     letter-spacing: -0.05em; /* Halved spacing for multi-word buttons */
   }
 
   /* Secondary Neutral button style - for general actions */
   .btn-secondary-neutral {
-    @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap text-center;
+    @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-3 py-0.5 rounded-lg transition-colors duration-200 font-mono text-sm uppercase whitespace-nowrap text-center;
     letter-spacing: -0.05em; /* Halved spacing for multi-word buttons */
   }
 
   /* Primary Alert button style - bigger urgent actions */
   .btn-primary-alert {
-    @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase text-center;
+    @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-6 py-3 rounded-xl transition-colors duration-200 font-mono text-base uppercase text-center;
     letter-spacing: -0.05em;
   }
 
   /* Primary Action button style - bigger primary actions */
   .btn-primary-action {
-    @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase text-center;
+    @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-6 py-3 rounded-xl transition-colors duration-200 font-mono text-base uppercase text-center;
     letter-spacing: -0.05em;
   }
 
   /* Primary Neutral button style - bigger general actions */
   .btn-primary-neutral {
-    @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase text-center;
+    @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-6 py-3 rounded-xl transition-colors duration-200 font-mono text-base uppercase text-center;
     letter-spacing: -0.05em;
   }
 
@@ -305,12 +305,12 @@
 
   /* War Room input style - 70% opacity background, gray text for transparency */
   .war-room-input {
-    @apply w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300;
+    @apply w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-colors duration-200;
   }
 
   /* War Room select style - 70% opacity background, gray text for transparency */
   .war-room-select {
-    @apply w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 focus:border-slate-500 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer;
+    @apply w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 focus:border-slate-500 focus:outline-none focus:ring-0 transition-colors duration-200 appearance-none cursor-pointer;
   }
 
   /* War Room sub-headline style - 60% opacity, moved up 3px (STANDARDIZED) */
@@ -424,13 +424,13 @@
 
   /* Animations */
   .animate-fade-in {
-    animation: fadeIn 0.5s ease-in-out;
+    animation: fadeIn 0.3s ease-out;
   }
 
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(8px);
     }
     to {
       opacity: 1;
@@ -442,6 +442,21 @@
   .spinner {
     @apply inline-block w-8 h-8 border-4 border-gray-200 border-t-blue-600 rounded-full animate-spin;
   }
+
+  /* Performance optimized utilities */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .hover-lift {
+    @apply transition-transform duration-200 ease-out;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-2px) translateZ(0);
+    will-change: transform;
+  }
 }
 
 /* Override Tailwind's default focus styles for better accessibility */
@@ -452,4 +467,16 @@
 /* Ensure proper stacking context for modals */
 #modal-root {
   @apply relative z-50;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
