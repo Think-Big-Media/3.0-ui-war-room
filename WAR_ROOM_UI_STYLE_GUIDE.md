@@ -194,17 +194,41 @@ Three standardized secondary button types with specific use cases:
 
 ## Spacing Standards
 
-### Content to Button Spacing
+### Site-wide Grid Standardization
 
-- **Standard**: `mt-4` (16px) between content and secondary buttons
-- **Applied consistently** across all components with secondary buttons
+**CRITICAL RULE**: All page-level grids must use **consistent 16px spacing** to match Live Monitoring:
+
+- **Grid gaps**: `gap-4` (16px) - NO responsive variations
+- **Component spacing**: `mb-4` (16px) between major sections
+- **Interior grids**: `gap-4` (16px) consistent across all components
+
+### Examples of Correct Implementation
+
+```tsx
+/* ✅ CORRECT - Dashboard grids */
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+<div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+
+/* ✅ CORRECT - Live Monitoring reference */
+<div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+<div className="space-y-4">
+
+/* ❌ INCORRECT - Inconsistent spacing */
+<div className="gap-3 lg:gap-4 mb-4 lg:mb-5">  /* Responsive variations */
+<div className="gap-6 mb-8">                   /* Excessive spacing */
+```
 
 ### Component Interior Spacing
 
 - **Interior box padding**: Increased (`p-5`, `p-6`)
 - **Gaps between interior boxes**: Reduced (`space-y-3`, `gap-3`)
 - **Exterior container padding**: Standard (`p-4`, `p-5`)
-- **Exterior container gaps**: Standard (`gap-4`, `space-y-4`)
+- **Exterior container gaps**: **STANDARDIZED** (`gap-4`, `mb-4`)
+
+### Content to Button Spacing
+
+- **Standard**: `mt-4` (16px) between content and secondary buttons
+- **Applied consistently** across all components with secondary buttons
 
 ### Monitoring Controls Specific
 
