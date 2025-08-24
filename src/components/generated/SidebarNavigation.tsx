@@ -193,6 +193,7 @@ const TopNavigation: React.FC = () => {
                 onClick={() => handleNavigation(item.path)}
                 aria-current={item.active ? 'page' : undefined}
                 data-route={item.route}
+                style={{ '--item-accent': item.accent } as React.CSSProperties}
                 className={`nav-item group px-3 py-1 rounded-lg text-sm transition-all duration-200 flex items-center space-x-1 ${
                   item.active
                     ? getNavActiveClasses(item.theme)
