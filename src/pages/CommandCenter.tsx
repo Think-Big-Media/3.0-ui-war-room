@@ -415,7 +415,8 @@ const CommandCenter: React.FC = () => {
   );
 
   return (
-    <PageLayout
+    <div className="page-dashboard">
+      <PageLayout
       pageTitle="Dashboard"
       placeholder="Ask War Room about your campaign status..."
     >
@@ -470,7 +471,8 @@ const CommandCenter: React.FC = () => {
           <IntelligenceDashboard />
         </div>
       </div>
-    </PageLayout>
+      </PageLayout>
+    </div>
   );
 };
 
