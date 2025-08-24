@@ -40,14 +40,25 @@ fontFamily: {
 
 /* Content Typography Classes */
 .content-subtitle {
-  @apply text-xs lg:text-sm text-white/75;
-  font-family: 'Barlow Semi Condensed', sans-serif;
+  @apply text-xs lg:text-sm text-white/50;
+  font-family: 'Barlow Condensed', sans-serif;
   line-height: 16px;
+  margin-top: 8px;
 }
 
 .content-title {
-  @apply font-bold text-white/95 text-xs lg:text-sm;
+  @apply font-bold text-white/95;
   font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 15px;
+  line-height: 19px;
+}
+
+@media (min-width: 1024px) {
+  .content-title {
+    font-size: 17px;
+    line-height: 21px;
+  }
+}
   line-height: 16px;
 }
 
