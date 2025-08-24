@@ -83,29 +83,24 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
         },
       }}
       onClick={handleClick}
-      className="group cursor-pointer hover:border-orange-400/50 hover:bg-black/25"
-      padding="md"
+      className="group cursor-pointer bg-slate-800/60 backdrop-blur-lg border border-slate-600/50 hover:border-slate-500/80 hover:bg-slate-700/60 transition-all duration-300 rounded-xl"
+      padding="lg"
       variant="glass"
     >
-      <div className="flex items-start justify-between mb-3 lg:mb-4">
-        <div className="p-3 lg:p-4 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 group-hover:border-orange-400/50 group-hover:bg-orange-400/10 transition-all duration-300">
-          <Icon className="w-6 h-6 lg:w-8 lg:h-8 text-white/95 group-hover:text-orange-300 transition-colors duration-300" />
-        </div>
-        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div className="text-xs text-orange-300 font-medium">
-            Click to explore →
-          </div>
+      <div className="flex items-center justify-between mb-4">
+        <div className="p-3 bg-slate-700/50 rounded-lg">
+          <Icon className="w-6 h-6 text-slate-300" />
         </div>
       </div>
 
-      <div className="py-[7px] space-y-1">
-        <div className="text-2xl lg:text-3xl font-bold text-white/95">
+      <div className="space-y-2">
+        <div className="text-3xl font-bold text-white">
           {number}
         </div>
-        <h3 className="text-base lg:text-lg font-semibold text-white/90 uppercase">
+        <h3 className="text-sm font-medium text-slate-300 uppercase tracking-wide">
           {title}
         </h3>
-        <p className="text-xs lg:text-sm text-white leading-relaxed uppercase">
+        <p className="text-xs text-slate-400">
           {subtitle}
         </p>
       </div>
@@ -380,14 +375,14 @@ const CommandCenter: React.FC = () => {
         pageTitle="War Room Command Center"
         placeholder="Ask War Room about your campaign status..."
       >
-      {/* Slate/Gray gradient background matching Settings page */}
-      <div className="fixed inset-0 bg-gradient-to-br from-slate-600 via-slate-700 to-slate-800 -z-10" />
+      {/* Dark slate gradient background to match Builder.io design */}
+      <div className="fixed inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-black -z-10" />
 
-      {/* Top Row - 4 KPI Tiles */}
+      {/* Top Row - 4 Stats Cards exactly matching Builder.io design */}
       <div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-4 lg:mb-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <DashboardCard
-          title="Real-Time Alerts"
+          title="Real-time Alerts"
           number={7}
           subtitle="Active crisis detections"
           icon={Bell}
@@ -397,7 +392,7 @@ const CommandCenter: React.FC = () => {
         <DashboardCard
           title="Ad Spend Today"
           number="$47.2K"
-          subtitle="Meta + Google Ads (+12% vs yesterday)"
+          subtitle="Meta + Google trending up"
           icon={TrendingUp}
           delay={0.2}
           navigateTo="/campaign-control"
@@ -413,20 +408,24 @@ const CommandCenter: React.FC = () => {
         <DashboardCard
           title="Sentiment Score"
           number="74%"
-          subtitle="Positive sentiment"
+          subtitle="Positive sentiment gauge"
           icon={Brain}
           delay={0.4}
           navigateTo="/intelligence-hub"
         />
       </div>
 
-      {/* Middle Row - 2 Wider Cards */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4 mb-5">
+      {/* Campaign Operations Section - Large card matching Builder.io */}
+      <div className="mb-6">
         <CampaignOperationsHub />
+      </div>
+
+      {/* Quick Actions Section - 6 buttons in 2 rows of 3 */}
+      <div className="mb-6">
         <QuickActions />
       </div>
 
-      {/* Bottom Row - Intelligence Dashboard */}
+      {/* Intelligence Dashboard - Bottom section with 4 metric cards */}
       <div className="mb-4">
         <IntelligenceDashboard />
       </div>

@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
 
-import App from './App';
+import App from './AppBrandBOS';  // ← PRODUCTION FRONTEND - matches index.tsx
 import { store } from './store';
 import './index.css';
 

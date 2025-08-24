@@ -146,7 +146,7 @@ const TopNavigation: React.FC = () => {
   const unreadAlerts = teamAlerts.filter((alert) => alert.status === 'unread');
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-xl">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-800/95 backdrop-blur-xl border-b border-slate-600/30">
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo/Brand */}
@@ -158,22 +158,33 @@ const TopNavigation: React.FC = () => {
             />
           </div>
 
-          {/* Navigation Items - Compact spacing */}
-          <div className="hidden md:flex items-center space-x-1">
-            {navItems.map((item, index) => (
-              <button
-                key={index}
-                onClick={() => handleNavigation(item.path)}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-1 ${
-                  item.active
-                    ? 'bg-white/20 text-white border border-white/30'
-                    : 'text-white/70 hover:text-white hover:bg-white/10'
-                }`}
-              >
-                <item.icon className="w-4 h-4" />
-                <span>{item.label}</span>
-              </button>
-            ))}
+          {/* Navigation Items - Match Builder.io Design */}
+          <div className="hidden md:flex items-center space-x-6">
+            {navItems.map((item, index) => {
+              // Map to Builder.io navigation labels
+              const builderLabels: {[key: string]: string} = {
+                'Command Center': 'DASHBOARD',
+                'Real-Time Monitoring': 'LIVE MONITORING', 
+                'Campaign Control': 'WAR ROOM',
+                'Intelligence Hub': 'INTELLIGENCE',
+                'Alert Center': 'ALERT CENTER',
+                'Settings': 'SETTINGS'
+              };
+              
+              return (
+                <button
+                  key={index}
+                  onClick={() => handleNavigation(item.path)}
+                  className={`px-4 py-2 text-sm font-semibold tracking-wide transition-all duration-200 ${
+                    item.active
+                      ? 'text-white border-b-2 border-white'
+                      : 'text-white/80 hover:text-white hover:border-b-2 hover:border-white/50'
+                  }`}
+                >
+                  {builderLabels[item.label] || item.label.toUpperCase()}
+                </button>
+              );
+            })}
           </div>
 
           {/* Right Side Actions */}

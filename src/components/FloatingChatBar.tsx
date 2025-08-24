@@ -10,7 +10,6 @@ import {
   X,
   Clock,
 } from 'lucide-react';
-import { perfectCardShadow } from '../lib/utils';
 
 interface ChatMessage {
   id: string;
@@ -337,111 +336,31 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
         )}
       </AnimatePresence>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="bg-white/20 backdrop-blur-xl rounded-2xl border border-white/40"
-        style={{ boxShadow: perfectCardShadow }}
-      >
-        <form onSubmit={handleSubmit} className="flex items-center p-4">
-          {/* Chat History Button with Tooltip */}
-          <div className="relative group">
-            <button
-              type="button"
-              onClick={toggleChatHistory}
-              className={`p-1.5 rounded-xl transition-all duration-200 mr-2 ${
-                chatState === 'history'
-                  ? 'text-white bg-white/20'
-                  : 'text-white hover:text-gray-200 hover:bg-white/20'
-              }`}
-            >
-              <MessageCircle className="w-5 h-5" />
-            </button>
-            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-              Chat History
-            </div>
-          </div>
-
-          {/* Input Field */}
-          <div className="flex-1 relative">
-            <input
-              ref={inputRef}
-              type="text"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder={placeholder}
-              className="w-full bg-white/90 text-black placeholder-gray-500 rounded-xl px-4 py-4 pr-12 border border-white/50 focus:border-white/70 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200"
-            />
-
-            {/* AI Indicator */}
-            <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-              <motion.div
-                animate={{
-                  scale: [1, 1.1, 1],
-                  opacity: [0.7, 1, 0.7],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
-                className="w-2 h-2 bg-white/60 rounded-full"
-              />
-            </div>
-          </div>
-
-          {/* Action Buttons with Tooltips */}
-          <div className="flex items-center space-x-1 ml-2">
-            {/* Attachment Button */}
-            <div className="relative group">
-              <button
-                type="button"
-                className="p-1.5 rounded-xl text-white hover:text-gray-200 hover:bg-white/20 transition-all duration-200"
-              >
-                <Paperclip className="w-5 h-5" />
-              </button>
-              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                Attach File
-              </div>
-            </div>
-
-            {/* Voice Button */}
-            <div className="relative group">
-              <button
-                type="button"
-                className="p-1.5 rounded-xl text-white hover:text-gray-200 hover:bg-white/20 transition-all duration-200"
-              >
-                <Mic className="w-5 h-5" />
-              </button>
-              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                Voice Input
-              </div>
-            </div>
-
-            {/* Send Button */}
-            <div className="relative group">
-              <motion.button
-                type="submit"
-                disabled={!message.trim()}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`p-1.5 rounded-xl transition-all duration-200 ${
-                  message.trim()
-                    ? 'bg-white/80 text-gray-800 shadow-lg hover:bg-white'
-                    : 'bg-white/30 text-white cursor-not-allowed'
-                }`}
-              >
-                <Send className="w-5 h-5" />
-              </motion.button>
-              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                Send Message
-              </div>
-            </div>
-          </div>
+      {/* Simple chat bar matching Builder.io design */}
+      <div className="bg-slate-800/80 backdrop-blur-lg border border-slate-600/50 rounded-lg">
+        <form onSubmit={handleSubmit} className="flex items-center p-3">
+          <input
+            ref={inputRef}
+            type="text"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder={placeholder}
+            className="flex-1 bg-transparent text-white placeholder-slate-400 px-4 py-2 focus:outline-none text-sm"
+          />
+          <button
+            type="submit"
+            disabled={!message.trim()}
+            className={`p-2 rounded-md transition-colors ${
+              message.trim()
+                ? 'text-white hover:bg-slate-700/50'
+                : 'text-slate-500 cursor-not-allowed'
+            }`}
+          >
+            <Send className="w-4 h-4" />
+          </button>
         </form>
-      </motion.div>
+      </div>
     </div>
   );
 };
