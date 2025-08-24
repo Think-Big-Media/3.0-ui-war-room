@@ -45,6 +45,8 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   navigateTo,
 }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const sectionTheme = getSectionTheme(location.pathname);
 
   const handleClick = () => {
     logger.debug(`Dashboard card clicked: ${title}`);
