@@ -256,69 +256,6 @@ jest.mock('axios', () => {
   return mockAxios;
 });
 
-// Mock ioredis
-jest.mock('ioredis', () => {
-  const mockRedis = {
-    default: jest.fn().mockImplementation(() => ({
-      connect: jest.fn().mockResolvedValue(undefined),
-      disconnect: jest.fn().mockResolvedValue(undefined),
-      get: jest.fn().mockResolvedValue(null),
-      set: jest.fn().mockResolvedValue('OK'),
-      del: jest.fn().mockResolvedValue(1),
-      exists: jest.fn().mockResolvedValue(0),
-      expire: jest.fn().mockResolvedValue(1),
-      ttl: jest.fn().mockResolvedValue(-1),
-      keys: jest.fn().mockResolvedValue([]),
-      scan: jest.fn().mockResolvedValue(['0', []]),
-      eval: jest.fn().mockResolvedValue([1, 100]),
-      multi: jest.fn().mockReturnValue({
-        set: jest.fn().mockReturnThis(),
-        get: jest.fn().mockReturnThis(),
-        del: jest.fn().mockReturnThis(),
-        hmset: jest.fn().mockReturnThis(),
-        hmget: jest.fn().mockReturnThis(),
-        hset: jest.fn().mockReturnThis(),
-        hget: jest.fn().mockReturnThis(),
-        expire: jest.fn().mockReturnThis(),
-        exec: jest.fn().mockResolvedValue([['OK'], ['value'], [1], ['OK']]),
-      }),
-      pipeline: jest.fn().mockReturnValue({
-        set: jest.fn().mockReturnThis(),
-        get: jest.fn().mockReturnThis(),
-        del: jest.fn().mockReturnThis(),
-        hmset: jest.fn().mockReturnThis(),
-        hmget: jest.fn().mockReturnThis(),
-        hset: jest.fn().mockReturnThis(),
-        hget: jest.fn().mockReturnThis(),
-        expire: jest.fn().mockReturnThis(),
-        exec: jest.fn().mockResolvedValue([['OK'], ['value'], [1], ['OK']]),
-      }),
-      hset: jest.fn().mockResolvedValue(1),
-      hget: jest.fn().mockResolvedValue('value'),
-      hmget: jest.fn().mockResolvedValue(['value1', 'value2']),
-      hmset: jest.fn().mockResolvedValue('OK'),
-      on: jest.fn(),
-      off: jest.fn(),
-      once: jest.fn(),
-      emit: jest.fn(),
-      status: 'ready',
-    })),
-  };
-  return mockRedis;
-});
-
-// Mock jsonwebtoken
-jest.mock('jsonwebtoken', () => ({
-  default: {
-    sign: jest.fn(() => 'mock-jwt-token'),
-    verify: jest.fn(() => ({ sub: 'test-user', exp: Date.now() / 1000 + 3600 })),
-    decode: jest.fn(() => ({ sub: 'test-user', exp: Date.now() / 1000 + 3600 })),
-  },
-  sign: jest.fn(() => 'mock-jwt-token'),
-  verify: jest.fn(() => ({ sub: 'test-user', exp: Date.now() / 1000 + 3600 })),
-  decode: jest.fn(() => ({ sub: 'test-user', exp: Date.now() / 1000 + 3600 })),
-}));
-
 // Mock config constants to avoid import.meta.env issues
 jest.mock('./config/constants', () => ({
   API_BASE_URL: 'http://localhost:8000',
