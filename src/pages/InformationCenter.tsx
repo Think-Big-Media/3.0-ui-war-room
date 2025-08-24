@@ -241,7 +241,7 @@ const InformationCenter: React.FC = () => {
                 variant="glass"
               >
                 <stat.icon className={`w-8 h-8 ${stat.color} mx-auto mb-2`} />
-                <div className="text-2xl font-bold text-white/95">
+                <div className="text-2xl font-bold font-condensed text-white/95">
                   {stat.count}
                 </div>
                 <div className="text-sm text-white/70">{stat.title}</div>
