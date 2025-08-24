@@ -122,7 +122,10 @@ const QuickActions: React.FC = () => {
             whileTap={{ scale: 0.95 }}
             className={`${action.bgColor} backdrop-blur-sm rounded-xl p-4 lg:p-5 border ${action.borderColor} ${action.hoverBorderColor} hover:bg-black/25 ${action.hoverShadowColor} transition-all duration-300 flex flex-col items-center space-y-2`}
           >
-            <action.icon className={`w-6 h-6 lg:w-8 lg:h-8 ${action.color}`} />
+            <action.icon
+              className={`w-6 h-6 lg:w-8 lg:h-8 ${action.color}`}
+              style={action.label === 'Live Monitor' ? { color: 'rgba(126, 211, 33, 1)' } : {}}
+            />
             <span className="text-xs lg:text-sm font-medium text-white/90">
               {action.label}
             </span>
