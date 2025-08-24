@@ -318,7 +318,7 @@ const Dashboard: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Activity Feed */}
           <div className="lg:col-span-2">
-            <div className="bg-black/20 backdrop-blur-md rounded-2xl border border-[#8B956D]/30 shadow-sm p-6">
+            <div className="bg-black/20 rounded-2xl border border-[#8B956D]/30 shadow-sm p-6">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-lg font-semibold text-[#E8E4D0]">
                   Recent Activity
