@@ -288,15 +288,7 @@ const TopNavigation: React.FC = () => {
                                     {formatTimestamp(alert.timestamp)}
                                   </div>
                                   <span
-                                    className={`px-1.5 py-0.5 rounded text-xs ${
-                                      alert.priority === 'critical'
-                                        ? 'bg-red-100 text-red-600'
-                                        : alert.priority === 'high'
-                                          ? 'bg-orange-100 text-orange-600'
-                                          : alert.priority === 'medium'
-                                            ? 'bg-blue-100 text-blue-600'
-                                            : 'bg-gray-100 text-gray-600'
-                                    }`}
+                                    className={`px-1.5 py-0.5 rounded text-xs ${getPriorityColor(alert.priority)}`}
                                   >
                                     {alert.priority}
                                   </span>
