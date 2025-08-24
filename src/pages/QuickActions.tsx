@@ -123,8 +123,8 @@ const QuickActions: React.FC = () => {
 
       <div className="mt-4 lg:mt-6 pt-4 border-t border-purple-400/20">
         <div className="flex items-center justify-between text-sm">
-          <span className="text-white/75" style={{ fontFamily: "JetBrains Mono, monospace" }}>Quick access to key features</span>
-          <span className="text-white/90" style={{ fontFamily: "JetBrains Mono, monospace", backgroundColor: "rgba(126, 211, 33, 1)" }}><span style={{ color: "rgba(126, 211, 33, 1)" }}>READY</span></span>
+          <span className="text-white/75">Quick access to key features</span>
+          <span className="text-white/90">Ready</span>
         </div>
       </div>
     </Card>
