@@ -416,7 +416,7 @@ const IntelligenceHub: React.FC = () => {
               <Card key={query.id} whileHover={{}} padding="sm">
                 <div className="flex items-start justify-between mb-2">
                   <div className="flex items-center space-x-2">
-                    <MessageSquare className="w-4 h-4 text-blue-400" />
+                    <MessageSquare className="w-4 h-4 chat-icon" />
                     <span className="text-sm text-white/70">{query.topic}</span>
                   </div>
                   <div className="flex items-center space-x-2 text-xs text-white/60">
