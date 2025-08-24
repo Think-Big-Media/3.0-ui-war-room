@@ -9,20 +9,14 @@ import { store } from './store';
 import './index.css';
 
 /**
- * ⚡ BUILDER.IO FRONTEND CONFIGURATION ⚡
+ * ⚡ PRODUCTION FRONTEND CONFIGURATION ⚡
  * 
- * 🎯 ACTIVE: HomePage.tsx (Builder.io Integration)
- * - Dynamic content from Builder.io CMS
- * - Navigation with icons from Builder
- * - Visual indicator: Icons show this is correct version
- * 
- * 🔍 SUCCESS INDICATOR: Icons next to menu items
- * 📊 Dashboard, 📡 Live Monitoring, ⚔️ War Room
+ * 🎯 ACTIVE: AppBrandBOS.tsx (Working Production Version)
+ * - Command Center dashboard 
+ * - Full routing system
+ * - All components working
  */
-import HomePage from './pages/HomePage';
-
-// Builder.io App Component  
-const App = () => <HomePage />;
+import App from './AppBrandBOS';
 
 // Static options (FALLBACK ONLY):
 // import App from './AppBrandBOS'; // Static version without Builder
