@@ -175,15 +175,16 @@ const TickerTape: React.FC = () => {
           }
         `}</style>
         <div className="ticker-content">
-          {/* Repeat items extensively for absolutely seamless loop */}
-          {[...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems].map(
-            (item, index) => {
+          {/* Create seamless continuous loop */}
+          {Array.from({ length: 20 }, (_, setIndex) =>
+            tickerItems.map((item, itemIndex) => {
               const IconComponent = getIcon(item);
+              const uniqueIndex = setIndex * tickerItems.length + itemIndex;
               return (
                 <div
-                  key={`ticker-${item.id}-${index}`}
+                  key={`ticker-${item.id}-${setIndex}-${itemIndex}`}
                   className={`ticker-item flex items-center space-x-3 px-4 py-1 cursor-pointer rounded-lg ${getPriorityOpacity(item.priority)}`}
-                  onClick={() => handleItemClick(item, index)}
+                  onClick={() => handleItemClick(item, uniqueIndex)}
                   title={`${item.category.replace('-', ' ')} - ${item.priority} priority`}
                 >
                   <div
@@ -207,13 +208,10 @@ const TickerTape: React.FC = () => {
                   {item.priority === 'critical' && (
                     <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
                   )}
-                  {index < tickerItems.length * 3 - 1 && (
-                    <div className="w-1 h-1 bg-white/30 rounded-full ml-8" />
-                  )}
                 </div>
               );
-            }
-          )}
+            })
+          ).flat()}
         </div>
       </div>
 
@@ -228,12 +226,6 @@ const TickerTape: React.FC = () => {
         </button>
       </div>
 
-      {/* Debug info (only in development) */}
-      {import.meta.env.DEV && (
-        <div className="absolute top-0 left-4 text-xs text-white/50">
-          {tickerItems.length} items • Mixed feed
-        </div>
-      )}
     </div>
   );
 };
