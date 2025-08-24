@@ -46,7 +46,7 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
   // Get transition classes based on route
   const getTransitionClasses = (): string => {
     const baseClasses = ['page-transition-container'];
-    
+
     if (isWarRoomTransition(location.pathname)) {
       baseClasses.push('war-room-enter');
     } else {
@@ -67,13 +67,15 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
   // Handle route changes with transitions
   useEffect(() => {
     setIsTransitioning(true);
-    
+
     // Update background class
     const newBg = getBackgroundClass(location.pathname);
     setCurrentBg(newBg);
 
     // Add stagger effect to cards
-    const cards = document.querySelectorAll('[class*="Card"], .card, [class*="card"]');
+    const cards = document.querySelectorAll(
+      '[class*="Card"], .card, [class*="card"]'
+    );
     cards.forEach((card, index) => {
       if (card instanceof HTMLElement) {
         card.style.animationDelay = `${index * 100}ms`;
@@ -83,7 +85,9 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
     });
 
     // Complete transition
-    const transitionDuration = isWarRoomTransition(location.pathname) ? 1200 : 800;
+    const transitionDuration = isWarRoomTransition(location.pathname)
+      ? 1200
+      : 800;
     const timer = setTimeout(() => {
       setIsTransitioning(false);
     }, transitionDuration);
@@ -104,11 +108,9 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
     <>
       {/* Dynamic background */}
       <div className={`background-transition ${currentBg}`} />
-      
+
       {/* Page content with transitions */}
-      <div className={getTransitionClasses()}>
-        {children}
-      </div>
+      <div className={getTransitionClasses()}>{children}</div>
     </>
   );
 };

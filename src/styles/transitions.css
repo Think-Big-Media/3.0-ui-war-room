@@ -75,7 +75,8 @@
 
 /* Dashboard background */
 .bg-dashboard {
-  background: linear-gradient(135deg, 
+  background: linear-gradient(
+    135deg,
     hsl(210, 20%, 25%) 0%,
     hsl(215, 25%, 27%) 25%,
     hsl(220, 20%, 30%) 50%,
@@ -86,17 +87,19 @@
 
 /* Live Monitoring background */
 .bg-live-monitoring {
-  background: linear-gradient(135deg,
+  background: linear-gradient(
+    135deg,
     hsl(210, 20%, 25%) 0%,
     hsl(215, 25%, 27%) 30%,
-    hsl(180, 15%, 28%)  60%,
+    hsl(180, 15%, 28%) 60%,
     hsl(215, 25%, 27%) 100%
   );
 }
 
 /* War Room background - special gradient */
 .bg-war-room {
-  background: linear-gradient(135deg,
+  background: linear-gradient(
+    135deg,
     hsl(270, 30%, 15%) 0%,
     hsl(280, 25%, 18%) 20%,
     hsl(260, 35%, 20%) 40%,
@@ -108,7 +111,8 @@
 
 /* Intelligence background */
 .bg-intelligence {
-  background: linear-gradient(135deg,
+  background: linear-gradient(
+    135deg,
     hsl(210, 20%, 25%) 0%,
     hsl(220, 25%, 27%) 25%,
     hsl(230, 20%, 30%) 50%,
@@ -119,7 +123,8 @@
 
 /* Alert Center background */
 .bg-alert-center {
-  background: linear-gradient(135deg,
+  background: linear-gradient(
+    135deg,
     hsl(210, 20%, 25%) 0%,
     hsl(45, 15%, 28%) 30%,
     hsl(50, 20%, 30%) 60%,
@@ -129,7 +134,8 @@
 
 /* Settings background */
 .bg-settings {
-  background: linear-gradient(135deg,
+  background: linear-gradient(
+    135deg,
     hsl(210, 20%, 25%) 0%,
     hsl(250, 15%, 27%) 30%,
     hsl(260, 20%, 29%) 60%,
@@ -153,12 +159,24 @@
   animation-delay: 0ms;
 }
 
-.cards-stagger:nth-child(1) { animation-delay: 0ms; }
-.cards-stagger:nth-child(2) { animation-delay: 100ms; }
-.cards-stagger:nth-child(3) { animation-delay: 200ms; }
-.cards-stagger:nth-child(4) { animation-delay: 300ms; }
-.cards-stagger:nth-child(5) { animation-delay: 400ms; }
-.cards-stagger:nth-child(6) { animation-delay: 500ms; }
+.cards-stagger:nth-child(1) {
+  animation-delay: 0ms;
+}
+.cards-stagger:nth-child(2) {
+  animation-delay: 100ms;
+}
+.cards-stagger:nth-child(3) {
+  animation-delay: 200ms;
+}
+.cards-stagger:nth-child(4) {
+  animation-delay: 300ms;
+}
+.cards-stagger:nth-child(5) {
+  animation-delay: 400ms;
+}
+.cards-stagger:nth-child(6) {
+  animation-delay: 500ms;
+}
 
 /* Smooth scroll behavior */
 html {

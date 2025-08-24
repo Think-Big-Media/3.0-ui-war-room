@@ -45,17 +45,19 @@ const Card: React.FC<CardProps> = memo(
     // Memoize class names to prevent re-calculation
     const cardClasses = useMemo(() => {
       const baseClasses = [
-      'rounded-lg backdrop-blur-md border transition-all duration-400',
-    ];
+        'rounded-lg backdrop-blur-md border transition-all duration-400',
+      ];
 
-    // Add animation classes for luxurious feel
-    if (animate) {
-      baseClasses.push('fade-in cards-stagger');
-    }
+      // Add animation classes for luxurious feel
+      if (animate) {
+        baseClasses.push('fade-in cards-stagger');
+      }
 
       if (hover && onClick) {
-      baseClasses.push('scale-hover cursor-pointer hover:shadow-2xl hover:shadow-white/5');
-    }
+        baseClasses.push(
+          'scale-hover cursor-pointer hover:shadow-2xl hover:shadow-white/5'
+        );
+      }
 
       // Variant styles
       switch (variant) {
