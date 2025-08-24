@@ -26,7 +26,7 @@ const logger = createLogger('CampaignControl');
 
 const CampaignControl: React.FC = () => {
   const location = useLocation();
-  const [activeTab, setActiveTab] = useState<CampaignTab>('projects');
+  const [activeTab, setActiveTab] = useState<CampaignTab>('analytics');
   const [analyticsPlatform, setAnalyticsPlatform] = useState<
     'meta' | 'google' | 'both'
   >('both');
