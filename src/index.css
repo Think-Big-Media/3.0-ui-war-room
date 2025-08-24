@@ -320,6 +320,8 @@
   /* Targeted word spacing for specific nav labels */
   .nav-label {
     word-spacing: 0.15em;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-weight: 500;
   }
 
   /* Quick Actions using design tokens */
