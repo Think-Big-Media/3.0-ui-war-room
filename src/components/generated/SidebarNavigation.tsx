@@ -359,7 +359,8 @@ const TopNavigation: React.FC = () => {
                     handleNavigation(item.path);
                     setIsMobileMenuOpen(false);
                   }}
-                  className={`group w-full px-6 py-4 rounded-lg font-semibold transition-all duration-200 flex items-center space-x-3 ${
+                  style={{ '--item-accent': item.accent } as React.CSSProperties}
+                  className={`nav-item group w-full px-6 py-4 rounded-lg font-semibold transition-all duration-200 flex items-center space-x-3 ${
                     item.active
                       ? `text-white font-extrabold border-l-4 border-l-white/20`
                       : 'text-white/80 hover:bg-white/10'
