@@ -97,7 +97,8 @@ const QuickActions: React.FC = () => {
             <Zap className="w-5 h-5 lg:w-6 lg:h-6 text-white/95" />
           </div>
           <h3
-            className="text-xl lg:text-2xl font-semibold text-white/40 font-condensed tracking-wide"
+            className="text-xl lg:text-2xl font-semibold text-white/70 tracking-wide"
+            style={{ font: "600 20px/33px Barlow Semi Condensed, sans-serif" }}
             style={{
               textRendering: 'optimizeLegibility',
               WebkitFontSmoothing: 'antialiased',
@@ -131,8 +132,8 @@ const QuickActions: React.FC = () => {
 
       <div className="mt-4 lg:mt-6 pt-4 border-t border-purple-400/20">
         <div className="flex items-center justify-between text-sm">
-          <span className="text-white/75">Quick access to key features</span>
-          <span className="text-white/90">Ready</span>
+          <span className="text-white/75" style={{ fontFamily: "JetBrains Mono, monospace" }}>Quick access to key features</span>
+          <span className="text-white/90" style={{ fontFamily: "JetBrains Mono, monospace", backgroundColor: "rgba(126, 211, 33, 1)" }}><span style={{ color: "rgba(126, 211, 33, 1)" }}>READY</span></span>
         </div>
       </div>
     </motion.div>
