@@ -232,8 +232,9 @@
   }
 
   /* Special handling for Live Monitoring navigation icon contrast */
-  .page-live-monitoring [aria-current="page"] .nav-active-icon {
-    color: var(--nav-accent-live-monitoring);
+  /* When page accent is the dark Live Monitoring green, use lighter variant for nav icon */
+  [style*="--page-accent: #2A434A"] [aria-current="page"] .nav-active-icon {
+    color: var(--nav-accent-live-monitoring) !important;
   }
 
   /* Navigation hover states - neutral styling only */
