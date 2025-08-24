@@ -46,6 +46,7 @@ import SettingsPage from './pages/SettingsPage';
 // Import Builder.io components
 import BuilderPage from './pages/BuilderPage';
 import HomePage from './pages/HomePage';
+import BuilderDashboard from './pages/BuilderDashboard';
 import './builder-registry'; // Register components with Builder
 
 // Import Data Toggle Button
@@ -259,8 +260,8 @@ function App() {
           }
         />
 
-        {/* Default Route - Home Page with Builder.io */}
-        <Route path="/" element={<HomePage />} />
+        {/* Default Route - War Room Dashboard from Builder.io */}
+        <Route path="/" element={<BuilderDashboard />} />
 
         {/* Temporary route to view dashboard without auth for development */}
         <Route path="/preview-dashboard" element={
