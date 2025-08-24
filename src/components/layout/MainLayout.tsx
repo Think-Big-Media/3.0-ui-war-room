@@ -135,7 +135,7 @@ export function MainLayout() {
           <div className="relative">
             <button
               onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-              className="w-full flex items-center p-2 rounded-lg hover:bg-gray-50 transition-colors"
+              className="w-full flex items-center p-2 rounded-lg hover:bg-gray-50 transition-colors duration-200"
             >
               <div className="w-8 h-8 bg-gradient-to-br from-gray-600 to-gray-700 rounded-full flex items-center justify-center">
                 <span className="text-white text-sm font-medium">
