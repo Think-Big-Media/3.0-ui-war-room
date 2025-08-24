@@ -199,7 +199,22 @@ Three standardized secondary button types with specific use cases:
 - **Use**: Secondary actions, supplementary functions
 - **Color**: Neutral theme (`bg-white/10 hover:bg-white/20 text-white/80`)
 
-### Button Specifications
+### Primary Button Specifications
+
+```css
+/* src/index.css */
+.btn-primary {
+  @apply px-4 py-2 bg-blue-600 text-white font-mono font-medium text-sm rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200;
+  letter-spacing: -0.05em; /* Halved spacing for multi-word buttons */
+}
+
+.btn-secondary {
+  @apply px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-200;
+  letter-spacing: -0.05em; /* Halved spacing for multi-word buttons */
+}
+```
+
+### Secondary Button Specifications
 
 ```css
 /* src/index.css */
@@ -215,6 +230,21 @@ Three standardized secondary button types with specific use cases:
 
 .btn-secondary-neutral {
   @apply bg-white/10 hover:bg-white/20 text-white/80 px-3 py-0.5 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap;
+  letter-spacing: -0.05em;
+}
+
+.btn-primary-alert {
+  @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase;
+  letter-spacing: -0.05em;
+}
+
+.btn-primary-action {
+  @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase;
+  letter-spacing: -0.05em;
+}
+
+.btn-primary-neutral {
+  @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-6 py-3 rounded-xl transition-colors font-mono text-base uppercase;
   letter-spacing: -0.05em;
 }
 ```
