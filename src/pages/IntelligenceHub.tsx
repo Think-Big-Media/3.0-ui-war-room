@@ -167,17 +167,17 @@ const IntelligenceHub: React.FC = () => {
   const getFileIcon = (type: string) => {
     switch (type) {
       case 'polling':
-        return <Brain className="w-5 h-5 text-blue-400" />;
+        return <Brain className="w-5 h-5 file-icon-intelligence" />;
       case 'field-report':
-        return <FileText className="w-5 h-5 text-green-400" />;
+        return <FileText className="w-5 h-5 file-icon-monitoring" />;
       case 'opposition-research':
-        return <Eye className="w-5 h-5 text-red-400" />;
+        return <Eye className="w-5 h-5 file-icon-warroom" />;
       case 'messaging':
-        return <MessageSquare className="w-5 h-5 text-purple-400" />;
+        return <MessageSquare className="w-5 h-5 file-icon-settings" />;
       case 'news-media':
-        return <Link className="w-5 h-5 text-orange-400" />;
+        return <Link className="w-5 h-5 file-icon-alerts" />;
       default:
-        return <File className="w-5 h-5 text-gray-400" />;
+        return <File className="w-5 h-5 text-white/70" />;
     }
   };
 
