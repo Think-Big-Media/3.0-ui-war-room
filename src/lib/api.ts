@@ -38,6 +38,11 @@ api.interceptors.response.use(
 
     // Handle specific error cases
     if (error.response) {
+      // Allow Google Ads 404 errors to pass through to service layer for demo mode fallback
+      if (isGoogleAdsEndpoint && is404) {
+        return Promise.reject(error);
+      }
+
       switch (error.response.status) {
         case 401:
           // Clear auth token and redirect to login
