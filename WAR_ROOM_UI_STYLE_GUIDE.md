@@ -612,10 +612,14 @@ This creates proper visual hierarchy where:
 
 ### 📋 **Standards Applied Consistently:**
 
+- **Typography Hierarchy**: Complete implementation across all pages
+  - Section headers: `.section-header` (Barlow Condensed 600, 50% opacity)
+  - Content titles: `.content-title` (Barlow Semi-Condensed 500)
+  - Content subtitles: `.content-subtitle` (Barlow Condensed, 50% opacity)
+  - Form labels: JetBrains Mono (uppercase, tracking-wider)
+- **Settings Page Elements**: All toggle items, form labels, and section headers properly typed
 - **Grid Spacing**: All page-level grids use `gap-4` to match Live Monitoring
-- **Label Positioning**: All form labels use `mb-1 ml-1.5` (5px indent, 4px from field)
-- **Toggle Switch Labels**: All use `ml-1.5` indentation to match form labels
-- **Subheaders**: All section headers use Barlow Condensed with 40% opacity and UPPERCASE
+- **Icon Alignment**: All icons aligned with title text (no mt-0.5 offset)
 - **Dropdown Components**: CustomDropdown used consistently across all pages
 - **Content Indentation**: Single-column cards use `px-1.5` for content, `ml-1.5` for headers
 
