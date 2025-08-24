@@ -281,6 +281,10 @@
     color: var(--page-accent);
   }
 
+  .ticker-accent-bg {
+    background-color: var(--page-accent);
+  }
+
   /* Card titles should use Inter for content readability */
   .card-title {
     @apply font-sans font-semibold text-lg;
