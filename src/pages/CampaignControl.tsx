@@ -100,7 +100,8 @@ const CampaignControl: React.FC = () => {
   });
 
   return (
-    <PageLayout
+    <div className="page-warroom">
+      <PageLayout
       pageTitle="War Room"
       placeholder="Ask War Room about campaign operations..."
     >
@@ -148,7 +149,8 @@ const CampaignControl: React.FC = () => {
           <PlatformAnalytics platform={analyticsPlatform} />
         </div>
       )}
-    </PageLayout>
+      </PageLayout>
+    </div>
   );
 };
 
