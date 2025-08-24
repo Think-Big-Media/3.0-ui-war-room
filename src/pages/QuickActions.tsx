@@ -112,18 +112,22 @@ const QuickActions: React.FC = () => {
           >
             <action.icon
               className={`w-6 h-6 lg:w-8 lg:h-8 ${action.color}`}
-              style={action.label === 'Live Monitor' ? { color: 'rgba(126, 211, 33, 1)' } : {}}
+              style={
+                action.label === 'Live Monitor'
+                  ? { color: 'rgba(126, 211, 33, 1)' }
+                  : {}
+              }
             />
-            <span className="content-title text-white/90">
-              {action.label}
-            </span>
+            <span className="content-title text-white/90">{action.label}</span>
           </motion.button>
         ))}
       </div>
 
       <div className="mt-4 lg:mt-6 pt-4 border-t border-purple-400/20">
         <div className="flex items-center justify-between text-sm">
-          <span className="footer-text text-white/75">Quick access to key features</span>
+          <span className="footer-text text-white/75">
+            Quick access to key features
+          </span>
           <span className="footer-text status-active">Ready</span>
         </div>
       </div>

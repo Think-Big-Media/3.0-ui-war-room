@@ -110,16 +110,16 @@ const QuickActions: React.FC = () => {
             className={`${action.bgColor} backdrop-blur-sm rounded-xl p-4 lg:p-5 border ${action.borderColor} ${action.hoverBorderColor} hover:bg-black/25 ${action.hoverShadowColor} transition-all duration-300 flex flex-col items-center space-y-2`}
           >
             <action.icon className={`w-6 h-6 lg:w-8 lg:h-8 ${action.color}`} />
-            <span className="content-title text-white/90">
-              {action.label}
-            </span>
+            <span className="content-title text-white/90">{action.label}</span>
           </motion.button>
         ))}
       </div>
 
       <div className="mt-4 lg:mt-6 pt-4 border-t border-purple-400/20">
         <div className="flex items-center justify-between text-sm">
-          <span className="footer-text text-white/75">Quick access to key features</span>
+          <span className="footer-text text-white/75">
+            Quick access to key features
+          </span>
           <span className="footer-text status-active">Ready</span>
         </div>
       </div>

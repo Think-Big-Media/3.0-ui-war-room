@@ -75,9 +75,7 @@ export const CardTitle: React.FC<{
   children: React.ReactNode;
   className?: string;
 }> = ({ children, className }) => (
-  <h3 className={cn('section-header', className)}>
-    {children}
-  </h3>
+  <h3 className={cn('section-header', className)}>{children}</h3>
 );
 
 export const CardDescription: React.FC<{

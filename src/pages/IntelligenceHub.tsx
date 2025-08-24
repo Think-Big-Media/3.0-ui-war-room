@@ -236,9 +236,7 @@ const IntelligenceHub: React.FC = () => {
           padding="md"
           className="mb-6"
         >
-          <h3 className="section-header mb-4">
-            Upload Intelligence
-          </h3>
+          <h3 className="section-header mb-4">Upload Intelligence</h3>
 
           {/* Drag & Drop Area */}
           <div className="border-2 border-dashed border-white/30 rounded-lg p-8 text-center mb-6">
@@ -401,9 +399,7 @@ const IntelligenceHub: React.FC = () => {
           className="space-y-4"
         >
           <div className="flex items-center justify-between">
-            <h3 className="section-header">
-              Chat History & Saved Queries
-            </h3>
+            <h3 className="section-header">Chat History & Saved Queries</h3>
             <div className="flex items-center space-x-2">
               <button className="text-sm text-white/70 hover:text-white">
                 My Chats

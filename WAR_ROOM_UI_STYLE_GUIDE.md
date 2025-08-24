@@ -33,31 +33,33 @@ fontFamily: {
 /* Section Header - Major headings across the site */
 .section-header {
   @apply text-white/50 uppercase;
-  font: 600 20px/29px "Barlow Condensed", sans-serif;
+  font:
+    600 20px/29px 'Barlow Condensed',
+    sans-serif;
 }
 
 /* Content Typography Classes */
 .content-subtitle {
   @apply text-xs lg:text-sm text-white/75;
-  font-family: "Barlow Semi Condensed", sans-serif;
+  font-family: 'Barlow Semi Condensed', sans-serif;
   line-height: 16px;
 }
 
 .content-title {
   @apply font-bold text-white/95 text-xs lg:text-sm;
-  font-family: "Barlow Semi Condensed", sans-serif;
+  font-family: 'Barlow Semi Condensed', sans-serif;
   line-height: 16px;
 }
 
 .status-indicator {
   @apply text-xs font-mono uppercase;
-  font-family: "JetBrains Mono", monospace;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 /* Footer text - always uppercase JetBrains Mono */
 .footer-text {
   @apply text-xs font-mono uppercase;
-  font-family: "JetBrains Mono", monospace;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 /* Color-coded status indicators */

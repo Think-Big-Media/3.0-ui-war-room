@@ -30,8 +30,7 @@ api.interceptors.response.use(
     // Only log errors that aren't expected (e.g., integration 404s are expected when backend is off)
     const isGoogleAdsEndpoint =
       error.config?.url?.includes('/auth/google-ads/');
-    const isMetaEndpoint =
-      error.config?.url?.includes('/auth/meta/');
+    const isMetaEndpoint = error.config?.url?.includes('/auth/meta/');
     const is404 = error.response?.status === 404;
     const isIntegrationEndpoint = isGoogleAdsEndpoint || isMetaEndpoint;
 

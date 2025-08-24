@@ -61,9 +61,7 @@ const SettingsSection: React.FC<SettingsSectionProps> = ({
         <div className="p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-purple-400/20">
           <Icon className="w-6 h-6 text-white/95" />
         </div>
-        <h3 className="section-header tracking-wide">
-          {title.toUpperCase()}
-        </h3>
+        <h3 className="section-header tracking-wide">{title.toUpperCase()}</h3>
       </div>
       {children}
     </Card>
@@ -413,9 +411,7 @@ const SettingsPage: React.FC = () => {
             <div className="p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-purple-400/20">
               <Link2 className="w-6 h-6 text-white/95" />
             </div>
-            <h3 className="section-header">
-              Platform Integrations
-            </h3>
+            <h3 className="section-header">Platform Integrations</h3>
           </div>
           {/* DIAGNOSTIC INFO */}
           <div className="mb-4 p-3 bg-yellow-500/20 border border-yellow-500/50 rounded text-xs text-yellow-200">

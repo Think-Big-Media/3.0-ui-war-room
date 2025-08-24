@@ -252,9 +252,7 @@ const InformationCenter: React.FC = () => {
           {/* Live Stream Items */}
           <Card padding="md" variant="glass">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="section-header">
-                Live Stream
-              </h3>
+              <h3 className="section-header">Live Stream</h3>
               <button
                 onClick={handleMarkAllAsRead}
                 className="text-sm text-white/70 hover:text-white transition-colors"

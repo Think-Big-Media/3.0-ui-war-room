@@ -99,15 +99,14 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
       </div>
 
       <div className="space-y-1 lg:space-y-2">
-        <div className="text-2xl lg:text-3xl text-white/95" style={{ font: "400 31px/37px 'Barlow Condensed', sans-serif" }}>
+        <div
+          className="text-2xl lg:text-3xl text-white/95"
+          style={{ font: "400 31px/37px 'Barlow Condensed', sans-serif" }}
+        >
           {number}
         </div>
-        <h3 className="section-header mb-1">
-          {title}
-        </h3>
-        <p className="content-subtitle">
-          {subtitle}
-        </p>
+        <h3 className="section-header mb-1">{title}</h3>
+        <p className="content-subtitle">{subtitle}</p>
       </div>
     </Card>
   );
@@ -205,7 +204,10 @@ const IntelligenceDashboard: React.FC = () => {
             }}
             className="bg-black/20 backdrop-blur-sm rounded-xl p-3 lg:p-4 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 cursor-pointer"
           >
-            <div className="text-xl lg:text-2xl text-white/95 mb-1" style={{ font: "400 25px/33px 'Barlow Condensed', sans-serif" }}>
+            <div
+              className="text-xl lg:text-2xl text-white/95 mb-1"
+              style={{ font: "400 25px/33px 'Barlow Condensed', sans-serif" }}
+            >
               {metric.value}
             </div>
             <div className="text-xs lg:text-sm text-white/75 mb-2">
@@ -334,24 +336,38 @@ const CampaignOperationsHub: React.FC = () => {
                 className="bg-black/20 backdrop-blur-sm rounded-xl p-6 lg:p-7 border border-white/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <h5 className="content-title">
-                    {cluster.title}
-                  </h5>
+                  <h5 className="content-title">{cluster.title}</h5>
                   <div
                     className={`w-2 h-2 rounded-full ${cluster.statusColor}`}
                   />
                 </div>
                 <div className="flex items-center justify-between text-xs">
-                  <span className={`status-indicator ${
-                    cluster.status === 'Live' ? 'status-active' :
-                    cluster.status === 'Running' ? 'status-running' :
-                    cluster.status === 'Planning' ? 'status-planning' : 'text-white/75'
-                  }`}>{cluster.status}</span>
-                  <span className={`status-indicator ${
-                    cluster.timeline === 'Active' ? 'status-active' :
-                    cluster.timeline === 'Today' ? 'status-running' :
-                    cluster.timeline === 'Next Week' ? 'status-planning' : 'text-white/65'
-                  }`}>{cluster.timeline}</span>
+                  <span
+                    className={`status-indicator ${
+                      cluster.status === 'Live'
+                        ? 'status-active'
+                        : cluster.status === 'Running'
+                          ? 'status-running'
+                          : cluster.status === 'Planning'
+                            ? 'status-planning'
+                            : 'text-white/75'
+                    }`}
+                  >
+                    {cluster.status}
+                  </span>
+                  <span
+                    className={`status-indicator ${
+                      cluster.timeline === 'Active'
+                        ? 'status-active'
+                        : cluster.timeline === 'Today'
+                          ? 'status-running'
+                          : cluster.timeline === 'Next Week'
+                            ? 'status-planning'
+                            : 'text-white/65'
+                    }`}
+                  >
+                    {cluster.timeline}
+                  </span>
                 </div>
               </div>
             ))}
@@ -370,9 +386,7 @@ const CampaignOperationsHub: React.FC = () => {
                 onClick={() => handleTemplateClick(template.name)}
                 className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 text-center cursor-pointer"
               >
-                <h5 className="content-title mb-1">
-                  {template.name}
-                </h5>
+                <h5 className="content-title mb-1">{template.name}</h5>
                 <p className="text-xs text-white/65">{template.type}</p>
               </div>
             ))}
