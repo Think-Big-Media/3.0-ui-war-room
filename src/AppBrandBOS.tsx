@@ -24,6 +24,8 @@ function App() {
       <ErrorBoundary>
         <Routes>
           <Route path="/" element={<CommandCenter />} />
+          <Route path="/CommandCenter" element={<CommandCenter />} />
+          <Route path="/command-center" element={<CommandCenter />} />
           <Route
             path="/real-time-monitoring"
             element={<RealTimeMonitoring />}
