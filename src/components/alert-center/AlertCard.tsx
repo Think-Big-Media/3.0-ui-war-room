@@ -46,7 +46,7 @@ const AlertCard: React.FC<AlertCardProps> = ({
           {getAlertIcon(alert.type)}
           <div className="flex-1">
             <div className="flex items-center space-x-2 mb-1">
-              <h3 className="font-semibold font-condensed text-white/95">
+              <h3 className="section-header">
                 {alert.title}
               </h3>
               <span

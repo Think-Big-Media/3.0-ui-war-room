@@ -50,7 +50,7 @@ const AlertSummary: React.FC<AlertSummaryProps> = ({ alerts }) => {
 
   return (
     <Card padding="sm" variant="glass">
-      <h3 className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide">
+      <h3 className="section-header mb-4 tracking-wide">
         QUICK STATS
       </h3>
       <div className="space-y-3">
