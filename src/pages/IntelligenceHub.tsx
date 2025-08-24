@@ -414,7 +414,7 @@ const IntelligenceHub: React.FC = () => {
 
             {chatQueries.map((query) => (
               <Card key={query.id} whileHover={{}} padding="none">
-                <div className="px-3.5 pt-3.5 pb-3.5">
+                <div className="px-4 pt-4 pb-4">
                   <div className="flex items-start justify-between mb-2">
                   <div className="flex items-center space-x-2">
                     <MessageSquare className="w-4 h-4 chat-icon" />
