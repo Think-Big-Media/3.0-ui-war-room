@@ -14,18 +14,7 @@ const SentimentBreakdown: React.FC<SentimentBreakdownProps> = ({
 }) => {
   return (
     <Card padding="md" variant="glass">
-      <h3
-        className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide ml-1.5"
-        style={{
-          textRendering: 'optimizeLegibility',
-          WebkitFontSmoothing: 'antialiased',
-          MozOsxFontSmoothing: 'grayscale',
-          fontKerning: 'normal',
-          textSizeAdjust: '100%',
-          textRendering: 'optimizeLegibility',
-          WebkitFontSmoothing: 'antialiased',
-        }}
-      >
+      <h3 className="section-header mb-4 tracking-wide ml-1.5">
         SENTIMENT BREAKDOWN
       </h3>
       <div className="space-y-4 px-1.5 pb-5">
