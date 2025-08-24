@@ -199,7 +199,8 @@ const IntelligenceHub: React.FC = () => {
   };
 
   return (
-    <PageLayout
+    <div className="page-intelligence">
+      <PageLayout
       pageTitle="Intelligence"
       placeholder="Ask War Room about campaign intelligence..."
     >
@@ -440,7 +441,8 @@ const IntelligenceHub: React.FC = () => {
           ))}
         </motion.div>
       )}
-    </PageLayout>
+      </PageLayout>
+    </div>
   );
 };
 
