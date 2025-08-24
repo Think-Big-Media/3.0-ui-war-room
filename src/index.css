@@ -676,19 +676,6 @@
     -webkit-mask-composite: source-in;
   }
 
-/* CRITICAL: Navigation font override - Barlow Condensed for nav only */
-nav[class*="fixed"] button span[class*="label"],
-nav button span[class*="label"],
-nav button span,
-.nav-item span,
-.nav-item .label,
-button[class*="nav-item"] span,
-nav button * {
-  font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif !important;
-  font-weight: 500 !important;
-  font-size: 16px !important;
-  font-stretch: condensed !important;
-}
 
   /* Subtle fade variant with less fade distance */
   .scroll-fade-subtle {
