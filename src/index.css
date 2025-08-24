@@ -298,6 +298,36 @@
     background-color: var(--accent-alert-center); /* Yellow for planning */
   }
 
+  /* Priority classes using design tokens */
+  .priority-critical {
+    @apply bg-black/20 border border-white/20;
+    color: var(--accent-war-room);
+  }
+
+  .priority-high {
+    @apply bg-black/20 border border-white/20;
+    color: var(--accent-alert-center);
+  }
+
+  .priority-medium {
+    @apply bg-black/20 border border-white/20;
+    color: var(--accent-intelligence);
+  }
+
+  .priority-low {
+    @apply bg-black/20 border border-white/20;
+    color: var(--accent-live-monitoring);
+  }
+
+  /* Notification badge using design tokens */
+  .notification-badge {
+    @apply bg-black/20 border border-white/20;
+  }
+
+  .notification-badge-text {
+    color: var(--page-accent);
+  }
+
   /* Card titles should use Inter for content readability */
   .card-title {
     @apply font-sans font-semibold text-lg;
