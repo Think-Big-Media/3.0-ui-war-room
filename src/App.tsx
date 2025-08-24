@@ -44,7 +44,16 @@ const DocumentIntelligence = React.lazy(
 
 // Lazy load other heavy components
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
-const CommandCenter = React.lazy(() => import('./pages/CommandCenter'));
+const CommandCenter = React.lazy(() => {
+  console.log('🔧 IMPORTING CommandCenter...');
+  return import('./pages/CommandCenter').then(module => {
+    console.log('✅ CommandCenter imported successfully:', module);
+    return module;
+  }).catch(error => {
+    console.error('❌ CommandCenter import failed:', error);
+    throw error;
+  });
+});
 const DebugDashboard = React.lazy(() => import('./pages/DebugDashboard'));
 
 // Import light components normally
