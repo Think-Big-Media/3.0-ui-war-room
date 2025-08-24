@@ -4,11 +4,12 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Barlow', 'system-ui', 'sans-serif'],
         condensed: ['Barlow Condensed', 'sans-serif'],
+        'semi-condensed': ['Barlow Semi Condensed', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
         display: ['Barlow Condensed', 'sans-serif'],
-        body: ['Inter', 'system-ui', 'sans-serif'],
+        body: ['Barlow', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',
