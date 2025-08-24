@@ -94,10 +94,17 @@ export function getSectionTheme(pathname: string): SectionTheme {
 }
 
 /**
- * Get CSS classes for navigation active state based on theme
+ * Get CSS classes for navigation active state based on theme (icon only)
  */
 export function getNavActiveClasses(theme: SectionTheme): string {
-  return `bg-${theme.colors.background} text-${theme.colors.text} border border-${theme.colors.border}`;
+  return `text-white font-medium`;
+}
+
+/**
+ * Get CSS classes for navigation icon active state based on theme
+ */
+export function getNavIconActiveClasses(theme: SectionTheme): string {
+  return `text-${theme.colors.primary}`;
 }
 
 /**
