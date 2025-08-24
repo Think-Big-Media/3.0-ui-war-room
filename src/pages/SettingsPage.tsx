@@ -197,7 +197,7 @@ const SettingsPage: React.FC = () => {
           <div className="space-y-4 pb-5">
             <div className="flex items-start justify-between">
               <div className="flex items-start space-x-3 ml-2.5">
-                <Mail className="w-5 h-5 text-white/75 mt-0.5" />
+                <Mail className="w-5 h-5 text-white/75" />
                 <div className="ml-1.5">
                   <p className="content-title">
                     Email Notifications
