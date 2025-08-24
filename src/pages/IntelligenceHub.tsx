@@ -344,7 +344,7 @@ const IntelligenceHub: React.FC = () => {
               {filteredFiles.map((file) => (
                 <Card
                   key={file.id}
-                  whileHover={{ scale: 1.01 }}
+                  whileHover={{}}
                   padding="sm"
                   className="cursor-pointer"
                   onClick={() => setSelectedFile(file)}
