@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createLogger } from '../utils/logger';
 
-console.log('🎫 TICKER MODULE: TickerTape.tsx loading...');
-
 const logger = createLogger('TickerTape');
 import {
   TrendingUp,
