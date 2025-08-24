@@ -444,6 +444,41 @@ When applying these standards to new components:
 - [ ] Content text remains lowercase with appropriate font
 - [ ] Proper opacity levels applied (40% for sub-headers, 70% for metadata)
 
+## Settings Item Component Pattern
+
+### Standard Layout for Toggle Settings
+
+All settings page toggle items (notifications, security, appearance, privacy) use a consistent layout pattern:
+
+```tsx
+<div className="flex items-start justify-between">
+  <div className="flex items-start space-x-3 ml-2.5">
+    <Icon className="w-5 h-5 text-white/75 mt-0.5" />
+    <div className="ml-1.5">
+      <p className="content-title">Setting Name</p>
+      <p className="content-subtitle">Setting description</p>
+    </div>
+  </div>
+  <div className="mt-1">
+    <ToggleSwitch />
+  </div>
+</div>
+```
+
+### Implementation Rules
+
+- **Typography**: Main text uses `.content-title` (Barlow Semi-Condensed Bold), descriptions use `.content-subtitle` (Barlow Semi-Condensed)
+- **Icon Spacing**: Container uses `ml-2.5` (10px), text container uses `ml-1.5` (6px)
+- **Icon Styling**: `w-5 h-5` size, `text-white/75` color, `mt-0.5` positioning for alignment
+- **Toggle Alignment**: `mt-1` for vertical alignment with text
+- **Icon Selection**: Use semantic icons (Mail for email, Shield for security, Palette for appearance, etc.)
+
+### Applied To
+
+- Email Notifications, Push Notifications, Auto-Publish Content
+- Two-Factor Authentication, Dark Mode, Data Sharing
+- Any future toggle-based settings items
+
 ## Single-Column Card Content Indentation
 
 ### Standard for Right-Hand Side Components
