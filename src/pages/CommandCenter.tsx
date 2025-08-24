@@ -90,7 +90,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
     >
       <div className="flex items-start justify-between mb-3 lg:mb-4">
         <div
-          className={`p-3 lg:p-4 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 group-hover:border-${sectionTheme.colors.border} group-hover:bg-${sectionTheme.colors.background} transition-all duration-300`}
+          className={`p-3 lg:p-4 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 hoverable transition-all duration-300`}
         >
           <Icon
             className={`w-6 h-6 lg:w-8 lg:h-8 text-white/95 group-hover:text-${sectionTheme.colors.text} transition-colors duration-300`}
