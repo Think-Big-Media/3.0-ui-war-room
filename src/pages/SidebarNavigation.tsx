@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { informationService } from '../services/informationService';
 import { type InformationItem } from '../types/information';
-import { getSectionTheme } from '../utils/sectionTheming';
+import { getSectionTheme, getNavIconActiveClasses } from '../utils/sectionTheming';
 import {
   Home,
   Target,
