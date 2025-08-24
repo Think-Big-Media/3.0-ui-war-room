@@ -181,7 +181,9 @@ const TopNavigation: React.FC = () => {
               >
                 <item.icon
                   className={`w-4 h-4 flex-shrink-0 ${item.icon === Home ? '-translate-y-0.5' : ''} ${
-                    item.active ? getNavIconActiveClasses(item.theme) : ''
+                    item.active
+                      ? getNavIconActiveClasses(item.theme)
+                      : getNavIconHoverClasses(item.theme)
                   }`}
                 />
                 <span>{item.label}</span>
