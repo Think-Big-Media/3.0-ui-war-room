@@ -51,7 +51,7 @@ const MonitoringAlert: React.FC<MonitoringAlertProps> = ({
         {actionText && (
           <button
             onClick={handleAction}
-            className="btn-secondary-alert bg-red-500/20 hover:bg-red-500/30 text-red-400 px-3 py-1 rounded-lg transition-colors font-mono text-sm uppercase whitespace-nowrap"
+            className="btn-secondary-alert"
           >
             {actionText}
           </button>
