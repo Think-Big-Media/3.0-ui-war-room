@@ -260,19 +260,19 @@ const CampaignOperationsHub: React.FC = () => {
       title: 'Crisis Response Protocol',
       status: 'Live',
       timeline: 'Active',
-      statusColor: 'bg-red-500',
+      statusColor: 'status-live',
     },
     {
       title: 'Ad Campaign Optimization',
       status: 'Running',
       timeline: 'Today',
-      statusColor: 'bg-green-500',
+      statusColor: 'status-running',
     },
     {
       title: 'Voter Outreach Strategy',
       status: 'Planning',
       timeline: 'Next Week',
-      statusColor: 'bg-yellow-500',
+      statusColor: 'status-planning',
     },
   ];
 
