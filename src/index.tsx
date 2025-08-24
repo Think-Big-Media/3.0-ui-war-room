@@ -9,14 +9,15 @@ import { store } from './store';
 import './index.css';
 
 /**
- * ⚡ PRODUCTION FRONTEND CONFIGURATION ⚡
+ * ⚡ SINGLE SOURCE OF TRUTH ⚡
  * 
- * 🎯 ACTIVE: AppBrandBOS.tsx (Working Production Version)
+ * 🎯 ACTIVE: App.tsx (ONLY app entry point)
  * - Command Center dashboard 
  * - Full routing system
  * - All components working
+ * - NO MORE AppBrandBOS confusion
  */
-import App from './AppBrandBOS';
+import App from './App';
 
 // Static options (FALLBACK ONLY):
 // import App from './AppBrandBOS'; // Static version without Builder
