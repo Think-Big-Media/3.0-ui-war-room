@@ -27,19 +27,22 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
-    // Only log errors that aren't expected (e.g., Google Ads 404s are expected when backend is off)
+    // Only log errors that aren't expected (e.g., integration 404s are expected when backend is off)
     const isGoogleAdsEndpoint =
       error.config?.url?.includes('/auth/google-ads/');
+    const isMetaEndpoint =
+      error.config?.url?.includes('/auth/meta/');
     const is404 = error.response?.status === 404;
+    const isIntegrationEndpoint = isGoogleAdsEndpoint || isMetaEndpoint;
 
-    if (!(isGoogleAdsEndpoint && is404)) {
+    if (!(isIntegrationEndpoint && is404)) {
       console.error('API Error:', error.message);
     }
 
     // Handle specific error cases
     if (error.response) {
-      // Allow Google Ads 404 errors to pass through to service layer for demo mode fallback
-      if (isGoogleAdsEndpoint && is404) {
+      // Allow integration 404 errors to pass through to service layer for demo mode fallback
+      if (isIntegrationEndpoint && is404) {
         return Promise.reject(error);
       }
 
