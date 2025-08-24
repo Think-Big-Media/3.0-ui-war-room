@@ -72,16 +72,8 @@ const TickerTape: React.FC = () => {
   };
 
   const getCategoryColor = (category: string) => {
-    switch (category) {
-      case 'political-news':
-        return 'text-blue-400';
-      case 'smart-recommendations':
-        return 'text-orange-400';
-      case 'team-alerts':
-        return 'text-red-400';
-      default:
-        return 'text-white/70';
-    }
+    // Use CSS variable for consistent theming
+    return 'ticker-accent';
   };
 
   const getPriorityOpacity = (priority: string) => {
