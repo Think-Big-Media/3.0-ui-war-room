@@ -237,23 +237,32 @@
     color: var(--nav-accent-live-monitoring) !important;
   }
 
-  /* Navigation hover states - neutral styling only */
+  /* Navigation hover states - use page accent for consistent theming */
   .nav-hover-text {
     @apply transition-colors duration-200;
-  }
-
-  .group:hover .nav-hover-text {
-    color: white;
-    opacity: 1;
   }
 
   .nav-hover-icon {
     @apply transition-colors duration-200;
   }
 
+  /* Universal navigation hover behavior - any nav item hover uses page accent */
   .group:hover .nav-hover-icon {
-    color: white;
-    opacity: 1;
+    color: var(--page-accent);
+  }
+
+  .group:hover .nav-hover-text {
+    color: var(--page-accent);
+  }
+
+  /* Active page navigation styling */
+  [aria-current='page'] .nav-active-icon {
+    color: var(--page-accent);
+  }
+
+  [aria-current='page'] .nav-active-text {
+    color: var(--active-text, #fff);
+    font-weight: 600;
   }
 
   /* Hoverable border system - replaces transform/scale with border-color changes */
