@@ -212,9 +212,14 @@ const TickerTape: React.FC = () => {
       {/* Debug info (only in development) */}
       {import.meta.env.DEV && (
         <div className="absolute top-0 left-4 text-xs text-white/50">
-          {tickerItems.length} items • Mixed feed
+          🎫 {tickerItems.length} items • Mixed feed
         </div>
       )}
+
+      {/* Extra visibility confirmation */}
+      <div className="absolute top-0 right-16 text-xs text-red-400">
+        TICKER ACTIVE
+      </div>
     </div>
   );
 };
