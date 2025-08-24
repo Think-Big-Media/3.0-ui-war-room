@@ -140,7 +140,7 @@ const TickerTape: React.FC = () => {
           className="w-1 h-4 rounded-full ticker-accent-bg"
         />
         {item.priority === 'critical' && (
-          <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+          <div className="w-2 h-2 ticker-accent-bg rounded-full animate-pulse" />
         )}
       </div>
     );
