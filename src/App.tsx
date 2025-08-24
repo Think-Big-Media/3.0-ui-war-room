@@ -170,7 +170,7 @@ function App() {
   }
 
   return (
-    <Router>
+    <>
       {/* Data Toggle Button - Always visible */}
       <DataToggleButton />
 
@@ -373,7 +373,7 @@ function App() {
           <LoginBypass />
         </>
       )}
-    </Router>
+    </>
   );
 }
 
