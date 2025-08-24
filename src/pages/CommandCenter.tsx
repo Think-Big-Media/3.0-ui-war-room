@@ -205,7 +205,7 @@ const IntelligenceDashboard: React.FC = () => {
             }}
             className="bg-black/20 backdrop-blur-sm rounded-xl p-3 lg:p-4 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 cursor-pointer"
           >
-            <div className="text-xl lg:text-2xl font-bold text-white/95 mb-2">
+            <div className="text-xl lg:text-2xl font-bold text-white/95 mb-2" style={{ font: "600 24px/32px Barlow, sans-serif" }}>
               {metric.value}
             </div>
             <div className="text-xs lg:text-sm text-white/75 mb-3 uppercase">
