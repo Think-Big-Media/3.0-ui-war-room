@@ -182,7 +182,7 @@ const TopNavigation: React.FC = () => {
                 onClick={() => handleNavigation(item.path)}
                 className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-1 ${
                   item.active
-                    ? 'bg-white/20 text-white border border-white/30'
+                    ? `bg-${item.theme.colors.background} text-${item.theme.colors.text} border border-${item.theme.colors.border}`
                     : 'text-white/70 hover:text-white hover:bg-white/10'
                 }`}
               >
@@ -365,10 +365,10 @@ const TopNavigation: React.FC = () => {
                       setIsMobileMenuOpen(false);
                     }}
                     className={`w-full px-6 py-4 rounded-lg font-semibold transition-all duration-200 flex items-center space-x-3 ${
-                      item.active
-                        ? 'bg-white/20 text-white border-l-4 border-white/60'
-                        : 'text-white/80 hover:bg-white/10'
-                    }`}
+                    item.active
+                      ? `bg-${item.theme.colors.background} text-${item.theme.colors.text} border-l-4 border-${item.theme.colors.border}`
+                      : 'text-white/80 hover:bg-white/10'
+                  }`}
                   >
                     <item.icon className="w-5 h-5 flex-shrink-0" />
                     <span className="text-lg">{item.label}</span>
