@@ -5,7 +5,6 @@
 
 import React from 'react';
 import { BuilderContent } from '../components/BuilderContent';
-import { Link } from 'react-router-dom';
 
 const HomePage: React.FC = () => {
   // Builder.io API key from environment
@@ -26,15 +25,15 @@ const HomePage: React.FC = () => {
               <span className="ml-3 text-white text-xl font-bold">War Room 3.0</span>
             </div>
             <nav className="flex space-x-6">
-              <Link to="/dashboard" className="text-white/80 hover:text-white transition">
-                Dashboard
-              </Link>
-              <Link to="/settings" className="text-white/80 hover:text-white transition">
-                Settings
-              </Link>
-              <Link to="/builder" className="text-white/80 hover:text-white transition">
-                Builder
-              </Link>
+              <a href="#dashboard" className="text-white/80 hover:text-white transition flex items-center gap-2">
+                <span>📊</span> Dashboard
+              </a>
+              <a href="#settings" className="text-white/80 hover:text-white transition flex items-center gap-2">
+                <span>⚙️</span> Settings
+              </a>
+              <a href="https://builder.io" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition flex items-center gap-2">
+                <span>🏗️</span> Builder
+              </a>
             </nav>
           </div>
         </div>

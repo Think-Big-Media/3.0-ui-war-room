@@ -29,14 +29,9 @@ import './index.css';
  * ⚠️ Builder.io API Key: VITE_BUILDER_IO_KEY must be set
  */
 import HomePage from './pages/HomePage';
-import { BrowserRouter as Router } from 'react-router-dom';
 
 // Builder.io App Component
-const App = () => (
-  <Router>
-    <HomePage />
-  </Router>
-);
+const App = () => <HomePage />;
 
 // Static options (FALLBACK ONLY):
 // import App from './AppBrandBOS'; // Static version without Builder
