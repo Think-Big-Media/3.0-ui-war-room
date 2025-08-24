@@ -238,8 +238,7 @@
 
   /* Hoverable border system - replaces transform/scale with border-color changes */
   .hoverable {
-    @apply transition-colors duration-200 ease-out;
-    transition-property: border-color;
+    transition: border-color 160ms ease;
   }
 
   .hoverable:hover {
