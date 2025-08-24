@@ -364,7 +364,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                     : 'Google'}{' '}
                 Spend
               </p>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-bold font-condensed text-gray-900">
                 {metrics.totalSpend}
               </p>
               <p className="text-xs text-green-600 mt-1">
@@ -385,7 +385,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                     : 'Google'}{' '}
                 Impressions
               </p>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-bold font-condensed text-gray-900">
                 {metrics.totalImpressions}
               </p>
               <p className="text-xs text-green-600 mt-1">
@@ -406,7 +406,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                     : 'Google'}{' '}
                 Conversions
               </p>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-bold font-condensed text-gray-900">
                 {metrics.totalConversions}
               </p>
               <p className="text-xs text-green-600 mt-1">
@@ -427,7 +427,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                     : 'Google'}{' '}
                 ROAS
               </p>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-bold font-condensed text-gray-900">
                 {metrics.avgRoas}
               </p>
               <p className="text-xs text-green-600 mt-1">↑ 0.4x improvement</p>
