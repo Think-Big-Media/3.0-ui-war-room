@@ -391,7 +391,7 @@ const TopNavigation: React.FC = () => {
             {/* Mobile Menu Button - Far Right */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 hover:shadow-md"
+              className="md:hidden p-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10 hover:shadow-md"
               style={{
                 transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
               }}
