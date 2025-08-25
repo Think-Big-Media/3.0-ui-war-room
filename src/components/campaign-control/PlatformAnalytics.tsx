@@ -429,7 +429,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
               <p className="text-2xl font-bold font-condensed text-gray-900">
                 {metrics.avgRoas}
               </p>
-              <p className="text-xs text-green-600 mt-1">↑ 0.4x improvement</p>
+              <p className="text-xs text-green-600 mt-1 font-mono">↑ 0.4x improvement</p>
             </div>
             <TrendingUp className="h-8 w-8 text-orange-500" />
           </div>
