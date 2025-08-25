@@ -644,9 +644,16 @@
   }
 
   .status-indicator {
-    @apply text-xs font-mono uppercase;
     font-family: 'JetBrains Mono', monospace;
-    color: rgba(255, 255, 255, 0.75); /* Neutral contrast-safe text color */
+    font-size: 0.75rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.75);
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   /* Footer text - always uppercase JetBrains Mono */
@@ -655,9 +662,11 @@
     font-family: 'JetBrains Mono', monospace;
   }
 
-  /* Color-coded status indicators - text only */
+  /* Color-coded status indicators - text only, using design tokens */
   .status-active {
-    color: #4ade80; /* green-400 */
+    color: var(--accent-live-monitoring) !important;
+    background: none !important;
+    border: none !important;
   }
 
   .status-running {
