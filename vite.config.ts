@@ -25,9 +25,10 @@ export default defineConfig(({ mode }) => {
         '@': path.resolve(__dirname, './src'),
       },
     },
-    // IMPORTANT: Never use process.env in define section - it breaks browser builds!
-    // Vite automatically handles VITE_ prefixed env vars via import.meta.env
-    // No define section needed for env vars
+    // Define process.env.NODE_ENV for any legacy code that might use it
+    define: {
+      'process.env.NODE_ENV': JSON.stringify(mode === 'production' ? 'production' : 'development')
+    },
     build: {
       // Bundle size optimization
       chunkSizeWarningLimit: 500,
