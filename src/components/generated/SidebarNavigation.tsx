@@ -377,10 +377,11 @@ const TopNavigation: React.FC = () => {
                     handleNavigation(item.path);
                     setIsMobileMenuOpen(false);
                   }}
-                  style={
-                    { '--item-accent': item.accent } as React.CSSProperties
-                  }
-                  className={`nav-item group w-full px-6 py-4 rounded-lg font-semibold transition-smooth flex items-center space-x-3 ${
+                  style={{
+                    transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    '--item-accent': item.accent
+                  } as React.CSSProperties}
+                  className={`nav-item group w-full px-6 py-4 rounded-lg font-semibold flex items-center space-x-3 ${
                     item.active
                       ? `text-white font-extrabold border-l-4 border-l-white/20`
                       : 'text-white/80 hover:bg-white/10'
