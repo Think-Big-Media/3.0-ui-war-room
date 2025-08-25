@@ -5,7 +5,6 @@
 
 import type React from 'react';
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { useSupabaseAuth } from '../contexts/SupabaseAuthContext';
 import {
   Users,
