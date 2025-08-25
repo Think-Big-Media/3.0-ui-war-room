@@ -420,19 +420,15 @@ const TopNavigation: React.FC = () => {
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header with Logo and Close Button */}
-              <div className="flex items-center justify-between p-4 border-b border-white/10">
+              <div className="flex items-center justify-between p-5 border-b border-white/20">
                 <img
                   src="https://cdn.builder.io/api/v1/image/assets%2F8686f311497044c0932b7d2247296478%2Ff489a630137d4a28b75e743a04ae8f49?format=webp&width=800"
                   alt="War Room"
-                  className="h-6 w-auto"
+                  className="h-7 w-auto"
                 />
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10"
-                  style={{
-                    transition:
-                      'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                  }}
+                  className="p-2 rounded-xl text-white/80 hover:text-white hover:bg-white/15 transition-all duration-200"
                 >
                   <X className="w-5 h-5" />
                 </button>
