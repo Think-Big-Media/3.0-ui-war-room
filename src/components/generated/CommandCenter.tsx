@@ -1,5 +1,4 @@
 import type React from 'react';
-import { motion } from 'framer-motion';
 import { Brain, TrendingUp, MessageSquare, Target, Bell } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import QuickActions from './QuickActions';
