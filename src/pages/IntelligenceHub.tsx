@@ -389,10 +389,8 @@ const IntelligenceHub: React.FC = () => {
 
         {/* Chat History Tab */}
         {activeTab === 'chat' && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="space-y-4"
+          <div
+            className="space-y-4 animate-in fade-in slide-in-from-bottom-5 duration-300"
           >
             <div className="flex items-center justify-between">
               <h3 className="section-header">Chat History & Saved Queries</h3>
@@ -438,7 +436,7 @@ const IntelligenceHub: React.FC = () => {
                 </div>
               </Card>
             ))}
-          </motion.div>
+          </div>
         )}
       </PageLayout>
     </div>
