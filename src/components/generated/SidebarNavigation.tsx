@@ -396,7 +396,7 @@ const TopNavigation: React.FC = () => {
                 transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
               }}
             >
-              <Menu className="w-6 h-6" />
+              <Menu className="w-5 h-5" />
             </button>
           </div>
         </div>
