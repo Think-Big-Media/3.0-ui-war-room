@@ -311,6 +311,30 @@
     border-color: var(--accent-intelligence) !important;
   }
 
+  /* War Room pages - disable ALL hover effects and animations */
+  [data-route='war-room'] .hoverable:hover,
+  [data-route='command-center'] .hoverable:hover,
+  [data-route='campaign-control'] .hoverable:hover {
+    border-color: var(--border-neutral, rgba(255, 255, 255, 0.15)) !important;
+    transform: none !important;
+    scale: 1 !important;
+  }
+
+  /* Disable all hover scale effects on War Room pages */
+  [data-route='war-room'] *[class*="hover:scale"],
+  [data-route='command-center'] *[class*="hover:scale"],
+  [data-route='campaign-control'] *[class*="hover:scale"] {
+    transform: none !important;
+    scale: 1 !important;
+  }
+
+  [data-route='war-room'] *[class*="hover:scale"]:hover,
+  [data-route='command-center'] *[class*="hover:scale"]:hover,
+  [data-route='campaign-control'] *[class*="hover:scale"]:hover {
+    transform: none !important;
+    scale: 1 !important;
+  }
+
   /* Shared selectors for consistency */
   .card.hoverable,
   .panel.hoverable {
