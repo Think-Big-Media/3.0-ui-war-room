@@ -278,17 +278,17 @@ const TopNavigation: React.FC = () => {
           </div>
 
           {/* Right Side Actions */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-1 md:space-x-2 lg:space-x-3">
             {/* Notifications */}
             <div className="relative" ref={notificationsRef}>
               <button
                 onClick={() => setShowNotifications(!showNotifications)}
-                className="p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 hover:shadow-md relative"
+                className="p-1.5 lg:p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 hover:shadow-md relative"
                 style={{
                   transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                 }}
               >
-                <Bell className="w-5 h-5" />
+                <Bell className="w-4 h-4 lg:w-5 lg:h-5" />
                 {unreadAlerts.length > 0 && (
                   <div className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 notification-badge rounded-lg flex items-center justify-center transition-colors">
                     <span className="notification-badge-text text-[11px] font-medium">
