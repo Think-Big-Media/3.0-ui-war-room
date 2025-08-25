@@ -1,6 +1,5 @@
 import type React from 'react';
 import { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
 import { createLogger } from '../utils/logger';
 
 const logger = createLogger('SettingsPage');
@@ -403,13 +402,11 @@ const SettingsPage: React.FC = () => {
         </div>
 
         {/* Platform Integrations Section - Full Width */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="mt-8"
+        <div
+          className="mt-8 animate-in fade-in slide-in-from-bottom-5 duration-600"
           id="integrations-section"
           ref={integrationsRef}
+          style={{ animationDelay: '0.7s' }}
         >
           <Card className="hoverable" padding="lg" variant="glass">
             <div className="flex items-center space-x-3 mb-6">
@@ -495,7 +492,7 @@ const SettingsPage: React.FC = () => {
               </div>
             </div>
           </Card>
-        </motion.div>
+        </div>
 
         {/* Autosave - no manual save button needed */}
       </PageLayout>
