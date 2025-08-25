@@ -38,11 +38,11 @@ export default defineConfig(({ mode }) => {
             if (!id) return;
             // Aggressive code splitting for better caching and smaller chunks
             if (id.includes('node_modules')) {
-              if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
+              // Bundle React, React-DOM, React-Redux, and Redux Toolkit together
+              // to avoid useSyncExternalStore errors
+              if (id.includes('react') || id.includes('react-dom') || id.includes('react-router') || 
+                  id.includes('@reduxjs') || id.includes('react-redux')) {
                 return 'react-vendor';
-              }
-              if (id.includes('@reduxjs') || id.includes('react-redux')) {
-                return 'state-vendor';
               }
               if (id.includes('recharts') || id.includes('d3')) {
                 return 'charts-vendor';
