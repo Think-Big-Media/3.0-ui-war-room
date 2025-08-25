@@ -237,7 +237,7 @@ const Dashboard: React.FC = () => {
       <StatusBar />
 
       {/* Main Dashboard Content */}
-      <div className="p-6 space-y-6">
+      <div className="p-6 space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
@@ -332,7 +332,7 @@ const Dashboard: React.FC = () => {
           </div>
 
           {/* Quick Actions & Status */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Campaign Health */}
             <CampaignHealth compact={true} />
 
