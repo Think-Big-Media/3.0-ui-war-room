@@ -1,7 +1,6 @@
 import type React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
 import {
   Check,
   X,
@@ -322,7 +321,6 @@ const GoogleAdsIntegration: React.FC = () => {
       </div>
 
       {/* Campaign Data - Hidden for compact view */}
-      <AnimatePresence>
         {false && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
@@ -439,7 +437,6 @@ const GoogleAdsIntegration: React.FC = () => {
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
     </div>
   );
 };

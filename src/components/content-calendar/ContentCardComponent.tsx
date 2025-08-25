@@ -1,5 +1,4 @@
 import type React from 'react';
-import { motion } from 'framer-motion';
 import { Edit3 } from 'lucide-react';
 import { type ContentCard } from '../../types/calendar';
 import { getPlatformIcon, getPlatformColor, getStatusIcon } from './utils';
@@ -20,10 +19,8 @@ const ContentCardComponent: React.FC<ContentCardComponentProps> = ({
   if (isDetailed) {
     // Detailed view for day view
     return (
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        className={`${getPlatformColor(content.platform)} rounded-lg p-4 flex items-center justify-between`}
+      <div
+        className={`${getPlatformColor(content.platform)} rounded-lg p-4 flex items-center justify-between animate-in fade-in slide-in-from-left-5 duration-300`}
       >
         <div className="flex items-center space-x-3">
           <PlatformIcon className="w-5 h-5 text-white" />
@@ -45,16 +42,14 @@ const ContentCardComponent: React.FC<ContentCardComponentProps> = ({
             </button>
           )}
         </div>
-      </motion.div>
+      </div>
     );
   }
 
   // Compact view for week/month view
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      className={`absolute inset-1 ${getPlatformColor(content.platform)} rounded-md p-2 cursor-pointer`}
+    <div
+      className={`absolute inset-1 ${getPlatformColor(content.platform)} rounded-md p-2 cursor-pointer animate-in fade-in zoom-in-95 duration-300`}
     >
       <div className="flex items-center justify-between mb-1">
         <PlatformIcon className="w-3 h-3 text-white" />
@@ -64,7 +59,7 @@ const ContentCardComponent: React.FC<ContentCardComponentProps> = ({
         {content.content}
       </div>
       <div className="text-white/70 text-xs">{content.time}</div>
-    </motion.div>
+    </div>
   );
 };
 

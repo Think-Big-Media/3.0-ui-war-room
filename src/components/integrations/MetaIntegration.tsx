@@ -1,7 +1,6 @@
 import type React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
 import {
   Check,
   X,
@@ -233,14 +232,9 @@ const MetaIntegration: React.FC = () => {
       </div>
 
       {/* Campaign Data - Hidden for compact view */}
-      <AnimatePresence>
         {false && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="mt-6 space-y-4"
+          <div
+            className="mt-6 space-y-4 animate-in fade-in slide-in-from-top-2 duration-300"
           >
             <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
               <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center space-x-2">
@@ -335,9 +329,8 @@ const MetaIntegration: React.FC = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
     </div>
   );
 };
