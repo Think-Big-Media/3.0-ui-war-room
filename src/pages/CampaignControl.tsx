@@ -130,7 +130,7 @@ const CampaignControl: React.FC = () => {
 
         {/* Asset Library */}
         {activeTab === 'assets' && (
-          <div className="space-y-6">
+          <div className="space-y-2">
             <AssetControls
               filters={assetFilters}
               onFiltersChange={setAssetFilters}
