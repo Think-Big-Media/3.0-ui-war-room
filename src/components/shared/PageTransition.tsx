@@ -38,27 +38,28 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
     }
   };
 
-  // Check if transitioning to/from War Room
+  // Check if transitioning to/from War Room (includes CommandCenter and CampaignControl)
   const isWarRoomTransition = (pathname: string): boolean => {
-    return pathname === '/campaign-control';
+    return pathname === '/campaign-control' ||
+           pathname === '/CommandCenter' ||
+           pathname === '/command-center' ||
+           pathname.includes('campaign-control') ||
+           pathname.includes('command-center');
   };
 
   // Get transition classes based on route
   const getTransitionClasses = (): string => {
     const baseClasses = ['page-transition-container'];
 
+    // Disable ALL transitions for War Room
     if (isWarRoomTransition(location.pathname)) {
-      baseClasses.push('war-room-enter');
-    } else {
-      baseClasses.push('page-enter');
+      return baseClasses.join(' ');
     }
 
+    baseClasses.push('page-enter');
+
     if (isTransitioning) {
-      if (isWarRoomTransition(location.pathname)) {
-        baseClasses.push('war-room-enter-active');
-      } else {
-        baseClasses.push('page-enter-active');
-      }
+      baseClasses.push('page-enter-active');
     }
 
     return baseClasses.join(' ');
