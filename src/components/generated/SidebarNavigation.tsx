@@ -221,6 +221,9 @@ const TopNavigation: React.FC = () => {
                       ? getNavIconActiveClasses(item.theme)
                       : getNavIconHoverClasses(item.theme)
                   }`}
+                  style={{
+                    transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                  }}
                 />
                 <span
                   className={`label ${item.active ? 'nav-active-text' : getNavHoverClasses(item.theme)} ${
@@ -230,6 +233,9 @@ const TopNavigation: React.FC = () => {
                       ? 'nav-label'
                       : ''
                   }`}
+                  style={{
+                    transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                  }}
                 >
                   {item.label}
                 </span>
