@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink, Download, Share2 } from 'lucide-react';
 
 interface AdCreative {
@@ -172,23 +171,17 @@ const AdPreviewModal: React.FC<AdPreviewModalProps> = ({ isOpen, campaign, onClo
     </div>
   );
 
+  if (!isOpen) return null;
+
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto"
-          onClick={onClose}
-        >
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-gray-900/95 backdrop-blur-xl border border-white/10 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
+    <div
+      className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto fade-in"
+      onClick={onClose}
+    >
+      <div
+        className="bg-gray-900/95 backdrop-blur-xl border border-white/10 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto scale-in"
+        onClick={(e) => e.stopPropagation()}
+      >
             {/* Header */}
             <div className="sticky top-0 bg-gray-900/95 backdrop-blur border-b border-white/10 p-6 flex items-center justify-between">
               <div>
@@ -255,10 +248,8 @@ const AdPreviewModal: React.FC<AdPreviewModalProps> = ({ isOpen, campaign, onClo
                 </div>
               </div>
             </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+      </div>
+    </div>
   );
 };
 
