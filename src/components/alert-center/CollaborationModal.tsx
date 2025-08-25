@@ -1,6 +1,5 @@
 import type React from 'react';
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, Tag } from 'lucide-react';
 import { type Alert, type TeamMember } from '../../types/alert';
 
@@ -38,19 +37,12 @@ const CollaborationModal: React.FC<CollaborationModalProps> = ({
   if (!isOpen || !alert) {return null;}
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+      <div
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-200"
         onClick={onClose}
       >
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.9, opacity: 0 }}
-          className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 max-w-md w-full"
+        <div
+          className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 max-w-md w-full animate-in zoom-in-95 fade-in duration-200"
           onClick={(e: React.MouseEvent) => e.stopPropagation()}
         >
           <div className="flex items-center justify-between mb-4">
@@ -142,9 +134,8 @@ const CollaborationModal: React.FC<CollaborationModalProps> = ({
               <span>Send Alert</span>
             </button>
           </div>
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+        </div>
+      </div>
   );
 };
 

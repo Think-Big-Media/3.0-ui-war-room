@@ -1,5 +1,4 @@
 import type React from 'react';
-import { motion } from 'framer-motion';
 import {
   MessageSquare,
   Link,
@@ -65,11 +64,8 @@ const AlertCard: React.FC<AlertCardProps> = ({
 
             {/* Expanded Content */}
             {isExpanded && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                className="mt-4 pt-4 border-t border-white/10"
+              <div
+                className="mt-4 pt-4 border-t border-white/10 animate-in fade-in slide-in-from-top-2 duration-200"
               >
                 <div className="space-y-3">
                   <div>
@@ -148,7 +144,7 @@ const AlertCard: React.FC<AlertCardProps> = ({
                     )}
                   </div>
                 </div>
-              </motion.div>
+              </div>
             )}
           </div>
         </div>

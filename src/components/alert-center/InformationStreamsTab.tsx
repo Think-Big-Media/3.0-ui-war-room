@@ -1,5 +1,4 @@
 import type React from 'react';
-import { motion } from 'framer-motion';
 import { Search, Globe, Target, Bell } from 'lucide-react';
 import Card from '../shared/Card';
 import CustomDropdown from '../shared/CustomDropdown';
@@ -68,10 +67,8 @@ const InformationStreamsTab: React.FC<InformationStreamsTabProps> = ({
   ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="space-y-6"
+    <div
+      className="space-y-6 animate-in fade-in slide-in-from-bottom-5 duration-300"
     >
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -165,7 +162,7 @@ const InformationStreamsTab: React.FC<InformationStreamsTabProps> = ({
           />
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 };
 
