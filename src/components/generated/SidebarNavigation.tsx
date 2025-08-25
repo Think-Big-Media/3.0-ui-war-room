@@ -382,12 +382,17 @@ const TopNavigation: React.FC = () => {
 
         {/* Mobile Menu Full Screen Overlay */}
         {isMobileMenuOpen && (
-          <div className="md:hidden fixed inset-0 bg-white z-50">
-            {/* Close Button */}
-            <div className="flex justify-end p-6">
+          <div className="md:hidden fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 z-50">
+            {/* Header with Logo and Close Button */}
+            <div className="flex items-center justify-between p-6 border-b border-white/10">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F8686f311497044c0932b7d2247296478%2Ff489a630137d4a28b75e743a04ae8f49?format=webp&width=800"
+                alt="War Room"
+                className="h-8 w-auto"
+              />
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 rounded-lg text-white/70 hover:bg-white/10"
+                className="p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10"
                 style={{
                   transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                 }}
@@ -397,7 +402,7 @@ const TopNavigation: React.FC = () => {
             </div>
 
             {/* Menu Items */}
-            <div className="px-6 py-4 space-y-4">
+            <div className="px-6 py-8 space-y-2 overflow-y-auto">
               {navItems.map((item, index) => (
                 <button
                   key={index}
