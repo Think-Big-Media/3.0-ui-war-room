@@ -296,7 +296,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
       </div>
 
       {/* Platform Filter Tabs */}
-      <div className="bg-white rounded-lg border border-gray-200 p-2">
+      <div className="bg-white/95 backdrop-blur-sm rounded-lg border border-gray-200/50 p-2">
         <div className="flex items-center gap-2">
           <button
             onClick={() => setPlatformFilter('all')}
