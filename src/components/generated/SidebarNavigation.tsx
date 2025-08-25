@@ -411,7 +411,12 @@ const TopNavigation: React.FC = () => {
           >
             {/* Right-side menu panel */}
             <div
-              className="absolute right-0 top-0 h-full w-72 sm:w-80 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 shadow-2xl mobile-menu-panel"
+              className="absolute right-5 top-20 bottom-5 bg-slate-900/95 backdrop-blur-md shadow-2xl mobile-menu-panel rounded-2xl border border-white/10 transition-all duration-300 ease-out transform translate-x-0"
+              style={{
+                width: 'calc(100vw - 40px)',
+                maxWidth: '320px',
+                animation: 'slideInFromRight 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+              }}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header with Logo and Close Button */}
