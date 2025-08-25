@@ -395,9 +395,9 @@
     color: var(--accent-settings);
   }
 
-  /* Targeted word spacing for specific nav labels */
+  /* Targeted word spacing for specific nav labels - reduced by 50% */
   .nav-label {
-    word-spacing: 0.15em;
+    word-spacing: 0.075em;
   }
 
   /* Quick Actions using design tokens */
