@@ -409,7 +409,7 @@ const TopNavigation: React.FC = () => {
           >
             {/* Right-side menu panel */}
             <div
-              className="absolute right-0 top-0 h-full w-80 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 shadow-2xl mobile-menu-panel"
+              className="absolute right-0 top-0 h-full w-72 sm:w-80 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 shadow-2xl mobile-menu-panel"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header with Logo and Close Button */}
