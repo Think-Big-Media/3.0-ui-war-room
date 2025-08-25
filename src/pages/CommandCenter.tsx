@@ -160,7 +160,7 @@ const IntelligenceDashboard: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-3">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {metrics.map((metric, index) => (
           <div
             key={index}
@@ -275,11 +275,11 @@ const CampaignOperationsHub: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Active Projects */}
-        <div className="space-y-3 lg:space-y-4">
+        <div className="space-y-4">
           <h4 className="text-lg lg:text-xl font-medium text-white/40 mb-3 uppercase font-condensed ml-2">
             ACTIVE PROJECTS
           </h4>
-          <div className="space-y-2 lg:space-y-3">
+          <div className="space-y-4">
             {activeProjects.map((cluster, index) => (
               <div
                 key={index}
