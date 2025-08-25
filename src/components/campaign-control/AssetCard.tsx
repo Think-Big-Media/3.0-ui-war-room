@@ -20,7 +20,7 @@ const AssetCard: React.FC<AssetCardProps> = ({
   onShare,
 }) => {
   return (
-    <Card className="cursor-pointer hoverable" padding="sm" variant="glass">
+    <Card className="cursor-pointer hoverable" padding="md" variant="glass">
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center space-x-2">
           {getAssetIcon(asset.type)}
@@ -54,14 +54,14 @@ const AssetCard: React.FC<AssetCardProps> = ({
       </div>
 
       <h4 className="font-medium text-white/95 mb-2">{asset.name}</h4>
-      <p className="text-white/70 text-sm mb-3">{asset.category}</p>
+      <p className="text-white/70 text-sm mb-5">{asset.category}</p>
 
       <div className="space-y-2">
         <div className="flex items-center justify-between text-xs text-white/60">
           <span>Size: {asset.size}</span>
           <span>{asset.uploadDate}</span>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 pb-4">
           {asset.tags.map((tag, index) => (
             <span
               key={index}
