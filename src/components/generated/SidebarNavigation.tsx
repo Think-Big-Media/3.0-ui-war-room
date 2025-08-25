@@ -435,7 +435,7 @@ const TopNavigation: React.FC = () => {
               </div>
 
               {/* Menu Items */}
-              <div className="px-4 py-4 space-y-1 overflow-y-auto">
+              <div className="px-5 py-5 space-y-2 overflow-y-auto">
                 {navItems.map((item, index) => (
                   <button
                     key={index}
