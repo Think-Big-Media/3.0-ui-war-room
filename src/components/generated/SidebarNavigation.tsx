@@ -456,10 +456,10 @@ const TopNavigation: React.FC = () => {
                     aria-current={item.active ? 'page' : undefined}
                   >
                     <item.icon
-                      className={`icon w-4 h-4 ${
+                      className={`icon w-5 h-5 flex-shrink-0 ${
                         item.active
-                          ? getNavIconActiveClasses(item.theme)
-                          : getNavIconHoverClasses(item.theme)
+                          ? 'text-white'
+                          : 'text-white/80 group-hover:text-white'
                       }`}
                     />
                     <span
