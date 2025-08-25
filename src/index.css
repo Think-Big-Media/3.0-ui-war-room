@@ -441,6 +441,13 @@
     }
   }
 
+  @media (max-width: 480px) {
+    /* Very small screens - reduce menu width */
+    .mobile-menu-panel {
+      width: 280px !important;
+    }
+  }
+
   /* Mobile menu slide animation */
   @keyframes slideInFromRight {
     from {
