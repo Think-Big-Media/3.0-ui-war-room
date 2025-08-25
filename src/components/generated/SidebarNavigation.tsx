@@ -268,9 +268,11 @@ const TopNavigation: React.FC = () => {
                   <span className="hidden lg:inline">{item.label}</span>
                   {/* Shorter text for tablet */}
                   <span className="lg:hidden">
-                    {item.label === 'LIVE MONITORING' ? 'LIVE' :
-                     item.label === 'ALERT CENTER' ? 'ALERTS' :
-                     item.label}
+                    {item.label === 'LIVE MONITORING'
+                      ? 'LIVE'
+                      : item.label === 'ALERT CENTER'
+                        ? 'ALERTS'
+                        : item.label}
                   </span>
                 </span>
               </button>
@@ -423,7 +425,8 @@ const TopNavigation: React.FC = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="p-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10"
                   style={{
-                    transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    transition:
+                      'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                   }}
                 >
                   <X className="w-5 h-5" />
@@ -462,9 +465,11 @@ const TopNavigation: React.FC = () => {
                     />
                     <span
                       className={`label ${item.active ? 'text-white font-semibold' : getNavHoverClasses(item.theme)} ${
-                        ['LIVE MONITORING', 'WAR ROOM', 'ALERT CENTER'].includes(
-                          item.label
-                        )
+                        [
+                          'LIVE MONITORING',
+                          'WAR ROOM',
+                          'ALERT CENTER',
+                        ].includes(item.label)
                           ? 'nav-label'
                           : ''
                       }`}
