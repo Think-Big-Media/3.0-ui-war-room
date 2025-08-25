@@ -249,17 +249,22 @@
 
   /* Navigation hover states - use page accent for consistent theming */
   .nav-hover-text {
-    @apply transition-colors duration-200;
+    transition: color 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   .nav-hover-icon {
-    @apply transition-colors duration-200;
+    transition: color 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   /* Per-item navigation hover behavior - each nav item uses its own accent */
+  .nav-item {
+    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
   .nav-item:hover .icon,
   .nav-item:hover .label {
     color: var(--item-accent) !important;
+    transition: color 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   /* Ensure active state overrides hover for active items */
