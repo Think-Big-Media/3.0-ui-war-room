@@ -25,12 +25,12 @@ interface DashboardLayoutProps {
 // Loading skeleton component
 const DashboardSkeleton: React.FC = () => (
   <div className="animate-pulse">
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
       {[...Array(4)].map((_, i) => (
         <div key={i} className="bg-gray-200 rounded-lg h-32" />
       ))}
     </div>
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
       <div className="bg-gray-200 rounded-lg h-64" />
       <div className="bg-gray-200 rounded-lg h-64" />
     </div>
@@ -124,7 +124,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <Suspense fallback={<DashboardSkeleton />}>
             {/* Metric cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
               <MetricCard
                 title="Active Volunteers"
                 metric="volunteers"
@@ -152,7 +152,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
             </div>
 
             {/* Charts grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
               {/* Volunteer growth chart */}
               <div className="bg-white rounded-lg shadow-sm p-6">
                 <h3 className="text-lg font-semibold mb-4">Volunteer Growth</h3>
@@ -179,7 +179,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
             </div>
 
             {/* Activity feed */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               <div className="lg:col-span-2">
                 {/* Custom content area */}
                 {children}
