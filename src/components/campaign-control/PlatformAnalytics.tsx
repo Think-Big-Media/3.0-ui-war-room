@@ -664,7 +664,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                   className="hover:bg-gray-50 active:scale-[0.999] transition-transform duration-100"
                 >
                   <td
-                    className={`${densityStyles.padding} sticky left-0 bg-white`}
+                    className={`${densityStyles.padding} sticky left-0 bg-white/95`}
                   >
                     <input
                       type="checkbox"
