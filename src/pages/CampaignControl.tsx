@@ -100,7 +100,7 @@ const CampaignControl: React.FC = () => {
   });
 
   return (
-    <div className="page-warroom">
+    <div className="page-warroom" data-route="war-room">
       <PageLayout
         pageTitle="War Room"
         placeholder="Ask War Room about campaign operations..."
