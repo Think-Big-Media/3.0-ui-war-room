@@ -380,12 +380,12 @@ const TopNavigation: React.FC = () => {
             {/* User Profile */}
             <button
               onClick={() => navigate('/settings')}
-              className="p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 hover:shadow-md"
+              className="p-1.5 lg:p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 hover:shadow-md"
               style={{
                 transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
               }}
             >
-              <User className="w-5 h-5" />
+              <User className="w-4 h-4 lg:w-5 lg:h-5" />
             </button>
 
             {/* Mobile Menu Button - Far Right */}
