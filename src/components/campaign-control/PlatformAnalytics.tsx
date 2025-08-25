@@ -367,7 +367,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                 {metrics.totalSpend}
               </p>
               <p className="text-xs text-green-600 mt-1">
-                ↑ 12% vs last period
+                �� 12% vs last period
               </p>
             </div>
             <DollarSign className="h-8 w-8 text-green-500" />
@@ -807,7 +807,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                   )}
                   {visibleColumns.actions && (
                     <td
-                      className={`${densityStyles.padding} whitespace-nowrap sticky right-0 bg-white`}
+                      className={`${densityStyles.padding} whitespace-nowrap sticky right-0 bg-white/95`}
                     >
                       <div className="flex items-center gap-2">
                         <button
