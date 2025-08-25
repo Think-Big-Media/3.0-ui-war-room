@@ -57,7 +57,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   return (
     <Card
       onClick={handleClick}
-      className="group cursor-pointer hover:border-orange-400/50 hover:bg-white/15 fade-in"
+      className="group cursor-pointer hover:border-orange-400/50 hover:bg-white/15 hover:scale-[1.02] transition-all duration-200 fade-in"
       padding="md"
       variant="glass"
     >
@@ -129,7 +129,7 @@ const IntelligenceDashboard: React.FC = () => {
   return (
     <Card
       onClick={handleDashboardClick}
-      className="group cursor-pointer hover:border-orange-400/50 hover:bg-white/15 fade-in"
+      className="group cursor-pointer hover:border-orange-400/50 hover:bg-white/15 hover:scale-[1.02] transition-all duration-200 fade-in"
       padding="md"
       variant="glass"
     >
@@ -152,7 +152,7 @@ const IntelligenceDashboard: React.FC = () => {
               e.stopPropagation();
               handleMetricClick(metric.label);
             }}
-            className="bg-black/20 backdrop-blur-sm rounded-xl p-3 lg:p-4 border border-purple-400/20 hover:border-orange-400/30 hover:bg-white/15 transition-all duration-300 cursor-pointer"
+            className="bg-black/20 backdrop-blur-sm rounded-xl p-3 lg:p-4 border border-purple-400/20 hover:border-orange-400/30 hover:bg-white/15 hover:scale-[1.02] transition-all duration-200 cursor-pointer"
           >
             <div
               className="text-xl lg:text-2xl text-white/95 mb-1"
