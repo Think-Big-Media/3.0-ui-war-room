@@ -224,10 +224,10 @@ const TopNavigation: React.FC = () => {
                   style={{
                     transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                     ...(item.icon === Home ? {
-                      // Direct margin positioning instead of transforms
-                      marginTop: item.active ? '-2px' : '-1px',  // Move up (active state goes up 1 more pixel)
-                      marginLeft: item.active ? '-3px' : '0px',  // Move left (active state goes left 3 pixels)
-                      marginRight: item.active ? '3px' : '0px'   // Compensate spacing
+                      // More aggressive positioning - both states need similar adjustments
+                      marginTop: '-3px',      // Move up 3 pixels for better alignment
+                      marginLeft: '-4px',     // Move left 4 pixels relative to text
+                      marginRight: '1px'      // Compensate spacing
                     } : {})
                   }}
                 />
