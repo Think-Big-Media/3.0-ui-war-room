@@ -293,7 +293,7 @@ const CampaignOperationsHub: React.FC = () => {
                   <div
                     className={`w-2 h-2 rounded-full ${
                       cluster.status === 'Live'
-                        ? 'bg-green-400'
+                        ? 'bg-[var(--accent-live-monitoring)]'
                         : cluster.status === 'Running'
                           ? 'bg-[var(--accent-war-room)]'
                           : cluster.status === 'Planning'
