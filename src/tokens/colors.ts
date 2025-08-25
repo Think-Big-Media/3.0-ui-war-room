@@ -4,7 +4,7 @@
  */
 
 export const DASHBOARD_ORANGE = '#D97706';
-export const LIVE_MONITORING_GREEN = '#3EA66A';
+export const LIVE_MONITORING_GREEN = '#4ade80';
 export const WAR_ROOM_FUSCHIA = '#DB2777';
 export const INTELLIGENCE_BLUE = '#60A5FA';
 export const ALERT_CENTER_YELLOW = '#FACC15';
