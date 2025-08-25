@@ -563,7 +563,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
               <Brain className="h-4 w-4" />
               AI Auto-Optimize
               <span
-                className={`h-2 w-2 rounded-full ${aiAutoOptimize ? 'bg-green-400' : 'bg-gray-400'}`}
+                className={`h-2 w-2 rounded-full ${aiAutoOptimize ? 'bg-[var(--accent-live-monitoring)]' : 'bg-gray-400'}`}
               />
             </button>
           </div>
@@ -747,7 +747,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                         <span
                           className={`mr-1 h-1.5 w-1.5 rounded-full ${
                             campaign.status === 'active'
-                              ? 'bg-green-400'
+                              ? 'bg-[var(--accent-live-monitoring)]'
                               : 'bg-gray-400'
                           }`}
                         />
