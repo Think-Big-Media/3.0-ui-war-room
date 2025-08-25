@@ -339,13 +339,35 @@
   .card.hoverable,
   .panel.hoverable {
     border: 1px solid var(--border-neutral, rgba(255, 255, 255, 0.15));
-    transition: border-color 160ms ease;
+    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   .card.hoverable:hover,
   .panel.hoverable:hover {
     border-color: var(--page-accent);
-    transition: border-color 160ms ease;
+    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Smooth transition utility classes */
+  .transition-smooth {
+    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .transition-smooth-slow {
+    transition: all 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .transition-smooth-hover {
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Override Tailwind's harsh transitions with smoother ones */
+  .transition-all {
+    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  }
+
+  .duration-200 {
+    transition-duration: 350ms !important;
   }
 
   /* Quick Actions accent classes */
