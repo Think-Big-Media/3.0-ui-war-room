@@ -34,7 +34,7 @@ const AlertCard: React.FC<AlertCardProps> = ({
 }) => {
   return (
     <Card
-      className={`hoverable cursor-pointer border-l-4 ${getPriorityColor(alert.priority)}`}
+      className={`hoverable cursor-pointer border-l-4 hover:scale-[1.02] transition-all duration-200 ${getPriorityColor(alert.priority)}`}
       padding="sm"
       variant="glass"
       onClick={() => onClick(alert)}
