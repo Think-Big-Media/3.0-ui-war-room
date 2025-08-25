@@ -840,7 +840,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
           </table>
         </div>
         {/* Add footer with count and padding */}
-        <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
+        <div className="px-6 py-6 bg-gray-50 border-t border-gray-200">
           <p className="text-sm text-gray-600">
             Showing {filteredCampaigns.length}{' '}
             {filteredCampaigns.length === 1 ? 'campaign' : 'campaigns'}
