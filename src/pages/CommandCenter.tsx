@@ -354,7 +354,7 @@ const CommandCenter: React.FC = () => {
   );
 
   return (
-    <div className="page-dashboard">
+    <div className="page-dashboard" data-route="command-center">
       <PageLayout
         pageTitle="Dashboard"
         placeholder="Ask War Room about your campaign status..."
