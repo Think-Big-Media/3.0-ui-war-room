@@ -67,13 +67,21 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
 
   // Handle route changes with transitions
   useEffect(() => {
+    // Skip all animation logic for War Room pages
+    if (isWarRoomTransition(location.pathname)) {
+      setIsTransitioning(false);
+      const newBg = getBackgroundClass(location.pathname);
+      setCurrentBg(newBg);
+      return;
+    }
+
     setIsTransitioning(true);
 
     // Update background class
     const newBg = getBackgroundClass(location.pathname);
     setCurrentBg(newBg);
 
-    // Add stagger effect to cards
+    // Add stagger effect to cards (only for non-War Room pages)
     const cards = document.querySelectorAll(
       '[class*="Card"], .card, [class*="card"]'
     );
@@ -86,9 +94,7 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
     });
 
     // Complete transition
-    const transitionDuration = isWarRoomTransition(location.pathname)
-      ? 1200
-      : 800;
+    const transitionDuration = 800;
     const timer = setTimeout(() => {
       setIsTransitioning(false);
     }, transitionDuration);
