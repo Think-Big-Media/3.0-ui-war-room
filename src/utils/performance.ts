@@ -147,7 +147,7 @@ export function usePerformanceMonitor(
 }
 
 // Initialize performance monitoring in development
-if (process.env.NODE_ENV === 'development') {
+if (import.meta.env.DEV) {
   const monitor = PerformanceMonitor.getInstance();
 
   // Start monitoring

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diagnose Render Blank Page</title>
+    <style>
+        body { font-family: monospace; padding: 20px; }
+        .test { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+        .success { background: #d4f4dd; }
+        .error { background: #fdd; }
+    </style>
+</head>
+<body>
+    <h1>War Room Render Deployment Diagnostic</h1>
+    <div id="results"></div>
+
+    <script>
+        const results = document.getElementById('results');
+        
+        function addResult(test, success, detail) {
+            const div = document.createElement('div');
+            div.className = `test ${success ? 'success' : 'error'}`;
+            div.innerHTML = `<strong>${test}:</strong> ${success ? '✅' : '❌'} ${detail}`;
+            results.appendChild(div);
+        }
+
+        // Test 1: Fetch HTML
+        fetch('https://war-room-3-ui.onrender.com')
+            .then(res => res.text())
+            .then(html => {
+                addResult('HTML Fetch', true, `Loaded ${html.length} bytes`);
+                
+                // Test 2: Check for root div
+                const hasRoot = html.includes('id="root"');
+                addResult('React Root', hasRoot, hasRoot ? 'Found root div' : 'Root div missing!');
+                
+                // Test 3: Check for script tags
+                const scriptMatch = html.match(/src="\/assets\/index-[^"]+\.js"/);
+                addResult('JS Bundle Reference', !!scriptMatch, scriptMatch ? scriptMatch[0] : 'No JS bundle found!');
+                
+                // Test 4: Check for CSS
+                const cssMatch = html.match(/href="\/assets\/index-[^"]+\.css"/);
+                addResult('CSS Reference', !!cssMatch, cssMatch ? cssMatch[0] : 'No CSS found!');
+                
+                // Extract bundle URL for next test
+                if (scriptMatch) {
+                    const bundleUrl = 'https://war-room-3-ui.onrender.com' + scriptMatch[0].match(/\/assets\/[^"]+/)[0];
+                    
+                    // Test 5: Fetch JS Bundle
+                    return fetch(bundleUrl);
+                }
+            })
+            .then(res => {
+                if (res) {
+                    addResult('JS Bundle Fetch', res.ok, `Status: ${res.status}`);
+                    return res.text();
+                }
+            })
+            .then(js => {
+                if (js) {
+                    addResult('JS Bundle Size', true, `${js.length} bytes`);
+                    
+                    // Test 6: Check for common errors
+                    const hasFramerMotion = js.includes('framer-motion');
+                    addResult('Framer Motion Check', !hasFramerMotion, hasFramerMotion ? 'FOUND - This is the problem!' : 'Not found (good)');
+                    
+                    // Test 7: Check for React
+                    const hasReact = js.includes('React') || js.includes('react');
+                    addResult('React in Bundle', hasReact, hasReact ? 'React found' : 'React missing!');
+                    
+                    // Test 8: Check for error strings
+                    const errorStrings = ['Cannot find module', 'Failed to fetch', 'NetworkError'];
+                    const foundErrors = errorStrings.filter(err => js.includes(err));
+                    addResult('Error Strings', foundErrors.length === 0, foundErrors.length > 0 ? `Found: ${foundErrors.join(', ')}` : 'No error strings');
+                }
+            })
+            .catch(err => {
+                addResult('Fetch Error', false, err.message);
+            });
+
+        // Test 9: Try to load in iframe
+        setTimeout(() => {
+            const iframe = document.createElement('iframe');
+            iframe.src = 'https://war-room-3-ui.onrender.com';
+            iframe.style.width = '100%';
+            iframe.style.height = '400px';
+            iframe.style.border = '2px solid #333';
+            iframe.style.marginTop = '20px';
+            
+            iframe.onload = () => {
+                addResult('Iframe Load', true, 'Page loaded in iframe');
+                
+                // Try to access iframe content (will fail due to CORS but shows attempt)
+                try {
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    const rootEl = iframeDoc.getElementById('root');
+                    addResult('Iframe Root Check', !!rootEl, rootEl ? 'Root element exists' : 'Root element not found');
+                } catch (e) {
+                    addResult('Iframe Access', false, 'CORS prevents access (expected)');
+                }
+            };
+            
+            iframe.onerror = () => {
+                addResult('Iframe Load', false, 'Failed to load in iframe');
+            };
+            
+            document.body.appendChild(iframe);
+        }, 1000);
+    </script>
+</body>
+</html>
