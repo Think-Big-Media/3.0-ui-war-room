@@ -457,7 +457,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
               </button>
 
               {bulkActionOpen && selectedCampaigns.size > 0 && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200/50 z-10">
                   <button
                     onClick={() => handleBulkAction('pause')}
                     className="w-full text-left px-4 py-2 hover:bg-gray-50 text-sm font-mono uppercase"
