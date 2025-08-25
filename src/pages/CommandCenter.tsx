@@ -61,7 +61,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   return (
     <Card
       onClick={handleClick}
-      className={`group cursor-pointer hoverable hover:bg-white/15`}
+      className={`group cursor-pointer hoverable hover:bg-white/15 hover:scale-[1.02] transition-all duration-200`}
       padding="md"
       variant="glass"
     >
@@ -145,7 +145,7 @@ const IntelligenceDashboard: React.FC = () => {
   return (
     <Card
       onClick={handleDashboardClick}
-      className="group cursor-pointer hoverable hover:bg-white/15"
+      className="group cursor-pointer hoverable hover:bg-white/15 hover:scale-[1.02] transition-all duration-200"
       padding="md"
       variant="glass"
     >
@@ -168,7 +168,7 @@ const IntelligenceDashboard: React.FC = () => {
               e.stopPropagation();
               handleMetricClick(metric.label);
             }}
-            className="bg-black/20 backdrop-blur-sm rounded-xl p-3 lg:p-4 border border-white/20 hoverable hover:bg-white/15 transition-all duration-300 cursor-pointer"
+            className="bg-black/20 backdrop-blur-sm rounded-xl p-3 lg:p-4 border border-white/20 hoverable hover:bg-white/15 hover:scale-[1.02] transition-all duration-200 cursor-pointer"
           >
             <div
               className="text-xl lg:text-2xl text-white/95 mb-1"
@@ -258,7 +258,7 @@ const CampaignOperationsHub: React.FC = () => {
 
   return (
     <Card
-      className="group hoverable hover:bg-white/15"
+      className="group hoverable hover:bg-white/15 hover:scale-[1.02] transition-all duration-200"
       padding="md"
       variant="glass"
     >
@@ -284,7 +284,7 @@ const CampaignOperationsHub: React.FC = () => {
               <div
                 key={index}
                 onClick={() => handleProjectClick(cluster.title)}
-                className="bg-black/20 backdrop-blur-sm rounded-xl p-6 lg:p-7 border border-white/20 hoverable hover:bg-white/15 transition-all duration-300 cursor-pointer"
+                className="bg-black/20 backdrop-blur-sm rounded-xl p-6 lg:p-7 border border-white/20 hoverable hover:bg-white/15 hover:scale-[1.02] transition-all duration-200 cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-2">
                   <h5 className="content-title text-white/90">
@@ -333,7 +333,7 @@ const CampaignOperationsHub: React.FC = () => {
               <div
                 key={index}
                 onClick={() => handleTemplateClick(template.name)}
-                className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-white/20 hoverable hover:bg-white/15 transition-all duration-300 text-center cursor-pointer"
+                className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-white/20 hoverable hover:bg-white/15 hover:scale-[1.02] transition-all duration-200 text-center cursor-pointer"
               >
                 <h5 className="content-title mb-1">{template.name}</h5>
                 <p className="text-xs text-white/65">{template.type}</p>
