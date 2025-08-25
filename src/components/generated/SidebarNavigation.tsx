@@ -405,7 +405,7 @@ const TopNavigation: React.FC = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-60">
             {/* Right-side menu panel */}
-            <div className="absolute right-0 top-0 h-full w-80 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 shadow-2xl">
+            <div className="absolute right-0 top-0 h-full w-80 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 shadow-2xl mobile-menu-panel">
               {/* Header with Logo and Close Button */}
               <div className="flex items-center justify-between p-4 border-b border-white/10">
                 <img
