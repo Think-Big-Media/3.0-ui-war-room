@@ -79,7 +79,7 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
   ];
 
   return (
-    <Card padding="md" variant="glass" className="hoverable">
+    <Card padding="md" variant="glass" className="hoverable hover:scale-[1.02] transition-all duration-200">
       <div className="flex items-center justify-between mb-3">
         <h3 className="section-header tracking-wide ml-2">
           LIVE MENTIONS STREAM
@@ -112,7 +112,7 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
         {mentions.map((mention) => (
           <div
             key={mention.id}
-            className="bg-black/20 rounded-lg p-6 hoverable animate-in fade-in slide-in-from-bottom-2 duration-300"
+            className="bg-black/20 rounded-lg p-6 hoverable animate-in fade-in slide-in-from-bottom-2 hover:scale-[1.02] transition-all duration-200"
           >
             <div className="flex items-start justify-between mb-2">
               <div className="flex items-center space-x-2">
