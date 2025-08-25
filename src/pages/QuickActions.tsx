@@ -1,5 +1,4 @@
 import type React from 'react';
-import { motion } from 'framer-motion';
 import {
   TrendingUp,
   Search,
@@ -53,9 +52,6 @@ const QuickActions: React.FC = () => {
 
   return (
     <Card
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.4 }}
       className="group hoverable hover:bg-black/25"
       padding="md"
       variant="glass"
@@ -73,14 +69,13 @@ const QuickActions: React.FC = () => {
 
       <div className="grid grid-cols-3 gap-3 lg:gap-4">
         {actions.map((action, index) => (
-          <motion.button
+          <button
             key={index}
-            whileTap={{ scale: 0.95 }}
-            className={`bg-black/20 backdrop-blur-sm rounded-xl p-4 lg:p-5 border border-white/20 hover:bg-black/25 hoverable transition-all duration-300 flex flex-col items-center space-y-2 quick-action-${action.accentKey}`}
+            className={`bg-black/20 backdrop-blur-sm rounded-xl p-4 lg:p-5 border border-white/20 hover:bg-black/25 hoverable transition-all duration-300 flex flex-col items-center space-y-2 quick-action-${action.accentKey} active:scale-95`}
           >
             <action.icon className="w-6 h-6 lg:w-8 lg:h-8 quick-action-icon" />
             <span className="content-title text-white/90">{action.label}</span>
-          </motion.button>
+          </button>
         ))}
       </div>
 
