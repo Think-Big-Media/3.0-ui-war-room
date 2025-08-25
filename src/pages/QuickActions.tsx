@@ -67,7 +67,7 @@ const QuickActions: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-3 lg:gap-4">
+      <div className="grid grid-cols-3 gap-4">
         {actions.map((action, index) => (
           <button
             key={index}
