@@ -1,5 +1,4 @@
 import type React from 'react';
-import { motion } from 'framer-motion';
 import {
   TrendingUp,
   Search,
@@ -51,16 +50,7 @@ const QuickActions: React.FC = () => {
   ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.4 }}
-      whileHover={{
-        y: -2,
-        transition: { duration: 0.2 },
-      }}
-      className="bg-black/15 backdrop-blur-lg rounded-2xl p-4 lg:p-6 border border-white/20 hover:bg-black/20 hoverable transition-all duration-300 group"
-    >
+    <div className="bg-black/15 backdrop-blur-lg rounded-2xl p-4 lg:p-6 border border-white/20 hover:bg-black/20 hoverable transition-all duration-300 group fade-in">
       <div className="flex items-start justify-between mb-4 lg:mb-6">
         <div className="flex items-center space-x-3">
           <div className="p-2 lg:p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 hoverable transition-all duration-300">
@@ -74,15 +64,13 @@ const QuickActions: React.FC = () => {
 
       <div className="grid grid-cols-3 gap-3 lg:gap-4">
         {actions.map((action, index) => (
-          <motion.button
+          <button
             key={index}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             className={`bg-black/20 backdrop-blur-sm rounded-xl p-4 lg:p-5 border border-white/20 hover:bg-black/25 hoverable transition-all duration-300 flex flex-col items-center space-y-2 quick-action-${action.accentKey}`}
           >
             <action.icon className="w-6 h-6 lg:w-8 lg:h-8 quick-action-icon" />
             <span className="content-title text-white/90">{action.label}</span>
-          </motion.button>
+          </button>
         ))}
       </div>
 
@@ -94,7 +82,7 @@ const QuickActions: React.FC = () => {
           <span className="footer-text status-active">Ready</span>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
