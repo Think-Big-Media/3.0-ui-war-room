@@ -146,23 +146,11 @@ const IntelligenceDashboard: React.FC = () => {
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
         {metrics.map((metric, index) => (
-          <motion.div
+          <div
             key={index}
             onClick={(e: React.MouseEvent) => {
               e.stopPropagation();
               handleMetricClick(metric.label);
-            }}
-            whileHover={{
-              scale: 1.02,
-              transition: {
-                duration: 0.2,
-              },
-            }}
-            whileTap={{
-              scale: 0.98,
-              transition: {
-                duration: 0.1,
-              },
             }}
             className="bg-black/20 backdrop-blur-sm rounded-xl p-3 lg:p-4 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 cursor-pointer"
           >
@@ -178,7 +166,7 @@ const IntelligenceDashboard: React.FC = () => {
             <div className="text-xs text-green-400 font-medium">
               {metric.trend}
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
 
