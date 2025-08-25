@@ -231,7 +231,7 @@ const IntelligenceHub: React.FC = () => {
         {/* Upload Intelligence Tab */}
         {activeTab === 'upload' && (
           <Card
-            className="hoverable mb-6"
+            className="hoverable hover:scale-[1.02] transition-all duration-200 mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             padding="md"
@@ -310,7 +310,7 @@ const IntelligenceHub: React.FC = () => {
         {activeTab === 'library' && (
           <div className="space-y-6 animate-in fade-in slide-in-from-bottom-5 duration-300">
             {/* Filter & Search */}
-            <Card className="hoverable" padding="sm">
+            <Card className="hoverable hover:scale-[1.02] transition-all duration-200" padding="sm">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div className="flex items-center space-x-2">
                   <Search className="w-5 h-5 text-white/50" />
@@ -339,7 +339,7 @@ const IntelligenceHub: React.FC = () => {
               {filteredFiles.map((file) => (
                 <Card
                   key={file.id}
-                  className="hoverable cursor-pointer"
+                  className="hoverable hover:scale-[1.02] transition-all duration-200 cursor-pointer"
                   padding="none"
                   onClick={() => setSelectedFile(file)}
                 >
@@ -402,7 +402,7 @@ const IntelligenceHub: React.FC = () => {
             </div>
 
             {chatQueries.map((query) => (
-              <Card key={query.id} className="hoverable" padding="none">
+              <Card key={query.id} className="hoverable hover:scale-[1.02] transition-all duration-200" padding="none">
                 <div className="px-4 pt-4 pb-4">
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex items-center space-x-2">
