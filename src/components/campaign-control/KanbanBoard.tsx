@@ -1,7 +1,6 @@
 // Kanban Board Component
 
 import type React from 'react';
-import { motion } from 'framer-motion';
 import ProjectCard from './ProjectCard';
 import { type Project, type ProjectStatus } from '../../types/campaign';
 
@@ -30,10 +29,8 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="grid grid-cols-1 lg:grid-cols-4 gap-6"
+    <div
+      className="grid grid-cols-1 lg:grid-cols-4 gap-6 animate-in fade-in slide-in-from-bottom-5 duration-300"
     >
       {statusColumns.map((status) => {
         const statusProjects = getProjectsByStatus(status);
@@ -61,7 +58,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({
           </div>
         );
       })}
-    </motion.div>
+    </div>
   );
 };
 

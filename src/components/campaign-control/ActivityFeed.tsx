@@ -1,7 +1,6 @@
 // Activity Feed Component
 
 import type React from 'react';
-import { motion } from 'framer-motion';
 import Card from '../shared/Card';
 import { type CampaignActivityItem } from '../../types/campaign';
 import { getActivityIcon } from './utils';
@@ -12,10 +11,8 @@ interface ActivityFeedProps {
 
 const ActivityFeed: React.FC<ActivityFeedProps> = ({ activities }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="space-y-6"
+    <div
+      className="space-y-6 animate-in fade-in slide-in-from-bottom-5 duration-300"
     >
       <Card padding="md" variant="glass">
         <h3
@@ -50,7 +47,7 @@ const ActivityFeed: React.FC<ActivityFeedProps> = ({ activities }) => {
           ))}
         </div>
       </Card>
-    </motion.div>
+    </div>
   );
 };
 
