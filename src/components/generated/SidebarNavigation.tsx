@@ -264,7 +264,14 @@ const TopNavigation: React.FC = () => {
                       'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                   }}
                 >
-                  {item.label}
+                  {/* Full text for large screens */}
+                  <span className="hidden lg:inline">{item.label}</span>
+                  {/* Shorter text for tablet */}
+                  <span className="lg:hidden">
+                    {item.label === 'LIVE MONITORING' ? 'LIVE' :
+                     item.label === 'ALERT CENTER' ? 'ALERTS' :
+                     item.label}
+                  </span>
                 </span>
               </button>
             ))}
