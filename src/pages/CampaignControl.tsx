@@ -147,9 +147,7 @@ const CampaignControl: React.FC = () => {
 
         {/* Analytics & AI Insights Tab */}
         {activeTab === 'analytics' && (
-          <div className="space-y-2">
-            <PlatformAnalytics platform={analyticsPlatform} />
-          </div>
+          <PlatformAnalytics platform={analyticsPlatform} />
         )}
       </PageLayout>
     </div>
