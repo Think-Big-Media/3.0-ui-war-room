@@ -437,7 +437,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
       </div>
 
       {/* Campaign Management Toolbar */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4">
+      <div className="bg-white/95 backdrop-blur-sm rounded-xl border border-gray-200/50 p-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button className="btn-secondary-action flex items-center gap-2 px-4 py-2">
