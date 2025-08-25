@@ -140,7 +140,7 @@ const StatusBar: React.FC = () => {
               COMMAND STATUS
             </h2>
             <div className="flex items-center space-x-1">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+              <div className="w-2 h-2 bg-[var(--accent-live-monitoring)] rounded-full animate-pulse" />
               <span className="text-sm text-[#C5C1A8] font-mono">
                 OPERATIONAL
               </span>

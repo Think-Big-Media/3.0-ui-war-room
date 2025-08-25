@@ -143,8 +143,8 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
       {/* Connection pulse indicator */}
       {isConnected && (
         <div className="relative">
-          <div className="w-2 h-2 bg-green-500 rounded-full" />
-          <div className="absolute inset-0 w-2 h-2 bg-green-400 rounded-full animate-ping" />
+          <div className="w-2 h-2 bg-[var(--accent-live-monitoring)] rounded-full" />
+          <div className="absolute inset-0 w-2 h-2 bg-[var(--accent-live-monitoring)]/70 rounded-full animate-ping" />
         </div>
       )}
     </motion.div>
