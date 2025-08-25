@@ -404,67 +404,70 @@ const TopNavigation: React.FC = () => {
         {/* Mobile Menu Full Screen Overlay */}
         {isMobileMenuOpen && (
           <div className="md:hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-60">
-            {/* Header with Logo and Close Button */}
-            <div className="flex items-center justify-between p-6 border-b border-white/10">
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F8686f311497044c0932b7d2247296478%2Ff489a630137d4a28b75e743a04ae8f49?format=webp&width=800"
-                alt="War Room"
-                className="h-8 w-auto"
-              />
-              <button
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10"
-                style={{
-                  transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                }}
-              >
-                <X className="w-6 h-6" />
-              </button>
-            </div>
-
-            {/* Menu Items */}
-            <div className="px-6 py-8 space-y-2 overflow-y-auto">
-              {navItems.map((item, index) => (
+            {/* Right-side menu panel */}
+            <div className="absolute right-0 top-0 h-full w-80 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 shadow-2xl">
+              {/* Header with Logo and Close Button */}
+              <div className="flex items-center justify-between p-4 border-b border-white/10">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets%2F8686f311497044c0932b7d2247296478%2Ff489a630137d4a28b75e743a04ae8f49?format=webp&width=800"
+                  alt="War Room"
+                  className="h-6 w-auto"
+                />
                 <button
-                  key={index}
-                  onClick={() => {
-                    handleNavigation(item.path);
-                    setIsMobileMenuOpen(false);
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10"
+                  style={{
+                    transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                   }}
-                  style={
-                    {
-                      transition:
-                        'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                      '--item-accent': item.accent,
-                    } as React.CSSProperties
-                  }
-                  className={`nav-item group w-full px-6 py-4 rounded-lg font-semibold flex items-center space-x-3 ${
-                    item.active
-                      ? `text-white font-extrabold border-l-4 border-l-white/20`
-                      : 'text-white/80 hover:bg-white/10'
-                  }`}
-                  aria-current={item.active ? 'page' : undefined}
                 >
-                  <item.icon
-                    className={`icon w-5 h-5 ${
-                      item.active
-                        ? getNavIconActiveClasses(item.theme)
-                        : getNavIconHoverClasses(item.theme)
-                    }`}
-                  />
-                  <span
-                    className={`label text-lg ${item.active ? 'text-white font-semibold' : getNavHoverClasses(item.theme)} ${
-                      ['LIVE MONITORING', 'WAR ROOM', 'ALERT CENTER'].includes(
-                        item.label
-                      )
-                        ? 'nav-label'
-                        : ''
-                    }`}
-                  >
-                    {item.label}
-                  </span>
+                  <X className="w-5 h-5" />
                 </button>
-              ))}
+              </div>
+
+              {/* Menu Items */}
+              <div className="px-4 py-4 space-y-1 overflow-y-auto">
+                {navItems.map((item, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      handleNavigation(item.path);
+                      setIsMobileMenuOpen(false);
+                    }}
+                    style={
+                      {
+                        transition:
+                          'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                        '--item-accent': item.accent,
+                      } as React.CSSProperties
+                    }
+                    className={`nav-item group w-full px-4 py-2.5 rounded-lg font-medium flex items-center space-x-3 text-sm ${
+                      item.active
+                        ? `text-white font-semibold border-l-4 border-l-white/20`
+                        : 'text-white/80 hover:bg-white/10'
+                    }`}
+                    aria-current={item.active ? 'page' : undefined}
+                  >
+                    <item.icon
+                      className={`icon w-4 h-4 ${
+                        item.active
+                          ? getNavIconActiveClasses(item.theme)
+                          : getNavIconHoverClasses(item.theme)
+                      }`}
+                    />
+                    <span
+                      className={`label ${item.active ? 'text-white font-semibold' : getNavHoverClasses(item.theme)} ${
+                        ['LIVE MONITORING', 'WAR ROOM', 'ALERT CENTER'].includes(
+                          item.label
+                        )
+                          ? 'nav-label'
+                          : ''
+                      }`}
+                    >
+                      {item.label}
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         )}
