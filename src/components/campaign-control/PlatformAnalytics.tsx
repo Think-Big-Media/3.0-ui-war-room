@@ -504,7 +504,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
               </button>
 
               {columnSettingsOpen && (
-                <div className="absolute top-full right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 z-10 p-3">
+                <div className="absolute top-full right-0 mt-2 w-56 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200/50 z-10 p-3">
                   <div className="font-medium text-sm text-gray-900 mb-2">
                     Show/Hide Columns
                   </div>
