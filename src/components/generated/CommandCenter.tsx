@@ -331,26 +331,14 @@ const CampaignOperationsHub: React.FC = () => {
           </h4>
           <div className="grid grid-cols-2 gap-4">
             {contentTemplates.map((template, index) => (
-              <motion.div
+              <div
                 key={index}
                 onClick={() => handleTemplateClick(template.name)}
-                whileHover={{
-                  scale: 1.02,
-                  transition: {
-                    duration: 0.2,
-                  },
-                }}
-                whileTap={{
-                  scale: 0.98,
-                  transition: {
-                    duration: 0.1,
-                  },
-                }}
                 className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 text-center cursor-pointer"
               >
                 <h5 className="content-title mb-1">{template.name}</h5>
                 <p className="text-xs text-white/65">{template.type}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
