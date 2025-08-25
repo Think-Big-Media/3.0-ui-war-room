@@ -248,9 +248,9 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
       <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-6 text-white">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-bold font-condensed flex items-center gap-2">
+            <h2 className="text-2xl font-bold font-condensed flex items-center gap-2 uppercase">
               <Brain className="h-6 w-6" />
-              AI-Powered Campaign Intelligence
+              AI-POWERED CAMPAIGN INTELLIGENCE
             </h2>
             <p className="mt-2 text-blue-100">
               WarRoom's AI analyzes your campaigns in real-time to optimize
