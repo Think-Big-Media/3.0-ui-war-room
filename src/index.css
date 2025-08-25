@@ -285,13 +285,13 @@
   /* Hoverable border system - replaces transform/scale with border-color changes */
   .hoverable {
     border: 1px solid var(--border-neutral, rgba(255, 255, 255, 0.15));
-    transition: border-color 160ms ease;
+    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   /* Generic rule - applies to all hoverable elements */
   .hoverable:hover {
     border-color: var(--page-accent);
-    transition: border-color 160ms ease;
+    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   /* Page-scoped reinforcement for specific routes - overrides any conflicts */
