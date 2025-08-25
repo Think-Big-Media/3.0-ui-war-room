@@ -443,13 +443,11 @@ const TopNavigation: React.FC = () => {
                       handleNavigation(item.path);
                       setIsMobileMenuOpen(false);
                     }}
-                    style={
-                      {
-                        transition:
-                          'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                        '--item-accent': item.accent,
-                      } as React.CSSProperties
-                    }
+                    style={{
+                      transition: 'all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                      '--item-accent': item.accent,
+                      minHeight: '48px' // Ensure proper touch targets
+                    } as React.CSSProperties}
                     className={`nav-item group w-full px-4 py-2.5 rounded-lg font-medium flex items-center space-x-3 text-sm ${
                       item.active
                         ? `text-white font-semibold border-l-4 border-l-white/20`
