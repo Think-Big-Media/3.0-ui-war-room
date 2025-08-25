@@ -1,5 +1,4 @@
 import type React from 'react';
-import { motion } from 'framer-motion';
 import { Settings, Play } from 'lucide-react';
 import Card from '../shared/Card';
 import { type ContentFormat } from '../../types/content';
@@ -21,11 +20,7 @@ const ContentFormatCard: React.FC<ContentFormatCardProps> = ({
   const IconComponent = format.icon;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay }}
-    >
+    <div className="fade-in">
       <Card
         padding="md"
         variant="glass"
@@ -85,7 +80,7 @@ const ContentFormatCard: React.FC<ContentFormatCardProps> = ({
           )}
         </div>
       </Card>
-    </motion.div>
+    </div>
   );
 };
 

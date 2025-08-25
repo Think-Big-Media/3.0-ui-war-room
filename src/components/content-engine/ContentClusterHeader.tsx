@@ -1,5 +1,4 @@
 import type React from 'react';
-import { motion } from 'framer-motion';
 import {
   ChevronLeft,
   ChevronRight,
@@ -25,12 +24,7 @@ const ContentClusterHeader: React.FC<ContentClusterHeaderProps> = ({
   onNavigateToCalendar,
 }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.1 }}
-      className="mb-8"
-    >
+    <div className="mb-8 fade-in">
       <Card padding="md" variant="glass">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center">
@@ -100,7 +94,7 @@ const ContentClusterHeader: React.FC<ContentClusterHeaderProps> = ({
           </div>
         </div>
       </Card>
-    </motion.div>
+    </div>
   );
 };
 

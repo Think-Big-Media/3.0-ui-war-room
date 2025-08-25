@@ -1,6 +1,5 @@
 import type React from 'react';
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import {
   Instagram,
   Twitter,
@@ -76,11 +75,7 @@ const GHLPublisher: React.FC<GHLPublisherProps> = ({ onPublishSuccess }) => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.4 }}
-    >
+    <div className="fade-in">
       <Card padding="md" variant="glass">
         <h3 className="text-lg font-semibold text-white/95 mb-4">
           Quick Publish to GoHighLevel
@@ -169,7 +164,7 @@ const GHLPublisher: React.FC<GHLPublisherProps> = ({ onPublishSuccess }) => {
           </p>
         )}
       </Card>
-    </motion.div>
+    </div>
   );
 };
 

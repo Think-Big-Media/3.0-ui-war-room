@@ -1,5 +1,4 @@
 import type React from 'react';
-import { motion } from 'framer-motion';
 import { Calendar, Clock } from 'lucide-react';
 import Card from '../shared/Card';
 import { useGHLSchedules } from '../../services/ghlService';
@@ -22,11 +21,7 @@ const ScheduledPosts: React.FC = () => {
   const {schedules} = data;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.5 }}
-    >
+    <div className="fade-in">
       <Card padding="md" variant="glass">
         <h3 className="text-lg font-semibold text-white/95 mb-4">
           Scheduled Posts
@@ -77,7 +72,7 @@ const ScheduledPosts: React.FC = () => {
           ))}
         </div>
       </Card>
-    </motion.div>
+    </div>
   );
 };
 
