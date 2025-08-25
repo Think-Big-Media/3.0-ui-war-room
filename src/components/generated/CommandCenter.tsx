@@ -239,25 +239,7 @@ const CampaignOperationsHub: React.FC = () => {
 
   return (
     <Card
-      initial={{
-        opacity: 0,
-        y: 20,
-      }}
-      animate={{
-        opacity: 1,
-        y: 0,
-      }}
-      transition={{
-        duration: 0.6,
-        delay: 0.3,
-      }}
-      whileHover={{
-        y: -2,
-        transition: {
-          duration: 0.2,
-        },
-      }}
-      className="group hover:border-orange-400/50 hover:bg-black/25"
+      className="group hover:border-orange-400/50 hover:bg-black/25 fade-in"
       padding="md"
       variant="glass"
     >
