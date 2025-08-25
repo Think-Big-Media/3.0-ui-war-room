@@ -216,7 +216,13 @@ const TopNavigation: React.FC = () => {
                 }`}
               >
                 <item.icon
-                  className={`icon w-4 h-4 flex-shrink-0 ${item.icon === Home ? '-translate-y-[6px] -translate-x-[3px]' : ''} ${
+                  className={`icon w-4 h-4 flex-shrink-0 ${
+                    item.icon === Home
+                      ? item.active
+                        ? '-translate-y-[7px] -translate-x-[6px]'  // Active state: up 1 more pixel, left 3 more pixels
+                        : '-translate-y-[5px] -translate-x-[2px]'  // Off state: aligned with text
+                      : ''
+                  } ${
                     item.active
                       ? getNavIconActiveClasses(item.theme)
                       : getNavIconHoverClasses(item.theme)
