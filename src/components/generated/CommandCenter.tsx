@@ -271,21 +271,9 @@ const CampaignOperationsHub: React.FC = () => {
           </h4>
           <div className="space-y-2 lg:space-y-3">
             {activeProjects.map((cluster, index) => (
-              <motion.div
+              <div
                 key={index}
                 onClick={() => handleProjectClick(cluster.title)}
-                whileHover={{
-                  scale: 1.02,
-                  transition: {
-                    duration: 0.2,
-                  },
-                }}
-                whileTap={{
-                  scale: 0.98,
-                  transition: {
-                    duration: 0.1,
-                  },
-                }}
                 className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-purple-400/20 hover:border-orange-400/30 hover:bg-black/25 transition-all duration-300 cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-2">
@@ -322,7 +310,7 @@ const CampaignOperationsHub: React.FC = () => {
                     {cluster.timeline}
                   </span>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
