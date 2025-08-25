@@ -408,7 +408,10 @@ const TopNavigation: React.FC = () => {
             onClick={() => setIsMobileMenuOpen(false)}
           >
             {/* Right-side menu panel */}
-            <div className="absolute right-0 top-0 h-full w-80 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 shadow-2xl mobile-menu-panel">
+            <div
+              className="absolute right-0 top-0 h-full w-80 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 shadow-2xl mobile-menu-panel"
+              onClick={(e) => e.stopPropagation()}
+            >
               {/* Header with Logo and Close Button */}
               <div className="flex items-center justify-between p-4 border-b border-white/10">
                 <img
