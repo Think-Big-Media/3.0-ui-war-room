@@ -206,14 +206,14 @@ const TopNavigation: React.FC = () => {
                 aria-current={item.active ? 'page' : undefined}
                 data-route={item.route}
                 style={{ '--item-accent': item.accent } as React.CSSProperties}
-                className={`nav-item group px-3 py-1 rounded-lg text-sm transition-smooth flex items-center space-x-1 ${
+                className={`nav-item group px-3 py-1 rounded-lg text-sm flex items-center space-x-1 ${
                   item.active
                     ? getNavActiveClasses(item.theme)
                     : 'text-white/70 hover:bg-white/10'
                 }`}
               >
                 <item.icon
-                  className={`icon w-4 h-4 flex-shrink-0 ${item.icon === Home ? '-translate-y-2' : ''} ${
+                  className={`icon w-4 h-4 flex-shrink-0 ${item.icon === Home ? 'translate-y-[3px]' : ''} ${
                     item.active
                       ? getNavIconActiveClasses(item.theme)
                       : getNavIconHoverClasses(item.theme)
