@@ -412,6 +412,30 @@
     word-spacing: 0.075em;
   }
 
+  /* Responsive navigation improvements */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    /* Tablet-specific nav styling */
+    .nav-item {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      font-size: 0.75rem;
+    }
+
+    /* Ensure no overflow on tablet */
+    nav .max-w-7xl {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    /* Mobile navigation overflow prevention */
+    nav .max-w-7xl {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+  }
+
   /* Quick Actions using design tokens */
   .quick-action-dashboard .quick-action-icon {
     color: var(--accent-dashboard);
