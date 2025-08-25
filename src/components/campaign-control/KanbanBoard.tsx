@@ -29,7 +29,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 animate-in fade-in slide-in-from-bottom-5 duration-300">
+    <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 animate-in fade-in slide-in-from-bottom-5 duration-300">
       {statusColumns.map((status) => {
         const statusProjects = getProjectsByStatus(status);
 
