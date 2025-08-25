@@ -50,7 +50,7 @@ const QuickActions: React.FC = () => {
   ];
 
   return (
-    <div className="bg-black/15 backdrop-blur-lg rounded-2xl p-4 lg:p-6 border border-white/20 hover:bg-black/20 hoverable transition-all duration-300 group fade-in">
+    <div className="bg-black/15 backdrop-blur-lg rounded-2xl p-4 lg:p-6 border border-white/20 hover:bg-black/20 hoverable hover:scale-[1.02] transition-all duration-200 group fade-in">
       <div className="flex items-start justify-between mb-4 lg:mb-6">
         <div className="flex items-center space-x-3">
           <div className="p-2 lg:p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 hoverable transition-all duration-300">
@@ -66,7 +66,7 @@ const QuickActions: React.FC = () => {
         {actions.map((action, index) => (
           <button
             key={index}
-            className={`bg-black/20 backdrop-blur-sm rounded-xl p-4 lg:p-5 border border-white/20 hover:bg-white/15 hoverable transition-all duration-300 flex flex-col items-center space-y-2 quick-action-${action.accentKey}`}
+            className={`bg-black/20 backdrop-blur-sm rounded-xl p-4 lg:p-5 border border-white/20 hover:bg-white/15 hoverable hover:scale-[1.02] transition-all duration-200 flex flex-col items-center space-y-2 quick-action-${action.accentKey}`}
           >
             <action.icon className="w-6 h-6 lg:w-8 lg:h-8 quick-action-icon" />
             <span className="content-title text-white/90">{action.label}</span>
