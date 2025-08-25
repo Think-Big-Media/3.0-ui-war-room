@@ -1,6 +1,5 @@
 import type React from 'react';
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import {
   Upload,
   Search,
@@ -309,10 +308,8 @@ const IntelligenceHub: React.FC = () => {
 
         {/* Knowledge Library Tab */}
         {activeTab === 'library' && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="space-y-6"
+          <div
+            className="space-y-6 animate-in fade-in slide-in-from-bottom-5 duration-300"
           >
             {/* Filter & Search */}
             <Card className="hoverable" padding="sm">
@@ -387,7 +384,7 @@ const IntelligenceHub: React.FC = () => {
                 </Card>
               ))}
             </div>
-          </motion.div>
+          </div>
         )}
 
         {/* Chat History Tab */}
