@@ -217,18 +217,18 @@ const TopNavigation: React.FC = () => {
               >
                 <item.icon
                   className={`icon w-4 h-4 flex-shrink-0 ${
-                    item.icon === Home
-                      ? item.active
-                        ? '-translate-y-[7px] -translate-x-[6px]'  // Active state: up 1 more pixel, left 3 more pixels
-                        : '-translate-y-[5px] -translate-x-[2px]'  // Off state: aligned with text
-                      : ''
-                  } ${
                     item.active
                       ? getNavIconActiveClasses(item.theme)
                       : getNavIconHoverClasses(item.theme)
                   }`}
                   style={{
-                    transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                    transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    ...(item.icon === Home ? {
+                      // Direct margin positioning instead of transforms
+                      marginTop: item.active ? '-2px' : '-1px',  // Move up (active state goes up 1 more pixel)
+                      marginLeft: item.active ? '-3px' : '0px',  // Move left (active state goes left 3 pixels)
+                      marginRight: item.active ? '3px' : '0px'   // Compensate spacing
+                    } : {})
                   }}
                 />
                 <span
