@@ -1,7 +1,6 @@
 import type React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Check } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
@@ -135,13 +134,9 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
             {selectedOption ? selectedOption.label : placeholder}
           </span>
         </div>
-        <motion.div
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
-          className="ml-2 flex-shrink-0"
-        >
+        <div className={`ml-2 flex-shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : 'rotate-0'}`}>
           <ChevronDown className="w-4 h-4 text-white/70" />
-        </motion.div>
+        </div>
       </button>
 
       {/* Dropdown Menu - Rendered via Portal */}
