@@ -13,7 +13,7 @@ export const SETTINGS_MAUVE = '#818CF8';
 export const BRAND_TOKENS = {
   dashboard: DASHBOARD_ORANGE,
   liveMonitoring: LIVE_MONITORING_GREEN,
-  warRoom: WAR_ROOM_FUSCHIA,
+  warRoom: WAR_ROOM_SALMON,
   intelligence: INTELLIGENCE_BLUE,
   alertCenter: ALERT_CENTER_YELLOW,
   settings: SETTINGS_MAUVE,
