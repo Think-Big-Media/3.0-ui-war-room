@@ -328,6 +328,10 @@
     border-color: var(--accent-intelligence) !important;
   }
 
+  [data-route='command-center'] .hoverable:hover {
+    border-color: var(--accent-dashboard) !important;
+  }
+
   /* War Room pages - disable ALL hover effects and animations */
   [data-route='war-room'] .hoverable:hover,
   [data-route='campaign-control'] .hoverable:hover {
