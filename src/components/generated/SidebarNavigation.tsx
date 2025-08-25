@@ -230,7 +230,7 @@ const TopNavigation: React.FC = () => {
                     ...(item.icon === Home
                       ? {
                           // More aggressive positioning - both states need similar adjustments
-                          marginTop: '-3px', // Move up 3 pixels for better alignment
+                          marginTop: '-2px', // Move up 2 pixels for better alignment
                           marginLeft: '-4px', // Move left 4 pixels relative to text
                           marginRight: '1px', // Compensate spacing
                         }
