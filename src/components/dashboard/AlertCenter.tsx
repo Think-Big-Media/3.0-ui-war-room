@@ -6,7 +6,6 @@
 
 import type React from 'react';
 import { memo, useCallback, useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import {
   AlertTriangle,
   AlertCircle,
@@ -69,16 +68,11 @@ const AlertItem = memo<{
   const Icon = config.icon;
 
   return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, x: -50 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: 50 }}
-      whileHover={{ scale: 1.02 }}
+    <div
       className={`
           relative overflow-hidden rounded-lg border p-4
           ${config.lightColor} ${config.borderColor}
-          transition-all duration-200
+          transition-all duration-200 scale-in
         `}
     >
       {/* Priority indicator */}
@@ -139,15 +133,13 @@ const AlertItem = memo<{
         <div className="flex items-center space-x-2 ml-4">
           {/* TODO: Add acknowledged state management */}
           {true && (
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+            <button
               onClick={() => onAcknowledge(alert.campaign_id)}
               className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
               title="Acknowledge alert"
             >
               <CheckCircle size={18} className="text-green-600" />
-            </motion.button>
+            </button>
           )}
 
           <button
@@ -158,7 +150,7 @@ const AlertItem = memo<{
           </button>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 });
 
@@ -213,13 +205,11 @@ export const AlertCenter: React.FC = memo(() => {
           <div className="flex items-center space-x-3">
             <h2 className="text-lg font-semibold">Alert Center</h2>
             {criticalAlertsCount > 0 && (
-              <motion.span
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="px-2 py-1 text-xs font-medium bg-red-500 text-white rounded-full"
+              <span
+                className="px-2 py-1 text-xs font-medium bg-red-500 text-white rounded-full scale-in"
               >
                 {criticalAlertsCount} critical
-              </motion.span>
+              </span>
             )}
             {error && (
               <span className="px-2 py-1 text-xs font-medium bg-yellow-500 text-white rounded-full">
@@ -276,29 +266,23 @@ export const AlertCenter: React.FC = memo(() => {
 
       {/* Alert list */}
       <div className="max-h-96 overflow-y-auto scroll-fade-subtle">
-        <AnimatePresence mode="popLayout">
-          {filteredAlerts.length === 0 ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="p-8 text-center text-gray-500 dark:text-gray-400"
-            >
-              <Bell size={48} className="mx-auto mb-3 opacity-20" />
-              <p>No {filter !== 'all' ? filter : ''} alerts</p>
-              <p className="text-sm mt-1">All systems operational</p>
-            </motion.div>
-          ) : (
-            <div className="p-4 space-y-3">
-              {filteredAlerts.map((alert) => (
-                <AlertItem
-                  key={alert.id}
-                  alert={alert}
-                  onAcknowledge={handleAcknowledge}
-                />
-              ))}
-            </div>
-          )}
-        </AnimatePresence>
+        {filteredAlerts.length === 0 ? (
+          <div className="p-8 text-center text-gray-500 dark:text-gray-400 fade-in">
+            <Bell size={48} className="mx-auto mb-3 opacity-20" />
+            <p>No {filter !== 'all' ? filter : ''} alerts</p>
+            <p className="text-sm mt-1">All systems operational</p>
+          </div>
+        ) : (
+          <div className="p-4 space-y-3">
+            {filteredAlerts.map((alert) => (
+              <AlertItem
+                key={alert.id}
+                alert={alert}
+                onAcknowledge={handleAcknowledge}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Alert statistics */}

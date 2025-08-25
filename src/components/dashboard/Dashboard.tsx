@@ -5,7 +5,6 @@
 
 import type React from 'react';
 import { memo, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { Wifi, WifiOff, RefreshCw } from 'lucide-react';
 import { MetricsDisplay } from './MetricsDisplay';
 import { AlertCenter } from './AlertCenter';
@@ -150,15 +149,11 @@ export const Dashboard: React.FC = memo(() => {
 
         {/* Error display */}
         {error && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 mb-6"
-          >
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 mb-6 fade-in">
             <p className="text-sm text-red-800 dark:text-red-200">
               ⚠️ {error}
             </p>
-          </motion.div>
+          </div>
         )}
 
         {/* Main content grid */}
