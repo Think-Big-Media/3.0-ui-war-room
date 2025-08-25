@@ -394,7 +394,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
             <Eye className="h-8 w-8 text-blue-500" />
           </div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white/95 backdrop-blur-sm rounded-lg border border-gray-200/50 p-4">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-gray-600">
