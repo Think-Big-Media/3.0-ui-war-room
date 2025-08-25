@@ -100,7 +100,7 @@ const MetaIntegration: React.FC = () => {
   return (
     <div className="w-full">
       {/* Connection Status Card */}
-      <div className="bg-black/20 backdrop-blur-xl rounded-2xl p-6 border border-purple-400/30 shadow-2xl hover:bg-white/15 transition-all duration-300">
+      <div className="bg-black/20 backdrop-blur-xl rounded-2xl p-6 border border-purple-400/30 shadow-2xl hover:bg-white/15 hover:scale-[1.02] transition-all duration-200">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-4">
             {/* Meta/Facebook Logo */}
