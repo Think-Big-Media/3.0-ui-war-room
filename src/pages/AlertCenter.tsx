@@ -1,6 +1,5 @@
 import type React from 'react';
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Plus, AlertCircle, Activity } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import PageLayout from '../components/shared/PageLayout';
