@@ -62,7 +62,7 @@ const CalendarStats: React.FC<CalendarStatsProps> = ({
       className="mb-6"
     >
       <Card padding="md" variant="glass">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
               <div className="flex justify-center mb-2">
