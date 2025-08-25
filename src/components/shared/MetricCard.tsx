@@ -1,5 +1,4 @@
 import type React from 'react';
-import { motion } from 'framer-motion';
 import { type LucideIcon, TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import Card from './Card';
 import { cn } from '../../lib/utils';
@@ -74,15 +73,14 @@ const MetricCard: React.FC<MetricCardProps> = ({
           )}
         </div>
 
-        <motion.div
-          whileHover={{ scale: 1.1, rotate: 5 }}
+        <div
           className={cn(
-            'p-3 rounded-xl bg-white/10 backdrop-blur-sm',
+            'p-3 rounded-xl bg-white/10 backdrop-blur-sm transition-transform hover:scale-110',
             iconColor,
           )}
         >
           <Icon className="w-6 h-6" />
-        </motion.div>
+        </div>
       </div>
     </Card>
   );

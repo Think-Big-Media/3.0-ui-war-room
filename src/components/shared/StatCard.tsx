@@ -1,6 +1,5 @@
 import type React from 'react';
 import { memo } from 'react';
-import { motion } from 'framer-motion';
 import { type LucideIcon } from 'lucide-react';
 import Card from './Card';
 import { cn } from '../../lib/utils';
@@ -68,13 +67,9 @@ const StatCardComponent: React.FC<StatCardProps> = ({
     >
       <div className="flex flex-col gap-3">
         {Icon && (
-          <motion.div
-            whileHover={{ rotate: 360 }}
-            transition={{ duration: 0.5 }}
-            className="self-start"
-          >
+          <div className="self-start">
             <Icon className={cn('text-white/70', iconSize)} />
-          </motion.div>
+          </div>
         )}
 
         <div>
