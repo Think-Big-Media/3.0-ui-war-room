@@ -362,7 +362,8 @@ const TopNavigation: React.FC = () => {
             <div className="flex justify-end p-6">
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 rounded-lg text-white/70 hover:bg-white/10 transition-smooth"
+                className="p-2 rounded-lg text-white/70 hover:bg-white/10"
+                style={{ transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}
               >
                 <X className="w-6 h-6" />
               </button>
