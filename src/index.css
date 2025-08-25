@@ -446,21 +446,7 @@
     background-color: var(--page-accent);
   }
 
-  /* Status indicators using neutral backgrounds with accent text */
-  .status-live {
-    @apply bg-black/20 border border-white/20;
-    color: var(--accent-war-room); /* Fuchsia text for live/critical */
-  }
-
-  .status-running {
-    @apply bg-black/20 border border-white/20;
-    color: var(--accent-live-monitoring); /* Green text for running */
-  }
-
-  .status-planning {
-    @apply bg-black/20 border border-white/20;
-    color: var(--accent-alert-center); /* Yellow text for planning */
-  }
+  /* Status indicators - removed duplicate classes that had unwanted backgrounds */
 
   /* Priority classes using design tokens */
   .priority-critical {
