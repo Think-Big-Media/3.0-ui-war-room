@@ -211,105 +211,114 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
 
   return (
     <div className="max-w-6xl mx-auto">
-        {isExpanded && (
+      {isExpanded && (
+        <div
+          ref={expandedRef}
+          className="mb-4 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 animate-in slide-in-from-bottom-5 fade-in duration-200"
+        >
+          {/* Chat Window Content */}
           <div
-            ref={expandedRef}
-            className="mb-4 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 animate-in slide-in-from-bottom-5 fade-in duration-200"
+            className={`bg-white/10 backdrop-blur-xl rounded-2xl overflow-hidden ${
+              chatState === 'history'
+                ? 'h-[600px]'
+                : 'min-h-[600px] max-h-[70vh]'
+            }`}
           >
-            {/* Chat Window Content */}
-            <div
-              className={`bg-white/10 backdrop-blur-xl rounded-2xl overflow-hidden ${
-                chatState === 'history'
-                  ? 'h-[600px]'
-                  : 'min-h-[600px] max-h-[70vh]'
-              }`}
-            >
-              {/* Chat History State */}
-              {chatState === 'history' && (
-                <div className="flex flex-col h-full">
-                  <div className="p-4 border-b border-gray-200/50">
-                    <h3 className="text-gray-800 font-medium flex items-center">
-                      <Clock className="w-4 h-4 mr-2" />
-                      Recent Conversations
+            {/* Chat History State */}
+            {chatState === 'history' && (
+              <div className="flex flex-col h-full">
+                <div className="p-4 border-b border-gray-200/50">
+                  <h3 className="text-gray-800 font-medium flex items-center">
+                    <Clock className="w-4 h-4 mr-2" />
+                    Recent Conversations
+                  </h3>
+                </div>
+                <div className="flex-1 overflow-y-auto p-4 scroll-fade-subtle">
+                  <div className="space-y-2">
+                    {chatHistory.map((chat) => (
+                      <button
+                        key={chat.id}
+                        onClick={() => openChat(chat)}
+                        className="w-full p-3 bg-white/60 hover:bg-white/80 rounded-xl border border-gray-200/50 hover:border-gray-300/50 transition-all duration-200 text-left hover:scale-[1.02]"
+                      >
+                        <div className="flex justify-between items-start mb-1">
+                          <h4 className="text-gray-800 font-medium text-sm">
+                            {chat.title}
+                          </h4>
+                          <span className="text-gray-500 text-xs">
+                            {formatTime(chat.timestamp)}
+                          </span>
+                        </div>
+                        <p className="text-gray-600 text-xs line-clamp-2">
+                          {chat.lastMessage}
+                        </p>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Active Chat State */}
+            {chatState === 'chat' && (
+              <div className="flex flex-col h-full">
+                {/* Chat Header */}
+                {activeChat && (
+                  <div className="p-3 border-b border-gray-200/50 bg-white/50">
+                    <h3 className="text-gray-800 font-medium text-sm">
+                      {activeChat.title}
                     </h3>
                   </div>
-                  <div className="flex-1 overflow-y-auto p-4 scroll-fade-subtle">
-                    <div className="space-y-2">
-                      {chatHistory.map((chat) => (
-                        <button
-                          key={chat.id}
-                          onClick={() => openChat(chat)}
-                          className="w-full p-3 bg-white/60 hover:bg-white/80 rounded-xl border border-gray-200/50 hover:border-gray-300/50 transition-all duration-200 text-left hover:scale-[1.02]"
-                        >
-                          <div className="flex justify-between items-start mb-1">
-                            <h4 className="text-gray-800 font-medium text-sm">
-                              {chat.title}
-                            </h4>
-                            <span className="text-gray-500 text-xs">
-                              {formatTime(chat.timestamp)}
-                            </span>
-                          </div>
-                          <p className="text-gray-600 text-xs line-clamp-2">
-                            {chat.lastMessage}
-                          </p>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
+                )}
 
-              {/* Active Chat State */}
-              {chatState === 'chat' && (
-                <div className="flex flex-col h-full">
-                  {/* Chat Header */}
-                  {activeChat && (
-                    <div className="p-3 border-b border-gray-200/50 bg-white/50">
-                      <h3 className="text-gray-800 font-medium text-sm">
-                        {activeChat.title}
-                      </h3>
-                    </div>
-                  )}
-
-                  {/* Messages Area */}
-                  <div className="flex-1 p-4 overflow-y-auto scroll-fade-subtle">
-                    <div className="space-y-3">
-                      {currentMessages.map((msg) => (
+                {/* Messages Area */}
+                <div className="flex-1 p-4 overflow-y-auto scroll-fade-subtle">
+                  <div className="space-y-3">
+                    {currentMessages.map((msg) => (
+                      <div
+                        key={msg.id}
+                        className={`flex ${msg.isUser ? 'justify-end' : 'justify-start'}`}
+                      >
                         <div
-                          key={msg.id}
-                          className={`flex ${msg.isUser ? 'justify-end' : 'justify-start'}`}
+                          className={`max-w-[80%] p-3 rounded-lg text-sm ${
+                            msg.isUser
+                              ? 'bg-gray-200 text-black'
+                              : 'bg-gray-700 text-white'
+                          }`}
                         >
-                          <div
-                            className={`max-w-[80%] p-3 rounded-lg text-sm ${
-                              msg.isUser
-                                ? 'bg-gray-200 text-black'
-                                : 'bg-gray-700 text-white'
-                            }`}
-                          >
-                            {msg.text}
-                          </div>
+                          {msg.text}
                         </div>
-                      ))}
+                      </div>
+                    ))}
 
-                      {/* Typing Indicator */}
-                      {isTyping && (
-                        <div className="flex justify-start">
-                          <div className="bg-gray-100 p-3 rounded-lg">
-                            <div className="flex space-x-1">
-                              <div className="w-2 h-2 bg-gray-400 rounded-full animate-pulse" style={{ animationDelay: '0ms' }} />
-                              <div className="w-2 h-2 bg-gray-400 rounded-full animate-pulse" style={{ animationDelay: '200ms' }} />
-                              <div className="w-2 h-2 bg-gray-400 rounded-full animate-pulse" style={{ animationDelay: '400ms' }} />
-                            </div>
+                    {/* Typing Indicator */}
+                    {isTyping && (
+                      <div className="flex justify-start">
+                        <div className="bg-gray-100 p-3 rounded-lg">
+                          <div className="flex space-x-1">
+                            <div
+                              className="w-2 h-2 bg-gray-400 rounded-full animate-pulse"
+                              style={{ animationDelay: '0ms' }}
+                            />
+                            <div
+                              className="w-2 h-2 bg-gray-400 rounded-full animate-pulse"
+                              style={{ animationDelay: '200ms' }}
+                            />
+                            <div
+                              className="w-2 h-2 bg-gray-400 rounded-full animate-pulse"
+                              style={{ animationDelay: '400ms' }}
+                            />
                           </div>
                         </div>
-                      )}
-                    </div>
+                      </div>
+                    )}
                   </div>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
-        )}
+        </div>
+      )}
 
       <div
         className="bg-white/20 backdrop-blur-xl rounded-2xl border border-white/40 animate-in slide-in-from-bottom-5 fade-in duration-400"

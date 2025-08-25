@@ -134,7 +134,9 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
             {selectedOption ? selectedOption.label : placeholder}
           </span>
         </div>
-        <div className={`ml-2 flex-shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : 'rotate-0'}`}>
+        <div
+          className={`ml-2 flex-shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : 'rotate-0'}`}
+        >
           <ChevronDown className="w-4 h-4 text-white/70" />
         </div>
       </button>
