@@ -572,7 +572,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
 
       {/* Campaign Performance Table */}
       <div className="bg-white/95 backdrop-blur-sm rounded-xl border border-gray-200/50 overflow-hidden">
-        <div className="px-4 py-3 border-b border-gray-200">
+        <div className="px-6 py-6 border-b border-gray-200">
           <h3 className="text-lg font-semibold text-gray-900">
             Live Campaign Performance
           </h3>
