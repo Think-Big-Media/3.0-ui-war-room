@@ -463,14 +463,10 @@ const TopNavigation: React.FC = () => {
                       }`}
                     />
                     <span
-                      className={`label ${item.active ? 'text-white font-semibold' : getNavHoverClasses(item.theme)} ${
-                        [
-                          'LIVE MONITORING',
-                          'WAR ROOM',
-                          'ALERT CENTER',
-                        ].includes(item.label)
-                          ? 'nav-label'
-                          : ''
+                      className={`label font-medium ${
+                        item.active
+                          ? 'text-white font-semibold'
+                          : 'text-white/90 group-hover:text-white'
                       }`}
                     >
                       {item.label}
