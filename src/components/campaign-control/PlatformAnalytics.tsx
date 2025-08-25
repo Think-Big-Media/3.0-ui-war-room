@@ -297,7 +297,6 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
 
       {/* Main Campaign Dashboard - Unified Panel */}
       <div className="bg-white/95 backdrop-blur-sm rounded-xl border border-gray-200/50 p-6">
-        
         {/* Platform Filter Tabs */}
         <div className="flex items-center gap-2 mb-6">
           <button
@@ -430,7 +429,9 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                 <p className="text-2xl font-bold font-condensed text-gray-900">
                   {metrics.avgRoas}
                 </p>
-                <p className="text-xs text-green-600 mt-1 font-mono">↑ 0.4x improvement</p>
+                <p className="text-xs text-green-600 mt-1 font-mono">
+                  ↑ 0.4x improvement
+                </p>
               </div>
               <TrendingUp className="h-8 w-8 text-orange-500" />
             </div>
@@ -576,7 +577,8 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
               Live Campaign Performance
             </h3>
             <p className="text-sm text-gray-600 mt-0.5">
-              Real-time data synchronized from Meta Business Suite and Google Ads
+              Real-time data synchronized from Meta Business Suite and Google
+              Ads
             </p>
           </div>
 
