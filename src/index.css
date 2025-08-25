@@ -330,7 +330,6 @@
 
   /* War Room pages - disable ALL hover effects and animations */
   [data-route='war-room'] .hoverable:hover,
-  [data-route='command-center'] .hoverable:hover,
   [data-route='campaign-control'] .hoverable:hover {
     border-color: var(--border-neutral, rgba(255, 255, 255, 0.15)) !important;
     transform: none !important;
