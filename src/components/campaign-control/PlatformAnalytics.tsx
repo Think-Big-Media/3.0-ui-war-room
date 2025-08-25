@@ -387,7 +387,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
               <p className="text-2xl font-bold font-condensed text-gray-900">
                 {metrics.totalImpressions}
               </p>
-              <p className="text-xs text-green-600 mt-1">
+              <p className="text-xs text-green-600 mt-1 font-mono">
                 ↑ 28% reach increase
               </p>
             </div>
