@@ -26,7 +26,11 @@ const InfluencerTracker: React.FC<InfluencerTrackerProps> = ({
   };
 
   return (
-    <Card padding="md" variant="glass" className="hoverable hover:scale-[1.02] transition-all duration-200">
+    <Card
+      padding="md"
+      variant="glass"
+      className="hoverable hover:scale-[1.02] transition-all duration-200"
+    >
       <h3 className="section-header mb-4 tracking-wide ml-1.5">
         INFLUENCER TRACKER
       </h3>

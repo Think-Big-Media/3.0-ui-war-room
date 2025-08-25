@@ -326,16 +326,16 @@
   }
 
   /* Disable all hover scale effects on War Room pages */
-  [data-route='war-room'] *[class*="hover:scale"],
-  [data-route='command-center'] *[class*="hover:scale"],
-  [data-route='campaign-control'] *[class*="hover:scale"] {
+  [data-route='war-room'] *[class*='hover:scale'],
+  [data-route='command-center'] *[class*='hover:scale'],
+  [data-route='campaign-control'] *[class*='hover:scale'] {
     transform: none !important;
     scale: 1 !important;
   }
 
-  [data-route='war-room'] *[class*="hover:scale"]:hover,
-  [data-route='command-center'] *[class*="hover:scale"]:hover,
-  [data-route='campaign-control'] *[class*="hover:scale"]:hover {
+  [data-route='war-room'] *[class*='hover:scale']:hover,
+  [data-route='command-center'] *[class*='hover:scale']:hover,
+  [data-route='campaign-control'] *[class*='hover:scale']:hover {
     transform: none !important;
     scale: 1 !important;
   }

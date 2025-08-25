@@ -85,7 +85,11 @@ const InformationStreamsTab: React.FC<InformationStreamsTabProps> = ({
       </div>
 
       {/* Filters */}
-      <Card className="hoverable hover:scale-[1.02] transition-all duration-200" padding="sm" variant="glass">
+      <Card
+        className="hoverable hover:scale-[1.02] transition-all duration-200"
+        padding="sm"
+        variant="glass"
+      >
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div className="flex items-center space-x-4">
             <div className="relative">

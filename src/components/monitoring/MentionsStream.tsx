@@ -79,7 +79,11 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
   ];
 
   return (
-    <Card padding="md" variant="glass" className="hoverable hover:scale-[1.02] transition-all duration-200">
+    <Card
+      padding="md"
+      variant="glass"
+      className="hoverable hover:scale-[1.02] transition-all duration-200"
+    >
       <div className="flex items-center justify-between mb-3">
         <h3 className="section-header tracking-wide ml-2">
           LIVE MENTIONS STREAM

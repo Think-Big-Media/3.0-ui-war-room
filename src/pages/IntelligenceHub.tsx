@@ -310,7 +310,10 @@ const IntelligenceHub: React.FC = () => {
         {activeTab === 'library' && (
           <div className="space-y-6 animate-in fade-in slide-in-from-bottom-5 duration-300">
             {/* Filter & Search */}
-            <Card className="hoverable hover:scale-[1.02] transition-all duration-200" padding="sm">
+            <Card
+              className="hoverable hover:scale-[1.02] transition-all duration-200"
+              padding="sm"
+            >
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div className="flex items-center space-x-2">
                   <Search className="w-5 h-5 text-white/50" />
@@ -402,7 +405,11 @@ const IntelligenceHub: React.FC = () => {
             </div>
 
             {chatQueries.map((query) => (
-              <Card key={query.id} className="hoverable hover:scale-[1.02] transition-all duration-200" padding="none">
+              <Card
+                key={query.id}
+                className="hoverable hover:scale-[1.02] transition-all duration-200"
+                padding="none"
+              >
                 <div className="px-4 pt-4 pb-4">
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex items-center space-x-2">

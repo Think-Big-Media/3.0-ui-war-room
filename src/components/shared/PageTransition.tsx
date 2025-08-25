@@ -40,11 +40,13 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
 
   // Check if transitioning to/from War Room (includes CommandCenter and CampaignControl)
   const isWarRoomTransition = (pathname: string): boolean => {
-    return pathname === '/campaign-control' ||
-           pathname === '/CommandCenter' ||
-           pathname === '/command-center' ||
-           pathname.includes('campaign-control') ||
-           pathname.includes('command-center');
+    return (
+      pathname === '/campaign-control' ||
+      pathname === '/CommandCenter' ||
+      pathname === '/command-center' ||
+      pathname.includes('campaign-control') ||
+      pathname.includes('command-center')
+    );
   };
 
   // Get transition classes based on route

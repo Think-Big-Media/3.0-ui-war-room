@@ -18,7 +18,11 @@ const MonitoringControls: React.FC<MonitoringControlsProps> = ({
   totalMentions = 12847,
 }) => {
   return (
-    <Card padding="sm" variant="glass" className="mb-4 hoverable hover:scale-[1.02] transition-all duration-200">
+    <Card
+      padding="sm"
+      variant="glass"
+      className="mb-4 hoverable hover:scale-[1.02] transition-all duration-200"
+    >
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2">
