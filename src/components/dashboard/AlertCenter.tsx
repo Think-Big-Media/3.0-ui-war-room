@@ -205,9 +205,7 @@ export const AlertCenter: React.FC = memo(() => {
           <div className="flex items-center space-x-3">
             <h2 className="text-lg font-semibold">Alert Center</h2>
             {criticalAlertsCount > 0 && (
-              <span
-                className="px-2 py-1 text-xs font-medium bg-red-500 text-white rounded-full scale-in"
-              >
+              <span className="px-2 py-1 text-xs font-medium bg-red-500 text-white rounded-full scale-in">
                 {criticalAlertsCount} critical
               </span>
             )}

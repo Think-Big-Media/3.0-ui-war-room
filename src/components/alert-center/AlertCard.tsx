@@ -64,9 +64,7 @@ const AlertCard: React.FC<AlertCardProps> = ({
 
             {/* Expanded Content */}
             {isExpanded && (
-              <div
-                className="mt-4 pt-4 border-t border-white/10 animate-in fade-in slide-in-from-top-2 duration-200"
-              >
+              <div className="mt-4 pt-4 border-t border-white/10 animate-in fade-in slide-in-from-top-2 duration-200">
                 <div className="space-y-3">
                   <div>
                     <h4 className="text-sm font-medium text-white/90 mb-1">

@@ -308,9 +308,7 @@ const IntelligenceHub: React.FC = () => {
 
         {/* Knowledge Library Tab */}
         {activeTab === 'library' && (
-          <div
-            className="space-y-6 animate-in fade-in slide-in-from-bottom-5 duration-300"
-          >
+          <div className="space-y-6 animate-in fade-in slide-in-from-bottom-5 duration-300">
             {/* Filter & Search */}
             <Card className="hoverable" padding="sm">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -389,9 +387,7 @@ const IntelligenceHub: React.FC = () => {
 
         {/* Chat History Tab */}
         {activeTab === 'chat' && (
-          <div
-            className="space-y-4 animate-in fade-in slide-in-from-bottom-5 duration-300"
-          >
+          <div className="space-y-4 animate-in fade-in slide-in-from-bottom-5 duration-300">
             <div className="flex items-center justify-between">
               <h3 className="section-header">Chat History & Saved Queries</h3>
               <div className="flex items-center space-x-2">

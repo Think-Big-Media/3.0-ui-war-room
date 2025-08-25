@@ -28,9 +28,7 @@ const AssetGrid: React.FC<AssetGridProps> = ({ assets }) => {
   };
 
   return (
-    <div
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 animate-in fade-in slide-in-from-bottom-5 duration-300"
-    >
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 animate-in fade-in slide-in-from-bottom-5 duration-300">
       {assets.map((asset) => (
         <AssetCard
           key={asset.id}

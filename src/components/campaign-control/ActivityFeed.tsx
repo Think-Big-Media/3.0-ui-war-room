@@ -11,9 +11,7 @@ interface ActivityFeedProps {
 
 const ActivityFeed: React.FC<ActivityFeedProps> = ({ activities }) => {
   return (
-    <div
-      className="space-y-6 animate-in fade-in slide-in-from-bottom-5 duration-300"
-    >
+    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-5 duration-300">
       <Card padding="md" variant="glass">
         <h3
           className="text-xl font-semibold text-white/40 mb-4 font-condensed tracking-wide ml-1.5"

@@ -67,9 +67,7 @@ const InformationStreamsTab: React.FC<InformationStreamsTabProps> = ({
   ];
 
   return (
-    <div
-      className="space-y-6 animate-in fade-in slide-in-from-bottom-5 duration-300"
-    >
+    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-5 duration-300">
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {stats.map((stat, index) => (

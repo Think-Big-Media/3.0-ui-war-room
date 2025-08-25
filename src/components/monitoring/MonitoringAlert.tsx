@@ -26,9 +26,7 @@ const MonitoringAlert: React.FC<MonitoringAlertProps> = ({
 
   return (
     <div className="mb-2">
-      <div
-        className="bg-red-500/20 rounded-lg p-4 flex items-center justify-between hoverable animate-in fade-in slide-in-from-bottom-2 duration-300"
-      >
+      <div className="bg-red-500/20 rounded-lg p-4 flex items-center justify-between hoverable animate-in fade-in slide-in-from-bottom-2 duration-300">
         <div className="flex items-center space-x-3">
           <AlertCircle className="w-5 h-5 text-red-400" />
           <div className="flex items-center">

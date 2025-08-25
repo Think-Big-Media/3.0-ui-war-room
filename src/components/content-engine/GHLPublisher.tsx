@@ -31,7 +31,7 @@ const GHLPublisher: React.FC<GHLPublisherProps> = ({ onPublishSuccess }) => {
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
   const [contentText, setContentText] = useState('');
   const [scheduleDate, setScheduleDate] = useState(
-    new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().slice(0, 16),
+    new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().slice(0, 16)
   );
 
   const ghlPost = useGHLPost();
@@ -40,7 +40,7 @@ const GHLPublisher: React.FC<GHLPublisherProps> = ({ onPublishSuccess }) => {
     setSelectedPlatforms((prev) =>
       prev.includes(platform)
         ? prev.filter((p) => p !== platform)
-        : [...prev, platform],
+        : [...prev, platform]
     );
   };
 
@@ -65,7 +65,7 @@ const GHLPublisher: React.FC<GHLPublisherProps> = ({ onPublishSuccess }) => {
       setSelectedPlatforms([]);
       setContentText('');
       setScheduleDate(
-        new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().slice(0, 16),
+        new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().slice(0, 16)
       );
 
       onPublishSuccess?.();

@@ -321,118 +321,114 @@ const GoogleAdsIntegration: React.FC = () => {
       </div>
 
       {/* Campaign Data - Hidden for compact view */}
-        {false && (
-          <div
-            className="mt-6 space-y-4 animate-in fade-in slide-in-from-top-2 duration-300"
-          >
-            <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-              <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center space-x-2">
-                <BarChart3 className="w-5 h-5 text-[#4285F4]" />
-                <span>Active Campaigns</span>
-              </h4>
+      {false && (
+        <div className="mt-6 space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
+          <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+            <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center space-x-2">
+              <BarChart3 className="w-5 h-5 text-[#4285F4]" />
+              <span>Active Campaigns</span>
+            </h4>
 
-              {/* Campaign Cards */}
-              <div className="space-y-3">
-                {mockCampaignData.map((campaign) => (
-                  <div
-                    key={campaign.id}
-                    className="bg-gray-50 rounded-lg p-4 border border-gray-200"
-                  >
-                    <div className="flex items-center justify-between mb-3">
-                      <div>
-                        <h5 className="font-medium text-gray-900">
-                          {campaign.name}
-                        </h5>
-                        <span
-                          className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium mt-1 ${
-                            campaign.status === 'active'
-                              ? 'bg-green-100 text-green-800'
-                              : 'bg-yellow-100 text-yellow-800'
-                          }`}
-                        >
-                          {campaign.status === 'active' ? 'Active' : 'Paused'}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Campaign Metrics */}
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-                      <div>
-                        <div className="flex items-center space-x-1 text-gray-600 text-xs mb-1">
-                          <Activity className="w-3 h-3" />
-                          <span>Impressions</span>
-                        </div>
-                        <p className="text-gray-900 font-medium">
-                          {formatNumber(campaign.impressions)}
-                        </p>
-                      </div>
-                      <div>
-                        <div className="flex items-center space-x-1 text-gray-600 text-xs mb-1">
-                          <MousePointerClick className="w-3 h-3" />
-                          <span>Clicks</span>
-                        </div>
-                        <p className="text-gray-900 font-medium">
-                          {formatNumber(campaign.clicks)}
-                        </p>
-                      </div>
-                      <div>
-                        <div className="flex items-center space-x-1 text-gray-600 text-xs mb-1">
-                          <DollarSign className="w-3 h-3" />
-                          <span>Cost</span>
-                        </div>
-                        <p className="text-gray-900 font-medium">
-                          {formatCurrency(campaign.cost)}
-                        </p>
-                      </div>
-                      <div>
-                        <div className="flex items-center space-x-1 text-gray-600 text-xs mb-1">
-                          <TrendingUp className="w-3 h-3" />
-                          <span>CTR</span>
-                        </div>
-                        <p className="text-gray-900 font-medium">
-                          {campaign.ctr}%
-                        </p>
-                      </div>
-                      <div>
-                        <div className="flex items-center space-x-1 text-gray-600 text-xs mb-1">
-                          <Target className="w-3 h-3" />
-                          <span>Conversions</span>
-                        </div>
-                        <p className="text-gray-900 font-medium">
-                          {formatNumber(campaign.conversions)}
-                        </p>
-                      </div>
+            {/* Campaign Cards */}
+            <div className="space-y-3">
+              {mockCampaignData.map((campaign) => (
+                <div
+                  key={campaign.id}
+                  className="bg-gray-50 rounded-lg p-4 border border-gray-200"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <div>
+                      <h5 className="font-medium text-gray-900">
+                        {campaign.name}
+                      </h5>
+                      <span
+                        className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium mt-1 ${
+                          campaign.status === 'active'
+                            ? 'bg-green-100 text-green-800'
+                            : 'bg-yellow-100 text-yellow-800'
+                        }`}
+                      >
+                        {campaign.status === 'active' ? 'Active' : 'Paused'}
+                      </span>
                     </div>
                   </div>
-                ))}
-              </div>
 
-              {/* Summary Stats */}
-              <div className="mt-4 pt-4 border-t border-gray-200">
-                <div className="grid grid-cols-4 gap-4">
-                  <div className="text-center">
-                    <p className="text-gray-600 text-sm">Total Impressions</p>
-                    <p className="text-xl font-bold text-gray-900">1.4M</p>
+                  {/* Campaign Metrics */}
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                    <div>
+                      <div className="flex items-center space-x-1 text-gray-600 text-xs mb-1">
+                        <Activity className="w-3 h-3" />
+                        <span>Impressions</span>
+                      </div>
+                      <p className="text-gray-900 font-medium">
+                        {formatNumber(campaign.impressions)}
+                      </p>
+                    </div>
+                    <div>
+                      <div className="flex items-center space-x-1 text-gray-600 text-xs mb-1">
+                        <MousePointerClick className="w-3 h-3" />
+                        <span>Clicks</span>
+                      </div>
+                      <p className="text-gray-900 font-medium">
+                        {formatNumber(campaign.clicks)}
+                      </p>
+                    </div>
+                    <div>
+                      <div className="flex items-center space-x-1 text-gray-600 text-xs mb-1">
+                        <DollarSign className="w-3 h-3" />
+                        <span>Cost</span>
+                      </div>
+                      <p className="text-gray-900 font-medium">
+                        {formatCurrency(campaign.cost)}
+                      </p>
+                    </div>
+                    <div>
+                      <div className="flex items-center space-x-1 text-gray-600 text-xs mb-1">
+                        <TrendingUp className="w-3 h-3" />
+                        <span>CTR</span>
+                      </div>
+                      <p className="text-gray-900 font-medium">
+                        {campaign.ctr}%
+                      </p>
+                    </div>
+                    <div>
+                      <div className="flex items-center space-x-1 text-gray-600 text-xs mb-1">
+                        <Target className="w-3 h-3" />
+                        <span>Conversions</span>
+                      </div>
+                      <p className="text-gray-900 font-medium">
+                        {formatNumber(campaign.conversions)}
+                      </p>
+                    </div>
                   </div>
-                  <div className="text-center">
-                    <p className="text-gray-600 text-sm">Total Cost</p>
-                    <p className="text-xl font-bold text-gray-900">
-                      $11,527.77
-                    </p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-gray-600 text-sm">Avg. CPC</p>
-                    <p className="text-xl font-bold text-gray-900">$0.31</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-gray-600 text-sm">Conversions</p>
-                    <p className="text-xl font-bold text-gray-900">1,582</p>
-                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Summary Stats */}
+            <div className="mt-4 pt-4 border-t border-gray-200">
+              <div className="grid grid-cols-4 gap-4">
+                <div className="text-center">
+                  <p className="text-gray-600 text-sm">Total Impressions</p>
+                  <p className="text-xl font-bold text-gray-900">1.4M</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-gray-600 text-sm">Total Cost</p>
+                  <p className="text-xl font-bold text-gray-900">$11,527.77</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-gray-600 text-sm">Avg. CPC</p>
+                  <p className="text-xl font-bold text-gray-900">$0.31</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-gray-600 text-sm">Conversions</p>
+                  <p className="text-xl font-bold text-gray-900">1,582</p>
                 </div>
               </div>
             </div>
           </div>
-        )}
+        </div>
+      )}
     </div>
   );
 };

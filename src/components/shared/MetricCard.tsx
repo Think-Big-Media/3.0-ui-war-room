@@ -25,7 +25,15 @@ const MetricCard: React.FC<MetricCardProps> = ({
   className,
 }) => {
   // Determine trend if not provided
-  const calculatedTrend = trend || (change ? (change > 0 ? 'up' : change < 0 ? 'down' : 'neutral') : 'neutral');
+  const calculatedTrend =
+    trend ||
+    (change
+      ? change > 0
+        ? 'up'
+        : change < 0
+          ? 'down'
+          : 'neutral'
+      : 'neutral');
 
   const getTrendIcon = () => {
     switch (calculatedTrend) {
@@ -63,7 +71,8 @@ const MetricCard: React.FC<MetricCardProps> = ({
               <div className={cn('flex items-center gap-1', getTrendColor())}>
                 <TrendIcon className="w-4 h-4" />
                 <span className="text-sm font-medium">
-                  {change > 0 ? '+' : ''}{change}%
+                  {change > 0 ? '+' : ''}
+                  {change}%
                 </span>
               </div>
               {changeLabel && (
@@ -76,7 +85,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
         <div
           className={cn(
             'p-3 rounded-xl bg-white/10 backdrop-blur-sm transition-transform hover:scale-110',
-            iconColor,
+            iconColor
           )}
         >
           <Icon className="w-6 h-6" />
