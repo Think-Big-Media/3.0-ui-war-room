@@ -352,7 +352,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
 
       {/* Platform Overview Cards */}
       <div className="grid grid-cols-4 gap-4">
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white/95 backdrop-blur-sm rounded-lg border border-gray-200/50 p-4">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-gray-600">
