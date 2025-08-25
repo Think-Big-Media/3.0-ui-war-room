@@ -239,7 +239,7 @@ const CampaignOperationsHub: React.FC = () => {
 
   return (
     <Card
-      className="group hover:border-orange-400/50 hover:bg-white/15 fade-in"
+      className="group hover:border-orange-400/50 hover:bg-white/15 hover:scale-[1.02] transition-all duration-200 fade-in"
       padding="md"
       variant="glass"
     >
@@ -274,7 +274,7 @@ const CampaignOperationsHub: React.FC = () => {
               <div
                 key={index}
                 onClick={() => handleProjectClick(cluster.title)}
-                className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-purple-400/20 hover:border-orange-400/30 hover:bg-white/15 transition-all duration-300 cursor-pointer"
+                className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-purple-400/20 hover:border-orange-400/30 hover:bg-white/15 hover:scale-[1.02] transition-all duration-200 cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-2">
                   <h5 className="content-title">{cluster.title}</h5>
@@ -334,7 +334,7 @@ const CampaignOperationsHub: React.FC = () => {
               <div
                 key={index}
                 onClick={() => handleTemplateClick(template.name)}
-                className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-purple-400/20 hover:border-orange-400/30 hover:bg-white/15 transition-all duration-300 text-center cursor-pointer"
+                className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-purple-400/20 hover:border-orange-400/30 hover:bg-white/15 hover:scale-[1.02] transition-all duration-200 text-center cursor-pointer"
               >
                 <h5 className="content-title mb-1">{template.name}</h5>
                 <p className="text-xs text-white/65">{template.type}</p>
