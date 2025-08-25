@@ -34,6 +34,8 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         output: {
           manualChunks: (id) => {
+            // Only split if module actually exists
+            if (!id) return;
             // Aggressive code splitting for better caching and smaller chunks
             if (id.includes('node_modules')) {
               if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
@@ -74,11 +76,11 @@ export default defineConfig(({ mode }) => {
         },
         // External dependencies that should not be bundled
         external: [],
-        // Tree-shaking optimizations
+        // Tree-shaking optimizations - FIXED to not eliminate everything
         treeshake: {
-          moduleSideEffects: false,
-          propertyReadSideEffects: false,
-          tryCatchDeoptimization: false
+          moduleSideEffects: true,  // Allow side effects
+          propertyReadSideEffects: true,
+          tryCatchDeoptimization: true
         }
       },
       // Disable source maps in production for smaller bundle
