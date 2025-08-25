@@ -446,6 +446,20 @@
     .mobile-menu-panel {
       width: 280px !important;
     }
+
+    /* Ensure touch targets are at least 44px high */
+    .mobile-menu-panel .nav-item {
+      min-height: 44px;
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+    }
+  }
+
+  /* Mobile menu backdrop blur optimization */
+  @supports (backdrop-filter: blur(8px)) {
+    .mobile-menu-backdrop {
+      backdrop-filter: blur(8px);
+    }
   }
 
   /* Mobile menu slide animation */
