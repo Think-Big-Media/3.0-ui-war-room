@@ -225,14 +225,15 @@ const TopNavigation: React.FC = () => {
                     '--item-accent': item.accent,
                   } as React.CSSProperties
                 }
-                className={`nav-item group px-3 py-1 rounded-lg text-sm flex items-center space-x-1 ${
+                className={`nav-item group px-2 lg:px-3 py-1 rounded-lg text-xs lg:text-sm flex items-center space-x-1 ${
                   item.active
                     ? getNavActiveClasses(item.theme)
                     : 'text-white/70 hover:text-white hover:bg-white/10 hover:shadow-lg'
                 }`}
               >
+                {/* Hide icons on tablet, show on large screens */}
                 <item.icon
-                  className={`icon w-4 h-4 flex-shrink-0 ${
+                  className={`icon w-4 h-4 flex-shrink-0 hidden lg:block ${
                     item.active
                       ? getNavIconActiveClasses(item.theme)
                       : getNavIconHoverClasses(item.theme)
