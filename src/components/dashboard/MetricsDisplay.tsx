@@ -51,12 +51,7 @@ const MetricCard = memo<MetricCardProps>(
     const isPositiveChange = change && change > 0;
 
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.2 }}
-        className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700 will-change-transform"
-      >
+      <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700 will-change-transform fade-in">
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
             {label}
@@ -65,29 +60,15 @@ const MetricCard = memo<MetricCardProps>(
         </div>
 
         <div className="flex items-baseline justify-between">
-          <AnimatePresence mode="wait">
-            {loading ? (
-              <motion.div
-                key="loading"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="h-8 w-24 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"
-              />
-            ) : (
-              <motion.span
-                key={value}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                className="text-2xl font-bold text-gray-900 dark:text-white"
-              >
-                {prefix}
-                {value}
-                {suffix}
-              </motion.span>
-            )}
-          </AnimatePresence>
+          {loading ? (
+            <div className="h-8 w-24 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
+          ) : (
+            <span className="text-2xl font-bold text-gray-900 dark:text-white">
+              {prefix}
+              {value}
+              {suffix}
+            </span>
+          )}
 
           {change !== undefined && !loading && (
             <div
@@ -104,7 +85,7 @@ const MetricCard = memo<MetricCardProps>(
             </div>
           )}
         </div>
-      </motion.div>
+      </div>
     );
   }
 );
