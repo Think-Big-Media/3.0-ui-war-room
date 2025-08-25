@@ -257,39 +257,27 @@ export const MetricsDisplay: React.FC = memo(() => {
   return (
     <div className="space-y-6">
       {/* Connection Status */}
-      <AnimatePresence>
-        {showConnectionWarning && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3"
-          >
-            <div className="flex items-center space-x-2">
-              <WifiOff size={16} className="text-red-600" />
-              <p className="text-sm text-red-800 dark:text-red-200">
-                Unable to connect to live campaign data. Using fallback data.
-              </p>
-            </div>
-          </motion.div>
-        )}
-        {!showConnectionWarning && campaignData && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3"
-          >
-            <div className="flex items-center space-x-2">
-              <Wifi size={16} className="text-green-600" />
-              <p className="text-sm text-green-800 dark:text-green-200">
-                Live data connected • Last sync:{' '}
-                {new Date(campaignData.last_sync).toLocaleTimeString()}
-              </p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {showConnectionWarning && (
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3 fade-in">
+          <div className="flex items-center space-x-2">
+            <WifiOff size={16} className="text-red-600" />
+            <p className="text-sm text-red-800 dark:text-red-200">
+              Unable to connect to live campaign data. Using fallback data.
+            </p>
+          </div>
+        </div>
+      )}
+      {!showConnectionWarning && campaignData && (
+        <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3 fade-in">
+          <div className="flex items-center space-x-2">
+            <Wifi size={16} className="text-green-600" />
+            <p className="text-sm text-green-800 dark:text-green-200">
+              Live data connected • Last sync:{' '}
+              {new Date(campaignData.last_sync).toLocaleTimeString()}
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Aggregated Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
