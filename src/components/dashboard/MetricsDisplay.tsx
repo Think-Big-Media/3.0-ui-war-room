@@ -101,7 +101,7 @@ const PlatformMetrics = memo<PlatformMetricsProps>(
           <h3 className="text-lg font-semibold mb-3 uppercase font-condensed tracking-wide text-white/40">
             {platform} ADS
           </h3>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-4">
             {[1, 2, 3, 4].map((i) => (
               <div
                 key={i}
@@ -144,7 +144,7 @@ const PlatformMetrics = memo<PlatformMetricsProps>(
           </span>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-4">
           <div className="bg-white dark:bg-gray-800 rounded p-3">
             <p className="text-sm text-gray-600 dark:text-gray-400">Spend</p>
             <p className="text-lg font-bold">
@@ -319,7 +319,7 @@ export const MetricsDisplay: React.FC = memo(() => {
       </div>
 
       {/* Platform-Specific Metrics */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <PlatformMetrics
           platform="meta"
           metrics={metaMetrics}
