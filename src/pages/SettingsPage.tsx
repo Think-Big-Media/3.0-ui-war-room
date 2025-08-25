@@ -52,7 +52,7 @@ const SettingsSection: React.FC<SettingsSectionProps> = ({
 }) => {
   return (
     <Card
-      className="hoverable"
+      className="hoverable hover:scale-[1.02] transition-all duration-200"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay }}
@@ -408,7 +408,7 @@ const SettingsPage: React.FC = () => {
           ref={integrationsRef}
           style={{ animationDelay: '0.7s' }}
         >
-          <Card className="hoverable" padding="lg" variant="glass">
+          <Card className="hoverable hover:scale-[1.02] transition-all duration-200" padding="lg" variant="glass">
             <div className="flex items-center space-x-3 mb-6">
               <div className="p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20">
                 <Link2 className="w-6 h-6 text-white/95" />
