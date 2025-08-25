@@ -1,7 +1,6 @@
 // Mentions Stream Component
 
 import type React from 'react';
-import { motion } from 'framer-motion';
 import { Heart, MapPin, Globe, BarChart3, TrendingUp } from 'lucide-react';
 import Card from '../shared/Card';
 import CustomDropdown from '../shared/CustomDropdown';
@@ -111,11 +110,9 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
 
       <div className="space-y-3 max-h-96 overflow-y-auto scroll-fade">
         {mentions.map((mention) => (
-          <motion.div
+          <div
             key={mention.id}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-black/20 rounded-lg p-6 hoverable"
+            className="bg-black/20 rounded-lg p-6 hoverable animate-in fade-in slide-in-from-bottom-2 duration-300"
           >
             <div className="flex items-start justify-between mb-2">
               <div className="flex items-center space-x-2">
@@ -161,7 +158,7 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
                 </button>
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </Card>

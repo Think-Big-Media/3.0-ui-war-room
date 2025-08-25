@@ -1,7 +1,6 @@
 // Trending Topics Component
 
 import type React from 'react';
-import { motion } from 'framer-motion';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 import Card from '../shared/Card';
 import { type TrendingTopic } from '../../types/monitoring';
@@ -32,10 +31,9 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {topics.map((topic) => (
-          <motion.div
+          <div
             key={topic.id}
-            whileHover={{ scale: 1.02 }}
-            className="bg-black/20 rounded-lg p-6 hoverable cursor-pointer"
+            className="bg-black/20 rounded-lg p-6 hoverable cursor-pointer hover:scale-[1.02] transition-transform duration-200"
           >
             <div className="flex items-center justify-between mb-2 -mt-2">
               <h4 className="font-medium text-white/95">{topic.keyword}</h4>
@@ -74,7 +72,7 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
                 Draft response
               </button>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </Card>

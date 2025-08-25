@@ -1,7 +1,6 @@
 // Monitoring Alert Component
 
 import type React from 'react';
-import { motion } from 'framer-motion';
 import { AlertCircle } from 'lucide-react';
 import { createLogger } from '../../utils/logger';
 
@@ -27,10 +26,8 @@ const MonitoringAlert: React.FC<MonitoringAlertProps> = ({
 
   return (
     <div className="mb-2">
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="bg-red-500/20 rounded-lg p-4 flex items-center justify-between hoverable"
+      <div
+        className="bg-red-500/20 rounded-lg p-4 flex items-center justify-between hoverable animate-in fade-in slide-in-from-bottom-2 duration-300"
       >
         <div className="flex items-center space-x-3">
           <AlertCircle className="w-5 h-5 text-red-400" />
@@ -53,7 +50,7 @@ const MonitoringAlert: React.FC<MonitoringAlertProps> = ({
             {actionText}
           </button>
         )}
-      </motion.div>
+      </div>
     </div>
   );
 };
