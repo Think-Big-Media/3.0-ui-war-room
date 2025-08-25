@@ -11,18 +11,18 @@
   overflow: hidden;
 }
 
-/* Elegant crossfade transition */
+/* Elegant crossfade transition - smoother and less harsh */
 .page-enter {
   opacity: 0;
-  transform: translateY(20px) scale(0.98);
-  filter: blur(8px);
+  transform: translateY(10px) scale(0.99);
+  filter: blur(3px);
 }
 
 .page-enter-active {
   opacity: 1;
   transform: translateY(0) scale(1);
   filter: blur(0px);
-  transition: all 800ms cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .page-exit {
@@ -33,9 +33,9 @@
 
 .page-exit-active {
   opacity: 0;
-  transform: translateY(-20px) scale(1.02);
-  filter: blur(4px);
-  transition: all 600ms cubic-bezier(0.76, 0, 0.24, 1);
+  transform: translateY(-5px) scale(1.01);
+  filter: blur(2px);
+  transition: all 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* War Room special entrance - dramatic reveal */
