@@ -59,7 +59,7 @@ export const DataToggleButton: React.FC = () => {
           {/* Animated indicator dot */}
           <div className={`
             absolute -top-1 -right-1 w-3 h-3 rounded-full
-            ${isMock ? 'bg-yellow-300' : 'bg-green-400'}
+            ${isMock ? 'bg-yellow-300' : 'bg-[var(--accent-live-monitoring)]'}
             animate-ping
           `} />
         </button>

@@ -30,7 +30,7 @@ const SentimentBreakdown: React.FC<SentimentBreakdownProps> = ({
         </div>
         <div className="w-full bg-black/20 rounded-full h-2">
           <div
-            className={`bg-green-400 h-2 rounded-full ${getSentimentWidth(sentimentData.positive)}`}
+            className={`bg-[var(--accent-live-monitoring)] h-2 rounded-full ${getSentimentWidth(sentimentData.positive)}`}
           />
         </div>
 
