@@ -188,17 +188,30 @@ const TopNavigation: React.FC = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
         <div className="flex items-center justify-between h-16">
-          {/* Logo/Brand */}
+          {/* Logo/Brand - Responsive */}
           <div className="flex items-center ml-[10px]">
+            {/* Full logo for large screens */}
             <img
               src="/images/WarRoom_Logo_White.png"
               alt="War Room"
-              className="h-[26px] w-auto"
+              className="hidden lg:block h-[26px] w-auto"
+            />
+            {/* Logomark for tablet */}
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F8686f311497044c0932b7d2247296478%2Ff489a630137d4a28b75e743a04ae8f49?format=webp&width=800"
+              alt="War Room"
+              className="hidden md:block lg:hidden h-[28px] w-auto"
+            />
+            {/* Small logo for mobile header */}
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F8686f311497044c0932b7d2247296478%2Ff489a630137d4a28b75e743a04ae8f49?format=webp&width=800"
+              alt="War Room"
+              className="block md:hidden h-[24px] w-auto"
             />
           </div>
 
-          {/* Navigation Items - Compact spacing */}
-          <div className="hidden md:flex items-center space-x-2">
+          {/* Navigation Items - Responsive */}
+          <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
             {navItems.map((item, index) => (
               <button
                 key={index}
