@@ -115,7 +115,7 @@ const CampaignControl: React.FC = () => {
 
         {/* Strategic Projects Board */}
         {activeTab === 'projects' && (
-          <div className="space-y-2">
+          <div className="space-y-4">
             <ProjectControls
               filters={projectFilters}
               onFiltersChange={setProjectFilters}
@@ -130,7 +130,7 @@ const CampaignControl: React.FC = () => {
 
         {/* Asset Library */}
         {activeTab === 'assets' && (
-          <div className="space-y-2">
+          <div className="space-y-4">
             <AssetControls
               filters={assetFilters}
               onFiltersChange={setAssetFilters}
