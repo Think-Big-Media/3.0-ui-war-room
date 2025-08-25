@@ -1,6 +1,7 @@
 /**
  * War Room Platform - Application Entry Point
  * Clean, simple, no legacy code
+ * Build: 20250825-fix-render-deployment
  */
 
 import React from 'react';
