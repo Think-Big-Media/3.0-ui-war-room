@@ -659,10 +659,9 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
             </thead>
             <tbody className="divide-y divide-gray-200">
               {filteredCampaigns.map((campaign) => (
-                <motion.tr
+                <tr
                   key={campaign.id}
-                  className="hover:bg-gray-50"
-                  whileTap={{ scale: 0.999 }}
+                  className="hover:bg-gray-50 active:scale-[0.999] transition-transform duration-100"
                 >
                   <td
                     className={`${densityStyles.padding} sticky left-0 bg-white`}
@@ -835,7 +834,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                       </div>
                     </td>
                   )}
-                </motion.tr>
+                </tr>
               ))}
             </tbody>
           </table>
