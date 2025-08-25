@@ -448,10 +448,10 @@ const TopNavigation: React.FC = () => {
                       '--item-accent': item.accent,
                       minHeight: '48px' // Ensure proper touch targets
                     } as React.CSSProperties}
-                    className={`nav-item group w-full px-4 py-2.5 rounded-lg font-medium flex items-center space-x-3 text-sm ${
+                    className={`nav-item group w-full px-4 py-3 rounded-xl font-medium flex items-center space-x-4 text-base transition-all duration-200 ${
                       item.active
-                        ? `text-white font-semibold border-l-4 border-l-white/20`
-                        : 'text-white/80 hover:bg-white/10'
+                        ? 'text-white font-semibold bg-white/15 border-l-4 border-l-white shadow-lg'
+                        : 'text-white/90 hover:bg-white/10 hover:text-white hover:scale-[1.02]'
                     }`}
                     aria-current={item.active ? 'page' : undefined}
                   >
