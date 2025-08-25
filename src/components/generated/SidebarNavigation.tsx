@@ -205,10 +205,13 @@ const TopNavigation: React.FC = () => {
                 onClick={() => handleNavigation(item.path)}
                 aria-current={item.active ? 'page' : undefined}
                 data-route={item.route}
-                style={{
-                  transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                  '--item-accent': item.accent
-                } as React.CSSProperties}
+                style={
+                  {
+                    transition:
+                      'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    '--item-accent': item.accent,
+                  } as React.CSSProperties
+                }
                 className={`nav-item group px-3 py-1 rounded-lg text-sm flex items-center space-x-1 ${
                   item.active
                     ? getNavActiveClasses(item.theme)
@@ -222,13 +225,16 @@ const TopNavigation: React.FC = () => {
                       : getNavIconHoverClasses(item.theme)
                   }`}
                   style={{
-                    transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                    ...(item.icon === Home ? {
-                      // More aggressive positioning - both states need similar adjustments
-                      marginTop: '-3px',      // Move up 3 pixels for better alignment
-                      marginLeft: '-4px',     // Move left 4 pixels relative to text
-                      marginRight: '1px'      // Compensate spacing
-                    } : {})
+                    transition:
+                      'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    ...(item.icon === Home
+                      ? {
+                          // More aggressive positioning - both states need similar adjustments
+                          marginTop: '-3px', // Move up 3 pixels for better alignment
+                          marginLeft: '-4px', // Move left 4 pixels relative to text
+                          marginRight: '1px', // Compensate spacing
+                        }
+                      : {}),
                   }}
                 />
                 <span
@@ -240,7 +246,8 @@ const TopNavigation: React.FC = () => {
                       : ''
                   }`}
                   style={{
-                    transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                    transition:
+                      'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                   }}
                 >
                   {item.label}
@@ -256,7 +263,9 @@ const TopNavigation: React.FC = () => {
               <button
                 onClick={() => setShowNotifications(!showNotifications)}
                 className="p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 hover:shadow-md relative"
-                style={{ transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}
+                style={{
+                  transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                }}
               >
                 <Bell className="w-5 h-5" />
                 {unreadAlerts.length > 0 && (
@@ -351,7 +360,9 @@ const TopNavigation: React.FC = () => {
             <button
               onClick={() => navigate('/settings')}
               className="p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 hover:shadow-md"
-              style={{ transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}
+              style={{
+                transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+              }}
             >
               <User className="w-5 h-5" />
             </button>
@@ -360,7 +371,9 @@ const TopNavigation: React.FC = () => {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 hover:shadow-md"
-              style={{ transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}
+              style={{
+                transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+              }}
             >
               <Menu className="w-6 h-6" />
             </button>
@@ -375,7 +388,9 @@ const TopNavigation: React.FC = () => {
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="p-2 rounded-lg text-white/70 hover:bg-white/10"
-                style={{ transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}
+                style={{
+                  transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                }}
               >
                 <X className="w-6 h-6" />
               </button>
@@ -390,10 +405,13 @@ const TopNavigation: React.FC = () => {
                     handleNavigation(item.path);
                     setIsMobileMenuOpen(false);
                   }}
-                  style={{
-                    transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                    '--item-accent': item.accent
-                  } as React.CSSProperties}
+                  style={
+                    {
+                      transition:
+                        'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                      '--item-accent': item.accent,
+                    } as React.CSSProperties
+                  }
                   className={`nav-item group w-full px-6 py-4 rounded-lg font-semibold flex items-center space-x-3 ${
                     item.active
                       ? `text-white font-extrabold border-l-4 border-l-white/20`
