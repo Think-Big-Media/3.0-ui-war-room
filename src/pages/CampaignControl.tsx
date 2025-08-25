@@ -115,7 +115,7 @@ const CampaignControl: React.FC = () => {
 
         {/* Strategic Projects Board */}
         {activeTab === 'projects' && (
-          <div className="space-y-6">
+          <div className="space-y-2">
             <ProjectControls
               filters={projectFilters}
               onFiltersChange={setProjectFilters}
