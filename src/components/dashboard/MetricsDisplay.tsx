@@ -6,7 +6,6 @@
 
 import type React from 'react';
 import { memo, useMemo, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import {
   TrendingUp,
   TrendingDown,
