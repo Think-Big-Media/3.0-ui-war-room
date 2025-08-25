@@ -35,7 +35,10 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
         icon: RotateCcw,
         color: 'text-blue-600 bg-blue-50',
         label: 'Connecting...',
-        description: reconnectAttempts > 0 ? `Retry ${reconnectAttempts}/${maxReconnectAttempts}` : 'Establishing connection',
+        description:
+          reconnectAttempts > 0
+            ? `Retry ${reconnectAttempts}/${maxReconnectAttempts}`
+            : 'Establishing connection',
       };
     }
 
@@ -53,7 +56,10 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
         icon: AlertTriangle,
         color: 'text-red-600 bg-red-50',
         label: 'Connection Error',
-        description: reconnectAttempts >= maxReconnectAttempts ? 'Max retries reached' : error,
+        description:
+          reconnectAttempts >= maxReconnectAttempts
+            ? 'Max retries reached'
+            : error,
       };
     }
 
@@ -72,14 +78,11 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
     return (
       <div className={cn('flex items-center space-x-2', className)}>
         <div className={cn('p-1 rounded-full', config.color)}>
-          <Icon
-            className={cn(
-              'w-3 h-3',
-              isConnecting && 'animate-spin',
-            )}
-          />
+          <Icon className={cn('w-3 h-3', isConnecting && 'animate-spin')} />
         </div>
-        <span className="text-xs font-medium text-gray-700">{config.label}</span>
+        <span className="text-xs font-medium text-gray-700">
+          {config.label}
+        </span>
       </div>
     );
   }
@@ -90,27 +93,35 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
       animate={{ opacity: 1, y: 0 }}
       className={cn(
         'flex items-center justify-between p-3 rounded-lg border',
-        config.color.includes('green') ? 'border-green-200' :
-          config.color.includes('red') ? 'border-red-200' :
-            config.color.includes('blue') ? 'border-blue-200' :
-              'border-gray-200',
+        config.color.includes('green')
+          ? 'border-green-200'
+          : config.color.includes('red')
+            ? 'border-red-200'
+            : config.color.includes('blue')
+              ? 'border-blue-200'
+              : 'border-gray-200',
         config.color,
-        className,
+        className
       )}
     >
       <div className="flex items-center space-x-3">
-        <div className={cn(
-          'p-2 rounded-lg',
-          config.color.includes('green') ? 'bg-green-100' :
-            config.color.includes('red') ? 'bg-red-100' :
-              config.color.includes('blue') ? 'bg-blue-100' :
-                'bg-gray-100',
-        )}>
+        <div
+          className={cn(
+            'p-2 rounded-lg',
+            config.color.includes('green')
+              ? 'bg-green-100'
+              : config.color.includes('red')
+                ? 'bg-red-100'
+                : config.color.includes('blue')
+                  ? 'bg-blue-100'
+                  : 'bg-gray-100'
+          )}
+        >
           <Icon
             className={cn(
               'w-4 h-4',
               isConnecting && 'animate-spin',
-              config.color.split(' ')[0], // Extract text color
+              config.color.split(' ')[0] // Extract text color
             )}
           />
         </div>
@@ -119,9 +130,7 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
           <p className={cn('text-sm font-medium', config.color.split(' ')[0])}>
             {config.label}
           </p>
-          <p className="text-xs text-gray-500">
-            {config.description}
-          </p>
+          <p className="text-xs text-gray-500">{config.description}</p>
         </div>
       </div>
 
