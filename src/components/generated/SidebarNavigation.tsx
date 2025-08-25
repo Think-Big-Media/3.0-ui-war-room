@@ -403,7 +403,10 @@ const TopNavigation: React.FC = () => {
 
         {/* Mobile Menu Full Screen Overlay */}
         {isMobileMenuOpen && (
-          <div className="md:hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-60">
+          <div
+            className="md:hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-60"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
             {/* Right-side menu panel */}
             <div className="absolute right-0 top-0 h-full w-80 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 shadow-2xl mobile-menu-panel">
               {/* Header with Logo and Close Button */}
