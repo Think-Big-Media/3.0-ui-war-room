@@ -335,12 +335,7 @@ export const MetricsDisplay: React.FC = memo(() => {
 
       {/* Spend Distribution Chart */}
       {campaignData && totalSpend > 0 && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm"
-        >
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm fade-in">
           <h3 className="text-lg font-semibold mb-4">Spend Distribution</h3>
           <div className="flex items-center space-x-4">
             <div className="flex-1">
@@ -355,23 +350,15 @@ export const MetricsDisplay: React.FC = memo(() => {
 
                   return (
                     <>
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{
+                      <div
+                        style={{
                           width: `${(metaSpend / totalSpend) * 100}%`,
                         }}
-                        transition={{ duration: 0.5, ease: 'easeOut' }}
                         className="bg-blue-500"
                       />
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{
+                      <div
+                        style={{
                           width: `${(googleSpend / totalSpend) * 100}%`,
-                        }}
-                        transition={{
-                          duration: 0.5,
-                          ease: 'easeOut',
-                          delay: 0.1,
                         }}
                         className="bg-green-500"
                       />
@@ -410,7 +397,7 @@ export const MetricsDisplay: React.FC = memo(() => {
               })()}
             </div>
           </div>
-        </motion.div>
+        </div>
       )}
     </div>
   );
