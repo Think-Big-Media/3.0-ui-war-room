@@ -403,79 +403,42 @@ const TopNavigation: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile Menu Full Screen Overlay */}
+        {/* Mobile Menu Dropdown - Proper Implementation */}
         {isMobileMenuOpen && (
-          <div
-            className="md:hidden fixed inset-0 bg-black/95 backdrop-blur-sm mobile-menu-backdrop z-60 transition-all duration-300 ease-out"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            {/* Right-side menu panel */}
+          <>
+            {/* Backdrop overlay */}
             <div
-              className="absolute right-5 top-20 bottom-5 bg-slate-900/95 backdrop-blur-md shadow-2xl mobile-menu-panel rounded-2xl border border-white/10 transition-all duration-300 ease-out transform translate-x-0"
-              style={{
-                width: 'calc(100vw - 40px)',
-                maxWidth: '320px',
-                animation: 'slideInFromRight 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Header with Logo and Close Button */}
-              <div className="flex items-center justify-between p-5 border-b border-white/20">
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets%2F8686f311497044c0932b7d2247296478%2Ff489a630137d4a28b75e743a04ae8f49?format=webp&width=800"
-                  alt="War Room"
-                  className="h-7 w-auto"
-                />
-                <button
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2 rounded-xl text-white/80 hover:text-white hover:bg-white/15 transition-all duration-200"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
+              className="md:hidden fixed inset-0 bg-black/60 z-40"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
 
-              {/* Menu Items */}
-              <div className="px-5 py-5 space-y-2 overflow-y-auto">
-                {navItems.map((item, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      handleNavigation(item.path);
-                      setIsMobileMenuOpen(false);
-                    }}
-                    style={{
-                      transition: 'all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                      '--item-accent': item.accent,
-                      minHeight: '48px' // Ensure proper touch targets
-                    } as React.CSSProperties}
-                    className={`nav-item group w-full px-4 py-3 rounded-xl font-medium flex items-center space-x-4 text-base transition-all duration-200 ${
-                      item.active
-                        ? 'text-white font-semibold bg-white/15 border-l-4 border-l-white shadow-lg'
-                        : 'text-white/90 hover:bg-white/10 hover:text-white hover:scale-[1.02]'
-                    }`}
-                    aria-current={item.active ? 'page' : undefined}
-                  >
-                    <item.icon
-                      className={`icon w-5 h-5 flex-shrink-0 ${
+            {/* Dropdown menu panel - attached to navigation */}
+            <div className="md:hidden absolute right-0 top-full left-0 z-50">
+              <div className="mx-4 mt-2 bg-slate-900 rounded-2xl border border-white/20 shadow-2xl overflow-hidden">
+                {/* Menu Items */}
+                <div className="p-4 space-y-1">
+                  {navItems.map((item, index) => (
+                    <button
+                      key={index}
+                      onClick={() => {
+                        handleNavigation(item.path);
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className={`w-full px-4 py-4 rounded-xl font-medium text-left flex items-center space-x-4 text-base transition-all duration-200 ${
                         item.active
-                          ? 'text-white'
-                          : 'text-white/80 group-hover:text-white'
+                          ? 'text-white font-semibold bg-white/20 border-l-4 border-l-white'
+                          : 'text-white/90 hover:bg-white/10 hover:text-white'
                       }`}
-                    />
-                    <span
-                      className={`label font-medium ${
-                        item.active
-                          ? 'text-white font-semibold'
-                          : 'text-white/90 group-hover:text-white'
-                      }`}
+                      style={{ minHeight: '52px' }}
                     >
-                      {item.label}
-                    </span>
-                  </button>
-                ))}
+                      <item.icon className="w-5 h-5 flex-shrink-0" />
+                      <span className="font-medium">{item.label}</span>
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          </>
         )}
       </div>
     </nav>
