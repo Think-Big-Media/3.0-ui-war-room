@@ -670,11 +670,15 @@
   }
 
   .status-running {
-    color: var(--accent-war-room);
+    color: var(--accent-war-room) !important;
+    background: none !important;
+    border: none !important;
   }
 
   .status-planning {
-    color: var(--accent-intelligence);
+    color: var(--accent-intelligence) !important;
+    background: none !important;
+    border: none !important;
   }
 
   /* Duplicate status classes removed - using only the neutral background versions above */
