@@ -49,8 +49,6 @@ const XDashboard: React.FC = () => {
             <div className="space-y-4">
               {/* Intelligence Feed */}
               <IntelligenceFeed highlightedFeedId={highlightedFeedId} />
-              
-              {/* Additional components can be added here following the same pattern */}
             </div>
           </div>
         </div>
