@@ -1,193 +1,122 @@
 import type React from 'react';
 import { Shield, Users, DollarSign, Target, BarChart3 } from 'lucide-react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import Card from '../components/shared/Card';
-import PageLayout from '../components/shared/PageLayout';
-import { createLogger } from '../utils/logger';
-import { getSectionTheme } from '../utils/sectionTheming';
-
-const logger = createLogger('Dashboard');
-
-interface DashboardCardProps {
-  title: string;
-  number: string | number;
-  subtitle: string;
-  icon: React.ComponentType<{
-    className?: string;
-  }>;
-  delay?: number;
-  onClick?: () => void;
-  navigateTo?: string;
-}
-
-const DashboardCard: React.FC<DashboardCardProps> = ({
-  title,
-  number,
-  subtitle,
-  icon: Icon,
-  onClick,
-  navigateTo,
-}) => {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    if (onClick) {
-      onClick();
-    } else if (navigateTo) {
-      navigate(navigateTo);
-    }
-  };
-
-  return (
-    <Card 
-      variant="glass" 
-      className="p-6 cursor-pointer hover:bg-white/20 transition-all duration-200"
-      onClick={handleClick}
-    >
-      <div className="flex items-center justify-between mb-4">
-        <Icon className="w-8 h-8 text-white/80" />
-        <div className="text-right">
-          <div className="text-2xl font-bold text-white">{number}</div>
-          <div className="text-sm text-white/60">{subtitle}</div>
-        </div>
-      </div>
-      <h3 className="text-lg font-semibold text-white/90">{title}</h3>
-    </Card>
-  );
-};
-
-const QuickActionCard: React.FC<{
-  title: string;
-  description: string;
-  icon: React.ComponentType<{ className?: string }>;
-  onClick: () => void;
-}> = ({ title, description, icon: Icon, onClick }) => (
-  <Card 
-    variant="glass" 
-    className="p-4 cursor-pointer hover:bg-white/20 transition-all duration-200"
-    onClick={onClick}
-  >
-    <div className="flex items-center space-x-3">
-      <Icon className="w-6 h-6 text-white/80" />
-      <div>
-        <h4 className="font-semibold text-white">{title}</h4>
-        <p className="text-sm text-white/60">{description}</p>
-      </div>
-    </div>
-  </Card>
-);
 
 const Dashboard: React.FC = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const theme = getSectionTheme(location.pathname);
-
-  logger.info('Dashboard component mounted');
-
-  const handleNavigation = (path: string) => {
-    navigate(path);
-  };
-
   return (
-    <PageLayout pageTitle="War Room Dashboard" placeholder="Ask about campaign operations...">
-      <div className="space-y-6">
-        {/* Status Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2">
-            CAMPAIGN OPERATIONS
-          </h1>
-          <p className="text-white/70 text-lg">
-            War Room Dashboard V2 - Operational Status: ACTIVE
-          </p>
-          <div className="flex items-center justify-center space-x-2 mt-3">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-            <span className="text-sm text-white/80 font-mono">ALL SYSTEMS OPERATIONAL</span>
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-8">
+      {/* Fixed Header */}
+      <div className="text-center mb-12 relative z-20">
+        <h1 className="text-5xl font-bold text-white mb-4">
+          WAR ROOM DASHBOARD V2
+        </h1>
+        <p className="text-xl text-white/80">
+          Campaign Operations - Status: OPERATIONAL
+        </p>
+        <div className="flex items-center justify-center space-x-2 mt-4">
+          <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
+          <span className="text-white/90 font-mono text-lg">ALL SYSTEMS GO</span>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto relative z-20">
+        {/* Metrics Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all">
+            <div className="flex items-center justify-between mb-4">
+              <Users className="w-10 h-10 text-blue-400" />
+              <div className="text-right">
+                <div className="text-3xl font-bold text-white">2,847</div>
+                <div className="text-sm text-green-400">+12.5%</div>
+              </div>
+            </div>
+            <h3 className="text-lg font-semibold text-white">Active Personnel</h3>
+          </div>
+
+          <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all">
+            <div className="flex items-center justify-between mb-4">
+              <DollarSign className="w-10 h-10 text-green-400" />
+              <div className="text-right">
+                <div className="text-3xl font-bold text-white">$124K</div>
+                <div className="text-sm text-green-400">+8.2%</div>
+              </div>
+            </div>
+            <h3 className="text-lg font-semibold text-white">Total Budget</h3>
+          </div>
+
+          <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all">
+            <div className="flex items-center justify-between mb-4">
+              <Target className="w-10 h-10 text-orange-400" />
+              <div className="text-right">
+                <div className="text-3xl font-bold text-white">94.2%</div>
+                <div className="text-sm text-green-400">+3.1%</div>
+              </div>
+            </div>
+            <h3 className="text-lg font-semibold text-white">Mission Success</h3>
+          </div>
+
+          <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all">
+            <div className="flex items-center justify-between mb-4">
+              <BarChart3 className="w-10 h-10 text-purple-400" />
+              <div className="text-right">
+                <div className="text-3xl font-bold text-white">89K</div>
+                <div className="text-sm text-green-400">+15.3%</div>
+              </div>
+            </div>
+            <h3 className="text-lg font-semibold text-white">Intel Reports</h3>
           </div>
         </div>
 
-        {/* Metrics Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <DashboardCard
-            title="Active Personnel"
-            number="2,847"
-            subtitle="+12.5% this month"
-            icon={Users}
-            onClick={() => handleNavigation('/campaign-control')}
-          />
-          <DashboardCard
-            title="Total Budget"
-            number="$124,560"
-            subtitle="+8.2% this month"
-            icon={DollarSign}
-            onClick={() => handleNavigation('/analytics')}
-          />
-          <DashboardCard
-            title="Mission Success"
-            number="94.2%"
-            subtitle="+3.1% this month"
-            icon={Target}
-            onClick={() => handleNavigation('/intelligence-hub')}
-          />
-          <DashboardCard
-            title="Intel Reports"
-            number="89,472"
-            subtitle="+15.3% this month"
-            icon={BarChart3}
-            onClick={() => handleNavigation('/real-time-monitoring')}
-          />
-        </div>
-
         {/* Quick Actions */}
-        <div>
-          <h2 className="text-2xl font-semibold text-white mb-4">Quick Actions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <QuickActionCard
-              title="Launch Operation"
-              description="Start new campaign operations"
-              icon={Target}
-              onClick={() => handleNavigation('/campaign-control')}
-            />
-            <QuickActionCard
-              title="View Analytics"
-              description="Review performance metrics"
-              icon={BarChart3}
-              onClick={() => handleNavigation('/analytics')}
-            />
-            <QuickActionCard
-              title="Security Check"
-              description="Run system diagnostics"
-              icon={Shield}
-              onClick={() => handleNavigation('/alert-center')}
-            />
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold text-white mb-6">QUICK ACTIONS</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <button className="bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 p-6 rounded-xl transition-all border border-blue-500/30 hover:border-blue-500/50">
+              <Target className="w-8 h-8 mb-3" />
+              <div className="text-lg font-semibold">LAUNCH OPERATION</div>
+              <div className="text-sm text-blue-300">Start new campaign</div>
+            </button>
+
+            <button className="bg-green-500/20 hover:bg-green-500/30 text-green-400 p-6 rounded-xl transition-all border border-green-500/30 hover:border-green-500/50">
+              <BarChart3 className="w-8 h-8 mb-3" />
+              <div className="text-lg font-semibold">VIEW ANALYTICS</div>
+              <div className="text-sm text-green-300">Review performance</div>
+            </button>
+
+            <button className="bg-red-500/20 hover:bg-red-500/30 text-red-400 p-6 rounded-xl transition-all border border-red-500/30 hover:border-red-500/50">
+              <Shield className="w-8 h-8 mb-3" />
+              <div className="text-lg font-semibold">SECURITY CHECK</div>
+              <div className="text-sm text-red-300">Run diagnostics</div>
+            </button>
           </div>
         </div>
 
         {/* Status Grid */}
         <div>
-          <h2 className="text-2xl font-semibold text-white mb-4">System Status</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Card variant="glass" className="p-4">
+          <h2 className="text-3xl font-bold text-white mb-6">SYSTEM STATUS</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
               <div className="flex items-center justify-between">
-                <span className="text-white/80">Network Status</span>
-                <span className="text-green-400 font-semibold">SECURE</span>
+                <span className="text-white text-lg">Network Status</span>
+                <span className="text-green-400 font-bold text-xl">SECURE</span>
               </div>
-            </Card>
-            <Card variant="glass" className="p-4">
+            </div>
+            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
               <div className="flex items-center justify-between">
-                <span className="text-white/80">DEFCON Level</span>
-                <span className="text-yellow-400 font-semibold">3</span>
+                <span className="text-white text-lg">DEFCON Level</span>
+                <span className="text-yellow-400 font-bold text-xl">3</span>
               </div>
-            </Card>
-            <Card variant="glass" className="p-4">
+            </div>
+            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
               <div className="flex items-center justify-between">
-                <span className="text-white/80">Active Operations</span>
-                <span className="text-blue-400 font-semibold">7</span>
+                <span className="text-white text-lg">Active Ops</span>
+                <span className="text-blue-400 font-bold text-xl">7</span>
               </div>
-            </Card>
+            </div>
           </div>
         </div>
       </div>
-    </PageLayout>
+    </div>
   );
 };
 
