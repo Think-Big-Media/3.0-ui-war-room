@@ -87,9 +87,8 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
+    <div
+      className="animate-fade-in"
       className={cn(
         'flex items-center justify-between p-3 rounded-lg border',
         config.color.includes('green')
@@ -155,6 +154,6 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
           <div className="absolute inset-0 w-2 h-2 bg-[var(--accent-live-monitoring)]/70 rounded-full animate-ping" />
         </div>
       )}
-    </motion.div>
+    </div>
   );
 };
