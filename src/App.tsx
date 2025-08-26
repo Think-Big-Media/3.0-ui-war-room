@@ -315,6 +315,16 @@ function App() {
               </React.Suspense>
             }
           />
+          <Route
+            path="x"
+            element={
+              <React.Suspense
+                fallback={<LazyLoadFallback componentName="X Dashboard" />}
+              >
+                <XDashboard />
+              </React.Suspense>
+            }
+          />
         </Route>
 
         {/* Temporary route to view dashboard without auth for development */}
