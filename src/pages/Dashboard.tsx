@@ -28,6 +28,7 @@ import { MetricCard } from '../components/dashboard/MetricCard';
 import { ActivityFeed } from '../components/dashboard/ActivityFeed';
 import { CampaignHealth } from '../components/dashboard/CampaignHealth';
 import { AnalyticsOverview } from '../components/dashboard/AnalyticsOverview';
+import PhraseCloud from '../components/dashboard/PhraseCloud';
 import {
   DashboardHead,
   DashboardStructuredData,
