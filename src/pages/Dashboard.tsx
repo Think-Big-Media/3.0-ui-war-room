@@ -30,6 +30,7 @@ import { ActivityFeed } from '../components/dashboard/ActivityFeed';
 import { CampaignHealth } from '../components/dashboard/CampaignHealth';
 import { AnalyticsOverview } from '../components/dashboard/AnalyticsOverview';
 import PhraseCloud from '../components/dashboard/PhraseCloud';
+import PerformanceMetrics from '../components/dashboard/PerformanceMetrics';
 import {
   DashboardHead,
   DashboardStructuredData,
