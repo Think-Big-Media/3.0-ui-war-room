@@ -4,7 +4,16 @@
  */
 
 import React from 'react';
-import { Users, Calendar, DollarSign, TrendingUp, MapPin, BarChart3, Activity, CheckCircle } from 'lucide-react';
+import {
+  Users,
+  Calendar,
+  DollarSign,
+  TrendingUp,
+  MapPin,
+  BarChart3,
+  Activity,
+  CheckCircle,
+} from 'lucide-react';
 
 // Mock chart data
 const chartData = [
@@ -26,11 +35,41 @@ const regionData = [
 
 // Activity data
 const activities = [
-  { id: 1, type: 'volunteer', message: 'New volunteer registered in Ohio', time: '2 min ago', icon: Users },
-  { id: 2, type: 'event', message: 'Town hall scheduled for Phoenix', time: '5 min ago', icon: Calendar },
-  { id: 3, type: 'donation', message: '$2,500 donation received', time: '8 min ago', icon: DollarSign },
-  { id: 4, type: 'milestone', message: 'Reached 10,000 volunteers!', time: '12 min ago', icon: CheckCircle },
-  { id: 5, type: 'event', message: 'Fundraiser completed in Denver', time: '15 min ago', icon: TrendingUp },
+  {
+    id: 1,
+    type: 'volunteer',
+    message: 'New volunteer registered in Ohio',
+    time: '2 min ago',
+    icon: Users,
+  },
+  {
+    id: 2,
+    type: 'event',
+    message: 'Town hall scheduled for Phoenix',
+    time: '5 min ago',
+    icon: Calendar,
+  },
+  {
+    id: 3,
+    type: 'donation',
+    message: '$2,500 donation received',
+    time: '8 min ago',
+    icon: DollarSign,
+  },
+  {
+    id: 4,
+    type: 'milestone',
+    message: 'Reached 10,000 volunteers!',
+    time: '12 min ago',
+    icon: CheckCircle,
+  },
+  {
+    id: 5,
+    type: 'event',
+    message: 'Fundraiser completed in Denver',
+    time: '15 min ago',
+    icon: TrendingUp,
+  },
 ];
 
 // Metric Card Component
@@ -42,12 +81,13 @@ const MetricCard: React.FC<{
   icon: React.ComponentType<{ className?: string }>;
   color: string;
 }> = ({ title, value, change, trend, icon: Icon, color }) => {
-  const colorClasses = {
-    blue: 'text-blue-600 bg-blue-50',
-    green: 'text-green-600 bg-green-50',
-    purple: 'text-purple-600 bg-purple-50',
-    yellow: 'text-yellow-600 bg-yellow-50',
-  }[color] || 'text-gray-600 bg-gray-50';
+  const colorClasses =
+    {
+      blue: 'text-blue-600 bg-blue-50',
+      green: 'text-green-600 bg-green-50',
+      purple: 'text-purple-600 bg-purple-50',
+      yellow: 'text-yellow-600 bg-yellow-50',
+    }[color] || 'text-gray-600 bg-gray-50';
 
   return (
     <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
@@ -55,7 +95,9 @@ const MetricCard: React.FC<{
         <div>
           <p className="text-sm font-medium text-gray-600">{title}</p>
           <p className="text-3xl font-bold text-gray-900 mt-1">{value}</p>
-          <p className={`text-sm mt-2 ${trend === 'up' ? 'text-green-600' : 'text-red-600'}`}>
+          <p
+            className={`text-sm mt-2 ${trend === 'up' ? 'text-green-600' : 'text-red-600'}`}
+          >
             {trend === 'up' ? '↗' : '↘'} {change} from last month
           </p>
         </div>
@@ -68,13 +110,20 @@ const MetricCard: React.FC<{
 };
 
 // Simple Line Chart Component
-const SimpleLineChart: React.FC<{ data: typeof chartData; dataKey: string; color: string }> = ({ data, dataKey, color }) => {
-  const maxValue = Math.max(...data.map(d => d[dataKey as keyof typeof d] as number));
-  
+const SimpleLineChart: React.FC<{
+  data: typeof chartData;
+  dataKey: string;
+  color: string;
+}> = ({ data, dataKey, color }) => {
+  const maxValue = Math.max(
+    ...data.map((d) => d[dataKey as keyof typeof d] as number)
+  );
+
   return (
     <div className="h-64 flex items-end space-x-2 p-4">
       {data.map((item, index) => {
-        const height = ((item[dataKey as keyof typeof item] as number) / maxValue) * 200;
+        const height =
+          ((item[dataKey as keyof typeof item] as number) / maxValue) * 200;
         return (
           <div key={index} className="flex flex-col items-center flex-1">
             <div className="flex items-end mb-2" style={{ height: '200px' }}>
@@ -127,17 +176,24 @@ const USMap: React.FC = () => {
           ))}
         </svg>
       </div>
-      
+
       {/* Legend */}
       <div className="absolute bottom-4 left-4 bg-white p-3 rounded shadow-sm">
-        <p className="text-sm font-semibold text-gray-700 mb-2">Volunteers by Region</p>
+        <p className="text-sm font-semibold text-gray-700 mb-2">
+          Volunteers by Region
+        </p>
         {regionData.map((region) => (
-          <div key={region.name} className="flex items-center space-x-2 text-xs">
+          <div
+            key={region.name}
+            className="flex items-center space-x-2 text-xs"
+          >
             <div
               className="w-3 h-3 rounded-full"
               style={{ backgroundColor: region.color }}
             />
-            <span>{region.name}: {region.volunteers}</span>
+            <span>
+              {region.name}: {region.volunteers}
+            </span>
           </div>
         ))}
       </div>
@@ -152,12 +208,17 @@ const ActivityFeed: React.FC = () => {
       {activities.map((activity) => {
         const Icon = activity.icon;
         return (
-          <div key={activity.id} className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-50">
+          <div
+            key={activity.id}
+            className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-50"
+          >
             <div className="p-2 bg-blue-100 rounded-full">
               <Icon className="h-4 w-4 text-blue-600" />
             </div>
             <div className="flex-1">
-              <p className="text-sm font-medium text-gray-900">{activity.message}</p>
+              <p className="text-sm font-medium text-gray-900">
+                {activity.message}
+              </p>
               <p className="text-xs text-gray-500">{activity.time}</p>
             </div>
           </div>
@@ -187,9 +248,11 @@ const Dashboard: React.FC = () => {
               {/* Live indicator */}
               <div className="flex items-center">
                 <div className="h-3 w-3 rounded-full bg-green-500 mr-2 animate-pulse" />
-                <span className="text-sm font-medium text-gray-700">Live Data</span>
+                <span className="text-sm font-medium text-gray-700">
+                  Live Data
+                </span>
               </div>
-              
+
               {/* Export button */}
               <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
                 Export Report
@@ -245,7 +308,11 @@ const Dashboard: React.FC = () => {
               <BarChart3 className="h-5 w-5 mr-2 text-blue-600" />
               Volunteer Growth
             </h3>
-            <SimpleLineChart data={chartData} dataKey="volunteers" color="bg-blue-500" />
+            <SimpleLineChart
+              data={chartData}
+              dataKey="volunteers"
+              color="bg-blue-500"
+            />
           </div>
 
           {/* Event attendance chart */}
@@ -254,7 +321,11 @@ const Dashboard: React.FC = () => {
               <Calendar className="h-5 w-5 mr-2 text-green-600" />
               Event Attendance
             </h3>
-            <SimpleLineChart data={chartData} dataKey="events" color="bg-green-500" />
+            <SimpleLineChart
+              data={chartData}
+              dataKey="events"
+              color="bg-green-500"
+            />
           </div>
 
           {/* Geographic distribution */}
@@ -272,7 +343,11 @@ const Dashboard: React.FC = () => {
               <DollarSign className="h-5 w-5 mr-2 text-yellow-600" />
               Donation Trends
             </h3>
-            <SimpleLineChart data={chartData} dataKey="donations" color="bg-yellow-500" />
+            <SimpleLineChart
+              data={chartData}
+              dataKey="donations"
+              color="bg-yellow-500"
+            />
           </div>
         </div>
 

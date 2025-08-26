@@ -191,9 +191,7 @@ const DashboardHeader: React.FC<{ user: any }> = ({ user }) => (
   >
     <div className="flex items-center justify-between">
       <div>
-        <h1 className="section-header">
-          CAMPAIGN OPERATIONS
-        </h1>
+        <h1 className="section-header">CAMPAIGN OPERATIONS</h1>
         <p className="content-subtitle mt-1">
           Welcome back, {user?.email?.split('@')[0]}. Operational status: ACTIVE
         </p>
@@ -203,7 +201,9 @@ const DashboardHeader: React.FC<{ user: any }> = ({ user }) => (
         {/* Status indicator */}
         <div className="flex items-center space-x-2 px-3 py-2 bg-green-900/30 border border-green-500/50 rounded-lg">
           <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-          <span className="status-indicator text-green-300">All Systems Operational</span>
+          <span className="status-indicator text-green-300">
+            All Systems Operational
+          </span>
         </div>
 
         {/* Settings button */}
@@ -219,9 +219,7 @@ const DashboardHeader: React.FC<{ user: any }> = ({ user }) => (
 const QuickActions: React.FC = () => (
   <Card variant="glass" className="mb-4">
     <div className="p-5">
-      <h3 className="section-header mb-4 ml-1.5">
-        QUICK ACTIONS
-      </h3>
+      <h3 className="section-header mb-4 ml-1.5">QUICK ACTIONS</h3>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 px-1.5">
         <button className="btn-secondary-action group">
           <Users className="w-4 h-4 group-hover:scale-110 transition-transform" />
@@ -245,31 +243,59 @@ const QuickActions: React.FC = () => (
 // Recent activity component with War Room styling
 const RecentActivity: React.FC = () => {
   const activities = [
-    { id: 1, action: 'Campaign launched', target: 'Summer Operations 2025', time: '2 minutes ago', type: 'success' },
-    { id: 2, action: 'Budget updated', target: 'Q1 Operations', time: '15 minutes ago', type: 'info' },
-    { id: 3, action: 'Alert resolved', target: 'High Resource Warning', time: '1 hour ago', type: 'warning' },
-    { id: 4, action: 'Report generated', target: 'Weekly Performance', time: '2 hours ago', type: 'info' },
+    {
+      id: 1,
+      action: 'Campaign launched',
+      target: 'Summer Operations 2025',
+      time: '2 minutes ago',
+      type: 'success',
+    },
+    {
+      id: 2,
+      action: 'Budget updated',
+      target: 'Q1 Operations',
+      time: '15 minutes ago',
+      type: 'info',
+    },
+    {
+      id: 3,
+      action: 'Alert resolved',
+      target: 'High Resource Warning',
+      time: '1 hour ago',
+      type: 'warning',
+    },
+    {
+      id: 4,
+      action: 'Report generated',
+      target: 'Weekly Performance',
+      time: '2 hours ago',
+      type: 'info',
+    },
   ];
 
   const getStatusColor = (type: string) => {
     switch (type) {
-      case 'success': return 'bg-green-400';
-      case 'warning': return 'bg-yellow-400';
-      case 'info': return 'bg-blue-400';
-      default: return 'bg-[#C5C1A8]';
+      case 'success':
+        return 'bg-green-400';
+      case 'warning':
+        return 'bg-yellow-400';
+      case 'info':
+        return 'bg-blue-400';
+      default:
+        return 'bg-[#C5C1A8]';
     }
   };
 
   return (
     <Card variant="glass">
       <div className="p-5">
-        <h3 className="section-header mb-4 ml-1.5">
-          RECENT ACTIVITY
-        </h3>
+        <h3 className="section-header mb-4 ml-1.5">RECENT ACTIVITY</h3>
         <div className="space-y-4 px-1.5">
           {activities.map((activity) => (
             <div key={activity.id} className="flex items-start space-x-3">
-              <div className={`w-2 h-2 rounded-full mt-2 ${getStatusColor(activity.type)}`} />
+              <div
+                className={`w-2 h-2 rounded-full mt-2 ${getStatusColor(activity.type)}`}
+              />
               <div className="flex-1">
                 <p className="content-title">{activity.action}</p>
                 <p className="text-[var(--accent-dashboard)] hover:text-[var(--accent-dashboard)]/80 cursor-pointer text-sm">
@@ -289,9 +315,7 @@ const RecentActivity: React.FC = () => {
 const PerformanceChart: React.FC = () => (
   <Card variant="glass">
     <div className="p-5">
-      <h3 className="section-header mb-4 ml-1.5">
-        PERFORMANCE OVERVIEW
-      </h3>
+      <h3 className="section-header mb-4 ml-1.5">PERFORMANCE OVERVIEW</h3>
       <div className="h-64 flex items-center justify-center bg-black/20 rounded-lg border border-[#8B956D]/30 mx-1">
         <div className="text-center">
           <BarChart3 className="w-12 h-12 text-[var(--accent-dashboard)] mx-auto mb-3" />
@@ -476,9 +500,7 @@ const DashboardV4: React.FC = () => {
             {/* Quick Actions Card */}
             <Card variant="glass">
               <div className="p-5">
-                <h3 className="section-header mb-4 ml-1.5">
-                  MISSION CONTROL
-                </h3>
+                <h3 className="section-header mb-4 ml-1.5">MISSION CONTROL</h3>
                 <div className="space-y-3 px-1.5">
                   <button className="w-full flex items-center justify-between p-3 hoverable bg-black/20 rounded-xl border border-[#8B956D]/30 hover:border-[var(--accent-dashboard)] transition-colors">
                     <div className="flex items-center space-x-3">
@@ -487,7 +509,7 @@ const DashboardV4: React.FC = () => {
                     </div>
                     <ArrowRight className="w-4 h-4 text-[#C5C1A8]" />
                   </button>
-                  
+
                   <button className="w-full flex items-center justify-between p-3 hoverable bg-black/20 rounded-xl border border-[#8B956D]/30 hover:border-[var(--accent-dashboard)] transition-colors">
                     <div className="flex items-center space-x-3">
                       <Mail className="w-5 h-5 text-[var(--accent-dashboard)]" />
@@ -495,7 +517,7 @@ const DashboardV4: React.FC = () => {
                     </div>
                     <ArrowRight className="w-4 h-4 text-[#C5C1A8]" />
                   </button>
-                  
+
                   <button className="w-full flex items-center justify-between p-3 hoverable bg-black/20 rounded-xl border border-[#8B956D]/30 hover:border-[var(--accent-dashboard)] transition-colors">
                     <div className="flex items-center space-x-3">
                       <Calendar className="w-5 h-5 text-[var(--accent-dashboard)]" />
