@@ -41,7 +41,7 @@ const DocumentIntelligence = React.lazy(
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 const CommandCenter = React.lazy(() => import('./pages/CommandCenter'));
 const DebugDashboard = React.lazy(() => import('./pages/DebugDashboard'));
-const XPage = React.lazy(() => import('./pages/XPage'));
+const XDashboard = React.lazy(() => import('./pages/XDashboard'));
 
 // Import light components normally
 import AuthCallback from './pages/AuthCallback';
