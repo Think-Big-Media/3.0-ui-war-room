@@ -326,7 +326,7 @@ function App() {
             <React.Suspense
               fallback={<LazyLoadFallback componentName="X Dashboard" />}
             >
-              <XPage />
+              <XDashboard />
             </React.Suspense>
           }
         />
