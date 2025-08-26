@@ -215,10 +215,10 @@ function App() {
         <Route path="/test-auth" element={<TestAuth />} />
         <Route path="/oauth-diagnostics" element={<OAuthDiagnostics />} />
 
-        {/* Protected Routes with Layout - TEMPORARILY DISABLED */}
+        {/* Main App Routes - Single MainLayout */}
         <Route element={<MainLayout />}>
           <Route
-            path="/dashboard"
+            index
             element={
               <React.Suspense
                 fallback={<LazyLoadFallback componentName="Dashboard" />}
@@ -228,7 +228,27 @@ function App() {
             }
           />
           <Route
-            path="/analytics"
+            path="dashboard"
+            element={
+              <React.Suspense
+                fallback={<LazyLoadFallback componentName="Dashboard" />}
+              >
+                <Dashboard />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="x"
+            element={
+              <React.Suspense
+                fallback={<LazyLoadFallback componentName="X Dashboard" />}
+              >
+                <XDashboard />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="analytics"
             element={
               <React.Suspense
                 fallback={
@@ -240,7 +260,7 @@ function App() {
             }
           />
           <Route
-            path="/automation"
+            path="automation"
             element={
               <React.Suspense
                 fallback={
@@ -252,7 +272,7 @@ function App() {
             }
           />
           <Route
-            path="/documents"
+            path="documents"
             element={
               <React.Suspense
                 fallback={
@@ -263,7 +283,7 @@ function App() {
               </React.Suspense>
             }
           />
-          <Route path="/contacts" element={<SimpleDashboard />} />
+          <Route path="contacts" element={<SimpleDashboard />} />
         </Route>
 
         {/* Settings Route - Uses its own PageLayout with top navigation */}
@@ -292,30 +312,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-
-        {/* Default Route - TEMPORARILY BYPASS AUTH */}
-        <Route path="/" element={<MainLayout />}>
-          <Route
-            index
-            element={
-              <React.Suspense
-                fallback={<LazyLoadFallback componentName="Dashboard" />}
-              >
-                <Dashboard />
-              </React.Suspense>
-            }
-          />
-          <Route
-            path="x"
-            element={
-              <React.Suspense
-                fallback={<LazyLoadFallback componentName="X Dashboard" />}
-              >
-                <XDashboard />
-              </React.Suspense>
-            }
-          />
-        </Route>
 
         {/* Temporary route to view dashboard without auth for development */}
         <Route
