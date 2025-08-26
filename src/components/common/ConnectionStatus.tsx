@@ -88,9 +88,8 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
 
   return (
     <div
-      className="animate-fade-in"
       className={cn(
-        'flex items-center justify-between p-3 rounded-lg border',
+        'flex items-center justify-between p-3 rounded-lg border animate-fade-in',
         config.color.includes('green')
           ? 'border-green-200'
           : config.color.includes('red')
