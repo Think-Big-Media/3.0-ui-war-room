@@ -508,7 +508,7 @@ const DashboardV4: React.FC = () => {
               </div>
             </Card>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
