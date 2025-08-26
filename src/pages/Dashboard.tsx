@@ -441,6 +441,11 @@ const Dashboard: React.FC = () => {
           <AnalyticsOverview timeRange={selectedTimeRange} />
         </div>
 
+        {/* Performance Metrics */}
+        <div className="mt-8">
+          <PerformanceMetrics />
+        </div>
+
         {/* Phrase Cloud */}
         <div className="mt-8">
           <PhraseCloud
