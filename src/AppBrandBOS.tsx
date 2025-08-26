@@ -48,7 +48,6 @@ function App() {
   return (
     <Router>
       <ErrorBoundary>
-        <PageTransition>
           <Routes>
             <Route path="/" element={<CommandCenter />} />
             <Route path="/CommandCenter" element={<CommandCenter />} />
@@ -71,7 +70,6 @@ function App() {
             <Route path="/v2-dashboard" element={<Dashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </PageTransition>
         {/* Ticker runs independently at app level */}
         <TickerTape />
       </ErrorBoundary>
