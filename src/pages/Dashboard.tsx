@@ -35,6 +35,7 @@ import {
   DashboardStructuredData,
   OrganizationStructuredData,
 } from '../components/SEO';
+import { mockTrendingTopics } from '../data/monitoringData';
 
 // Type definitions for military status bar
 interface StatusIndicator {
