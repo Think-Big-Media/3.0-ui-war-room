@@ -53,6 +53,7 @@
     "clsx": "^2.1.1",
     "d3-scale": "^4.0.2",
     "date-fns": "^2.30.0",
+    "framer-motion": "^12.23.12",
     "lucide-react": "^0.294.0",
     "posthog-js": "^1.96.1",
     "react": "^18.2.0",
