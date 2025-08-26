@@ -20,6 +20,9 @@ import {
   ContentCalendarPage,
   ContentEnginePage,
 } from './components/LazyComponents';
+
+// Dashboard component import
+const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 import ErrorBoundary from './pages/ErrorBoundary';
 import NotFound from './pages/NotFound';
 import TickerTape from './components/TickerTape';
@@ -64,6 +67,22 @@ function App() {
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="/content-calendar" element={<ContentCalendarPage />} />
             <Route path="/content-engine" element={<ContentEnginePage />} />
+            <Route
+              path="/dashboard"
+              element={
+                <React.Suspense fallback={<div>Loading...</div>}>
+                  <Dashboard />
+                </React.Suspense>
+              }
+            />
+            <Route
+              path="/v2-dashboard"
+              element={
+                <React.Suspense fallback={<div>Loading...</div>}>
+                  <Dashboard />
+                </React.Suspense>
+              }
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </PageTransition>
