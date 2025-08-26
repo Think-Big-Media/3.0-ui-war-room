@@ -329,17 +329,6 @@ function App() {
           }
         />
 
-        {/* X Dashboard Route */}
-        <Route
-          path="/x"
-          element={
-            <React.Suspense
-              fallback={<LazyLoadFallback componentName="X Dashboard" />}
-            >
-              <XDashboard />
-            </React.Suspense>
-          }
-        />
 
         {/* CommandCenter Routes */}
         <Route
