@@ -5,7 +5,6 @@
 
 import type React from 'react';
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import {
   Users,
   DollarSign,
@@ -155,18 +154,16 @@ const StatusBar: React.FC = () => {
             {statusIndicators.map((indicator, index) => {
               const Icon = indicator.icon;
               return (
-                <motion.div
+                <div
                   key={indicator.label}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.1 }}
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg border ${getStatusColor(indicator.status)}`}
+                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg border ${getStatusColor(indicator.status)} animate-fade-in`}
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <Icon className="w-4 h-4" />
                   <span className="text-xs font-mono font-semibold">
                     {indicator.label}: {indicator.value}
                   </span>
-                </motion.div>
+                </div>
               );
             })}
           </div>
