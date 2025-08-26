@@ -437,6 +437,30 @@ const Dashboard: React.FC = () => {
           </div>
           <AnalyticsOverview timeRange={selectedTimeRange} />
         </div>
+
+        {/* Phrase Cloud */}
+        <div className="mt-8">
+          <PhraseCloud
+            words={[
+              { text: 'Healthcare', weight: 95, trend: 'up', mentions: 3456 },
+              { text: 'Economy', weight: 82, trend: 'up', mentions: 2890 },
+              { text: 'Education', weight: 76, trend: 'stable', mentions: 2134 },
+              { text: 'Infrastructure', weight: 71, trend: 'up', mentions: 1876 },
+              { text: 'Climate', weight: 68, trend: 'down', mentions: 1654 },
+              { text: 'Jobs', weight: 65, trend: 'up', mentions: 1543 },
+              { text: 'Security', weight: 58, trend: 'stable', mentions: 1234 },
+              { text: 'Immigration', weight: 52, trend: 'down', mentions: 1098 },
+              { text: 'Technology', weight: 47, trend: 'up', mentions: 987 },
+              { text: 'Agriculture', weight: 43, trend: 'stable', mentions: 876 },
+              { text: 'Transportation', weight: 39, trend: 'up', mentions: 765 },
+              { text: 'Veterans', weight: 35, trend: 'up', mentions: 654 },
+              { text: 'Small Business', weight: 31, trend: 'down', mentions: 543 },
+              { text: 'Housing', weight: 28, trend: 'stable', mentions: 432 },
+              { text: 'Energy', weight: 25, trend: 'up', mentions: 321 },
+            ]}
+            title="Campaign Phrase Cloud"
+          />
+        </div>
       </div>
     </div>
   );
