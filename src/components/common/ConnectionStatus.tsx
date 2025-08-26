@@ -133,19 +133,14 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
       </div>
 
       {/* Reconnect button for error states */}
-      <AnimatePresence>
-        {error && onReconnect && reconnectAttempts < maxReconnectAttempts && (
-          <motion.button
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            onClick={onReconnect}
-            className="px-3 py-1 text-xs font-medium text-blue-600 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors"
-          >
-            Retry
-          </motion.button>
-        )}
-      </AnimatePresence>
+      {error && onReconnect && reconnectAttempts < maxReconnectAttempts && (
+        <button
+          onClick={onReconnect}
+          className="px-3 py-1 text-xs font-medium text-blue-600 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors animate-fade-in"
+        >
+          Retry
+        </button>
+      )}
 
       {/* Connection pulse indicator */}
       {isConnected && (
