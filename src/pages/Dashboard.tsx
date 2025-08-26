@@ -89,7 +89,7 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <PageLayout>
+    <PageLayout pageTitle="War Room Dashboard" placeholder="Ask about campaign operations...">
       <div className="space-y-6">
         {/* Status Header */}
         <div className="text-center mb-8">
