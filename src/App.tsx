@@ -341,6 +341,18 @@ function App() {
           }
         />
 
+        {/* X Dashboard Route */}
+        <Route
+          path="/x"
+          element={
+            <React.Suspense
+              fallback={<LazyLoadFallback componentName="X Dashboard" />}
+            >
+              <XPage />
+            </React.Suspense>
+          }
+        />
+
         {/* Builder.io Routes - Visual Editor Pages */}
         <Route path="/builder/*" element={<BuilderPage />} />
         <Route path="/builder" element={<BuilderPage />} />
