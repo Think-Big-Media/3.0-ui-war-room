@@ -912,6 +912,10 @@
     100% { transform: translateY(-600px); }
   }
 
+  .animate-scroll-feed {
+    animation: scrollFeed 30s linear infinite;
+  }
+
   @keyframes scrollLeft {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
