@@ -27,7 +27,15 @@ const ActivityFeed: React.FC<ActivityFeedProps> = ({ activities }) => {
         </h3>
         <div className="space-y-3 px-1.5">
           {activities.map((activity) => (
-            <div key={activity.id} className="flex items-start space-x-3">
+            <div
+              key={activity.id}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              className="space-x-3"
+            >
               <div className="p-5 bg-black/20 rounded-lg">
                 {getActivityIcon(activity.type)}
               </div>
