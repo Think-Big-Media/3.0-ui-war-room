@@ -145,7 +145,7 @@ const IntelligenceDashboard: React.FC = () => {
   return (
     <Card
       onClick={handleDashboardClick}
-      className="group cursor-pointer hoverable hover:bg-white/0 hover:scale-[1.02] transition-all duration-200"
+      className="group cursor-pointer hoverable hover:bg-white/15 hover:scale-[1.02] transition-all duration-200"
       padding="md"
       variant="glass"
     >
