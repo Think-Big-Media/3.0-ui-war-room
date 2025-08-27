@@ -656,9 +656,8 @@
   /* Section Header - Major headings across the site */
   .section-header {
     @apply text-white/50 uppercase;
-    font:
-      600 20px/29px 'Barlow Condensed',
-      sans-serif;
+    letter-spacing: 1px;
+    font: 400 20px/29px Barlow Condensed, sans-serif;
   }
 
   /* Content Typography Classes */
