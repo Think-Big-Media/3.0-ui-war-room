@@ -239,7 +239,7 @@ const CampaignOperationsHub: React.FC = () => {
 
   return (
     <Card
-      className="group hover:border-orange-400/50 hover:bg-white/0 hover:scale-[1.02] transition-all duration-200 fade-in"
+      className="group hover:border-orange-400/50 hover:bg-white/15 hover:scale-[1.02] transition-all duration-200 fade-in"
       padding="md"
       variant="glass"
     >
