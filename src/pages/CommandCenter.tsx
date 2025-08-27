@@ -61,7 +61,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   return (
     <Card
       onClick={handleClick}
-      className={`group cursor-pointer hoverable hover:bg-white/0 hover:scale-[1.02] transition-all duration-200`}
+      className={`group cursor-pointer hoverable hover:bg-white/15 hover:scale-[1.02] transition-all duration-200`}
       padding="md"
       variant="glass"
     >
@@ -155,7 +155,7 @@ const IntelligenceDashboard: React.FC = () => {
   return (
     <Card
       onClick={handleDashboardClick}
-      className="group cursor-pointer hoverable hover:bg-white/0 hover:scale-[1.02] transition-all duration-200"
+      className="group cursor-pointer hoverable hover:bg-white/15 hover:scale-[1.02] transition-all duration-200"
       padding="md"
       variant="glass"
     >
@@ -188,7 +188,7 @@ const IntelligenceDashboard: React.FC = () => {
               e.stopPropagation();
               handleMetricClick(metric.label);
             }}
-            className="bg-black/20 backdrop-blur-sm rounded-xl p-3 lg:p-4 border border-white/20 hoverable hover:bg-white/0 hover:scale-[1.02] transition-all duration-200 cursor-pointer"
+            className="bg-black/20 backdrop-blur-sm rounded-xl p-3 lg:p-4 border border-white/20 hoverable hover:bg-white/15 hover:scale-[1.02] transition-all duration-200 cursor-pointer"
           >
             <div
               className="text-xl lg:text-2xl text-white/95 mb-1"
@@ -278,7 +278,7 @@ const CampaignOperationsHub: React.FC = () => {
 
   return (
     <Card
-      className="group hoverable hover:bg-white/0 hover:scale-[1.02] transition-all duration-200"
+      className="group hoverable hover:bg-white/15 hover:scale-[1.02] transition-all duration-200"
       padding="md"
       variant="glass"
     >
@@ -314,13 +314,7 @@ const CampaignOperationsHub: React.FC = () => {
               <div
                 key={index}
                 onClick={() => handleProjectClick(cluster.title)}
-                className="bg-black/20 backdrop-blur-sm rounded-xl p-6 lg:p-7 border border-white/20 hoverable hover:bg-white/0 hover:scale-[1.02] transition-all duration-200 cursor-pointer"
-                style={{
-                  backdropFilter: "blur(4px)",
-                  backgroundColor: cluster.title === 'Crisis Response Protocol' ? "rgba(255, 255, 255, 0)" : "rgba(255, 255, 255, 0.15)",
-                  borderColor: cluster.title === 'Crisis Response Protocol' ? "rgb(217, 119, 6)" : "rgba(255, 255, 255, 0.2)",
-                  transform: cluster.title === 'Crisis Response Protocol' ? "matrix(1.02, 0, 0, 1.02, 0, 0)" : undefined,
-                }}
+                className="bg-black/20 backdrop-blur-sm rounded-xl p-6 lg:p-7 border border-white/20 hoverable hover:bg-white/15 hover:scale-[1.02] transition-all duration-200 cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-2">
                   <h5 className="content-title text-white/90">
@@ -375,28 +369,10 @@ const CampaignOperationsHub: React.FC = () => {
               <div
                 key={index}
                 onClick={() => handleTemplateClick(template.name)}
-                className="bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 hoverable hover:bg-white/0 hover:scale-[1.02] transition-all duration-200 text-center cursor-pointer"
-                style={{
-                  padding: index === 0 ? "16px 25px 24px" : index === 1 ? "20px 25px 25px" : index === 2 ? "21px 25px 23px" : "21px 25px 25px",
-                }}
+                className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-white/20 hoverable hover:bg-white/15 hover:scale-[1.02] transition-all duration-200 text-center cursor-pointer"
               >
-                <h5
-                  className="content-title mb-1"
-                  style={{
-                    color: "rgba(255, 255, 255, 0.95)",
-                    marginBottom: "4px",
-                    font: '500 17px/19px "Barlow Semi Condensed", sans-serif ',
-                  }}
-                >{template.name}</h5>
-                <p
-                  className="text-xs text-white/65"
-                  style={{
-                    color: "rgba(255, 255, 255, 0.65)",
-                    fontSize: "12px",
-                    fontWeight: "400",
-                    lineHeight: index === 0 ? "13.5px" : "16.5px",
-                  }}
-                >{template.type}</p>
+                <h5 className="content-title mb-1">{template.name}</h5>
+                <p className="text-xs text-white/65">{template.type}</p>
               </div>
             ))}
           </div>
