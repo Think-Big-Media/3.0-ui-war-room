@@ -57,7 +57,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   return (
     <Card
       onClick={handleClick}
-      className="group cursor-pointer hover:border-orange-400/50 hover:bg-white/0 hover:scale-[1.02] transition-all duration-200 fade-in"
+      className="group cursor-pointer hover:border-orange-400/50 hover:bg-white/15 hover:scale-[1.02] transition-all duration-200 fade-in"
       padding="md"
       variant="glass"
     >
@@ -129,7 +129,7 @@ const IntelligenceDashboard: React.FC = () => {
   return (
     <Card
       onClick={handleDashboardClick}
-      className="group cursor-pointer hover:border-orange-400/50 hover:bg-white/0 hover:scale-[1.02] transition-all duration-200 fade-in"
+      className="group cursor-pointer hover:border-orange-400/50 hover:bg-white/15 hover:scale-[1.02] transition-all duration-200 fade-in"
       padding="md"
       variant="glass"
     >
