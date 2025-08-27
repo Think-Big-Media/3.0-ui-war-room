@@ -95,7 +95,17 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
         >
           {number}
         </div>
-        <h3 className="section-header mb-1">{title}</h3>
+        <h3
+          className="section-header mb-1"
+          style={{
+            fontFeatureSettings: "normal",
+            marginTop: "8px",
+            textTransform: "uppercase",
+            letterSpacing: "1px",
+            font: "400 20px/29px Barlow Condensed, sans-serif ",
+            color: "rgba(255, 255, 255, 0.5)",
+          }}
+        >{title}</h3>
         <p className="content-subtitle">{subtitle}</p>
       </div>
     </Card>
@@ -154,7 +164,17 @@ const IntelligenceDashboard: React.FC = () => {
           <div className="p-3 lg:p-4 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 hoverable transition-all duration-300">
             <Target className="w-6 h-6 lg:w-8 lg:h-8 text-white/95" />
           </div>
-          <h3 className="text-xl lg:text-2xl section-header">
+          <h3
+            className="text-xl lg:text-2xl section-header"
+            style={{
+              color: "rgba(255, 255, 255, 0.5)",
+              fontFeatureSettings: "normal",
+              marginLeft: "12px",
+              textTransform: "uppercase",
+              letterSpacing: "1px",
+              font: '600 25px/33px "Barlow Condensed", sans-serif ',
+            }}
+          >
             Intelligence Dashboard
           </h3>
         </div>
@@ -267,7 +287,17 @@ const CampaignOperationsHub: React.FC = () => {
           <div className="p-3 lg:p-4 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 hoverable transition-all duration-300">
             <Target className="w-6 h-6 lg:w-8 lg:h-8 text-white/95" />
           </div>
-          <h3 className="text-xl lg:text-2xl section-header">
+          <h3
+            className="text-xl lg:text-2xl section-header"
+            style={{
+              color: "rgba(255, 255, 255, 0.5)",
+              fontFeatureSettings: "normal",
+              marginLeft: "12px",
+              textTransform: "uppercase",
+              letterSpacing: "1px",
+              font: '600 25px/33px "Barlow Condensed", sans-serif ',
+            }}
+          >
             Campaign Operations
           </h3>
         </div>
@@ -284,7 +314,13 @@ const CampaignOperationsHub: React.FC = () => {
               <div
                 key={index}
                 onClick={() => handleProjectClick(cluster.title)}
-                className="bg-black/20 backdrop-blur-sm rounded-xl p-6 lg:p-7 border border-white/20 hoverable hover:bg-white/15 hover:scale-[1.02] transition-all duration-200 cursor-pointer"
+                className="bg-black/20 backdrop-blur-sm rounded-xl p-6 lg:p-7 border border-white/20 hoverable hover:bg-white/0 hover:scale-[1.02] transition-all duration-200 cursor-pointer"
+                style={{
+                  backdropFilter: "blur(4px)",
+                  backgroundColor: cluster.title === 'Crisis Response Protocol' ? "rgba(255, 255, 255, 0)" : "rgba(255, 255, 255, 0.15)",
+                  borderColor: cluster.title === 'Crisis Response Protocol' ? "rgb(217, 119, 6)" : "rgba(255, 255, 255, 0.2)",
+                  transform: cluster.title === 'Crisis Response Protocol' ? "matrix(1.02, 0, 0, 1.02, 0, 0)" : undefined,
+                }}
               >
                 <div className="flex items-center justify-between mb-2">
                   <h5 className="content-title text-white/90">
@@ -324,7 +360,13 @@ const CampaignOperationsHub: React.FC = () => {
         </div>
 
         {/* Content Templates */}
-        <div className="space-y-2 lg:space-y-3">
+        <div
+          className="space-y-2 lg:space-y-3"
+          style={{
+            paddingBottom: "11px",
+            marginBottom: "-1px",
+          }}
+        >
           <h4 className="text-lg lg:text-xl font-medium text-white/40 mb-3 uppercase font-condensed ml-2">
             &nbsp;CONTENT TEMPLATES
           </h4>
@@ -333,10 +375,28 @@ const CampaignOperationsHub: React.FC = () => {
               <div
                 key={index}
                 onClick={() => handleTemplateClick(template.name)}
-                className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-white/20 hoverable hover:bg-white/15 hover:scale-[1.02] transition-all duration-200 text-center cursor-pointer"
+                className="bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 hoverable hover:bg-white/0 hover:scale-[1.02] transition-all duration-200 text-center cursor-pointer"
+                style={{
+                  padding: index === 0 ? "16px 25px 24px" : index === 1 ? "20px 25px 25px" : index === 2 ? "21px 25px 23px" : "21px 25px 25px",
+                }}
               >
-                <h5 className="content-title mb-1">{template.name}</h5>
-                <p className="text-xs text-white/65">{template.type}</p>
+                <h5
+                  className="content-title mb-1"
+                  style={{
+                    color: "rgba(255, 255, 255, 0.95)",
+                    marginBottom: "4px",
+                    font: '500 17px/19px "Barlow Semi Condensed", sans-serif ',
+                  }}
+                >{template.name}</h5>
+                <p
+                  className="text-xs text-white/65"
+                  style={{
+                    color: "rgba(255, 255, 255, 0.65)",
+                    fontSize: "12px",
+                    fontWeight: "400",
+                    lineHeight: index === 0 ? "13.5px" : "16.5px",
+                  }}
+                >{template.type}</p>
               </div>
             ))}
           </div>
