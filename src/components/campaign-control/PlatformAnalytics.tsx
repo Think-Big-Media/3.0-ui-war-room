@@ -250,7 +250,13 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
           <div>
             <h2 className="text-2xl font-bold font-condensed flex items-center gap-2 uppercase">
               <Brain className="h-6 w-6" />
-              AI-POWERED CAMPAIGN INTELLIGENCE
+              <div
+                style={{
+                  fontWeight: "500",
+                }}
+              >
+                AI-POWERED CAMPAIGN INTELLIGENCE
+              </div>
             </h2>
             <p className="mt-2 text-blue-100">
               WarRoom's AI analyzes your campaigns in real-time to optimize
@@ -363,12 +369,22 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                       : 'Google'}{' '}
                   Spend
                 </p>
-                <p className="text-2xl font-bold font-condensed text-gray-900">
+                <div
+                  style={{
+                    font: '400 25px/33px "Barlow Condensed", sans-serif ',
+                  }}
+                >
                   {metrics.totalSpend}
-                </p>
-                <p className="text-xs text-green-600 mt-1 font-mono">
+                </div>
+                <div
+                  style={{
+                    color: "rgb(22, 163, 74)",
+                    marginTop: "4px",
+                    font: "400 12px/16.5px JetBrains Mono, monospace ",
+                  }}
+                >
                   ↑ 12% vs last period
-                </p>
+                </div>
               </div>
               <DollarSign className="h-8 w-8 text-green-500" />
             </div>
@@ -384,12 +400,22 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                       : 'Google'}{' '}
                   Impressions
                 </p>
-                <p className="text-2xl font-bold font-condensed text-gray-900">
+                <div
+                  style={{
+                    font: '400 25px/33px "Barlow Condensed", sans-serif ',
+                  }}
+                >
                   {metrics.totalImpressions}
-                </p>
-                <p className="text-xs text-green-600 mt-1 font-mono">
+                </div>
+                <div
+                  style={{
+                    color: "rgb(22, 163, 74)",
+                    marginTop: "4px",
+                    font: "400 12px/16.5px JetBrains Mono, monospace ",
+                  }}
+                >
                   ↑ 28% reach increase
-                </p>
+                </div>
               </div>
               <Eye className="h-8 w-8 text-blue-500" />
             </div>
@@ -405,12 +431,22 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                       : 'Google'}{' '}
                   Conversions
                 </p>
-                <p className="text-2xl font-bold font-condensed text-gray-900">
+                <div
+                  style={{
+                    font: '400 25px/33px "Barlow Condensed", sans-serif ',
+                  }}
+                >
                   {metrics.totalConversions}
-                </p>
-                <p className="text-xs text-green-600 mt-1 font-mono">
+                </div>
+                <div
+                  style={{
+                    color: "rgb(22, 163, 74)",
+                    marginTop: "4px",
+                    font: "400 12px/16.5px JetBrains Mono, monospace ",
+                  }}
+                >
                   ↑ 45% conversion rate
-                </p>
+                </div>
               </div>
               <Target className="h-8 w-8 text-purple-500" />
             </div>
@@ -426,12 +462,22 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                       : 'Google'}{' '}
                   ROAS
                 </p>
-                <p className="text-2xl font-bold font-condensed text-gray-900">
+                <div
+                  style={{
+                    font: '400 25px/33px "Barlow Condensed", sans-serif ',
+                  }}
+                >
                   {metrics.avgRoas}
-                </p>
-                <p className="text-xs text-green-600 mt-1 font-mono">
+                </div>
+                <div
+                  style={{
+                    color: "rgb(22, 163, 74)",
+                    marginTop: "4px",
+                    font: "400 12px/16.5px JetBrains Mono, monospace ",
+                  }}
+                >
                   ↑ 0.4x improvement
-                </p>
+                </div>
               </div>
               <TrendingUp className="h-8 w-8 text-orange-500" />
             </div>

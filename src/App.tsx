@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 
 // Import pages directly
 import Dashboard from "./pages/Dashboard";
-import XDashboardContent from "./pages/XDashboardContent";
 import CommandCenter from "./pages/CommandCenter";
 import NotFound from "./pages/NotFound";
 
@@ -17,7 +16,6 @@ const App = () => (
     <Routes>
       <Route path="/" element={<Dashboard />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/x" element={<XDashboardContent />} />
       <Route path="/command-center" element={<CommandCenter />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

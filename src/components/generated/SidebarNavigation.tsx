@@ -96,15 +96,6 @@ const TopNavigation: React.FC = () => {
       accent: 'var(--accent-dashboard)',
     },
     {
-      icon: X,
-      label: 'X',
-      path: '/x',
-      route: 'x-dashboard',
-      active: location.pathname === '/x',
-      theme: getSectionTheme('/x'),
-      accent: 'var(--accent-dashboard)',
-    },
-    {
       icon: BarChart3,
       label: 'LIVE MONITORING',
       path: '/real-time-monitoring',
