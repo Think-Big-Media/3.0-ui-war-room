@@ -61,17 +61,7 @@ const QuickActions: React.FC = () => {
           <div className="p-2 lg:p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 hoverable transition-all duration-300">
             <Zap className="w-5 h-5 lg:w-6 lg:h-6 text-white/95" />
           </div>
-          <h3
-            className="text-xl lg:text-2xl section-header"
-            style={{
-              color: "rgba(255, 255, 255, 0.5)",
-              fontFeatureSettings: "normal",
-              letterSpacing: "1px",
-              marginLeft: "12px",
-              textTransform: "uppercase",
-              font: '600 25px/33px "Barlow Condensed", sans-serif ',
-            }}
-          >
+          <h3 className="text-xl lg:text-2xl section-header ml-3">
             QUICK ACTIONS
           </h3>
         </div>
