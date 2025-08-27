@@ -61,7 +61,7 @@ const QuickActions: React.FC = () => {
           <div className="p-2 lg:p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 hoverable transition-all duration-300">
             <Zap className="w-5 h-5 lg:w-6 lg:h-6 text-white/95" />
           </div>
-          <h3 className="text-xl lg:text-2xl section-header ml-3">
+          <h3 className="section-header-large ml-3">
             QUICK ACTIONS
           </h3>
         </div>
