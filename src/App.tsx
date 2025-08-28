@@ -25,6 +25,9 @@ import InformationCenter from './pages/InformationCenter';
 import DebugDashboard from './pages/DebugDashboard';
 import NotFound from './pages/NotFound';
 
+// V2 Dashboard with SWOT Radar
+import DashboardV2 from './pages/v2-dashboard/DashboardV2';
+
 // Builder.io Integration
 import BuilderPage from './pages/BuilderPage';
 import './builder-registry';
@@ -60,6 +63,9 @@ function App() {
             <Route path="/automation" element={<AutomationDashboard />} />
             <Route path="/documents" element={<DocumentIntelligence />} />
             <Route path="/information-center" element={<InformationCenter />} />
+            
+            {/* V2 Dashboard with SWOT Radar */}
+            <Route path="/v2-dashboard" element={<DashboardV2 />} />
             
             {/* Content Management Routes */}
             <Route path="/content-calendar" element={<ContentCalendarPage />} />
