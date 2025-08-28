@@ -30,6 +30,8 @@ import DashboardV2 from './pages/v2-dashboard/DashboardV2';
 import TestDashboard from './pages/v2-dashboard/TestDashboard';
 import SimpleRadar from './pages/v2-dashboard/SimpleRadar';
 import BasicTest from './pages/v2-dashboard/BasicTest';
+import MinimalTest from './pages/v2-dashboard/MinimalTest';
+import StaticRadar from './pages/v2-dashboard/StaticRadar';
 
 // Builder.io Integration
 import BuilderPage from './pages/BuilderPage';
@@ -52,6 +54,9 @@ function App() {
       <Router>
         <ErrorBoundary>
           <Routes>
+            {/* Test route FIRST */}
+            <Route path="/v2-dashboard" element={<StaticRadar />} />
+            
             {/* Main Navigation Routes */}
             <Route path="/" element={<CommandCenter />} />
             <Route path="/dashboard" element={<Dashboard />} />
@@ -67,8 +72,7 @@ function App() {
             <Route path="/documents" element={<DocumentIntelligence />} />
             <Route path="/information-center" element={<InformationCenter />} />
             
-            {/* V2 Dashboard with SWOT Radar */}
-            <Route path="/v2-dashboard" element={<SimpleRadar />} />
+            {/* V2 Dashboard with SWOT Radar - Additional routes */}
             <Route path="/v2-test" element={<TestDashboard />} />
             <Route path="/v2-simple" element={<SimpleRadar />} />
             
