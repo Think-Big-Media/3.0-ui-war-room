@@ -29,6 +29,7 @@ import NotFound from './pages/NotFound';
 import DashboardV2 from './pages/v2-dashboard/DashboardV2';
 import TestDashboard from './pages/v2-dashboard/TestDashboard';
 import SimpleRadar from './pages/v2-dashboard/SimpleRadar';
+import BasicTest from './pages/v2-dashboard/BasicTest';
 
 // Builder.io Integration
 import BuilderPage from './pages/BuilderPage';
