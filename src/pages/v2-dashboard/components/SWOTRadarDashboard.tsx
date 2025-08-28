@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
 import { RadarCanvas } from './RadarCanvas';
-import { IntelligencePanel } from './IntelligencePanel';
+import '../swot-radar.css';
 export interface SWOTDataPoint {
   id: string;
   type: 'strength' | 'weakness' | 'opportunity' | 'threat';
@@ -150,27 +149,12 @@ export const SWOTRadarDashboard = () => {
           </p>
         </header>
 
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 lg:gap-12">
-          <div className="xl:col-span-2">
+        <div className="flex justify-center">
+          <div className="w-full max-w-4xl">
             <div className="relative bg-white/70 dark:bg-slate-900/70 backdrop-blur-sm border border-slate-200/60 dark:border-slate-700/60 rounded-2xl p-8 shadow-xl shadow-slate-200/20 dark:shadow-slate-900/20">
               <RadarCanvas dataPoints={dataPoints} sweepAngle={sweepAngle} onSweepHit={handleSweepHit} />
               
-              {activeLabel && <motion.div initial={{
-              opacity: 0,
-              scale: 0.8,
-              y: 10
-            }} animate={{
-              opacity: 1,
-              scale: 1,
-              y: 0
-            }} exit={{
-              opacity: 0,
-              scale: 0.8,
-              y: 10
-            }} transition={{
-              duration: 0.3,
-              ease: "easeOut"
-            }} className="absolute bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/60 rounded-xl p-4 shadow-2xl z-[1060] max-w-xs" style={{
+              {activeLabel && <div className="absolute bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/60 rounded-xl p-4 shadow-2xl z-[1060] max-w-xs animate-fadeIn" style={{
               left: activeLabel.x + 10,
               top: activeLabel.y - 10,
               transform: 'translate(0, -100%)'
@@ -184,13 +168,10 @@ export const SWOTRadarDashboard = () => {
                   <div className="text-xs text-slate-600 dark:text-slate-400">
                     <span>Sentiment: {(activeLabel.point.sentiment * 100).toFixed(0)}%</span>
                   </div>
-                </motion.div>}
+                </div>}
             </div>
           </div>
 
-          <div className="xl:col-span-1">
-            <IntelligencePanel isConnected={isConnected} dataPoints={dataPoints} crisisAlerts={crisisAlerts} onExport={exportData} />
-          </div>
         </div>
       </div>
     </div>;
