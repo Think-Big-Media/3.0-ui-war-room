@@ -27,10 +27,12 @@ import NotFound from './pages/NotFound';
 
 // V2 Dashboard with SWOT Radar
 import DashboardV2 from './pages/v2-dashboard/DashboardV2';
+import TestDashboard from './pages/v2-dashboard/TestDashboard';
+import SimpleRadar from './pages/v2-dashboard/SimpleRadar';
 
 // Builder.io Integration
 import BuilderPage from './pages/BuilderPage';
-import './builder-registry';
+// import './builder-registry'; // Temporarily disabled - causing Builder.init error
 
 // Components
 import { ErrorBoundary } from './components/ErrorBoundary';
@@ -65,7 +67,9 @@ function App() {
             <Route path="/information-center" element={<InformationCenter />} />
             
             {/* V2 Dashboard with SWOT Radar */}
-            <Route path="/v2-dashboard" element={<DashboardV2 />} />
+            <Route path="/v2-dashboard" element={<SimpleRadar />} />
+            <Route path="/v2-test" element={<TestDashboard />} />
+            <Route path="/v2-simple" element={<SimpleRadar />} />
             
             {/* Content Management Routes */}
             <Route path="/content-calendar" element={<ContentCalendarPage />} />
