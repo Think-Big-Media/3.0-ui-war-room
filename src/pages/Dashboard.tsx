@@ -378,11 +378,12 @@ const Dashboard: React.FC = () => {
         {/* Phrase Cloud */}
         <div className="mt-8">
           <PhraseCloud
-            words={mockTrendingTopics.map(topic => ({
+            words={mockTrendingTopics.map((topic) => ({
               text: topic.keyword,
               weight: Math.min(100, topic.mentions / 50), // Normalize weight
-              trend: topic.change > 0 ? 'up' : topic.change < 0 ? 'down' : 'stable',
-              mentions: topic.mentions
+              trend:
+                topic.change > 0 ? 'up' : topic.change < 0 ? 'down' : 'stable',
+              mentions: topic.mentions,
             }))}
             title="Campaign Phrase Cloud"
           />
