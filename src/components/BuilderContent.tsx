@@ -57,6 +57,13 @@ export const BuilderContent: React.FC<BuilderContentProps> = ({
                 device: 'desktop',
                 urlPath: currentPath,
               },
+              // Force fresh content by disabling cache
+              cacheSeconds: 0,
+              // Add cache-busting parameter
+              options: {
+                noCache: true,
+                includeRefs: true,
+              },
             })
             .promise();
           
