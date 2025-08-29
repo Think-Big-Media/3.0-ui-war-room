@@ -4,7 +4,6 @@
  */
 
 import type React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Wifi, WifiOff, AlertTriangle, RotateCcw } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
@@ -88,11 +87,9 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
+    <div
       className={cn(
-        'flex items-center justify-between p-3 rounded-lg border',
+        'flex items-center justify-between p-3 rounded-lg border animate-fade-in',
         config.color.includes('green')
           ? 'border-green-200'
           : config.color.includes('red')
@@ -135,19 +132,14 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
       </div>
 
       {/* Reconnect button for error states */}
-      <AnimatePresence>
-        {error && onReconnect && reconnectAttempts < maxReconnectAttempts && (
-          <motion.button
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            onClick={onReconnect}
-            className="px-3 py-1 text-xs font-medium text-blue-600 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors"
-          >
-            Retry
-          </motion.button>
-        )}
-      </AnimatePresence>
+      {error && onReconnect && reconnectAttempts < maxReconnectAttempts && (
+        <button
+          onClick={onReconnect}
+          className="px-3 py-1 text-xs font-medium text-blue-600 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors animate-fade-in"
+        >
+          Retry
+        </button>
+      )}
 
       {/* Connection pulse indicator */}
       {isConnected && (
@@ -156,6 +148,6 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
           <div className="absolute inset-0 w-2 h-2 bg-[var(--accent-live-monitoring)]/70 rounded-full animate-ping" />
         </div>
       )}
-    </motion.div>
+    </div>
   );
 };

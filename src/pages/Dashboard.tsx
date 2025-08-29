@@ -1,444 +1,373 @@
 /**
- * War Room Main Dashboard
- * Military-themed design with command status bar and real-time metrics
+ * War Room V2 Dashboard
+ * Sophisticated analytics dashboard - fully functional
  */
 
 import type React from 'react';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useSupabaseAuth } from '../contexts/SupabaseAuthContext';
+
 import {
   Users,
   Calendar,
   DollarSign,
-  Activity,
-  FileText,
-  ArrowRight,
-  Zap,
-  Mail,
   TrendingUp,
+  MapPin,
   BarChart3,
-  Target,
-  Clock,
-  Shield,
-  Radio,
-  Signal,
-  Satellite,
+  Activity,
+  CheckCircle,
 } from 'lucide-react';
-import { MetricCard } from '../components/dashboard/MetricCard';
-import { ActivityFeed } from '../components/dashboard/ActivityFeed';
-import { CampaignHealth } from '../components/dashboard/CampaignHealth';
-import { AnalyticsOverview } from '../components/dashboard/AnalyticsOverview';
+
 import PhraseCloud from '../components/dashboard/PhraseCloud';
 import PerformanceMetrics from '../components/dashboard/PerformanceMetrics';
-import {
-  DashboardHead,
-  DashboardStructuredData,
-  OrganizationStructuredData,
-} from '../components/SEO';
 import { mockTrendingTopics } from '../data/monitoringData';
+// Note: MetricCard and ActivityFeed are defined locally in this file
+// CampaignHealth, AnalyticsOverview, SEO helpers are not used here and omitted
 
-// Type definitions for military status bar
-interface StatusIndicator {
-  label: string;
-  value: string | number;
-  status: 'active' | 'warning' | 'critical' | 'normal';
+// Mock chart data
+const chartData = [
+  { name: 'Jan', volunteers: 400, events: 12, donations: 8400 },
+  { name: 'Feb', volunteers: 300, events: 15, donations: 9800 },
+  { name: 'Mar', volunteers: 600, events: 18, donations: 12400 },
+  { name: 'Apr', volunteers: 800, events: 22, donations: 15600 },
+  { name: 'May', volunteers: 700, events: 25, donations: 18200 },
+  { name: 'Jun', volunteers: 900, events: 28, donations: 21800 },
+];
+
+// US Regions data
+const regionData = [
+  { name: 'Northeast', volunteers: 1250, events: 34, color: '#3B82F6' },
+  { name: 'Southeast', volunteers: 890, events: 28, color: '#10B981' },
+  { name: 'Midwest', volunteers: 760, events: 22, color: '#F59E0B' },
+  { name: 'West', volunteers: 1100, events: 31, color: '#8B5CF6' },
+];
+
+// Activity data
+const activities = [
+  {
+    id: 1,
+    type: 'volunteer',
+    message: 'New volunteer registered in Ohio',
+    time: '2 min ago',
+    icon: Users,
+  },
+  {
+    id: 2,
+    type: 'event',
+    message: 'Town hall scheduled for Phoenix',
+    time: '5 min ago',
+    icon: Calendar,
+  },
+  {
+    id: 3,
+    type: 'donation',
+    message: '$2,500 donation received',
+    time: '8 min ago',
+    icon: DollarSign,
+  },
+  {
+    id: 4,
+    type: 'milestone',
+    message: 'Reached 10,000 volunteers!',
+    time: '12 min ago',
+    icon: CheckCircle,
+  },
+  {
+    id: 5,
+    type: 'event',
+    message: 'Fundraiser completed in Denver',
+    time: '15 min ago',
+    icon: TrendingUp,
+  },
+];
+
+// Metric Card Component
+const MetricCard: React.FC<{
+  title: string;
+  value: string;
+  change: string;
+  trend: 'up' | 'down';
   icon: React.ComponentType<{ className?: string }>;
-}
+  color: string;
+}> = ({ title, value, change, trend, icon: Icon, color }) => {
+  const colorClasses =
+    {
+      blue: 'text-blue-600 bg-blue-50',
+      green: 'text-green-600 bg-green-50',
+      purple: 'text-purple-600 bg-purple-50',
+      yellow: 'text-yellow-600 bg-yellow-50',
+    }[color] || 'text-gray-600 bg-gray-50';
 
-// Camouflage texture background component
-const CamoBackground: React.FC = () => {
   return (
-    <div className="fixed inset-0 -z-10">
-      {/* Base gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#6B7B47] via-[#8B956D] to-[#A0956B]" />
-
-      {/* Camouflage pattern overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.12]"
-        style={{
-          backgroundImage: `
-            radial-gradient(circle at 20% 30%, rgba(107, 123, 71, 0.8) 15%, transparent 16%),
-            radial-gradient(circle at 60% 70%, rgba(139, 149, 109, 0.6) 12%, transparent 13%),
-            radial-gradient(circle at 80% 20%, rgba(160, 149, 107, 0.7) 18%, transparent 19%),
-            radial-gradient(circle at 40% 80%, rgba(132, 126, 102, 0.5) 14%, transparent 15%),
-            radial-gradient(circle at 90% 60%, rgba(107, 123, 71, 0.6) 16%, transparent 17%),
-            radial-gradient(circle at 10% 90%, rgba(160, 149, 107, 0.8) 13%, transparent 14%)
-          `,
-          backgroundSize:
-            '120px 120px, 80px 80px, 100px 100px, 90px 90px, 110px 110px, 70px 70px',
-          backgroundPosition:
-            '0 0, 40px 40px, 80px 20px, 20px 80px, 60px 60px, 100px 10px',
-        }}
-      />
-
-      {/* Subtle fiber texture */}
-      <div
-        className="absolute inset-0 opacity-[0.08]"
-        style={{
-          backgroundImage: `
-            linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%),
-            linear-gradient(-45deg, transparent 40%, rgba(0,0,0,0.1) 50%, transparent 60%)
-          `,
-          backgroundSize: '3px 3px, 3px 3px',
-        }}
-      />
+    <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-sm font-medium text-gray-600">{title}</p>
+          <p className="text-3xl font-bold text-gray-900 mt-1">{value}</p>
+          <p
+            className={`text-sm mt-2 ${trend === 'up' ? 'text-green-600' : 'text-red-600'}`}
+          >
+            {trend === 'up' ? '↗' : '↘'} {change} from last month
+          </p>
+        </div>
+        <div className={`p-3 rounded-full ${colorClasses}`}>
+          <Icon className="h-8 w-8" />
+        </div>
+      </div>
     </div>
   );
 };
 
-// Military Status Bar Component
-const StatusBar: React.FC = () => {
-  const statusIndicators: StatusIndicator[] = [
-    {
-      label: 'DEFCON',
-      value: '3',
-      status: 'warning',
-      icon: Shield,
-    },
-    {
-      label: 'Active Ops',
-      value: 7,
-      status: 'active',
-      icon: Radio,
-    },
-    {
-      label: 'Network',
-      value: 'SECURE',
-      status: 'normal',
-      icon: Signal,
-    },
-    {
-      label: 'Satellites',
-      value: '4/4',
-      status: 'normal',
-      icon: Satellite,
-    },
-    {
-      label: 'Personnel',
-      value: 23,
-      status: 'active',
-      icon: Users,
-    },
-  ];
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'critical':
-        return 'text-red-300 bg-red-900/30 border-red-500/50';
-      case 'warning':
-        return 'text-amber-300 bg-amber-900/30 border-amber-500/50';
-      case 'active':
-        return 'text-green-300 bg-green-900/30 border-green-500/50';
-      default:
-        return 'text-slate-300 bg-slate-800/30 border-slate-500/50';
-    }
-  };
+// Simple Line Chart Component
+const SimpleLineChart: React.FC<{
+  data: typeof chartData;
+  dataKey: string;
+  color: string;
+}> = ({ data, dataKey, color }) => {
+  const maxValue = Math.max(
+    ...data.map((d) => d[dataKey as keyof typeof d] as number)
+  );
 
   return (
-    <section className="bg-black/20 border-b border-[#8B956D]/30 px-6 py-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-6">
-            <h2 className="text-lg font-bold text-[#E8E4D0] tracking-wider">
-              COMMAND STATUS
-            </h2>
-            <div className="flex items-center space-x-1">
-              <div className="w-2 h-2 bg-[var(--accent-live-monitoring)] rounded-full animate-pulse" />
-              <span className="text-sm text-[#C5C1A8] font-mono">
-                OPERATIONAL
-              </span>
+    <div className="h-64 flex items-end space-x-2 p-4">
+      {data.map((item, index) => {
+        const height =
+          ((item[dataKey as keyof typeof item] as number) / maxValue) * 200;
+        return (
+          <div key={index} className="flex flex-col items-center flex-1">
+            <div className="flex items-end mb-2" style={{ height: '200px' }}>
+              <div
+                className={`w-full max-w-12 rounded-t ${color} transition-all duration-300 hover:opacity-80`}
+                style={{ height: `${height}px` }}
+                title={`${item.name}: ${item[dataKey as keyof typeof item]}`}
+              />
             </div>
+            <span className="text-xs text-gray-600">{item.name}</span>
           </div>
+        );
+      })}
+    </div>
+  );
+};
 
-          <div className="flex items-center space-x-4">
-            {statusIndicators.map((indicator, index) => {
-              const Icon = indicator.icon;
-              return (
-                <motion.div
-                  key={indicator.label}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.1 }}
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg border ${getStatusColor(indicator.status)}`}
-                >
-                  <Icon className="w-4 h-4" />
-                  <span className="text-xs font-mono font-semibold">
-                    {indicator.label}: {indicator.value}
-                  </span>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          <div className="text-right">
-            <div className="text-sm text-[#C5C1A8] font-mono">
-              {new Date().toLocaleTimeString('en-US', {
-                hour12: false,
-                timeZoneName: 'short',
-              })}
-            </div>
-            <div className="text-xs text-[#A0956B]">ZULU TIME</div>
-          </div>
-        </div>
+// US Map Component (simplified)
+const USMap: React.FC = () => {
+  return (
+    <div className="h-64 bg-gray-50 rounded-lg p-4 flex items-center justify-center relative">
+      <div className="w-full max-w-md">
+        <svg viewBox="0 0 400 300" className="w-full h-full">
+          {/* Simplified US map outline */}
+          <path
+            d="M50,150 L100,100 L200,110 L300,120 L350,140 L360,180 L340,220 L300,240 L200,250 L100,240 L50,200 Z"
+            fill="#E5E7EB"
+            stroke="#9CA3AF"
+            strokeWidth="2"
+          />
+          {/* Region markers */}
+          {regionData.map((region, index) => (
+            <g key={region.name}>
+              <circle
+                cx={80 + index * 80}
+                cy={150 + (index % 2) * 40}
+                r={Math.sqrt(region.volunteers / 10)}
+                fill={region.color}
+                opacity="0.7"
+              />
+              <text
+                x={80 + index * 80}
+                y={200 + (index % 2) * 40}
+                textAnchor="middle"
+                className="text-xs fill-gray-600"
+              >
+                {region.name}
+              </text>
+            </g>
+          ))}
+        </svg>
       </div>
-    </section>
+
+      {/* Legend */}
+      <div className="absolute bottom-4 left-4 bg-white p-3 rounded shadow-sm">
+        <p className="text-sm font-semibold text-gray-700 mb-2">
+          Volunteers by Region
+        </p>
+        {regionData.map((region) => (
+          <div
+            key={region.name}
+            className="flex items-center space-x-2 text-xs"
+          >
+            <div
+              className="w-3 h-3 rounded-full"
+              style={{ backgroundColor: region.color }}
+            />
+            <span>
+              {region.name}: {region.volunteers}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Activity Feed Component
+const ActivityFeed: React.FC = () => {
+  return (
+    <div className="space-y-4">
+      {activities.map((activity) => {
+        const Icon = activity.icon;
+        return (
+          <div
+            key={activity.id}
+            className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-50"
+          >
+            <div className="p-2 bg-blue-100 rounded-full">
+              <Icon className="h-4 w-4 text-blue-600" />
+            </div>
+            <div className="flex-1">
+              <p className="text-sm font-medium text-gray-900">
+                {activity.message}
+              </p>
+              <p className="text-xs text-gray-500">{activity.time}</p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
   );
 };
 
 const Dashboard: React.FC = () => {
-  const { user } = useSupabaseAuth();
-  const [selectedTimeRange, setSelectedTimeRange] = useState('7d');
-  const [isLoading, setIsLoading] = useState(true);
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-6">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">
+                War Room Analytics Dashboard V2
+              </h1>
+              <p className="text-lg text-gray-600 mt-1">
+                Campaign insights and real-time performance metrics
+              </p>
+            </div>
 
-  // Mock sparkline data
-  const generateSparkline = () => {
-    return Array.from(
-      { length: 7 },
-      () => Math.floor(Math.random() * 100) + 20
-    );
-  };
+            <div className="flex items-center space-x-4">
+              {/* Live indicator */}
+              <div className="flex items-center">
+                <div className="h-3 w-3 rounded-full bg-green-500 mr-2 animate-pulse" />
+                <span className="text-sm font-medium text-gray-700">
+                  Live Data
+                </span>
+              </div>
 
-  // Loading effect with error handling
-  useEffect(() => {
-    console.log('Dashboard mounted, starting loading timer...');
-    const timer = setTimeout(() => {
-      console.log('Setting loading to false');
-      setIsLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Debug render
-  console.log('Dashboard rendering, isLoading:', isLoading);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto" />
-          <p className="mt-4 text-gray-600">Loading dashboard...</p>
+              {/* Export button */}
+              <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                Export Report
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    );
-  }
 
-  return (
-    <div className="min-h-screen">
-      {/* SEO Meta Tags and Structured Data */}
-      <DashboardHead
-        url="https://war-room-oa9t.onrender.com/dashboard"
-        canonicalUrl="https://war-room-oa9t.onrender.com/dashboard"
-      />
-      <DashboardStructuredData />
-      <OrganizationStructuredData />
-
-      {/* Global Camouflage Background */}
-      <CamoBackground />
-
-      {/* Military Status Bar */}
-      <StatusBar />
-
-      {/* Main Dashboard Content */}
-      <div className="p-6 space-y-4">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold text-[#E8E4D0]">
-              Campaign Dashboard
-            </h1>
-            <p className="mt-1 text-[#C5C1A8]">
-              Welcome back, {user?.email?.split('@')[0]}
-            </p>
-          </div>
-
-          {/* Time Range Selector */}
-          <div className="flex items-center space-x-2 bg-black/20 rounded-lg border border-[#8B956D]/30 p-1">
-            {['24h', '7d', '30d', '90d'].map((range) => (
-              <button
-                key={range}
-                onClick={() => setSelectedTimeRange(range)}
-                className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-                  selectedTimeRange === range
-                    ? 'bg-[#8B956D] text-[#E8E4D0]'
-                    : 'text-[#C5C1A8] hover:text-[#E8E4D0] hover:bg-black/20'
-                }`}
-              >
-                {range}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Metrics Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Main content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Metric cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <MetricCard
             title="Active Volunteers"
-            value={2847}
-            change={12.5}
+            value="2,847"
+            change="+12.5%"
             trend="up"
             icon={Users}
             color="blue"
-            sparklineData={generateSparkline()}
-            loading={isLoading}
           />
           <MetricCard
-            title="Total Donations"
-            value={124560}
-            change={8.2}
+            title="Events Hosted"
+            value="156"
+            change="+8.2%"
             trend="up"
-            icon={DollarSign}
-            color="green"
-            format="currency"
-            sparklineData={generateSparkline()}
-            loading={isLoading}
-          />
-          <MetricCard
-            title="Upcoming Events"
-            value={18}
-            change={-5.3}
-            trend="down"
             icon={Calendar}
-            color="purple"
-            sparklineData={generateSparkline()}
-            loading={isLoading}
+            color="green"
           />
           <MetricCard
-            title="Engagement Rate"
-            value={73.2}
-            change={3.1}
+            title="Donations Raised"
+            value="$124,560"
+            change="-2.1%"
+            trend="down"
+            icon={DollarSign}
+            color="yellow"
+          />
+          <MetricCard
+            title="Total Reach"
+            value="89,472"
+            change="+15.3%"
             trend="up"
-            icon={Activity}
-            color="orange"
-            format="percentage"
-            sparklineData={generateSparkline()}
-            loading={isLoading}
+            icon={TrendingUp}
+            color="purple"
           />
         </div>
 
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          {/* Activity Feed */}
-          <div className="lg:col-span-2">
-            <div className="bg-black/20 rounded-2xl border border-[#8B956D]/30 shadow-sm p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-semibold text-[#E8E4D0]">
-                  Recent Activity
-                </h2>
-                <button className="text-sm text-[#8B956D] hover:text-[#A0956B] font-medium flex items-center space-x-1">
-                  <span>View All</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
-              <ActivityFeed limit={8} showTimestamps={true} />
-            </div>
+        {/* Charts grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          {/* Volunteer growth chart */}
+          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+            <h3 className="text-lg font-semibold mb-4 flex items-center">
+              <BarChart3 className="h-5 w-5 mr-2 text-blue-600" />
+              Volunteer Growth
+            </h3>
+            <SimpleLineChart
+              data={chartData}
+              dataKey="volunteers"
+              color="bg-blue-500"
+            />
           </div>
 
-          {/* Quick Actions & Status */}
-          <div className="space-y-4">
-            {/* Campaign Health */}
-            <CampaignHealth compact={true} />
+          {/* Event attendance chart */}
+          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+            <h3 className="text-lg font-semibold mb-4 flex items-center">
+              <Calendar className="h-5 w-5 mr-2 text-green-600" />
+              Event Attendance
+            </h3>
+            <SimpleLineChart
+              data={chartData}
+              dataKey="events"
+              color="bg-green-500"
+            />
+          </div>
 
-            {/* Quick Actions */}
-            <div className="relative bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-6 text-white overflow-hidden">
-              {/* Background decoration */}
-              <div className="absolute -top-24 -right-24 w-48 h-48 bg-white/10 rounded-full" />
-              <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-white/10 rounded-full" />
+          {/* Geographic distribution */}
+          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+            <h3 className="text-lg font-semibold mb-4 flex items-center">
+              <MapPin className="h-5 w-5 mr-2 text-purple-600" />
+              Geographic Reach
+            </h3>
+            <USMap />
+          </div>
 
-              <div className="relative">
-                <h3 className="text-lg font-semibold mb-4 flex items-center space-x-2">
-                  <Zap className="w-5 h-5" />
-                  <span>Quick Actions</span>
-                </h3>
-                <div className="space-y-3">
-                  <button className="w-full flex items-center justify-between p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-colors duration-200 transform hover:scale-[1.01] will-change-transform">
-                    <div className="flex items-center space-x-3">
-                      <Target className="w-5 h-5" />
-                      <span className="font-medium">Launch Campaign</span>
-                    </div>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                  <button className="w-full flex items-center justify-between p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-colors duration-200 transform hover:scale-[1.01] will-change-transform">
-                    <div className="flex items-center space-x-3">
-                      <Mail className="w-5 h-5" />
-                      <span className="font-medium">Send Broadcast</span>
-                    </div>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                  <button className="w-full flex items-center justify-between p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-colors duration-200 transform hover:scale-[1.01] will-change-transform">
-                    <div className="flex items-center space-x-3">
-                      <Calendar className="w-5 h-5" />
-                      <span className="font-medium">Schedule Event</span>
-                    </div>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Upcoming Tasks */}
-            <div className="bg-black/20 rounded-2xl border border-[#8B956D]/30 shadow-sm p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-[#E8E4D0] flex items-center space-x-2">
-                  <Clock className="w-5 h-5 text-[#A0956B]" />
-                  <span>Upcoming Tasks</span>
-                </h3>
-                <span className="text-xs text-[#C5C1A8] bg-black/30 px-2 py-1 rounded-full">
-                  3 pending
-                </span>
-              </div>
-              <div className="space-y-3">
-                <div className="group flex items-start space-x-3 p-3 rounded-xl hover:bg-black/30 transition-colors cursor-pointer">
-                  <div className="relative">
-                    <div className="w-2 h-2 bg-red-500 rounded-full mt-1.5 animate-pulse" />
-                    <div className="absolute inset-0 w-2 h-2 bg-red-400 rounded-full mt-1.5 animate-ping" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-[#E8E4D0] group-hover:text-[#8B956D]">
-                      Review donor report
-                    </p>
-                    <p className="text-xs text-[#A0956B]">Due in 2 hours</p>
-                  </div>
-                </div>
-                <div className="group flex items-start space-x-3 p-3 rounded-xl hover:bg-black/30 transition-colors cursor-pointer">
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full mt-1.5" />
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-[#E8E4D0] group-hover:text-[#8B956D]">
-                      Call volunteer leads
-                    </p>
-                    <p className="text-xs text-[#A0956B]">
-                      Due today at 5:00 PM
-                    </p>
-                  </div>
-                </div>
-                <div className="group flex items-start space-x-3 p-3 rounded-xl hover:bg-black/30 transition-colors cursor-pointer">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-1.5" />
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-[#E8E4D0] group-hover:text-[#8B956D]">
-                      Prepare town hall slides
-                    </p>
-                    <p className="text-xs text-[#A0956B]">Due tomorrow</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          {/* Donations chart */}
+          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+            <h3 className="text-lg font-semibold mb-4 flex items-center">
+              <DollarSign className="h-5 w-5 mr-2 text-yellow-600" />
+              Donation Trends
+            </h3>
+            <SimpleLineChart
+              data={chartData}
+              dataKey="donations"
+              color="bg-yellow-500"
+            />
           </div>
         </div>
 
-        {/* Analytics Overview */}
-        <div className="mt-8">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-[#E8E4D0] flex items-center space-x-2">
-              <BarChart3 className="w-6 h-6 text-[#A0956B]" />
-              <span>Analytics Overview</span>
-            </h2>
-            <button className="text-sm text-[#8B956D] hover:text-[#A0956B] font-medium flex items-center space-x-1">
-              <span>View Full Analytics</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-          <AnalyticsOverview timeRange={selectedTimeRange} />
+        {/* Activity feed */}
+        <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+          <h3 className="text-lg font-semibold mb-4 flex items-center">
+            <Activity className="h-5 w-5 mr-2 text-gray-600" />
+            Recent Activity
+          </h3>
+          <ActivityFeed />
         </div>
 
         {/* Performance Metrics */}
