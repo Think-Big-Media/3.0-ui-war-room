@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CommandStatusBar: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -9,6 +11,25 @@ const CommandStatusBar: React.FC = () => {
     }, 1000);
     return () => clearInterval(timer);
   }, []);
+
+  const handlePlatformClick = (platform: string) => {
+    switch (platform) {
+      case 'meta':
+        navigate('/campaign-control');
+        break;
+      case 'google':
+        navigate('/campaign-control');
+        break;
+      case 'social':
+        navigate('/real-time-monitoring');
+        break;
+      case 'analytics':
+        navigate('/intelligence-hub');
+        break;
+      default:
+        break;
+    }
+  };
 
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString('en-US', {
@@ -25,26 +46,38 @@ const CommandStatusBar: React.FC = () => {
       <div className="relative h-14 flex items-center justify-center px-6 border-t border-b border-white/20 bg-black/20 backdrop-blur-xl">
             {/* Left positioned - Platform indicators moved 40px more to the left */}
             <div className="absolute left-[105px] flex items-baseline gap-3">
-              <div className="flex items-baseline gap-2 bg-green-500/20 px-3 py-1.5 rounded-md border border-green-500/30">
+              <div 
+                onClick={() => handlePlatformClick('meta')}
+                className="flex items-baseline gap-2 bg-green-500/20 px-3 py-1.5 rounded-md border border-green-500/30 cursor-pointer hover:bg-green-500/30 hover:border-green-500/50 transition-all duration-200 transform hover:scale-105"
+              >
                 <span className="text-xs text-green-400 leading-none">●</span>
                 <span className="text-xs text-green-300 font-medium font-barlow leading-none">Meta</span>
               </div>
-              <div className="flex items-baseline gap-2 bg-blue-500/20 px-3 py-1.5 rounded-md border border-blue-500/30">
+              <div 
+                onClick={() => handlePlatformClick('google')}
+                className="flex items-baseline gap-2 bg-blue-500/20 px-3 py-1.5 rounded-md border border-blue-500/30 cursor-pointer hover:bg-blue-500/30 hover:border-blue-500/50 transition-all duration-200 transform hover:scale-105"
+              >
                 <span className="text-xs text-blue-400 leading-none">●</span>
                 <span className="text-xs text-blue-300 font-medium font-barlow leading-none">Google</span>
               </div>
-              <div className="flex items-baseline gap-2 bg-purple-500/20 px-3 py-1.5 rounded-md border border-purple-500/30">
+              <div 
+                onClick={() => handlePlatformClick('social')}
+                className="flex items-baseline gap-2 bg-purple-500/20 px-3 py-1.5 rounded-md border border-purple-500/30 cursor-pointer hover:bg-purple-500/30 hover:border-purple-500/50 transition-all duration-200 transform hover:scale-105"
+              >
                 <span className="text-xs text-purple-400 leading-none">●</span>
                 <span className="text-xs text-purple-300 font-medium font-barlow leading-none">Social</span>
               </div>
-              <div className="flex items-baseline gap-2 bg-orange-500/20 px-3 py-1.5 rounded-md border border-orange-500/30">
+              <div 
+                onClick={() => handlePlatformClick('analytics')}
+                className="flex items-baseline gap-2 bg-orange-500/20 px-3 py-1.5 rounded-md border border-orange-500/30 cursor-pointer hover:bg-orange-500/30 hover:border-orange-500/50 transition-all duration-200 transform hover:scale-105"
+              >
                 <span className="text-xs text-orange-400 leading-none">●</span>
                 <span className="text-xs text-orange-300 font-medium font-barlow leading-none">Analytics</span>
               </div>
             </div>
             
-            {/* Right positioned - Metrics positioned 100px left of time */}
-            <div className="absolute right-[200px] flex items-baseline gap-3">
+            {/* Right positioned - Metrics positioned further left with time repositioning */}
+            <div className="absolute right-[380px] flex items-baseline gap-3">
               <div className="bg-gray-700/50 px-3 py-1.5 rounded-md border border-gray-600/50 flex items-baseline">
                 <span className="text-xs font-bold text-white font-jetbrains leading-none">236</span>
                 <span className="text-xs text-gray-400 ml-1.5 font-barlow leading-none">Mentions</span>
@@ -66,8 +99,8 @@ const CommandStatusBar: React.FC = () => {
               </div>
             </div>
             
-            {/* Far right - Time display */}
-            <div className="absolute right-6 flex items-center gap-4">
+            {/* Far right - Time display moved left above content area */}
+            <div className="absolute right-[124px] flex items-center gap-4">
               {/* Vertical separator */}
               <div className="h-6 w-px bg-gray-600"></div>
               

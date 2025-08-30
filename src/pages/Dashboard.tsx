@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import PageLayout from "../components/shared/PageLayout";
 import Card from "../components/shared/Card";
 import { SWOTRadarDashboard } from "../components/generated/SWOTRadarDashboard";
@@ -11,8 +12,59 @@ import { Zap, Radio, PenTool, TrendingUp, Smartphone, AlertTriangle } from "luci
 import "../main-dashboard.css";
 
 export default function Dashboard() {
+  const navigate = useNavigate();
+  
   console.log('🏠 [DASHBOARD PAGE] Rendering at', window.location.pathname);
   console.log('🔄 [DASHBOARD] Component render at', performance.now());
+
+  const handleQuickActionClick = (action: string) => {
+    switch (action) {
+      case 'quick-campaign':
+        navigate('/campaign-control');
+        break;
+      case 'live-monitor':
+        navigate('/real-time-monitoring');
+        break;
+      case 'make-content':
+        navigate('/campaign-control');
+        break;
+      case 'trend-ops':
+        navigate('/intelligence-hub');
+        break;
+      case 'social-media':
+        navigate('/real-time-monitoring');
+        break;
+      case 'alert-center':
+        navigate('/alert-center');
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handlePhraseClick = (phrase: string) => {
+    // Navigate to Intelligence Hub with the phrase as search parameter
+    navigate(`/intelligence-hub?search=${encodeURIComponent(phrase)}`);
+  };
+
+  const handleMetricBoxClick = (metric: string) => {
+    switch (metric) {
+      case 'alerts':
+        navigate('/alert-center');
+        break;
+      case 'ad-spend':
+        navigate('/campaign-control');
+        break;
+      case 'mentions':
+        navigate('/real-time-monitoring');
+        break;
+      case 'sentiment':
+        navigate('/intelligence-hub?filter=sentiment');
+        break;
+      default:
+        break;
+    }
+  };
   
   // Mock data for Intelligence Panel - 15 total to fill taller container (added 3 more)
   const mockDataPoints = [
@@ -255,7 +307,12 @@ export default function Dashboard() {
           <div className="right-column">
             {/* Golden Measure Squares - Moved above phrase cloud */}
             <div className="metric-boxes-container">
-              <Card variant="glass" padding="sm" className="metric-box-square hoverable flex flex-col items-center justify-center">
+              <Card 
+                variant="glass" 
+                padding="sm" 
+                className="metric-box-square hoverable flex flex-col items-center justify-center cursor-pointer transform transition-all duration-200 hover:scale-105"
+                onClick={() => handleMetricBoxClick('alerts')}
+              >
                 <div className="text-3xl font-normal text-red-400" style={{fontFamily: 'Barlow Condensed', fontWeight: 400}}>
                   7
                 </div>
@@ -265,7 +322,12 @@ export default function Dashboard() {
                   Alerts
                 </div>
               </Card>
-              <Card variant="glass" padding="sm" className="metric-box-square hoverable flex flex-col items-center justify-center">
+              <Card 
+                variant="glass" 
+                padding="sm" 
+                className="metric-box-square hoverable flex flex-col items-center justify-center cursor-pointer transform transition-all duration-200 hover:scale-105"
+                onClick={() => handleMetricBoxClick('ad-spend')}
+              >
                 <div className="text-3xl font-normal text-blue-400" style={{fontFamily: 'Barlow Condensed', fontWeight: 400}}>
                   47.2
                 </div>
@@ -275,7 +337,12 @@ export default function Dashboard() {
                   Spend
                 </div>
               </Card>
-              <Card variant="glass" padding="sm" className="metric-box-square hoverable flex flex-col items-center justify-center">
+              <Card 
+                variant="glass" 
+                padding="sm" 
+                className="metric-box-square hoverable flex flex-col items-center justify-center cursor-pointer transform transition-all duration-200 hover:scale-105"
+                onClick={() => handleMetricBoxClick('mentions')}
+              >
                 <div className="text-3xl font-normal text-green-400" style={{fontFamily: 'Barlow Condensed', fontWeight: 400}}>
                   2847
                 </div>
@@ -285,7 +352,12 @@ export default function Dashboard() {
                   Volume
                 </div>
               </Card>
-              <Card variant="glass" padding="sm" className="metric-box-square hoverable flex flex-col items-center justify-center">
+              <Card 
+                variant="glass" 
+                padding="sm" 
+                className="metric-box-square hoverable flex flex-col items-center justify-center cursor-pointer transform transition-all duration-200 hover:scale-105"
+                onClick={() => handleMetricBoxClick('sentiment')}
+              >
                 <div className="text-3xl font-normal text-green-400" style={{fontFamily: 'Barlow Condensed', fontWeight: 400}}>
                   74
                 </div>
@@ -297,7 +369,67 @@ export default function Dashboard() {
               </Card>
             </div>
 
-            {/* Phrase Cloud - Moved below metric boxes */}
+            {/* Quick Actions Grid - Moved above phrase cloud */}
+            <Card variant="glass" padding="none" className="quick-actions hoverable" style={{ overflow: "hidden" }}>
+              <div className="bg-white/10 px-3 py-2 border-b border-white/30">
+                <div className="text-xs text-white/60 uppercase font-semibold tracking-wider font-barlow">
+                  Quick Actions
+                </div>
+              </div>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(3, 1fr)",
+                  gridTemplateRows: "repeat(2, 1fr)",
+                  height: "calc(100% - 40px)",
+                }}
+              >
+                <div 
+                  onClick={() => handleQuickActionClick('quick-campaign')}
+                  className="bg-white/5 border-r border-b border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/15 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
+                >
+                  <Zap className="w-4 h-4 text-yellow-400" />
+                  Quick Campaign
+                </div>
+                <div 
+                  onClick={() => handleQuickActionClick('live-monitor')}
+                  className="bg-white/5 border-r border-b border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/15 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
+                >
+                  <Radio className="w-4 h-4 text-green-400" />
+                  Live Monitor
+                </div>
+                <div 
+                  onClick={() => handleQuickActionClick('make-content')}
+                  className="bg-black/10 border-b border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/10 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
+                >
+                  <PenTool className="w-4 h-4 text-blue-400" />
+                  Make Content
+                </div>
+                <div 
+                  onClick={() => handleQuickActionClick('trend-ops')}
+                  className="bg-black/10 border-r border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/10 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
+                >
+                  <TrendingUp className="w-4 h-4 text-purple-400" />
+                  Trend Ops
+                </div>
+                <div 
+                  onClick={() => handleQuickActionClick('social-media')}
+                  className="bg-black/10 border-r border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/10 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
+                >
+                  <Smartphone className="w-4 h-4 text-cyan-400" />
+                  Social Media
+                </div>
+                <div 
+                  onClick={() => handleQuickActionClick('alert-center')}
+                  className="bg-white/5 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/15 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
+                >
+                  <AlertTriangle className="w-4 h-4 text-red-400" />
+                  Alert Center
+                </div>
+              </div>
+            </Card>
+
+            {/* Phrase Cloud - Moved below Quick Actions */}
             <Card variant="glass" padding="md" className="phrase-cloud hoverable">
               <div className="phrase-container">
                 <div className="keywords-section">
@@ -322,79 +454,67 @@ export default function Dashboard() {
                 </div>
                 <div className="phrase-3d">
                   <div className="phrase-carousel">
-                    <div className="phrase-item text-white/80 text-sm">
+                    <div 
+                      onClick={() => handlePhraseClick('Trump leads GOP primary polling by 42 points nationwide')}
+                      className="phrase-item text-white/80 text-sm cursor-pointer hover:text-blue-300 hover:underline transition-all duration-200"
+                    >
                       Trump leads GOP primary polling by 42 points nationwide
                     </div>
-                    <div className="phrase-item">
+                    <div 
+                      onClick={() => handlePhraseClick('Healthcare costs surge 23% in critical swing states')}
+                      className="phrase-item cursor-pointer hover:text-blue-300 hover:underline transition-all duration-200"
+                    >
                       Healthcare costs surge 23% in critical swing states
                     </div>
-                    <div className="phrase-item">
+                    <div 
+                      onClick={() => handlePhraseClick('Economy shows mixed signals ahead of Fed meeting')}
+                      className="phrase-item cursor-pointer hover:text-blue-300 hover:underline transition-all duration-200"
+                    >
                       Economy shows mixed signals ahead of Fed meeting
                     </div>
-                    <div className="phrase-item">
+                    <div 
+                      onClick={() => handlePhraseClick('Medicare expansion gains bipartisan support')}
+                      className="phrase-item cursor-pointer hover:text-blue-300 hover:underline transition-all duration-200"
+                    >
                       Medicare expansion gains bipartisan support
                     </div>
-                    <div className="phrase-item">
+                    <div 
+                      onClick={() => handlePhraseClick('Trump defense fund raises $47M post-indictment')}
+                      className="phrase-item cursor-pointer hover:text-blue-300 hover:underline transition-all duration-200"
+                    >
                       Trump defense fund raises $47M post-indictment
                     </div>
-                    <div className="phrase-item">
+                    <div 
+                      onClick={() => handlePhraseClick('Inflation eases but remains top voter priority')}
+                      className="phrase-item cursor-pointer hover:text-blue-300 hover:underline transition-all duration-200"
+                    >
                       Inflation eases but remains top voter priority
                     </div>
-                    <div className="phrase-item">
+                    <div 
+                      onClick={() => handlePhraseClick('Border security bill passes House committee')}
+                      className="phrase-item cursor-pointer hover:text-blue-300 hover:underline transition-all duration-200"
+                    >
                       Border security bill passes House committee
                     </div>
-                    <div className="phrase-item">
+                    <div 
+                      onClick={() => handlePhraseClick('Trump rallies Iowa base before caucus deadline')}
+                      className="phrase-item cursor-pointer hover:text-blue-300 hover:underline transition-all duration-200"
+                    >
                       Trump rallies Iowa base before caucus deadline
                     </div>
-                    <div className="phrase-item">
+                    <div 
+                      onClick={() => handlePhraseClick('Prescription drug costs hit unprecedented highs')}
+                      className="phrase-item cursor-pointer hover:text-blue-300 hover:underline transition-all duration-200"
+                    >
                       Prescription drug costs hit unprecedented highs
                     </div>
-                    <div className="phrase-item">
+                    <div 
+                      onClick={() => handlePhraseClick('Global market volatility impacts US outlook')}
+                      className="phrase-item cursor-pointer hover:text-blue-300 hover:underline transition-all duration-200"
+                    >
                       Global market volatility impacts US outlook
                     </div>
                   </div>
-                </div>
-              </div>
-            </Card>
-
-            {/* Quick Actions Grid */}
-            <Card variant="glass" padding="none" className="quick-actions hoverable" style={{ overflow: "hidden" }}>
-              <div className="bg-white/10 px-3 py-2 border-b border-white/30">
-                <div className="text-xs text-white/60 uppercase font-semibold tracking-wider font-barlow">
-                  Quick Actions
-                </div>
-              </div>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(3, 1fr)",
-                  gridTemplateRows: "repeat(2, 1fr)",
-                  height: "calc(100% - 40px)",
-                }}
-              >
-                <div className="bg-white/5 border-r border-b border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/15 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider">
-                  <Zap className="w-4 h-4 text-yellow-400" />
-                  Quick Campaign
-                </div>
-                <div className="bg-white/5 border-r border-b border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/15 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider">
-                  <Radio className="w-4 h-4 text-green-400" />
-                  Live Monitor
-                </div>
-                <div className="bg-black/10 border-b border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/10 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider">
-                  <PenTool className="w-4 h-4 text-blue-400" />
-                  Make Content
-                </div>
-                <div className="bg-black/10 border-r border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/10 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider">
-                  <TrendingUp className="w-4 h-4 text-purple-400" />
-                  Trend Ops
-                </div>
-                <div className="bg-black/10 border-r border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/10 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider">
-                  <Smartphone className="w-4 h-4 text-cyan-400" />
-                  Social Media
-                </div>
-                <div className="bg-white/5 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/15 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider">
-                  <AlertTriangle className="w-4 h-4 text-red-400" />
-                  Alert Center
                 </div>
               </div>
             </Card>

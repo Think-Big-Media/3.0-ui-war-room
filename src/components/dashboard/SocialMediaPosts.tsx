@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import SocialPostModal from './SocialPostModal';
 
 interface SocialPost {
   id: string;
@@ -9,6 +10,19 @@ interface SocialPost {
 }
 
 const SocialMediaPosts: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPost, setSelectedPost] = useState<SocialPost | null>(null);
+
+  const handlePostClick = (post: SocialPost) => {
+    setSelectedPost(post);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedPost(null);
+  };
+
   // Mock data for social media posts related to user's keywords
   const socialPosts: SocialPost[] = [
     {
@@ -120,6 +134,7 @@ const SocialMediaPosts: React.FC = () => {
         {socialPosts.slice(0, 8).map((post) => (
           <div
             key={post.id}
+            onClick={() => handlePostClick(post)}
             className="relative group cursor-pointer transform transition-all duration-200 hover:scale-105"
           >
             {/* 110x110 square image with proper spacing */}
@@ -150,6 +165,13 @@ const SocialMediaPosts: React.FC = () => {
           Load more posts →
         </button>
       </div>
+
+      {/* Social Post Modal */}
+      <SocialPostModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        post={selectedPost}
+      />
     </div>
   );
 };

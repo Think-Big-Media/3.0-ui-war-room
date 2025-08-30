@@ -36,12 +36,11 @@ export default {
     'text-red-400',
     // Button letter spacing
     'tracking-[-0.05em]',
-    // Background theme camouflage patterns - prevent purging
-    'bg-camo',
-    'bg-camo-digital', 
-    'bg-camo-urban',
-    'bg-camo-desert',
-    'camo-overlay-balanced',
+    // Background theme CSS classes - CRITICAL: prevent Tailwind purging
+    'war-room-classic-blue',
+    'war-room-tactical-camo',
+    'war-room-digital-camo',
+    'war-room-camo-overlay',
   ],
   theme: {
     extend: {

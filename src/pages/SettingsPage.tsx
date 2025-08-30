@@ -28,8 +28,7 @@ import {
   GoogleAdsIntegration,
 } from '../components/integrations';
 import { 
-  useBackgroundTheme, 
-  getBackgroundThemes,
+  useBackgroundTheme,
   type BackgroundTheme 
 } from '../contexts/BackgroundThemeContext';
 
@@ -265,7 +264,7 @@ const SettingsPage: React.FC = () => {
                   />
                 </div>
                 <p className="text-xs text-white/60 mt-2 ml-1.5">
-                  {getBackgroundThemes()[currentTheme].description}
+                  {availableThemes.find(theme => theme.id === currentTheme)?.description || 'Theme description'}
                 </p>
                 
                 {/* Debugging buttons for testing themes */}
