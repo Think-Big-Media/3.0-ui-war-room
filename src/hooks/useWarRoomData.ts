@@ -184,12 +184,11 @@ export function useDashboardData() {
 
 // Hook for checking if using mock data
 export function useDataMode() {
-  const isMock = localStorage.getItem('VITE_USE_MOCK_DATA') === 'true' || 
-                 import.meta.env.VITE_USE_MOCK_DATA === 'true';
+  const isMock = import.meta.env.VITE_USE_MOCK_DATA === 'true';
   
   return {
     isMock,
     mode: isMock ? 'MOCK' : 'LIVE',
-    apiUrl: import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || 'http://localhost:8000',
+    apiUrl: import.meta.env.VITE_API_URL,
   };
 }

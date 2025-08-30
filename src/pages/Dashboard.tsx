@@ -181,7 +181,7 @@ export default function Dashboard() {
 
   return (
     <PageLayout 
-      pageTitle="Campaign Intelligence" 
+      pageTitle="Command Center" 
       placeholder="Ask about your campaign intelligence..."
     >
       {/* Command Status Bar - Compact format matching upload */}

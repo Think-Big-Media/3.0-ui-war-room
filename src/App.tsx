@@ -31,7 +31,6 @@ import NotFound from './pages/NotFound';
 // Components
 import { ErrorBoundary } from './components/ErrorBoundary';
 import TickerTape from './components/TickerTape';
-import DataToggleButton from './components/DataToggleButton';
 
 // Context Providers
 import { SupabaseAuthProvider } from './contexts/SupabaseAuthContext';
@@ -48,10 +47,10 @@ function App() {
           <Router>
             <ErrorBoundary>
               <Routes>
-                {/* Main Dashboard - Fresh 30-Aug Dashboard with SWOT radar */}
+                {/* Command Center - Fresh 30-Aug with SWOT radar */}
                 <Route path="/" element={<Dashboard />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/30-aug-dashboard" element={<Dashboard />} />
+                <Route path="/command-center" element={<Dashboard />} />
+                <Route path="/dashboard" element={<Dashboard />} /> {/* Legacy route for compatibility */}
                 
                 {/* Core Navigation Routes */}
                 <Route path="/command-center" element={<CommandCenter />} />
@@ -86,7 +85,6 @@ function App() {
               
               {/* Global Components */}
               <TickerTape />
-              <DataToggleButton />
             </ErrorBoundary>
           </Router>
         </BackgroundThemeProvider>
