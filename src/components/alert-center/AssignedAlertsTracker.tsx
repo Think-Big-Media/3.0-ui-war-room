@@ -32,7 +32,7 @@ const AssignedAlertsTracker: React.FC<AssignedAlertsTrackerProps> = ({
 
   return (
     <Card padding="sm" variant="glass">
-      <h3 className="section-header mb-4 tracking-wide">TEAM ASSIGNMENTS</h3>
+      <h3 className="text-xl font-semibold text-white/40 tracking-wide font-barlow-condensed mb-4">TEAM ASSIGNMENTS</h3>
       <div className="space-y-3">
         {teamMembers.map((member) => {
           const assignedAlerts = getAssignedAlerts(member.name);

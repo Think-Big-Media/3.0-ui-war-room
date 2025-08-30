@@ -66,7 +66,7 @@ const ContentEnginePage: React.FC<ContentEnginePageProps> = ({
       />
 
       {/* GHL Publisher and Scheduled Posts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8">
         <GHLPublisher onPublishSuccess={() => logger.info('Content published successfully')} />
         <ScheduledPosts />
       </div>

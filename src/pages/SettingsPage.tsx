@@ -63,7 +63,7 @@ const SettingsSection: React.FC<SettingsSectionProps> = ({
         <div className="p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20">
           <Icon className="w-6 h-6 text-white/95" />
         </div>
-        <h3 className="section-header">{title.toUpperCase()}</h3>
+        <h3 className="text-xl font-semibold text-white/40 tracking-wide font-barlow-condensed">{title.toUpperCase()}</h3>
       </div>
       {children}
     </Card>
@@ -197,7 +197,7 @@ const SettingsPage: React.FC = () => {
                 <div className="flex items-start space-x-3 ml-2.5">
                   <Mail className="w-5 h-5 text-white/75" />
                   <div className="ml-1.5">
-                    <p className="content-title">Email Notifications</p>
+                    <p className="content-title ml-1.5">Email Notifications</p>
                     <p className="content-subtitle">
                       Receive campaign updates via email
                     </p>
@@ -214,7 +214,7 @@ const SettingsPage: React.FC = () => {
                 <div className="flex items-start space-x-3 ml-2.5">
                   <Smartphone className="w-5 h-5 text-white/75" />
                   <div className="ml-1.5">
-                    <p className="content-title">Push Notifications</p>
+                    <p className="content-title ml-1.5">Push Notifications</p>
                     <p className="content-subtitle">
                       Get instant alerts on your device
                     </p>
@@ -231,7 +231,7 @@ const SettingsPage: React.FC = () => {
                 <div className="flex items-start space-x-3 ml-2.5">
                   <Globe className="w-5 h-5 text-white/75" />
                   <div className="ml-1.5">
-                    <p className="content-title">Auto-Publish Content</p>
+                    <p className="content-title ml-1.5">Auto-Publish Content</p>
                     <p className="content-subtitle">
                       Automatically publish scheduled content
                     </p>
@@ -269,7 +269,7 @@ const SettingsPage: React.FC = () => {
                 <div className="flex items-start space-x-3 ml-2.5">
                   <Moon className="w-5 h-5 text-white/75" />
                   <div className="ml-1.5">
-                    <p className="content-title">Dark Mode</p>
+                    <p className="content-title ml-1.5">Dark Mode</p>
                     <p className="content-subtitle">
                       Use dark theme across the platform
                     </p>
@@ -304,7 +304,7 @@ const SettingsPage: React.FC = () => {
                 <div className="flex items-start space-x-3 ml-2.5">
                   <Key className="w-5 h-5 text-white/75" />
                   <div className="ml-1.5">
-                    <p className="content-title">Two-Factor Authentication</p>
+                    <p className="content-title ml-1.5">Two-Factor Authentication</p>
                     <p className="content-subtitle">
                       Add an extra layer of security
                     </p>
@@ -336,7 +336,7 @@ const SettingsPage: React.FC = () => {
                 <div className="flex items-start space-x-3 ml-2.5">
                   <Share2 className="w-5 h-5 text-white/75" />
                   <div className="ml-1.5">
-                    <p className="content-title">Data Sharing</p>
+                    <p className="content-title ml-1.5">Data Sharing</p>
                     <p className="content-subtitle">
                       Share anonymized data for improvements
                     </p>
@@ -417,24 +417,7 @@ const SettingsPage: React.FC = () => {
               <div className="p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20">
                 <Link2 className="w-6 h-6 text-white/95" />
               </div>
-              <h3 className="section-header">PLATFORM INTEGRATIONS</h3>
-            </div>
-            {/* DIAGNOSTIC INFO */}
-            <div className="mb-4 p-3 bg-yellow-500/20 border border-yellow-500/50 rounded text-xs text-yellow-200">
-              <div>🔍 OAuth Import Status:</div>
-              <div>
-                - MetaIntegration: {typeof MetaIntegration} (
-                {typeof MetaIntegration !== 'undefined' ? 'loaded' : 'missing'})
-              </div>
-              <div>
-                - GoogleAdsIntegration: {typeof GoogleAdsIntegration} (
-                {typeof GoogleAdsIntegration !== 'undefined'
-                  ? 'loaded'
-                  : 'missing'}
-                )
-              </div>
-              <div>- Environment: {import.meta.env.MODE}</div>
-              <div>- Build time: {new Date().toISOString()}</div>
+              <h3 className="text-xl font-semibold text-white/40 tracking-wide font-barlow-condensed">PLATFORM INTEGRATIONS</h3>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
