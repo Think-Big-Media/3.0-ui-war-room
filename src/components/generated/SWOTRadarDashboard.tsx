@@ -154,7 +154,7 @@ export const SWOTRadarDashboard = () => {
       x: canvasX,
       y: canvasY
     });
-    setTimeout(() => setActiveLabel(null), 1500); // Fade out after 1.5 seconds
+    setTimeout(() => setActiveLabel(null), 2000); // Fade out after 2 seconds
   };
   
   const handleBlobClick = (point: SWOTDataPoint) => {
@@ -195,21 +195,23 @@ export const SWOTRadarDashboard = () => {
         <div className="relative overflow-hidden w-full h-full">
           <RadarCanvas dataPoints={dataPoints} onSweepHit={handleSweepHit} onBlobClick={handleBlobClick} />
           
-          {/* Active Label - Simple white text that fades in/out */}
+          {/* Active Label - Subtle white pill with dark gray text */}
           {activeLabel && (
             <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
               className="absolute pointer-events-none z-[1060]"
               style={{
                 left: Math.min(Math.max(10, activeLabel.x - 60), 280), // Keep within container
                 top: Math.min(Math.max(10, activeLabel.y - 20), 320), // Keep within container
               }}
             >
-              <div className="text-white text-xs font-medium drop-shadow-lg">
-                {activeLabel.point.label}
+              <div className="bg-white/75 backdrop-blur-sm px-2 py-0.5 rounded-full">
+                <div className="text-gray-700 text-[10px] font-medium tracking-wider uppercase">
+                  {activeLabel.point.label}
+                </div>
               </div>
             </motion.div>
           )}
