@@ -11,6 +11,7 @@ import ScheduledPosts from '../components/content-engine/ScheduledPosts';
 import { contentFormats } from '../data/contentFormats';
 import { type ContentEnginePageProps } from '../types/content';
 import { createLogger } from '../utils/logger';
+import { useBackgroundClasses } from '../contexts/BackgroundThemeContext';
 
 const logger = createLogger('ContentEnginePage');
 
@@ -20,6 +21,7 @@ const ContentEnginePage: React.FC<ContentEnginePageProps> = ({
   onFormatToggle,
   onPublishContent,
 }) => {
+  const { baseClass, overlayClass } = useBackgroundClasses();
   const navigate = useNavigate();
   const [currentWeek, setCurrentWeek] = useState(weekOffset);
   const [formats, setFormats] = useState(contentFormats);
@@ -47,8 +49,9 @@ const ContentEnginePage: React.FC<ContentEnginePageProps> = ({
       pageTitle="Content Engine"
       placeholder="Ask Content Engine to transform viral opportunities..."
     >
-      {/* Slate gradient background */}
-      <div className="fixed inset-0 bg-gradient-to-br from-slate-600 via-slate-700 to-slate-800 -z-10" />
+      {/* Dynamic Background Theme System */}
+      <div className={`fixed inset-0 ${baseClass} -z-10`} />
+      {overlayClass && <div className={`fixed inset-0 ${overlayClass} -z-10`} />}
 
       {/* Content Cluster Overview */}
       <ContentClusterHeader
