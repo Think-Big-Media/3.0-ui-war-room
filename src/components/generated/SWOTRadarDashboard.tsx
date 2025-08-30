@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { RadarCanvas } from './RadarCanvas';
 import { IntelligencePanel } from './IntelligencePanel';
 export interface SWOTDataPoint {
@@ -45,11 +45,12 @@ export const SWOTRadarDashboard = () => {
   const [isConnected, setIsConnected] = useState(false);
   const [crisisAlerts, setCrisisAlerts] = useState<CrisisAlert[]>([]);
   // REMOVED sweepAngle state - animation now handled internally in RadarCanvas
-  const [activeLabel, setActiveLabel] = useState<{
+  const [activeLabels, setActiveLabels] = useState<Map<string, {
     point: SWOTDataPoint;
     x: number;
     y: number;
-  } | null>(null);
+    timeoutId?: NodeJS.Timeout;
+  }>>(new Map());
   const wsRef = useRef<WebSocket | null>(null);
   const sweepIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -128,6 +129,17 @@ export const SWOTRadarDashboard = () => {
 
   // Sweep animation removed - now handled internally in RadarCanvas with requestAnimationFrame
 
+  // Clean up timeouts on unmount
+  useEffect(() => {
+    return () => {
+      activeLabels.forEach(label => {
+        if (label.timeoutId) {
+          clearTimeout(label.timeoutId);
+        }
+      });
+    };
+  }, []);
+
   // Initialize mock data
   useEffect(() => {
     console.log('📝 Setting initial mock data');
@@ -149,12 +161,34 @@ export const SWOTRadarDashboard = () => {
   };
 
   const handleSweepHit = (point: SWOTDataPoint, canvasX: number, canvasY: number) => {
-    setActiveLabel({
-      point,
-      x: canvasX,
-      y: canvasY
+    setActiveLabels(prev => {
+      const newMap = new Map(prev);
+      
+      // Clear existing timeout for this point if it exists
+      const existing = newMap.get(point.id);
+      if (existing?.timeoutId) {
+        clearTimeout(existing.timeoutId);
+      }
+      
+      // Set new timeout for this label
+      const timeoutId = setTimeout(() => {
+        setActiveLabels(prevLabels => {
+          const updated = new Map(prevLabels);
+          updated.delete(point.id);
+          return updated;
+        });
+      }, 2000); // Each label stays for exactly 2 seconds
+      
+      // Add or update the label
+      newMap.set(point.id, {
+        point,
+        x: canvasX,
+        y: canvasY,
+        timeoutId
+      });
+      
+      return newMap;
     });
-    setTimeout(() => setActiveLabel(null), 2500); // Fade out after 2.5 seconds
   };
   
   const handleBlobClick = (point: SWOTDataPoint) => {
@@ -195,9 +229,11 @@ export const SWOTRadarDashboard = () => {
         <div className="relative overflow-hidden w-full h-full">
           <RadarCanvas dataPoints={dataPoints} onSweepHit={handleSweepHit} onBlobClick={handleBlobClick} />
           
-          {/* Active Label - Subtle white pill with dark gray text */}
-          {activeLabel && (
+          {/* Active Labels - Multiple can be shown simultaneously */}
+          <AnimatePresence>
+          {Array.from(activeLabels.values()).map(({ point, x, y }) => (
             <motion.div 
+              key={point.id}
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.85 }}
               exit={{ opacity: 0 }}
@@ -206,20 +242,24 @@ export const SWOTRadarDashboard = () => {
                 ease: "easeInOut",
                 opacity: { duration: 0.8 }
               }}
-              className="absolute pointer-events-none z-[1060] flex items-center justify-center"
+              className="absolute z-[1060] flex items-center justify-center"
               style={{
-                left: Math.min(Math.max(10, activeLabel.x - 80), 240), // Keep within container
-                top: Math.min(Math.max(10, activeLabel.y - 20), 320), // Keep within container
+                left: Math.min(Math.max(10, x - 80), 240), // Keep within container
+                top: Math.min(Math.max(10, y - 20), 320), // Keep within container
                 width: '140px'
               }}
             >
-              <div className="bg-white/70 backdrop-blur-sm px-3 py-1.5 rounded-full inline-block">
-                <div className="text-gray-600 text-[10px] font-medium tracking-wide uppercase text-center leading-[1.2]">
-                  {activeLabel.point.label}
+              <div 
+                className="bg-white/70 backdrop-blur-sm px-3 py-1.5 rounded-full inline-block cursor-pointer hover:bg-white/80 transition-colors"
+                onClick={() => handleBlobClick(point)}
+              >
+                <div className="text-gray-600 text-[10px] font-medium tracking-wide uppercase text-center leading-[1.2] pointer-events-none">
+                  {point.label}
                 </div>
               </div>
             </motion.div>
-          )}
+          ))}
+          </AnimatePresence>
         </div>
       </div>
       
