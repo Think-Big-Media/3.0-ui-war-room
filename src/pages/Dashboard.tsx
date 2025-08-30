@@ -6,6 +6,7 @@ import { SWOTRadarDashboard } from "../components/generated/SWOTRadarDashboard";
 import { IntelligencePanel } from "../components/generated/IntelligencePanel";
 import { StatusBar } from "../components/generated/StatusBar";
 import CommandStatusBar from "../components/dashboard/CommandStatusBar";
+import InteractivePoliticalMap from "../components/political/InteractivePoliticalMap";
 import { Zap, Radio, PenTool, TrendingUp, Smartphone, AlertTriangle } from "lucide-react";
 import "../main-dashboard.css";
 
@@ -130,20 +131,10 @@ export default function Dashboard() {
             {/* Political Map - NO TITLE */}
             <Card variant="glass" padding="md" className="political-map hoverable">
               <div className="map-container" style={{ display: 'grid', gridTemplateColumns: '460px 1fr', gap: '10px' }}>
-                {/* Political Map Image - Direct without wrapper */}
-                <img
-                  src="https://p129.p0.n0.cdn.zight.com/items/BluAK9rN/cb190d20-eec7-4e05-8969-259b1dbd9d69.png?source=client&v=6826eb6cb151acf76bf79d55b23b9628"
-                  alt="Political Map"
-                  className="electoral-map-svg"
-                  style={{
-                    width: "88%",
-                    height: "88%",
-                    objectFit: "contain",
-                    objectPosition: "center top",
-                    marginTop: "20px",
-                    marginLeft: "58px"
-                  }}
-                />
+                {/* Interactive Political Map - SVG-based with real-time data */}
+                <div style={{ width: "460px", height: "280px", position: "relative" }}>
+                  <InteractivePoliticalMap />
+                </div>
                 <div className="map-data" style={{ textAlign: "right", paddingRight: "10px" }}>
                   <div className="text-[9px] text-white/60 mb-1 text-right uppercase font-semibold tracking-wider truncate font-barlow">
                     SWING STATES
@@ -268,7 +259,51 @@ export default function Dashboard() {
 
           {/* Right Column */}
           <div className="right-column">
-            {/* Phrase Cloud */}
+            {/* Golden Measure Squares - Moved above phrase cloud */}
+            <div className="metric-boxes-container">
+              <Card variant="glass" padding="sm" className="metric-box-square hoverable flex flex-col items-center justify-center">
+                <div className="text-3xl font-normal text-red-400" style={{fontFamily: 'Barlow Condensed', fontWeight: 400}}>
+                  7
+                </div>
+                <div className="text-[10px] text-white/60 uppercase mt-2 text-center font-semibold tracking-wider font-barlow">
+                  Real-Time
+                  <br />
+                  Alerts
+                </div>
+              </Card>
+              <Card variant="glass" padding="sm" className="metric-box-square hoverable flex flex-col items-center justify-center">
+                <div className="text-3xl font-normal text-blue-400" style={{fontFamily: 'Barlow Condensed', fontWeight: 400}}>
+                  47.2
+                </div>
+                <div className="text-[10px] text-white/60 uppercase mt-2 text-center font-semibold tracking-wider font-barlow">
+                  Ad
+                  <br />
+                  Spend
+                </div>
+              </Card>
+              <Card variant="glass" padding="sm" className="metric-box-square hoverable flex flex-col items-center justify-center">
+                <div className="text-3xl font-normal text-green-400" style={{fontFamily: 'Barlow Condensed', fontWeight: 400}}>
+                  2847
+                </div>
+                <div className="text-[10px] text-white/60 uppercase mt-2 text-center font-semibold tracking-wider font-barlow">
+                  Mention
+                  <br />
+                  Volume
+                </div>
+              </Card>
+              <Card variant="glass" padding="sm" className="metric-box-square hoverable flex flex-col items-center justify-center">
+                <div className="text-3xl font-normal text-green-400" style={{fontFamily: 'Barlow Condensed', fontWeight: 400}}>
+                  74
+                </div>
+                <div className="text-[10px] text-white/60 uppercase mt-2 text-center font-semibold tracking-wider font-barlow">
+                  Sentiment
+                  <br />
+                  Score
+                </div>
+              </Card>
+            </div>
+
+            {/* Phrase Cloud - Moved below metric boxes */}
             <Card variant="glass" padding="md" className="phrase-cloud hoverable">
               <div className="phrase-container">
                 <div className="keywords-section">
@@ -327,50 +362,6 @@ export default function Dashboard() {
                 </div>
               </div>
             </Card>
-
-            {/* Golden Measure Squares */}
-            <div className="metric-boxes-container">
-              <Card variant="glass" padding="sm" className="metric-box-square hoverable flex flex-col items-center justify-center">
-                <div className="text-3xl font-normal text-red-400 font-barlow-condensed">
-                  7
-                </div>
-                <div className="text-[10px] text-white/60 uppercase mt-2 text-center font-semibold tracking-wider font-barlow">
-                  Real-Time
-                  <br />
-                  Alerts
-                </div>
-              </Card>
-              <Card variant="glass" padding="sm" className="metric-box-square hoverable flex flex-col items-center justify-center">
-                <div className="text-3xl font-normal text-blue-400 font-barlow-condensed">
-                  $47.2K
-                </div>
-                <div className="text-[10px] text-white/60 uppercase mt-2 text-center font-semibold tracking-wider font-barlow">
-                  Ad
-                  <br />
-                  Spend
-                </div>
-              </Card>
-              <Card variant="glass" padding="sm" className="metric-box-square hoverable flex flex-col items-center justify-center">
-                <div className="text-3xl font-normal text-green-400 font-barlow-condensed">
-                  2,847
-                </div>
-                <div className="text-[10px] text-white/60 uppercase mt-2 text-center font-semibold tracking-wider font-barlow">
-                  Mention
-                  <br />
-                  Volume
-                </div>
-              </Card>
-              <Card variant="glass" padding="sm" className="metric-box-square hoverable flex flex-col items-center justify-center">
-                <div className="text-3xl font-normal text-green-400 font-barlow-condensed">
-                  74%
-                </div>
-                <div className="text-[10px] text-white/60 uppercase mt-2 text-center font-semibold tracking-wider font-barlow">
-                  Sentiment
-                  <br />
-                  Score
-                </div>
-              </Card>
-            </div>
 
             {/* Quick Actions Grid */}
             <Card variant="glass" padding="none" className="quick-actions hoverable" style={{ overflow: "hidden" }}>
