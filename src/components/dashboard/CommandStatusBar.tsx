@@ -22,9 +22,9 @@ const CommandStatusBar: React.FC = () => {
 
   return (
     <div className="fixed top-16 left-0 right-0 z-40">
-      <div className="relative h-14 flex items-center justify-center px-6 border-t border-b border-white/20">
-            {/* Left of center - Platform indicators */}
-            <div className="flex items-baseline gap-3 mr-4">
+      <div className="relative h-14 flex items-center justify-center px-6 border-t border-b border-white/20 bg-black/20 backdrop-blur-xl">
+            {/* Left positioned - Platform indicators moved 40px more to the left */}
+            <div className="absolute left-[105px] flex items-baseline gap-3">
               <div className="flex items-baseline gap-2 bg-green-500/20 px-3 py-1.5 rounded-md border border-green-500/30">
                 <span className="text-xs text-green-400 leading-none">●</span>
                 <span className="text-xs text-green-300 font-medium font-barlow leading-none">Meta</span>
@@ -43,11 +43,8 @@ const CommandStatusBar: React.FC = () => {
               </div>
             </div>
             
-            {/* Center separator */}
-            <div className="h-6 w-px bg-gray-600"></div>
-            
-            {/* Right of center - Metrics */}
-            <div className="flex items-baseline gap-3 ml-4">
+            {/* Right positioned - Metrics positioned 100px left of time */}
+            <div className="absolute right-[200px] flex items-baseline gap-3">
               <div className="bg-gray-700/50 px-3 py-1.5 rounded-md border border-gray-600/50 flex items-baseline">
                 <span className="text-xs font-bold text-white font-jetbrains leading-none">236</span>
                 <span className="text-xs text-gray-400 ml-1.5 font-barlow leading-none">Mentions</span>

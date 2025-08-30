@@ -6,6 +6,7 @@ import { IntelligencePanel } from "../components/generated/IntelligencePanel";
 import { StatusBar } from "../components/generated/StatusBar";
 import CommandStatusBar from "../components/dashboard/CommandStatusBar";
 import InteractivePoliticalMap from "../components/political/InteractivePoliticalMap";
+import SocialMediaPosts from "../components/dashboard/SocialMediaPosts";
 import { Zap, Radio, PenTool, TrendingUp, Smartphone, AlertTriangle } from "lucide-react";
 import "../main-dashboard.css";
 
@@ -434,6 +435,9 @@ export default function Dashboard() {
                 </Card>
               </div>
             </div>
+
+            {/* Social Media Posts - Latest posts related to user's keywords */}
+            <SocialMediaPosts />
 
           </div>
         </div>
