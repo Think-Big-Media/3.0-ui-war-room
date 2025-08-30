@@ -282,8 +282,8 @@ const TopNavigation: React.FC = () => {
             ))}
           </div>
 
-          {/* Right Side Actions */}
-          <div className="flex items-center space-x-1 md:space-x-2 lg:space-x-3">
+          {/* Right Side Actions - Moved 25px left with tighter spacing */}
+          <div className="flex items-center space-x-1 md:space-x-1.5 lg:space-x-2 mr-[25px]">
             {/* Notifications */}
             <div className="relative" ref={notificationsRef}>
               <button

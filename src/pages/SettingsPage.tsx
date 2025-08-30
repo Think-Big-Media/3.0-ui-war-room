@@ -287,6 +287,12 @@ const SettingsPage: React.FC = () => {
                   >
                     🟫 Digital Camo
                   </button>
+                  <button 
+                    onClick={() => setTheme('dark-slate')}
+                    className="px-3 py-1 text-xs bg-slate-800 text-white rounded hover:bg-slate-900"
+                  >
+                    🖤 Dark Slate
+                  </button>
                 </div>
                 <p className="text-xs text-yellow-400 mt-2 ml-1.5">
                   Debug: Current theme = {currentTheme}

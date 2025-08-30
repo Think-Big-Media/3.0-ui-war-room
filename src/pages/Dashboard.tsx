@@ -65,6 +65,26 @@ export default function Dashboard() {
         break;
     }
   };
+
+  const handleIntelligenceFeedClick = (type: string, topic?: string) => {
+    switch (type) {
+      case 'strength':
+        navigate('/intelligence-hub?category=strength&topic=' + encodeURIComponent(topic || 'social-media-engagement'));
+        break;
+      case 'opportunity':
+        navigate('/intelligence-hub?category=opportunity&topic=' + encodeURIComponent(topic || 'trending-hashtags'));
+        break;
+      case 'weakness':
+        navigate('/intelligence-hub?category=weakness&topic=' + encodeURIComponent(topic || 'engagement-issues'));
+        break;
+      case 'threat':
+        navigate('/intelligence-hub?category=threat&topic=' + encodeURIComponent(topic || 'sentiment-alerts'));
+        break;
+      default:
+        navigate('/intelligence-hub');
+        break;
+    }
+  };
   
   // Mock data for Intelligence Panel - 15 total to fill taller container (added 3 more)
   const mockDataPoints = [
@@ -213,7 +233,10 @@ export default function Dashboard() {
               
               <div className="space-y-3">
                 {/* Strength Intelligence */}
-                <div className="relative backdrop-blur-md bg-green-500/20 border border-green-400/30 rounded-lg p-3 hover:bg-green-500/30 transition-all duration-200">
+                <div 
+                  onClick={() => handleIntelligenceFeedClick('strength', 'healthcare messaging')}
+                  className="relative backdrop-blur-md bg-green-500/20 border border-green-400/30 rounded-lg p-3 hover:bg-green-500/30 cursor-pointer transform transition-all duration-200 hover:scale-105 hover:border-green-400/50"
+                >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-1">
@@ -235,7 +258,10 @@ export default function Dashboard() {
                 </div>
 
                 {/* Opportunity Intelligence */}
-                <div className="relative backdrop-blur-md bg-blue-500/20 border border-blue-400/30 rounded-lg p-3 hover:bg-blue-500/30 transition-all duration-200">
+                <div 
+                  onClick={() => handleIntelligenceFeedClick('opportunity', 'clean energy hashtag')}
+                  className="relative backdrop-blur-md bg-blue-500/20 border border-blue-400/30 rounded-lg p-3 hover:bg-blue-500/30 cursor-pointer transform transition-all duration-200 hover:scale-105 hover:border-blue-400/50"
+                >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-1">
@@ -257,7 +283,10 @@ export default function Dashboard() {
                 </div>
 
                 {/* Weakness Intelligence */}
-                <div className="relative backdrop-blur-md bg-red-500/20 border border-red-400/30 rounded-lg p-3 hover:bg-red-500/30 transition-all duration-200">
+                <div 
+                  onClick={() => handleIntelligenceFeedClick('weakness', 'economic policy engagement')}
+                  className="relative backdrop-blur-md bg-red-500/20 border border-red-400/30 rounded-lg p-3 hover:bg-red-500/30 cursor-pointer transform transition-all duration-200 hover:scale-105 hover:border-red-400/50"
+                >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-1">
@@ -279,7 +308,10 @@ export default function Dashboard() {
                 </div>
 
                 {/* Threat Intelligence */}
-                <div className="relative backdrop-blur-md bg-orange-500/20 border border-orange-400/30 rounded-lg p-3 hover:bg-orange-500/30 transition-all duration-200">
+                <div 
+                  onClick={() => handleIntelligenceFeedClick('threat', 'district sentiment spike')}
+                  className="relative backdrop-blur-md bg-orange-500/20 border border-orange-400/30 rounded-lg p-3 hover:bg-orange-500/30 cursor-pointer transform transition-all duration-200 hover:scale-105 hover:border-orange-400/50"
+                >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-1">
@@ -456,61 +488,61 @@ export default function Dashboard() {
                   <div className="phrase-carousel">
                     <div 
                       onClick={() => handlePhraseClick('Trump leads GOP primary polling by 42 points nationwide')}
-                      className="phrase-item text-white/80 text-sm cursor-pointer hover:text-blue-300 hover:underline transition-all duration-200"
+                      className="phrase-item text-white/80 text-sm cursor-pointer hover:text-blue-300 hover:font-bold transition-all duration-200"
                     >
                       Trump leads GOP primary polling by 42 points nationwide
                     </div>
                     <div 
                       onClick={() => handlePhraseClick('Healthcare costs surge 23% in critical swing states')}
-                      className="phrase-item cursor-pointer hover:text-blue-300 hover:underline transition-all duration-200"
+                      className="phrase-item cursor-pointer hover:text-blue-300 hover:font-bold transition-all duration-200"
                     >
                       Healthcare costs surge 23% in critical swing states
                     </div>
                     <div 
                       onClick={() => handlePhraseClick('Economy shows mixed signals ahead of Fed meeting')}
-                      className="phrase-item cursor-pointer hover:text-blue-300 hover:underline transition-all duration-200"
+                      className="phrase-item cursor-pointer hover:text-blue-300 hover:font-bold transition-all duration-200"
                     >
                       Economy shows mixed signals ahead of Fed meeting
                     </div>
                     <div 
                       onClick={() => handlePhraseClick('Medicare expansion gains bipartisan support')}
-                      className="phrase-item cursor-pointer hover:text-blue-300 hover:underline transition-all duration-200"
+                      className="phrase-item cursor-pointer hover:text-blue-300 hover:font-bold transition-all duration-200"
                     >
                       Medicare expansion gains bipartisan support
                     </div>
                     <div 
                       onClick={() => handlePhraseClick('Trump defense fund raises $47M post-indictment')}
-                      className="phrase-item cursor-pointer hover:text-blue-300 hover:underline transition-all duration-200"
+                      className="phrase-item cursor-pointer hover:text-blue-300 hover:font-bold transition-all duration-200"
                     >
                       Trump defense fund raises $47M post-indictment
                     </div>
                     <div 
                       onClick={() => handlePhraseClick('Inflation eases but remains top voter priority')}
-                      className="phrase-item cursor-pointer hover:text-blue-300 hover:underline transition-all duration-200"
+                      className="phrase-item cursor-pointer hover:text-blue-300 hover:font-bold transition-all duration-200"
                     >
                       Inflation eases but remains top voter priority
                     </div>
                     <div 
                       onClick={() => handlePhraseClick('Border security bill passes House committee')}
-                      className="phrase-item cursor-pointer hover:text-blue-300 hover:underline transition-all duration-200"
+                      className="phrase-item cursor-pointer hover:text-blue-300 hover:font-bold transition-all duration-200"
                     >
                       Border security bill passes House committee
                     </div>
                     <div 
                       onClick={() => handlePhraseClick('Trump rallies Iowa base before caucus deadline')}
-                      className="phrase-item cursor-pointer hover:text-blue-300 hover:underline transition-all duration-200"
+                      className="phrase-item cursor-pointer hover:text-blue-300 hover:font-bold transition-all duration-200"
                     >
                       Trump rallies Iowa base before caucus deadline
                     </div>
                     <div 
                       onClick={() => handlePhraseClick('Prescription drug costs hit unprecedented highs')}
-                      className="phrase-item cursor-pointer hover:text-blue-300 hover:underline transition-all duration-200"
+                      className="phrase-item cursor-pointer hover:text-blue-300 hover:font-bold transition-all duration-200"
                     >
                       Prescription drug costs hit unprecedented highs
                     </div>
                     <div 
                       onClick={() => handlePhraseClick('Global market volatility impacts US outlook')}
-                      className="phrase-item cursor-pointer hover:text-blue-300 hover:underline transition-all duration-200"
+                      className="phrase-item cursor-pointer hover:text-blue-300 hover:font-bold transition-all duration-200"
                     >
                       Global market volatility impacts US outlook
                     </div>

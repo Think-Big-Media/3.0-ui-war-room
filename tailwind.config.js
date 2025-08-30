@@ -40,6 +40,7 @@ export default {
     'war-room-classic-blue',
     'war-room-tactical-camo',
     'war-room-digital-camo',
+    'war-room-dark-slate',
     'war-room-camo-overlay',
   ],
   theme: {

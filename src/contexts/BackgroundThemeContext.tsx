@@ -42,6 +42,12 @@ const BACKGROUND_THEMES: Record<BackgroundTheme, BackgroundThemeConfig> = {
     baseClass: 'war-room-digital-camo',
     overlayClass: 'war-room-camo-overlay',
   },
+  'dark-slate': {
+    id: 'dark-slate',
+    name: 'Dark Slate',
+    description: 'Dark slate theme you\'ve been using all day',
+    baseClass: 'war-room-dark-slate',
+  },
 };
 
 interface BackgroundThemeContextType {

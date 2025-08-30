@@ -13,6 +13,16 @@
   ) !important;
 }
 
+/* Dark Slate Theme - The dark theme you've been using all day */
+.war-room-dark-slate {
+  background: linear-gradient(135deg, 
+    #1e293b 0%,     /* slate-800 */
+    #0f172a 25%,    /* slate-900 */
+    #020617 75%,    /* slate-950 */
+    #000000 100%    /* black */
+  ) !important;
+}
+
 /* Tactical Camo - Woodland camouflage with gorgeous green diagonal */
 .war-room-tactical-camo {
   background: 

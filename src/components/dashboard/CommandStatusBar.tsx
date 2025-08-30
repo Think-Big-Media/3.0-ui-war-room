@@ -31,6 +31,25 @@ const CommandStatusBar: React.FC = () => {
     }
   };
 
+  const handleMetricClick = (metric: string) => {
+    switch (metric) {
+      case 'mentions':
+        navigate('/real-time-monitoring');
+        break;
+      case 'alerts':
+        navigate('/alert-center');
+        break;
+      case 'opportunities':
+        navigate('/intelligence-hub?category=opportunity');
+        break;
+      case 'threats':
+        navigate('/intelligence-hub?category=threat');
+        break;
+      default:
+        break;
+    }
+  };
+
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString('en-US', {
       hour12: false,
@@ -78,22 +97,34 @@ const CommandStatusBar: React.FC = () => {
             
             {/* Right positioned - Metrics positioned further left with time repositioning */}
             <div className="absolute right-[380px] flex items-baseline gap-3">
-              <div className="bg-gray-700/50 px-3 py-1.5 rounded-md border border-gray-600/50 flex items-baseline">
+              <div 
+                onClick={() => handleMetricClick('mentions')}
+                className="bg-gray-700/50 px-3 py-1.5 rounded-md border border-gray-600/50 flex items-baseline cursor-pointer hover:bg-gray-600/60 hover:border-gray-500/60 transition-all duration-200 transform hover:scale-105"
+              >
                 <span className="text-xs font-bold text-white font-jetbrains leading-none">236</span>
                 <span className="text-xs text-gray-400 ml-1.5 font-barlow leading-none">Mentions</span>
               </div>
               
-              <div className="bg-orange-500/20 px-3 py-1.5 rounded-md border border-orange-500/30 flex items-baseline">
+              <div 
+                onClick={() => handleMetricClick('alerts')}
+                className="bg-orange-500/20 px-3 py-1.5 rounded-md border border-orange-500/30 flex items-baseline cursor-pointer hover:bg-orange-500/30 hover:border-orange-500/50 transition-all duration-200 transform hover:scale-105"
+              >
                 <span className="text-xs font-bold text-orange-400 font-jetbrains leading-none">9</span>
                 <span className="text-xs text-orange-300 ml-1.5 font-barlow leading-none">Alerts</span>
               </div>
               
-              <div className="bg-green-500/20 px-3 py-1.5 rounded-md border border-green-500/30 hidden lg:flex items-baseline">
+              <div 
+                onClick={() => handleMetricClick('opportunities')}
+                className="bg-green-500/20 px-3 py-1.5 rounded-md border border-green-500/30 hidden lg:flex items-baseline cursor-pointer hover:bg-green-500/30 hover:border-green-500/50 transition-all duration-200 transform hover:scale-105"
+              >
                 <span className="text-xs font-bold text-green-400 font-jetbrains leading-none">18</span>
                 <span className="text-xs text-green-300 ml-1.5 font-barlow leading-none">Opportunities</span>
               </div>
               
-              <div className="bg-red-500/20 px-3 py-1.5 rounded-md border border-red-500/30 hidden xl:flex items-baseline">
+              <div 
+                onClick={() => handleMetricClick('threats')}
+                className="bg-red-500/20 px-3 py-1.5 rounded-md border border-red-500/30 hidden xl:flex items-baseline cursor-pointer hover:bg-red-500/30 hover:border-red-500/50 transition-all duration-200 transform hover:scale-105"
+              >
                 <span className="text-xs font-bold text-red-400 font-jetbrains leading-none">3</span>
                 <span className="text-xs text-red-300 ml-1.5 font-barlow leading-none">Threats</span>
               </div>
