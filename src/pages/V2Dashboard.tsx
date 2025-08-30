@@ -1,46 +1,56 @@
 import { useEffect } from "react";
 import PageLayout from "../components/shared/PageLayout";
 import { useBackgroundClasses } from "../contexts/BackgroundThemeContext";
-import { SWOTRadarDashboard } from "../components/generated/SWOTRadarDashboard";
-import { IntelligencePanel } from "../components/generated/IntelligencePanel";
-import { StatusBar } from "../components/generated/StatusBar";
-import CommandStatusBar from "../components/dashboard/CommandStatusBar";
-import "../main-dashboard.css";
+import "../v2-dashboard.css";
 
-export default function Dashboard() {
+export default function V2Dashboard() {
   const { baseClass, overlayClass } = useBackgroundClasses();
   
-  // Mock data for Intelligence Panel - 15 total to fill taller container (added 3 more)
-  const mockDataPoints = [
-    { id: '1', type: 'strength' as const, x: 150, y: 120, intensity: 0.8, label: 'Strong Brand Recognition', timestamp: new Date(), sentiment: 0.7, source: 'Twitter' },
-    { id: '2', type: 'strength' as const, x: 200, y: 150, intensity: 0.9, label: 'High Voter Engagement', timestamp: new Date(), sentiment: 0.8, source: 'Polls' },
-    { id: '3', type: 'strength' as const, x: 180, y: 140, intensity: 0.7, label: 'Fundraising Success', timestamp: new Date(), sentiment: 0.6, source: 'Finance' },
-    { id: '4', type: 'weakness' as const, x: 450, y: 180, intensity: 0.6, label: 'Customer Service Issues', timestamp: new Date(), sentiment: -0.5, source: 'Reviews' },
-    { id: '5', type: 'weakness' as const, x: 480, y: 120, intensity: 0.7, label: 'Ad Fatigue Detected', timestamp: new Date(), sentiment: -0.4, source: 'Meta Analytics' },
-    { id: '6', type: 'weakness' as const, x: 460, y: 160, intensity: 0.5, label: 'Message Consistency', timestamp: new Date(), sentiment: -0.3, source: 'Focus Groups' },
-    { id: '7', type: 'opportunity' as const, x: 180, y: 420, intensity: 0.9, label: 'Emerging Market Expansion', timestamp: new Date(), sentiment: 0.8, source: 'News' },
-    { id: '8', type: 'opportunity' as const, x: 220, y: 380, intensity: 0.8, label: 'Youth Voter Surge', timestamp: new Date(), sentiment: 0.7, source: 'Demographics' },
-    { id: '9', type: 'opportunity' as const, x: 200, y: 400, intensity: 0.6, label: 'Social Media Growth', timestamp: new Date(), sentiment: 0.5, source: 'Analytics' },
-    { id: '10', type: 'threat' as const, x: 480, y: 450, intensity: 0.7, label: 'Competitor Launch', timestamp: new Date(), sentiment: -0.6, source: 'Industry Reports' },
-    { id: '11', type: 'threat' as const, x: 460, y: 430, intensity: 0.8, label: 'Economic Downturn', timestamp: new Date(), sentiment: -0.7, source: 'Economic Data' },
-    { id: '12', type: 'threat' as const, x: 470, y: 440, intensity: 0.6, label: 'Regulatory Changes', timestamp: new Date(), sentiment: -0.5, source: 'Policy Watch' },
-    { id: '13', type: 'strength' as const, x: 170, y: 130, intensity: 0.8, label: 'Grassroots Network Strong', timestamp: new Date(), sentiment: 0.8, source: 'Field Reports' },
-    { id: '14', type: 'opportunity' as const, x: 210, y: 390, intensity: 0.7, label: 'Viral Content Momentum', timestamp: new Date(), sentiment: 0.6, source: 'TikTok Analytics' },
-    { id: '15', type: 'weakness' as const, x: 470, y: 140, intensity: 0.6, label: 'Rural Outreach Gaps', timestamp: new Date(), sentiment: -0.4, source: 'Regional Data' }
-  ];
-  
-  const mockCrisisAlerts = [
-    { id: 'alert-1', message: 'Negative sentiment spike detected in customer service mentions', severity: 'high' as const, timestamp: new Date(), source: 'Social Media' }
-  ];
-  
   useEffect(() => {
-    // Interactive SWOT radar to Live Intelligence connection
-    const blobContainers = document.querySelectorAll(".radar-blob-container");
-    const feedWrapper = document.getElementById("feedWrapper");
-    let animationTimeout: NodeJS.Timeout | null = null;
+    // Add a small delay to ensure elements are rendered
+    const timeout = setTimeout(() => {
+      // DEBUG: Check phrase cloud elements and styles
+      const phraseCarousel = document.querySelector('.phrase-carousel');
+      const phraseItems = document.querySelectorAll('.phrase-item');
+      
+      console.log('🔍 PHRASE CLOUD DEBUG:');
+      console.log('Phrase carousel element:', phraseCarousel);
+      console.log('Number of phrase items:', phraseItems.length);
+      
+      if (phraseCarousel) {
+        const carouselStyles = window.getComputedStyle(phraseCarousel);
+        console.log('Carousel transform-style:', carouselStyles.transformStyle);
+        console.log('Carousel position:', carouselStyles.position);
+        console.log('Carousel dimensions:', {
+          width: carouselStyles.width,
+          height: carouselStyles.height,
+          left: carouselStyles.left
+        });
+      }
+      
+      phraseItems.forEach((item, index) => {
+        const styles = window.getComputedStyle(item);
+        console.log(`Phrase ${index + 1}:`, {
+          position: styles.position,
+          transform: styles.transform,
+          animation: styles.animation,
+          animationDelay: styles.animationDelay,
+          top: styles.top,
+          left: styles.left,
+          zIndex: styles.zIndex
+        });
+      });
+
+      // Interactive SWOT radar to Live Intelligence connection
+      const blobContainers = document.querySelectorAll(".radar-blob-container");
+      const feedWrapper = document.getElementById("feedWrapper");
+      let animationTimeout: NodeJS.Timeout | null = null;
+      
+      console.log('V2Dashboard: Found blob containers:', blobContainers.length);
+      console.log('V2Dashboard: Found feedWrapper:', !!feedWrapper);
 
     blobContainers.forEach((blob) => {
-      blob.addEventListener("click", function (this: Element) {
+      blob.addEventListener("click", function () {
         const feedId = this.getAttribute("data-feed-id");
         if (!feedId) return;
 
@@ -96,10 +106,10 @@ export default function Dashboard() {
       });
     });
 
+    }, 100); // Small delay to ensure DOM is ready
+
     return () => {
-      if (animationTimeout) {
-        clearTimeout(animationTimeout);
-      }
+      clearTimeout(timeout);
     };
   }, []);
 
@@ -112,15 +122,7 @@ export default function Dashboard() {
       <div className={`fixed inset-0 ${baseClass} -z-10`} />
       {overlayClass && <div className={`fixed inset-0 ${overlayClass} -z-10`} />}
       
-      {/* Command Status Bar - Below top nav, above content */}
-      <div className="relative z-10">
-        <CommandStatusBar />
-      </div>
-      
-      {/* Original Status Bar */}
-      <StatusBar />
-      
-      <div className="30-aug-dashboard war-room-dashboard" style={{ paddingTop: '20px' }}>
+      <div className="war-room-dashboard">
       <div
         style={{
           fontFamily:
@@ -142,39 +144,250 @@ export default function Dashboard() {
                     alt="Political Map"
                     className="electoral-map-svg"
                     style={{
-                      width: "80%",
-                      height: "80%",
+                      width: "90%",
+                      height: "90%",
                       objectFit: "contain",
-                      objectPosition: "center top",
-                      marginTop: "-30px",
                     }}
                   />
                 </div>
-                <div className="map-data" style={{ textAlign: "right", paddingRight: "10px" }}>
+                <div className="map-data">
                   <div
                     style={{
                       fontSize: "9px",
                       color: "#64748b",
                       marginBottom: "5px",
-                      textAlign: "right",
                     }}
                   >
                     SWING STATES
                   </div>
-                  <div className="map-data-item" style={{ lineHeight: "1.3", textAlign: "right" }}>Pennsylvania: +2.3% D</div>
-                  <div className="map-data-item" style={{ lineHeight: "1.3", textAlign: "right" }}>Michigan: -1.2% R</div>
-                  <div className="map-data-item" style={{ lineHeight: "1.3", textAlign: "right" }}>Wisconsin: TOSS UP</div>
-                  <div className="map-data-item" style={{ lineHeight: "1.3", textAlign: "right" }}>Arizona: +0.8% R</div>
-                  <div className="map-data-item" style={{ lineHeight: "1.3", textAlign: "right" }}>Georgia: +1.5% D</div>
-                  <div className="map-data-item" style={{ lineHeight: "1.3", textAlign: "right" }}>Nevada: TOSS UP</div>
-                  <div className="map-data-item" style={{ lineHeight: "1.3", textAlign: "right" }}>Florida: +3.2% R</div>
+                  <div className="map-data-item">• Pennsylvania: +2.3% D</div>
+                  <div className="map-data-item">• Michigan: -1.2% R</div>
+                  <div className="map-data-item">• Wisconsin: TOSS UP</div>
+                  <div className="map-data-item">• Arizona: +0.8% R</div>
+                  <div className="map-data-item">• Georgia: +1.5% D</div>
+                  <div className="map-data-item">• Nevada: TOSS UP</div>
+                  <div className="map-data-item">• Florida: +3.2% R</div>
                 </div>
               </div>
             </div>
 
-            {/* Fresh SWOT Radar - Green Square Design */}
-            <div className="card fresh-swot-radar">
-              <SWOTRadarDashboard />
+            {/* SWOT Radar + Live Intelligence - ALIGNED */}
+            <div className="card swot-intelligence">
+              <div className="swot-radar">
+                <div className="radar-container">
+                  <div className="radar-sweep"></div>
+                  {/* Quadrant Labels */}
+                  <div
+                    className="radar-quadrant"
+                    style={{ top: "15px", right: "15px" }}
+                  >
+                    STRENGTHS
+                  </div>
+                  <div
+                    className="radar-quadrant"
+                    style={{ top: "15px", left: "15px" }}
+                  >
+                    WEAKNESSES
+                  </div>
+                  <div
+                    className="radar-quadrant"
+                    style={{ bottom: "15px", right: "15px" }}
+                  >
+                    OPPORTUNITIES
+                  </div>
+                  <div
+                    className="radar-quadrant"
+                    style={{ bottom: "15px", left: "15px" }}
+                  >
+                    THREATS
+                  </div>
+
+                  {/* Radar Blobs with Labels */}
+                  <div
+                    className="radar-blob-container"
+                    style={{
+                      width: "24px",
+                      height: "24px",
+                      top: "25%",
+                      right: "30%",
+                    }}
+                    data-feed-id="brand-recognition"
+                  >
+                    <div className="radar-blob blob-strength"></div>
+                    <div className="blob-label">Brand Recognition +18%</div>
+                  </div>
+                  <div
+                    className="radar-blob-container"
+                    style={{
+                      width: "18px",
+                      height: "18px",
+                      top: "35%",
+                      right: "20%",
+                    }}
+                    data-feed-id="youth-engagement"
+                  >
+                    <div className="radar-blob blob-strength"></div>
+                    <div className="blob-label">Youth Engagement +23%</div>
+                  </div>
+                  <div
+                    className="radar-blob-container"
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                      top: "30%",
+                      left: "25%",
+                    }}
+                    data-feed-id="ad-fatigue"
+                  >
+                    <div className="radar-blob blob-weakness"></div>
+                    <div className="blob-label">Ad Fatigue Detected</div>
+                  </div>
+                  <div
+                    className="radar-blob-container"
+                    style={{
+                      width: "26px",
+                      height: "26px",
+                      bottom: "35%",
+                      right: "35%",
+                    }}
+                    data-feed-id="wisconsin-opens"
+                  >
+                    <div className="radar-blob blob-opportunity"></div>
+                    <div className="blob-label">Wisconsin Opens +34%</div>
+                  </div>
+                  <div
+                    className="radar-blob-container"
+                    style={{
+                      width: "19px",
+                      height: "19px",
+                      bottom: "25%",
+                      right: "22%",
+                    }}
+                    data-feed-id="fl-suburbs"
+                  >
+                    <div className="radar-blob blob-opportunity"></div>
+                    <div className="blob-label">FL Suburbs +12%</div>
+                  </div>
+                  <div
+                    className="radar-blob-container"
+                    style={{
+                      width: "22px",
+                      height: "22px",
+                      bottom: "30%",
+                      left: "30%",
+                    }}
+                    data-feed-id="competitor-launch"
+                  >
+                    <div className="radar-blob blob-threat"></div>
+                    <div className="blob-label">Competitor $250K Launch</div>
+                  </div>
+                  <div
+                    className="radar-blob-container"
+                    style={{
+                      width: "16px",
+                      height: "16px",
+                      bottom: "40%",
+                      left: "20%",
+                    }}
+                    data-feed-id="viral-negative"
+                  >
+                    <div className="radar-blob blob-threat"></div>
+                    <div className="blob-label">Viral Negative 12K RT</div>
+                  </div>
+                </div>
+                <div className="radar-stats">
+                  Active Threats: 2 • Opportunities: 4 • Risk Level: Medium
+                  <br />
+                  Radar Sweep: 12s • Detection Rate: 97%
+                </div>
+              </div>
+
+              <div className="live-intelligence">
+                <div className="card-title">LIVE INTELLIGENCE</div>
+                <div className="feed-container" id="feedContainer">
+                  <div className="feed-items-wrapper" id="feedWrapper">
+                    <div className="feed-item info" data-id="wisconsin-opens">
+                      <span>
+                        <strong>UPDATE:</strong> Wisconsin voter registration up
+                        34%.
+                      </span>
+                    </div>
+                    <div className="feed-item warning">
+                      <span>
+                        <strong>WARNING:</strong> Major news outlet published
+                        critical article.
+                      </span>
+                    </div>
+                    <div className="feed-item info" data-id="fl-suburbs">
+                      <span>
+                        <strong>INFO:</strong> Positive sentiment in Florida
+                        suburbs +12%.
+                      </span>
+                    </div>
+                    <div
+                      className="feed-item critical"
+                      data-id="viral-negative"
+                    >
+                      <span>
+                        <strong>CRITICAL:</strong> Viral negative mention
+                        detected. 12K retweets in PA.
+                      </span>
+                    </div>
+                    <div
+                      className="feed-item warning"
+                      data-id="competitor-launch"
+                    >
+                      <span>
+                        <strong>WARNING:</strong> Competitor launched $250K ad
+                        campaign.
+                      </span>
+                    </div>
+                    <div className="feed-item info" data-id="youth-engagement">
+                      <span>
+                        <strong>INFO:</strong> Youth voter engagement up 23% in
+                        Michigan.
+                      </span>
+                    </div>
+                    <div className="feed-item info">
+                      <span>
+                        <strong>UPDATE:</strong> Meta ads performing 52% above
+                        benchmark.
+                      </span>
+                    </div>
+                    <div className="feed-item warning" data-id="ad-fatigue">
+                      <span>
+                        <strong>ALERT:</strong> Ad fatigue detected in target
+                        demographics.
+                      </span>
+                    </div>
+                    <div className="feed-item info" data-id="brand-recognition">
+                      <span>
+                        <strong>INFO:</strong> Brand recognition increased 18%
+                        this week.
+                      </span>
+                    </div>
+                    <div className="feed-item critical">
+                      <span>
+                        <strong>CRITICAL:</strong> Opposition video trending #1
+                        on Twitter.
+                      </span>
+                    </div>
+                    {/* Duplicate for seamless scrolling */}
+                    <div className="feed-item info" data-id="wisconsin-opens">
+                      <span>
+                        <strong>UPDATE:</strong> Wisconsin voter registration up
+                        34%.
+                      </span>
+                    </div>
+                    <div className="feed-item warning">
+                      <span>
+                        <strong>WARNING:</strong> Major news outlet published
+                        critical article.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -396,17 +609,13 @@ export default function Dashboard() {
                     borderRight: "1px solid #1f2633",
                     borderBottom: "1px solid #1f2633",
                     display: "flex",
-                    flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
                     fontSize: "12px",
-                    color: "#ffffff",
                     cursor: "pointer",
                     transition: "all 0.2s",
-                    gap: "6px",
                   }}
                 >
-                  ⚡
                   Quick Campaign
                 </div>
                 <div
@@ -415,17 +624,13 @@ export default function Dashboard() {
                     borderRight: "1px solid #1f2633",
                     borderBottom: "1px solid #1f2633",
                     display: "flex",
-                    flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
                     fontSize: "12px",
-                    color: "#ffffff",
                     cursor: "pointer",
                     transition: "all 0.2s",
-                    gap: "6px",
                   }}
                 >
-                  📡
                   Live Monitor
                 </div>
                 <div
@@ -433,17 +638,13 @@ export default function Dashboard() {
                     background: "#2a3342",
                     borderBottom: "1px solid #1f2633",
                     display: "flex",
-                    flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
                     fontSize: "12px",
-                    color: "#ffffff",
                     cursor: "pointer",
                     transition: "all 0.2s",
-                    gap: "6px",
                   }}
                 >
-                  ✏️
                   Make Content
                 </div>
                 <div
@@ -451,17 +652,13 @@ export default function Dashboard() {
                     background: "#2a3342",
                     borderRight: "1px solid #1f2633",
                     display: "flex",
-                    flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
                     fontSize: "12px",
-                    color: "#ffffff",
                     cursor: "pointer",
                     transition: "all 0.2s",
-                    gap: "6px",
                   }}
                 >
-                  📈
                   Trend Ops
                 </div>
                 <div
@@ -469,34 +666,26 @@ export default function Dashboard() {
                     background: "#2a3342",
                     borderRight: "1px solid #1f2633",
                     display: "flex",
-                    flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
                     fontSize: "12px",
-                    color: "#ffffff",
                     cursor: "pointer",
                     transition: "all 0.2s",
-                    gap: "6px",
                   }}
                 >
-                  📱
                   Social Media
                 </div>
                 <div
                   style={{
                     background: "#2a3342",
                     display: "flex",
-                    flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
                     fontSize: "12px",
-                    color: "#ffffff",
                     cursor: "pointer",
                     transition: "all 0.2s",
-                    gap: "6px",
                   }}
                 >
-                  🚨
                   Alert Center
                 </div>
               </div>
