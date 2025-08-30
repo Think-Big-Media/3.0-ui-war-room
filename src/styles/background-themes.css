@@ -23,95 +23,135 @@
   ) !important;
 }
 
-/* Tactical Camo - Woodland camouflage with gorgeous green diagonal */
+/* Tactical Camo - Beautiful woodland camouflage with gorgeous green diagonal */
 .war-room-tactical-camo {
   background: 
-    /* Green diagonal stripes - the "gorgeous green diagonal camouflage" */
+    /* Primary gorgeous green diagonal stripes - the signature pattern */
     repeating-linear-gradient(
       45deg,
-      rgba(34, 197, 94, 0.15) 0px,
-      rgba(34, 197, 94, 0.15) 8px,
-      transparent 8px,
-      transparent 16px
-    ),
-    /* Brown diagonal overlay */
-    repeating-linear-gradient(
-      -45deg,
-      rgba(133, 77, 14, 0.12) 0px,
-      rgba(133, 77, 14, 0.12) 12px,
+      rgba(34, 197, 94, 0.25) 0px,
+      rgba(34, 197, 94, 0.25) 12px,
       transparent 12px,
       transparent 24px
     ),
-    /* Dark green patches */
+    /* Secondary diagonal stripes for depth */
+    repeating-linear-gradient(
+      135deg,
+      rgba(22, 163, 74, 0.2) 0px,
+      rgba(22, 163, 74, 0.2) 8px,
+      transparent 8px,
+      transparent 16px
+    ),
+    /* Brown/tan diagonal overlay for realism */
+    repeating-linear-gradient(
+      -30deg,
+      rgba(146, 64, 14, 0.15) 0px,
+      rgba(146, 64, 14, 0.15) 16px,
+      transparent 16px,
+      transparent 32px
+    ),
+    /* Organic camouflage patches - dark green */
     radial-gradient(
-      ellipse 80px 60px at 20% 30%,
+      ellipse 120px 80px at 15% 25%,
+      rgba(20, 83, 45, 0.4) 0%,
+      rgba(21, 128, 61, 0.2) 50%,
+      transparent 80%
+    ),
+    radial-gradient(
+      ellipse 150px 100px at 85% 75%,
+      rgba(22, 101, 52, 0.35) 0%,
+      rgba(34, 197, 94, 0.15) 40%,
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse 100px 120px at 50% 10%,
       rgba(21, 128, 61, 0.3) 0%,
-      transparent 70%
+      transparent 60%
     ),
     radial-gradient(
-      ellipse 100px 80px at 80% 20%,
-      rgba(22, 101, 52, 0.25) 0%,
+      ellipse 130px 90px at 70% 90%,
+      rgba(16, 185, 129, 0.2) 0%,
       transparent 70%
+    ),
+    /* Olive/brown patches for contrast */
+    radial-gradient(
+      ellipse 80px 60px at 30% 80%,
+      rgba(120, 113, 108, 0.25) 0%,
+      transparent 60%
     ),
     radial-gradient(
-      ellipse 120px 90px at 60% 80%,
-      rgba(20, 83, 45, 0.2) 0%,
-      transparent 70%
+      ellipse 90px 110px at 90% 30%,
+      rgba(161, 98, 7, 0.2) 0%,
+      transparent 65%
     ),
-    /* Olive patches */
-    radial-gradient(
-      ellipse 90px 70px at 40% 60%,
-      rgba(113, 113, 122, 0.15) 0%,
-      transparent 70%
-    ),
-    /* Base woodland green gradient */
+    /* Rich woodland base gradient */
     linear-gradient(135deg,
-      #166534 0%,     /* green-800 */
-      #15803d 25%,    /* green-700 */
-      #16a34a 50%,    /* green-600 */
-      #22c55e 75%,    /* green-500 */
+      #14532d 0%,     /* green-900 */
+      #166534 20%,    /* green-800 */
+      #15803d 40%,    /* green-700 */
+      #16a34a 60%,    /* green-600 */
+      #22c55e 80%,    /* green-500 */
       #15803d 100%    /* green-700 */
     ) !important;
 }
 
-/* Digital Camo - Pixelated military pattern */
+/* Digital Camo - Pixelated military pattern with gray/green tones */
 .war-room-digital-camo {
   background: 
-    /* Pixelated squares pattern */
-    repeating-conic-gradient(
-      from 0deg at 50% 50%,
-      rgba(34, 197, 94, 0.2) 0deg 90deg,
-      rgba(21, 128, 61, 0.25) 90deg 180deg,
-      rgba(22, 101, 52, 0.15) 180deg 270deg,
-      rgba(20, 83, 45, 0.3) 270deg 360deg
-    ) 0 0 / 40px 40px,
-    repeating-conic-gradient(
-      from 45deg at 50% 50%,
-      rgba(74, 74, 74, 0.1) 0deg 90deg,
-      rgba(115, 115, 115, 0.15) 90deg 180deg,
-      rgba(82, 82, 82, 0.12) 180deg 270deg,
-      transparent 270deg 360deg
-    ) 20px 20px / 40px 40px,
-    /* Digital noise overlay */
+    /* Large digital blocks - primary pattern */
+    repeating-linear-gradient(
+      0deg,
+      rgba(75, 85, 99, 0.3) 0px,
+      rgba(75, 85, 99, 0.3) 20px,
+      transparent 20px,
+      transparent 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(55, 65, 81, 0.25) 0px,
+      rgba(55, 65, 81, 0.25) 20px,
+      transparent 20px,
+      transparent 40px
+    ),
+    /* Medium digital blocks - secondary pattern */
+    repeating-linear-gradient(
+      45deg,
+      rgba(107, 114, 128, 0.2) 0px,
+      rgba(107, 114, 128, 0.2) 12px,
+      transparent 12px,
+      transparent 24px
+    ),
+    /* Small digital noise for texture */
     repeating-linear-gradient(
       0deg,
       transparent 0px,
-      rgba(34, 197, 94, 0.05) 2px,
+      rgba(156, 163, 175, 0.08) 2px,
       transparent 4px
     ),
     repeating-linear-gradient(
       90deg,
       transparent 0px,
-      rgba(21, 128, 61, 0.08) 2px,
+      rgba(209, 213, 219, 0.06) 2px,
       transparent 4px
     ),
-    /* Base digital gradient */
-    linear-gradient(45deg,
-      #1f2937 0%,     /* gray-800 */
-      #374151 25%,    /* gray-700 */
-      #16a34a 50%,    /* green-600 */
-      #15803d 75%,    /* green-700 */
-      #166534 100%    /* green-800 */
+    /* Subtle green military accents */
+    radial-gradient(
+      ellipse 100px 60px at 25% 75%,
+      rgba(34, 197, 94, 0.15) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 80px 80px at 75% 25%,
+      rgba(22, 163, 74, 0.12) 0%,
+      transparent 60%
+    ),
+    /* Base digital gray gradient */
+    linear-gradient(135deg,
+      #111827 0%,     /* gray-900 */
+      #1f2937 25%,    /* gray-800 */
+      #374151 50%,    /* gray-700 */
+      #4b5563 75%,    /* gray-600 */
+      #6b7280 100%    /* gray-500 */
     ) !important;
 }
 
