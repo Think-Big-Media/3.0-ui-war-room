@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import PageLayout from "../components/shared/PageLayout";
+import Card from "../components/shared/Card";
 import { useBackgroundClasses } from "../contexts/BackgroundThemeContext";
 import { SWOTRadarDashboard } from "../components/generated/SWOTRadarDashboard";
 import { IntelligencePanel } from "../components/generated/IntelligencePanel";
@@ -127,7 +128,7 @@ export default function Dashboard() {
           {/* Left Column */}
           <div className="left-column">
             {/* Political Map - NO TITLE */}
-            <div className="card political-map">
+            <Card variant="glass" padding="md" className="political-map hoverable">
               <div className="map-container" style={{ display: 'grid', gridTemplateColumns: '460px 1fr', gap: '10px' }}>
                 {/* Political Map Image - Direct without wrapper */}
                 <img
@@ -156,15 +157,15 @@ export default function Dashboard() {
                   <div className="text-white/75 text-[10px] leading-tight text-right uppercase truncate font-barlow">Florida: <span className="font-jetbrains">+3.2%</span> R</div>
                 </div>
               </div>
-            </div>
+            </Card>
 
             {/* Fresh SWOT Radar - Green Square Design */}
-            <div className="card fresh-swot-radar">
+            <Card variant="glass" padding="md" className="fresh-swot-radar hoverable">
               <SWOTRadarDashboard />
-            </div>
+            </Card>
 
             {/* Live Intelligence Feed - War Room Style - Moved directly under SWOT radar */}
-            <div className="card">
+            <Card variant="glass" padding="md" className="hoverable">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="font-barlow font-semibold text-white text-lg">Live Intelligence Feed</h3>
                 <div className="flex items-center space-x-2">
@@ -262,13 +263,13 @@ export default function Dashboard() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Card>
           </div>
 
           {/* Right Column */}
           <div className="right-column">
             {/* Phrase Cloud */}
-            <div className="card phrase-cloud">
+            <Card variant="glass" padding="md" className="phrase-cloud hoverable">
               <div className="phrase-container">
                 <div className="keywords-section">
                   <div className="keyword-group">
@@ -325,11 +326,11 @@ export default function Dashboard() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Card>
 
             {/* Golden Measure Squares */}
             <div className="metric-boxes-container">
-              <div className="card metric-box-square">
+              <Card variant="glass" padding="sm" className="metric-box-square hoverable flex flex-col items-center justify-center">
                 <div className="text-3xl font-normal text-red-400 font-barlow-condensed">
                   7
                 </div>
@@ -338,8 +339,8 @@ export default function Dashboard() {
                   <br />
                   Alerts
                 </div>
-              </div>
-              <div className="card metric-box-square">
+              </Card>
+              <Card variant="glass" padding="sm" className="metric-box-square hoverable flex flex-col items-center justify-center">
                 <div className="text-3xl font-normal text-blue-400 font-barlow-condensed">
                   $47.2K
                 </div>
@@ -348,8 +349,8 @@ export default function Dashboard() {
                   <br />
                   Spend
                 </div>
-              </div>
-              <div className="card metric-box-square">
+              </Card>
+              <Card variant="glass" padding="sm" className="metric-box-square hoverable flex flex-col items-center justify-center">
                 <div className="text-3xl font-normal text-green-400 font-barlow-condensed">
                   2,847
                 </div>
@@ -358,8 +359,8 @@ export default function Dashboard() {
                   <br />
                   Volume
                 </div>
-              </div>
-              <div className="card metric-box-square">
+              </Card>
+              <Card variant="glass" padding="sm" className="metric-box-square hoverable flex flex-col items-center justify-center">
                 <div className="text-3xl font-normal text-green-400 font-barlow-condensed">
                   74%
                 </div>
@@ -368,11 +369,11 @@ export default function Dashboard() {
                   <br />
                   Score
                 </div>
-              </div>
+              </Card>
             </div>
 
             {/* Quick Actions Grid */}
-            <div className="card quick-actions" style={{ padding: 0, overflow: "hidden" }}>
+            <Card variant="glass" padding="none" className="quick-actions hoverable" style={{ overflow: "hidden" }}>
               <div className="bg-white/10 px-3 py-2 border-b border-white/30">
                 <div className="text-xs text-white/60 uppercase font-semibold tracking-wider font-barlow">
                   Quick Actions
@@ -411,10 +412,10 @@ export default function Dashboard() {
                   Alert Center
                 </div>
               </div>
-            </div>
+            </Card>
 
             {/* Performance Metrics Table */}
-            <div className="card performance-metrics">
+            <Card variant="glass" padding="md" className="performance-metrics hoverable">
               <div className="text-xs lg:text-sm text-white/60 mb-3 uppercase font-semibold tracking-wider font-barlow">Performance Metrics</div>
               <div className="metrics-table">
                 <div className="metric-cell">
@@ -448,7 +449,7 @@ export default function Dashboard() {
                   <div className="metric-trend trend-up">▲ 3%</div>
                 </div>
               </div>
-            </div>
+            </Card>
 
           </div>
         </div>
