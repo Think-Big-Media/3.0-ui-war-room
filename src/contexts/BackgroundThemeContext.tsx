@@ -65,12 +65,12 @@ const STORAGE_KEY = 'war-room-background-theme';
 
 export const BackgroundThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentTheme, setCurrentTheme] = useState<BackgroundTheme>(() => {
-    // Load theme from localStorage or default to tactical-camo
+    // Load theme from localStorage or default to dark-slate
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved && saved in BACKGROUND_THEMES) {
       return saved as BackgroundTheme;
     }
-    return 'tactical-camo'; // Default to the camo theme
+    return 'dark-slate'; // Default to the dark slate theme
   });
 
   const setTheme = (theme: BackgroundTheme) => {

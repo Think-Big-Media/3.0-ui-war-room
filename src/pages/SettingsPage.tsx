@@ -15,7 +15,6 @@ import {
   Mail,
   Smartphone,
   Link2,
-  Moon,
   Share2,
 } from 'lucide-react';
 // Removed hardcoded gradient imports - using consistent slate background
@@ -116,7 +115,6 @@ const SettingsPage: React.FC = () => {
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [pushNotifications, setPushNotifications] = useState(false);
   const [autoPublish, setAutoPublish] = useState(true);
-  const [darkMode, setDarkMode] = useState(true);
   const [twoFactor, setTwoFactor] = useState(false);
   const [dataSharing, setDataSharing] = useState(true);
 
@@ -266,51 +264,6 @@ const SettingsPage: React.FC = () => {
                 <p className="text-xs text-white/60 mt-2 ml-1.5">
                   {availableThemes.find(theme => theme.id === currentTheme)?.description || 'Theme description'}
                 </p>
-                
-                {/* Debugging buttons for testing themes */}
-                <div className="flex flex-wrap gap-2 mt-4 ml-1.5">
-                  <button 
-                    onClick={() => setTheme('tactical-camo')}
-                    className="px-3 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700"
-                  >
-                    🌿 Tactical Camo
-                  </button>
-                  <button 
-                    onClick={() => setTheme('classic-blue')}
-                    className="px-3 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700"
-                  >
-                    💙 Classic Blue
-                  </button>
-                  <button 
-                    onClick={() => setTheme('digital-camo')}
-                    className="px-3 py-1 text-xs bg-gray-600 text-white rounded hover:bg-gray-700"
-                  >
-                    🟫 Digital Camo
-                  </button>
-                  <button 
-                    onClick={() => setTheme('dark-slate')}
-                    className="px-3 py-1 text-xs bg-slate-800 text-white rounded hover:bg-slate-900"
-                  >
-                    🖤 Dark Slate
-                  </button>
-                </div>
-                <p className="text-xs text-yellow-400 mt-2 ml-1.5">
-                  Debug: Current theme = {currentTheme}
-                </p>
-              </div>
-              <div className="flex items-start justify-between">
-                <div className="flex items-start space-x-3 ml-2.5">
-                  <Moon className="w-5 h-5 text-white/75" />
-                  <div className="ml-1.5">
-                    <p className="content-title ml-1.5">Dark Mode</p>
-                    <p className="content-subtitle">
-                      Use dark theme across the platform
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-1">
-                  <ToggleSwitch enabled={darkMode} onChange={setDarkMode} />
-                </div>
               </div>
               <div>
                 <label className="block text-sm font-mono text-white/75 mb-1 ml-1.5 uppercase tracking-wider">

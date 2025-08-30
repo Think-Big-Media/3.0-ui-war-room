@@ -67,8 +67,8 @@ export const SWOTRadarDashboard = () => {
   }, {
     id: '2',
     type: 'weakness',
-    x: 450,
-    y: 180,
+    x: 250,
+    y: 100,
     intensity: 0.6,
     label: 'Customer Service Issues',
     timestamp: new Date(),
@@ -76,24 +76,54 @@ export const SWOTRadarDashboard = () => {
     source: 'Reviews'
   }, {
     id: '3',
+    type: 'weakness',
+    x: 280,
+    y: 140,
+    intensity: 0.5,
+    label: 'Technical Debt Accumulation',
+    timestamp: new Date(),
+    sentiment: -0.4,
+    source: 'Internal Audit'
+  }, {
+    id: '4',
     type: 'opportunity',
-    x: 180,
-    y: 420,
+    x: 120,
+    y: 230,
     intensity: 0.9,
     label: 'Emerging Market Expansion',
     timestamp: new Date(),
     sentiment: 0.8,
     source: 'News'
   }, {
-    id: '4',
+    id: '5',
+    type: 'opportunity',
+    x: 90,
+    y: 280,
+    intensity: 0.75,
+    label: 'Partnership Opportunities',
+    timestamp: new Date(),
+    sentiment: 0.65,
+    source: 'Business Development'
+  }, {
+    id: '6',
     type: 'threat',
-    x: 480,
-    y: 450,
+    x: 260,
+    y: 250,
     intensity: 0.7,
     label: 'Competitor Launch',
     timestamp: new Date(),
     sentiment: -0.6,
     source: 'Industry Reports'
+  }, {
+    id: '7',
+    type: 'threat',
+    x: 290,
+    y: 290,
+    intensity: 0.8,
+    label: 'Regulatory Changes',
+    timestamp: new Date(),
+    sentiment: -0.7,
+    source: 'Legal Analysis'
   }], []);
 
   // Sweep animation removed - now handled internally in RadarCanvas with requestAnimationFrame
@@ -125,6 +155,11 @@ export const SWOTRadarDashboard = () => {
       y: canvasY
     });
     setTimeout(() => setActiveLabel(null), 3000);
+  };
+  
+  const handleBlobClick = (point: SWOTDataPoint) => {
+    // Navigate to intelligence hub with the specific category
+    navigate(`/intelligence-hub?category=${point.type}&item=${point.id}`);
   };
   const exportData = () => {
     const exportData = {
@@ -158,7 +193,7 @@ export const SWOTRadarDashboard = () => {
       <div className="flex-none" style={{ width: '350px', height: '350px' }}>
         {/* SWOT Radar Container - Clean square, no padding, no rounded corners */}
         <div className="relative overflow-hidden w-full h-full">
-          <RadarCanvas dataPoints={dataPoints} onSweepHit={handleSweepHit} />
+          <RadarCanvas dataPoints={dataPoints} onSweepHit={handleSweepHit} onBlobClick={handleBlobClick} />
           
           {/* Active Label Tooltip - Enhanced with Navigation */}
           {activeLabel && (

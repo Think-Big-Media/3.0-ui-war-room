@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import type { SWOTDataPoint, CrisisAlert } from './SWOTRadarDashboard';
 
 export interface IntelligencePanelProps {
@@ -14,6 +15,8 @@ export const IntelligencePanel: React.FC<IntelligencePanelProps> = ({
   crisisAlerts,
   onExport
 }) => {
+  const navigate = useNavigate();
+  
   // Convert SWOT data points to intelligence items with proper colors
   const getColorForType = (type: string) => {
     switch (type) {
@@ -34,15 +37,24 @@ export const IntelligencePanel: React.FC<IntelligencePanelProps> = ({
     id: point.id,
     type: point.type.toUpperCase(),
     message: point.label,
-    color: getColorForType(point.type)
+    color: getColorForType(point.type),
+    originalType: point.type
   }));
+  
+  const handleItemClick = (item: any) => {
+    navigate(`/intelligence-hub?category=${item.originalType}&item=${item.id}`);
+  };
 
   return (
     <div className="h-full flex flex-col">
       {/* Intelligence Feed - Tighter spacing to reduce radar padding */}
       <div className="flex-1 space-y-2 overflow-y-auto">
         {intelligenceItems.map(item => (
-          <div key={item.id} className={`${item.color} border-l-4 p-2 rounded-r text-xs`}>
+          <div 
+            key={item.id} 
+            className={`${item.color} border-l-4 p-2 rounded-r text-xs cursor-pointer hover:opacity-80 transition-opacity`}
+            onClick={() => handleItemClick(item)}
+          >
             <div className="font-semibold mb-1">{item.type}:</div>
             <div className="text-gray-200 leading-tight">{item.message}</div>
           </div>

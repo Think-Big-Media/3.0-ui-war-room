@@ -26,7 +26,7 @@ const logger = createLogger('CampaignControl');
 
 const CampaignControl: React.FC = () => {
   const location = useLocation();
-  const [activeTab, setActiveTab] = useState<CampaignTab>('ads'); // Default to Ad Campaigns
+  const [activeTab, setActiveTab] = useState<CampaignTab>('analytics'); // Default to Ad Campaigns
   const [analyticsPlatform, setAnalyticsPlatform] = useState<
     'meta' | 'google' | 'both'
   >('both');

@@ -161,30 +161,33 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
             }}
           >
             <div className="py-2 max-h-60 overflow-y-auto custom-scrollbar">
-              {options
-                .filter((option) => option.value !== value)
-                .map((option) => (
-                  <button
-                    key={option.value}
-                    type="button"
-                    onClick={() => handleOptionClick(option.value)}
-                    className={cn(
-                      'w-full px-4 py-2 text-left text-sm font-mono uppercase',
-                      'flex items-center justify-between',
-                      'transition-colors duration-200',
-                      'text-white/80 hover:bg-white/30 hover:text-white'
+              {options.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => handleOptionClick(option.value)}
+                  className={cn(
+                    'w-full px-4 py-2 text-left text-sm font-mono uppercase',
+                    'flex items-center justify-between',
+                    'transition-colors duration-200',
+                    option.value === value
+                      ? 'bg-white/20 text-white'
+                      : 'text-white/80 hover:bg-white/30 hover:text-white'
+                  )}
+                >
+                  <div className="flex items-center space-x-2">
+                    {option.icon && (
+                      <span className="text-white/70">{option.icon}</span>
                     )}
-                  >
-                    <div className="flex items-center space-x-2">
-                      {option.icon && (
-                        <span className="text-white/70">{option.icon}</span>
-                      )}
-                      <span className="font-mono uppercase">
-                        {option.label}
-                      </span>
-                    </div>
-                  </button>
-                ))}
+                    <span className="font-mono uppercase">
+                      {option.label}
+                    </span>
+                  </div>
+                  {option.value === value && (
+                    <Check className="w-4 h-4 text-white ml-2" />
+                  )}
+                </button>
+              ))}
             </div>
           </div>,
           document.body

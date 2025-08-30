@@ -4,12 +4,14 @@ import { SWOTDataPoint } from './SWOTRadarDashboard';
 interface RadarCanvasProps {
   dataPoints: SWOTDataPoint[];
   onSweepHit: (point: SWOTDataPoint, x: number, y: number) => void;
+  onBlobClick?: (point: SWOTDataPoint) => void;
 }
 
 // @component: RadarCanvas
 export const RadarCanvas = ({
   dataPoints,
-  onSweepHit
+  onSweepHit,
+  onBlobClick
 }: RadarCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
@@ -17,6 +19,7 @@ export const RadarCanvas = ({
   const lastTimeRef = useRef<number>(0);
   const backgroundCacheRef = useRef<HTMLCanvasElement | null>(null);
   const isAnimatingRef = useRef<boolean>(false);
+  const lastHitPointsRef = useRef<Set<string>>(new Set());
   
   // Constants
   const SWEEP_SPEED = 0.03; // degrees per millisecond (360 degrees in 12 seconds)
@@ -200,6 +203,31 @@ export const RadarCanvas = ({
     
     ctx.shadowBlur = 0;
 
+    // Check for sweep hits
+    const sweepRadians = (sweepAngle - 90) * (Math.PI / 180);
+    const hitPoints = new Set<string>();
+    
+    dataPoints.forEach(point => {
+      // Calculate angle from center to point
+      const pointAngle = Math.atan2(point.y - centerY, point.x - centerX);
+      const pointDegrees = ((pointAngle * 180 / Math.PI) + 90 + 360) % 360;
+      
+      // Check if sweep is passing over this point (within 5 degree tolerance)
+      const angleDiff = Math.abs(sweepAngle - pointDegrees);
+      const isHit = angleDiff < 5 || angleDiff > 355;
+      
+      if (isHit) {
+        hitPoints.add(point.id);
+        // If this point wasn't hit in the last frame, trigger the callback
+        if (!lastHitPointsRef.current.has(point.id)) {
+          onSweepHit(point, point.x, point.y);
+        }
+      }
+    });
+    
+    // Update last hit points
+    lastHitPointsRef.current = hitPoints;
+
     // Draw data points
     const currentTimeMs = Date.now();
     dataPoints.forEach(point => {
@@ -208,9 +236,9 @@ export const RadarCanvas = ({
 
       const colorMap: Record<string, string> = {
         strength: '#22c55e',
-        weakness: '#ef4444',
+        weakness: '#f87171', // Softer red (red-400)
         opportunity: '#3b82f6',
-        threat: '#f59e0b'
+        threat: '#fb923c' // Softer orange (orange-400)
       };
       const color = colorMap[point.type];
 
@@ -246,6 +274,26 @@ export const RadarCanvas = ({
     }
   }, [dataPoints, createBackgroundCache]);
 
+  // Handle canvas click
+  const handleCanvasClick = useCallback((event: MouseEvent) => {
+    const canvas = canvasRef.current;
+    if (!canvas || !onBlobClick) return;
+    
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    
+    // Check if click is on any data point
+    dataPoints.forEach(point => {
+      const distance = Math.sqrt(Math.pow(x - point.x, 2) + Math.pow(y - point.y, 2));
+      const blobRadius = 6 + point.intensity * 8; // Base radius without animation
+      
+      if (distance <= blobRadius * 2) { // Click within blob area (including glow)
+        onBlobClick(point);
+      }
+    });
+  }, [dataPoints, onBlobClick]);
+
   // Initialize canvas and start animation
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -268,14 +316,18 @@ export const RadarCanvas = ({
     isAnimatingRef.current = true;
     lastTimeRef.current = performance.now();
     animate();
+    
+    // Add click listener
+    canvas.addEventListener('click', handleCanvasClick);
 
     return () => {
       isAnimatingRef.current = false;
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
+      canvas.removeEventListener('click', handleCanvasClick);
     };
-  }, [animate, createBackgroundCache]);
+  }, [animate, createBackgroundCache, handleCanvasClick]);
 
   return (
     <canvas 
@@ -283,7 +335,8 @@ export const RadarCanvas = ({
       className="absolute inset-0 w-full h-full"
       style={{
         filter: 'contrast(1.05) brightness(1.05)',
-        background: 'transparent'
+        background: 'transparent',
+        cursor: 'crosshair'
       }} 
     />
   );

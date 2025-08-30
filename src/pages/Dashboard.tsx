@@ -195,7 +195,7 @@ export default function Dashboard() {
           {/* Left Column */}
           <div className="left-column">
             {/* Political Map - NO TITLE */}
-            <Card variant="glass" padding="md" className="political-map hoverable">
+            <Card variant="glass" padding="md" className="political-map hoverable hover:scale-[1.02] transition-all duration-200">
               <div className="map-container" style={{ display: 'grid', gridTemplateColumns: '460px 1fr', gap: '10px' }}>
                 {/* Interactive Political Map - SVG-based with real-time data */}
                 <div style={{ width: "460px", height: "280px", position: "relative" }}>
@@ -217,12 +217,12 @@ export default function Dashboard() {
             </Card>
 
             {/* Fresh SWOT Radar - Green Square Design */}
-            <Card variant="glass" padding="md" className="fresh-swot-radar hoverable">
+            <Card variant="glass" padding="md" className="fresh-swot-radar hoverable hover:scale-[1.02] transition-all duration-200">
               <SWOTRadarDashboard />
             </Card>
 
             {/* Live Intelligence Feed - War Room Style - Moved directly under SWOT radar */}
-            <Card variant="glass" padding="md" className="hoverable">
+            <Card variant="glass" padding="md" className="hoverable hover:scale-[1.02] transition-all duration-200">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="font-barlow font-semibold text-white text-lg">Live Intelligence Feed</h3>
                 <div className="flex items-center space-x-2">
@@ -235,7 +235,7 @@ export default function Dashboard() {
                 {/* Strength Intelligence */}
                 <div 
                   onClick={() => handleIntelligenceFeedClick('strength', 'healthcare messaging')}
-                  className="relative backdrop-blur-md bg-green-500/20 border border-green-400/30 rounded-lg p-3 hover:bg-green-500/30 cursor-pointer transform transition-all duration-200 hover:scale-105 hover:border-green-400/50"
+                  className="relative backdrop-blur-md bg-green-500/20 border border-green-400/30 rounded-lg p-3 hover:bg-green-500/30 cursor-pointer transform transition-all duration-200 hover:scale-[1.02] hover:border-green-400/50"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -260,7 +260,7 @@ export default function Dashboard() {
                 {/* Opportunity Intelligence */}
                 <div 
                   onClick={() => handleIntelligenceFeedClick('opportunity', 'clean energy hashtag')}
-                  className="relative backdrop-blur-md bg-blue-500/20 border border-blue-400/30 rounded-lg p-3 hover:bg-blue-500/30 cursor-pointer transform transition-all duration-200 hover:scale-105 hover:border-blue-400/50"
+                  className="relative backdrop-blur-md bg-blue-500/20 border border-blue-400/30 rounded-lg p-3 hover:bg-blue-500/30 cursor-pointer transform transition-all duration-200 hover:scale-[1.02] hover:border-blue-400/50"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -285,7 +285,7 @@ export default function Dashboard() {
                 {/* Weakness Intelligence */}
                 <div 
                   onClick={() => handleIntelligenceFeedClick('weakness', 'economic policy engagement')}
-                  className="relative backdrop-blur-md bg-red-500/20 border border-red-400/30 rounded-lg p-3 hover:bg-red-500/30 cursor-pointer transform transition-all duration-200 hover:scale-105 hover:border-red-400/50"
+                  className="relative backdrop-blur-md bg-red-500/20 border border-red-400/30 rounded-lg p-3 hover:bg-red-500/30 cursor-pointer transform transition-all duration-200 hover:scale-[1.02] hover:border-red-400/50"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -310,7 +310,7 @@ export default function Dashboard() {
                 {/* Threat Intelligence */}
                 <div 
                   onClick={() => handleIntelligenceFeedClick('threat', 'district sentiment spike')}
-                  className="relative backdrop-blur-md bg-orange-500/20 border border-orange-400/30 rounded-lg p-3 hover:bg-orange-500/30 cursor-pointer transform transition-all duration-200 hover:scale-105 hover:border-orange-400/50"
+                  className="relative backdrop-blur-md bg-orange-500/20 border border-orange-400/30 rounded-lg p-3 hover:bg-orange-500/30 cursor-pointer transform transition-all duration-200 hover:scale-[1.02] hover:border-orange-400/50"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -342,7 +342,7 @@ export default function Dashboard() {
               <Card 
                 variant="glass" 
                 padding="sm" 
-                className="metric-box-square hoverable flex flex-col items-center justify-center cursor-pointer transform transition-all duration-200 hover:scale-105"
+                className="metric-box-square hoverable flex flex-col items-center justify-center cursor-pointer transform transition-all duration-200 hover:scale-[1.02]"
                 onClick={() => handleMetricBoxClick('alerts')}
               >
                 <div className="text-3xl font-normal text-red-400" style={{fontFamily: 'Barlow Condensed', fontWeight: 400}}>
@@ -357,7 +357,7 @@ export default function Dashboard() {
               <Card 
                 variant="glass" 
                 padding="sm" 
-                className="metric-box-square hoverable flex flex-col items-center justify-center cursor-pointer transform transition-all duration-200 hover:scale-105"
+                className="metric-box-square hoverable flex flex-col items-center justify-center cursor-pointer transform transition-all duration-200 hover:scale-[1.02]"
                 onClick={() => handleMetricBoxClick('ad-spend')}
               >
                 <div className="text-3xl font-normal text-blue-400" style={{fontFamily: 'Barlow Condensed', fontWeight: 400}}>
@@ -372,7 +372,7 @@ export default function Dashboard() {
               <Card 
                 variant="glass" 
                 padding="sm" 
-                className="metric-box-square hoverable flex flex-col items-center justify-center cursor-pointer transform transition-all duration-200 hover:scale-105"
+                className="metric-box-square hoverable flex flex-col items-center justify-center cursor-pointer transform transition-all duration-200 hover:scale-[1.02]"
                 onClick={() => handleMetricBoxClick('mentions')}
               >
                 <div className="text-3xl font-normal text-green-400" style={{fontFamily: 'Barlow Condensed', fontWeight: 400}}>
@@ -387,7 +387,7 @@ export default function Dashboard() {
               <Card 
                 variant="glass" 
                 padding="sm" 
-                className="metric-box-square hoverable flex flex-col items-center justify-center cursor-pointer transform transition-all duration-200 hover:scale-105"
+                className="metric-box-square hoverable flex flex-col items-center justify-center cursor-pointer transform transition-all duration-200 hover:scale-[1.02]"
                 onClick={() => handleMetricBoxClick('sentiment')}
               >
                 <div className="text-3xl font-normal text-green-400" style={{fontFamily: 'Barlow Condensed', fontWeight: 400}}>
@@ -402,7 +402,7 @@ export default function Dashboard() {
             </div>
 
             {/* Quick Actions Grid - Moved above phrase cloud */}
-            <Card variant="glass" padding="none" className="quick-actions hoverable" style={{ overflow: "hidden" }}>
+            <Card variant="glass" padding="none" className="quick-actions hoverable hover:scale-[1.02] transition-all duration-200" style={{ overflow: "hidden" }}>
               <div className="bg-white/10 px-3 py-2 border-b border-white/30">
                 <div className="text-xs text-white/60 uppercase font-semibold tracking-wider font-barlow">
                   Quick Actions
@@ -462,7 +462,7 @@ export default function Dashboard() {
             </Card>
 
             {/* Phrase Cloud - Moved below Quick Actions */}
-            <Card variant="glass" padding="md" className="phrase-cloud hoverable">
+            <Card variant="glass" padding="md" className="phrase-cloud hoverable hover:scale-[1.02] transition-all duration-200">
               <div className="phrase-container">
                 <div className="keywords-section">
                   <div className="keyword-group">
