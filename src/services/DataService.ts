@@ -8,9 +8,13 @@
 
 import { mockVolunteers, mockEvents, mockDonations, mockUsers } from './mock-data';
 
+// Import central API configuration
+import apiService from './api.service';
+
 // Environment configuration
-const USE_MOCK = import.meta.env.VITE_USE_MOCK_DATA === 'true';
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const USE_MOCK = localStorage.getItem('VITE_USE_MOCK_DATA') === 'true' || 
+                 import.meta.env.VITE_USE_MOCK_DATA === 'true';
+const API_BASE_URL = apiService.baseUrl;
 const MOCK_DELAY = 300; // Simulate network latency
 
 // Type definitions (move to types/ directory in production)

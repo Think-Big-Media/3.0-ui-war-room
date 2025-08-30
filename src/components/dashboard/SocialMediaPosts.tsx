@@ -122,7 +122,7 @@ const SocialMediaPosts: React.FC = () => {
   };
 
   return (
-    <div className="bg-black/20 backdrop-blur-sm border border-white/10 rounded-lg p-4 shadow-lg hoverable" style={{ marginTop: '20px' }}>
+    <div className="bg-black/20 backdrop-blur-sm border border-white/10 rounded-lg p-4 shadow-lg hoverable hover:scale-[1.02] transition-all duration-200" style={{ marginTop: '20px' }}>
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-sm font-semibold text-white/90 uppercase tracking-wider font-barlow">
           Recent Social Media Posts
@@ -135,7 +135,7 @@ const SocialMediaPosts: React.FC = () => {
           <div
             key={post.id}
             onClick={() => handlePostClick(post)}
-            className="relative group cursor-pointer transform transition-all duration-200 hover:scale-105"
+            className="relative group cursor-pointer transform transition-all duration-200 hover:scale-[1.02]"
           >
             {/* 110x110 square image with proper spacing */}
             <div className="w-[110px] h-[110px] rounded-lg overflow-hidden bg-gray-800/50 border border-white/10 flex-shrink-0">

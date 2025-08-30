@@ -555,32 +555,32 @@ export default function Dashboard() {
             <div className="performance-metrics-container">
               <div className="text-xs lg:text-sm text-white/60 mb-3 uppercase font-semibold tracking-wider font-barlow">Performance Metrics</div>
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
-                <Card variant="glass" padding="sm" className="hoverable flex flex-col items-center justify-center">
+                <Card variant="glass" padding="sm" className="hoverable hover:scale-[1.02] transition-all duration-200 flex flex-col items-center justify-center">
                   <div className="text-lg font-normal text-green-400 font-barlow-condensed">45s</div>
                   <div className="text-[9px] text-white/60 uppercase mt-1 text-center font-semibold tracking-wider font-barlow">Alert Response</div>
                   <div className="text-[8px] text-green-400 mt-1">▲ 12%</div>
                 </Card>
-                <Card variant="glass" padding="sm" className="hoverable flex flex-col items-center justify-center">
+                <Card variant="glass" padding="sm" className="hoverable hover:scale-[1.02] transition-all duration-200 flex flex-col items-center justify-center">
                   <div className="text-lg font-normal text-blue-400 font-barlow-condensed">3.2x</div>
                   <div className="text-[9px] text-white/60 uppercase mt-1 text-center font-semibold tracking-wider font-barlow">Campaign ROI</div>
                   <div className="text-[8px] text-green-400 mt-1">▲ 8%</div>
                 </Card>
-                <Card variant="glass" padding="sm" className="hoverable flex flex-col items-center justify-center">
+                <Card variant="glass" padding="sm" className="hoverable hover:scale-[1.02] transition-all duration-200 flex flex-col items-center justify-center">
                   <div className="text-lg font-normal text-orange-400 font-barlow-condensed">32</div>
                   <div className="text-[9px] text-white/60 uppercase mt-1 text-center font-semibold tracking-wider font-barlow">Threat Score</div>
                   <div className="text-[8px] text-red-400 mt-1">▼ 5%</div>
                 </Card>
-                <Card variant="glass" padding="sm" className="hoverable flex flex-col items-center justify-center">
+                <Card variant="glass" padding="sm" className="hoverable hover:scale-[1.02] transition-all duration-200 flex flex-col items-center justify-center">
                   <div className="text-lg font-normal text-purple-400 font-barlow-condensed">67%</div>
                   <div className="text-[9px] text-white/60 uppercase mt-1 text-center font-semibold tracking-wider font-barlow">Voter Rate</div>
                   <div className="text-[8px] text-gray-400 mt-1">— 0%</div>
                 </Card>
-                <Card variant="glass" padding="sm" className="hoverable flex flex-col items-center justify-center">
+                <Card variant="glass" padding="sm" className="hoverable hover:scale-[1.02] transition-all duration-200 flex flex-col items-center justify-center">
                   <div className="text-lg font-normal text-cyan-400 font-barlow-condensed">2.4M</div>
                   <div className="text-[9px] text-white/60 uppercase mt-1 text-center font-semibold tracking-wider font-barlow">Media Reach</div>
                   <div className="text-[8px] text-green-400 mt-1">▲ 23%</div>
                 </Card>
-                <Card variant="glass" padding="sm" className="hoverable flex flex-col items-center justify-center">
+                <Card variant="glass" padding="sm" className="hoverable hover:scale-[1.02] transition-all duration-200 flex flex-col items-center justify-center">
                   <div className="text-lg font-normal text-green-400 font-barlow-condensed">+18</div>
                   <div className="text-[9px] text-white/60 uppercase mt-1 text-center font-semibold tracking-wider font-barlow">Sentiment</div>
                   <div className="text-[8px] text-green-400 mt-1">▲ 3%</div>

@@ -154,7 +154,7 @@ export const SWOTRadarDashboard = () => {
       x: canvasX,
       y: canvasY
     });
-    setTimeout(() => setActiveLabel(null), 3000);
+    setTimeout(() => setActiveLabel(null), 1500); // Fade out after 1.5 seconds
   };
   
   const handleBlobClick = (point: SWOTDataPoint) => {
@@ -195,42 +195,21 @@ export const SWOTRadarDashboard = () => {
         <div className="relative overflow-hidden w-full h-full">
           <RadarCanvas dataPoints={dataPoints} onSweepHit={handleSweepHit} onBlobClick={handleBlobClick} />
           
-          {/* Active Label Tooltip - Enhanced with Navigation */}
+          {/* Active Label - Simple white text that fades in/out */}
           {activeLabel && (
             <motion.div 
-              initial={{ opacity: 0, scale: 0.8, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.8, y: 10 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className="absolute bg-slate-800/95 backdrop-blur-md border border-slate-600/60 rounded-lg p-3 shadow-2xl z-[1060] max-w-xs cursor-pointer hover:bg-slate-700/95 transition-all duration-200"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="absolute pointer-events-none z-[1060]"
               style={{
-                left: activeLabel.x + 10,
-                top: activeLabel.y - 10,
-                transform: 'translate(0, -100%)'
+                left: Math.min(Math.max(10, activeLabel.x - 60), 280), // Keep within container
+                top: Math.min(Math.max(10, activeLabel.y - 20), 320), // Keep within container
               }}
-              onClick={() => handleCategoryNavigation(activeLabel.point.type)}
             >
-              <div className="text-sm font-medium text-white mb-2">
+              <div className="text-white text-xs font-medium drop-shadow-lg">
                 {activeLabel.point.label}
-              </div>
-              <div className="text-xs text-gray-300 mb-1">
-                Source: {activeLabel.point.source}
-              </div>
-              <div className="text-xs text-gray-300 mb-2">
-                Sentiment: {(activeLabel.point.sentiment * 100).toFixed(0)}%
-              </div>
-              <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-600/50">
-                <div className={`px-2 py-1 rounded text-xs font-medium ${
-                  activeLabel.point.type === 'strength' ? 'bg-green-500/20 text-green-300 border border-green-500/30' :
-                  activeLabel.point.type === 'weakness' ? 'bg-red-500/20 text-red-300 border border-red-500/30' :
-                  activeLabel.point.type === 'opportunity' ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30' :
-                  'bg-orange-500/20 text-orange-300 border border-orange-500/30'
-                }`}>
-                  {activeLabel.point.type.toUpperCase()}
-                </div>
-                <div className="text-xs text-blue-300 hover:text-blue-200 transition-colors">
-                  Click to explore →
-                </div>
               </div>
             </motion.div>
           )}

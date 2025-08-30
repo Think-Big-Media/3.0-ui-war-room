@@ -31,6 +31,7 @@ import NotFound from './pages/NotFound';
 // Components
 import { ErrorBoundary } from './components/ErrorBoundary';
 import TickerTape from './components/TickerTape';
+import DataToggleButton from './components/DataToggleButton';
 
 // Context Providers
 import { SupabaseAuthProvider } from './contexts/SupabaseAuthContext';
@@ -85,6 +86,7 @@ function App() {
               
               {/* Global Components */}
               <TickerTape />
+              <DataToggleButton />
             </ErrorBoundary>
           </Router>
         </BackgroundThemeProvider>
