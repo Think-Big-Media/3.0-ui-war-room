@@ -6,9 +6,12 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './database.types';
 
-// Environment variables
+// Environment variables with fallback for development
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || import.meta.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+// Check if we have placeholder values
+const hasPlaceholders = supabaseUrl === 'your-supabase-url' || supabaseAnonKey === 'your-supabase-anon-key';
 
 // Comprehensive debug logging
 console.log('🔧 Supabase Client Initialization:');
@@ -23,15 +26,21 @@ console.log('  - Expected Redirect:', `${window.location.origin}/auth/callback`)
 // Skip environment variable logging in browser
 console.log('==========================================');
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('❌ Supabase environment variables missing!');
-  // Don't access process.env in browser
-  throw new Error('Missing Supabase environment variables. Please check your .env file.');
+if (!supabaseUrl || !supabaseAnonKey || hasPlaceholders) {
+  console.warn('⚠️ Supabase not configured - using dummy values for development');
+  // Use dummy values to prevent crash during development
+  const dummyUrl = 'https://xyzcompany.supabase.co';
+  const dummyKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5emNvbXBhbnkiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTYyNzIwODU0MSwibmF0IjoxNjI3MjA4NTQxLCJleHAiOjE5NzQzNjMzNDEsImV4cCI6MTk3NDM2MzM0MX0.dummy_key_for_development_only';
+  var finalUrl = hasPlaceholders ? dummyUrl : supabaseUrl;
+  var finalKey = hasPlaceholders ? dummyKey : supabaseAnonKey;
+} else {
+  var finalUrl = supabaseUrl;
+  var finalKey = supabaseAnonKey;
 }
 
 // Create Supabase client with type safety
 console.log('🚀 Creating Supabase client...');
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
+export const supabase = createClient<Database>(finalUrl!, finalKey!, {
   auth: {
     autoRefreshToken: true,
     persistSession: true,

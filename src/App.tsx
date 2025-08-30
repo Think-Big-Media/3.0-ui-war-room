@@ -8,11 +8,9 @@ import NotFound from "./pages/NotFound";
 
 // Import providers
 import { SupabaseAuthProvider } from './contexts/SupabaseAuthContext';
-import { DataToggleButton } from './components/DataToggleButton';
 
 const App = () => (
   <SupabaseAuthProvider>
-    <DataToggleButton />
     <Routes>
       <Route path="/" element={<Dashboard />} />
       <Route path="/dashboard" element={<Dashboard />} />
