@@ -365,8 +365,6 @@ const CommandCenter: React.FC = () => {
         pageTitle="Dashboard"
         placeholder="Ask War Room about your campaign status..."
       >
-        {/* Slate/Gray gradient background matching Settings page */}
-        <div className="fixed inset-0 bg-gradient-to-br from-slate-600 via-slate-700 to-slate-800 -z-10" />
 
         {/* Top Row - 4 KPI Tiles */}
         <div>

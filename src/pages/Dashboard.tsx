@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import PageLayout from "../components/shared/PageLayout";
 import Card from "../components/shared/Card";
-import { useBackgroundClasses } from "../contexts/BackgroundThemeContext";
 import { SWOTRadarDashboard } from "../components/generated/SWOTRadarDashboard";
 import { IntelligencePanel } from "../components/generated/IntelligencePanel";
 import { StatusBar } from "../components/generated/StatusBar";
@@ -13,8 +12,6 @@ import "../main-dashboard.css";
 export default function Dashboard() {
   console.log('🏠 [DASHBOARD PAGE] Rendering at', window.location.pathname);
   console.log('🔄 [DASHBOARD] Component render at', performance.now());
-  
-  const { baseClass, overlayClass } = useBackgroundClasses();
   
   // Mock data for Intelligence Panel - 15 total to fill taller container (added 3 more)
   const mockDataPoints = [
@@ -114,10 +111,6 @@ export default function Dashboard() {
       pageTitle="Campaign Intelligence" 
       placeholder="Ask about your campaign intelligence..."
     >
-      {/* Dynamic Background Theme System */}
-      <div className={`fixed inset-0 ${baseClass} -z-10`} />
-      {overlayClass && <div className={`fixed inset-0 ${overlayClass} -z-10`} />}
-      
       {/* Command Status Bar - Compact format matching upload */}
       <CommandStatusBar />
       

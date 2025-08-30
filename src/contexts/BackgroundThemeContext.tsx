@@ -7,60 +7,39 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 
 export type BackgroundTheme = 
   | 'classic-blue'       // Current blue/slate gradient
-  | 'dark-blue'          // Darker blue gradient (from Live Monitoring)
   | 'tactical-camo'      // Woodland camo with balanced overlay
-  | 'digital-camo'       // Digital/pixelated camo
-  | 'urban-camo'         // Gray urban camo
-  | 'desert-camo';       // Desert tan camo
+  | 'digital-camo';      // Digital/pixelated camo
 
 export interface BackgroundThemeConfig {
   id: BackgroundTheme;
   name: string;
   description: string;
-  baseClass: string;
+  baseClass?: string;
   overlayClass?: string;
+  backgroundStyle?: React.CSSProperties;
+  overlayStyle?: React.CSSProperties;
 }
 
-export const BACKGROUND_THEMES: Record<BackgroundTheme, BackgroundThemeConfig> = {
+const BACKGROUND_THEMES: Record<BackgroundTheme, BackgroundThemeConfig> = {
   'classic-blue': {
     id: 'classic-blue',
     name: 'Classic Blue',
     description: 'Original blue/slate gradient theme',
-    baseClass: 'bg-gradient-to-br from-slate-600 via-slate-700 to-slate-800',
-  },
-  'dark-blue': {
-    id: 'dark-blue',
-    name: 'Dark Blue',
-    description: 'Darker blue gradient from Live Monitoring',
-    baseClass: 'bg-gradient-to-br from-slate-800 via-slate-900 to-black',
+    baseClass: 'war-room-classic-blue',
   },
   'tactical-camo': {
     id: 'tactical-camo',
     name: 'Tactical Camo',
     description: 'Military woodland camouflage pattern',
-    baseClass: 'bg-camo',
-    overlayClass: 'camo-overlay-balanced',
+    baseClass: 'war-room-tactical-camo',
+    overlayClass: 'war-room-camo-overlay',
   },
   'digital-camo': {
     id: 'digital-camo',
     name: 'Digital Camo',
     description: 'Digital/pixelated military pattern',
-    baseClass: 'bg-camo-digital',
-    overlayClass: 'camo-overlay-balanced',
-  },
-  'urban-camo': {
-    id: 'urban-camo',
-    name: 'Urban Camo',
-    description: 'Gray urban warfare pattern',
-    baseClass: 'bg-camo-urban',
-    overlayClass: 'camo-overlay-balanced',
-  },
-  'desert-camo': {
-    id: 'desert-camo',
-    name: 'Desert Camo',
-    description: 'Desert tan camouflage pattern',
-    baseClass: 'bg-camo-desert',
-    overlayClass: 'camo-overlay-balanced',
+    baseClass: 'war-room-digital-camo',
+    overlayClass: 'war-room-camo-overlay',
   },
 };
 
@@ -71,9 +50,60 @@ interface BackgroundThemeContextType {
   availableThemes: BackgroundThemeConfig[];
 }
 
+// Export function to get themes (HMR-friendly)
+export const getBackgroundThemes = () => BACKGROUND_THEMES;
+
 const BackgroundThemeContext = createContext<BackgroundThemeContextType | undefined>(undefined);
 
 const STORAGE_KEY = 'war-room-background-theme';
+
+// Inject CSS directly into the page
+const injectBackgroundCSS = () => {
+  const styleId = 'war-room-background-styles';
+  let styleElement = document.getElementById(styleId) as HTMLStyleElement;
+  
+  if (!styleElement) {
+    styleElement = document.createElement('style');
+    styleElement.id = styleId;
+    document.head.appendChild(styleElement);
+  }
+  
+  styleElement.textContent = `
+    .war-room-classic-blue {
+      background: linear-gradient(135deg, rgb(71 85 105) 0%, rgb(51 65 85) 50%, rgb(30 41 59) 100%) !important;
+    }
+    
+    .war-room-tactical-camo {
+      background-color: #2a3329 !important;
+      background-image: 
+        radial-gradient(ellipse at 20% 30%, rgba(52, 61, 51, 0.8) 15%, transparent 40%),
+        radial-gradient(ellipse at 80% 70%, rgba(76, 84, 70, 0.6) 20%, transparent 50%),
+        radial-gradient(ellipse at 60% 10%, rgba(34, 51, 29, 0.9) 25%, transparent 45%),
+        radial-gradient(ellipse at 10% 80%, rgba(90, 95, 85, 0.5) 18%, transparent 35%),
+        radial-gradient(ellipse at 90% 20%, rgba(45, 52, 43, 0.7) 22%, transparent 55%),
+        radial-gradient(ellipse at 40% 90%, rgba(65, 70, 62, 0.6) 16%, transparent 38%) !important;
+    }
+    
+    .war-room-digital-camo {
+      background-color: #1a1f1a !important;
+      background-image:
+        linear-gradient(45deg, rgba(40, 50, 38, 0.8) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(30, 40, 28, 0.6) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(50, 60, 48, 0.4) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(35, 45, 33, 0.7) 75%) !important;
+      background-size: 20px 20px, 20px 20px, 20px 20px, 20px 20px !important;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px !important;
+    }
+    
+    .war-room-camo-overlay {
+      background: 
+        radial-gradient(circle at 0% 0%, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 25%, rgba(0, 0, 0, 0.2) 50%),
+        radial-gradient(circle at 100% 0%, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 30%, rgba(0, 0, 0, 0.1) 60%),
+        radial-gradient(circle at 0% 100%, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 35%, rgba(0, 0, 0, 0.05) 70%),
+        radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.3) 40%, transparent 80%) !important;
+    }
+  `;
+};
 
 export const BackgroundThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentTheme, setCurrentTheme] = useState<BackgroundTheme>(() => {
@@ -84,6 +114,11 @@ export const BackgroundThemeProvider: React.FC<{ children: React.ReactNode }> = 
     }
     return 'tactical-camo'; // Default to the camo theme
   });
+  
+  // Inject CSS when component mounts
+  useEffect(() => {
+    injectBackgroundCSS();
+  }, []);
 
   const setTheme = (theme: BackgroundTheme) => {
     console.log('🎯 BackgroundThemeContext: Setting theme to:', theme);
@@ -119,16 +154,14 @@ export const useBackgroundTheme = () => {
 };
 
 /**
- * Hook to get background classes for a component
+ * Hook to get background styles for a component
  */
-export const useBackgroundClasses = () => {
+export const useBackgroundStyles = () => {
   const { themeConfig } = useBackgroundTheme();
   
   return {
-    baseClass: themeConfig.baseClass,
-    overlayClass: themeConfig.overlayClass,
-    containerClasses: themeConfig.overlayClass 
-      ? `${themeConfig.baseClass}` // Base will be applied to first div
-      : themeConfig.baseClass,
+    backgroundStyle: themeConfig.backgroundStyle || {},
+    overlayStyle: themeConfig.overlayStyle || {},
+    hasOverlay: !!themeConfig.overlayStyle,
   };
 };

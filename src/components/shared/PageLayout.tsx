@@ -6,6 +6,7 @@ import FloatingChatBar from '../FloatingChatBar';
 import GlobalFooter from './GlobalFooter';
 import { createLogger } from '../../utils/logger';
 import { getRouteAccent } from '../../tokens/colors';
+import { useBackgroundTheme } from '../../contexts/BackgroundThemeContext';
 
 const logger = createLogger('PageLayout');
 
@@ -22,9 +23,11 @@ const PageLayout: React.FC<PageLayoutProps> = ({
 }) => {
   const location = useLocation();
   const pageAccent = getRouteAccent(location.pathname);
+  const { themeConfig } = useBackgroundTheme();
 
   logger.debug(`PageLayout rendering for: ${pageTitle}`);
   logger.debug(`Route: ${location.pathname}, Accent: ${pageAccent}`);
+  logger.debug(`Background theme:`, themeConfig);
 
   const handleSendMessage = (message: string) => {
     logger.info(`Message from ${pageTitle}:`, { message });
@@ -32,10 +35,15 @@ const PageLayout: React.FC<PageLayoutProps> = ({
 
   return (
     <div
-      className="min-h-screen w-full relative"
+      className={`min-h-screen w-full relative ${themeConfig.baseClass || ''}`}
       style={{ '--page-accent': pageAccent } as React.CSSProperties}
     >
-      {/* Theme-independent layout - each page sets its own gradient background */}
+      {/* Background overlay for camouflage themes */}
+      {themeConfig.overlayClass && (
+        <div className={`absolute inset-0 ${themeConfig.overlayClass}`} />
+      )}
+      
+      {/* Content layer with consistent theming */}
       <div className="min-h-screen w-full flex flex-col relative z-10">
         {/* Fixed Top Nav */}
         <TopNavigation />

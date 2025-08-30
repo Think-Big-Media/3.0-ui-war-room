@@ -188,8 +188,11 @@ const TopNavigation: React.FC = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
         <div className="flex items-center justify-between h-16">
-          {/* Logo/Brand - Responsive */}
-          <div className="flex items-center ml-[25px]">
+          {/* Logo/Brand - Responsive - Click to go to Dashboard */}
+          <button 
+            onClick={() => handleNavigation('/')}
+            className="flex items-center ml-[25px] hover:opacity-80 transition-opacity duration-200 cursor-pointer"
+          >
             {/* Full logo for large screens */}
             <img
               src="/images/WarRoom_Logo_White.png"
@@ -208,7 +211,7 @@ const TopNavigation: React.FC = () => {
               alt="War Room"
               className="block md:hidden h-[24px] w-auto"
             />
-          </div>
+          </button>
 
           {/* Navigation Items - Responsive */}
           <div className="hidden md:flex items-center space-x-1 lg:space-x-2">

@@ -47,8 +47,6 @@ const ContentCalendarPage: React.FC = () => {
       pageTitle="Content Calendar"
       placeholder="Ask about scheduled content..."
     >
-      {/* Slate gradient background */}
-      <div className="fixed inset-0 bg-gradient-to-br from-slate-600 via-slate-700 to-slate-800 -z-10" />
 
       {/* Calendar Controls */}
       <CalendarControls

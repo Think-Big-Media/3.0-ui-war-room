@@ -59,8 +59,6 @@ const AlertCenter: React.FC = () => {
         pageTitle="Alert Center"
         placeholder="Ask War Room about campaign alerts..."
       >
-        {/* Slate gradient background */}
-        <div className="fixed inset-0 bg-gradient-to-br from-slate-600 via-slate-700 to-slate-800 -z-10" />
 
         {/* Tab Navigation */}
         <div className="flex space-x-4 mb-3 overflow-x-auto">

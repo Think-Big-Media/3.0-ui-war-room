@@ -27,6 +27,11 @@ import {
   MetaIntegration,
   GoogleAdsIntegration,
 } from '../components/integrations';
+import { 
+  useBackgroundTheme, 
+  getBackgroundThemes,
+  type BackgroundTheme 
+} from '../contexts/BackgroundThemeContext';
 
 // Lightweight runtime diagnostics to validate prod behavior
 const BUILD_DIAG = {
@@ -116,24 +121,22 @@ const SettingsPage: React.FC = () => {
   const [twoFactor, setTwoFactor] = useState(false);
   const [dataSharing, setDataSharing] = useState(true);
 
-  // Dropdown states
-  const [selectedTheme, setSelectedTheme] = useState('Purple Fire');
+  // Background theme state - this is now the main theme system
+  const { currentTheme, setTheme, availableThemes } = useBackgroundTheme();
   const [selectedLanguage, setSelectedLanguage] = useState('English');
   const [selectedTimezone, setSelectedTimezone] = useState('EST');
   const [selectedDateFormat, setSelectedDateFormat] = useState('MM/DD/YYYY');
 
-  const themes = [
-    'Purple Fire',
-    'Ocean Blue',
-    'Forest Green',
-    'Sunset Orange',
-    'Midnight Black',
-  ];
+  // Use actual background themes instead of dummy themes
+  const themes = availableThemes;
   const languages = ['English', 'Spanish', 'French', 'German', 'Portuguese'];
   const timezones = ['EST', 'PST', 'CST', 'GMT', 'CET'];
 
-  // Dropdown options
-  const themeOptions = themes.map((theme) => ({ value: theme, label: theme }));
+  // Dropdown options - use real background themes
+  const themeOptions = themes.map((theme) => ({ 
+    value: theme.id, 
+    label: theme.name 
+  }));
   const languageOptions = languages.map((lang) => ({
     value: lang,
     label: lang,
@@ -148,9 +151,6 @@ const SettingsPage: React.FC = () => {
   return (
     <div className="page-settings" data-route="settings">
       <PageLayout pageTitle="Settings" placeholder="Ask about settings...">
-        {/* Consistent slate background */}
-        <div className="fixed inset-0 bg-gradient-to-br from-slate-600 via-slate-700 to-slate-800 -z-10" />
-        <div />
 
         {/* Settings Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -256,14 +256,42 @@ const SettingsPage: React.FC = () => {
                 </label>
                 <div className="ml-1.5">
                   <CustomDropdown
-                    value={selectedTheme}
-                    onChange={setSelectedTheme}
+                    value={currentTheme}
+                    onChange={(value) => setTheme(value as BackgroundTheme)}
                     options={themeOptions}
                     placeholder="Select Theme"
                     icon={<Palette className="w-4 h-4" />}
                     className="min-w-[140px]"
                   />
                 </div>
+                <p className="text-xs text-white/60 mt-2 ml-1.5">
+                  {getBackgroundThemes()[currentTheme].description}
+                </p>
+                
+                {/* Debugging buttons for testing themes */}
+                <div className="flex flex-wrap gap-2 mt-4 ml-1.5">
+                  <button 
+                    onClick={() => setTheme('tactical-camo')}
+                    className="px-3 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700"
+                  >
+                    🌿 Tactical Camo
+                  </button>
+                  <button 
+                    onClick={() => setTheme('classic-blue')}
+                    className="px-3 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700"
+                  >
+                    💙 Classic Blue
+                  </button>
+                  <button 
+                    onClick={() => setTheme('digital-camo')}
+                    className="px-3 py-1 text-xs bg-gray-600 text-white rounded hover:bg-gray-700"
+                  >
+                    🟫 Digital Camo
+                  </button>
+                </div>
+                <p className="text-xs text-yellow-400 mt-2 ml-1.5">
+                  Debug: Current theme = {currentTheme}
+                </p>
               </div>
               <div className="flex items-start justify-between">
                 <div className="flex items-start space-x-3 ml-2.5">
