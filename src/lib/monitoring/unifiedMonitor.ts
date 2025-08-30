@@ -23,8 +23,6 @@ interface UnifiedMonitorConfig {
   pollingInterval?: number; // milliseconds
 }
 
-}
-
 export class UnifiedMonitor {
   private clients: Map<string, MonitoringClient> = new Map();
   private config: UnifiedMonitorConfig;
@@ -288,3 +286,4 @@ export class UnifiedMonitor {
 // Factory function
 export function createUnifiedMonitor(config: UnifiedMonitorConfig): UnifiedMonitor {
   return new UnifiedMonitor(config);
+}

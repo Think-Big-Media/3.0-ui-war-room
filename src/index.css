@@ -1,9 +1,18 @@
 /**
  * War Room Platform - Global Styles
  * Using Tailwind CSS for utility-first styling
+ * Performance-optimized with reduced font weights and CSS animations
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* ALL @import statements must come first */
+/* Optimized font import - only load needed weights */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Barlow+Semi+Condensed:wght@400;500;600&display=swap');
+
+/* Import performance-optimized animations */
+@import './styles/animations.css';
+
+/* Import luxurious page transitions */
+@import './styles/transitions.css';
 
 @tailwind base;
 @tailwind components;
@@ -16,14 +25,14 @@
 
     /* Brand Accent Colors - Single Source of Truth */
     --accent-dashboard: #d97706;
-    --accent-live-monitoring: #2a434a;
-    --accent-war-room: #db2777;
+    --accent-live-monitoring: #4ade80;
+    --accent-war-room: #d7484f;
     --accent-intelligence: #60a5fa;
     --accent-alert-center: #facc15;
     --accent-settings: #818cf8;
 
     /* Navigation-specific variants for better contrast */
-    --nav-accent-live-monitoring: #4adb7a; /* Lighter green for visibility */
+    --nav-accent-live-monitoring: #4ade80; /* Use the same bright green for navigation */
 
     /* Glassmorphic theme - transparent with subtle tints */
     --background: 249 250 251; /* gray-50 base */
@@ -188,6 +197,66 @@
   }
 }
 
+/* Background Theme System - Camouflage Patterns */
+@layer components {
+  /* Woodland Camo Background */
+  .bg-camo {
+    background-color: #2a3329;
+    background-image: 
+      radial-gradient(ellipse at 20% 30%, rgba(52, 61, 51, 0.8) 15%, transparent 40%),
+      radial-gradient(ellipse at 80% 70%, rgba(76, 84, 70, 0.6) 20%, transparent 50%),
+      radial-gradient(ellipse at 60% 10%, rgba(34, 51, 29, 0.9) 25%, transparent 45%),
+      radial-gradient(ellipse at 10% 80%, rgba(90, 95, 85, 0.5) 18%, transparent 35%),
+      radial-gradient(ellipse at 90% 20%, rgba(45, 52, 43, 0.7) 22%, transparent 55%),
+      radial-gradient(ellipse at 40% 90%, rgba(65, 70, 62, 0.6) 16%, transparent 38%);
+  }
+  
+  /* Digital Camo Background */
+  .bg-camo-digital {
+    background-color: #1a1f1a;
+    background-image:
+      linear-gradient(45deg, rgba(40, 50, 38, 0.8) 25%, transparent 25%),
+      linear-gradient(-45deg, rgba(30, 40, 28, 0.6) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, rgba(50, 60, 48, 0.4) 75%),
+      linear-gradient(-45deg, transparent 75%, rgba(35, 45, 33, 0.7) 75%);
+    background-size: 20px 20px, 20px 20px, 20px 20px, 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  }
+  
+  /* Urban Camo Background */
+  .bg-camo-urban {
+    background-color: #2c2c2c;
+    background-image:
+      radial-gradient(ellipse at 25% 40%, rgba(60, 60, 65, 0.7) 20%, transparent 45%),
+      radial-gradient(ellipse at 75% 20%, rgba(45, 48, 52, 0.6) 18%, transparent 40%),
+      radial-gradient(ellipse at 15% 80%, rgba(70, 72, 75, 0.5) 22%, transparent 50%),
+      radial-gradient(ellipse at 85% 70%, rgba(35, 38, 42, 0.8) 25%, transparent 42%);
+  }
+  
+  /* Desert Camo Background */
+  .bg-camo-desert {
+    background-color: #8b7355;
+    background-image:
+      radial-gradient(ellipse at 30% 20%, rgba(160, 140, 110, 0.7) 20%, transparent 45%),
+      radial-gradient(ellipse at 70% 80%, rgba(120, 100, 80, 0.6) 18%, transparent 40%),
+      radial-gradient(ellipse at 20% 70%, rgba(180, 160, 130, 0.5) 22%, transparent 50%),
+      radial-gradient(ellipse at 80% 30%, rgba(100, 85, 65, 0.8) 25%, transparent 42%);
+  }
+}
+
+/* Camo Overlay Classes for Photoshop-like Effects */
+@layer components {
+  .camo-overlay-balanced {
+    background: 
+      radial-gradient(circle at 0% 0%, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 25%, rgba(0, 0, 0, 0.2) 50%),
+      radial-gradient(circle at 100% 0%, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 30%, rgba(0, 0, 0, 0.1) 60%),
+      radial-gradient(circle at 0% 100%, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 35%, rgba(0, 0, 0, 0.05) 70%),
+      radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.3) 40%, transparent 80%),
+      radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.3) 100%);
+    mix-blend-mode: multiply;
+  }
+}
+
 /* Custom component styles */
 @layer components {
   /* Page-accent theming using brand accent tokens */
@@ -234,24 +303,41 @@
   }
 
   /* Special handling for Live Monitoring navigation icon contrast */
-  /* When page accent is the dark Live Monitoring green, use lighter variant for nav icon */
-  [style*='--page-accent: #2A434A'] [aria-current='page'] .nav-active-icon {
+  /* When page accent is the Live Monitoring green, use the green accent for nav icon */
+  [style*='--page-accent: #3EA66A'] [aria-current='page'] .nav-active-icon {
     color: var(--nav-accent-live-monitoring) !important;
   }
 
   /* Navigation hover states - use page accent for consistent theming */
   .nav-hover-text {
-    @apply transition-colors duration-200;
+    transition: color 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   .nav-hover-icon {
-    @apply transition-colors duration-200;
+    transition: color 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   /* Per-item navigation hover behavior - each nav item uses its own accent */
+  .nav-item {
+    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Enhanced hover effects with better specificity */
+  nav .nav-item:hover .icon,
+  nav .nav-item:hover .label,
   .nav-item:hover .icon,
   .nav-item:hover .label {
     color: var(--item-accent) !important;
+    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    transform: scale(1.05);
+  }
+
+  /* Smooth button hover effects */
+  nav .nav-item:hover,
+  .nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
   }
 
   /* Ensure active state overrides hover for active items */
@@ -277,31 +363,90 @@
   /* Hoverable border system - replaces transform/scale with border-color changes */
   .hoverable {
     border: 1px solid var(--border-neutral, rgba(255, 255, 255, 0.15));
-    transition: border-color 160ms ease;
+    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   /* Generic rule - applies to all hoverable elements */
   .hoverable:hover {
     border-color: var(--page-accent);
-    transition: border-color 160ms ease;
+    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
-  /* Page-scoped reinforcement for Live Monitoring - overrides any conflicts */
+  /* Page-scoped reinforcement for specific routes - overrides any conflicts */
   [data-route='live-monitoring'] .hoverable:hover {
     border-color: var(--accent-live-monitoring) !important;
+  }
+
+  [data-route='alert-center'] .hoverable:hover {
+    border-color: var(--accent-alert-center) !important;
+  }
+
+  [data-route='settings'] .hoverable:hover {
+    border-color: var(--accent-settings) !important;
+  }
+
+  [data-route='intelligence-hub'] .hoverable:hover {
+    border-color: var(--accent-intelligence) !important;
+  }
+
+  [data-route='command-center'] .hoverable:hover {
+    border-color: var(--accent-dashboard) !important;
+  }
+
+  /* War Room pages - disable ALL hover effects and animations */
+  [data-route='war-room'] .hoverable:hover,
+  [data-route='campaign-control'] .hoverable:hover {
+    border-color: var(--border-neutral, rgba(255, 255, 255, 0.15)) !important;
+    transform: none !important;
+    scale: 1 !important;
+  }
+
+  /* Disable all hover scale effects on War Room pages */
+  [data-route='war-room'] *[class*='hover:scale'],
+  [data-route='campaign-control'] *[class*='hover:scale'] {
+    transform: none !important;
+    scale: 1 !important;
+  }
+
+  [data-route='war-room'] *[class*='hover:scale']:hover,
+  [data-route='campaign-control'] *[class*='hover:scale']:hover {
+    transform: none !important;
+    scale: 1 !important;
   }
 
   /* Shared selectors for consistency */
   .card.hoverable,
   .panel.hoverable {
     border: 1px solid var(--border-neutral, rgba(255, 255, 255, 0.15));
-    transition: border-color 160ms ease;
+    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   .card.hoverable:hover,
   .panel.hoverable:hover {
     border-color: var(--page-accent);
-    transition: border-color 160ms ease;
+    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Smooth transition utility classes */
+  .transition-smooth {
+    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .transition-smooth-slow {
+    transition: all 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .transition-smooth-hover {
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Override Tailwind's harsh transitions with smoother ones */
+  .transition-all {
+    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  }
+
+  .duration-200 {
+    transition-duration: 350ms !important;
   }
 
   /* Quick Actions accent classes */
@@ -324,9 +469,71 @@
     color: var(--accent-settings);
   }
 
-  /* Targeted word spacing for specific nav labels */
+  /* Targeted word spacing for specific nav labels - reduced by 50% */
   .nav-label {
-    word-spacing: 0.15em;
+    word-spacing: 0.075em;
+  }
+
+  /* Responsive navigation improvements */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    /* Tablet-specific nav styling */
+    .nav-item {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      font-size: 0.75rem;
+    }
+
+    /* Ensure no overflow on tablet */
+    nav .max-w-7xl {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    /* Mobile navigation overflow prevention */
+    nav .max-w-7xl {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+
+    /* Mobile menu slide-in animation */
+    .mobile-menu-panel {
+      animation: slideInFromRight 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+  }
+
+  @media (max-width: 480px) {
+    /* Very small screens - reduce menu width */
+    .mobile-menu-panel {
+      width: 280px !important;
+    }
+
+    /* Ensure touch targets are at least 44px high */
+    .mobile-menu-panel .nav-item {
+      min-height: 44px;
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+    }
+  }
+
+  /* Mobile menu backdrop blur optimization */
+  @supports (backdrop-filter: blur(8px)) {
+    .mobile-menu-backdrop {
+      backdrop-filter: blur(8px);
+    }
+  }
+
+  /* Mobile menu slide animation */
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
   }
 
   /* Quick Actions using design tokens */
@@ -363,21 +570,7 @@
     background-color: var(--page-accent);
   }
 
-  /* Status indicators using neutral backgrounds with accent text */
-  .status-live {
-    @apply bg-black/20 border border-white/20;
-    color: var(--accent-war-room); /* Fuchsia text for live/critical */
-  }
-
-  .status-running {
-    @apply bg-black/20 border border-white/20;
-    color: var(--accent-live-monitoring); /* Green text for running */
-  }
-
-  .status-planning {
-    @apply bg-black/20 border border-white/20;
-    color: var(--accent-alert-center); /* Yellow text for planning */
-  }
+  /* Status indicators - removed duplicate classes that had unwanted backgrounds */
 
   /* Priority classes using design tokens */
   .priority-critical {
@@ -510,21 +703,29 @@
 
     /* Primary Action button style - bigger primary actions */
     .btn-primary-action {
-      @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-6 py-3 rounded-xl transition-colors duration-200 font-mono text-base uppercase text-center;
+      @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-6 py-3 rounded-xl font-mono text-base uppercase text-center;
+      transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     /* Primary Neutral button style - bigger general actions */
     .btn-primary-neutral {
-      @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-6 py-3 rounded-xl transition-colors duration-200 font-mono text-base uppercase text-center;
+      @apply bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-6 py-3 rounded-xl font-mono text-base uppercase text-center;
+      transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
   }
 
   /* Section Header - Major headings across the site */
   .section-header {
     @apply text-white/50 uppercase;
-    font:
-      600 20px/29px 'Barlow Condensed',
-      sans-serif;
+    letter-spacing: 1px;
+    font: 400 20px/29px Barlow Condensed, sans-serif;
+  }
+
+  /* Large Section Header - For main page section headers */
+  .section-header-large {
+    @apply text-white/50 uppercase;
+    letter-spacing: 1px;
+    font: 400 25px/33px Barlow Condensed, sans-serif;
   }
 
   /* Content Typography Classes */
@@ -559,9 +760,16 @@
   }
 
   .status-indicator {
-    @apply text-xs font-mono uppercase;
     font-family: 'JetBrains Mono', monospace;
-    color: rgba(255, 255, 255, 0.75); /* Neutral contrast-safe text color */
+    font-size: 0.75rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.75);
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   /* Footer text - always uppercase JetBrains Mono */
@@ -570,17 +778,23 @@
     font-family: 'JetBrains Mono', monospace;
   }
 
-  /* Color-coded status indicators - text only */
+  /* Color-coded status indicators - text only, using design tokens */
   .status-active {
-    color: #4ade80; /* green-400 */
+    color: var(--accent-live-monitoring) !important;
+    background: none !important;
+    border: none !important;
   }
 
   .status-running {
-    color: var(--accent-war-room);
+    color: var(--accent-war-room) !important;
+    background: none !important;
+    border: none !important;
   }
 
   .status-planning {
-    color: var(--accent-intelligence);
+    color: var(--accent-intelligence) !important;
+    background: none !important;
+    border: none !important;
   }
 
   /* Duplicate status classes removed - using only the neutral background versions above */
@@ -608,12 +822,14 @@
 
   /* War Room input style - 70% opacity background, gray text for transparency */
   .war-room-input {
-    @apply w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 transition-colors duration-200;
+    @apply w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-0 appearance-none;
+    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   /* War Room select style - 70% opacity background, gray text for transparency */
   .war-room-select {
-    @apply w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 focus:border-slate-500 focus:outline-none focus:ring-0 transition-colors duration-200 appearance-none cursor-pointer;
+    @apply w-full bg-white/70 rounded-xl px-4 py-2.5 border border-slate-200 text-gray-600 focus:border-slate-500 focus:outline-none focus:ring-0 appearance-none cursor-pointer;
+    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   /* War Room sub-headline style - 60% opacity, moved up 3px (STANDARDIZED) */
@@ -741,6 +957,140 @@
     }
   }
 
+  /* X Page Animations */
+  .animate-scroll-feed {
+    animation: scrollFeed 30s linear infinite;
+  }
+
+  .animate-scroll-left {
+    animation: scrollLeft 30s linear infinite;
+  }
+
+  .animate-ticker-scroll {
+    animation: tickerScroll 60s linear infinite;
+  }
+
+  .animate-elliptical-rotate {
+    animation: ellipticalRotate 30s linear infinite;
+  }
+
+  @keyframes scrollFeed {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-600px); }
+  }
+
+  .animate-scroll-feed {
+    animation: scrollFeed 30s linear infinite;
+  }
+
+  @keyframes scrollLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes tickerScroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+
+  @keyframes ellipticalRotate {
+    0% {
+      transform: translateY(-50%) translateZ(60px) translateY(0px);
+      font-size: 15px;
+      opacity: 1;
+      filter: blur(0px);
+      color: #e2e8f0;
+      z-index: 100;
+      font-weight: 600;
+    }
+    10% {
+      transform: translateY(-50%) translateZ(45px) translateY(-20px) translateX(-15px);
+      font-size: 14px;
+      opacity: 0.9;
+      filter: blur(0.5px);
+      color: #cbd5e1;
+      z-index: 90;
+    }
+    20% {
+      transform: translateY(-50%) translateZ(25px) translateY(-35px) translateX(-25px);
+      font-size: 12px;
+      opacity: 0.7;
+      filter: blur(2px);
+      color: #94a3b8;
+      z-index: 50;
+    }
+    30% {
+      transform: translateY(-50%) translateZ(0px) translateY(-45px) translateX(-30px);
+      font-size: 10px;
+      opacity: 0.5;
+      filter: blur(3px);
+      color: #64748b;
+      z-index: 20;
+    }
+    40% {
+      transform: translateY(-50%) translateZ(-30px) translateY(-40px) translateX(-25px);
+      font-size: 9px;
+      opacity: 0.3;
+      filter: blur(4px);
+      color: #475569;
+      z-index: 5;
+    }
+    50% {
+      transform: translateY(-50%) translateZ(-45px) translateY(0px);
+      font-size: 8px;
+      opacity: 0.2;
+      filter: blur(5px);
+      color: #334155;
+      z-index: 1;
+    }
+    60% {
+      transform: translateY(-50%) translateZ(-30px) translateY(40px) translateX(25px);
+      font-size: 9px;
+      opacity: 0.3;
+      filter: blur(4px);
+      color: #475569;
+      z-index: 5;
+    }
+    70% {
+      transform: translateY(-50%) translateZ(0px) translateY(45px) translateX(30px);
+      font-size: 10px;
+      opacity: 0.5;
+      filter: blur(3px);
+      color: #64748b;
+      z-index: 20;
+    }
+    80% {
+      transform: translateY(-50%) translateZ(25px) translateY(35px) translateX(25px);
+      font-size: 12px;
+      opacity: 0.7;
+      filter: blur(2px);
+      color: #94a3b8;
+      z-index: 50;
+    }
+    90% {
+      transform: translateY(-50%) translateZ(45px) translateY(20px) translateX(15px);
+      font-size: 14px;
+      opacity: 0.9;
+      filter: blur(0.5px);
+      color: #cbd5e1;
+      z-index: 90;
+    }
+    100% {
+      transform: translateY(-50%) translateZ(60px) translateY(0px);
+      font-size: 15px;
+      opacity: 1;
+      filter: blur(0px);
+      color: #e2e8f0;
+      z-index: 100;
+      font-weight: 600;
+    }
+  }
+
+  /* Utility class for radial gradients */
+  .bg-gradient-radial {
+    background: radial-gradient(circle, currentColor, transparent);
+  }
+
   /* Loading spinner */
   .spinner {
     @apply inline-block w-8 h-8 border-4 border-gray-200 border-t-blue-600 rounded-full animate-spin;
@@ -753,7 +1103,7 @@
   }
 
   .hover-lift {
-    @apply transition-transform duration-200 ease-out;
+    transition: transform 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   .hover-lift:hover {

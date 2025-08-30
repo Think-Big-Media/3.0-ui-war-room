@@ -35,8 +35,6 @@ interface WSMessage<T = any> {
 }
 
 // Queue for messages during disconnection
-}
-
 class MessageQueue {
   private queue: WSMessage[] = [];
   private maxSize = 100;
@@ -345,3 +343,4 @@ export function destroyDashboardWebSocket(): void {
     dashboardWebSocket.destroy();
     dashboardWebSocket = null;
   }
+}

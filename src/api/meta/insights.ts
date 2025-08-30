@@ -348,3 +348,4 @@ export class MetaInsightsService {
 
     return ((spend / impressions) * 1000).toFixed(2);
   }
+}

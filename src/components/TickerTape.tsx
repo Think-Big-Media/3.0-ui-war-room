@@ -56,10 +56,13 @@ const TickerTape: React.FC = () => {
     loadTickerItems();
 
     // Refresh ticker items every 30 seconds
+    // Only refresh when page is visible and component mounted
     const interval = setInterval(() => {
-      informationService.refreshData();
-      loadTickerItems();
-    }, 30000);
+      if (!document.hidden) {
+        informationService.refreshData();
+        loadTickerItems();
+      }
+    }, 45000); // Increased interval to reduce resource usage
 
     return () => clearInterval(interval);
   }, []);

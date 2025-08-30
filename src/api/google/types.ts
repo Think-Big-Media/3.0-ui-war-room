@@ -1,4 +1,3 @@
-}
 // Google Ads API TypeScript Type Definitions
 
 export interface GoogleAdsConfig {
@@ -320,3 +319,4 @@ export interface ChangeData {
   user_email?: string;
   client_type?: string;
   change_summary?: any;
+}

@@ -1,4 +1,3 @@
-}
 // Authentication manager for Meta Business API
 
 import { type MetaConfig, type AccessToken } from './types';
@@ -238,3 +237,4 @@ export class MetaAuthManager {
       );
     }
   }
+}

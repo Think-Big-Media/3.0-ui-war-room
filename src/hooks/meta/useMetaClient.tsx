@@ -1,4 +1,3 @@
-}
 /**
  * Hook to access Meta API client and services
  */
@@ -83,6 +82,8 @@ export function MetaClientProvider({ children }: { children: React.ReactNode }) 
       {children}
     </MetaClientContext.Provider>
   );
+}
+
 /**
  * Hook to access Meta API client and services
  */
@@ -94,15 +95,20 @@ export function useMetaClient() {
   }
 
   return context;
+}
+
 /**
  * Hook to check if Meta is authenticated
  */
 export function useIsMetaAuthenticated() {
   const { isAuthenticated } = useMetaClient();
   return isAuthenticated;
+}
+
 /**
  * Hook to get current Meta account ID
  */
 export function useMetaAccountId() {
   const { accountId } = useMetaClient();
   return accountId;
+}

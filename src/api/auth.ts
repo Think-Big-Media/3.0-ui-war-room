@@ -96,3 +96,4 @@ export async function refreshToken(): Promise<AuthResponse> {
   }
   
   return response.json();
+}

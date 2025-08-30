@@ -26,7 +26,7 @@ const logger = createLogger('CampaignControl');
 
 const CampaignControl: React.FC = () => {
   const location = useLocation();
-  const [activeTab, setActiveTab] = useState<CampaignTab>('projects');
+  const [activeTab, setActiveTab] = useState<CampaignTab>('ads'); // Default to Ad Campaigns
   const [analyticsPlatform, setAnalyticsPlatform] = useState<
     'meta' | 'google' | 'both'
   >('both');
@@ -100,7 +100,7 @@ const CampaignControl: React.FC = () => {
   });
 
   return (
-    <div className="page-warroom">
+    <div className="page-warroom" data-route="war-room">
       <PageLayout
         pageTitle="War Room"
         placeholder="Ask War Room about campaign operations..."
@@ -115,7 +115,7 @@ const CampaignControl: React.FC = () => {
 
         {/* Strategic Projects Board */}
         {activeTab === 'projects' && (
-          <div className="space-y-6">
+          <div className="space-y-4">
             <ProjectControls
               filters={projectFilters}
               onFiltersChange={setProjectFilters}
@@ -130,7 +130,7 @@ const CampaignControl: React.FC = () => {
 
         {/* Asset Library */}
         {activeTab === 'assets' && (
-          <div className="space-y-6">
+          <div className="space-y-4">
             <AssetControls
               filters={assetFilters}
               onFiltersChange={setAssetFilters}
@@ -147,9 +147,7 @@ const CampaignControl: React.FC = () => {
 
         {/* Analytics & AI Insights Tab */}
         {activeTab === 'analytics' && (
-          <div className="space-y-6">
-            <PlatformAnalytics platform={analyticsPlatform} />
-          </div>
+          <PlatformAnalytics platform={analyticsPlatform} />
         )}
       </PageLayout>
     </div>

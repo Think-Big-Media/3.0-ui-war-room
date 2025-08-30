@@ -4,11 +4,8 @@
  */
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { supabase } from '../lib/supabase/client';
-import { type User, type Session } from '../lib/supabase/auth';
-
-// Mock AuthError type
-type AuthError = Error;
+import { supabase, auth, db } from '../lib/supabase';
+import type { User, Session, AuthError } from '@supabase/supabase-js';
 
 // Types
 export interface LoginRequest {

@@ -247,6 +247,8 @@ export interface MetricDisplayProps
   loading?: boolean;
   interactive?: boolean;
   onAction?: () => void;
+}
+
 const MetricDisplay = forwardRef<HTMLDivElement, MetricDisplayProps>(
   (
     {
@@ -391,6 +393,8 @@ export interface MetricGridProps {
   columns?: 1 | 2 | 3 | 4;
   gap?: 'sm' | 'md' | 'lg';
   className?: string;
+}
+
 const MetricGrid: React.FC<MetricGridProps> = ({
   children,
   columns = 4,

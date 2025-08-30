@@ -1,4 +1,3 @@
-}
 // Google Ads API client exports
 
 export * from './types';
@@ -121,3 +120,4 @@ export function createGoogleAdsAPI(options: GoogleAdsAPIOptions): {
     reports: new GoogleAdsReportsService(client),
     changes: new GoogleAdsChangesService(client),
   };
+}

@@ -22,8 +22,6 @@ interface PerformanceTestResults {
   passed: boolean;
 }
 
-}
-
 interface LoadTestScenario {
   name: string;
   duration_seconds: number;
@@ -35,8 +33,6 @@ interface LoadTestScenario {
     negative: number;
     neutral: number;
   };
-}
-
 }
 
 export class MonitoringPerformanceTest {
@@ -652,3 +648,4 @@ if (require.main === module) {
   }
 
   runTests();
+}

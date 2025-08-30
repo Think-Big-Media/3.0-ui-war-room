@@ -262,6 +262,8 @@ function formatNumber(num: number): string {
     return `${(num / 1000).toFixed(1)}K`;
   }
   return num.toString();
+}
+
 function formatTimeAgo(timestamp: string): string {
   const date = new Date(timestamp);
   const now = new Date();
@@ -274,5 +276,7 @@ function formatTimeAgo(timestamp: string): string {
     return `${Math.floor(diffMins / 60)}h ago`;
   }
   return `${Math.floor(diffMins / 1440)}d ago`;
+
+}
 
 export default PlatformAdminDashboard;

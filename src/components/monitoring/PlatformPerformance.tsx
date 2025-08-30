@@ -30,7 +30,11 @@ const PlatformPerformance: React.FC<PlatformPerformanceProps> = ({
   };
 
   return (
-    <Card padding="md" variant="glass" className="hoverable">
+    <Card
+      padding="md"
+      variant="glass"
+      className="hoverable hover:scale-[1.02] transition-all duration-200"
+    >
       <h3 className="section-header mb-4 tracking-wide ml-1.5">
         PLATFORM PERFORMANCE
       </h3>

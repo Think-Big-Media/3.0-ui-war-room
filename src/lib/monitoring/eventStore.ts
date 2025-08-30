@@ -1,23 +1,17 @@
 // Event Store - Supabase-backed Event History & Storage
 
-// Mock Supabase client for frontend-only operation
-type SupabaseClient = any;
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import {
   type MonitoringEvent,
   type CrisisAlert,
   type PipelineMetrics,
 } from './types';
-// Mock crypto for browser
-const createHash = (algo: string) => ({
-  update: (data: string) => ({ digest: (format: string) => 'mock-hash-' + data.substring(0, 8) })
-});
+import { createHash } from 'crypto';
 
 interface StoredEvent extends Omit<MonitoringEvent, 'timestamp'> {
   timestamp: string; // ISO string for Supabase
   created_at: string;
   updated_at: string;
-}
-
 }
 
 interface StoredAlert extends Omit<CrisisAlert, 'created_at' | 'updated_at'> {
@@ -29,13 +23,9 @@ interface StoredAlert extends Omit<CrisisAlert, 'created_at' | 'updated_at'> {
   resolved_at?: string;
 }
 
-}
-
 interface SimilarEvent {
   id: string;
   similarity_score: number;
-}
-
 }
 
 export class EventStore {
@@ -581,3 +571,4 @@ export class EventStore {
       return false;
     }
   }
+}

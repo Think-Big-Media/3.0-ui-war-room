@@ -1,4 +1,3 @@
-}
 // Meta Business API TypeScript Type Definitions
 
 export interface MetaConfig {
@@ -402,3 +401,4 @@ export interface AudienceRule {
       }>;
     }>;
   }>;
+}

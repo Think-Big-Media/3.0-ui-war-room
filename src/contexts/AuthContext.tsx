@@ -5,7 +5,8 @@
 
 import React, { createContext, useContext, useEffect, useReducer, type ReactNode } from 'react';
 import { supabase } from '../lib/supabase/client';
-import { signIn, signOut, getCurrentUser, onAuthStateChange, type AuthState as SupabaseAuthState, type User } from '../lib/supabase/auth';
+import { signIn, signOut, getCurrentUser, onAuthStateChange, type AuthState as SupabaseAuthState } from '../lib/supabase/auth';
+import type { User } from '@supabase/supabase-js';
 
 // Auth state types - migrated to Supabase
 interface AuthState {
@@ -14,6 +15,8 @@ interface AuthState {
   user: User | null;
   session: any | null;
   error: string | null;
+}
+
 // Auth actions - updated for Supabase
 type AuthAction =
   | { type: 'AUTH_START' }
@@ -24,8 +27,6 @@ type AuthAction =
   | { type: 'AUTH_UPDATE_USER'; payload: User };
 
 // Auth context type - updated for Supabase
-}
-
 interface AuthContextType extends AuthState {
   signInWithEmail: (email: string, password: string) => Promise<void>;
   signUpWithEmail: (email: string, password: string, metadata?: any) => Promise<void>;
@@ -35,9 +36,9 @@ interface AuthContextType extends AuthState {
   hasRole: (role: string) => boolean;
   hasAnyRole: (roles: string[]) => boolean;
   hasPermission: (permission: string) => boolean;
-// Initial state - updated for Supabase
 }
 
+// Initial state - updated for Supabase
 const initialState: AuthState = {
   isAuthenticated: false,
   isLoading: true,
@@ -100,15 +101,17 @@ function authReducer(state: AuthState, action: AuthAction): AuthState {
     default:
       return state;
   }
+}
+
 // Create context
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // Auth provider props
 interface AuthProviderProps {
   children: ReactNode;
-// Auth provider component - migrated to Supabase
 }
 
+// Auth provider component - migrated to Supabase
 export function AuthProvider({ children }: AuthProviderProps) {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
@@ -241,6 +244,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
 // Hook to use auth context
 export function useAuth(): AuthContextType {
   const context = useContext(AuthContext);
@@ -248,6 +253,8 @@ export function useAuth(): AuthContextType {
     throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
+}
+
 // Higher-order component for protecting routes
 interface RequireAuthProps {
   children: ReactNode;
@@ -293,6 +300,8 @@ export function RequireAuth({
   }
 
   return <>{children}</>;
+}
+
 // Hook for conditional rendering based on roles - Supabase compatible
 export function usePermissions() {
   const { hasRole, hasAnyRole } = useAuth();
@@ -306,3 +315,4 @@ export function usePermissions() {
     canManageOrg: () => hasRole('admin') || hasRole('platform_admin'),
     canViewReports: () => hasAnyRole(['admin', 'user']),
   };
+}

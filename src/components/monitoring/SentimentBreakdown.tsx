@@ -13,7 +13,11 @@ const SentimentBreakdown: React.FC<SentimentBreakdownProps> = ({
   sentimentData,
 }) => {
   return (
-    <Card padding="md" variant="glass" className="hoverable">
+    <Card
+      padding="md"
+      variant="glass"
+      className="hoverable hover:scale-[1.02] transition-all duration-200"
+    >
       <h3 className="section-header mb-4 tracking-wide ml-1.5">
         SENTIMENT BREAKDOWN
       </h3>
@@ -26,7 +30,7 @@ const SentimentBreakdown: React.FC<SentimentBreakdownProps> = ({
         </div>
         <div className="w-full bg-black/20 rounded-full h-2">
           <div
-            className={`bg-green-400 h-2 rounded-full ${getSentimentWidth(sentimentData.positive)}`}
+            className={`bg-[var(--accent-live-monitoring)] h-2 rounded-full ${getSentimentWidth(sentimentData.positive)}`}
           />
         </div>
 

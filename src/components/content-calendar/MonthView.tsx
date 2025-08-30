@@ -27,7 +27,7 @@ const MonthView: React.FC<MonthViewProps> = ({
       </div>
 
       {/* Month Calendar Grid */}
-      <div className="grid grid-cols-7 gap-2">
+      <div className="grid grid-cols-7 gap-4">
         {/* Weekday Headers */}
         {weekDays.map((day) => (
           <div

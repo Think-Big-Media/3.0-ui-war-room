@@ -4,10 +4,8 @@
  */
 
 import { type CrisisAlert, type MonitoringEvent } from './types';
-// Mock Supabase client
-const createClient = (url: string, key: string) => ({ /* mock */ });
-// Use browser WebSocket
-const WS = WebSocket;
+import { createClient } from '@supabase/supabase-js';
+import { WebSocket as WS } from 'ws';
 
 interface AlertServiceConfig {
   supabaseUrl: string;
@@ -16,8 +14,6 @@ interface AlertServiceConfig {
   enableEmail?: boolean;
   enableSMS?: boolean;
   enableWebhook?: boolean;
-}
-
 }
 
 interface AlertSubscriber {
@@ -29,8 +25,6 @@ interface AlertSubscriber {
     types?: CrisisAlert['type'][];
     keywords?: string[];
   };
-}
-
 }
 
 export class AlertService {
@@ -313,7 +307,7 @@ export class AlertService {
       critical: '#DB2777', // War Room Fuchsia
       high: '#FACC15', // Alert Center Yellow
       medium: '#60A5FA', // Intelligence Blue
-      low: '#2A434A', // Live Monitoring Green
+      low: '#3EA66A', // Live Monitoring Green
     };
     return colors[severity];
   }
@@ -491,3 +485,4 @@ export class AlertService {
 // Factory function
 export function createAlertService(config: AlertServiceConfig): AlertService {
   return new AlertService(config);
+}

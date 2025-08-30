@@ -76,3 +76,4 @@ export async function deleteCrisisAlert(id: string): Promise<void> {
   if (!response.ok) {
     throw new Error('Failed to delete crisis alert');
   }
+}

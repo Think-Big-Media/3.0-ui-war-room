@@ -49,3 +49,4 @@ export interface ProjectFilters {
 export interface AssetFilters {
   category: string;
   search: string;
+}

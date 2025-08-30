@@ -18,7 +18,11 @@ const MonitoringControls: React.FC<MonitoringControlsProps> = ({
   totalMentions = 12847,
 }) => {
   return (
-    <Card padding="sm" variant="glass" className="mb-4 hoverable">
+    <Card
+      padding="sm"
+      variant="glass"
+      className="mb-4 hoverable hover:scale-[1.02] transition-all duration-200"
+    >
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2">
@@ -33,7 +37,7 @@ const MonitoringControls: React.FC<MonitoringControlsProps> = ({
           </div>
           <button
             onClick={onToggleLive}
-            className="flex items-center space-x-2 bg-white/20 hover:bg-white/30 text-white px-3 py-1.5 rounded-lg transition-colors"
+            className="flex items-center space-x-2 bg-white/20 hover:bg-white/30 text-white px-3 py-1.5 rounded-lg hover:scale-[1.02] transition-all duration-200"
           >
             {isLive ? (
               <Pause className="w-4 h-4" />

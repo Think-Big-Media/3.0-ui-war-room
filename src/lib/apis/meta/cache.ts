@@ -11,8 +11,6 @@ interface CacheEntry<T> {
   ttl: number;
 }
 
-}
-
 export class MetaApiCache {
   private cache: Map<string, CacheEntry<any>> = new Map();
   private config: CacheConfig;

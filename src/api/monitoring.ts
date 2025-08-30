@@ -75,3 +75,4 @@ export async function getKeywordMentions(keyword: string, hours: number = 24): P
     throw new Error('Failed to fetch keyword mentions');
   }
   return response.json();
+}

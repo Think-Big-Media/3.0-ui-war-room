@@ -29,3 +29,4 @@ export interface CalendarStats {
   scheduled: number;
   published: number;
   engagement: number;
+}
