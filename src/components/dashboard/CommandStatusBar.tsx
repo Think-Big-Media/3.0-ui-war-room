@@ -15,15 +15,14 @@ const CommandStatusBar: React.FC = () => {
       hour12: false,
       hour: '2-digit',
       minute: '2-digit',
-      second: '2-digit'
-    });
+      second: '2-digit',
+      timeZone: 'America/New_York'
+    }) + ' EST';
   };
 
   return (
     <div className="fixed top-16 left-0 right-0 z-40">
-      <div className="max-w-[1920px] mx-auto px-[15px] max-[1440px]:px-3 max-[1024px]:px-[10px] max-[768px]:px-2 max-[480px]:px-[6px]">
-        <div className="h-14 bg-gray-900/95 backdrop-blur-xl border border-gray-700/50 rounded-lg shadow-2xl">
-          <div className="relative h-full flex items-center justify-center px-6">
+      <div className="relative h-14 flex items-center justify-center px-6 border-t border-b border-white/20">
             {/* Left of center - Platform indicators */}
             <div className="flex items-baseline gap-3 mr-4">
               <div className="flex items-baseline gap-2 bg-green-500/20 px-3 py-1.5 rounded-md border border-green-500/30">
@@ -75,15 +74,11 @@ const CommandStatusBar: React.FC = () => {
               {/* Vertical separator */}
               <div className="h-6 w-px bg-gray-600"></div>
               
-              {/* Time display */}
-              <div className="bg-blue-500/20 px-3 py-1.5 rounded-md border border-blue-500/30">
-                <span className="text-sm font-mono font-bold text-blue-300">
-                  {formatTime(currentTime)}
-                </span>
-              </div>
+              {/* Time display - no container, white text */}
+              <span className="text-sm font-mono font-bold text-white">
+                {formatTime(currentTime)}
+              </span>
             </div>
-          </div>
-        </div>
       </div>
     </div>
   );

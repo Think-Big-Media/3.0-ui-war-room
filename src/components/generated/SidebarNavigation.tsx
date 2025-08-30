@@ -189,7 +189,7 @@ const TopNavigation: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo/Brand - Responsive */}
-          <div className="flex items-center ml-[10px]">
+          <div className="flex items-center ml-[25px]">
             {/* Full logo for large screens */}
             <img
               src="/images/WarRoom_Logo_White.png"

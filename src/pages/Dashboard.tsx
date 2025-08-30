@@ -140,8 +140,8 @@ export default function Dashboard() {
                     height: "88%",
                     objectFit: "contain",
                     objectPosition: "center top",
-                    marginTop: "-5px",
-                    marginLeft: "8px"
+                    marginTop: "20px",
+                    marginLeft: "58px"
                   }}
                 />
                 <div className="map-data" style={{ textAlign: "right", paddingRight: "10px" }}>

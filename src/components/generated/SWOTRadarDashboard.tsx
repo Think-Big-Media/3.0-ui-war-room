@@ -146,10 +146,10 @@ export const SWOTRadarDashboard = () => {
   // @return - 2/3 SWOT radar, 1/3 live intelligence with compact proportions
   return (
     <div className="w-full flex gap-4" style={{ height: '350px' }}>
-      {/* Left Section (2/3) - SWOT Radar Only */}
-      <div className="flex-[2] flex flex-col">
+      {/* Left Section - SWOT Radar Only - Square Container */}
+      <div className="flex-none" style={{ width: '350px', height: '350px' }}>
         {/* SWOT Radar Container - Clean square, no padding, no rounded corners */}
-        <div className="relative overflow-hidden" style={{ height: '350px', aspectRatio: '1/1' }}>
+        <div className="relative overflow-hidden w-full h-full">
           <RadarCanvas dataPoints={dataPoints} onSweepHit={handleSweepHit} />
           
           {/* Active Label Tooltip */}

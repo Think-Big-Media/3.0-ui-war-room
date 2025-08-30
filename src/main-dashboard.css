@@ -571,7 +571,7 @@
       font-size: 15px;
       opacity: 1;
       filter: blur(0px);
-      color: #e2e8f0;
+      color: #ffffff;
       z-index: 100;
       font-weight: 600;
     }
@@ -581,7 +581,7 @@
       font-size: 14px;
       opacity: 0.9;
       filter: blur(0.5px);
-      color: #cbd5e1;
+      color: #ffffff;
       z-index: 90;
     }
     20% {
@@ -590,7 +590,7 @@
       font-size: 12px;
       opacity: 0.7;
       filter: blur(2px);
-      color: #94a3b8;
+      color: #ffffff;
       z-index: 50;
     }
     30% {
@@ -599,7 +599,7 @@
       font-size: 10px;
       opacity: 0.5;
       filter: blur(3px);
-      color: #64748b;
+      color: #ffffff;
       z-index: 20;
     }
     40% {
@@ -608,7 +608,7 @@
       font-size: 9px;
       opacity: 0.3;
       filter: blur(4px);
-      color: #475569;
+      color: #ffffff;
       z-index: 5;
     }
     50% {
@@ -616,7 +616,7 @@
       font-size: 8px;
       opacity: 0.2;
       filter: blur(5px);
-      color: #334155;
+      color: #ffffff;
       z-index: 1;
     }
     60% {
@@ -625,7 +625,7 @@
       font-size: 9px;
       opacity: 0.3;
       filter: blur(4px);
-      color: #475569;
+      color: #ffffff;
       z-index: 5;
     }
     70% {
@@ -634,7 +634,7 @@
       font-size: 10px;
       opacity: 0.5;
       filter: blur(3px);
-      color: #64748b;
+      color: #ffffff;
       z-index: 20;
     }
     80% {
@@ -643,7 +643,7 @@
       font-size: 12px;
       opacity: 0.7;
       filter: blur(2px);
-      color: #94a3b8;
+      color: #ffffff;
       z-index: 50;
     }
     90% {
@@ -652,7 +652,7 @@
       font-size: 14px;
       opacity: 0.9;
       filter: blur(0.5px);
-      color: #cbd5e1;
+      color: #ffffff;
       z-index: 90;
     }
     100% {
@@ -660,7 +660,7 @@
       font-size: 15px;
       opacity: 1;
       filter: blur(0px);
-      color: #e2e8f0;
+      color: #ffffff;
       z-index: 100;
       font-weight: 600;
     }
