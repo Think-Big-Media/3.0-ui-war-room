@@ -13,12 +13,13 @@
   ) !important;
 }
 
-/* Dark Slate Theme - The dark theme you've been using all day */
+/* Dark Slate Theme - Very dark charcoal/black */
 .war-room-dark-slate {
   background: linear-gradient(135deg, 
-    #1e293b 0%,     /* slate-800 */
-    #0f172a 25%,    /* slate-900 */
-    #020617 75%,    /* slate-950 */
+    #0f172a 0%,     /* slate-900 */
+    #020617 25%,    /* slate-950 */
+    #000000 50%,    /* black */
+    #111111 75%,    /* very dark gray */
     #000000 100%    /* black */
   ) !important;
 }
@@ -26,122 +27,130 @@
 /* Tactical Camo - Beautiful woodland camouflage with gorgeous green diagonal */
 .war-room-tactical-camo {
   background: 
-    /* Primary gorgeous green diagonal stripes - the signature pattern */
+    /* EXTRA DARK DIAGONAL CROSSING - especially middle and bottom-right */
+    linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.6) 25%,
+      rgba(0, 0, 0, 0.7) 50%,
+      rgba(0, 0, 0, 0.8) 75%,
+      rgba(0, 0, 0, 0.9) 100%
+    ),
+    /* Primary green diagonal stripes - DESATURATED & DARKER */
     repeating-linear-gradient(
       45deg,
-      rgba(34, 197, 94, 0.25) 0px,
-      rgba(34, 197, 94, 0.25) 12px,
-      transparent 12px,
-      transparent 24px
+      rgba(15, 80, 35, 0.4) 0px,
+      rgba(15, 80, 35, 0.4) 60px,
+      transparent 60px,
+      transparent 120px
     ),
-    /* Secondary diagonal stripes for depth */
+    /* Secondary diagonal stripes - DESATURATED & DARKER */
     repeating-linear-gradient(
       135deg,
-      rgba(22, 163, 74, 0.2) 0px,
-      rgba(22, 163, 74, 0.2) 8px,
-      transparent 8px,
-      transparent 16px
+      rgba(20, 60, 30, 0.35) 0px,
+      rgba(20, 60, 30, 0.35) 40px,
+      transparent 40px,
+      transparent 80px
     ),
-    /* Brown/tan diagonal overlay for realism */
+    /* Brown/tan diagonal overlay for realism - BIGGER */
     repeating-linear-gradient(
       -30deg,
-      rgba(146, 64, 14, 0.15) 0px,
-      rgba(146, 64, 14, 0.15) 16px,
-      transparent 16px,
-      transparent 32px
+      rgba(146, 64, 14, 0.2) 0px,
+      rgba(146, 64, 14, 0.2) 80px,
+      transparent 80px,
+      transparent 160px
     ),
-    /* Organic camouflage patches - dark green */
+    /* Large organic camouflage patches - DESATURATED & DARKER */
     radial-gradient(
-      ellipse 120px 80px at 15% 25%,
-      rgba(20, 83, 45, 0.4) 0%,
-      rgba(21, 128, 61, 0.2) 50%,
+      ellipse 300px 200px at 15% 25%,
+      rgba(10, 40, 20, 0.5) 0%,
+      rgba(15, 50, 25, 0.3) 50%,
       transparent 80%
     ),
     radial-gradient(
-      ellipse 150px 100px at 85% 75%,
-      rgba(22, 101, 52, 0.35) 0%,
-      rgba(34, 197, 94, 0.15) 40%,
+      ellipse 400px 250px at 85% 75%,
+      rgba(12, 45, 22, 0.45) 0%,
+      rgba(18, 55, 28, 0.25) 40%,
       transparent 75%
     ),
     radial-gradient(
-      ellipse 100px 120px at 50% 10%,
-      rgba(21, 128, 61, 0.3) 0%,
+      ellipse 250px 300px at 50% 10%,
+      rgba(8, 35, 18, 0.4) 0%,
       transparent 60%
     ),
     radial-gradient(
-      ellipse 130px 90px at 70% 90%,
-      rgba(16, 185, 129, 0.2) 0%,
+      ellipse 350px 220px at 70% 90%,
+      rgba(10, 42, 25, 0.3) 0%,
       transparent 70%
     ),
-    /* Olive/brown patches for contrast */
+    /* Large olive/brown patches for contrast - BIGGER */
     radial-gradient(
-      ellipse 80px 60px at 30% 80%,
+      ellipse 200px 150px at 30% 80%,
       rgba(120, 113, 108, 0.25) 0%,
       transparent 60%
     ),
     radial-gradient(
-      ellipse 90px 110px at 90% 30%,
+      ellipse 220px 280px at 90% 30%,
       rgba(161, 98, 7, 0.2) 0%,
       transparent 65%
     ),
-    /* Rich woodland base gradient */
+    /* MUCH DARKER woodland base gradient */
     linear-gradient(135deg,
-      #14532d 0%,     /* green-900 */
-      #166534 20%,    /* green-800 */
-      #15803d 40%,    /* green-700 */
-      #16a34a 60%,    /* green-600 */
-      #22c55e 80%,    /* green-500 */
-      #15803d 100%    /* green-700 */
+      #052e16 0%,     /* green-950 */
+      #14532d 25%,    /* green-900 */
+      #166534 50%,    /* green-800 */
+      #15803d 75%,    /* green-700 */
+      #166534 100%    /* green-800 */
     ) !important;
 }
 
-/* Digital Camo - Pixelated military pattern with gray/green tones */
+/* Digital Camo - Pixelated military pattern with gray/green tones - MUCH BIGGER */
 .war-room-digital-camo {
   background: 
-    /* Large digital blocks - primary pattern */
+    /* Large digital blocks - primary pattern - MUCH BIGGER */
     repeating-linear-gradient(
       0deg,
       rgba(75, 85, 99, 0.3) 0px,
-      rgba(75, 85, 99, 0.3) 20px,
-      transparent 20px,
-      transparent 40px
+      rgba(75, 85, 99, 0.3) 80px,
+      transparent 80px,
+      transparent 160px
     ),
     repeating-linear-gradient(
       90deg,
       rgba(55, 65, 81, 0.25) 0px,
-      rgba(55, 65, 81, 0.25) 20px,
-      transparent 20px,
-      transparent 40px
+      rgba(55, 65, 81, 0.25) 80px,
+      transparent 80px,
+      transparent 160px
     ),
-    /* Medium digital blocks - secondary pattern */
+    /* Medium digital blocks - secondary pattern - BIGGER */
     repeating-linear-gradient(
       45deg,
       rgba(107, 114, 128, 0.2) 0px,
-      rgba(107, 114, 128, 0.2) 12px,
-      transparent 12px,
-      transparent 24px
+      rgba(107, 114, 128, 0.2) 50px,
+      transparent 50px,
+      transparent 100px
     ),
-    /* Small digital noise for texture */
+    /* Digital noise for texture - BIGGER */
     repeating-linear-gradient(
       0deg,
       transparent 0px,
-      rgba(156, 163, 175, 0.08) 2px,
-      transparent 4px
+      rgba(156, 163, 175, 0.08) 8px,
+      transparent 16px
     ),
     repeating-linear-gradient(
       90deg,
       transparent 0px,
-      rgba(209, 213, 219, 0.06) 2px,
-      transparent 4px
+      rgba(209, 213, 219, 0.06) 8px,
+      transparent 16px
     ),
-    /* Subtle green military accents */
+    /* Large green military accent patches - MUCH BIGGER */
     radial-gradient(
-      ellipse 100px 60px at 25% 75%,
+      ellipse 300px 180px at 25% 75%,
       rgba(34, 197, 94, 0.15) 0%,
       transparent 70%
     ),
     radial-gradient(
-      ellipse 80px 80px at 75% 25%,
+      ellipse 250px 250px at 75% 25%,
       rgba(22, 163, 74, 0.12) 0%,
       transparent 60%
     ),
