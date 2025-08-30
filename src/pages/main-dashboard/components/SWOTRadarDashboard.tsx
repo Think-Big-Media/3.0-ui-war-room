@@ -25,14 +25,12 @@ export const SWOTRadarDashboard = () => {
   const [dataPoints, setDataPoints] = useState<SWOTDataPoint[]>([]);
   const [isConnected, setIsConnected] = useState(false);
   const [crisisAlerts, setCrisisAlerts] = useState<CrisisAlert[]>([]);
-  const [sweepAngle, setSweepAngle] = useState(0);
   const [activeLabel, setActiveLabel] = useState<{
     point: SWOTDataPoint;
     x: number;
     y: number;
   } | null>(null);
   const wsRef = useRef<WebSocket | null>(null);
-  const sweepIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Mock data for demonstration
   const mockDataPoints: SWOTDataPoint[] = [{
@@ -77,18 +75,7 @@ export const SWOTRadarDashboard = () => {
     source: 'Industry Reports'
   }];
 
-  // Initialize sweep animation
-  useEffect(() => {
-    sweepIntervalRef.current = setInterval(() => {
-      setSweepAngle(prev => (prev + 1) % 360);
-    }, 33.33); // 12-second cycle: 360 degrees / 12 seconds = 30 degrees/second, at 30fps = 1 degree per frame
-
-    return () => {
-      if (sweepIntervalRef.current) {
-        clearInterval(sweepIntervalRef.current);
-      }
-    };
-  }, []);
+  // Sweep animation is now handled inside RadarCanvas with requestAnimationFrame
 
   // Initialize mock data
   useEffect(() => {
@@ -152,7 +139,7 @@ export const SWOTRadarDashboard = () => {
         <div className="flex justify-center">
           <div className="w-full max-w-4xl">
             <div className="relative bg-white/70 dark:bg-slate-900/70 backdrop-blur-sm border border-slate-200/60 dark:border-slate-700/60 rounded-2xl p-8 shadow-xl shadow-slate-200/20 dark:shadow-slate-900/20">
-              <RadarCanvas dataPoints={dataPoints} sweepAngle={sweepAngle} onSweepHit={handleSweepHit} />
+              <RadarCanvas dataPoints={dataPoints} onSweepHit={handleSweepHit} />
               
               {activeLabel && <div className="absolute bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/60 rounded-xl p-4 shadow-2xl z-[1060] max-w-xs animate-fadeIn" style={{
               left: activeLabel.x + 10,

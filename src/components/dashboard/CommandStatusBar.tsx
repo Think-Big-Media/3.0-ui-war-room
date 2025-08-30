@@ -1,185 +1,86 @@
 import React, { useState, useEffect } from 'react';
-import { Activity, AlertCircle, CheckCircle2, Clock, Cpu, Database, Globe, Zap } from 'lucide-react';
-
-interface StatusMetric {
-  label: string;
-  value: string | number;
-  status: 'success' | 'warning' | 'error' | 'neutral';
-  icon?: React.ReactNode;
-}
-
-interface CommandStatus {
-  activeProcesses: number;
-  systemHealth: 'healthy' | 'degraded' | 'critical';
-  apiLatency: number;
-  dbConnections: number;
-  activeUsers: number;
-  lastUpdate: Date;
-}
 
 const CommandStatusBar: React.FC = () => {
-  const [status, setStatus] = useState<CommandStatus>({
-    activeProcesses: 12,
-    systemHealth: 'healthy',
-    apiLatency: 45,
-    dbConnections: 8,
-    activeUsers: 247,
-    lastUpdate: new Date()
-  });
+  const [currentTime, setCurrentTime] = useState(new Date());
 
-  const [isLive, setIsLive] = useState(true);
-
-  // Simulate real-time updates
   useEffect(() => {
-    if (!isLive) return;
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
-    const interval = setInterval(() => {
-      setStatus(prev => ({
-        activeProcesses: Math.max(5, prev.activeProcesses + Math.floor(Math.random() * 5 - 2)),
-        systemHealth: Math.random() > 0.9 ? 'degraded' : 'healthy',
-        apiLatency: Math.max(20, Math.min(200, prev.apiLatency + Math.floor(Math.random() * 20 - 10))),
-        dbConnections: Math.max(3, Math.min(20, prev.dbConnections + Math.floor(Math.random() * 3 - 1))),
-        activeUsers: Math.max(100, prev.activeUsers + Math.floor(Math.random() * 10 - 5)),
-        lastUpdate: new Date()
-      }));
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [isLive]);
-
-  const getHealthColor = (health: string) => {
-    switch (health) {
-      case 'healthy': return 'text-green-400';
-      case 'degraded': return 'text-yellow-400';
-      case 'critical': return 'text-red-400';
-      default: return 'text-gray-400';
-    }
-  };
-
-  const getHealthIcon = (health: string) => {
-    switch (health) {
-      case 'healthy': return <CheckCircle2 className="w-4 h-4" />;
-      case 'degraded': return <AlertCircle className="w-4 h-4" />;
-      case 'critical': return <AlertCircle className="w-4 h-4" />;
-      default: return <Activity className="w-4 h-4" />;
-    }
-  };
-
-  const metrics: StatusMetric[] = [
-    {
-      label: 'System Health',
-      value: status.systemHealth.toUpperCase(),
-      status: status.systemHealth === 'healthy' ? 'success' : status.systemHealth === 'degraded' ? 'warning' : 'error',
-      icon: getHealthIcon(status.systemHealth)
-    },
-    {
-      label: 'Active Processes',
-      value: status.activeProcesses,
-      status: status.activeProcesses > 20 ? 'warning' : 'success',
-      icon: <Cpu className="w-4 h-4" />
-    },
-    {
-      label: 'API Latency',
-      value: `${status.apiLatency}ms`,
-      status: status.apiLatency > 100 ? 'warning' : status.apiLatency > 150 ? 'error' : 'success',
-      icon: <Zap className="w-4 h-4" />
-    },
-    {
-      label: 'DB Connections',
-      value: `${status.dbConnections}/20`,
-      status: status.dbConnections > 15 ? 'warning' : 'success',
-      icon: <Database className="w-4 h-4" />
-    },
-    {
-      label: 'Active Users',
-      value: status.activeUsers.toLocaleString(),
-      status: 'neutral',
-      icon: <Globe className="w-4 h-4" />
-    }
-  ];
-
-  const getStatusColor = (status: StatusMetric['status']) => {
-    switch (status) {
-      case 'success': return 'text-green-400 bg-green-400/10 border-green-400/20';
-      case 'warning': return 'text-yellow-400 bg-yellow-400/10 border-yellow-400/20';
-      case 'error': return 'text-red-400 bg-red-400/10 border-red-400/20';
-      default: return 'text-gray-300 bg-gray-400/5 border-gray-400/10';
-    }
+  const formatTime = (date: Date) => {
+    return date.toLocaleTimeString('en-US', {
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
   };
 
   return (
-    <div className="w-full bg-gradient-to-r from-gray-900/95 via-gray-800/95 to-gray-900/95 backdrop-blur-lg border-b border-gray-700/50 shadow-2xl">
-      <div className="max-w-full mx-auto px-4 py-3">
-        {/* Header Row */}
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2">
-              <div className="relative">
-                <div className={`w-2 h-2 rounded-full ${getHealthColor(status.systemHealth)} animate-pulse`} />
-                <div className={`absolute inset-0 w-2 h-2 rounded-full ${getHealthColor(status.systemHealth)} animate-ping`} />
+    <div className="fixed top-16 left-0 right-0 z-40">
+      <div className="max-w-[1920px] mx-auto px-[15px] max-[1440px]:px-3 max-[1024px]:px-[10px] max-[768px]:px-2 max-[480px]:px-[6px]">
+        <div className="h-14 bg-gray-900/95 backdrop-blur-xl border border-gray-700/50 rounded-lg shadow-2xl">
+          <div className="relative h-full flex items-center justify-center px-6">
+            {/* Left of center - Platform indicators */}
+            <div className="flex items-baseline gap-3 mr-4">
+              <div className="flex items-baseline gap-2 bg-green-500/20 px-3 py-1.5 rounded-md border border-green-500/30">
+                <span className="text-xs text-green-400 leading-none">●</span>
+                <span className="text-xs text-green-300 font-medium font-barlow leading-none">Meta</span>
               </div>
-              <span className="text-sm font-medium text-gray-300">Command Center Status</span>
+              <div className="flex items-baseline gap-2 bg-blue-500/20 px-3 py-1.5 rounded-md border border-blue-500/30">
+                <span className="text-xs text-blue-400 leading-none">●</span>
+                <span className="text-xs text-blue-300 font-medium font-barlow leading-none">Google</span>
+              </div>
+              <div className="flex items-baseline gap-2 bg-purple-500/20 px-3 py-1.5 rounded-md border border-purple-500/30">
+                <span className="text-xs text-purple-400 leading-none">●</span>
+                <span className="text-xs text-purple-300 font-medium font-barlow leading-none">Social</span>
+              </div>
+              <div className="flex items-baseline gap-2 bg-orange-500/20 px-3 py-1.5 rounded-md border border-orange-500/30">
+                <span className="text-xs text-orange-400 leading-none">●</span>
+                <span className="text-xs text-orange-300 font-medium font-barlow leading-none">Analytics</span>
+              </div>
             </div>
-            <span className="text-xs text-gray-500">|</span>
-            <div className="flex items-center gap-1.5 text-xs text-gray-400">
-              <Clock className="w-3.5 h-3.5" />
-              <span>Last updated: {status.lastUpdate.toLocaleTimeString()}</span>
-            </div>
-          </div>
-          
-          {/* Live/Mock Toggle */}
-          <button
-            onClick={() => setIsLive(!isLive)}
-            className={`px-3 py-1 text-xs font-medium rounded-full transition-all ${
-              isLive 
-                ? 'bg-green-400/20 text-green-400 border border-green-400/30' 
-                : 'bg-gray-600/20 text-gray-400 border border-gray-600/30'
-            }`}
-          >
-            {isLive ? 'LIVE' : 'MOCK'}
-          </button>
-        </div>
-
-        {/* Metrics Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-          {metrics.map((metric, index) => (
-            <div
-              key={index}
-              className={`
-                relative group cursor-pointer
-                px-3 py-2.5 rounded-lg border backdrop-blur-sm
-                transition-all duration-300 ease-out
-                hover:scale-105 hover:shadow-lg
-                ${getStatusColor(metric.status)}
-              `}
-            >
-              <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <div className="text-xs text-gray-400 mb-1">{metric.label}</div>
-                  <div className="text-lg font-bold tracking-tight">{metric.value}</div>
-                </div>
-                <div className="opacity-60 group-hover:opacity-100 transition-opacity">
-                  {metric.icon}
-                </div>
+            
+            {/* Center separator */}
+            <div className="h-6 w-px bg-gray-600"></div>
+            
+            {/* Right of center - Metrics */}
+            <div className="flex items-baseline gap-3 ml-4">
+              <div className="bg-gray-700/50 px-3 py-1.5 rounded-md border border-gray-600/50 flex items-baseline">
+                <span className="text-xs font-bold text-white font-jetbrains leading-none">236</span>
+                <span className="text-xs text-gray-400 ml-1.5 font-barlow leading-none">Mentions</span>
               </div>
               
-              {/* Animated background gradient on hover */}
-              <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+              <div className="bg-orange-500/20 px-3 py-1.5 rounded-md border border-orange-500/30 flex items-baseline">
+                <span className="text-xs font-bold text-orange-400 font-jetbrains leading-none">9</span>
+                <span className="text-xs text-orange-300 ml-1.5 font-barlow leading-none">Alerts</span>
+              </div>
+              
+              <div className="bg-green-500/20 px-3 py-1.5 rounded-md border border-green-500/30 hidden lg:flex items-baseline">
+                <span className="text-xs font-bold text-green-400 font-jetbrains leading-none">18</span>
+                <span className="text-xs text-green-300 ml-1.5 font-barlow leading-none">Opportunities</span>
+              </div>
+              
+              <div className="bg-red-500/20 px-3 py-1.5 rounded-md border border-red-500/30 hidden xl:flex items-baseline">
+                <span className="text-xs font-bold text-red-400 font-jetbrains leading-none">3</span>
+                <span className="text-xs text-red-300 ml-1.5 font-barlow leading-none">Threats</span>
+              </div>
             </div>
-          ))}
-        </div>
-
-        {/* Command Line Preview */}
-        <div className="mt-3 p-2 bg-black/40 rounded-lg border border-gray-700/50">
-          <div className="flex items-center gap-2">
-            <span className="text-green-400 text-xs font-mono">$</span>
-            <span className="text-gray-400 text-xs font-mono flex-1">
-              war-room status --monitor --interval=3s
-            </span>
-            <div className="flex gap-1">
-              <div className="w-2 h-2 rounded-full bg-red-500" />
-              <div className="w-2 h-2 rounded-full bg-yellow-500" />
-              <div className="w-2 h-2 rounded-full bg-green-500" />
+            
+            {/* Far right - Time display */}
+            <div className="absolute right-6 flex items-center gap-4">
+              {/* Vertical separator */}
+              <div className="h-6 w-px bg-gray-600"></div>
+              
+              {/* Time display */}
+              <div className="bg-blue-500/20 px-3 py-1.5 rounded-md border border-blue-500/30">
+                <span className="text-sm font-mono font-bold text-blue-300">
+                  {formatTime(currentTime)}
+                </span>
+              </div>
             </div>
           </div>
         </div>

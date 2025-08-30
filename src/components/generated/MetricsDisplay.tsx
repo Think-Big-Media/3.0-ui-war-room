@@ -24,27 +24,23 @@ const METRICS_DATA = [{
 // @component: MetricsDisplay
 export const MetricsDisplay = () => {
   // @return
-  return <div className="flex items-center gap-4">
-      {METRICS_DATA.map((metric, index) => <div key={metric.label} className="flex items-center gap-2">
-          {index > 0 && <span className="text-gray-500 mx-2" style={{
-        textShadow: '0 0 4px rgba(255,255,255,0.2)'
-      }}>
-              |
-            </span>}
+  return <div className="flex items-center">
+      {METRICS_DATA.map((metric, index) => (
+        <div key={metric.label} className="flex items-center">
+          {index > 0 && (
+            <span className="text-gray-600 mx-3 text-xs">|</span>
+          )}
           
-          <span className={`text-sm font-mono ${metric.color}`} style={{
-        textShadow: `0 0 8px ${metric.glow}`,
-        fontFamily: 'JetBrains Mono, monospace'
-      }}>
-            {metric.value}
-          </span>
-          
-          <span className="text-sm font-mono text-gray-400" style={{
-        textShadow: '0 0 6px rgba(255,255,255,0.2)',
-        fontFamily: 'JetBrains Mono, monospace'
-      }}>
-            {metric.label}
-          </span>
-        </div>)}
+          <div className="flex items-center gap-1.5">
+            <span className={`text-xs font-semibold ${metric.color}`}>
+              {metric.value}
+            </span>
+            
+            <span className="text-xs text-gray-400">
+              {metric.label}
+            </span>
+          </div>
+        </div>
+      ))}
     </div>;
 };

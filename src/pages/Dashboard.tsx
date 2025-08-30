@@ -5,9 +5,13 @@ import { SWOTRadarDashboard } from "../components/generated/SWOTRadarDashboard";
 import { IntelligencePanel } from "../components/generated/IntelligencePanel";
 import { StatusBar } from "../components/generated/StatusBar";
 import CommandStatusBar from "../components/dashboard/CommandStatusBar";
+import { Zap, Radio, PenTool, TrendingUp, Smartphone, AlertTriangle } from "lucide-react";
 import "../main-dashboard.css";
 
 export default function Dashboard() {
+  console.log('🏠 [DASHBOARD PAGE] Rendering at', window.location.pathname);
+  console.log('🔄 [DASHBOARD] Component render at', performance.now());
+  
   const { baseClass, overlayClass } = useBackgroundClasses();
   
   // Mock data for Intelligence Panel - 15 total to fill taller container (added 3 more)
@@ -112,21 +116,11 @@ export default function Dashboard() {
       <div className={`fixed inset-0 ${baseClass} -z-10`} />
       {overlayClass && <div className={`fixed inset-0 ${overlayClass} -z-10`} />}
       
-      {/* Command Status Bar - Below top nav, above content */}
-      <div className="relative z-10">
-        <CommandStatusBar />
-      </div>
+      {/* Command Status Bar - Compact format matching upload */}
+      <CommandStatusBar />
       
-      {/* Original Status Bar */}
-      <StatusBar />
-      
-      <div className="30-aug-dashboard war-room-dashboard" style={{ paddingTop: '20px' }}>
-      <div
-        style={{
-          fontFamily:
-            '-apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", sans-serif',
-        }}
-      >
+      <div className="30-aug-dashboard war-room-dashboard font-barlow" style={{ paddingTop: '47px' }}>
+      <div>
       {/* Main Dashboard Wrapper */}
       <div className="dashboard-wrapper">
         <div className="dashboard">
@@ -134,40 +128,32 @@ export default function Dashboard() {
           <div className="left-column">
             {/* Political Map - NO TITLE */}
             <div className="card political-map">
-              <div className="map-container">
-                <div className="map-visual">
-                  {/* Political Map Image */}
-                  <img
-                    src="https://p129.p0.n0.cdn.zight.com/items/BluAK9rN/cb190d20-eec7-4e05-8969-259b1dbd9d69.png?source=client&v=6826eb6cb151acf76bf79d55b23b9628"
-                    alt="Political Map"
-                    className="electoral-map-svg"
-                    style={{
-                      width: "80%",
-                      height: "80%",
-                      objectFit: "contain",
-                      objectPosition: "center top",
-                      marginTop: "-30px",
-                    }}
-                  />
-                </div>
+              <div className="map-container" style={{ display: 'grid', gridTemplateColumns: '460px 1fr', gap: '10px' }}>
+                {/* Political Map Image - Direct without wrapper */}
+                <img
+                  src="https://p129.p0.n0.cdn.zight.com/items/BluAK9rN/cb190d20-eec7-4e05-8969-259b1dbd9d69.png?source=client&v=6826eb6cb151acf76bf79d55b23b9628"
+                  alt="Political Map"
+                  className="electoral-map-svg"
+                  style={{
+                    width: "88%",
+                    height: "88%",
+                    objectFit: "contain",
+                    objectPosition: "center top",
+                    marginTop: "-5px",
+                    marginLeft: "8px"
+                  }}
+                />
                 <div className="map-data" style={{ textAlign: "right", paddingRight: "10px" }}>
-                  <div
-                    style={{
-                      fontSize: "9px",
-                      color: "#64748b",
-                      marginBottom: "5px",
-                      textAlign: "right",
-                    }}
-                  >
+                  <div className="text-[9px] text-white/60 mb-1 text-right uppercase font-semibold tracking-wider truncate font-barlow">
                     SWING STATES
                   </div>
-                  <div className="map-data-item" style={{ lineHeight: "1.3", textAlign: "right" }}>Pennsylvania: +2.3% D</div>
-                  <div className="map-data-item" style={{ lineHeight: "1.3", textAlign: "right" }}>Michigan: -1.2% R</div>
-                  <div className="map-data-item" style={{ lineHeight: "1.3", textAlign: "right" }}>Wisconsin: TOSS UP</div>
-                  <div className="map-data-item" style={{ lineHeight: "1.3", textAlign: "right" }}>Arizona: +0.8% R</div>
-                  <div className="map-data-item" style={{ lineHeight: "1.3", textAlign: "right" }}>Georgia: +1.5% D</div>
-                  <div className="map-data-item" style={{ lineHeight: "1.3", textAlign: "right" }}>Nevada: TOSS UP</div>
-                  <div className="map-data-item" style={{ lineHeight: "1.3", textAlign: "right" }}>Florida: +3.2% R</div>
+                  <div className="text-white/75 text-[10px] leading-tight text-right uppercase truncate font-barlow">Pennsylvania: <span className="font-jetbrains">+2.3%</span> D</div>
+                  <div className="text-white/75 text-[10px] leading-tight text-right uppercase truncate font-barlow">Michigan: <span className="font-jetbrains">-1.2%</span> R</div>
+                  <div className="text-white/75 text-[10px] leading-tight text-right uppercase truncate font-barlow">Wisconsin: <span className="font-jetbrains">TOSS UP</span></div>
+                  <div className="text-white/75 text-[10px] leading-tight text-right uppercase truncate font-barlow">Arizona: <span className="font-jetbrains">+0.8%</span> R</div>
+                  <div className="text-white/75 text-[10px] leading-tight text-right uppercase truncate font-barlow">Georgia: <span className="font-jetbrains">+1.5%</span> D</div>
+                  <div className="text-white/75 text-[10px] leading-tight text-right uppercase truncate font-barlow">Nevada: <span className="font-jetbrains">TOSS UP</span></div>
+                  <div className="text-white/75 text-[10px] leading-tight text-right uppercase truncate font-barlow">Florida: <span className="font-jetbrains">+3.2%</span> R</div>
                 </div>
               </div>
             </div>
@@ -175,6 +161,107 @@ export default function Dashboard() {
             {/* Fresh SWOT Radar - Green Square Design */}
             <div className="card fresh-swot-radar">
               <SWOTRadarDashboard />
+            </div>
+
+            {/* Live Intelligence Feed - War Room Style - Moved directly under SWOT radar */}
+            <div className="card">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-barlow font-semibold text-white text-lg">Live Intelligence Feed</h3>
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <span className="font-jetbrains text-xs text-white/70">LIVE</span>
+                </div>
+              </div>
+              
+              <div className="space-y-3">
+                {/* Strength Intelligence */}
+                <div className="relative backdrop-blur-md bg-green-500/20 border border-green-400/30 rounded-lg p-3 hover:bg-green-500/30 transition-all duration-200">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-2 mb-1">
+                        <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                        <span className="font-jetbrains text-xs text-green-200 uppercase tracking-wide">STRENGTH</span>
+                        <span className="font-jetbrains text-xs text-white/50">2m ago</span>
+                      </div>
+                      <p className="font-barlow text-sm text-white">Strong social media engagement on healthcare messaging</p>
+                      <div className="flex items-center space-x-3 mt-2">
+                        <span className="font-jetbrains text-xs text-white/70">Sentiment: +87%</span>
+                        <span className="font-jetbrains text-xs text-white/70">Reach: 23.4K</span>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="font-jetbrains text-lg font-bold text-green-400">+87</div>
+                      <div className="font-jetbrains text-xs text-green-300">Impact Score</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Opportunity Intelligence */}
+                <div className="relative backdrop-blur-md bg-blue-500/20 border border-blue-400/30 rounded-lg p-3 hover:bg-blue-500/30 transition-all duration-200">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-2 mb-1">
+                        <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                        <span className="font-jetbrains text-xs text-blue-200 uppercase tracking-wide">OPPORTUNITY</span>
+                        <span className="font-jetbrains text-xs text-white/50">7m ago</span>
+                      </div>
+                      <p className="font-barlow text-sm text-white">Trending hashtag #CleanEnergyNow gaining momentum</p>
+                      <div className="flex items-center space-x-3 mt-2">
+                        <span className="font-jetbrains text-xs text-white/70">Growth: +142%</span>
+                        <span className="font-jetbrains text-xs text-white/70">Volume: 18.7K</span>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="font-jetbrains text-lg font-bold text-blue-400">+73</div>
+                      <div className="font-jetbrains text-xs text-blue-300">Trend Score</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Weakness Intelligence */}
+                <div className="relative backdrop-blur-md bg-red-500/20 border border-red-400/30 rounded-lg p-3 hover:bg-red-500/30 transition-all duration-200">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-2 mb-1">
+                        <div className="w-2 h-2 bg-red-400 rounded-full"></div>
+                        <span className="font-jetbrains text-xs text-red-200 uppercase tracking-wide">WEAKNESS</span>
+                        <span className="font-jetbrains text-xs text-white/50">12m ago</span>
+                      </div>
+                      <p className="font-barlow text-sm text-white">Low engagement on economic policy posts</p>
+                      <div className="flex items-center space-x-3 mt-2">
+                        <span className="font-jetbrains text-xs text-white/70">Engagement: -34%</span>
+                        <span className="font-jetbrains text-xs text-white/70">Comments: 47</span>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="font-jetbrains text-lg font-bold text-red-400">-42</div>
+                      <div className="font-jetbrains text-xs text-red-300">Alert Level</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Threat Intelligence */}
+                <div className="relative backdrop-blur-md bg-orange-500/20 border border-orange-400/30 rounded-lg p-3 hover:bg-orange-500/30 transition-all duration-200">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-2 mb-1">
+                        <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
+                        <span className="font-jetbrains text-xs text-orange-200 uppercase tracking-wide">THREAT</span>
+                        <span className="font-jetbrains text-xs text-white/50">15m ago</span>
+                      </div>
+                      <p className="font-barlow text-sm text-white">Negative sentiment spike detected in district coverage</p>
+                      <div className="flex items-center space-x-3 mt-2">
+                        <span className="font-jetbrains text-xs text-white/70">Sentiment: -23%</span>
+                        <span className="font-jetbrains text-xs text-white/70">Sources: 12</span>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="font-jetbrains text-lg font-bold text-orange-400">68</div>
+                      <div className="font-jetbrains text-xs text-orange-300">Risk Level</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -185,49 +272,27 @@ export default function Dashboard() {
               <div className="phrase-container">
                 <div className="keywords-section">
                   <div className="keyword-group">
-                    <div
-                      style={{
-                        color: "#94a3b8",
-                        fontWeight: 600,
-                        marginBottom: "6px",
-                        fontSize: "10px",
-                      }}
-                    >
+                    <div className="text-[9px] text-white/60 mb-1 uppercase font-semibold tracking-wider truncate font-barlow">
                       KEYWORDS
                     </div>
-                    <div className="keyword-list">
-                      • Economy
-                      <br />
-                      • Healthcare
-                      <br />• Donald Trump
-                    </div>
+                    <div className="text-white/75 text-[10px] leading-tight uppercase truncate font-barlow">• Economy</div>
+                    <div className="text-white/75 text-[10px] leading-tight uppercase truncate font-barlow">• Healthcare</div>
+                    <div className="text-white/75 text-[10px] leading-tight uppercase truncate font-barlow">• Donald Trump</div>
                   </div>
                   <div className="keyword-group">
-                    <div
-                      style={{
-                        color: "#94a3b8",
-                        fontWeight: 600,
-                        marginBottom: "6px",
-                        fontSize: "10px",
-                      }}
-                    >
+                    <div className="text-[9px] text-white/60 mb-1 uppercase font-semibold tracking-wider truncate font-barlow">
                       RELATED
                     </div>
-                    <div className="keyword-list">
-                      • Inflation
-                      <br />
-                      • Medicare
-                      <br />
-                      • GOP Primary
-                      <br />
-                      • Tax Policy
-                      <br />• Border Security
-                    </div>
+                    <div className="text-white/75 text-[10px] leading-tight uppercase truncate font-barlow">• Inflation</div>
+                    <div className="text-white/75 text-[10px] leading-tight uppercase truncate font-barlow">• Medicare</div>
+                    <div className="text-white/75 text-[10px] leading-tight uppercase truncate font-barlow">• GOP Primary</div>
+                    <div className="text-white/75 text-[10px] leading-tight uppercase truncate font-barlow">• Tax Policy</div>
+                    <div className="text-white/75 text-[10px] leading-tight uppercase truncate font-barlow">• Border Security</div>
                   </div>
                 </div>
                 <div className="phrase-3d">
                   <div className="phrase-carousel">
-                    <div className="phrase-item">
+                    <div className="phrase-item text-white/80 text-sm">
                       Trump leads GOP primary polling by 42 points nationwide
                     </div>
                     <div className="phrase-item">
@@ -265,93 +330,40 @@ export default function Dashboard() {
             {/* Golden Measure Squares */}
             <div className="metric-boxes-container">
               <div className="card metric-box-square">
-                <div
-                  style={{
-                    fontSize: "28px",
-                    fontWeight: 700,
-                    color: "#ef4444",
-                  }}
-                >
+                <div className="text-3xl font-normal text-red-400 font-barlow-condensed">
                   7
                 </div>
-                <div
-                  style={{
-                    fontSize: "10px",
-                    color: "#94a3b8",
-                    textTransform: "uppercase",
-                    marginTop: "8px",
-                    textAlign: "center",
-                  }}
-                >
+                <div className="text-[10px] text-white/60 uppercase mt-2 text-center font-semibold tracking-wider font-barlow">
                   Real-Time
                   <br />
                   Alerts
                 </div>
               </div>
               <div className="card metric-box-square">
-                <div
-                  style={{
-                    fontSize: "28px",
-                    fontWeight: 700,
-                    color: "#3b82f6",
-                  }}
-                >
+                <div className="text-3xl font-normal text-blue-400 font-barlow-condensed">
                   $47.2K
                 </div>
-                <div
-                  style={{
-                    fontSize: "10px",
-                    color: "#94a3b8",
-                    textTransform: "uppercase",
-                    marginTop: "8px",
-                  }}
-                >
-                  Ad Spend
+                <div className="text-[10px] text-white/60 uppercase mt-2 text-center font-semibold tracking-wider font-barlow">
+                  Ad
+                  <br />
+                  Spend
                 </div>
               </div>
               <div className="card metric-box-square">
-                <div
-                  style={{
-                    fontSize: "28px",
-                    fontWeight: 700,
-                    color: "#10b981",
-                  }}
-                >
+                <div className="text-3xl font-normal text-green-400 font-barlow-condensed">
                   2,847
                 </div>
-                <div
-                  style={{
-                    fontSize: "10px",
-                    color: "#94a3b8",
-                    textTransform: "uppercase",
-                    marginTop: "8px",
-                    textAlign: "center",
-                  }}
-                >
+                <div className="text-[10px] text-white/60 uppercase mt-2 text-center font-semibold tracking-wider font-barlow">
                   Mention
                   <br />
                   Volume
                 </div>
               </div>
               <div className="card metric-box-square">
-                <div
-                  style={{
-                    fontSize: "28px",
-                    fontWeight: 700,
-                    color: "#10b981",
-                  }}
-                >
+                <div className="text-3xl font-normal text-green-400 font-barlow-condensed">
                   74%
                 </div>
-                <div
-                  style={{
-                    fontSize: "10px",
-                    color: "#94a3b8",
-                    textTransform: "uppercase",
-                    marginTop: "8px",
-                    textAlign: "center",
-                  }}
-                >
+                <div className="text-[10px] text-white/60 uppercase mt-2 text-center font-semibold tracking-wider font-barlow">
                   Sentiment
                   <br />
                   Score
@@ -360,25 +372,9 @@ export default function Dashboard() {
             </div>
 
             {/* Quick Actions Grid */}
-            <div
-              className="card quick-actions"
-              style={{ padding: 0, overflow: "hidden" }}
-            >
-              <div
-                style={{
-                  background: "#1f2633",
-                  padding: "10px 12px",
-                  borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "11px",
-                    color: "#94a3b8",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.5px",
-                  }}
-                >
+            <div className="card quick-actions" style={{ padding: 0, overflow: "hidden" }}>
+              <div className="bg-white/10 px-3 py-2 border-b border-white/30">
+                <div className="text-xs text-white/60 uppercase font-semibold tracking-wider font-barlow">
                   Quick Actions
                 </div>
               </div>
@@ -390,113 +386,28 @@ export default function Dashboard() {
                   height: "calc(100% - 40px)",
                 }}
               >
-                <div
-                  style={{
-                    background: "#2a3342",
-                    borderRight: "1px solid #1f2633",
-                    borderBottom: "1px solid #1f2633",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "12px",
-                    color: "#ffffff",
-                    cursor: "pointer",
-                    transition: "all 0.2s",
-                    gap: "6px",
-                  }}
-                >
-                  ⚡
+                <div className="bg-white/5 border-r border-b border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/15 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider">
+                  <Zap className="w-4 h-4 text-yellow-400" />
                   Quick Campaign
                 </div>
-                <div
-                  style={{
-                    background: "#2a3342",
-                    borderRight: "1px solid #1f2633",
-                    borderBottom: "1px solid #1f2633",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "12px",
-                    color: "#ffffff",
-                    cursor: "pointer",
-                    transition: "all 0.2s",
-                    gap: "6px",
-                  }}
-                >
-                  📡
+                <div className="bg-white/5 border-r border-b border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/15 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider">
+                  <Radio className="w-4 h-4 text-green-400" />
                   Live Monitor
                 </div>
-                <div
-                  style={{
-                    background: "#2a3342",
-                    borderBottom: "1px solid #1f2633",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "12px",
-                    color: "#ffffff",
-                    cursor: "pointer",
-                    transition: "all 0.2s",
-                    gap: "6px",
-                  }}
-                >
-                  ✏️
+                <div className="bg-black/10 border-b border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/10 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider">
+                  <PenTool className="w-4 h-4 text-blue-400" />
                   Make Content
                 </div>
-                <div
-                  style={{
-                    background: "#2a3342",
-                    borderRight: "1px solid #1f2633",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "12px",
-                    color: "#ffffff",
-                    cursor: "pointer",
-                    transition: "all 0.2s",
-                    gap: "6px",
-                  }}
-                >
-                  📈
+                <div className="bg-black/10 border-r border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/10 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider">
+                  <TrendingUp className="w-4 h-4 text-purple-400" />
                   Trend Ops
                 </div>
-                <div
-                  style={{
-                    background: "#2a3342",
-                    borderRight: "1px solid #1f2633",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "12px",
-                    color: "#ffffff",
-                    cursor: "pointer",
-                    transition: "all 0.2s",
-                    gap: "6px",
-                  }}
-                >
-                  📱
+                <div className="bg-black/10 border-r border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/10 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider">
+                  <Smartphone className="w-4 h-4 text-cyan-400" />
                   Social Media
                 </div>
-                <div
-                  style={{
-                    background: "#2a3342",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "12px",
-                    color: "#ffffff",
-                    cursor: "pointer",
-                    transition: "all 0.2s",
-                    gap: "6px",
-                  }}
-                >
-                  🚨
+                <div className="bg-white/5 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/15 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider">
+                  <AlertTriangle className="w-4 h-4 text-red-400" />
                   Alert Center
                 </div>
               </div>
@@ -504,7 +415,7 @@ export default function Dashboard() {
 
             {/* Performance Metrics Table */}
             <div className="card performance-metrics">
-              <div className="card-title">Performance Metrics</div>
+              <div className="text-xs lg:text-sm text-white/60 mb-3 uppercase font-semibold tracking-wider font-barlow">Performance Metrics</div>
               <div className="metrics-table">
                 <div className="metric-cell">
                   <div className="metric-label">Alert Response</div>
@@ -538,197 +449,7 @@ export default function Dashboard() {
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Social Post Thumbnails - Full Width */}
-          <div className="card social-posts">
-            <div className="card-title">Social Post Thumbnails</div>
-            <div className="social-grid">
-              <div className="social-grid-wrapper">
-                {/* First set */}
-                <div className="social-thumbnail">
-                  <div
-                    style={{
-                      background:
-                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                      height: "100%",
-                    }}
-                  ></div>
-                  <div className="social-overlay">
-                    <div className="social-metrics">
-                      <span>❤️ 2.3K</span>
-                      <span>🔄 847</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="social-thumbnail">
-                  <div
-                    style={{
-                      background:
-                        "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-                      height: "100%",
-                    }}
-                  ></div>
-                  <div className="social-overlay">
-                    <div className="social-metrics">
-                      <span>❤️ 5.1K</span>
-                      <span>🔄 1.2K</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="social-thumbnail">
-                  <div
-                    style={{
-                      background:
-                        "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-                      height: "100%",
-                    }}
-                  ></div>
-                  <div className="social-overlay">
-                    <div className="social-metrics">
-                      <span>❤️ 923</span>
-                      <span>🔄 145</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="social-thumbnail">
-                  <div
-                    style={{
-                      background:
-                        "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
-                      height: "100%",
-                    }}
-                  ></div>
-                  <div className="social-overlay">
-                    <div className="social-metrics">
-                      <span>❤️ 7.8K</span>
-                      <span>🔄 2.9K</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="social-thumbnail">
-                  <div
-                    style={{
-                      background:
-                        "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
-                      height: "100%",
-                    }}
-                  ></div>
-                  <div className="social-overlay">
-                    <div className="social-metrics">
-                      <span>❤️ 3.4K</span>
-                      <span>🔄 562</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="social-thumbnail">
-                  <div
-                    style={{
-                      background:
-                        "linear-gradient(135deg, #30cfd0 0%, #330867 100%)",
-                      height: "100%",
-                    }}
-                  ></div>
-                  <div className="social-overlay">
-                    <div className="social-metrics">
-                      <span>❤️ 8.9K</span>
-                      <span>🔄 2.1K</span>
-                    </div>
-                  </div>
-                </div>
-                {/* Duplicate set for seamless scrolling */}
-                <div className="social-thumbnail">
-                  <div
-                    style={{
-                      background:
-                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                      height: "100%",
-                    }}
-                  ></div>
-                  <div className="social-overlay">
-                    <div className="social-metrics">
-                      <span>❤️ 2.3K</span>
-                      <span>🔄 847</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="social-thumbnail">
-                  <div
-                    style={{
-                      background:
-                        "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-                      height: "100%",
-                    }}
-                  ></div>
-                  <div className="social-overlay">
-                    <div className="social-metrics">
-                      <span>❤️ 5.1K</span>
-                      <span>🔄 1.2K</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="social-thumbnail">
-                  <div
-                    style={{
-                      background:
-                        "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-                      height: "100%",
-                    }}
-                  ></div>
-                  <div className="social-overlay">
-                    <div className="social-metrics">
-                      <span>❤️ 923</span>
-                      <span>🔄 145</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="social-thumbnail">
-                  <div
-                    style={{
-                      background:
-                        "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
-                      height: "100%",
-                    }}
-                  ></div>
-                  <div className="social-overlay">
-                    <div className="social-metrics">
-                      <span>❤️ 7.8K</span>
-                      <span>🔄 2.9K</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="social-thumbnail">
-                  <div
-                    style={{
-                      background:
-                        "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
-                      height: "100%",
-                    }}
-                  ></div>
-                  <div className="social-overlay">
-                    <div className="social-metrics">
-                      <span>❤️ 3.4K</span>
-                      <span>🔄 562</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="social-thumbnail">
-                  <div
-                    style={{
-                      background:
-                        "linear-gradient(135deg, #30cfd0 0%, #330867 100%)",
-                      height: "100%",
-                    }}
-                  ></div>
-                  <div className="social-overlay">
-                    <div className="social-metrics">
-                      <span>❤️ 8.9K</span>
-                      <span>🔄 2.1K</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 

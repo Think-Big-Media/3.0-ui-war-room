@@ -21,7 +21,7 @@ const SYSTEM_STATUSES = [{
 // @component: SystemHealthIndicators
 export const SystemHealthIndicators = () => {
   // @return
-  return <div className="flex items-center gap-5">
+  return <div className="flex items-center gap-4">
       {SYSTEM_STATUSES.map(system => <StatusIndicator key={system.name} name={system.name} status={system.status} type={system.type} />)}
     </div>;
 };

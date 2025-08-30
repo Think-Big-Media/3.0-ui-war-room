@@ -43,9 +43,9 @@
     /* War Room Dashboard Colors - same for dark mode */
     --war-room-background: 220 22% 14%; /* #1a1f2e */
     --war-room-header: 220 20% 19%; /* #252d3d */
-    --war-room-card: 220 18% 22%; /* #2a3342 */
+    --war-room-card: 0 0% 0%; /* rgba(0,0,0,0.2) - glassmorphic */
     --war-room-text: 210 20% 88%; /* #e2e8f0 */
-    --war-room-border: 0 0% 100%; /* rgba(255,255,255,0.08) */
+    --war-room-border: 0 0% 100%; /* rgba(255,255,255,0.3) */
   }
 }
 
@@ -61,7 +61,7 @@
   .war-room-dashboard body {
     font-family:
       -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", sans-serif;
-    background: #1a1f2e;
+    /* Remove opaque background to allow gradient to show through */
     color: #e2e8f0;
     width: 100vw;
     min-height: 100vh;
@@ -69,19 +69,21 @@
     overflow-x: hidden;
   }
 
-  /* Main Dashboard Container */
+  /* Main Dashboard Container - transparent to show gradient */
   .dashboard-wrapper {
     max-width: 1920px;
     margin: 0 auto;
     padding: 15px;
+    background: transparent;
   }
 
-  /* Main Two Equal Columns */
+  /* Main Two Equal Columns - transparent to show gradient */
   .dashboard {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
     width: 100%;
+    background: transparent;
   }
 
   /* Card Base */
@@ -94,10 +96,11 @@
 
   .card-title {
     font-size: 11px;
-    color: #94a3b8;
+    color: rgba(255, 255, 255, 0.6);
     margin-bottom: 8px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    font-weight: 600;
   }
 
   /* Responsive Design - Tablet and Mobile */
@@ -192,16 +195,17 @@
     vertical-align: middle;
   }
 
-  /* Make SWOT radar container much taller */
+  /* Make SWOT radar container compact */
   .fresh-swot-radar {
-    height: 600px !important; /* Double the typical height */
+    height: 420px !important; /* Reduced from 600px to remove dead space */
   }
 
-  /* Left Column Container */
+  /* Left Column Container - transparent */
   .left-column {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    background: transparent;
   }
 
   /* Political Map - Top Left */
@@ -209,6 +213,8 @@
     height: 300px;
     display: flex;
     flex-direction: column;
+    /* Let Tailwind bg-white/10 work properly */
+    /* opacity and filter at default values */
   }
 
   .map-container {
@@ -216,6 +222,7 @@
     display: grid;
     grid-template-columns: 460px 1fr;
     gap: 10px;
+    /* No background override - let parent handle it */
   }
 
   .map-visual {
@@ -226,6 +233,10 @@
     overflow: hidden;
     padding: 10px;
     border-radius: 4px;
+    background: transparent !important;
+    /* Ensure no opacity layers */
+    opacity: 1;
+    filter: none;
   }
 
   .electoral-map-svg {
@@ -476,11 +487,12 @@
     border-left-color: #3b82f6;
   }
 
-  /* Right Column Container */
+  /* Right Column Container - transparent */
   .right-column {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    background: transparent;
   }
 
   /* Phrase Cloud */
@@ -709,7 +721,7 @@
 
   /* Performance Metrics */
   .performance-metrics {
-    height: 215px;
+    height: 280px;
     display: flex;
     flex-direction: column;
   }
@@ -736,12 +748,17 @@
     font-size: 9px;
     color: #64748b;
     margin-bottom: 4px;
+    font-family: 'Barlow', sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
   }
 
   .metric-value {
     font-size: 16px;
     font-weight: 600;
     color: #e2e8f0;
+    font-family: 'JetBrains Mono', monospace;
   }
 
   .metric-trend {
@@ -854,7 +871,7 @@
     
     /* Reduce SWOT radar size on tablets */
     .fresh-swot-radar {
-      height: 400px;
+      height: 350px;
     }
     
     /* Adjust metric boxes for tablets */
@@ -899,7 +916,7 @@
     
     /* Simplify SWOT radar on mobile */
     .fresh-swot-radar {
-      height: 300px;
+      height: 280px;
     }
     
     /* Adjust phrase cloud for mobile */
@@ -969,4 +986,5 @@
       grid-template-columns: repeat(2, 1fr);
     }
   }
+
 }

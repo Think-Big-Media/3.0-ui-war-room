@@ -30,37 +30,15 @@ export const TimeAndMetrics = () => {
   };
 
   // @return
-  return <div className="flex items-center gap-4">
-      <div className="hidden md:block">
-        <MetricsDisplay />
-      </div>
+  return <div className="flex items-center">
+      <MetricsDisplay />
       
-      <span className="text-gray-500 hidden md:block" style={{
-      textShadow: '0 0 4px rgba(255,255,255,0.2)'
-    }}>
-        |
+      <span className="text-gray-600 mx-3 text-xs">|</span>
+      
+      <span className="text-xs text-gray-300" style={{
+        fontFamily: 'JetBrains Mono, monospace'
+      }}>
+        {formatTime(currentTime)}
       </span>
-      
-      <div className="flex items-center gap-2">
-        <span className="text-sm font-mono text-gray-200" style={{
-        textShadow: '0 0 8px rgba(255,255,255,0.4)',
-        fontFamily: 'JetBrains Mono, monospace'
-      }}>
-          {formatTime(currentTime)}
-        </span>
-        
-        <span className="text-sm text-gray-400" style={{
-        textShadow: '0 0 6px rgba(255,255,255,0.2)'
-      }}>
-          •
-        </span>
-        
-        <span className="text-sm font-mono text-gray-300 whitespace-nowrap" style={{
-        textShadow: '0 0 8px rgba(255,255,255,0.3)',
-        fontFamily: 'JetBrains Mono, monospace'
-      }}>
-          {formatDate(currentTime)}
-        </span>
-      </div>
     </div>;
 };

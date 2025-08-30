@@ -23,14 +23,25 @@ export interface CrisisAlert {
 
 // @component: SWOTRadarDashboard
 export const SWOTRadarDashboard = () => {
-  // Debug: Track renders
+  // Unique instance tracking
+  const instanceId = useRef(`swot-dashboard-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`);
   const renderCountRef = useRef(0);
   renderCountRef.current++;
-  console.log(`🔷 SWOTRadarDashboard RENDER #${renderCountRef.current}`);
+  
+  console.log(`🔷 [GENERATED SWOTRadarDashboard] RENDER #${renderCountRef.current} - Instance: ${instanceId.current}`);
+  
+  // StrictMode detection
+  const strictModeRef = useRef(false);
+  useEffect(() => {
+    if (strictModeRef.current) {
+      console.warn('⚠️ REACT STRICTMODE DOUBLE MOUNT DETECTED!');
+    }
+    strictModeRef.current = true;
+  });
   const [dataPoints, setDataPoints] = useState<SWOTDataPoint[]>([]);
   const [isConnected, setIsConnected] = useState(false);
   const [crisisAlerts, setCrisisAlerts] = useState<CrisisAlert[]>([]);
-  const [sweepAngle, setSweepAngle] = useState(0);
+  // REMOVED sweepAngle state - animation now handled internally in RadarCanvas
   const [activeLabel, setActiveLabel] = useState<{
     point: SWOTDataPoint;
     x: number;
@@ -82,27 +93,7 @@ export const SWOTRadarDashboard = () => {
     source: 'Industry Reports'
   }], []);
 
-  // Initialize sweep animation
-  useEffect(() => {
-    console.log('🟣 SWOTRadarDashboard: Starting sweep interval');
-    let updateCount = 0;
-    sweepIntervalRef.current = setInterval(() => {
-      setSweepAngle(prev => {
-        updateCount++;
-        if (updateCount % 30 === 0) { // Log every 30 updates (about 1 second)
-          console.log(`📊 Sweep angle update #${updateCount}, angle: ${prev}`);
-        }
-        return (prev + 1) % 360;
-      });
-    }, 33.33); // 12-second cycle: 360 degrees / 12 seconds = 30 degrees/second, at 30fps = 1 degree per frame
-
-    return () => {
-      console.log('🟣 SWOTRadarDashboard: Clearing sweep interval');
-      if (sweepIntervalRef.current) {
-        clearInterval(sweepIntervalRef.current);
-      }
-    };
-  }, []);
+  // Sweep animation removed - now handled internally in RadarCanvas with requestAnimationFrame
 
   // Initialize mock data
   useEffect(() => {
@@ -152,14 +143,14 @@ export const SWOTRadarDashboard = () => {
     URL.revokeObjectURL(url);
   };
 
-  // @return - 2/3 SWOT radar, 1/3 live intelligence with proper proportions
+  // @return - 2/3 SWOT radar, 1/3 live intelligence with compact proportions
   return (
-    <div className="w-full h-full flex gap-4">
-      {/* Left Section (2/3) - SWOT Radar + Stats */}
-      <div className="flex-[2] flex flex-col gap-0 justify-start">
-        {/* SWOT Radar Container - Square with no rounded corners */}
-        <div className="aspect-square relative bg-black overflow-hidden">
-          <RadarCanvas dataPoints={dataPoints} sweepAngle={sweepAngle} onSweepHit={handleSweepHit} />
+    <div className="w-full flex gap-4" style={{ height: '350px' }}>
+      {/* Left Section (2/3) - SWOT Radar Only */}
+      <div className="flex-[2] flex flex-col">
+        {/* SWOT Radar Container - Clean square, no padding, no rounded corners */}
+        <div className="relative overflow-hidden" style={{ height: '350px', aspectRatio: '1/1' }}>
+          <RadarCanvas dataPoints={dataPoints} onSweepHit={handleSweepHit} />
           
           {/* Active Label Tooltip */}
           {activeLabel && (
@@ -187,17 +178,10 @@ export const SWOTRadarDashboard = () => {
             </motion.div>
           )}
         </div>
-        
-        {/* Bottom Stats Section - Outside radar container */}
-        <div className="px-4 py-2 text-sm text-gray-400 bg-gray-900/50 rounded">
-          Active Threats: {dataPoints.filter(p => p.type === 'threat').length} • Opportunities: {dataPoints.filter(p => p.type === 'opportunity').length}
-          <br />
-          Risk Level: Medium
-        </div>
       </div>
       
       {/* Right Section (1/3) - Intelligence Panel */}
-      <div className="flex-1 h-full">
+      <div className="flex-1">
         <IntelligencePanel 
           isConnected={isConnected} 
           dataPoints={dataPoints} 

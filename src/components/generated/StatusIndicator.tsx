@@ -38,32 +38,16 @@ export const StatusIndicator = ({
   };
 
   // @return
-  return <div className="flex items-center gap-1">
-      <motion.div className="flex items-center gap-1" animate={{
-      opacity: [0.4, 1, 0.4]
-    }} transition={{
-      duration: 2.5,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }}>
-        <motion.span className="text-lg leading-none" animate={{
-        textShadow: ['0 0 0px transparent', `0 0 5px ${getDotColor()}`, '0 0 0px transparent'],
-        filter: ['drop-shadow(0 0 0px transparent)', `drop-shadow(0 0 2px ${getDotColor()})`, 'drop-shadow(0 0 0px transparent)']
-      }} transition={{
-        duration: 2.5,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }} style={{
+  return <div className="flex items-center gap-1.5">
+      <span className="text-xs leading-none" style={{
         color: getDotColor()
       }}>
-          ●
-        </motion.span>
-      </motion.div>
+        ●
+      </span>
       
-      <span className="text-sm font-mono text-gray-300" style={{
-      textShadow: '0 0 8px rgba(255,255,255,0.3)',
-      fontFamily: 'JetBrains Mono, monospace'
-    }}>
+      <span className="text-xs text-gray-400" style={{
+        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+      }}>
         {name}
       </span>
     </div>;
