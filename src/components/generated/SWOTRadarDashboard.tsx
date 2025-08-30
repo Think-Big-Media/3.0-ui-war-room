@@ -154,7 +154,7 @@ export const SWOTRadarDashboard = () => {
       x: canvasX,
       y: canvasY
     });
-    setTimeout(() => setActiveLabel(null), 2000); // Fade out after 2 seconds
+    setTimeout(() => setActiveLabel(null), 2500); // Fade out after 2.5 seconds
   };
   
   const handleBlobClick = (point: SWOTDataPoint) => {
@@ -198,18 +198,23 @@ export const SWOTRadarDashboard = () => {
           {/* Active Label - Subtle white pill with dark gray text */}
           {activeLabel && (
             <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="absolute pointer-events-none z-[1060]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.85 }}
+              exit={{ opacity: 0 }}
+              transition={{ 
+                duration: 0.6, 
+                ease: "easeInOut",
+                opacity: { duration: 0.8 }
+              }}
+              className="absolute pointer-events-none z-[1060] flex items-center justify-center"
               style={{
-                left: Math.min(Math.max(10, activeLabel.x - 60), 280), // Keep within container
+                left: Math.min(Math.max(10, activeLabel.x - 80), 240), // Keep within container
                 top: Math.min(Math.max(10, activeLabel.y - 20), 320), // Keep within container
+                width: '140px'
               }}
             >
-              <div className="bg-white/75 backdrop-blur-sm px-2 py-0.5 rounded-full">
-                <div className="text-gray-700 text-[10px] font-medium tracking-wider uppercase">
+              <div className="bg-white/70 backdrop-blur-sm px-3 py-1.5 rounded-full inline-block">
+                <div className="text-gray-600 text-[10px] font-medium tracking-wide uppercase text-center leading-[1.2]">
                   {activeLabel.point.label}
                 </div>
               </div>
