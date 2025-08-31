@@ -226,13 +226,13 @@ class MentionlyticsService {
   // WebSocket for real-time updates (simulated in mock mode)
   subscribeToLiveFeed(callback: (mention: MentionlyticsMention) => void): () => void {
     if (this.isMockMode) {
-      // Simulate live updates every 5-15 seconds
+      // Simulate live updates every 30-60 seconds (much less frequent)
       const interval = setInterval(
         () => {
           const newMention = generateLiveMention();
           callback(newMention);
         },
-        Math.random() * 10000 + 5000
+        Math.random() * 30000 + 30000 // 30-60 seconds instead of 5-15
       );
 
       return () => clearInterval(interval);

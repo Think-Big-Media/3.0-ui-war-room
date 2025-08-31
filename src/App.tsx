@@ -31,6 +31,7 @@ import NotFound from './pages/NotFound';
 // Components
 import { ErrorBoundary } from './components/ErrorBoundary';
 import TickerTape from './components/TickerTape';
+import { NotificationProvider } from './components/shared/NotificationSystem';
 
 // Context Providers
 import { SupabaseAuthProvider } from './contexts/SupabaseAuthContext';
@@ -49,8 +50,9 @@ function App() {
     <>
       <SupabaseAuthProvider>
         <BackgroundThemeProvider>
-          <Router>
-            <ErrorBoundary>
+          <NotificationProvider>
+            <Router>
+              <ErrorBoundary>
               <Routes>
                 {/* Command Center - Fresh 30-Aug with SWOT radar */}
                 <Route path="/" element={<Dashboard />} />
@@ -88,8 +90,9 @@ function App() {
 
               {/* Global Components */}
               <TickerTape />
-            </ErrorBoundary>
-          </Router>
+              </ErrorBoundary>
+            </Router>
+          </NotificationProvider>
         </BackgroundThemeProvider>
       </SupabaseAuthProvider>
     </>

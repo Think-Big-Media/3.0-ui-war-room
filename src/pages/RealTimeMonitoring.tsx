@@ -47,9 +47,9 @@ const RealTimeMonitoring: React.FC = () => {
   // Use live data if available, fallback to mock
   const mentions = useMemo(() => {
     if (liveMentions && liveMentions.length > 0) {
-      // Convert Mentionlytics format to our format
-      return liveMentions.map((mention) => ({
-        id: mention.id,
+      // Convert Mentionlytics format to our format with stable IDs
+      return liveMentions.map((mention, index) => ({
+        id: mention.id || `mention-${index}-${Date.now()}`, // Ensure stable unique ID
         platform: mention.source || 'twitter',
         author: mention.author,
         content: mention.text,

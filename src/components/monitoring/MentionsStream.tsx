@@ -27,11 +27,9 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({ mentions, filters, onFi
     
     const { scrollTop, scrollHeight, clientHeight } = scrollContainerRef.current;
     
-    // Show top gradient if scrolled down from top
-    setShowTopGradient(scrollTop > 10);
-    
-    // Show bottom gradient if not at bottom
-    setShowBottomGradient(scrollTop < scrollHeight - clientHeight - 10);
+    // More stable thresholds to prevent constant updates
+    setShowTopGradient(scrollTop > 30);
+    setShowBottomGradient(scrollTop < scrollHeight - clientHeight - 30);
   };
 
   useEffect(() => {
@@ -39,10 +37,10 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({ mentions, filters, onFi
     if (scrollContainer) {
       // Initial check
       handleScroll();
-      scrollContainer.addEventListener('scroll', handleScroll);
+      scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
       return () => scrollContainer.removeEventListener('scroll', handleScroll);
     }
-  }, [mentions]);
+  }, []); // Remove mentions dependency to prevent re-initialization
   const handleAddToAlert = (mention: Mention) => {
     logger.info('Add mention to alert:', mention.username);
     // Handle adding mention to alert system
@@ -274,11 +272,8 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({ mentions, filters, onFi
                   </div>
 
                   {/* Enhanced text with more context - expanded view */}
-                  <p className="text-base text-white/80 leading-relaxed my-4 whitespace-pre-wrap">
+                  <p className="text-base text-white/80 leading-relaxed my-4 whitespace-pre-wrap min-h-[4rem]">
                     {post.text}
-                    {post.text.length < 100 && (
-                      <span className="text-white/60"> This post discusses key policy positions and has generated significant engagement across social media platforms, indicating strong public interest in the topic.</span>
-                    )}
                   </p>
 
                   {/* Sentiment badges - exact dashboard styling */}
