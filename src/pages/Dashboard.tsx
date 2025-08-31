@@ -1,21 +1,43 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PageLayout from "../components/shared/PageLayout";
 import Card from "../components/shared/Card";
-import { SWOTRadarDashboard } from "../components/generated/SWOTRadarDashboard";
-import { IntelligencePanel } from "../components/generated/IntelligencePanel";
-import { StatusBar } from "../components/generated/StatusBar";
 import CommandStatusBar from "../components/dashboard/CommandStatusBar";
 import InteractivePoliticalMap from "../components/political/InteractivePoliticalMap";
 import SocialMediaPosts from "../components/dashboard/SocialMediaPosts";
-import { Zap, Radio, PenTool, TrendingUp, Smartphone, AlertTriangle } from "lucide-react";
+import { ShareOfVoiceChart } from "../components/mentionlytics/ShareOfVoiceChart";
+import { DualPieCharts } from "../components/mentionlytics/DualPieCharts";
+import { MomentumIndicators } from "../components/mentionlytics/MomentumIndicators";
+import { PlatformDominanceGrid } from "../components/mentionlytics/PlatformDominanceGrid";
+import { InfluencerPowerMatrix } from "../components/mentionlytics/InfluencerPowerMatrix";
+import { CampaignSetupModal } from "../components/mentionlytics/CampaignSetupModal";
+import { Zap, Radio, PenTool, TrendingUp, Smartphone, AlertTriangle, Settings } from "lucide-react";
 import "../main-dashboard.css";
 
 export default function Dashboard() {
   const navigate = useNavigate();
+  const [showSetupModal, setShowSetupModal] = useState(false);
+  const [campaignData, setCampaignData] = useState(null);
   
   console.log('🏠 [DASHBOARD PAGE] Rendering at', window.location.pathname);
   console.log('🔄 [DASHBOARD] Component render at', performance.now());
+
+  // Load campaign data from localStorage
+  useEffect(() => {
+    const stored = localStorage.getItem('warRoomCampaignSetup');
+    if (stored) {
+      setCampaignData(JSON.parse(stored));
+    }
+  }, []);
+
+  const handleOpenSetup = () => {
+    setShowSetupModal(true);
+  };
+
+  const handleSetupComplete = (data: any) => {
+    setCampaignData(data);
+    setShowSetupModal(false);
+  };
 
   const handleQuickActionClick = (action: string) => {
     switch (action) {
@@ -216,190 +238,23 @@ export default function Dashboard() {
               </div>
             </Card>
 
-            {/* Fresh SWOT Radar - Green Square Design */}
-            <Card variant="glass" padding="md" className="fresh-swot-radar hoverable hover:scale-[1.02] transition-all duration-200">
-              <SWOTRadarDashboard />
-            </Card>
+            {/* Mentionlytics Share of Voice Chart */}
+            <ShareOfVoiceChart campaignData={campaignData} />
 
-            {/* Live Intelligence Feed - War Room Style - Moved directly under SWOT radar */}
-            <Card variant="glass" padding="md" className="hoverable hover:scale-[1.02] transition-all duration-200">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="font-barlow font-semibold text-white text-lg">Live Intelligence Feed</h3>
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                  <span className="font-jetbrains text-xs text-white/70">LIVE</span>
-                </div>
-              </div>
-              
-              <div className="space-y-3">
-                {/* Strength Intelligence */}
-                <div 
-                  onClick={() => handleIntelligenceFeedClick('strength', 'healthcare messaging')}
-                  className="relative backdrop-blur-md bg-green-500/20 border border-green-400/30 rounded-lg p-3 hover:bg-green-500/30 cursor-pointer transform transition-all duration-200 hover:scale-[1.02] hover:border-green-400/50"
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-2 mb-1">
-                        <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                        <span className="font-jetbrains text-xs text-green-200 uppercase tracking-wide">STRENGTH</span>
-                        <span className="font-jetbrains text-xs text-white/50">2m ago</span>
-                      </div>
-                      <p className="font-barlow text-sm text-white">Strong social media engagement on healthcare messaging</p>
-                      <div className="flex items-center space-x-3 mt-2">
-                        <span className="font-jetbrains text-xs text-white/70">Sentiment: +87%</span>
-                        <span className="font-jetbrains text-xs text-white/70">Reach: 23.4K</span>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="font-jetbrains text-lg font-bold text-green-400">+87</div>
-                      <div className="font-jetbrains text-xs text-green-300">Impact Score</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Opportunity Intelligence */}
-                <div 
-                  onClick={() => handleIntelligenceFeedClick('opportunity', 'clean energy hashtag')}
-                  className="relative backdrop-blur-md bg-blue-500/20 border border-blue-400/30 rounded-lg p-3 hover:bg-blue-500/30 cursor-pointer transform transition-all duration-200 hover:scale-[1.02] hover:border-blue-400/50"
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-2 mb-1">
-                        <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                        <span className="font-jetbrains text-xs text-blue-200 uppercase tracking-wide">OPPORTUNITY</span>
-                        <span className="font-jetbrains text-xs text-white/50">7m ago</span>
-                      </div>
-                      <p className="font-barlow text-sm text-white">Trending hashtag #CleanEnergyNow gaining momentum</p>
-                      <div className="flex items-center space-x-3 mt-2">
-                        <span className="font-jetbrains text-xs text-white/70">Growth: +142%</span>
-                        <span className="font-jetbrains text-xs text-white/70">Volume: 18.7K</span>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="font-jetbrains text-lg font-bold text-blue-400">+73</div>
-                      <div className="font-jetbrains text-xs text-blue-300">Trend Score</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Weakness Intelligence */}
-                <div 
-                  onClick={() => handleIntelligenceFeedClick('weakness', 'economic policy engagement')}
-                  className="relative backdrop-blur-md bg-red-500/20 border border-red-400/30 rounded-lg p-3 hover:bg-red-500/30 cursor-pointer transform transition-all duration-200 hover:scale-[1.02] hover:border-red-400/50"
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-2 mb-1">
-                        <div className="w-2 h-2 bg-red-400 rounded-full"></div>
-                        <span className="font-jetbrains text-xs text-red-200 uppercase tracking-wide">WEAKNESS</span>
-                        <span className="font-jetbrains text-xs text-white/50">12m ago</span>
-                      </div>
-                      <p className="font-barlow text-sm text-white">Low engagement on economic policy posts</p>
-                      <div className="flex items-center space-x-3 mt-2">
-                        <span className="font-jetbrains text-xs text-white/70">Engagement: -34%</span>
-                        <span className="font-jetbrains text-xs text-white/70">Comments: 47</span>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="font-jetbrains text-lg font-bold text-red-400">-42</div>
-                      <div className="font-jetbrains text-xs text-red-300">Alert Level</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Threat Intelligence */}
-                <div 
-                  onClick={() => handleIntelligenceFeedClick('threat', 'district sentiment spike')}
-                  className="relative backdrop-blur-md bg-orange-500/20 border border-orange-400/30 rounded-lg p-3 hover:bg-orange-500/30 cursor-pointer transform transition-all duration-200 hover:scale-[1.02] hover:border-orange-400/50"
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-2 mb-1">
-                        <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
-                        <span className="font-jetbrains text-xs text-orange-200 uppercase tracking-wide">THREAT</span>
-                        <span className="font-jetbrains text-xs text-white/50">15m ago</span>
-                      </div>
-                      <p className="font-barlow text-sm text-white">Negative sentiment spike detected in district coverage</p>
-                      <div className="flex items-center space-x-3 mt-2">
-                        <span className="font-jetbrains text-xs text-white/70">Sentiment: -23%</span>
-                        <span className="font-jetbrains text-xs text-white/70">Sources: 12</span>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="font-jetbrains text-lg font-bold text-orange-400">68</div>
-                      <div className="font-jetbrains text-xs text-orange-300">Risk Level</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Card>
+            {/* Dual Pie Charts - Sentiment & Emotion */}
+            <DualPieCharts />
           </div>
 
           {/* Right Column */}
           <div className="right-column">
-            {/* Golden Measure Squares - Moved above phrase cloud */}
-            <div className="metric-boxes-container">
-              <Card 
-                variant="glass" 
-                padding="sm" 
-                className="metric-box-square hoverable flex flex-col items-center justify-center cursor-pointer transform transition-all duration-200 hover:scale-[1.02]"
-                onClick={() => handleMetricBoxClick('alerts')}
-              >
-                <div className="text-3xl font-normal text-red-400" style={{fontFamily: 'Barlow Condensed', fontWeight: 400}}>
-                  7
-                </div>
-                <div className="text-[10px] text-white/60 uppercase mt-2 text-center font-semibold tracking-wider font-barlow">
-                  Real-Time
-                  <br />
-                  Alerts
-                </div>
-              </Card>
-              <Card 
-                variant="glass" 
-                padding="sm" 
-                className="metric-box-square hoverable flex flex-col items-center justify-center cursor-pointer transform transition-all duration-200 hover:scale-[1.02]"
-                onClick={() => handleMetricBoxClick('ad-spend')}
-              >
-                <div className="text-3xl font-normal text-blue-400" style={{fontFamily: 'Barlow Condensed', fontWeight: 400}}>
-                  47.2
-                </div>
-                <div className="text-[10px] text-white/60 uppercase mt-2 text-center font-semibold tracking-wider font-barlow">
-                  Ad
-                  <br />
-                  Spend
-                </div>
-              </Card>
-              <Card 
-                variant="glass" 
-                padding="sm" 
-                className="metric-box-square hoverable flex flex-col items-center justify-center cursor-pointer transform transition-all duration-200 hover:scale-[1.02]"
-                onClick={() => handleMetricBoxClick('mentions')}
-              >
-                <div className="text-3xl font-normal text-green-400" style={{fontFamily: 'Barlow Condensed', fontWeight: 400}}>
-                  2847
-                </div>
-                <div className="text-[10px] text-white/60 uppercase mt-2 text-center font-semibold tracking-wider font-barlow">
-                  Mention
-                  <br />
-                  Volume
-                </div>
-              </Card>
-              <Card 
-                variant="glass" 
-                padding="sm" 
-                className="metric-box-square hoverable flex flex-col items-center justify-center cursor-pointer transform transition-all duration-200 hover:scale-[1.02]"
-                onClick={() => handleMetricBoxClick('sentiment')}
-              >
-                <div className="text-3xl font-normal text-green-400" style={{fontFamily: 'Barlow Condensed', fontWeight: 400}}>
-                  74
-                </div>
-                <div className="text-[10px] text-white/60 uppercase mt-2 text-center font-semibold tracking-wider font-barlow">
-                  Sentiment
-                  <br />
-                  Score
-                </div>
-              </Card>
-            </div>
+            {/* Momentum Indicators */}
+            <MomentumIndicators />
+            
+            {/* Platform Dominance Grid */}
+            <PlatformDominanceGrid />
+            
+            {/* Influencer Power Matrix */}
+            <InfluencerPowerMatrix />
 
             {/* Quick Actions Grid - Moved above phrase cloud */}
             <Card variant="glass" padding="none" className="quick-actions hoverable hover:scale-[1.02] transition-all duration-200" style={{ overflow: "hidden" }}>
@@ -431,11 +286,11 @@ export default function Dashboard() {
                   Live Monitor
                 </div>
                 <div 
-                  onClick={() => handleQuickActionClick('make-content')}
+                  onClick={handleOpenSetup}
                   className="bg-black/10 border-b border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/10 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
                 >
-                  <PenTool className="w-4 h-4 text-blue-400" />
-                  Make Content
+                  <Settings className="w-4 h-4 text-blue-400" />
+                  Campaign Setup
                 </div>
                 <div 
                   onClick={() => handleQuickActionClick('trend-ops')}
@@ -599,6 +454,13 @@ export default function Dashboard() {
         </div>
       </div>
       </div>
+      
+      {/* Campaign Setup Modal */}
+      <CampaignSetupModal 
+        isOpen={showSetupModal}
+        onClose={() => setShowSetupModal(false)}
+        onComplete={handleSetupComplete}
+      />
     </PageLayout>
   );
 }
