@@ -170,7 +170,7 @@ export default function Dashboard() {
                 }`}
               ></div>
             </div>
-            <div className="text-2xl font-bold text-emerald-400 mb-1">
+            <div className="text-2xl font-bold text-emerald-400 mb-1 font-barlow-condensed" style={{fontWeight: 400}}>
               {sentimentData
                 ? `+${Math.round((sentimentData.positive / sentimentData.total) * 100)}%`
                 : '+33%'}
@@ -195,7 +195,7 @@ export default function Dashboard() {
                 }`}
               ></div>
             </div>
-            <div className="text-2xl font-bold text-sky-400 mb-1">
+            <div className="text-2xl font-bold text-sky-400 mb-1 font-barlow-condensed" style={{fontWeight: 400}}>
               {sentimentData ? sentimentData.total.toLocaleString() : '1,039'}
             </div>
             <div className="text-xs text-white/60">24h volume • +12% vs yesterday</div>
@@ -216,7 +216,7 @@ export default function Dashboard() {
                 }`}
               ></div>
             </div>
-            <div className="text-2xl font-bold text-violet-400 mb-1">
+            <div className="text-2xl font-bold text-violet-400 mb-1 font-barlow-condensed" style={{fontWeight: 400}}>
               {dashboard.shareOfVoice?.[0]?.percentage?.toFixed(1) || '76.9'}%
             </div>
             <div className="text-xs text-white/60">Leading competitor • Reach: 2.4M</div>
@@ -242,9 +242,10 @@ export default function Dashboard() {
               ></div>
             </div>
             <div
-              className={`text-2xl font-bold mb-1 ${
+              className={`text-2xl font-bold mb-1 font-barlow-condensed ${
                 crisisAlerts?.hasActiveCrisis ? 'text-rose-400' : 'text-emerald-400'
               }`}
+              style={{fontWeight: 400}}
             >
               {crisisAlerts?.hasActiveCrisis ? 'HIGH' : 'LOW'}
             </div>

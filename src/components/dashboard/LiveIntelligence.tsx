@@ -1,4 +1,5 @@
 import React, { useState, useEffect, memo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Card from '../shared/Card';
 import { MessageCircle, Heart, Share2, TrendingUp, Clock } from 'lucide-react';
 import { mentionlyticsService, type MentionlyticsMention } from '../../services/mentionlytics/mentionlyticsService';
@@ -9,6 +10,7 @@ interface SocialPost extends MentionlyticsMention {
 }
 
 export const LiveIntelligence: React.FC = memo(() => {
+  const navigate = useNavigate();
   const [posts, setPosts] = useState<SocialPost[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -147,6 +149,12 @@ export const LiveIntelligence: React.FC = memo(() => {
     };
   }, [posts.length, imageUrls]);
 
+  // Handle clicking on a post - navigate to detailed view
+  const handlePostClick = (post: SocialPost) => {
+    // Navigate to real-time monitoring with specific filters for this post
+    navigate(`/real-time-monitoring?platform=${post.platform}&sentiment=${post.sentiment}&author=${encodeURIComponent(post.author)}`);
+  };
+
   return (
     <Card
       variant="glass"
@@ -170,96 +178,96 @@ export const LiveIntelligence: React.FC = memo(() => {
             <div className="text-white/60 text-sm">Loading intelligence...</div>
           </div>
         ) : (
-          <>
-            {posts.map((post, index) => (
-          <div
-            key={post.id}
-            className={`relative p-3 rounded-lg border-l-2 ${getSentimentColor(post.sentiment)} hover:bg-white/5 transition-all duration-200`}
-          >
-            {/* Platform Icon - Top Left Corner, 25% height */}
-            <div className="absolute top-2 left-2 w-6 h-6 z-10">
-              {getPlatformIcon(post.platform)}
-            </div>
-
-            <div className="flex gap-3">
-              {/* Square Image */}
-              <div className="flex-shrink-0 self-stretch">
-                <img
-                  src={post.imageUrl}
-                  alt={`Post by ${post.author}`}
-                  className="h-full aspect-square object-cover bg-gray-800/50 border border-white/10"
-                  style={{borderRadius: '10px'}}
-                  loading="lazy"
-                />
+          posts.map((post, index) => (
+            <div
+              key={post.id}
+              onClick={() => handlePostClick(post)}
+              className={`relative p-2 rounded-lg border-l-2 ${getSentimentColor(post.sentiment)} hover:bg-white/5 transition-all duration-200 cursor-pointer hover:scale-[1.01]`}
+            >
+              {/* Platform Icon - Top Left Corner, 25% height */}
+              <div className="absolute top-2 left-2 w-6 h-6 z-10">
+                {getPlatformIcon(post.platform)}
               </div>
-              
-              {/* Content */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-start justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <div>
-                      <span className="text-sm font-semibold text-white">{post.author}</span>
-                      <div className="flex items-center gap-2 text-[11px] text-white/60">
-                        <Clock className="w-2.5 h-2.5" />
-                        {new Date(post.timestamp).toLocaleString('en-US', {
-                          month: 'short',
-                          day: 'numeric',
-                          hour: 'numeric',
-                          minute: '2-digit',
-                          hour12: true
-                        })}
+
+              <div className="flex gap-3 h-full">
+                {/* Square Image - Fixed 130x130 pixels */}
+                <div className="flex-shrink-0 py-2">
+                  <img
+                    src={post.imageUrl}
+                    alt={`Post by ${post.author}`}
+                    className="w-[130px] h-[130px] object-cover bg-gray-800/50 border border-white/10"
+                    style={{borderRadius: '10px'}}
+                    loading="lazy"
+                  />
+                </div>
+                
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="flex items-start gap-2">
+                      <div>
+                        <span className="text-sm font-semibold text-white">{post.author}</span>
+                        <div className="flex items-center gap-2 text-[11px] text-white/60">
+                          <Clock className="w-2.5 h-2.5" />
+                          {new Date(post.timestamp).toLocaleString('en-US', {
+                            month: 'short',
+                            day: 'numeric',
+                            hour: 'numeric',
+                            minute: '2-digit',
+                            hour12: true
+                          })}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-1 text-[11px] text-sky-400">
+                      <TrendingUp className="w-2.5 h-2.5" />
+                      <span className="font-barlow-condensed font-bold">{post.engagement.toLocaleString()}</span>
+                    </div>
+                  </div>
+
+                  <p className="text-sm text-white/80 leading-relaxed my-2" style={{lineHeight: '1.4', minHeight: '2.8em', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden'}}>{post.text}</p>
+
+                  {/* Single row: Sentiment badges on left, Social metrics on right - with bottom padding */}
+                  <div className="flex items-center justify-between mt-2 mb-2">
+                    <div className="flex items-center gap-3">
+                      <div
+                        className={`text-[10px] px-2 py-1 rounded uppercase font-semibold ${
+                          post.sentiment === 'positive'
+                            ? 'bg-emerald-400/20 text-emerald-400'
+                            : post.sentiment === 'negative'
+                              ? 'bg-rose-400/20 text-rose-400'
+                              : 'bg-slate-400/20 text-slate-400'
+                        }`}
+                      >
+                        {post.sentiment}
+                      </div>
+                      {post.isBreaking && (
+                        <div className="text-[10px] bg-rose-400/20 text-rose-400 border border-rose-400/30 px-2 py-1 rounded uppercase font-bold animate-pulse">
+                          BREAKING
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="flex items-center gap-3 text-white/50">
+                      <div className="flex items-center gap-1 text-xs">
+                        <MessageCircle className="w-3 h-3" />
+                        <span className="font-mono">{Math.floor(post.engagement * 0.3)}</span>
+                      </div>
+                      <div className="flex items-center gap-1 text-xs">
+                        <Heart className="w-3 h-3" />
+                        <span className="font-mono">{Math.floor(post.engagement * 0.6)}</span>
+                      </div>
+                      <div className="flex items-center gap-1 text-xs">
+                        <Share2 className="w-3 h-3" />
+                        <span className="font-mono">{Math.floor(post.engagement * 0.1)}</span>
                       </div>
                     </div>
                   </div>
-
-                  <div className="flex items-center gap-1 text-[11px] text-sky-400">
-                    <TrendingUp className="w-2.5 h-2.5" />
-                    <span className="font-barlow-condensed font-bold">{post.engagement.toLocaleString()}</span>
-                  </div>
-                </div>
-
-                <p className="text-sm text-white/80 leading-relaxed line-clamp-2 my-2">{post.text}</p>
-
-                <div className="flex items-center justify-between mt-2">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`text-[10px] px-2 py-1 rounded uppercase font-semibold ${
-                        post.sentiment === 'positive'
-                          ? 'bg-emerald-400/20 text-emerald-400'
-                          : post.sentiment === 'negative'
-                            ? 'bg-rose-400/20 text-rose-400'
-                            : 'bg-slate-400/20 text-slate-400'
-                      }`}
-                    >
-                      {post.sentiment}
-                    </div>
-                    {post.isBreaking && (
-                      <div className="text-[10px] bg-rose-400/20 text-rose-400 border border-rose-400/30 px-2 py-1 rounded uppercase font-bold animate-pulse">
-                        BREAKING
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="flex items-center gap-2 text-white/40">
-                    <div className="flex items-center gap-1 text-[10px]">
-                      <MessageCircle className="w-2 h-2" />
-                      <span className="font-mono">{Math.floor(post.engagement * 0.3)}</span>
-                    </div>
-                    <div className="flex items-center gap-1 text-[10px]">
-                      <Heart className="w-2 h-2" />
-                      <span className="font-mono">{Math.floor(post.engagement * 0.6)}</span>
-                    </div>
-                    <div className="flex items-center gap-1 text-[10px]">
-                      <Share2 className="w-2 h-2" />
-                      <span className="font-mono">{Math.floor(post.engagement * 0.1)}</span>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
-          </div>
-            ))}
-          </>
+          ))
         )}
       </div>
 

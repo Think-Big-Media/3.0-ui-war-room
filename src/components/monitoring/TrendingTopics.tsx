@@ -1,11 +1,14 @@
 // Trending Topics Component
 
 import type React from 'react';
+import { useState, useEffect } from 'react';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 import Card from '../shared/Card';
 import { type TrendingTopic } from '../../types/monitoring';
 import { getTrendColor, formatNumber } from './utils';
 import { createLogger } from '../../utils/logger';
+import { safeParseJSON } from '../../utils/localStorage';
+import { CampaignSetupData } from '../../types/campaign';
 
 const logger = createLogger('TrendingTopics');
 
@@ -14,6 +17,34 @@ interface TrendingTopicsProps {
 }
 
 const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
+  const [campaignKeywords, setCampaignKeywords] = useState<string[]>([]);
+
+  // Load campaign keywords from localStorage
+  useEffect(() => {
+    const campaignData = safeParseJSON<CampaignSetupData>('warRoomCampaignSetup', { fallback: null });
+    if (campaignData?.keywords) {
+      setCampaignKeywords(campaignData.keywords);
+    }
+  }, []);
+
+  // Mock keywords for fallback when no campaign data exists
+  const mockKeywords = ['HEALTHCARE REFORM', 'ECONOMIC POLICY', 'INFRASTRUCTURE', 'EDUCATION FUNDING'];
+  
+  // Use campaign keywords if available, otherwise use mock keywords
+  const keywordsToUse = campaignKeywords.length > 0 ? campaignKeywords : mockKeywords;
+  
+  // Create trending topics from keywords (campaign or mock)
+  const campaignTopics: TrendingTopic[] = keywordsToUse.slice(0, 4).map((keyword, index) => ({
+    id: `campaign-${index}`,
+    keyword: keyword.toUpperCase(),
+    change: [45, -12, 23, 67][index] || Math.floor(Math.random() * 100) - 25,
+    mentions: [2847, 1923, 3456, 1234][index] || Math.floor(Math.random() * 5000) + 1000,
+    region: ['District 3', 'Statewide', 'District 7', 'District 3'][index] || 'Statewide',
+    timeframe: '24h'
+  }));
+
+  // Always use our generated topics (either from campaign or mock data)
+  const displayTopics = campaignTopics;
   const handleViewMentions = (topic: TrendingTopic) => {
     logger.info('View mentions for topic:', topic.keyword);
     // Handle viewing mentions for topic
@@ -30,13 +61,13 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
         TRENDING TOPICS (Issue Spike Detector)
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        {topics.map((topic) => (
+        {displayTopics.map((topic) => (
           <div
             key={topic.id}
             className="bg-black/20 rounded-lg p-6 hoverable cursor-pointer hover:scale-[1.02] transition-transform duration-200"
           >
-            <div className="flex items-center justify-between mb-2 -mt-2">
-              <h4 className="font-medium text-white/95">{topic.keyword}</h4>
+            <div className="flex items-center justify-between mb-3">
+              <h4 className="text-xl font-bold text-white uppercase tracking-wide font-barlow-semi-condensed">{topic.keyword || 'NO KEYWORD'}</h4>
               <div className={`flex items-center space-x-1 ${getTrendColor(topic.change)}`}>
                 {topic.change > 0 ? (
                   <TrendingUp className="w-4 h-4" />

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Card from '../shared/Card';
 import { mentionlyticsService } from '../../services/mentionlytics/mentionlyticsService';
 
 export const PhraseCloud: React.FC = () => {
+  const navigate = useNavigate();
   const [campaignData, setCampaignData] = useState<any>(null);
   const [trendingPhrases, setTrendingPhrases] = useState<string[]>([]);
 
@@ -57,6 +59,16 @@ export const PhraseCloud: React.FC = () => {
 
   const phrases = allPhrases.length > 0 ? allPhrases : defaultPhrases;
 
+  // Handle keyword click - navigate to intelligence hub with search
+  const handleKeywordClick = (keyword: string) => {
+    navigate(`/intelligence-hub?search=${encodeURIComponent(keyword)}&filter=mentions`);
+  };
+
+  // Handle competitor click - navigate to intelligence hub with competitor filter  
+  const handleCompetitorClick = (competitorName: string) => {
+    navigate(`/intelligence-hub?competitor=${encodeURIComponent(competitorName)}&filter=competitor`);
+  };
+
   return (
     <Card
       variant="glass"
@@ -74,12 +86,13 @@ export const PhraseCloud: React.FC = () => {
             <div className="text-[9px] text-white/60 mb-1 uppercase font-semibold tracking-wider font-barlow">
               PRIMARY
             </div>
-            {phrases.slice(0, 3).map((phrase: string, idx: number) => (
+            {(campaignData?.keywords || ['Healthcare Reform', 'Economic Policy', 'Infrastructure']).slice(0, 3).map((keyword: string, idx: number) => (
               <div
                 key={idx}
-                className="text-white/75 text-[10px] leading-tight uppercase font-barlow mb-1 cursor-pointer hover:text-cyan-300 transition-colors"
+                onClick={() => handleKeywordClick(keyword)}
+                className="text-white/75 text-[10px] leading-tight uppercase font-barlow mb-1 cursor-pointer hover:text-cyan-300 transition-colors hover:scale-105"
               >
-                • {phrase}
+                • {keyword}
               </div>
             ))}
           </div>
@@ -111,16 +124,23 @@ export const PhraseCloud: React.FC = () => {
           {campaignData?.competitors?.map((comp: any, idx: number) => (
             <div
               key={idx}
-              className="text-white/75 text-[10px] leading-tight uppercase font-barlow mb-1 cursor-pointer hover:text-cyan-300 transition-colors"
+              onClick={() => handleCompetitorClick(comp.name)}
+              className="text-white/75 text-[10px] leading-tight uppercase font-barlow mb-1 cursor-pointer hover:text-cyan-300 transition-colors hover:scale-105"
             >
               • {comp.name}
             </div>
           )) || (
             <>
-              <div className="text-white/75 text-[10px] leading-tight uppercase font-barlow mb-1 cursor-pointer hover:text-cyan-300 transition-colors">
+              <div 
+                onClick={() => handleCompetitorClick('Joe Biden')}
+                className="text-white/75 text-[10px] leading-tight uppercase font-barlow mb-1 cursor-pointer hover:text-cyan-300 transition-colors hover:scale-105"
+              >
                 • Joe Biden
               </div>
-              <div className="text-white/75 text-[10px] leading-tight uppercase font-barlow mb-1 cursor-pointer hover:text-cyan-300 transition-colors">
+              <div 
+                onClick={() => handleCompetitorClick('Ron DeSantis')}
+                className="text-white/75 text-[10px] leading-tight uppercase font-barlow mb-1 cursor-pointer hover:text-cyan-300 transition-colors hover:scale-105"
+              >
                 • Ron DeSantis
               </div>
             </>
