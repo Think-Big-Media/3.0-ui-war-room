@@ -8,7 +8,7 @@
 export const API_CONFIG = {
   // Backend API
   backend: {
-    baseURL: import.meta.env.VITE_API_URL || 'https://war-room-oa9t.onrender.com',
+    baseURL: import.meta.env.VITE_API_URL || 'https://war-room-3-backend-d2msjrk82vjjq794glog.lp.dev',
     timeout: 30000,
   },
 
@@ -26,6 +26,12 @@ export const API_CONFIG = {
     authURL: 'https://www.facebook.com/v19.0/dialog/oauth',
     tokenURL: 'https://graph.facebook.com/v19.0/oauth/access_token',
     scope: 'ads_management,ads_read,business_management,pages_read_engagement',
+  },
+
+  // Mentionlytics API
+  mentionlytics: {
+    baseURL: 'https://app.mentionlytics.com/api',
+    authURL: 'https://app.mentionlytics.com/api/token',
   },
 };
 
@@ -66,6 +72,14 @@ export const getEnvironmentConfig = () => {
     sendgrid: {
       email: import.meta.env.VITE_SENDGRID_EMAIL,
       password: import.meta.env.VITE_SENDGRID_PASSWORD,
+    },
+    
+    // Mentionlytics credentials
+    mentionlytics: {
+      email: import.meta.env.VITE_MENTIONLYTICS_EMAIL,
+      password: import.meta.env.VITE_MENTIONLYTICS_PASSWORD,
+      apiToken: import.meta.env.VITE_MENTIONLYTICS_API_TOKEN,
+      projectId: import.meta.env.VITE_MENTIONLYTICS_PROJECT_ID,
     },
     
     // Other services
@@ -126,15 +140,20 @@ export const hasRealCredentials = () => {
   const hasPostHogCredentials =
     isValidCredential(config.posthog.key) &&
     isValidCredential(config.posthog.host);
+    
+  const hasMentionlyticsCredentials =
+    isValidCredential(config.mentionlytics.email) &&
+    isValidCredential(config.mentionlytics.password);
 
   return {
     meta: hasMetaCredentials,
     googleAds: hasGoogleCredentials,
     sendgrid: hasSendGridCredentials,
+    mentionlytics: hasMentionlyticsCredentials,
     supabase: hasSupabaseCredentials,
     posthog: hasPostHogCredentials,
-    any: hasMetaCredentials || hasGoogleCredentials || hasSendGridCredentials,
-    all: hasMetaCredentials && hasGoogleCredentials && hasSendGridCredentials && hasSupabaseCredentials,
+    any: hasMetaCredentials || hasGoogleCredentials || hasSendGridCredentials || hasMentionlyticsCredentials,
+    all: hasMetaCredentials && hasGoogleCredentials && hasSendGridCredentials && hasSupabaseCredentials && hasMentionlyticsCredentials,
   };
 };
 
@@ -168,6 +187,15 @@ export const getAPIEndpoints = () => {
         campaigns: `${backendURL}/api/v1/meta/campaigns`,
         adsets: `${backendURL}/api/v1/meta/adsets`,
         insights: `${backendURL}/api/v1/meta/insights`,
+      },
+      mentionlytics: {
+        mentions: `${backendURL}/api/v1/mentionlytics/mentions`,
+        sentiment: `${backendURL}/api/v1/mentionlytics/sentiment`,
+        geo: `${backendURL}/api/v1/mentionlytics/mentions/geo`,
+        influencers: `${backendURL}/api/v1/mentionlytics/influencers`,
+        trending: `${backendURL}/api/v1/mentionlytics/trending`,
+        shareOfVoice: `${backendURL}/api/v1/mentionlytics/share-of-voice`,
+        feed: `${backendURL}/api/v1/mentionlytics/feed`,
       },
     },
   };
