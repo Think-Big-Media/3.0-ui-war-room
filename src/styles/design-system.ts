@@ -5,69 +5,69 @@
 
 // Base unit: 4px grid system for consistent spacing
 export const spacing = {
-  xs: '0.25rem',  // 4px
-  sm: '0.5rem',   // 8px
-  md: '0.75rem',  // 12px
-  lg: '1rem',     // 16px
-  xl: '1.25rem',  // 20px
+  xs: '0.25rem', // 4px
+  sm: '0.5rem', // 8px
+  md: '0.75rem', // 12px
+  lg: '1rem', // 16px
+  xl: '1.25rem', // 20px
   '2xl': '1.5rem', // 24px
-  '3xl': '2rem',  // 32px
-  '4xl': '3rem',  // 48px
-  '5xl': '4rem',  // 64px
-  '6xl': '6rem',  // 96px
+  '3xl': '2rem', // 32px
+  '4xl': '3rem', // 48px
+  '5xl': '4rem', // 64px
+  '6xl': '6rem', // 96px
 } as const;
 
 // Professional color palette
 export const colors = {
   // Neutral grays - foundation colors
   gray: {
-    50: '#F9FAFB',   // Near white
-    100: '#F3F4F6',  // Light background
-    200: '#E5E7EB',  // Border light
-    300: '#D1D5DB',  // Border
-    400: '#9CA3AF',  // Text light
-    500: '#6B7280',  // Text medium
-    600: '#4B5563',  // Text
-    700: '#374151',  // Text dark
-    800: '#1F2937',  // Background dark
-    900: '#111827',  // Near black
+    50: '#F9FAFB', // Near white
+    100: '#F3F4F6', // Light background
+    200: '#E5E7EB', // Border light
+    300: '#D1D5DB', // Border
+    400: '#9CA3AF', // Text light
+    500: '#6B7280', // Text medium
+    600: '#4B5563', // Text
+    700: '#374151', // Text dark
+    800: '#1F2937', // Background dark
+    900: '#111827', // Near black
   },
 
   // Accent blues - primary brand color
   blue: {
-    50: '#EFF6FF',   // Light blue background
-    100: '#DBEAFE',  // Light blue
-    200: '#BFDBFE',  // Medium light
-    300: '#93C5FD',  // Medium
-    400: '#60A5FA',  // Medium dark
-    500: '#3B82F6',  // Primary blue
-    600: '#2563EB',  // Dark blue
-    700: '#1D4ED8',  // Darker blue
-    800: '#1E40AF',  // Very dark
-    900: '#1E3A8A',  // Navy
+    50: '#EFF6FF', // Light blue background
+    100: '#DBEAFE', // Light blue
+    200: '#BFDBFE', // Medium light
+    300: '#93C5FD', // Medium
+    400: '#60A5FA', // Medium dark
+    500: '#3B82F6', // Primary blue
+    600: '#2563EB', // Dark blue
+    700: '#1D4ED8', // Darker blue
+    800: '#1E40AF', // Very dark
+    900: '#1E3A8A', // Navy
   },
 
   // Status colors
   status: {
     success: {
-      light: '#DCFCE7',  // Green 100
+      light: '#DCFCE7', // Green 100
       medium: '#16A34A', // Green 600
-      dark: '#15803D',   // Green 700
+      dark: '#15803D', // Green 700
     },
     warning: {
-      light: '#FEF3C7',  // Amber 100
+      light: '#FEF3C7', // Amber 100
       medium: '#D97706', // Amber 600
-      dark: '#B45309',   // Amber 700
+      dark: '#B45309', // Amber 700
     },
     error: {
-      light: '#FEE2E2',  // Red 100
+      light: '#FEE2E2', // Red 100
       medium: '#DC2626', // Red 600
-      dark: '#B91C1C',   // Red 700
+      dark: '#B91C1C', // Red 700
     },
     info: {
-      light: '#DBEAFE',  // Blue 100
+      light: '#DBEAFE', // Blue 100
       medium: '#2563EB', // Blue 600
-      dark: '#1D4ED8',   // Blue 700
+      dark: '#1D4ED8', // Blue 700
     },
   },
 } as const;
@@ -75,20 +75,29 @@ export const colors = {
 // Typography scale - Clean, readable hierarchy
 export const typography = {
   fontFamily: {
-    sans: ['SF Pro Display', 'Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+    sans: [
+      'SF Pro Display',
+      'Inter',
+      'system-ui',
+      '-apple-system',
+      'BlinkMacSystemFont',
+      'Segoe UI',
+      'Roboto',
+      'sans-serif',
+    ],
     mono: ['SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'monospace'],
   },
 
   fontSize: {
-    xs: ['0.75rem', { lineHeight: '1rem' }],      // 12px
-    sm: ['0.875rem', { lineHeight: '1.25rem' }],  // 14px
-    base: ['1rem', { lineHeight: '1.5rem' }],     // 16px
-    lg: ['1.125rem', { lineHeight: '1.75rem' }],  // 18px
-    xl: ['1.25rem', { lineHeight: '1.75rem' }],   // 20px
-    '2xl': ['1.5rem', { lineHeight: '2rem' }],    // 24px
+    xs: ['0.75rem', { lineHeight: '1rem' }], // 12px
+    sm: ['0.875rem', { lineHeight: '1.25rem' }], // 14px
+    base: ['1rem', { lineHeight: '1.5rem' }], // 16px
+    lg: ['1.125rem', { lineHeight: '1.75rem' }], // 18px
+    xl: ['1.25rem', { lineHeight: '1.75rem' }], // 20px
+    '2xl': ['1.5rem', { lineHeight: '2rem' }], // 24px
     '3xl': ['1.875rem', { lineHeight: '2.25rem' }], // 30px
     '4xl': ['2.25rem', { lineHeight: '2.5rem' }], // 36px
-    '5xl': ['3rem', { lineHeight: '1' }],         // 48px
+    '5xl': ['3rem', { lineHeight: '1' }], // 48px
   },
 
   fontWeight: {
@@ -102,13 +111,13 @@ export const typography = {
 // Border radius system
 export const borderRadius = {
   none: '0px',
-  sm: '0.125rem',   // 2px
-  md: '0.25rem',    // 4px
-  lg: '0.5rem',     // 8px
-  xl: '0.75rem',    // 12px
-  '2xl': '1rem',    // 16px
-  '3xl': '1.5rem',  // 24px
-  full: '9999px',   // Fully rounded
+  sm: '0.125rem', // 2px
+  md: '0.25rem', // 4px
+  lg: '0.5rem', // 8px
+  xl: '0.75rem', // 12px
+  '2xl': '1rem', // 16px
+  '3xl': '1.5rem', // 24px
+  full: '9999px', // Fully rounded
 } as const;
 
 // Professional shadow system
@@ -146,7 +155,8 @@ export const animations = {
   // Common transitions
   transition: {
     all: 'all 250ms cubic-bezier(0.4, 0, 0.2, 1)',
-    colors: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1), background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), border-color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
+    colors:
+      'color 250ms cubic-bezier(0.4, 0, 0.2, 1), background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), border-color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
     opacity: 'opacity 250ms cubic-bezier(0.4, 0, 0.2, 1)',
     shadow: 'box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1)',
     transform: 'transform 250ms cubic-bezier(0.4, 0, 0.2, 1)',
@@ -193,8 +203,8 @@ export const layout = {
   },
 
   // Common component dimensions
-  sidebar: '16rem',    // 256px
-  header: '4rem',      // 64px
+  sidebar: '16rem', // 256px
+  header: '4rem', // 64px
   card: {
     minHeight: '8rem', // 128px
     padding: spacing['2xl'],

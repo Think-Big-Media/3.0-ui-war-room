@@ -4,7 +4,9 @@ import { DashboardChart } from '../analytics/DashboardChart';
 
 // Mock recharts components
 jest.mock('recharts', () => ({
-  ResponsiveContainer: ({ children }: any) => <div data-testid="responsive-container">{children}</div>,
+  ResponsiveContainer: ({ children }: any) => (
+    <div data-testid="responsive-container">{children}</div>
+  ),
   LineChart: ({ children }: any) => <div data-testid="line-chart">{children}</div>,
   BarChart: ({ children }: any) => <div data-testid="bar-chart">{children}</div>,
   AreaChart: ({ children }: any) => <div data-testid="area-chart">{children}</div>,
@@ -136,13 +138,7 @@ describe('DashboardChart', () => {
   });
 
   it('handles single data key', () => {
-    render(
-      <DashboardChart
-        {...defaultProps}
-        dataKeys={['donations']}
-        colors={['#3B82F6']}
-      />,
-    );
+    render(<DashboardChart {...defaultProps} dataKeys={['donations']} colors={['#3B82F6']} />);
 
     const lines = screen.getAllByTestId('line');
     expect(lines).toHaveLength(1);

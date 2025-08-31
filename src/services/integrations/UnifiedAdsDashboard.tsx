@@ -54,13 +54,13 @@ export const UnifiedAdsDashboard: React.FC = () => {
   const { data: metaInsights, isLoading: metaLoading } = useMetaAccountInsights(
     selectedMetaAccountId,
     metaInsightsParams,
-    { enabled: isMetaAuthenticated && Boolean(selectedMetaAccountId) },
+    { enabled: isMetaAuthenticated && Boolean(selectedMetaAccountId) }
   );
 
   const { data: googleInsights, isLoading: googleLoading } = useGoogleAdsAccountInsights(
     selectedGoogleCustomerId,
     googleInsightsParams,
-    { enabled: isGoogleAuthenticated && Boolean(selectedGoogleCustomerId) },
+    { enabled: isGoogleAuthenticated && Boolean(selectedGoogleCustomerId) }
   );
 
   // Authentication handlers
@@ -128,9 +128,7 @@ export const UnifiedAdsDashboard: React.FC = () => {
       {/* Account Selection */}
       {isGoogleAuthenticated && googleCustomers && (
         <div className="mb-8">
-          <label className="block text-sm font-medium mb-2">
-            Select Google Ads Account
-          </label>
+          <label className="block text-sm font-medium mb-2">Select Google Ads Account</label>
           <select
             value={selectedGoogleCustomerId}
             onChange={(e) => setSelectedGoogleCustomerId(e.target.value)}
@@ -155,11 +153,17 @@ export const UnifiedAdsDashboard: React.FC = () => {
             <p>Loading Meta insights...</p>
           ) : metaInsights ? (
             <div className="space-y-2">
-              <p>Impressions: {parseInt((metaInsights as any)?.impressions || '0').toLocaleString()}</p>
+              <p>
+                Impressions: {parseInt((metaInsights as any)?.impressions || '0').toLocaleString()}
+              </p>
               <p>Clicks: {parseInt((metaInsights as any)?.clicks || '0').toLocaleString()}</p>
               <p>Spend: ${parseFloat((metaInsights as any)?.spend || '0').toFixed(2)}</p>
               <p>CTR: {parseFloat((metaInsights as any)?.ctr || '0').toFixed(2)}%</p>
-              <p>Conversions: {((metaInsights as any)?.actions?.find((a: any) => a.action_type === 'conversions')?.value || '0')}</p>
+              <p>
+                Conversions:{' '}
+                {(metaInsights as any)?.actions?.find((a: any) => a.action_type === 'conversions')
+                  ?.value || '0'}
+              </p>
             </div>
           ) : (
             <p className="text-gray-500">Select an account to view insights</p>
@@ -173,11 +177,28 @@ export const UnifiedAdsDashboard: React.FC = () => {
             <p>Loading Google Ads insights...</p>
           ) : googleInsights ? (
             <div className="space-y-2">
-              <p>Impressions: {parseInt((googleInsights as any)?.summary?.totalImpressions || '0').toLocaleString()}</p>
-              <p>Clicks: {parseInt((googleInsights as any)?.summary?.totalClicks || '0').toLocaleString()}</p>
+              <p>
+                Impressions:{' '}
+                {parseInt(
+                  (googleInsights as any)?.summary?.totalImpressions || '0'
+                ).toLocaleString()}
+              </p>
+              <p>
+                Clicks:{' '}
+                {parseInt((googleInsights as any)?.summary?.totalClicks || '0').toLocaleString()}
+              </p>
               <p>Cost: ${((googleInsights as any)?.summary?.totalSpend || 0).toFixed(2)}</p>
-              <p>Conversions: {((googleInsights as any)?.summary?.totalConversions || 0).toLocaleString()}</p>
-              <p>CPC: ${(((googleInsights as any)?.summary?.totalSpend || 0) / ((googleInsights as any)?.summary?.totalClicks || 1)).toFixed(2)}</p>
+              <p>
+                Conversions:{' '}
+                {((googleInsights as any)?.summary?.totalConversions || 0).toLocaleString()}
+              </p>
+              <p>
+                CPC: $
+                {(
+                  ((googleInsights as any)?.summary?.totalSpend || 0) /
+                  ((googleInsights as any)?.summary?.totalClicks || 1)
+                ).toFixed(2)}
+              </p>
             </div>
           ) : (
             <p className="text-gray-500">Select an account to view insights</p>
@@ -193,25 +214,41 @@ export const UnifiedAdsDashboard: React.FC = () => {
             <div>
               <p className="text-sm text-gray-600">Total Impressions</p>
               <p className="text-2xl font-bold">
-                {(parseInt((metaInsights as any)?.impressions || '0') + parseInt((googleInsights as any)?.summary?.totalImpressions || '0')).toLocaleString()}
+                {(
+                  parseInt((metaInsights as any)?.impressions || '0') +
+                  parseInt((googleInsights as any)?.summary?.totalImpressions || '0')
+                ).toLocaleString()}
               </p>
             </div>
             <div>
               <p className="text-sm text-gray-600">Total Clicks</p>
               <p className="text-2xl font-bold">
-                {(parseInt((metaInsights as any)?.clicks || '0') + parseInt((googleInsights as any)?.summary?.totalClicks || '0')).toLocaleString()}
+                {(
+                  parseInt((metaInsights as any)?.clicks || '0') +
+                  parseInt((googleInsights as any)?.summary?.totalClicks || '0')
+                ).toLocaleString()}
               </p>
             </div>
             <div>
               <p className="text-sm text-gray-600">Total Spend</p>
               <p className="text-2xl font-bold">
-                ${(parseFloat((metaInsights as any)?.spend || '0') + ((googleInsights as any)?.summary?.totalSpend || 0)).toFixed(2)}
+                $
+                {(
+                  parseFloat((metaInsights as any)?.spend || '0') +
+                  ((googleInsights as any)?.summary?.totalSpend || 0)
+                ).toFixed(2)}
               </p>
             </div>
             <div>
               <p className="text-sm text-gray-600">Total Conversions</p>
               <p className="text-2xl font-bold">
-                {(parseInt((metaInsights as any)?.actions?.find((a: any) => a.action_type === 'conversions')?.value || '0') + ((googleInsights as any)?.summary?.totalConversions || 0)).toLocaleString()}
+                {(
+                  parseInt(
+                    (metaInsights as any)?.actions?.find(
+                      (a: any) => a.action_type === 'conversions'
+                    )?.value || '0'
+                  ) + ((googleInsights as any)?.summary?.totalConversions || 0)
+                ).toLocaleString()}
               </p>
             </div>
           </div>

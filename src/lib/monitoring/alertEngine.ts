@@ -103,7 +103,9 @@ export class AlertEngine extends EventEmitter {
   }
 
   async start(): Promise<void> {
-    if (this.isRunning) {return;}
+    if (this.isRunning) {
+      return;
+    }
 
     console.log('🚨 Starting Alert Engine...');
     this.isRunning = true;
@@ -129,7 +131,9 @@ export class AlertEngine extends EventEmitter {
   }
 
   async analyzeEvents(events: MonitoringEvent[]): Promise<void> {
-    if (!this.isRunning || events.length === 0) {return;}
+    if (!this.isRunning || events.length === 0) {
+      return;
+    }
 
     // Add events to processing queue for immediate processing
     this.processingQueue.push(...events);
@@ -141,7 +145,9 @@ export class AlertEngine extends EventEmitter {
   }
 
   private async processQueuedEvents(): Promise<void> {
-    if (this.processingInProgress) {return;}
+    if (this.processingInProgress) {
+      return;
+    }
 
     this.processingInProgress = true;
     const startTime = Date.now();
@@ -150,7 +156,9 @@ export class AlertEngine extends EventEmitter {
       const eventsToProcess = [...this.processingQueue];
       this.processingQueue = [];
 
-      if (eventsToProcess.length === 0) {return;}
+      if (eventsToProcess.length === 0) {
+        return;
+      }
 
       console.log(`🔍 Processing ${eventsToProcess.length} events for alerts...`);
 
@@ -158,7 +166,7 @@ export class AlertEngine extends EventEmitter {
       const windows = this.createAnalysisWindows(eventsToProcess);
 
       // Check each rule against each window
-      for (const rule of this.activeRules.filter(r => r.enabled)) {
+      for (const rule of this.activeRules.filter((r) => r.enabled)) {
         for (const window of windows) {
           try {
             const shouldAlert = rule.condition(window.events, 3600000); // 1 hour window
@@ -168,7 +176,7 @@ export class AlertEngine extends EventEmitter {
                 rule,
                 window.events,
                 window.start_time,
-                window.end_time,
+                window.end_time
               );
 
               this.emit('alert', alert);
@@ -193,9 +201,10 @@ export class AlertEngine extends EventEmitter {
 
       // Check if we're meeting the <60s target
       if (processingTime > this.CRISIS_THRESHOLDS.PROCESSING_TARGET_MS) {
-        console.warn(`⚠️ Alert processing took ${processingTime}ms (target: <${this.CRISIS_THRESHOLDS.PROCESSING_TARGET_MS}ms)`);
+        console.warn(
+          `⚠️ Alert processing took ${processingTime}ms (target: <${this.CRISIS_THRESHOLDS.PROCESSING_TARGET_MS}ms)`
+        );
       }
-
     } finally {
       this.processingInProgress = false;
     }
@@ -205,7 +214,9 @@ export class AlertEngine extends EventEmitter {
     // Sort events by timestamp
     const sortedEvents = events.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime());
 
-    if (sortedEvents.length === 0) {return [];}
+    if (sortedEvents.length === 0) {
+      return [];
+    }
 
     // Create sliding windows of 1 hour each, overlapping by 30 minutes
     const windows: AlertWindow[] = [];
@@ -218,7 +229,7 @@ export class AlertEngine extends EventEmitter {
     for (let windowStart = startTime; windowStart <= endTime; windowStart += stepSize) {
       const windowEnd = windowStart + windowSize;
 
-      const windowEvents = sortedEvents.filter(event => {
+      const windowEvents = sortedEvents.filter((event) => {
         const eventTime = event.timestamp.getTime();
         return eventTime >= windowStart && eventTime < windowEnd;
       });
@@ -241,7 +252,9 @@ export class AlertEngine extends EventEmitter {
     const threshold = this.config.crisis_thresholds.mentions_per_hour;
 
     // Check if current volume exceeds threshold
-    if (currentVolume < threshold) {return false;}
+    if (currentVolume < threshold) {
+      return false;
+    }
 
     // Additional check: compare to historical baseline
     // TODO: Implement historical comparison
@@ -250,7 +263,9 @@ export class AlertEngine extends EventEmitter {
   }
 
   private checkSentimentCrisis(events: MonitoringEvent[], timeWindow: number): boolean {
-    if (events.length < 10) {return false;} // Need minimum volume
+    if (events.length < 10) {
+      return false;
+    } // Need minimum volume
 
     // Calculate sentiment from available sources
     const sentimentWeights = { mentionlytics: 1.0 };
@@ -266,8 +281,10 @@ export class AlertEngine extends EventEmitter {
     const averageSentiment = totalWeight > 0 ? totalWeightedSentiment / totalWeight : 0;
 
     // Crisis if average sentiment is below threshold AND we have volume
-    return averageSentiment < -this.config.crisis_thresholds.sentiment_threshold &&
-           events.length >= this.config.crisis_thresholds.mentions_per_hour;
+    return (
+      averageSentiment < -this.config.crisis_thresholds.sentiment_threshold &&
+      events.length >= this.config.crisis_thresholds.mentions_per_hour
+    );
   }
 
   private checkViralNegative(events: MonitoringEvent[], timeWindow: number): boolean {
@@ -275,16 +292,18 @@ export class AlertEngine extends EventEmitter {
     const viralThreshold = 10000; // 10k+ reach
     const sentimentThreshold = -0.5; // Strongly negative
 
-    const viralNegativeEvents = events.filter(event =>
-      event.sentiment.score < sentimentThreshold &&
-      (event.metrics.reach || 0) > viralThreshold,
+    const viralNegativeEvents = events.filter(
+      (event) =>
+        event.sentiment.score < sentimentThreshold && (event.metrics.reach || 0) > viralThreshold
     );
 
     return viralNegativeEvents.length > 0;
   }
 
   private checkNegativeTrend(events: MonitoringEvent[], timeWindow: number): boolean {
-    if (events.length < 5) {return false;}
+    if (events.length < 5) {
+      return false;
+    }
 
     // Sort events by time and check if sentiment is trending downward
     const sortedEvents = events.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime());
@@ -294,8 +313,10 @@ export class AlertEngine extends EventEmitter {
     const firstHalf = sortedEvents.slice(0, midPoint);
     const secondHalf = sortedEvents.slice(midPoint);
 
-    const firstHalfSentiment = firstHalf.reduce((sum, event) => sum + event.sentiment.score, 0) / firstHalf.length;
-    const secondHalfSentiment = secondHalf.reduce((sum, event) => sum + event.sentiment.score, 0) / secondHalf.length;
+    const firstHalfSentiment =
+      firstHalf.reduce((sum, event) => sum + event.sentiment.score, 0) / firstHalf.length;
+    const secondHalfSentiment =
+      secondHalf.reduce((sum, event) => sum + event.sentiment.score, 0) / secondHalf.length;
 
     // Negative trend if recent sentiment is significantly worse
     const sentimentDrop = firstHalfSentiment - secondHalfSentiment;
@@ -306,23 +327,23 @@ export class AlertEngine extends EventEmitter {
     rule: AlertRule,
     triggerEvents: MonitoringEvent[],
     startTime: Date,
-    endTime: Date,
+    endTime: Date
   ): Promise<CrisisAlert> {
-
     const alertId = this.generateAlertId(rule, triggerEvents, startTime);
 
     // Calculate alert metrics
     const totalReach = triggerEvents.reduce((sum, event) => sum + (event.metrics.reach || 0), 0);
-    const averageSentiment = triggerEvents.reduce((sum, event) => sum + event.sentiment.score, 0) / triggerEvents.length;
-    const platforms = [...new Set(triggerEvents.map(event => event.platform))];
-    const keywords = [...new Set(triggerEvents.flatMap(event => event.keywords))];
+    const averageSentiment =
+      triggerEvents.reduce((sum, event) => sum + event.sentiment.score, 0) / triggerEvents.length;
+    const platforms = [...new Set(triggerEvents.map((event) => event.platform))];
+    const keywords = [...new Set(triggerEvents.flatMap((event) => event.keywords))];
 
     // Get top negative posts for context
     const topNegativePosts = triggerEvents
-      .filter(event => event.sentiment.score < -0.3)
+      .filter((event) => event.sentiment.score < -0.3)
       .sort((a, b) => a.sentiment.score - b.sentiment.score)
       .slice(0, 5)
-      .map(event => event.id);
+      .map((event) => event.id);
 
     // Calculate peak mentions per hour
     const peakMentionsHour = this.calculatePeakMentionsPerHour(triggerEvents);
@@ -333,7 +354,7 @@ export class AlertEngine extends EventEmitter {
       type: rule.type,
       title: this.generateAlertTitle(rule, triggerEvents.length, averageSentiment),
       description: this.generateAlertDescription(rule, triggerEvents, averageSentiment, totalReach),
-      trigger_event_ids: triggerEvents.map(event => event.id),
+      trigger_event_ids: triggerEvents.map((event) => event.id),
       trigger_conditions: {
         mentions_per_hour: triggerEvents.length,
         sentiment_threshold: averageSentiment,
@@ -349,7 +370,7 @@ export class AlertEngine extends EventEmitter {
       estimated_reach: totalReach,
       metadata: {
         peak_mentions_hour: peakMentionsHour,
-        lowest_sentiment: Math.min(...triggerEvents.map(e => e.sentiment.score)),
+        lowest_sentiment: Math.min(...triggerEvents.map((e) => e.sentiment.score)),
         top_negative_posts: topNegativePosts,
         geographic_spread: this.calculateGeographicSpread(triggerEvents),
       },
@@ -380,10 +401,10 @@ export class AlertEngine extends EventEmitter {
     rule: AlertRule,
     events: MonitoringEvent[],
     avgSentiment: number,
-    totalReach: number,
+    totalReach: number
   ): string {
     const eventCount = events.length;
-    const platforms = [...new Set(events.map(e => e.platform))].join(', ');
+    const platforms = [...new Set(events.map((e) => e.platform))].join(', ');
     const timeSpan = this.calculateTimeSpan(events);
 
     let description = `Detected ${eventCount} mentions over ${timeSpan} across ${platforms}. `;
@@ -398,7 +419,8 @@ export class AlertEngine extends EventEmitter {
 
     switch (rule.type) {
       case 'volume_spike':
-        description += 'This represents a significant increase in mention volume that requires attention.';
+        description +=
+          'This represents a significant increase in mention volume that requires attention.';
         break;
       case 'sentiment_drop':
         description += 'Negative sentiment levels have reached crisis thresholds.';
@@ -439,9 +461,11 @@ export class AlertEngine extends EventEmitter {
   }
 
   private calculateTimeSpan(events: MonitoringEvent[]): string {
-    if (events.length === 0) {return '0 minutes';}
+    if (events.length === 0) {
+      return '0 minutes';
+    }
 
-    const times = events.map(e => e.timestamp.getTime());
+    const times = events.map((e) => e.timestamp.getTime());
     const minTime = Math.min(...times);
     const maxTime = Math.max(...times);
 
@@ -452,19 +476,20 @@ export class AlertEngine extends EventEmitter {
       return `${Math.ceil(diffMs / (1000 * 60))} minutes`;
     }
     return `${diffHours.toFixed(1)} hours`;
-
   }
 
   // Cooldown management
   private checkCooldown(ruleId: string): boolean {
     const cooldownEnd = this.alertCooldowns.get(ruleId);
-    if (!cooldownEnd) {return true;}
+    if (!cooldownEnd) {
+      return true;
+    }
 
     return new Date() > cooldownEnd;
   }
 
   private setCooldown(ruleId: string, cooldownMinutes: number): void {
-    const cooldownEnd = new Date(Date.now() + (cooldownMinutes * 60 * 1000));
+    const cooldownEnd = new Date(Date.now() + cooldownMinutes * 60 * 1000);
     this.alertCooldowns.set(ruleId, cooldownEnd);
   }
 
@@ -472,7 +497,7 @@ export class AlertEngine extends EventEmitter {
   private async loadHistoricalBaseline(): Promise<void> {
     try {
       // Load last 7 days of data to establish baseline
-      const sevenDaysAgo = new Date(Date.now() - (7 * 24 * 60 * 60 * 1000));
+      const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
       const historicalEvents = await this.eventStore.getEventsSince(sevenDaysAgo);
 
       // Calculate baseline metrics
@@ -482,7 +507,6 @@ export class AlertEngine extends EventEmitter {
       this.updateDynamicThresholds(baselineMetrics);
 
       console.log(`📊 Loaded baseline from ${historicalEvents.length} historical events`);
-
     } catch (error) {
       console.warn('Could not load historical baseline:', error);
       // Continue with default thresholds
@@ -490,7 +514,9 @@ export class AlertEngine extends EventEmitter {
   }
 
   private calculateBaselineMetrics(events: MonitoringEvent[]): any {
-    if (events.length === 0) {return null;}
+    if (events.length === 0) {
+      return null;
+    }
 
     // Group by day and calculate averages
     const dailyStats = new Map<string, MonitoringEvent[]>();
@@ -503,32 +529,38 @@ export class AlertEngine extends EventEmitter {
       dailyStats.get(dayKey)!.push(event);
     }
 
-    const dailyVolumes = Array.from(dailyStats.values()).map(dayEvents => dayEvents.length);
-    const dailySentiments = Array.from(dailyStats.values()).map(dayEvents =>
-      dayEvents.reduce((sum, event) => sum + event.sentiment.score, 0) / dayEvents.length,
+    const dailyVolumes = Array.from(dailyStats.values()).map((dayEvents) => dayEvents.length);
+    const dailySentiments = Array.from(dailyStats.values()).map(
+      (dayEvents) =>
+        dayEvents.reduce((sum, event) => sum + event.sentiment.score, 0) / dayEvents.length
     );
 
     return {
       average_daily_volume: dailyVolumes.reduce((sum, vol) => sum + vol, 0) / dailyVolumes.length,
-      average_sentiment: dailySentiments.reduce((sum, sent) => sum + sent, 0) / dailySentiments.length,
+      average_sentiment:
+        dailySentiments.reduce((sum, sent) => sum + sent, 0) / dailySentiments.length,
       max_daily_volume: Math.max(...dailyVolumes),
       min_sentiment: Math.min(...dailySentiments),
     };
   }
 
   private updateDynamicThresholds(baseline: any): void {
-    if (!baseline) {return;}
+    if (!baseline) {
+      return;
+    }
 
     // Update volume spike threshold to 3x baseline average
     const dynamicVolumeThreshold = Math.max(
       baseline.average_daily_volume * this.CRISIS_THRESHOLDS.VOLUME_SPIKE_MULTIPLIER,
-      this.config.crisis_thresholds.mentions_per_hour,
+      this.config.crisis_thresholds.mentions_per_hour
     );
 
     // Update config with dynamic thresholds
     this.config.crisis_thresholds.mentions_per_hour = Math.floor(dynamicVolumeThreshold);
 
-    console.log(`🎯 Updated dynamic thresholds: volume=${this.config.crisis_thresholds.mentions_per_hour}`);
+    console.log(
+      `🎯 Updated dynamic thresholds: volume=${this.config.crisis_thresholds.mentions_per_hour}`
+    );
   }
 
   // Public API methods
@@ -546,8 +578,10 @@ export class AlertEngine extends EventEmitter {
   }
 
   updateRule(ruleId: string, updates: Partial<AlertRule>): boolean {
-    const ruleIndex = this.activeRules.findIndex(rule => rule.id === ruleId);
-    if (ruleIndex === -1) {return false;}
+    const ruleIndex = this.activeRules.findIndex((rule) => rule.id === ruleId);
+    if (ruleIndex === -1) {
+      return false;
+    }
 
     this.activeRules[ruleIndex] = { ...this.activeRules[ruleIndex], ...updates };
     console.log(`⚙️ Updated alert rule: ${ruleId}`);
@@ -561,7 +595,7 @@ export class AlertEngine extends EventEmitter {
 
   removeRule(ruleId: string): boolean {
     const initialLength = this.activeRules.length;
-    this.activeRules = this.activeRules.filter(rule => rule.id !== ruleId);
+    this.activeRules = this.activeRules.filter((rule) => rule.id !== ruleId);
 
     if (this.activeRules.length < initialLength) {
       console.log(`➖ Removed alert rule: ${ruleId}`);

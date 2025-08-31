@@ -32,7 +32,7 @@ export class GoogleAdsClient {
     private config: GoogleAdsConfig,
     auth?: GoogleAdsAuthManager,
     rateLimiter?: GoogleAdsRateLimiter,
-    circuitBreaker?: GoogleAdsCircuitBreaker,
+    circuitBreaker?: GoogleAdsCircuitBreaker
   ) {
     this.baseUrl = `https://googleads.googleapis.com/${config.apiVersion}`;
     this.auth = auth || new GoogleAdsAuthManager(config);
@@ -48,7 +48,7 @@ export class GoogleAdsClient {
    */
   async search<T = any>(
     customerId: string,
-    query: CustomerQuery,
+    query: CustomerQuery
   ): Promise<SearchGoogleAdsResponse<T>> {
     const endpoint = `customers/${customerId}/googleAds:search`;
 
@@ -71,7 +71,7 @@ export class GoogleAdsClient {
    */
   async *searchStream<T = any>(
     customerId: string,
-    query: CustomerQuery,
+    query: CustomerQuery
   ): AsyncGenerator<T[], void, unknown> {
     let pageToken: string | undefined;
 
@@ -99,19 +99,16 @@ export class GoogleAdsClient {
       partialFailure?: boolean;
       validateOnly?: boolean;
       responseContentType?: 'MUTABLE_RESOURCE' | 'RESOURCE_NAME_ONLY';
-    } = {},
+    } = {}
   ): Promise<MutateResponse> {
     // Check operation count
-    await this.rateLimiter.checkLimit(
-      this.config.developerToken,
-      operations.length,
-    );
+    await this.rateLimiter.checkLimit(this.config.developerToken, operations.length);
 
     // Build mutate request based on entity type
     const mutateRequests = this.buildMutateRequests(operations);
 
     return this.circuitBreaker.execute(async () => {
-      const promises = mutateRequests.map(request =>
+      const promises = mutateRequests.map((request) =>
         this.makeRequest(request.endpoint, {
           method: 'POST',
           body: {
@@ -121,15 +118,15 @@ export class GoogleAdsClient {
             responseContentType: options.responseContentType,
           },
           customerId,
-        }),
+        })
       );
 
       const responses = await Promise.all(promises);
 
       // Combine responses
       const combinedResponse: MutateResponse = {
-        results: responses.flatMap(r => r.results || []),
-        partialFailureError: responses.find(r => r.partialFailureError)?.partialFailureError,
+        results: responses.flatMap((r) => r.results || []),
+        partialFailureError: responses.find((r) => r.partialFailureError)?.partialFailureError,
       };
 
       // Handle partial failures
@@ -139,7 +136,7 @@ export class GoogleAdsClient {
           'Some operations failed',
           combinedResponse.results.length,
           failures.length,
-          failures,
+          failures
         );
       }
 
@@ -150,10 +147,7 @@ export class GoogleAdsClient {
   /**
    * Get resource by name
    */
-  async get<T = any>(
-    resourceName: string,
-    fields?: string[],
-  ): Promise<T> {
+  async get<T = any>(resourceName: string, fields?: string[]): Promise<T> {
     const customerId = this.extractCustomerId(resourceName);
     const query: CustomerQuery = {
       query: `SELECT ${fields ? fields.join(', ') : '*'} FROM ${this.getResourceType(resourceName)} WHERE resource_name = '${resourceName}'`,
@@ -178,7 +172,7 @@ export class GoogleAdsClient {
       body?: any;
       customerId?: string;
       headers?: Record<string, string>;
-    } = {},
+    } = {}
   ): Promise<any> {
     const { method = 'POST', body, customerId, headers = {} } = options;
 
@@ -188,7 +182,7 @@ export class GoogleAdsClient {
     // Build headers
     const requestHeaders: GoogleAdsHeaders = {
       'developer-token': this.config.developerToken,
-      'Authorization': `Bearer ${accessToken}`,
+      Authorization: `Bearer ${accessToken}`,
       'Content-Type': 'application/json',
       ...headers,
     };
@@ -241,7 +235,7 @@ export class GoogleAdsClient {
       throw new GoogleAdsAPIError(
         `Request failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
         undefined,
-        'UNAVAILABLE',
+        'UNAVAILABLE'
       );
     }
   }
@@ -256,7 +250,7 @@ export class GoogleAdsClient {
     // Group operations by entity type
     const grouped = new Map<string, MutateOperation[]>();
 
-    operations.forEach(op => {
+    operations.forEach((op) => {
       const ops = grouped.get(op.entity) || [];
       ops.push(op);
       grouped.set(op.entity, ops);
@@ -270,7 +264,7 @@ export class GoogleAdsClient {
       const endpoint = `customers/${customerId}/${entity}:mutate`;
 
       const body: any = {
-        operations: ops.map(op => {
+        operations: ops.map((op) => {
           const operation: any = {};
 
           if (op.operation === 'create') {
@@ -303,7 +297,7 @@ export class GoogleAdsClient {
     const status = errorData?.status || 'UNKNOWN';
 
     // Extract request ID if available
-    const requestId = errorData?.details?.find(d => d.requestId)?.requestId;
+    const requestId = errorData?.details?.find((d) => d.requestId)?.requestId;
 
     // Handle specific error types
     switch (status) {
@@ -344,9 +338,8 @@ export class GoogleAdsClient {
       errorData.details.forEach((detail: any) => {
         if (detail.errors) {
           detail.errors.forEach((err: any) => {
-            const field = err.location?.fieldPathElements
-              ?.map((e: any) => e.fieldName)
-              .join('.') || 'unknown';
+            const field =
+              err.location?.fieldPathElements?.map((e: any) => e.fieldName).join('.') || 'unknown';
 
             fieldErrors.push({
               field,
@@ -433,7 +426,7 @@ export class GoogleAdsClient {
     auth: boolean;
     rateLimiter: any;
     circuitBreaker: any;
-    } {
+  } {
     const token = this.auth.getCachedToken();
     const rateLimiterStats = this.rateLimiter.getUsageStats(this.config.developerToken);
 

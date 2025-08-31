@@ -9,24 +9,18 @@ interface SentimentBreakdownProps {
   sentimentData: SentimentData;
 }
 
-const SentimentBreakdown: React.FC<SentimentBreakdownProps> = ({
-  sentimentData,
-}) => {
+const SentimentBreakdown: React.FC<SentimentBreakdownProps> = ({ sentimentData }) => {
   return (
     <Card
       padding="md"
       variant="glass"
       className="hoverable hover:scale-[1.02] transition-all duration-200"
     >
-      <h3 className="section-header mb-4 tracking-wide ml-1.5">
-        SENTIMENT BREAKDOWN
-      </h3>
+      <h3 className="section-header mb-4 tracking-wide ml-1.5">SENTIMENT BREAKDOWN</h3>
       <div className="space-y-4 px-1.5 pb-5">
         <div className="flex items-center justify-between">
           <span className="text-white/80">Positive</span>
-          <span className="text-green-400 font-medium">
-            {sentimentData.positive}%
-          </span>
+          <span className="text-green-400 font-medium">{sentimentData.positive}%</span>
         </div>
         <div className="w-full bg-black/20 rounded-full h-2">
           <div
@@ -36,9 +30,7 @@ const SentimentBreakdown: React.FC<SentimentBreakdownProps> = ({
 
         <div className="flex items-center justify-between">
           <span className="text-white/80">Neutral</span>
-          <span className="text-gray-400 font-medium">
-            {sentimentData.neutral}%
-          </span>
+          <span className="text-gray-400 font-medium">{sentimentData.neutral}%</span>
         </div>
         <div className="w-full bg-black/20 rounded-full h-2">
           <div
@@ -48,9 +40,7 @@ const SentimentBreakdown: React.FC<SentimentBreakdownProps> = ({
 
         <div className="flex items-center justify-between">
           <span className="text-white/80">Negative</span>
-          <span className="text-red-400 font-medium">
-            {sentimentData.negative}%
-          </span>
+          <span className="text-red-400 font-medium">{sentimentData.negative}%</span>
         </div>
         <div className="w-full bg-black/20 rounded-full h-2">
           <div

@@ -55,7 +55,8 @@ class LocalStorageTokenStorage implements TokenStorage {
   setToken(token: AccessToken): void {
     safeSetJSON(this.tokenKey, token);
     // Calculate and store expiry time
-    const expiryTime = Date.now() + (token.expires_in ? token.expires_in * 1000 : LONG_LIVED_TOKEN_DURATION);
+    const expiryTime =
+      Date.now() + (token.expires_in ? token.expires_in * 1000 : LONG_LIVED_TOKEN_DURATION);
     localStorage.setItem(this.expiryKey, expiryTime.toString());
   }
 
@@ -78,7 +79,8 @@ const createEnhancedMetaAPI = (config?: EnhancedMetaConfig) => {
     appId: import.meta.env.VITE_META_APP_ID || '',
     appSecret: import.meta.env.VITE_META_APP_SECRET || '',
     apiVersion: '21.0', // Using v21.0 as v19.0 is deprecated
-    redirectUri: import.meta.env.VITE_META_REDIRECT_URI || `${window.location.origin  }/api/meta/callback`,
+    redirectUri:
+      import.meta.env.VITE_META_REDIRECT_URI || `${window.location.origin}/api/meta/callback`,
     enableAutoRefresh: true,
     ...config,
   };
@@ -136,14 +138,13 @@ class TokenRefreshScheduler {
     this.tokenStorage = tokenStorage;
   }
 
-  scheduleRefresh(
-    onRefresh: () => Promise<void>,
-    tokenExpiry?: number,
-  ): void {
+  scheduleRefresh(onRefresh: () => Promise<void>, tokenExpiry?: number): void {
     this.cancelRefresh();
 
     const expiry = tokenExpiry || this.tokenStorage.getTokenExpiry();
-    if (!expiry) {return;}
+    if (!expiry) {
+      return;
+    }
 
     const timeUntilRefresh = expiry - Date.now() - TOKEN_REFRESH_BUFFER;
     if (timeUntilRefresh <= 0) {
@@ -173,11 +174,17 @@ export const useMetaOAuth = (config?: EnhancedMetaConfig) => {
   const refreshScheduler = useMemo(() => new TokenRefreshScheduler(tokenStorage), [tokenStorage]);
 
   // Get current auth status with auto-refresh
-  const { data: authToken, isLoading, refetch: refetchToken } = useQuery({
+  const {
+    data: authToken,
+    isLoading,
+    refetch: refetchToken,
+  } = useQuery({
     queryKey: metaQueryKeys.auth.token(),
     queryFn: async () => {
       const cachedToken = tokenStorage.getToken();
-      if (!cachedToken) {return null;}
+      if (!cachedToken) {
+        return null;
+      }
 
       // Check if token needs refresh
       const expiry = tokenStorage.getTokenExpiry();
@@ -216,19 +223,20 @@ export const useMetaOAuth = (config?: EnhancedMetaConfig) => {
 
   // Generate random state for OAuth flow
   const generateRandomState = useCallback(() => {
-    return Math.random().toString(36).substring(2, 15) +
-           Math.random().toString(36).substring(2, 15);
+    return (
+      Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+    );
   }, []);
 
   // Generate OAuth login URL with state parameter
-  const getLoginUrl = useCallback((
-    scopes: string[] = ['ads_read', 'ads_management', 'business_management'],
-    state?: string,
-  ) => {
-    const authState = state || generateRandomState();
-    sessionStorage.setItem('meta_oauth_state', authState);
-    return metaAPI.auth.getLoginUrl(scopes);
-  }, [metaAPI, generateRandomState]);
+  const getLoginUrl = useCallback(
+    (scopes: string[] = ['ads_read', 'ads_management', 'business_management'], state?: string) => {
+      const authState = state || generateRandomState();
+      sessionStorage.setItem('meta_oauth_state', authState);
+      return metaAPI.auth.getLoginUrl(scopes);
+    },
+    [metaAPI, generateRandomState]
+  );
 
   // Exchange authorization code for access token
   const exchangeCode = useMutation({
@@ -347,10 +355,14 @@ export const useMetaUser = (options?: UseQueryOptions<BusinessUser>) => {
   return useQuery({
     queryKey: metaQueryKeys.auth.user(),
     queryFn: async () => {
-      if (!authToken) {throw new Error('Not authenticated');}
+      if (!authToken) {
+        throw new Error('Not authenticated');
+      }
 
       // Since getCurrentUser is not available in the auth API, fetch user info from Graph API
-      const response = await fetch(`https://graph.facebook.com/me?access_token=${authToken.access_token}`);
+      const response = await fetch(
+        `https://graph.facebook.com/me?access_token=${authToken.access_token}`
+      );
       if (!response.ok) {
         throw new Error('Failed to fetch user info');
       }
@@ -371,7 +383,9 @@ export const useMetaAdAccounts = (options?: UseQueryOptions<AdAccount[]>) => {
   return useQuery({
     queryKey: metaQueryKeys.accounts.list(),
     queryFn: async () => {
-      if (!authToken) {throw new Error('Not authenticated');}
+      if (!authToken) {
+        throw new Error('Not authenticated');
+      }
 
       // This would need to be implemented in the API client
       const accounts = await metaAPI.accounts.list(authToken.access_token);
@@ -390,7 +404,7 @@ export const useMetaInsights = (
   params: InsightsParams,
   options?: UseQueryOptions<InsightsData> & {
     onError?: (error: MetaAPIError) => void;
-  },
+  }
 ) => {
   const { authToken, reAuthenticate } = useMetaOAuth();
   const metaAPI = useMemo(() => createEnhancedMetaAPI(), []);
@@ -411,7 +425,9 @@ export const useMetaInsights = (
   return useQuery({
     queryKey,
     queryFn: async () => {
-      if (!authToken) {throw new Error('Not authenticated');}
+      if (!authToken) {
+        throw new Error('Not authenticated');
+      }
 
       try {
         let insightsArray: InsightsData[];
@@ -435,14 +451,16 @@ export const useMetaInsights = (
         }
 
         // Return the first insights object or a default if array is empty
-        const insights = insightsArray?.[0] || {
-          account_id: entityId,
-          impressions: '0',
-          clicks: '0',
-          spend: '0',
-          date_start: '',
-          date_stop: ''
-        } as InsightsData;
+        const insights =
+          insightsArray?.[0] ||
+          ({
+            account_id: entityId,
+            impressions: '0',
+            clicks: '0',
+            spend: '0',
+            date_start: '',
+            date_stop: '',
+          } as InsightsData);
 
         return insights;
       } catch (error) {
@@ -477,17 +495,16 @@ export const useMetaInsights = (
 };
 
 // Campaign management hooks
-export const useMetaCampaigns = (
-  accountId: string,
-  options?: UseQueryOptions<Campaign[]>,
-) => {
+export const useMetaCampaigns = (accountId: string, options?: UseQueryOptions<Campaign[]>) => {
   const { authToken } = useMetaOAuth();
   const metaAPI = useMemo(() => createEnhancedMetaAPI(), []);
 
   return useQuery({
     queryKey: metaQueryKeys.campaigns.list(accountId),
     queryFn: async () => {
-      if (!authToken) {throw new Error('Not authenticated');}
+      if (!authToken) {
+        throw new Error('Not authenticated');
+      }
 
       // This would need to be implemented in the API client
       const campaigns = await metaAPI.campaigns.list(accountId, authToken.access_token);
@@ -507,12 +524,14 @@ export const useMetaCampaignMutations = (accountId: string) => {
 
   const createCampaign = useMutation({
     mutationFn: async (campaignData: Partial<Campaign>) => {
-      if (!authToken) {throw new Error('Not authenticated');}
+      if (!authToken) {
+        throw new Error('Not authenticated');
+      }
 
       const campaign = await metaAPI.campaigns.create(
         accountId,
         campaignData,
-        authToken.access_token,
+        authToken.access_token
       );
       return campaign;
     },
@@ -528,17 +547,18 @@ export const useMetaCampaignMutations = (accountId: string) => {
   });
 
   const updateCampaign = useMutation({
-    mutationFn: async ({ campaignId, updates }: {
+    mutationFn: async ({
+      campaignId,
+      updates,
+    }: {
       campaignId: string;
-      updates: Partial<Campaign>
+      updates: Partial<Campaign>;
     }) => {
-      if (!authToken) {throw new Error('Not authenticated');}
+      if (!authToken) {
+        throw new Error('Not authenticated');
+      }
 
-      const campaign = await metaAPI.campaigns.update(
-        campaignId,
-        updates,
-        authToken.access_token,
-      );
+      const campaign = await metaAPI.campaigns.update(campaignId, updates, authToken.access_token);
       return campaign;
     },
     onSuccess: (_, variables) => {
@@ -566,7 +586,9 @@ export const useMetaCampaignMutations = (accountId: string) => {
 
   const deleteCampaign = useMutation({
     mutationFn: async (campaignId: string) => {
-      if (!authToken) {throw new Error('Not authenticated');}
+      if (!authToken) {
+        throw new Error('Not authenticated');
+      }
 
       await metaAPI.campaigns.delete(campaignId, authToken.access_token);
     },
@@ -595,11 +617,7 @@ export const useMetaCampaignMutations = (accountId: string) => {
 
 // Export all hooks and utilities
 export type { TokenStorage };
-export {
-  LocalStorageTokenStorage,
-  TokenRefreshScheduler,
-  createEnhancedMetaAPI,
-};
+export { LocalStorageTokenStorage, TokenRefreshScheduler, createEnhancedMetaAPI };
 
 // Re-export types for convenience
 export type {

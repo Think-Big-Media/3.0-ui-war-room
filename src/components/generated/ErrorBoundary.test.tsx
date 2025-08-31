@@ -5,13 +5,11 @@ import ErrorBoundary from './ErrorBoundary';
 
 // Mock console methods
 const originalConsoleError = console.error;
-const consoleErrorSpy = jest
-  .spyOn(console, 'error')
-  .mockImplementation((...args) => {
-    // Suppress output during tests but still track calls
-    // You can uncomment the next line to see errors during debugging:
-    // originalConsoleError(...args);
-  });
+const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation((...args) => {
+  // Suppress output during tests but still track calls
+  // You can uncomment the next line to see errors during debugging:
+  // originalConsoleError(...args);
+});
 
 // Component that throws an error
 const ThrowError = ({ shouldThrow }: { shouldThrow: boolean }) => {
@@ -61,13 +59,11 @@ describe('ErrorBoundary', () => {
       render(
         <ErrorBoundary>
           <div>Test content</div>
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       expect(screen.getByText('Test content')).toBeInTheDocument();
-      expect(
-        screen.queryByText('Something went wrong'),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText('Something went wrong')).not.toBeInTheDocument();
     });
 
     it('should render multiple children correctly', () => {
@@ -76,7 +72,7 @@ describe('ErrorBoundary', () => {
           <div>First child</div>
           <div>Second child</div>
           <div>Third child</div>
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       expect(screen.getByText('First child')).toBeInTheDocument();
@@ -95,7 +91,7 @@ describe('ErrorBoundary', () => {
               <p>Content</p>
             </main>
           </div>
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       expect(screen.getByText('Title')).toBeInTheDocument();
@@ -108,13 +104,11 @@ describe('ErrorBoundary', () => {
       render(
         <ErrorBoundary>
           <ThrowError shouldThrow={true} />
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       expect(screen.getByText('Something went wrong')).toBeInTheDocument();
-      expect(
-        screen.getByText('Please try refreshing the page'),
-      ).toBeInTheDocument();
+      expect(screen.getByText('Please try refreshing the page')).toBeInTheDocument();
       expect(screen.queryByText('No error content')).not.toBeInTheDocument();
     });
 
@@ -122,7 +116,7 @@ describe('ErrorBoundary', () => {
       render(
         <ErrorBoundary>
           <ThrowError shouldThrow={true} />
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       const detailsElement = screen.getByText('Show error details');
@@ -138,7 +132,7 @@ describe('ErrorBoundary', () => {
       render(
         <ErrorBoundary>
           <ThrowError shouldThrow={true} />
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       const summary = screen.getByText('Show error details');
@@ -155,7 +149,7 @@ describe('ErrorBoundary', () => {
       render(
         <ErrorBoundary>
           <ThrowCustomError shouldThrow={true} />
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       const summary = screen.getByText('Show error details');
@@ -174,7 +168,7 @@ describe('ErrorBoundary', () => {
       render(
         <ErrorBoundary>
           <ThrowInLifecycle shouldThrow={true} />
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       expect(screen.getByText('Something went wrong')).toBeInTheDocument();
@@ -187,13 +181,11 @@ describe('ErrorBoundary', () => {
       const { container } = render(
         <ErrorBoundary>
           <ThrowError shouldThrow={true} />
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       // Find the main error container with gradient background
-      const errorContainer = container.querySelector(
-        '.min-h-screen.bg-gradient-to-br',
-      );
+      const errorContainer = container.querySelector('.min-h-screen.bg-gradient-to-br');
       expect(errorContainer).toBeInTheDocument();
       expect(errorContainer).toHaveClass(
         'min-h-screen',
@@ -203,7 +195,7 @@ describe('ErrorBoundary', () => {
         'bg-gradient-to-br',
         'from-purple-600',
         'via-purple-700',
-        'to-purple-900',
+        'to-purple-900'
       );
     });
 
@@ -211,24 +203,18 @@ describe('ErrorBoundary', () => {
       render(
         <ErrorBoundary>
           <ThrowError shouldThrow={true} />
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       const details = screen.getByText('Show error details').closest('details');
-      expect(details).toHaveClass(
-        'mt-4',
-        'text-left',
-        'bg-black/20',
-        'p-4',
-        'rounded-lg',
-      );
+      expect(details).toHaveClass('mt-4', 'text-left', 'bg-black/20', 'p-4', 'rounded-lg');
     });
 
     it('should style error summary correctly', () => {
       render(
         <ErrorBoundary>
           <ThrowError shouldThrow={true} />
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       const summary = screen.getByText('Show error details');
@@ -241,7 +227,7 @@ describe('ErrorBoundary', () => {
       const { rerender } = render(
         <ErrorBoundary>
           <ThrowError shouldThrow={false} />
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       expect(screen.getByText('No error content')).toBeInTheDocument();
@@ -250,7 +236,7 @@ describe('ErrorBoundary', () => {
       rerender(
         <ErrorBoundary>
           <ThrowError shouldThrow={true} />
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       expect(screen.getByText('Something went wrong')).toBeInTheDocument();
@@ -260,7 +246,7 @@ describe('ErrorBoundary', () => {
       const { rerender } = render(
         <ErrorBoundary>
           <ThrowError shouldThrow={true} />
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       expect(screen.getByText('Something went wrong')).toBeInTheDocument();
@@ -269,7 +255,7 @@ describe('ErrorBoundary', () => {
       rerender(
         <ErrorBoundary>
           <div>This won't show</div>
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       // Should still show error UI
@@ -289,7 +275,7 @@ describe('ErrorBoundary', () => {
       render(
         <ErrorBoundary>
           <ErrorWithoutStack />
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       const summary = screen.getByText('Show error details');
@@ -306,7 +292,7 @@ describe('ErrorBoundary', () => {
       render(
         <ErrorBoundary>
           <ThrowString />
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       expect(screen.getByText('Something went wrong')).toBeInTheDocument();
@@ -324,7 +310,7 @@ describe('ErrorBoundary', () => {
         render(
           <ErrorBoundary>
             <ThrowNull />
-          </ErrorBoundary>,
+          </ErrorBoundary>
         );
       }).toThrow();
 
@@ -339,7 +325,7 @@ describe('ErrorBoundary', () => {
       const { container } = render(
         <ErrorBoundary>
           <LongError />
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       const summary = screen.getByText('Show error details');
@@ -361,7 +347,7 @@ describe('ErrorBoundary', () => {
       const { rerender } = render(
         <ErrorBoundary>
           <ThrowError shouldThrow={true} />
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       expect(screen.getByText('Something went wrong')).toBeInTheDocument();
@@ -370,7 +356,7 @@ describe('ErrorBoundary', () => {
       rerender(
         <ErrorBoundary>
           <ThrowError shouldThrow={false} />
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       expect(screen.getByText('Something went wrong')).toBeInTheDocument();
@@ -382,7 +368,7 @@ describe('ErrorBoundary', () => {
       render(
         <ErrorBoundary>
           <ThrowError shouldThrow={true} />
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       const heading = screen.getByRole('heading', { level: 1 });
@@ -393,7 +379,7 @@ describe('ErrorBoundary', () => {
       render(
         <ErrorBoundary>
           <ThrowError shouldThrow={true} />
-        </ErrorBoundary>,
+        </ErrorBoundary>
       );
 
       const summary = screen.getByText('Show error details');

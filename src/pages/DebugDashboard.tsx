@@ -10,7 +10,7 @@ const DebugDashboard: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setStatus(prev => [...prev, 'useEffect ran']);
+    setStatus((prev) => [...prev, 'useEffect ran']);
 
     // Test imports
     try {
@@ -20,11 +20,13 @@ const DebugDashboard: React.FC = () => {
         import('../components/dashboard/ActivityFeed').then(() => 'ActivityFeed loaded'),
         import('../components/dashboard/CampaignHealth').then(() => 'CampaignHealth loaded'),
         import('../components/dashboard/AnalyticsOverview').then(() => 'AnalyticsOverview loaded'),
-      ]).then(results => {
-        setStatus(prev => [...prev, ...results]);
-      }).catch(err => {
-        setError(`Import error: ${err.message}`);
-      });
+      ])
+        .then((results) => {
+          setStatus((prev) => [...prev, ...results]);
+        })
+        .catch((err) => {
+          setError(`Import error: ${err.message}`);
+        });
     } catch (err: any) {
       setError(`Sync error: ${err.message}`);
     }
@@ -38,7 +40,9 @@ const DebugDashboard: React.FC = () => {
         <h2 className="text-lg font-semibold mb-2">Status:</h2>
         <ul className="list-disc list-inside space-y-1">
           {status.map((item, idx) => (
-            <li key={idx} className="text-green-600">{item}</li>
+            <li key={idx} className="text-green-600">
+              {item}
+            </li>
           ))}
         </ul>
       </div>
@@ -52,7 +56,7 @@ const DebugDashboard: React.FC = () => {
 
       <div className="mt-4">
         <button
-          onClick={() => window.location.href = '/dashboard'}
+          onClick={() => (window.location.href = '/dashboard')}
           className="px-3 py-1.5 bg-blue-600 text-white rounded hover:bg-blue-700"
         >
           Go to Real Dashboard

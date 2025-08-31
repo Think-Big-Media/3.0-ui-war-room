@@ -58,7 +58,7 @@ const server = setupServer(
         two_factor_enabled: false,
         org_id: '123',
         created_at: new Date().toISOString(),
-      }),
+      })
     );
   }),
 
@@ -66,7 +66,10 @@ const server = setupServer(
     const body = await req.text();
     const params = new URLSearchParams(body);
 
-    if (params.get('username') === 'test@example.com' && params.get('password') === 'Password123!') {
+    if (
+      params.get('username') === 'test@example.com' &&
+      params.get('password') === 'Password123!'
+    ) {
       return res(
         ctx.status(200),
         ctx.json({
@@ -89,7 +92,7 @@ const server = setupServer(
             org_id: '123',
             created_at: new Date().toISOString(),
           },
-        }),
+        })
       );
     }
 
@@ -126,9 +129,9 @@ const server = setupServer(
           total_events: 78,
           upcoming_events: 12,
         },
-      }),
+      })
     );
-  }),
+  })
 );
 
 // Enable API mocking
@@ -187,7 +190,9 @@ describe('Authentication Flow Integration Tests', () => {
       // Should show email verification page
       await waitFor(() => {
         expect(screen.getByText(/verify your email/i)).toBeInTheDocument();
-        expect(screen.getByText(/we've sent a verification email to test@example.com/i)).toBeInTheDocument();
+        expect(
+          screen.getByText(/we've sent a verification email to test@example.com/i)
+        ).toBeInTheDocument();
       });
     });
   });
@@ -290,7 +295,7 @@ describe('Authentication Flow Integration Tests', () => {
               <LoginForm />
             </AuthProvider>
           </MemoryRouter>
-        </Provider>,
+        </Provider>
       );
 
       await user.type(screen.getByLabelText(/email address/i), 'test@example.com');
@@ -319,7 +324,7 @@ describe('Authentication Flow Integration Tests', () => {
               </Routes>
             </AuthProvider>
           </MemoryRouter>
-        </Provider>,
+        </Provider>
       );
 
       // Should still have access to dashboard
@@ -335,7 +340,7 @@ describe('Authentication Flow Integration Tests', () => {
       server.use(
         rest.get('/api/v1/auth/me', (req, res, ctx) => {
           return res(ctx.status(401), ctx.json({ detail: 'Token expired' }));
-        }),
+        })
       );
 
       // Set expired token in localStorage
@@ -361,7 +366,7 @@ describe('Authentication Flow Integration Tests', () => {
       server.use(
         rest.post('/api/v1/auth/login', (req, res) => {
           return res.networkError('Network error');
-        }),
+        })
       );
 
       render(<TestApp initialRoute="/login" />);
@@ -383,7 +388,7 @@ describe('Authentication Flow Integration Tests', () => {
       server.use(
         rest.post('/api/v1/auth/register', (req, res, ctx) => {
           return res(ctx.status(500), ctx.json({ detail: 'Internal server error' }));
-        }),
+        })
       );
 
       render(<TestApp initialRoute="/register" />);

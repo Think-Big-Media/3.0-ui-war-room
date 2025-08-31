@@ -10,7 +10,7 @@ interface RiskQualityIndicatorsProps {
 
 export const RiskQualityIndicators: React.FC<RiskQualityIndicatorsProps> = ({ data }) => {
   const { isLive } = useDataMode();
-  
+
   const crisisRisk = data?.risk?.crisisLevel || 23;
   const qualityScore = data?.quality?.engagementQuality || 87;
   const threatLevel = data?.risk?.threatLevel || 'LOW';
@@ -23,16 +23,20 @@ export const RiskQualityIndicators: React.FC<RiskQualityIndicatorsProps> = ({ da
   };
 
   const getThreatColor = (level: string) => {
-    switch(level.toUpperCase()) {
-      case 'HIGH': return 'text-red-400';
-      case 'MEDIUM': return 'text-yellow-400';
-      case 'LOW': return 'text-green-400';
-      default: return 'text-gray-400';
+    switch (level.toUpperCase()) {
+      case 'HIGH':
+        return 'text-red-400';
+      case 'MEDIUM':
+        return 'text-yellow-400';
+      case 'LOW':
+        return 'text-green-400';
+      default:
+        return 'text-gray-400';
     }
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3, delay: 0.3 }}
@@ -44,7 +48,7 @@ export const RiskQualityIndicators: React.FC<RiskQualityIndicatorsProps> = ({ da
           <span className="text-[8px] text-yellow-400 uppercase font-jetbrains">Mock</span>
         )}
       </div>
-      
+
       <div className="flex-1 space-y-3">
         {/* Crisis Risk */}
         <div className="flex items-center justify-between">
@@ -67,9 +71,7 @@ export const RiskQualityIndicators: React.FC<RiskQualityIndicatorsProps> = ({ da
             <span className="text-[9px] text-white/70 font-barlow uppercase">Quality</span>
           </div>
           <div className="text-right">
-            <div className="text-sm font-bold text-blue-400 font-jetbrains">
-              {qualityScore}
-            </div>
+            <div className="text-sm font-bold text-blue-400 font-jetbrains">{qualityScore}</div>
             <div className="text-[8px] text-white/50 font-barlow">score</div>
           </div>
         </div>
@@ -88,15 +90,21 @@ export const RiskQualityIndicators: React.FC<RiskQualityIndicatorsProps> = ({ da
           </div>
         </div>
       </div>
-      
+
       {/* Overall status indicator */}
       <div className="mt-2 pt-2 border-t border-white/10">
         <div className="flex items-center justify-between">
           <span className="text-[8px] text-white/50 font-barlow uppercase">Status</span>
           <div className="flex items-center gap-1">
-            <div className={`w-2 h-2 rounded-full ${
-              crisisRisk < 30 ? 'bg-green-400' : crisisRisk < 60 ? 'bg-yellow-400' : 'bg-red-400 animate-pulse'
-            }`} />
+            <div
+              className={`w-2 h-2 rounded-full ${
+                crisisRisk < 30
+                  ? 'bg-green-400'
+                  : crisisRisk < 60
+                    ? 'bg-yellow-400'
+                    : 'bg-red-400 animate-pulse'
+              }`}
+            />
             <span className="text-[9px] text-white/70 font-barlow">
               {crisisRisk < 30 ? 'Secure' : crisisRisk < 60 ? 'Watchful' : 'Alert'}
             </span>

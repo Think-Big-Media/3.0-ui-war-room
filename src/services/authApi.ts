@@ -3,7 +3,13 @@
  * Handles all auth-related API calls to backend endpoints
  */
 
-import { type BaseQueryFn, createApi, type FetchArgs, fetchBaseQuery, type FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
+import {
+  type BaseQueryFn,
+  createApi,
+  type FetchArgs,
+  fetchBaseQuery,
+  type FetchBaseQueryError,
+} from '@reduxjs/toolkit/query/react';
 
 import { API_BASE_URL, API_VERSION } from '@/config/constants';
 
@@ -75,7 +81,7 @@ export interface RefreshTokenRequest {
 const baseQueryWithAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
   args,
   api,
-  extraOptions,
+  extraOptions
 ) => {
   const baseQuery = fetchBaseQuery({
     baseUrl: `${API_BASE_URL}/api/v1/auth`,
@@ -105,7 +111,7 @@ const baseQueryWithAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQuery
           body: { refresh_token: refreshToken },
         },
         api,
-        extraOptions,
+        extraOptions
       );
 
       if (refreshResult.data) {
@@ -124,7 +130,6 @@ const baseQueryWithAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQuery
       localStorage.removeItem('refresh_token');
       localStorage.removeItem('user');
       window.location.href = '/login';
-
     }
   }
 
@@ -300,10 +305,14 @@ export const authUtils = {
   // Permission checks
   hasPermission: (permission: string): boolean => {
     const user = authUtils.getCurrentUser();
-    if (!user) {return false;}
+    if (!user) {
+      return false;
+    }
 
     // Admin has all permissions
-    if (user.role === 'admin') {return true;}
+    if (user.role === 'admin') {
+      return true;
+    }
 
     return user.permissions.includes(permission);
   },

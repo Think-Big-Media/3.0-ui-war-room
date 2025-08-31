@@ -42,7 +42,9 @@ export async function signUp(credentials: RegisterCredentials) {
     },
   });
 
-  if (error) {throw error;}
+  if (error) {
+    throw error;
+  }
   return data;
 }
 
@@ -55,7 +57,9 @@ export async function signIn(credentials: LoginCredentials) {
     password: credentials.password,
   });
 
-  if (error) {throw error;}
+  if (error) {
+    throw error;
+  }
   return data;
 }
 
@@ -64,7 +68,9 @@ export async function signIn(credentials: LoginCredentials) {
  */
 export async function signOut() {
   const { error } = await supabase.auth.signOut();
-  if (error) {throw error;}
+  if (error) {
+    throw error;
+  }
 }
 
 /**
@@ -72,7 +78,9 @@ export async function signOut() {
  */
 export async function getSession() {
   const { data, error } = await supabase.auth.getSession();
-  if (error) {throw error;}
+  if (error) {
+    throw error;
+  }
   return data.session;
 }
 
@@ -81,7 +89,9 @@ export async function getSession() {
  */
 export async function getCurrentUser() {
   const { data, error } = await supabase.auth.getUser();
-  if (error) {throw error;}
+  if (error) {
+    throw error;
+  }
   return data.user;
 }
 
@@ -93,7 +103,9 @@ export async function resetPassword(email: string) {
     redirectTo: `${window.location.origin}/auth/reset-password`,
   });
 
-  if (error) {throw error;}
+  if (error) {
+    throw error;
+  }
   return data;
 }
 
@@ -105,7 +117,9 @@ export async function updatePassword(password: string) {
     password,
   });
 
-  if (error) {throw error;}
+  if (error) {
+    throw error;
+  }
   return data;
 }
 

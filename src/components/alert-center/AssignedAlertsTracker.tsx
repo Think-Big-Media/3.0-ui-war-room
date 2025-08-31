@@ -7,14 +7,9 @@ interface AssignedAlertsTrackerProps {
   teamMembers: TeamMember[];
 }
 
-const AssignedAlertsTracker: React.FC<AssignedAlertsTrackerProps> = ({
-  alerts,
-  teamMembers,
-}) => {
+const AssignedAlertsTracker: React.FC<AssignedAlertsTrackerProps> = ({ alerts, teamMembers }) => {
   const getAssignedAlerts = (memberName: string) => {
-    return alerts.filter(
-      (alert) => alert.assignedTo === memberName && alert.status !== 'resolved'
-    );
+    return alerts.filter((alert) => alert.assignedTo === memberName && alert.status !== 'resolved');
   };
 
   const getStatusDot = (status: TeamMember['status']) => {
@@ -32,7 +27,9 @@ const AssignedAlertsTracker: React.FC<AssignedAlertsTrackerProps> = ({
 
   return (
     <Card padding="sm" variant="glass">
-      <h3 className="text-xl font-semibold text-white/40 tracking-wide font-barlow-condensed mb-4">TEAM ASSIGNMENTS</h3>
+      <h3 className="text-xl font-semibold text-white/40 tracking-wide font-barlow-condensed mb-4">
+        TEAM ASSIGNMENTS
+      </h3>
       <div className="space-y-3">
         {teamMembers.map((member) => {
           const assignedAlerts = getAssignedAlerts(member.name);
@@ -53,16 +50,12 @@ const AssignedAlertsTracker: React.FC<AssignedAlertsTrackerProps> = ({
                   />
                 </div>
                 <div>
-                  <div className="text-white/95 font-medium text-sm">
-                    {member.name}
-                  </div>
+                  <div className="text-white/95 font-medium text-sm">{member.name}</div>
                   <div className="text-white/60 text-xs">{member.role}</div>
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-white/95 font-semibold">
-                  {assignedAlerts.length}
-                </div>
+                <div className="text-white/95 font-semibold">{assignedAlerts.length}</div>
                 <div className="text-white/60 text-xs">Active</div>
               </div>
             </div>

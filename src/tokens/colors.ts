@@ -36,9 +36,7 @@ export const ROUTE_TO_BRAND_MAP = {
  * Returns the hex color that should be used for --page-accent
  */
 export function getRouteAccent(pathname: string): string {
-  const routeKey =
-    ROUTE_TO_BRAND_MAP[pathname as keyof typeof ROUTE_TO_BRAND_MAP] ||
-    'dashboard';
+  const routeKey = ROUTE_TO_BRAND_MAP[pathname as keyof typeof ROUTE_TO_BRAND_MAP] || 'dashboard';
   return BRAND_TOKENS[routeKey];
 }
 

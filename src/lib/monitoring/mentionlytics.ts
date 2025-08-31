@@ -3,7 +3,12 @@
  * Real-time social media and web monitoring
  */
 
-import { type MonitoringClient, type MonitoringEvent, type ServiceHealth, type MonitoringConfig } from './types';
+import {
+  type MonitoringClient,
+  type MonitoringEvent,
+  type ServiceHealth,
+  type MonitoringConfig,
+} from './types';
 
 interface MentionlyticsConfig {
   apiKey: string;
@@ -93,7 +98,7 @@ export class MentionlyticsClient implements MonitoringClient {
     const response = await this.makeRequest(`/mentions?${params}`);
     const data: MentionlyticsResponse = await response.json();
 
-    return data.mentions.map(mention => this.transformMention(mention));
+    return data.mentions.map((mention) => this.transformMention(mention));
   }
 
   async getServiceHealth(): Promise<ServiceHealth> {
@@ -156,7 +161,7 @@ export class MentionlyticsClient implements MonitoringClient {
     const response = await fetch(`${this.baseUrl}${endpoint}`, {
       ...options,
       headers: {
-        'Authorization': `Bearer ${this.config.apiKey}`,
+        Authorization: `Bearer ${this.config.apiKey}`,
         'Content-Type': 'application/json',
         ...options.headers,
       },
@@ -215,26 +220,32 @@ export class MentionlyticsClient implements MonitoringClient {
     if (['twitter', 'facebook', 'instagram', 'tiktok'].includes(lowerSource)) {
       return 'social';
     }
-    if (['bbc', 'cnn', 'reuters'].some(news => lowerSource.includes(news))) {
+    if (['bbc', 'cnn', 'reuters'].some((news) => lowerSource.includes(news))) {
       return 'news';
     }
     if (lowerSource.includes('review')) {
       return 'review';
     }
-    if (['reddit', 'forum'].some(forum => lowerSource.includes(forum))) {
+    if (['reddit', 'forum'].some((forum) => lowerSource.includes(forum))) {
       return 'forum';
     }
     return 'mention';
   }
 
   private getSentimentLabel(score: number): 'positive' | 'negative' | 'neutral' {
-    if (score > 0.3) {return 'positive';}
-    if (score < -0.3) {return 'negative';}
+    if (score > 0.3) {
+      return 'positive';
+    }
+    if (score < -0.3) {
+      return 'negative';
+    }
     return 'neutral';
   }
 
   private calculateEngagement(engagement?: any): number {
-    if (!engagement) {return 0;}
+    if (!engagement) {
+      return 0;
+    }
     return (engagement.likes || 0) + (engagement.shares || 0) + (engagement.comments || 0);
   }
 
@@ -242,9 +253,7 @@ export class MentionlyticsClient implements MonitoringClient {
     // Simple keyword extraction - in production, use NLP
     const words = text.toLowerCase().split(/\s+/);
     const stopWords = ['the', 'is', 'at', 'which', 'on', 'a', 'an', 'as', 'are', 'was', 'were'];
-    return words
-      .filter(word => word.length > 3 && !stopWords.includes(word))
-      .slice(0, 10);
+    return words.filter((word) => word.length > 3 && !stopWords.includes(word)).slice(0, 10);
   }
 
   private extractMentions(text: string): string[] {

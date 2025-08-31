@@ -9,18 +9,20 @@ import { supabaseServices } from '../../services/supabaseServices';
 
 export function SupabaseMigrationTest() {
   const { user, isAuthenticated, signInWithEmail, signUpWithEmail, signOut } = useAuth();
-  const [testResults, setTestResults] = useState<Array<{
-    test: string;
-    status: 'pending' | 'success' | 'error';
-    message: string;
-  }>>([]);
+  const [testResults, setTestResults] = useState<
+    Array<{
+      test: string;
+      status: 'pending' | 'success' | 'error';
+      message: string;
+    }>
+  >([]);
   const [testCredentials, setTestCredentials] = useState({
     email: 'test@warroom.dev',
     password: 'TestPassword123!',
   });
 
   const addResult = (test: string, status: 'success' | 'error', message: string) => {
-    setTestResults(prev => [...prev, { test, status, message }]);
+    setTestResults((prev) => [...prev, { test, status, message }]);
   };
 
   const runMigrationTests = async () => {
@@ -47,7 +49,7 @@ export function SupabaseMigrationTest() {
 
       // Test 4: Service Methods Available
       const services = ['volunteers', 'events', 'contacts', 'documents', 'donations'];
-      services.forEach(service => {
+      services.forEach((service) => {
         if (supabaseServices[service as keyof typeof supabaseServices]) {
           addResult(`${service} Service`, 'success', `${service} service methods available`);
         } else {
@@ -56,7 +58,6 @@ export function SupabaseMigrationTest() {
       });
 
       addResult('Migration Test', 'success', 'All migration tests completed');
-
     } catch (error: any) {
       addResult('Migration Test', 'error', `Test failed: ${error.message}`);
     }
@@ -64,15 +65,11 @@ export function SupabaseMigrationTest() {
 
   const testSignUp = async () => {
     try {
-      await signUpWithEmail(
-        testCredentials.email,
-        testCredentials.password,
-        {
-          first_name: 'Test',
-          last_name: 'User',
-          organization_name: 'Test Organization',
-        },
-      );
+      await signUpWithEmail(testCredentials.email, testCredentials.password, {
+        first_name: 'Test',
+        last_name: 'User',
+        organization_name: 'Test Organization',
+      });
       addResult('Sign Up Test', 'success', 'Sign up completed - check email for confirmation');
     } catch (error: any) {
       addResult('Sign Up Test', 'error', `Sign up failed: ${error.message}`);
@@ -114,7 +111,7 @@ export function SupabaseMigrationTest() {
             <input
               type="email"
               value={testCredentials.email}
-              onChange={(e) => setTestCredentials(prev => ({ ...prev, email: e.target.value }))}
+              onChange={(e) => setTestCredentials((prev) => ({ ...prev, email: e.target.value }))}
               className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2"
             />
           </div>
@@ -123,7 +120,9 @@ export function SupabaseMigrationTest() {
             <input
               type="password"
               value={testCredentials.password}
-              onChange={(e) => setTestCredentials(prev => ({ ...prev, password: e.target.value }))}
+              onChange={(e) =>
+                setTestCredentials((prev) => ({ ...prev, password: e.target.value }))
+              }
               className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2"
             />
           </div>
@@ -162,10 +161,18 @@ export function SupabaseMigrationTest() {
       {isAuthenticated && user && (
         <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
           <h2 className="text-lg font-semibold text-green-800 mb-2">Current User</h2>
-          <p><strong>Email:</strong> {user.email}</p>
-          <p><strong>ID:</strong> {user.id}</p>
-          <p><strong>Confirmed:</strong> {user.email_confirmed_at ? 'Yes' : 'No'}</p>
-          <p><strong>Role:</strong> {user.user_metadata?.role || 'user'}</p>
+          <p>
+            <strong>Email:</strong> {user.email}
+          </p>
+          <p>
+            <strong>ID:</strong> {user.id}
+          </p>
+          <p>
+            <strong>Confirmed:</strong> {user.email_confirmed_at ? 'Yes' : 'No'}
+          </p>
+          <p>
+            <strong>Role:</strong> {user.user_metadata?.role || 'user'}
+          </p>
         </div>
       )}
 
@@ -185,13 +192,15 @@ export function SupabaseMigrationTest() {
           >
             <div className="flex items-center">
               <span className="font-medium mr-2">{result.test}:</span>
-              <span className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium ${
-                result.status === 'success'
-                  ? 'bg-green-100 text-green-800'
-                  : result.status === 'error'
-                    ? 'bg-red-100 text-red-800'
-                    : 'bg-gray-100 text-gray-800'
-              }`}>
+              <span
+                className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium ${
+                  result.status === 'success'
+                    ? 'bg-green-100 text-green-800'
+                    : result.status === 'error'
+                      ? 'bg-red-100 text-red-800'
+                      : 'bg-gray-100 text-gray-800'
+                }`}
+              >
                 {result.status.toUpperCase()}
               </span>
             </div>

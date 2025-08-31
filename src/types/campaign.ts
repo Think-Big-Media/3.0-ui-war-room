@@ -44,7 +44,7 @@ export const defaultCampaignData: CampaignSetupData = {
   candidateParty: 'Republican',
   competitors: [],
   keywords: [],
-  trackingGoals: []
+  trackingGoals: [],
 };
 
 // Additional API response types that were using 'any'

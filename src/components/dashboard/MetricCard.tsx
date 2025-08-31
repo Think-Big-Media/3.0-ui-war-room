@@ -123,7 +123,9 @@ const MetricCardComponent: React.FC<MetricCardProps> = ({
 
   // Format value
   const formatValue = (val: string | number) => {
-    if (typeof val === 'string') {return val;}
+    if (typeof val === 'string') {
+      return val;
+    }
 
     switch (format) {
       case 'currency':
@@ -148,11 +150,13 @@ const MetricCardComponent: React.FC<MetricCardProps> = ({
     const width = 80;
     const height = 30;
 
-    const points = data.map((val, idx) => {
-      const x = (idx / (data.length - 1)) * width;
-      const y = height - ((val - min) / range) * height;
-      return `${x},${y}`;
-    }).join(' ');
+    const points = data
+      .map((val, idx) => {
+        const x = (idx / (data.length - 1)) * width;
+        const y = height - ((val - min) / range) * height;
+        return `${x},${y}`;
+      })
+      .join(' ');
 
     return (
       <svg width={width} height={height} className="mt-2">
@@ -170,11 +174,13 @@ const MetricCardComponent: React.FC<MetricCardProps> = ({
 
   if (loading) {
     return (
-      <div className={cn(
-        'relative bg-white rounded-2xl border border-gray-100 shadow-sm',
-        sizeClass.card,
-        'animate-pulse',
-      )}>
+      <div
+        className={cn(
+          'relative bg-white rounded-2xl border border-gray-100 shadow-sm',
+          sizeClass.card,
+          'animate-pulse'
+        )}
+      >
         <div className="flex items-start justify-between mb-4">
           <div className={cn('rounded-xl bg-gray-200', sizeClass.icon)} />
           <div className="w-16 h-6 bg-gray-200 rounded" />
@@ -189,9 +195,13 @@ const MetricCardComponent: React.FC<MetricCardProps> = ({
     <div
       className={cn(
         'relative bg-white rounded-2xl border border-gray-100 shadow-sm group overflow-hidden',
-        getAnimationClass(prefersReducedMotion, 'hover:shadow-xl transition-all duration-300', 'hover:shadow-lg'),
+        getAnimationClass(
+          prefersReducedMotion,
+          'hover:shadow-xl transition-all duration-300',
+          'hover:shadow-lg'
+        ),
         sizeClass.card,
-        onClick && 'cursor-pointer',
+        onClick && 'cursor-pointer'
       )}
       onClick={onClick}
     >
@@ -201,27 +211,37 @@ const MetricCardComponent: React.FC<MetricCardProps> = ({
       {/* Header */}
       <div className="relative flex items-start justify-between mb-4">
         {/* Icon with gradient background */}
-        <div className={cn(
-          'relative rounded-xl bg-gradient-to-br shadow-lg transform',
-          getAnimationClass(prefersReducedMotion, 'group-hover:scale-110 transition-transform duration-300', ''),
-          scheme.gradient,
-          scheme.hover,
-          sizeClass.icon,
-        )}>
+        <div
+          className={cn(
+            'relative rounded-xl bg-gradient-to-br shadow-lg transform',
+            getAnimationClass(
+              prefersReducedMotion,
+              'group-hover:scale-110 transition-transform duration-300',
+              ''
+            ),
+            scheme.gradient,
+            scheme.hover,
+            sizeClass.icon
+          )}
+        >
           <Icon className={cn('text-white', sizeClass.iconSize)} />
           {/* Icon glow effect */}
-          <div className={cn(
-            'absolute inset-0 rounded-xl bg-gradient-to-br opacity-0 group-hover:opacity-30 transition-opacity duration-300',
-            scheme.gradient,
-          )} />
+          <div
+            className={cn(
+              'absolute inset-0 rounded-xl bg-gradient-to-br opacity-0 group-hover:opacity-30 transition-opacity duration-300',
+              scheme.gradient
+            )}
+          />
         </div>
 
         {/* Change indicator */}
         {change !== undefined && (
-          <div className={cn(
-            'flex items-center space-x-1 px-2.5 py-1 rounded-lg',
-            trend === 'up' ? 'bg-green-50' : trend === 'down' ? 'bg-red-50' : 'bg-gray-50',
-          )}>
+          <div
+            className={cn(
+              'flex items-center space-x-1 px-2.5 py-1 rounded-lg',
+              trend === 'up' ? 'bg-green-50' : trend === 'down' ? 'bg-red-50' : 'bg-gray-50'
+            )}
+          >
             {trend === 'up' ? (
               <ArrowUpRight className="w-3.5 h-3.5 text-green-600" />
             ) : trend === 'down' ? (
@@ -229,10 +249,16 @@ const MetricCardComponent: React.FC<MetricCardProps> = ({
             ) : (
               <Minus className="w-3.5 h-3.5 text-gray-600" />
             )}
-            <span className={cn(
-              'text-sm font-semibold',
-              trend === 'up' ? 'text-green-600' : trend === 'down' ? 'text-red-600' : 'text-gray-600',
-            )}>
+            <span
+              className={cn(
+                'text-sm font-semibold',
+                trend === 'up'
+                  ? 'text-green-600'
+                  : trend === 'down'
+                    ? 'text-red-600'
+                    : 'text-gray-600'
+              )}
+            >
               {Math.abs(change)}%
             </span>
           </div>
@@ -260,11 +286,7 @@ const MetricCardComponent: React.FC<MetricCardProps> = ({
       )}
 
       {/* Footer */}
-      {footer && (
-        <div className="mt-4 pt-4 border-t border-gray-100">
-          {footer}
-        </div>
-      )}
+      {footer && <div className="mt-4 pt-4 border-t border-gray-100">{footer}</div>}
 
       {/* Click indicator */}
       {onClick && (

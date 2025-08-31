@@ -46,7 +46,7 @@ export function MetaIntegrationExample() {
       // Load initial data
       await loadAdAccounts();
     } catch (err) {
-      setError(`Authentication failed: ${  (err as Error).message}`);
+      setError(`Authentication failed: ${(err as Error).message}`);
     } finally {
       setLoading(false);
     }
@@ -70,7 +70,7 @@ export function MetaIntegrationExample() {
         await loadCampaigns(accounts[0].account_id);
       }
     } catch (err) {
-      setError(`Failed to load ad accounts: ${  (err as Error).message}`);
+      setError(`Failed to load ad accounts: ${(err as Error).message}`);
     } finally {
       setLoading(false);
     }
@@ -85,7 +85,7 @@ export function MetaIntegrationExample() {
       // Load insights
       await loadInsights(accountId);
     } catch (err) {
-      setError(`Failed to load campaigns: ${  (err as Error).message}`);
+      setError(`Failed to load campaigns: ${(err as Error).message}`);
     } finally {
       setLoading(false);
     }
@@ -99,7 +99,7 @@ export function MetaIntegrationExample() {
       });
       setInsights(insightData);
     } catch (err) {
-      setError(`Failed to load insights: ${  (err as Error).message}`);
+      setError(`Failed to load insights: ${(err as Error).message}`);
     } finally {
       setLoading(false);
     }
@@ -148,7 +148,7 @@ export function MetaIntegrationExample() {
           onChange={(e) => handleAccountChange(e.target.value)}
           className="border rounded px-3 py-2 w-full max-w-md"
         >
-          {adAccounts.map(account => (
+          {adAccounts.map((account) => (
             <option key={account.account_id} value={account.account_id}>
               {account.name} ({account.currency})
             </option>
@@ -164,12 +164,14 @@ export function MetaIntegrationExample() {
             <div>Loading...</div>
           ) : (
             <ul className="space-y-2">
-              {campaigns.map(campaign => (
+              {campaigns.map((campaign) => (
                 <li key={campaign.id} className="flex justify-between">
                   <span className="truncate">{campaign.name}</span>
-                  <span className={`text-sm ${
-                    campaign.status === 'ACTIVE' ? 'text-green-600' : 'text-gray-500'
-                  }`}>
+                  <span
+                    className={`text-sm ${
+                      campaign.status === 'ACTIVE' ? 'text-green-600' : 'text-gray-500'
+                    }`}
+                  >
                     {campaign.status}
                   </span>
                 </li>
@@ -189,7 +191,9 @@ export function MetaIntegrationExample() {
               </div>
               <div className="flex justify-between">
                 <dt>Impressions:</dt>
-                <dd className="font-semibold">{Number(insights[0].impressions).toLocaleString()}</dd>
+                <dd className="font-semibold">
+                  {Number(insights[0].impressions).toLocaleString()}
+                </dd>
               </div>
               <div className="flex justify-between">
                 <dt>Clicks:</dt>

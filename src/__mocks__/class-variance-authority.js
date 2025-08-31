@@ -16,5 +16,5 @@ module.exports = {
   cva,
   type: {
     VariantProps: 'any',
-  }
+  },
 };

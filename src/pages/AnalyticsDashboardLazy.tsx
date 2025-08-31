@@ -7,9 +7,13 @@ import React, { Suspense } from 'react';
 const AnalyticsDashboardComponent = React.lazy(() => import('./AnalyticsDashboard'));
 
 const AnalyticsDashboardLazy: React.FC<any> = (props) => (
-  <Suspense fallback={<div className="animate-pulse bg-gray-200 rounded-lg h-96 w-full flex items-center justify-center">
-    <div className="text-gray-500 text-lg">Loading Analytics Dashboard...</div>
-  </div>}>
+  <Suspense
+    fallback={
+      <div className="animate-pulse bg-gray-200 rounded-lg h-96 w-full flex items-center justify-center">
+        <div className="text-gray-500 text-lg">Loading Analytics Dashboard...</div>
+      </div>
+    }
+  >
     <AnalyticsDashboardComponent {...props} />
   </Suspense>
 );

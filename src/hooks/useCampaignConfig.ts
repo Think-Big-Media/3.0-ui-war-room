@@ -12,7 +12,7 @@ const DEFAULT_CONFIG: CampaignConfig = {
   candidate: '',
   party: 'Democrat',
   competitors: [],
-  keywords: []
+  keywords: [],
 };
 
 const STORAGE_KEY = 'war-room-campaign-config';
@@ -52,6 +52,6 @@ export const useCampaignConfig = () => {
     config,
     isConfigured,
     saveConfig,
-    resetConfig
+    resetConfig,
   };
 };

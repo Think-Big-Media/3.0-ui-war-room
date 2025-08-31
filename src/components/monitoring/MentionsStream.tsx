@@ -16,11 +16,7 @@ interface MentionsStreamProps {
   onFiltersChange: (filters: MonitoringFilters) => void;
 }
 
-const MentionsStream: React.FC<MentionsStreamProps> = ({
-  mentions,
-  filters,
-  onFiltersChange,
-}) => {
+const MentionsStream: React.FC<MentionsStreamProps> = ({ mentions, filters, onFiltersChange }) => {
   const handleAddToAlert = (mention: Mention) => {
     logger.info('Add mention to alert:', mention.username);
     // Handle adding mention to alert system
@@ -85,9 +81,7 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
       className="hoverable hover:scale-[1.02] transition-all duration-200"
     >
       <div className="flex items-center justify-between mb-3">
-        <h3 className="section-header tracking-wide ml-2">
-          LIVE MENTIONS STREAM
-        </h3>
+        <h3 className="section-header tracking-wide ml-2">LIVE MENTIONS STREAM</h3>
         <div className="flex items-center space-x-2">
           <CustomDropdown
             value={filters.source}
@@ -97,9 +91,7 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
           />
           <CustomDropdown
             value={filters.sentiment}
-            onChange={(value) =>
-              onFiltersChange({ ...filters, sentiment: value })
-            }
+            onChange={(value) => onFiltersChange({ ...filters, sentiment: value })}
             options={sentimentOptions}
             className="min-w-[140px]"
           />
@@ -121,9 +113,7 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
             <div className="flex items-start justify-between mb-2">
               <div className="flex items-center space-x-2">
                 {getPlatformIcon(mention.platform)}
-                <span className="text-white/90 font-medium">
-                  {mention.username}
-                </span>
+                <span className="text-white/90 font-medium">{mention.username}</span>
                 <span className="text-white/60 text-sm font-mono uppercase -mt-1">
                   {mention.timestamp}
                 </span>
@@ -148,10 +138,7 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({
                 </span>
               </div>
               <div className="flex items-center space-x-2">
-                <button
-                  onClick={() => handleAddToAlert(mention)}
-                  className="btn-secondary-action"
-                >
+                <button onClick={() => handleAddToAlert(mention)} className="btn-secondary-action">
                   Add to Alert
                 </button>
                 <button

@@ -11,11 +11,7 @@ interface PageWrapperProps {
 }
 
 export const PageWrapper: React.FC<PageWrapperProps> = ({ children, className = '' }) => {
-  return (
-    <div className={`min-h-screen ${className}`}>
-      {children}
-    </div>
-  );
+  return <div className={`min-h-screen ${className}`}>{children}</div>;
 };
 
 export default PageWrapper;

@@ -1,10 +1,12 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps';
 import { scaleQuantize } from 'd3-scale';
 import { useGeographicMentions } from '../../hooks/useMentionlytics';
 
-const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
+// Try different CDN URL format
+const geoUrl = 'https://unpkg.com/us-atlas@3/states-10m.json';
+// Alternative: const geoUrl = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
 
 interface StateData {
   id: string;
@@ -26,56 +28,81 @@ interface TooltipState {
   data: StateData | null;
 }
 
-const MentionlyticsPoliticalMap: React.FC = () => {
+const MentionlyticsPoliticalMap: React.FC = memo(() => {
   const navigate = useNavigate();
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const { data: mentionlyticsData, loading, dataMode } = useGeographicMentions();
-  
+
+  // Removed debug logging - map is working now!
+
   const [tooltip, setTooltip] = useState<TooltipState>({
     visible: false,
     x: 0,
     y: 0,
-    data: null
+    data: null,
   });
 
   // Convert Mentionlytics data to state lookup
   const stateDataMap = useMemo(() => {
     const map = new Map<string, StateData>();
-    
+
     if (mentionlyticsData) {
-      mentionlyticsData.forEach(locationData => {
-        const totalMentions = locationData.sentiment.positive + locationData.sentiment.negative + locationData.sentiment.neutral;
-        const sentimentScore = totalMentions > 0 
-          ? ((locationData.sentiment.positive - locationData.sentiment.negative) / totalMentions) * 100
-          : 0;
-          
+      mentionlyticsData.forEach((locationData) => {
+        const totalMentions =
+          locationData.sentiment.positive +
+          locationData.sentiment.negative +
+          locationData.sentiment.neutral;
+        const sentimentScore =
+          totalMentions > 0
+            ? ((locationData.sentiment.positive - locationData.sentiment.negative) /
+                totalMentions) *
+              100
+            : 0;
+
         map.set(locationData.state, {
           id: locationData.state,
           name: locationData.state,
           mentions: locationData.mentions,
           sentiment: locationData.sentiment,
           sentimentScore,
-          topKeywords: locationData.topKeywords
+          topKeywords: locationData.topKeywords,
         });
       });
     }
-    
+
     return map;
   }, [mentionlyticsData]);
 
+  // Get top states by activity
+  const topStates = useMemo(() => {
+    const states = Array.from(stateDataMap.values());
+    return states
+      .sort((a, b) => b.mentions - a.mentions)
+      .slice(0, 7)
+      .map(state => ({
+        name: state.name,
+        mentions: state.mentions,
+        sentimentScore: state.sentimentScore,
+        sentiment: state.sentiment
+      }));
+  }, [stateDataMap]);
+
   // Create color scale based on sentiment scores
   const colorScale = useMemo(() => {
-    const sentimentScores = Array.from(stateDataMap.values()).map(state => state.sentimentScore);
-    
+    const sentimentScores = Array.from(stateDataMap.values()).map((state) => state.sentimentScore);
+
     if (sentimentScores.length === 0) {
-      return scaleQuantize().domain([-50, 50]).range(['#fb7185', '#fda4af', '#94a3b8', '#86efac', '#34d399']);
+      return scaleQuantize()
+        .domain([-50, 50])
+        .range(['#fb718580', '#fda4af80', '#94a3b880', '#86efac80', '#34d39980']);
     }
-    
+
     const minScore = Math.min(...sentimentScores);
     const maxScore = Math.max(...sentimentScores);
-    
+
     return scaleQuantize()
       .domain([Math.min(minScore, -20), Math.max(maxScore, 20)])
-      .range(['#fb7185', '#fda4af', '#94a3b8', '#86efac', '#34d399']);
+      .range(['#fb718580', '#fda4af80', '#94a3b880', '#86efac80', '#34d39980']);
   }, [stateDataMap]);
 
   const handleStateClick = (geo: any) => {
@@ -86,13 +113,13 @@ const MentionlyticsPoliticalMap: React.FC = () => {
   const handleStateHover = (geo: any, event: React.MouseEvent) => {
     const stateName = geo.properties.name;
     const stateData = stateDataMap.get(stateName);
-    
+
     if (stateData) {
       setTooltip({
         visible: true,
         x: event.clientX,
         y: event.clientY,
-        data: stateData
+        data: stateData,
       });
     }
   };
@@ -101,117 +128,187 @@ const MentionlyticsPoliticalMap: React.FC = () => {
     setTooltip({ visible: false, x: 0, y: 0, data: null });
   };
 
-  const getStateFill = (geo: any) => {
+  const getStateFill = (geo: any): string => {
     const stateName = geo.properties.name;
     const stateData = stateDataMap.get(stateName);
-    
+
     if (stateData) {
-      return colorScale(stateData.sentimentScore);
+      const score = stateData.sentimentScore;
+      // Using dashboard color palette
+      if (score > 20) return '#34d399'; // emerald-400
+      if (score > 0) return '#10b981';  // emerald-500
+      if (score > -20) return '#0ea5e9'; // sky-500
+      if (score > -40) return '#f97316'; // orange-500
+      return '#f87171'; // rose-400
     }
-    
-    return '#374151'; // Default gray for states without data
+
+    return '#475569'; // slate-600 for states without data
   };
 
   return (
-    <div className="relative w-full h-full bg-slate-900/30 backdrop-blur-sm rounded-xl border border-white/10 p-2 pt-2">
-      {/* Data Mode Indicator - positioned absolute */}
-      <div className="absolute top-2 right-2 z-10">
-        <div className={`px-2 py-1 rounded text-xs font-bold ${ 
-          dataMode === 'MOCK' 
-            ? 'bg-amber-400/20 text-amber-400/80 border border-amber-400/30' 
-            : 'bg-emerald-400/20 text-emerald-400 border border-emerald-400/30'
-        }`}>
-          {loading ? 'Loading...' : dataMode}
-        </div>
-      </div>
-
-      {/* Map */}
-      <div className="relative" style={{ height: '240px' }}>
-        <ComposableMap
-          projection="geoAlbersUsa"
-          width={380}
-          height={240}
-          projectionConfig={{
-            scale: 420,
-          }}
+    <div ref={containerRef} className="relative w-full h-full">
+      <div className="flex w-full h-full">
+        {/* Left side - Map centered and scaled */}
+        <div
+          className="flex-1 relative flex items-center justify-start"
+          style={{ minHeight: '275px' }}
         >
-          <ZoomableGroup>
-            <Geographies geography={geoUrl}>
-              {({ geographies }) =>
-                geographies.map((geo) => (
-                  <Geography
-                    key={geo.rsmKey}
-                    geography={geo}
-                    fill={getStateFill(geo)}
-                    stroke="#64748b"
-                    strokeWidth={0.5}
-                    style={{
-                      default: { outline: 'none' },
-                      hover: { 
-                        fill: '#ffffff40',
-                        outline: 'none',
-                        cursor: 'pointer'
-                      },
-                      pressed: { outline: 'none' }
-                    }}
-                    onClick={() => handleStateClick(geo)}
-                    onMouseEnter={(event) => handleStateHover(geo, event)}
-                    onMouseLeave={handleStateLeave}
-                  />
-                ))
-              }
-            </Geographies>
-          </ZoomableGroup>
-        </ComposableMap>
+          <div className="relative w-full max-w-lg md:max-w-none flex justify-start" style={{ height: '275px', marginTop: '-60px' }}>
+            <ComposableMap
+              projection="geoAlbersUsa"
+              width={388}
+              height={245}
+              style={{ width: 'auto', height: 'auto', maxHeight: '275px', maxWidth: '100%' }}
+              projectionConfig={{
+                scale: 428,
+              }}
+            >
+              <ZoomableGroup>
+                <Geographies geography={geoUrl}>
+                  {({ geographies }) => {
+                    if (!geographies || geographies.length === 0) {
+                      return (
+                        <text x="160" y="100" fill="red" fontSize="20" fontWeight="bold" textAnchor="middle">
+                          MAP DATA FAILED TO LOAD!
+                        </text>
+                      );
+                    }
 
+                    return geographies.map((geo) => {
+                      const fill = getStateFill(geo);
+                      return (
+                        <Geography
+                          key={geo.rsmKey}
+                          geography={geo}
+                          fill={fill}
+                          stroke="#ffffff"
+                          strokeWidth={0.5}
+                          style={{
+                            default: { outline: 'none' },
+                            hover: {
+                              fill: '#ffffff40',
+                              outline: 'none',
+                              cursor: 'pointer',
+                            },
+                            pressed: { outline: 'none' },
+                          }}
+                          onClick={() => handleStateClick(geo)}
+                          onMouseEnter={(event) => handleStateHover(geo, event)}
+                          onMouseLeave={handleStateLeave}
+                        />
+                      );
+                    });
+                  }}
+                </Geographies>
+              </ZoomableGroup>
+            </ComposableMap>
+          </div>
+        </div>
+
+        {/* Right side - TOP ACTIVITY list */}
+        <div className="hidden lg:flex w-48 pl-4 flex-col justify-start pt-4">
+          <div className="text-xs text-white/60 mb-2 uppercase font-semibold tracking-wider font-barlow text-right">
+            TOP ACTIVITY
+          </div>
+          <div className="space-y-0.5 text-right">
+            {topStates.map((state) => {
+              const sentimentColor = 
+                state.sentimentScore > 20 ? 'text-emerald-400' :
+                state.sentimentScore > -20 ? 'text-sky-400' :
+                'text-rose-400';
+              
+              const displayValue = state.sentimentScore !== 0 
+                ? `${state.sentimentScore > 0 ? '+' : ''}${state.sentimentScore.toFixed(0)}%`
+                : `${state.mentions} mentions`;
+              
+              return (
+                <button
+                  key={state.name}
+                  onClick={() => navigate(`/intelligence-hub?location=${state.name}`)}
+                  className="w-full text-right hover:bg-white/5 px-1 py-0.5 rounded transition-colors duration-200"
+                >
+                  <div className="text-white/80 text-xs font-barlow leading-tight">
+                    {state.name}: <span className={`font-jetbrains ${sentimentColor}`}>{displayValue}</span>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+      </div>
+      
+      {/* Sentiment Legend - positioned below bottom edge */}
+      <div className="absolute left-2 right-2 z-20" style={{ bottom: '-7px' }}>
+        <div className="flex items-center gap-2 text-[10px]">
+          <span className="text-white/40 uppercase font-barlow font-medium tracking-wide">
+            Sentiment:
+          </span>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1">
+              <div className="w-2 h-1.5 bg-rose-400 rounded-sm"></div>
+              <span className="text-white/50">Neg</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <div className="w-2 h-1.5 bg-sky-400 rounded-sm"></div>
+              <span className="text-white/50">Neu</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <div className="w-2 h-1.5 bg-emerald-400 rounded-sm"></div>
+              <span className="text-white/50">Pos</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Tooltip */}
       {tooltip.visible && tooltip.data && (
-        <div
-          className="fixed z-[70] pointer-events-none"
-          style={{
-            left: `${tooltip.x + 10}px`,
-            top: `${tooltip.y - 10}px`,
-          }}
-        >
-          <div className="bg-black/90 backdrop-blur-md border border-white/20 rounded-lg p-3 shadow-lg max-w-xs">
-            <div className="flex items-center justify-between mb-2">
-              <h4 className="font-bold text-white font-barlow">{tooltip.data.name}</h4>
-              <div className={`px-2 py-1 rounded text-xs font-bold ${
-                tooltip.data.sentimentScore > 0 ? 'text-emerald-400' : 'text-rose-400'
-              }`}>
-                {tooltip.data.sentimentScore > 0 ? '+' : ''}{tooltip.data.sentimentScore.toFixed(1)}%
-              </div>
-            </div>
-            
-            <div className="space-y-1 text-xs text-white/80">
-              <div className="font-jetbrains">
-                Mentions: <span className="text-sky-400 font-bold">{tooltip.data.mentions.toLocaleString()}</span>
-                {dataMode === 'MOCK' && <span className="text-amber-400/80 ml-1">(MOCK)</span>}
-              </div>
-              
-              <div className="grid grid-cols-3 gap-1 text-xs mb-2">
-                <div className="text-emerald-400">
-                  +{tooltip.data.sentiment.positive}
-                </div>
-                <div className="text-rose-400">
-                  -{tooltip.data.sentiment.negative}
-                </div>
-                <div className="text-gray-400">
-                  ={tooltip.data.sentiment.neutral}
+          <div
+            className="fixed z-[70] pointer-events-none"
+            style={{
+              left: `${tooltip.x + 10}px`,
+              top: `${tooltip.y - 10}px`,
+            }}
+          >
+            <div className="bg-black/90 backdrop-blur-md border border-white/20 rounded-lg p-3 shadow-lg max-w-xs">
+              <div className="flex items-center justify-between mb-2">
+                <h4 className="font-bold text-white font-barlow">{tooltip.data.name}</h4>
+                <div
+                  className={`px-2 py-1 rounded text-xs font-bold ${
+                    tooltip.data.sentimentScore > 0 ? 'text-emerald-400' : 'text-rose-400'
+                  }`}
+                >
+                  {tooltip.data.sentimentScore > 0 ? '+' : ''}
+                  {tooltip.data.sentimentScore.toFixed(1)}%
                 </div>
               </div>
-              
-              <div className="text-xs">
-                <span className="text-cyan-300">Trending:</span> {tooltip.data.topKeywords.join(', ')}
+
+              <div className="space-y-1 text-xs text-white/80">
+                <div className="font-jetbrains">
+                  Mentions:{' '}
+                  <span className="text-sky-400 font-bold">
+                    {tooltip.data.mentions.toLocaleString()}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-3 gap-1 text-xs mb-2">
+                  <div className="text-emerald-400">+{tooltip.data.sentiment.positive}</div>
+                  <div className="text-rose-400">-{tooltip.data.sentiment.negative}</div>
+                  <div className="text-gray-400">={tooltip.data.sentiment.neutral}</div>
+                </div>
+
+                <div className="text-xs">
+                  <span className="text-cyan-300">Trending:</span>{' '}
+                  {tooltip.data.topKeywords.join(', ')}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
     </div>
   );
-};
+});
+
+MentionlyticsPoliticalMap.displayName = 'MentionlyticsPoliticalMap';
 
 export default MentionlyticsPoliticalMap;

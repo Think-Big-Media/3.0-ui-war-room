@@ -89,10 +89,7 @@ interface DateRangeFilterProps {
   onChange?: (dateRange: { from: Date; to: Date }) => void;
 }
 
-export const DateRangeFilter: React.FC<DateRangeFilterProps> = ({
-  value,
-  onChange,
-}) => {
+export const DateRangeFilter: React.FC<DateRangeFilterProps> = ({ value, onChange }) => {
   const dispatch = useAppDispatch();
   const reduxState = useAppSelector((state) => state.analytics);
   const { dateRange, customDates } = reduxState;
@@ -102,16 +99,12 @@ export const DateRangeFilter: React.FC<DateRangeFilterProps> = ({
   const [showCustomPicker, setShowCustomPicker] = useState(false);
   const [tempStartDate, setTempStartDate] = useState('');
   const [tempEndDate, setTempEndDate] = useState('');
-  const [selectedPreset, setSelectedPreset] = useState(
-    DateRangeEnum.LAST_7_DAYS
-  );
+  const [selectedPreset, setSelectedPreset] = useState(DateRangeEnum.LAST_7_DAYS);
 
   // Call onChange with default value on mount if controlled
   React.useEffect(() => {
     if (onChange && !value) {
-      const defaultOption = dateRangeOptions.find(
-        (opt) => opt.value === DateRangeEnum.LAST_7_DAYS
-      );
+      const defaultOption = dateRangeOptions.find((opt) => opt.value === DateRangeEnum.LAST_7_DAYS);
       if (defaultOption) {
         const dates = defaultOption.getDates();
         onChange({ from: dates.start, to: dates.end });
@@ -130,9 +123,7 @@ export const DateRangeFilter: React.FC<DateRangeFilterProps> = ({
       return `${format(value.from, 'MMM d')} - ${format(value.to, 'MMM d, yyyy')}`;
     }
 
-    const currentOption = dateRangeOptions.find(
-      (opt) => opt.value === dateRange
-    );
+    const currentOption = dateRangeOptions.find((opt) => opt.value === dateRange);
     return currentOption?.label || 'Last 7 days';
   };
 
@@ -189,13 +180,10 @@ export const DateRangeFilter: React.FC<DateRangeFilterProps> = ({
       errorDiv.style.marginTop = '4px';
 
       // Find the apply button and add error message after it
-      const applyButton = document.querySelector(
-        '[data-testid="apply-button"]'
-      );
+      const applyButton = document.querySelector('[data-testid="apply-button"]');
       if (applyButton && applyButton.parentElement) {
         // Remove existing error message
-        const existingError =
-          applyButton.parentElement.querySelector('.error-message');
+        const existingError = applyButton.parentElement.querySelector('.error-message');
         if (existingError) {
           existingError.remove();
         }
@@ -241,13 +229,8 @@ export const DateRangeFilter: React.FC<DateRangeFilterProps> = ({
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center space-x-2 px-3 py-1.5 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
-        <Calendar
-          className="h-4 w-4 text-gray-500"
-          data-testid="calendar-icon"
-        />
-        <span className="text-sm font-medium text-gray-700">
-          {currentLabel}
-        </span>
+        <Calendar className="h-4 w-4 text-gray-500" data-testid="calendar-icon" />
+        <span className="text-sm font-medium text-gray-700">{currentLabel}</span>
         <ChevronDown
           className={cn(
             'h-4 w-4 text-gray-500 transition-transform',
@@ -263,8 +246,7 @@ export const DateRangeFilter: React.FC<DateRangeFilterProps> = ({
             <div className="py-1">
               {dateRangeOptions.map((option) => {
                 const isActive = onChange
-                  ? selectedPreset === option.value &&
-                    option.label !== 'Custom range'
+                  ? selectedPreset === option.value && option.label !== 'Custom range'
                   : dateRange === option.value;
 
                 return (
@@ -284,15 +266,11 @@ export const DateRangeFilter: React.FC<DateRangeFilterProps> = ({
             </div>
           ) : (
             <div className="p-4">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3">
-                Custom Date Range
-              </h3>
+              <h3 className="text-sm font-semibold text-gray-900 mb-3">Custom Date Range</h3>
 
               <div className="space-y-3">
                 <div>
-                  <label className="block text-xs text-gray-600 mb-1">
-                    Start Date
-                  </label>
+                  <label className="block text-xs text-gray-600 mb-1">Start Date</label>
                   <input
                     type="date"
                     value={tempStartDate}
@@ -303,9 +281,7 @@ export const DateRangeFilter: React.FC<DateRangeFilterProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs text-gray-600 mb-1">
-                    End Date
-                  </label>
+                  <label className="block text-xs text-gray-600 mb-1">End Date</label>
                   <input
                     type="date"
                     value={tempEndDate}

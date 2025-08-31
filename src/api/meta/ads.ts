@@ -119,16 +119,13 @@ export class MetaAdService {
   constructor(
     private client: MetaAPIClient,
     private rateLimiter: RateLimiter,
-    private circuitBreaker: CircuitBreaker,
+    private circuitBreaker: CircuitBreaker
   ) {}
 
   /**
    * Create a new ad
    */
-  async createAd(
-    accountId: string,
-    params: AdCreateParams,
-  ): Promise<Ad> {
+  async createAd(accountId: string, params: AdCreateParams): Promise<Ad> {
     try {
       // Check rate limits
       await this.rateLimiter.checkLimit(`ads:create:${accountId}`);
@@ -142,22 +139,19 @@ export class MetaAdService {
 
       // Execute through circuit breaker
       const response = await this.circuitBreaker.execute(async () => {
-        return this.client.request<{ id: string }>(
-          `act_${accountId}/ads`,
-          {
-            method: 'POST',
-            body: {
-              name: params.name,
-              adset_id: params.adset_id,
-              creative: { creative_id: creativeId },
-              status: params.status || 'PAUSED',
-              tracking_specs: params.tracking_specs,
-              conversion_specs: params.conversion_specs,
-              bid_amount: params.bid_amount,
-              billing_event: params.billing_event,
-            },
+        return this.client.request<{ id: string }>(`act_${accountId}/ads`, {
+          method: 'POST',
+          body: {
+            name: params.name,
+            adset_id: params.adset_id,
+            creative: { creative_id: creativeId },
+            status: params.status || 'PAUSED',
+            tracking_specs: params.tracking_specs,
+            conversion_specs: params.conversion_specs,
+            bid_amount: params.bid_amount,
+            billing_event: params.billing_event,
           },
-        );
+        });
       });
 
       // Track usage
@@ -171,7 +165,7 @@ export class MetaAdService {
       }
       throw new MetaAPIError(
         `Failed to create ad: ${error instanceof Error ? error.message : String(error)}`,
-        500,
+        500
       );
     }
   }
@@ -179,23 +173,17 @@ export class MetaAdService {
   /**
    * Create an ad creative
    */
-  async createAdCreative(
-    accountId: string,
-    params: AdCreativeParams,
-  ): Promise<Creative> {
+  async createAdCreative(accountId: string, params: AdCreativeParams): Promise<Creative> {
     try {
       await this.rateLimiter.checkLimit(`creatives:create:${accountId}`);
 
       const response = await this.circuitBreaker.execute(async () => {
-        return this.client.request<{ id: string }>(
-          `act_${accountId}/adcreatives`,
-          {
-            method: 'POST',
-            body: {
-              ...params,
-            },
+        return this.client.request<{ id: string }>(`act_${accountId}/adcreatives`, {
+          method: 'POST',
+          body: {
+            ...params,
           },
-        );
+        });
       });
 
       // Fetch the created creative details
@@ -206,7 +194,7 @@ export class MetaAdService {
       }
       throw new MetaAPIError(
         `Failed to create ad creative: ${error instanceof Error ? error.message : String(error)}`,
-        500,
+        500
       );
     }
   }
@@ -230,21 +218,18 @@ export class MetaAdService {
       'billing_event',
       'tracking_specs',
       'conversion_specs',
-    ],
+    ]
   ): Promise<Ad> {
     try {
       await this.rateLimiter.checkLimit(`ads:read:${adId}`);
 
       const response = await this.circuitBreaker.execute(async () => {
-        return this.client.request<Ad>(
-          `${adId}`,
-          {
-            method: 'GET',
-            params: {
-              fields: fields.join(','),
-            },
+        return this.client.request<Ad>(`${adId}`, {
+          method: 'GET',
+          params: {
+            fields: fields.join(','),
           },
-        );
+        });
       });
 
       await this.rateLimiter.trackUsage(`ads:read:${adId}`);
@@ -253,10 +238,7 @@ export class MetaAdService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to get ad: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to get ad: ${(error as Error).message}`, 500);
     }
   }
 
@@ -276,15 +258,13 @@ export class MetaAdService {
       'video_id',
       'call_to_action_type',
       'effective_object_story_id',
-    ],
+    ]
   ): Promise<Creative> {
     try {
       await this.rateLimiter.checkLimit(`creatives:read:${creativeId}`);
 
       const response = await this.circuitBreaker.execute(async () => {
-        return this.client.request<Creative>(
-          `/${creativeId}?fields=${fields.join(',')}`,
-        );
+        return this.client.request<Creative>(`/${creativeId}?fields=${fields.join(',')}`);
       });
 
       await this.rateLimiter.trackUsage(`creatives:read:${creativeId}`);
@@ -293,10 +273,7 @@ export class MetaAdService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to get ad creative: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to get ad creative: ${(error as Error).message}`, 500);
     }
   }
 
@@ -306,7 +283,7 @@ export class MetaAdService {
   async listAds(
     parentId: string,
     parentType: 'account' | 'adset',
-    params: AdListParams = {},
+    params: AdListParams = {}
   ): Promise<MetaAPIResponse<Ad[]>> {
     try {
       await this.rateLimiter.checkLimit(`ads:list:${parentId}`);
@@ -321,9 +298,7 @@ export class MetaAdService {
         'updated_time',
       ];
 
-      const path = parentType === 'account'
-        ? `/act_${parentId}/ads`
-        : `/${parentId}/ads`;
+      const path = parentType === 'account' ? `/act_${parentId}/ads` : `/${parentId}/ads`;
 
       const response = await this.circuitBreaker.execute(async () => {
         const queryParams = new URLSearchParams({
@@ -337,9 +312,7 @@ export class MetaAdService {
           ...(params.date_preset && { date_preset: params.date_preset }),
           ...(params.time_range && { time_range: JSON.stringify(params.time_range) }),
         });
-        return this.client.request<MetaAPIResponse<Ad[]>>(
-          `${path}?${queryParams.toString()}`,
-        );
+        return this.client.request<MetaAPIResponse<Ad[]>>(`${path}?${queryParams.toString()}`);
       });
 
       await this.rateLimiter.trackUsage(`ads:list:${parentId}`);
@@ -348,31 +321,22 @@ export class MetaAdService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to list ads: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to list ads: ${(error as Error).message}`, 500);
     }
   }
 
   /**
    * Update an existing ad
    */
-  async updateAd(
-    adId: string,
-    params: AdUpdateParams,
-  ): Promise<Ad> {
+  async updateAd(adId: string, params: AdUpdateParams): Promise<Ad> {
     try {
       await this.rateLimiter.checkLimit(`ads:update:${adId}`);
 
       await this.circuitBreaker.execute(async () => {
-        return this.client.request(
-          `/${adId}`,
-          {
-            method: 'POST',
-            body: params,
-          },
-        );
+        return this.client.request(`/${adId}`, {
+          method: 'POST',
+          body: params,
+        });
       });
 
       await this.rateLimiter.trackUsage(`ads:update:${adId}`);
@@ -383,10 +347,7 @@ export class MetaAdService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to update ad: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to update ad: ${(error as Error).message}`, 500);
     }
   }
 
@@ -398,10 +359,7 @@ export class MetaAdService {
       await this.rateLimiter.checkLimit(`ads:delete:${adId}`);
 
       await this.circuitBreaker.execute(async () => {
-        return this.client.request(
-          `/${adId}`,
-          { method: 'DELETE' },
-        );
+        return this.client.request(`/${adId}`, { method: 'DELETE' });
       });
 
       await this.rateLimiter.trackUsage(`ads:delete:${adId}`);
@@ -409,10 +367,7 @@ export class MetaAdService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to delete ad: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to delete ad: ${(error as Error).message}`, 500);
     }
   }
 
@@ -442,7 +397,7 @@ export class MetaAdService {
    */
   async getAdInsights(
     adId: string,
-    params: AdInsightsParams = {},
+    params: AdInsightsParams = {}
   ): Promise<MetaAPIResponse<any[]>> {
     try {
       await this.rateLimiter.checkLimit(`ads:insights:${adId}`);
@@ -472,7 +427,7 @@ export class MetaAdService {
           ...(params.filtering && { filtering: JSON.stringify(params.filtering) }),
         });
         return this.client.request<MetaAPIResponse<any[]>>(
-          `/${adId}/insights?${queryParams.toString()}`,
+          `/${adId}/insights?${queryParams.toString()}`
         );
       });
 
@@ -482,10 +437,7 @@ export class MetaAdService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to get ad insights: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to get ad insights: ${(error as Error).message}`, 500);
     }
   }
 
@@ -496,7 +448,7 @@ export class MetaAdService {
     adId: string,
     newName: string,
     targetAdSetId?: string,
-    modifications?: Partial<AdCreateParams>,
+    modifications?: Partial<AdCreateParams>
   ): Promise<Ad> {
     try {
       // Get original ad
@@ -514,7 +466,7 @@ export class MetaAdService {
 
       // Extract account ID from ad set
       const adsetResponse = await this.client.request<{ account_id: string }>(
-        `/${original.adset_id}?fields=account_id`,
+        `/${original.adset_id}?fields=account_id`
       );
 
       const accountId = adsetResponse.account_id.replace('act_', '');
@@ -537,10 +489,7 @@ export class MetaAdService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to duplicate ad: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to duplicate ad: ${(error as Error).message}`, 500);
     }
   }
 
@@ -549,15 +498,16 @@ export class MetaAdService {
    */
   async getAdPreview(
     adId: string,
-    format: 'DESKTOP_FEED_STANDARD' | 'MOBILE_FEED_STANDARD' | 'INSTAGRAM_STANDARD' = 'DESKTOP_FEED_STANDARD',
+    format:
+      | 'DESKTOP_FEED_STANDARD'
+      | 'MOBILE_FEED_STANDARD'
+      | 'INSTAGRAM_STANDARD' = 'DESKTOP_FEED_STANDARD'
   ): Promise<{ body: string }> {
     try {
       await this.rateLimiter.checkLimit(`ads:preview:${adId}`);
 
       const response = await this.circuitBreaker.execute(async () => {
-        return this.client.request<{ body: string }>(
-          `/${adId}/previews?ad_format=${format}`,
-        );
+        return this.client.request<{ body: string }>(`/${adId}/previews?ad_format=${format}`);
       });
 
       await this.rateLimiter.trackUsage(`ads:preview:${adId}`);
@@ -566,10 +516,7 @@ export class MetaAdService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to get ad preview: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to get ad preview: ${(error as Error).message}`, 500);
     }
   }
 
@@ -578,7 +525,7 @@ export class MetaAdService {
    */
   async batchCreateAds(
     accountId: string,
-    ads: AdCreateParams[],
+    ads: AdCreateParams[]
   ): Promise<Array<{ id?: string; success: boolean; error?: string }>> {
     const results = [];
 
@@ -602,7 +549,7 @@ export class MetaAdService {
    */
   async getAdPerformanceSummary(
     adId: string,
-    datePreset = 'last_7d',
+    datePreset = 'last_7d'
   ): Promise<{
     impressions: number;
     clicks: number;
@@ -615,21 +562,12 @@ export class MetaAdService {
     try {
       const insights = await this.getAdInsights(adId, {
         date_preset: datePreset,
-        fields: [
-          'impressions',
-          'clicks',
-          'spend',
-          'ctr',
-          'cpc',
-          'actions',
-          'purchase_roas',
-        ],
+        fields: ['impressions', 'clicks', 'spend', 'ctr', 'cpc', 'actions', 'purchase_roas'],
       });
 
       const data = insights.data[0] || {};
-      const conversions = data.actions?.find(
-        (action: any) => action.action_type === 'purchase',
-      )?.value || 0;
+      const conversions =
+        data.actions?.find((action: any) => action.action_type === 'purchase')?.value || 0;
 
       return {
         impressions: parseInt(data.impressions || '0'),
@@ -646,7 +584,7 @@ export class MetaAdService {
       }
       throw new MetaAPIError(
         `Failed to get ad performance summary: ${(error as Error).message}`,
-        500,
+        500
       );
     }
   }

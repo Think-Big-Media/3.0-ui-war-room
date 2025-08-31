@@ -51,95 +51,105 @@ const CommandStatusBar: React.FC = () => {
   };
 
   const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('en-US', {
-      hour12: false,
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      timeZone: 'America/New_York'
-    }) + ' EST';
+    return (
+      date.toLocaleTimeString('en-US', {
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        timeZone: 'America/New_York',
+      }) + ' EST'
+    );
   };
 
   return (
     <div>
       <div className="relative h-12 flex items-center justify-between px-6 border border-white/20 bg-black/20 backdrop-blur-xl rounded-lg">
-            {/* Left positioned - Platform indicators moved 40px more to the left */}
-            <div className="absolute left-4 flex items-baseline gap-3">
-              <div 
-                onClick={() => handlePlatformClick('meta')}
-                className="flex items-baseline gap-2 bg-green-500/20 px-3 py-1.5 rounded-md border border-green-500/30 cursor-pointer hover:bg-green-500/30 hover:border-green-500/50 transition-all duration-200 transform hover:scale-105"
-              >
-                <span className="text-xs text-green-400 leading-none">●</span>
-                <span className="text-xs text-green-300 font-medium font-barlow leading-none">Meta</span>
-              </div>
-              <div 
-                onClick={() => handlePlatformClick('google')}
-                className="flex items-baseline gap-2 bg-blue-500/20 px-3 py-1.5 rounded-md border border-blue-500/30 cursor-pointer hover:bg-blue-500/30 hover:border-blue-500/50 transition-all duration-200 transform hover:scale-105"
-              >
-                <span className="text-xs text-blue-400 leading-none">●</span>
-                <span className="text-xs text-blue-300 font-medium font-barlow leading-none">Google</span>
-              </div>
-              <div 
-                onClick={() => handlePlatformClick('social')}
-                className="flex items-baseline gap-2 bg-purple-500/20 px-3 py-1.5 rounded-md border border-purple-500/30 cursor-pointer hover:bg-purple-500/30 hover:border-purple-500/50 transition-all duration-200 transform hover:scale-105"
-              >
-                <span className="text-xs text-purple-400 leading-none">●</span>
-                <span className="text-xs text-purple-300 font-medium font-barlow leading-none">Social</span>
-              </div>
-              <div 
-                onClick={() => handlePlatformClick('analytics')}
-                className="flex items-baseline gap-2 bg-orange-500/20 px-3 py-1.5 rounded-md border border-orange-500/30 cursor-pointer hover:bg-orange-500/30 hover:border-orange-500/50 transition-all duration-200 transform hover:scale-105"
-              >
-                <span className="text-xs text-orange-400 leading-none">●</span>
-                <span className="text-xs text-orange-300 font-medium font-barlow leading-none">Analytics</span>
-              </div>
-            </div>
-            
-            {/* Right positioned - Metrics aligned with dashboard content */}
-            <div className="absolute right-[200px] flex items-baseline gap-3">
-              <div 
-                onClick={() => handleMetricClick('mentions')}
-                className="bg-gray-700/50 px-3 py-1.5 rounded-md border border-gray-600/50 flex items-baseline cursor-pointer hover:bg-gray-600/60 hover:border-gray-500/60 transition-all duration-200 transform hover:scale-105"
-              >
-                <span className="text-xs font-bold text-white font-jetbrains leading-none">236</span>
-                <span className="text-xs text-gray-400 ml-1.5 font-barlow leading-none">Mentions</span>
-              </div>
-              
-              <div 
-                onClick={() => handleMetricClick('alerts')}
-                className="bg-orange-500/20 px-3 py-1.5 rounded-md border border-orange-500/30 flex items-baseline cursor-pointer hover:bg-orange-500/30 hover:border-orange-500/50 transition-all duration-200 transform hover:scale-105"
-              >
-                <span className="text-xs font-bold text-orange-400 font-jetbrains leading-none">9</span>
-                <span className="text-xs text-orange-300 ml-1.5 font-barlow leading-none">Alerts</span>
-              </div>
-              
-              <div 
-                onClick={() => handleMetricClick('opportunities')}
-                className="bg-green-500/20 px-3 py-1.5 rounded-md border border-green-500/30 hidden lg:flex items-baseline cursor-pointer hover:bg-green-500/30 hover:border-green-500/50 transition-all duration-200 transform hover:scale-105"
-              >
-                <span className="text-xs font-bold text-green-400 font-jetbrains leading-none">18</span>
-                <span className="text-xs text-green-300 ml-1.5 font-barlow leading-none">Opportunities</span>
-              </div>
-              
-              <div 
-                onClick={() => handleMetricClick('threats')}
-                className="bg-red-500/20 px-3 py-1.5 rounded-md border border-red-500/30 hidden xl:flex items-baseline cursor-pointer hover:bg-red-500/30 hover:border-red-500/50 transition-all duration-200 transform hover:scale-105"
-              >
-                <span className="text-xs font-bold text-red-400 font-jetbrains leading-none">3</span>
-                <span className="text-xs text-red-300 ml-1.5 font-barlow leading-none">Threats</span>
-              </div>
-            </div>
-            
-            {/* Far right - Time display aligned with dashboard content */}
-            <div className="absolute right-4 flex items-center gap-4">
-              {/* Vertical separator */}
-              <div className="h-6 w-px bg-gray-600"></div>
-              
-              {/* Time display - no container, white text */}
-              <span className="text-sm font-mono font-bold text-white">
-                {formatTime(currentTime)}
-              </span>
-            </div>
+        {/* Left positioned - Platform indicators moved 40px more to the left */}
+        <div className="absolute left-4 flex items-baseline gap-3">
+          <div
+            onClick={() => handlePlatformClick('meta')}
+            className="flex items-baseline gap-2 bg-green-500/20 px-3 py-1.5 rounded-md border border-green-500/30 cursor-pointer hover:bg-green-500/30 hover:border-green-500/50 transition-all duration-200 transform hover:scale-105"
+          >
+            <span className="text-xs text-green-400 leading-none">●</span>
+            <span className="text-xs text-green-300 font-medium font-barlow leading-none">
+              Meta
+            </span>
+          </div>
+          <div
+            onClick={() => handlePlatformClick('google')}
+            className="flex items-baseline gap-2 bg-blue-500/20 px-3 py-1.5 rounded-md border border-blue-500/30 cursor-pointer hover:bg-blue-500/30 hover:border-blue-500/50 transition-all duration-200 transform hover:scale-105"
+          >
+            <span className="text-xs text-blue-400 leading-none">●</span>
+            <span className="text-xs text-blue-300 font-medium font-barlow leading-none">
+              Google
+            </span>
+          </div>
+          <div
+            onClick={() => handlePlatformClick('social')}
+            className="flex items-baseline gap-2 bg-purple-500/20 px-3 py-1.5 rounded-md border border-purple-500/30 cursor-pointer hover:bg-purple-500/30 hover:border-purple-500/50 transition-all duration-200 transform hover:scale-105"
+          >
+            <span className="text-xs text-purple-400 leading-none">●</span>
+            <span className="text-xs text-purple-300 font-medium font-barlow leading-none">
+              Social
+            </span>
+          </div>
+          <div
+            onClick={() => handlePlatformClick('analytics')}
+            className="flex items-baseline gap-2 bg-orange-500/20 px-3 py-1.5 rounded-md border border-orange-500/30 cursor-pointer hover:bg-orange-500/30 hover:border-orange-500/50 transition-all duration-200 transform hover:scale-105"
+          >
+            <span className="text-xs text-orange-400 leading-none">●</span>
+            <span className="text-xs text-orange-300 font-medium font-barlow leading-none">
+              Analytics
+            </span>
+          </div>
+        </div>
+
+        {/* Right positioned - Metrics aligned with dashboard content */}
+        <div className="absolute right-[200px] flex items-baseline gap-3">
+          <div
+            onClick={() => handleMetricClick('mentions')}
+            className="bg-gray-700/50 px-3 py-1.5 rounded-md border border-gray-600/50 flex items-baseline cursor-pointer hover:bg-gray-600/60 hover:border-gray-500/60 transition-all duration-200 transform hover:scale-105"
+          >
+            <span className="text-xs font-bold text-white font-jetbrains leading-none">236</span>
+            <span className="text-xs text-gray-400 ml-1.5 font-barlow leading-none">Mentions</span>
+          </div>
+
+          <div
+            onClick={() => handleMetricClick('alerts')}
+            className="bg-orange-500/20 px-3 py-1.5 rounded-md border border-orange-500/30 flex items-baseline cursor-pointer hover:bg-orange-500/30 hover:border-orange-500/50 transition-all duration-200 transform hover:scale-105"
+          >
+            <span className="text-xs font-bold text-orange-400 font-jetbrains leading-none">9</span>
+            <span className="text-xs text-orange-300 ml-1.5 font-barlow leading-none">Alerts</span>
+          </div>
+
+          <div
+            onClick={() => handleMetricClick('opportunities')}
+            className="bg-green-500/20 px-3 py-1.5 rounded-md border border-green-500/30 hidden lg:flex items-baseline cursor-pointer hover:bg-green-500/30 hover:border-green-500/50 transition-all duration-200 transform hover:scale-105"
+          >
+            <span className="text-xs font-bold text-green-400 font-jetbrains leading-none">18</span>
+            <span className="text-xs text-green-300 ml-1.5 font-barlow leading-none">
+              Opportunities
+            </span>
+          </div>
+
+          <div
+            onClick={() => handleMetricClick('threats')}
+            className="bg-red-500/20 px-3 py-1.5 rounded-md border border-red-500/30 hidden xl:flex items-baseline cursor-pointer hover:bg-red-500/30 hover:border-red-500/50 transition-all duration-200 transform hover:scale-105"
+          >
+            <span className="text-xs font-bold text-red-400 font-jetbrains leading-none">3</span>
+            <span className="text-xs text-red-300 ml-1.5 font-barlow leading-none">Threats</span>
+          </div>
+        </div>
+
+        {/* Far right - Time display aligned with dashboard content */}
+        <div className="absolute right-4 flex items-center gap-4">
+          {/* Vertical separator */}
+          <div className="h-6 w-px bg-gray-600"></div>
+
+          {/* Time display - no container, white text */}
+          <span className="text-sm font-mono font-bold text-white">{formatTime(currentTime)}</span>
+        </div>
       </div>
     </div>
   );

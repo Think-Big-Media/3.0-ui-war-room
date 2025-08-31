@@ -89,12 +89,10 @@ const AutomationDashboard: React.FC = () => {
   const [workflows, setWorkflows] = useState<Workflow[]>([]);
   const [crisisAlerts, setCrisisAlerts] = useState<CrisisAlert[]>([]);
   const [executions, setExecutions] = useState<Execution[]>([]);
-  const [activeTab, setActiveTab] = useState<
-    'overview' | 'workflows' | 'alerts' | 'executions'
-  >('overview');
-  const [selectedWorkflow, setSelectedWorkflow] = useState<Workflow | null>(
-    null
+  const [activeTab, setActiveTab] = useState<'overview' | 'workflows' | 'alerts' | 'executions'>(
+    'overview'
   );
+  const [selectedWorkflow, setSelectedWorkflow] = useState<Workflow | null>(null);
   const [isBuilderOpen, setIsBuilderOpen] = useState(false);
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -201,10 +199,8 @@ const AutomationDashboard: React.FC = () => {
         id: 'c1',
         alert_type: 'negative_sentiment',
         severity: 'high',
-        title:
-          'High Crisis Alert: Negative Twitter mention about campaign financing',
-        description:
-          'Crisis Score: 75.5/100\nSource: twitter\nSentiment Score: -0.72',
+        title: 'High Crisis Alert: Negative Twitter mention about campaign financing',
+        description: 'Crisis Score: 75.5/100\nSource: twitter\nSentiment Score: -0.72',
         source: 'mentionlytics',
         content: 'This campaign is using dirty money from special interests...',
         acknowledged: false,
@@ -271,9 +267,7 @@ const AutomationDashboard: React.FC = () => {
         destination.droppableId === 'workflow-actions'
       ) {
         // Add action to workflow
-        const actionType = availableActions.find(
-          (a) => a.id === result.draggableId
-        );
+        const actionType = availableActions.find((a) => a.id === result.draggableId);
         if (actionType) {
           const newAction: WorkflowAction = {
             id: `action_${Date.now()}`,
@@ -350,9 +344,7 @@ const AutomationDashboard: React.FC = () => {
   return (
     <div className="p-6 max-w-7xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Automation Dashboard
-        </h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Automation Dashboard</h1>
         <p className="text-gray-600">
           Manage workflows, monitor crises, and track automated responses
         </p>
@@ -360,21 +352,19 @@ const AutomationDashboard: React.FC = () => {
 
       {/* Tab Navigation */}
       <div className="flex space-x-1 mb-8 bg-gray-100 p-1 rounded-lg w-fit">
-        {(['overview', 'workflows', 'alerts', 'executions'] as const).map(
-          (tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-                activeTab === tab
-                  ? 'bg-white text-blue-600 shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              {tab.charAt(0).toUpperCase() + tab.slice(1)}
-            </button>
-          )
-        )}
+        {(['overview', 'workflows', 'alerts', 'executions'] as const).map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+              activeTab === tab
+                ? 'bg-white text-blue-600 shadow-sm'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+          </button>
+        ))}
       </div>
 
       {/* Overview Tab */}
@@ -386,9 +376,7 @@ const AutomationDashboard: React.FC = () => {
               <div className="flex items-center">
                 <Zap className="w-8 h-8 text-blue-600" />
                 <div className="ml-3">
-                  <p className="text-sm font-medium text-gray-600">
-                    Active Workflows
-                  </p>
+                  <p className="text-sm font-medium text-gray-600">Active Workflows</p>
                   <p className="text-2xl font-bold text-gray-900">
                     {workflows.filter((w) => w.status === 'active').length}
                   </p>
@@ -400,9 +388,7 @@ const AutomationDashboard: React.FC = () => {
               <div className="flex items-center">
                 <AlertTriangle className="w-8 h-8 text-red-600" />
                 <div className="ml-3">
-                  <p className="text-sm font-medium text-gray-600">
-                    Open Alerts
-                  </p>
+                  <p className="text-sm font-medium text-gray-600">Open Alerts</p>
                   <p className="text-2xl font-bold text-gray-900">
                     {crisisAlerts.filter((a) => !a.is_resolved).length}
                   </p>
@@ -414,12 +400,8 @@ const AutomationDashboard: React.FC = () => {
               <div className="flex items-center">
                 <Activity className="w-8 h-8 text-green-600" />
                 <div className="ml-3">
-                  <p className="text-sm font-medium text-gray-600">
-                    Executions Today
-                  </p>
-                  <p className="text-2xl font-bold text-gray-900">
-                    {executions.length}
-                  </p>
+                  <p className="text-sm font-medium text-gray-600">Executions Today</p>
+                  <p className="text-2xl font-bold text-gray-900">{executions.length}</p>
                 </div>
               </div>
             </div>
@@ -428,13 +410,10 @@ const AutomationDashboard: React.FC = () => {
               <div className="flex items-center">
                 <Bell className="w-8 h-8 text-purple-600" />
                 <div className="ml-3">
-                  <p className="text-sm font-medium text-gray-600">
-                    Success Rate
-                  </p>
+                  <p className="text-sm font-medium text-gray-600">Success Rate</p>
                   <p className="text-2xl font-bold text-gray-900">
                     {Math.round(
-                      workflows.reduce((acc, w) => acc + w.success_rate, 0) /
-                        workflows.length
+                      workflows.reduce((acc, w) => acc + w.success_rate, 0) / workflows.length
                     )}
                     %
                   </p>
@@ -446,9 +425,7 @@ const AutomationDashboard: React.FC = () => {
           {/* Recent Crisis Alerts */}
           <div className="bg-white rounded-lg border border-gray-200">
             <div className="p-6 border-b border-gray-200">
-              <h3 className="text-lg font-medium text-gray-900">
-                Recent Crisis Alerts
-              </h3>
+              <h3 className="text-lg font-medium text-gray-900">Recent Crisis Alerts</h3>
             </div>
             <div className="p-6">
               {crisisAlerts.slice(0, 3).map((alert) => (
@@ -463,9 +440,7 @@ const AutomationDashboard: React.FC = () => {
                   </div>
                   <div className="flex-1">
                     <h4 className="font-medium text-gray-900">{alert.title}</h4>
-                    <p className="text-sm text-gray-600 mt-1 line-clamp-2">
-                      {alert.content}
-                    </p>
+                    <p className="text-sm text-gray-600 mt-1 line-clamp-2">{alert.content}</p>
                     <p className="text-xs text-gray-500 mt-2">
                       {new Date(alert.detected_at).toLocaleString()}
                     </p>
@@ -524,17 +499,12 @@ const AutomationDashboard: React.FC = () => {
           {/* Workflows List */}
           <div className="grid gap-4">
             {workflows.map((workflow) => (
-              <div
-                key={workflow.id}
-                className="bg-white rounded-lg border border-gray-200 p-6"
-              >
+              <div key={workflow.id} className="bg-white rounded-lg border border-gray-200 p-6">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center space-x-3">
                       {getStatusIcon(workflow.status)}
-                      <h3 className="text-lg font-medium text-gray-900">
-                        {workflow.name}
-                      </h3>
+                      <h3 className="text-lg font-medium text-gray-900">{workflow.name}</h3>
                       <span className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">
                         {workflow.trigger_type}
                       </span>
@@ -545,10 +515,7 @@ const AutomationDashboard: React.FC = () => {
                       <span>Executed {workflow.execution_count} times</span>
                       <span>{workflow.success_rate}% success rate</span>
                       <span>
-                        Last run:{' '}
-                        {new Date(
-                          workflow.last_executed_at
-                        ).toLocaleDateString()}
+                        Last run: {new Date(workflow.last_executed_at).toLocaleDateString()}
                       </span>
                     </div>
                   </div>
@@ -585,10 +552,7 @@ const AutomationDashboard: React.FC = () => {
         <div className="space-y-4">
           <div className="grid gap-4">
             {crisisAlerts.map((alert) => (
-              <div
-                key={alert.id}
-                className="bg-white rounded-lg border border-gray-200 p-6"
-              >
+              <div key={alert.id} className="bg-white rounded-lg border border-gray-200 p-6">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center space-x-3 mb-2">
@@ -597,31 +561,22 @@ const AutomationDashboard: React.FC = () => {
                       >
                         {alert.severity.toUpperCase()}
                       </span>
-                      <span className="text-xs text-gray-500">
-                        {alert.source}
-                      </span>
+                      <span className="text-xs text-gray-500">{alert.source}</span>
                       {alert.acknowledged && (
                         <span className="px-2 py-1 text-xs bg-green-100 text-green-700 rounded">
                           Acknowledged
                         </span>
                       )}
                     </div>
-                    <h3 className="text-lg font-medium text-gray-900 mb-2">
-                      {alert.title}
-                    </h3>
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">{alert.title}</h3>
                     <p className="text-gray-600 mb-3">{alert.description}</p>
                     <div className="bg-gray-50 rounded p-3 mb-3">
-                      <p className="text-sm text-gray-700 line-clamp-3">
-                        {alert.content}
-                      </p>
+                      <p className="text-sm text-gray-700 line-clamp-3">{alert.content}</p>
                     </div>
                     <p className="text-xs text-gray-500">
                       Detected: {new Date(alert.detected_at).toLocaleString()}
                       {alert.response_time && (
-                        <span>
-                          {' '}
-                          • Response time: {alert.response_time} minutes
-                        </span>
+                        <span> • Response time: {alert.response_time} minutes</span>
                       )}
                     </p>
                   </div>
@@ -664,21 +619,13 @@ const AutomationDashboard: React.FC = () => {
               </button>
             </div>
 
-            <div
-              className="p-6 overflow-y-auto"
-              style={{ maxHeight: 'calc(90vh - 140px)' }}
-            >
+            <div className="p-6 overflow-y-auto" style={{ maxHeight: 'calc(90vh - 140px)' }}>
               <DragDropContext onDragEnd={handleDragEnd}>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   {/* Available Actions */}
                   <div>
-                    <h3 className="font-medium text-gray-900 mb-4">
-                      Available Actions
-                    </h3>
-                    <Droppable
-                      droppableId="available-actions"
-                      isDropDisabled={true}
-                    >
+                    <h3 className="font-medium text-gray-900 mb-4">Available Actions</h3>
+                    <Droppable droppableId="available-actions" isDropDisabled={true}>
                       {(provided) => (
                         <div
                           {...provided.droppableProps}
@@ -686,11 +633,7 @@ const AutomationDashboard: React.FC = () => {
                           className="space-y-2"
                         >
                           {availableActions.map((action, index) => (
-                            <Draggable
-                              key={action.id}
-                              draggableId={action.id}
-                              index={index}
-                            >
+                            <Draggable key={action.id} draggableId={action.id} index={index}>
                               {(provided, snapshot) => (
                                 <div
                                   ref={provided.innerRef}
@@ -703,9 +646,7 @@ const AutomationDashboard: React.FC = () => {
                                   }`}
                                 >
                                   <action.icon className="w-5 h-5 text-gray-600" />
-                                  <span className="text-sm font-medium">
-                                    {action.name}
-                                  </span>
+                                  <span className="text-sm font-medium">{action.name}</span>
                                 </div>
                               )}
                             </Draggable>
@@ -718,9 +659,7 @@ const AutomationDashboard: React.FC = () => {
 
                   {/* Workflow Builder */}
                   <div className="lg:col-span-2">
-                    <h3 className="font-medium text-gray-900 mb-4">
-                      Workflow Actions
-                    </h3>
+                    <h3 className="font-medium text-gray-900 mb-4">Workflow Actions</h3>
                     <Droppable droppableId="workflow-actions">
                       {(provided, snapshot) => (
                         <div
@@ -740,11 +679,7 @@ const AutomationDashboard: React.FC = () => {
                           )}
 
                           {selectedWorkflow?.actions.map((action, index) => (
-                            <Draggable
-                              key={action.id}
-                              draggableId={action.id}
-                              index={index}
-                            >
+                            <Draggable key={action.id} draggableId={action.id} index={index}>
                               {(provided) => {
                                 const ActionIcon = getActionIcon(action.type);
                                 return (
@@ -759,9 +694,7 @@ const AutomationDashboard: React.FC = () => {
                                       <span className="font-medium">
                                         {action.type.replace('_', ' ')}
                                       </span>
-                                      <p className="text-sm text-gray-500">
-                                        Step {action.order}
-                                      </p>
+                                      <p className="text-sm text-gray-500">Step {action.order}</p>
                                     </div>
                                     <button className="p-1 text-gray-400 hover:text-red-600">
                                       <Trash2 className="w-4 h-4" />

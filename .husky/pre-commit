@@ -1,31 +1,14 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# Run quality checks before commit
-echo "🔍 Running pre-commit quality checks..."
+echo "🔍 Running pre-commit health check..."
 
-# Run ESLint
-echo "📏 Running ESLint..."
-npm run lint:fix
-if [ $? -ne 0 ]; then
-  echo "❌ ESLint failed. Please fix the issues before committing."
+# Run the health check system
+if npm run health:check; then
+  echo "✅ All pre-commit checks passed!"
+else
+  echo "❌ Health check failed. Please fix the issues before committing."
+  echo "💡 Run 'npm run format' to fix formatting issues"
+  echo "💡 Run 'npm run build' to check for build errors"
   exit 1
 fi
-
-# Run TypeScript check
-echo "🔧 Running TypeScript check..."
-npm run type-check
-if [ $? -ne 0 ]; then
-  echo "❌ TypeScript check failed. Please fix the issues before committing."
-  exit 1
-fi
-
-# Run stable tests
-echo "🧪 Running stable tests..."
-npm run test:stable
-if [ $? -ne 0 ]; then
-  echo "❌ Tests failed. Please fix the issues before committing."
-  exit 1
-fi
-
-echo "✅ All pre-commit checks passed!"

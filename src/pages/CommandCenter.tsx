@@ -79,10 +79,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
           />
         </div>
         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div
-            className={`text-xs font-medium`}
-            style={{ color: 'var(--page-accent)' }}
-          >
+          <div className={`text-xs font-medium`} style={{ color: 'var(--page-accent)' }}>
             Click to explore →
           </div>
         </div>
@@ -106,16 +103,12 @@ const IntelligenceDashboard: React.FC = () => {
   const navigate = useNavigate();
 
   const handleDashboardClick = () => {
-    logger.debug(
-      'Intelligence Dashboard clicked - navigating to /intelligence-hub'
-    );
+    logger.debug('Intelligence Dashboard clicked - navigating to /intelligence-hub');
     navigate('/intelligence-hub');
   };
 
   const handleMetricClick = (metricLabel: string) => {
-    logger.debug(
-      `Metric clicked: ${metricLabel} - navigating to /intelligence-hub`
-    );
+    logger.debug(`Metric clicked: ${metricLabel} - navigating to /intelligence-hub`);
     navigate('/intelligence-hub');
   };
 
@@ -154,9 +147,7 @@ const IntelligenceDashboard: React.FC = () => {
           <div className="p-3 lg:p-4 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 hoverable transition-all duration-300">
             <Target className="w-6 h-6 lg:w-8 lg:h-8 text-white/95" />
           </div>
-          <h3 className="section-header-large ml-3">
-            Intelligence Dashboard
-          </h3>
+          <h3 className="section-header-large ml-3">Intelligence Dashboard</h3>
         </div>
       </div>
 
@@ -176,13 +167,8 @@ const IntelligenceDashboard: React.FC = () => {
             >
               {metric.value}
             </div>
-            <div className="text-xs lg:text-sm text-white/75 mb-2">
-              {metric.label}
-            </div>
-            <div
-              className="text-xs font-medium"
-              style={{ color: 'var(--page-accent)' }}
-            >
+            <div className="text-xs lg:text-sm text-white/75 mb-2">{metric.label}</div>
+            <div className="text-xs font-medium" style={{ color: 'var(--page-accent)' }}>
               {metric.trend}
             </div>
           </div>
@@ -203,16 +189,12 @@ const CampaignOperationsHub: React.FC = () => {
   const navigate = useNavigate();
 
   const handleProjectClick = (projectTitle: string) => {
-    logger.debug(
-      `Project clicked: ${projectTitle} - navigating to /campaign-control`
-    );
+    logger.debug(`Project clicked: ${projectTitle} - navigating to /campaign-control`);
     navigate('/campaign-control');
   };
 
   const handleTemplateClick = (templateName: string) => {
-    logger.debug(
-      `Template clicked: ${templateName} - navigating to /campaign-control`
-    );
+    logger.debug(`Template clicked: ${templateName} - navigating to /campaign-control`);
     navigate('/campaign-control');
   };
 
@@ -267,9 +249,7 @@ const CampaignOperationsHub: React.FC = () => {
           <div className="p-3 lg:p-4 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 hoverable transition-all duration-300">
             <Target className="w-6 h-6 lg:w-8 lg:h-8 text-white/95" />
           </div>
-          <h3 className="section-header-large ml-3">
-            Campaign Operations
-          </h3>
+          <h3 className="section-header-large ml-3">Campaign Operations</h3>
         </div>
       </div>
 
@@ -287,9 +267,7 @@ const CampaignOperationsHub: React.FC = () => {
                 className="bg-black/20 backdrop-blur-sm rounded-xl p-6 lg:p-7 border border-white/20 hoverable hover:bg-white/0 hover:scale-[1.02] transition-all duration-200 cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <h5 className="content-title text-white/90">
-                    {cluster.title}
-                  </h5>
+                  <h5 className="content-title text-white/90">{cluster.title}</h5>
                   <div
                     className={`w-2 h-2 rounded-full ${
                       cluster.status === 'Live'
@@ -327,8 +305,8 @@ const CampaignOperationsHub: React.FC = () => {
         <div
           className="space-y-2 lg:space-y-3"
           style={{
-            paddingBottom: "11px",
-            marginBottom: "-1px",
+            paddingBottom: '11px',
+            marginBottom: '-1px',
           }}
         >
           <h4 className="text-lg lg:text-xl font-medium text-white/40 mb-3 uppercase font-condensed ml-2">
@@ -361,11 +339,7 @@ const CommandCenter: React.FC = () => {
 
   return (
     <div className="page-dashboard" data-route="command-center">
-      <PageLayout
-        pageTitle="Dashboard"
-        placeholder="Ask War Room about your campaign status..."
-      >
-
+      <PageLayout pageTitle="Dashboard" placeholder="Ask War Room about your campaign status...">
         {/* Top Row - 4 KPI Tiles */}
         <div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">

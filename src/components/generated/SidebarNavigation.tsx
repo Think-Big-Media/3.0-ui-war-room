@@ -68,10 +68,7 @@ const TopNavigation: React.FC = () => {
   // Close notifications when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        notificationsRef.current &&
-        !notificationsRef.current.contains(event.target as Node)
-      ) {
+      if (notificationsRef.current && !notificationsRef.current.contains(event.target as Node)) {
         setShowNotifications(false);
       }
     };
@@ -155,9 +152,7 @@ const TopNavigation: React.FC = () => {
   const formatTimestamp = (timestamp: string) => {
     const date = new Date(timestamp);
     const now = new Date();
-    const diffMinutes = Math.floor(
-      (now.getTime() - date.getTime()) / (1000 * 60)
-    );
+    const diffMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60));
 
     if (diffMinutes < 60) {
       return `${diffMinutes}m ago`;
@@ -189,7 +184,7 @@ const TopNavigation: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo/Brand - Responsive - Click to go to Dashboard */}
-          <button 
+          <button
             onClick={() => handleNavigation('/')}
             className="flex items-center ml-[25px] hover:opacity-80 transition-opacity duration-200 cursor-pointer"
           >
@@ -197,13 +192,15 @@ const TopNavigation: React.FC = () => {
             <img
               src="/images/WarRoom_Logo_White.png"
               alt="War Room"
-              className="hidden lg:block h-[26px] w-auto"
+              className="hidden lg:block h-[26px] w-auto object-contain"
+              style={{ minWidth: '80px', maxWidth: '120px' }}
             />
             {/* Logomark for tablet */}
             <img
               src="https://cdn.builder.io/api/v1/image/assets%2F8686f311497044c0932b7d2247296478%2Ff489a630137d4a28b75e743a04ae8f49?format=webp&width=800"
               alt="War Room"
-              className="hidden md:block lg:hidden h-[28px] w-auto"
+              className="hidden md:block lg:hidden h-[28px] w-auto object-contain"
+              style={{ aspectRatio: '1/1' }}
             />
             {/* Small logo for mobile header */}
             <img
@@ -214,7 +211,7 @@ const TopNavigation: React.FC = () => {
           </button>
 
           {/* Navigation Items - Responsive */}
-          <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
+          <div className="hidden md:flex items-center space-x-0.5 lg:space-x-1 xl:space-x-2">
             {navItems.map((item, index) => (
               <button
                 key={index}
@@ -223,12 +220,11 @@ const TopNavigation: React.FC = () => {
                 data-route={item.route}
                 style={
                   {
-                    transition:
-                      'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                     '--item-accent': item.accent,
                   } as React.CSSProperties
                 }
-                className={`nav-item group px-2 lg:px-3 py-1 rounded-lg text-xs lg:text-sm flex items-center space-x-1 ${
+                className={`nav-item group px-1.5 lg:px-2 xl:px-3 py-1 rounded-lg text-[10px] md:text-[11px] lg:text-xs xl:text-sm flex items-center space-x-0.5 lg:space-x-1 ${
                   item.active
                     ? getNavActiveClasses(item.theme)
                     : 'text-white/70 hover:text-white hover:bg-white/10 hover:shadow-lg'
@@ -236,14 +232,13 @@ const TopNavigation: React.FC = () => {
               >
                 {/* Hide icons on tablet, show on large screens */}
                 <item.icon
-                  className={`icon w-4 h-4 flex-shrink-0 hidden lg:block ${
+                  className={`icon w-3 h-3 lg:w-3.5 lg:h-3.5 xl:w-4 xl:h-4 flex-shrink-0 hidden lg:block ${
                     item.active
                       ? getNavIconActiveClasses(item.theme)
                       : getNavIconHoverClasses(item.theme)
                   }`}
                   style={{
-                    transition:
-                      'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                     ...(item.icon === Home
                       ? {
                           // More aggressive positioning - both states need similar adjustments
@@ -256,15 +251,12 @@ const TopNavigation: React.FC = () => {
                 />
                 <span
                   className={`label ${item.active ? 'nav-active-text' : getNavHoverClasses(item.theme)} ${
-                    ['LIVE MONITORING', 'WAR ROOM', 'ALERT CENTER'].includes(
-                      item.label
-                    )
+                    ['LIVE MONITORING', 'WAR ROOM', 'ALERT CENTER'].includes(item.label)
                       ? 'nav-label'
                       : ''
                   }`}
                   style={{
-                    transition:
-                      'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                   }}
                 >
                   {/* Full text for large screens */}
@@ -283,17 +275,17 @@ const TopNavigation: React.FC = () => {
           </div>
 
           {/* Right Side Actions - Moved 25px left with tighter spacing */}
-          <div className="flex items-center space-x-1 md:space-x-1.5 lg:space-x-2 mr-[25px]">
+          <div className="flex items-center space-x-0.5 md:space-x-1 lg:space-x-1.5 xl:space-x-2 mr-[15px] lg:mr-[20px] xl:mr-[25px]">
             {/* Notifications */}
             <div className="relative" ref={notificationsRef}>
               <button
                 onClick={() => setShowNotifications(!showNotifications)}
-                className="p-1.5 lg:p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 hover:shadow-md relative"
+                className="p-1 md:p-1.5 lg:p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 hover:shadow-md relative"
                 style={{
                   transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                 }}
               >
-                <Bell className="w-4 h-4 lg:w-5 lg:h-5" />
+                <Bell className="w-3.5 h-3.5 md:w-4 md:h-4 lg:w-4 lg:h-4 xl:w-5 xl:h-5" />
                 {unreadAlerts.length > 0 && (
                   <div className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 notification-badge rounded-lg flex items-center justify-center transition-colors">
                     <span className="notification-badge-text text-[11px] font-medium">
@@ -344,9 +336,7 @@ const TopNavigation: React.FC = () => {
                             }`}
                           >
                             <div className="flex items-start space-x-3">
-                              <div
-                                className={`p-2 rounded-lg ${getPriorityColor(alert.priority)}`}
-                              >
+                              <div className={`p-2 rounded-lg ${getPriorityColor(alert.priority)}`}>
                                 <Bell className="w-4 h-4" />
                               </div>
                               <div className="flex-1 min-w-0">
@@ -385,12 +375,12 @@ const TopNavigation: React.FC = () => {
             {/* User Profile */}
             <button
               onClick={() => navigate('/settings')}
-              className="p-1.5 lg:p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 hover:shadow-md"
+              className="p-1 md:p-1.5 lg:p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 hover:shadow-md"
               style={{
                 transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
               }}
             >
-              <User className="w-4 h-4 lg:w-5 lg:h-5" />
+              <User className="w-3.5 h-3.5 md:w-4 md:h-4 lg:w-4 lg:h-4 xl:w-5 xl:h-5" />
             </button>
 
             {/* Mobile Menu Button - Far Right */}

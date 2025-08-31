@@ -32,14 +32,14 @@ export class BackendConnectionTester {
    */
   async testHealth(): Promise<ConnectionResult> {
     const startTime = performance.now();
-    
+
     try {
       const response = await fetch(`${this.baseUrl}/health`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-        signal: AbortSignal.timeout(this.timeout)
+        signal: AbortSignal.timeout(this.timeout),
       });
 
       const latency = Math.round(performance.now() - startTime);
@@ -48,16 +48,16 @@ export class BackendConnectionTester {
         success: response.ok,
         status: response.status,
         latency,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     } catch (error) {
       const latency = Math.round(performance.now() - startTime);
-      
+
       return {
         success: false,
         latency,
         error: error instanceof Error ? error.message : 'Unknown error',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     }
   }
@@ -67,14 +67,14 @@ export class BackendConnectionTester {
    */
   async testMentionlyticsEndpoint(): Promise<ConnectionResult> {
     const startTime = performance.now();
-    
+
     try {
       const response = await fetch(`${this.baseUrl}/api/v1/mentionlytics/status`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-        signal: AbortSignal.timeout(this.timeout)
+        signal: AbortSignal.timeout(this.timeout),
       });
 
       const latency = Math.round(performance.now() - startTime);
@@ -83,16 +83,16 @@ export class BackendConnectionTester {
         success: response.ok,
         status: response.status,
         latency,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     } catch (error) {
       const latency = Math.round(performance.now() - startTime);
-      
+
       return {
         success: false,
         latency,
         error: error instanceof Error ? error.message : 'Unknown error',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     }
   }
@@ -102,14 +102,14 @@ export class BackendConnectionTester {
    */
   async testAuth(): Promise<ConnectionResult> {
     const startTime = performance.now();
-    
+
     try {
       const response = await fetch(`${this.baseUrl}/api/v1/auth/status`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-        signal: AbortSignal.timeout(this.timeout)
+        signal: AbortSignal.timeout(this.timeout),
       });
 
       const latency = Math.round(performance.now() - startTime);
@@ -118,16 +118,16 @@ export class BackendConnectionTester {
         success: response.ok,
         status: response.status,
         latency,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     } catch (error) {
       const latency = Math.round(performance.now() - startTime);
-      
+
       return {
         success: false,
         latency,
         error: error instanceof Error ? error.message : 'Unknown error',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     }
   }
@@ -151,20 +151,19 @@ export class BackendConnectionTester {
     const results = {
       health: await this.testHealth(),
       mentionlytics: await this.testMentionlyticsEndpoint(),
-      auth: await this.testAuth()
+      auth: await this.testAuth(),
     };
 
-    const successCount = Object.values(results).filter(r => r.success).length;
+    const successCount = Object.values(results).filter((r) => r.success).length;
     const totalTests = Object.keys(results).length;
     const successRate = (successCount / totalTests) * 100;
-    
+
     const latencies = Object.values(results)
-      .filter(r => r.latency !== undefined)
-      .map(r => r.latency!);
-    
-    const averageLatency = latencies.length > 0 
-      ? latencies.reduce((a, b) => a + b, 0) / latencies.length 
-      : 0;
+      .filter((r) => r.latency !== undefined)
+      .map((r) => r.latency!);
+
+    const averageLatency =
+      latencies.length > 0 ? latencies.reduce((a, b) => a + b, 0) / latencies.length : 0;
 
     let overall: 'healthy' | 'degraded' | 'failed';
     if (successRate >= 80) {
@@ -181,8 +180,8 @@ export class BackendConnectionTester {
       summary: {
         successRate: Math.round(successRate),
         averageLatency: Math.round(averageLatency),
-        totalTests
-      }
+        totalTests,
+      },
     };
   }
 
@@ -195,7 +194,7 @@ export class BackendConnectionTester {
     details: string[];
   }> {
     const testResult = await this.runFullTest();
-    
+
     if (testResult.overall === 'healthy') {
       return {
         ready: true,
@@ -203,11 +202,11 @@ export class BackendConnectionTester {
         details: [
           `Success rate: ${testResult.summary.successRate}%`,
           `Average latency: ${testResult.summary.averageLatency}ms`,
-          `All critical endpoints responding`
-        ]
+          `All critical endpoints responding`,
+        ],
       };
     }
-    
+
     if (testResult.overall === 'degraded') {
       return {
         ready: false,
@@ -217,11 +216,11 @@ export class BackendConnectionTester {
           `Average latency: ${testResult.summary.averageLatency}ms`,
           ...Object.entries(testResult.results)
             .filter(([_, result]) => !result.success)
-            .map(([endpoint, result]) => `${endpoint}: ${result.error || 'Failed'}`)
-        ]
+            .map(([endpoint, result]) => `${endpoint}: ${result.error || 'Failed'}`),
+        ],
       };
     }
-    
+
     return {
       ready: false,
       message: '❌ Backend not ready - connection failed',
@@ -230,8 +229,8 @@ export class BackendConnectionTester {
         `Base URL: ${this.baseUrl}`,
         ...Object.entries(testResult.results)
           .filter(([_, result]) => !result.success)
-          .map(([endpoint, result]) => `${endpoint}: ${result.error || 'Failed'}`)
-      ]
+          .map(([endpoint, result]) => `${endpoint}: ${result.error || 'Failed'}`),
+      ],
     };
   }
 }

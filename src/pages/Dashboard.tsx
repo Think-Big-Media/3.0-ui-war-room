@@ -1,43 +1,46 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { safeParseJSON } from "../utils/localStorage";
-import { CampaignSetupData, defaultCampaignData } from "../types/campaign";
-import PageLayout from "../components/shared/PageLayout";
-import Card from "../components/shared/Card";
-import { WidgetErrorBoundary } from "../components/shared/ErrorBoundary";
-import { SWOTRadarDashboard } from "../components/generated/SWOTRadarDashboard";
-import CommandStatusBar from "../components/dashboard/CommandStatusBar";
-import MentionlyticsPoliticalMap from "../components/political/MentionlyticsPoliticalMap";
-import SocialMediaPosts from "../components/dashboard/SocialMediaPosts";
-import { DualPieCharts } from "../components/dashboard/DualPieCharts";
-import { PlatformDominanceGrid } from "../components/dashboard/PlatformDominanceGrid";
-import { PhraseCloud } from "../components/dashboard/PhraseCloud";
-import { CompetitorAnalysis } from "../components/dashboard/CompetitorAnalysis";
-import { LiveIntelligence } from "../components/dashboard/LiveIntelligence";
-import { CampaignSetupModal } from "../components/mentionlytics/CampaignSetupModal";
-import { useSentimentAnalysis, useMentionlyticsDashboard, useCrisisAlerts } from "../hooks/useMentionlytics";
-import { Zap, Radio, PenTool, TrendingUp, Smartphone, AlertTriangle, Settings } from "lucide-react";
-import "../main-dashboard.css";
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { safeParseJSON } from '../utils/localStorage';
+import { CampaignSetupData, defaultCampaignData } from '../types/campaign';
+import PageLayout from '../components/shared/PageLayout';
+import Card from '../components/shared/Card';
+import { WidgetErrorBoundary } from '../components/shared/ErrorBoundary';
+import { SWOTRadarDashboard } from '../components/generated/SWOTRadarDashboard';
+import CommandStatusBar from '../components/dashboard/CommandStatusBar';
+import MentionlyticsPoliticalMap from '../components/political/MentionlyticsPoliticalMap';
+import SocialMediaPosts from '../components/dashboard/SocialMediaPosts';
+import { DualPieCharts } from '../components/dashboard/DualPieCharts';
+import { PlatformDominanceGrid } from '../components/dashboard/PlatformDominanceGrid';
+import { PhraseCloud } from '../components/dashboard/PhraseCloud';
+import { CompetitorAnalysis } from '../components/dashboard/CompetitorAnalysis';
+import { LiveIntelligence } from '../components/dashboard/LiveIntelligence';
+import { CampaignSetupModal } from '../components/mentionlytics/CampaignSetupModal';
+import {
+  useSentimentAnalysis,
+  useMentionlyticsDashboard,
+  useCrisisAlerts,
+} from '../hooks/useMentionlytics';
+import { Zap, Radio, PenTool, TrendingUp, Smartphone, AlertTriangle, Settings } from 'lucide-react';
+import '../main-dashboard.css';
 
 export default function Dashboard() {
   const navigate = useNavigate();
   const [showSetupModal, setShowSetupModal] = useState(false);
   const [campaignData, setCampaignData] = useState<CampaignSetupData | null>(null);
-  
+
   // Mentionlytics Data Hooks
   const { data: sentimentData, dataMode } = useSentimentAnalysis();
   const { alerts: crisisAlerts } = useCrisisAlerts();
   const dashboard = useMentionlyticsDashboard();
-  
+
   console.log('🏠 [DASHBOARD PAGE] Rendering at', window.location.pathname);
   console.log('🔄 [DASHBOARD] Component render at', performance.now());
 
   // Load campaign data from localStorage safely
   useEffect(() => {
-    const campaignData = safeParseJSON<CampaignSetupData>(
-      'warRoomCampaignSetup',
-      { fallback: defaultCampaignData }
-    );
+    const campaignData = safeParseJSON<CampaignSetupData>('warRoomCampaignSetup', {
+      fallback: defaultCampaignData,
+    });
     if (campaignData && campaignData.campaignName) {
       setCampaignData(campaignData);
     }
@@ -112,16 +115,28 @@ export default function Dashboard() {
   const handleIntelligenceFeedClick = (type: string, topic?: string) => {
     switch (type) {
       case 'strength':
-        navigate('/intelligence-hub?category=strength&topic=' + encodeURIComponent(topic || 'social-media-engagement'));
+        navigate(
+          '/intelligence-hub?category=strength&topic=' +
+            encodeURIComponent(topic || 'social-media-engagement')
+        );
         break;
       case 'opportunity':
-        navigate('/intelligence-hub?category=opportunity&topic=' + encodeURIComponent(topic || 'trending-hashtags'));
+        navigate(
+          '/intelligence-hub?category=opportunity&topic=' +
+            encodeURIComponent(topic || 'trending-hashtags')
+        );
         break;
       case 'weakness':
-        navigate('/intelligence-hub?category=weakness&topic=' + encodeURIComponent(topic || 'engagement-issues'));
+        navigate(
+          '/intelligence-hub?category=weakness&topic=' +
+            encodeURIComponent(topic || 'engagement-issues')
+        );
         break;
       case 'threat':
-        navigate('/intelligence-hub?category=threat&topic=' + encodeURIComponent(topic || 'sentiment-alerts'));
+        navigate(
+          '/intelligence-hub?category=threat&topic=' +
+            encodeURIComponent(topic || 'sentiment-alerts')
+        );
         break;
       default:
         navigate('/intelligence-hub');
@@ -130,144 +145,135 @@ export default function Dashboard() {
   };
 
   return (
-    <PageLayout 
-      pageTitle="Command Center" 
-      placeholder="Ask about your campaign intelligence..."
-    >
-      <div className="30-aug-dashboard war-room-dashboard font-barlow" style={{ marginTop: '-8px' }}>
-        {/* Command Status Bar */}
-        <div className="px-4 mb-3">
+    <PageLayout pageTitle="Command Center" placeholder="Ask about your campaign intelligence...">
+      <div
+        className="30-aug-dashboard war-room-dashboard font-barlow"
+        style={{ marginTop: '-8px' }}
+      >
+        {/* Command Status Bar - Hidden on mobile */}
+        <div className="hidden md:block px-4 mb-3">
           <CommandStatusBar />
         </div>
         {/* Top Header - 4 Compact Metric Cards */}
-        <div className="grid grid-cols-4 gap-4 mb-0.5 px-4">
+        <div className="grid grid-cols-4 gap-4 mb-3 px-4">
           {/* Sentiment Analysis Card */}
-          <Card variant="glass" padding="sm" className="hoverable hover:scale-[1.02] transition-all duration-300 cursor-pointer" onClick={() => handleMetricBoxClick('sentiment')}>
+          <Card
+            variant="glass"
+            padding="sm"
+            className="hoverable transition-all duration-300 cursor-pointer"
+            onClick={() => handleMetricBoxClick('sentiment')}
+          >
             <div className="flex items-center justify-between mb-2">
               <h3 className="font-barlow font-semibold text-white text-xs">Sentiment</h3>
-              <div className={`w-2 h-2 rounded-full animate-pulse ${
-                dataMode === 'MOCK' ? 'bg-amber-400' : 'bg-emerald-400'
-              }`}></div>
+              <div
+                className={`w-2 h-2 rounded-full animate-pulse ${
+                  dataMode === 'MOCK' ? 'bg-amber-400' : 'bg-emerald-400'
+                }`}
+              ></div>
             </div>
             <div className="text-2xl font-bold text-emerald-400 mb-1">
-              {sentimentData ? `+${Math.round((sentimentData.positive / sentimentData.total) * 100)}%` : '+33%'}
+              {sentimentData
+                ? `+${Math.round((sentimentData.positive / sentimentData.total) * 100)}%`
+                : '+33%'}
             </div>
             <div className="text-xs text-white/60">
               {sentimentData?.positive || 342} positive • {sentimentData?.negative || 503} negative
             </div>
-            {dataMode === 'MOCK' && (
-              <div className="text-xs text-amber-400/80 mt-1">MOCK DATA</div>
-            )}
           </Card>
 
           {/* Mention Volume Card */}
-          <Card variant="glass" padding="sm" className="hoverable hover:scale-[1.02] transition-all duration-300 cursor-pointer" onClick={() => handleMetricBoxClick('mentions')}>
+          <Card
+            variant="glass"
+            padding="sm"
+            className="hoverable transition-all duration-300 cursor-pointer"
+            onClick={() => handleMetricBoxClick('mentions')}
+          >
             <div className="flex items-center justify-between mb-2">
               <h3 className="font-barlow font-semibold text-white text-xs">Mention Volume</h3>
-              <div className={`w-2 h-2 rounded-full animate-pulse ${
-                dataMode === 'MOCK' ? 'bg-amber-400' : 'bg-sky-400'
-              }`}></div>
+              <div
+                className={`w-2 h-2 rounded-full animate-pulse ${
+                  dataMode === 'MOCK' ? 'bg-amber-400' : 'bg-sky-400'
+                }`}
+              ></div>
             </div>
             <div className="text-2xl font-bold text-sky-400 mb-1">
               {sentimentData ? sentimentData.total.toLocaleString() : '1,039'}
             </div>
-            <div className="text-xs text-white/60">
-              24h volume • +12% vs yesterday
-            </div>
-            {dataMode === 'MOCK' && (
-              <div className="text-xs text-amber-400/80 mt-1">MOCK DATA</div>
-            )}
+            <div className="text-xs text-white/60">24h volume • +12% vs yesterday</div>
           </Card>
 
           {/* Share of Voice Card */}
-          <Card variant="glass" padding="sm" className="hoverable hover:scale-[1.02] transition-all duration-300 cursor-pointer" onClick={() => handleMetricBoxClick('share')}>
+          <Card
+            variant="glass"
+            padding="sm"
+            className="hoverable transition-all duration-300 cursor-pointer"
+            onClick={() => handleMetricBoxClick('share')}
+          >
             <div className="flex items-center justify-between mb-2">
               <h3 className="font-barlow font-semibold text-white text-xs">Share of Voice</h3>
-              <div className={`w-2 h-2 rounded-full animate-pulse ${
-                dataMode === 'MOCK' ? 'bg-amber-400' : 'bg-violet-400'
-              }`}></div>
+              <div
+                className={`w-2 h-2 rounded-full animate-pulse ${
+                  dataMode === 'MOCK' ? 'bg-amber-400' : 'bg-violet-400'
+                }`}
+              ></div>
             </div>
             <div className="text-2xl font-bold text-violet-400 mb-1">
               {dashboard.shareOfVoice?.[0]?.percentage?.toFixed(1) || '76.9'}%
             </div>
-            <div className="text-xs text-white/60">
-              Leading competitor • Reach: 2.4M
-            </div>
-            {dataMode === 'MOCK' && (
-              <div className="text-xs text-amber-400/80 mt-1">MOCK DATA</div>
-            )}
+            <div className="text-xs text-white/60">Leading competitor • Reach: 2.4M</div>
           </Card>
 
           {/* Crisis Risk Card */}
-          <Card variant="glass" padding="sm" className="hoverable hover:scale-[1.02] transition-all duration-300 cursor-pointer" onClick={() => handleMetricBoxClick('risk')}>
+          <Card
+            variant="glass"
+            padding="sm"
+            className="hoverable transition-all duration-300 cursor-pointer"
+            onClick={() => handleMetricBoxClick('risk')}
+          >
             <div className="flex items-center justify-between mb-2">
               <h3 className="font-barlow font-semibold text-white text-xs">Crisis Risk</h3>
-              <div className={`w-2 h-2 rounded-full animate-pulse ${
-                crisisAlerts?.hasActiveCrisis ? 'bg-rose-400' : dataMode === 'MOCK' ? 'bg-amber-400' : 'bg-emerald-400'
-              }`}></div>
+              <div
+                className={`w-2 h-2 rounded-full animate-pulse ${
+                  crisisAlerts?.hasActiveCrisis
+                    ? 'bg-rose-400'
+                    : dataMode === 'MOCK'
+                      ? 'bg-amber-400'
+                      : 'bg-emerald-400'
+                }`}
+              ></div>
             </div>
-            <div className={`text-2xl font-bold mb-1 ${
-              crisisAlerts?.hasActiveCrisis ? 'text-rose-400' : 'text-emerald-400'
-            }`}>
+            <div
+              className={`text-2xl font-bold mb-1 ${
+                crisisAlerts?.hasActiveCrisis ? 'text-rose-400' : 'text-emerald-400'
+              }`}
+            >
               {crisisAlerts?.hasActiveCrisis ? 'HIGH' : 'LOW'}
             </div>
             <div className="text-xs text-white/60">
               {crisisAlerts?.alerts?.length || 1} active threats
             </div>
-            {dataMode === 'MOCK' && (
-              <div className="text-xs text-amber-400/80 mt-1">MOCK DATA</div>
-            )}
           </Card>
         </div>
 
-
-        {/* Main Dashboard Wrapper - Align with top boxes */}
-        <div className="dashboard-wrapper px-4">
-          <div className="dashboard">
+        {/* Main Dashboard Grid - Remove wrapper, use full PageLayout width */}
+        <div className="dashboard px-4">
             {/* Left Column */}
             <div className="left-column">
               {/* Political Map */}
-              <Card variant="glass" padding="md" className="political-map hoverable hover:scale-[1.02] transition-all duration-200">
-                <div className="map-container" style={{ display: 'grid', gridTemplateColumns: '380px 1fr', gap: '10px' }}>
-                  <div style={{ width: "380px", height: "260px", position: "relative" }}>
-                    <MentionlyticsPoliticalMap />
-                  </div>
-                  <div className="map-data" style={{ textAlign: "right", paddingRight: "10px" }}>
-                    <div className="text-[9px] text-white/60 mb-1 text-right uppercase font-semibold tracking-wider truncate font-barlow">
-                      TOP ACTIVITY
-                    </div>
-                    <div className="text-white/75 text-[10px] leading-tight text-right uppercase truncate font-barlow">Texas: <span className="font-jetbrains">298</span> mentions</div>
-                    <div className="text-white/75 text-[10px] leading-tight text-right uppercase truncate font-barlow">Florida: <span className="font-jetbrains">234</span> mentions</div>
-                    <div className="text-white/75 text-[10px] leading-tight text-right uppercase truncate font-barlow">Georgia: <span className="font-jetbrains text-green-400">+48%</span></div>
-                    <div className="text-white/75 text-[10px] leading-tight text-right uppercase truncate font-barlow">Ohio: <span className="font-jetbrains">167</span> mentions</div>
-                    <div className="text-white/75 text-[10px] leading-tight text-right uppercase truncate font-barlow">Pennsylvania: <span className="font-jetbrains text-green-400">+43%</span></div>
-                    <div className="text-white/75 text-[10px] leading-tight text-right uppercase truncate font-barlow">Michigan: <span className="font-jetbrains text-red-400">-48%</span></div>
-                    <div className="text-white/75 text-[10px] leading-tight text-right uppercase truncate font-barlow">Arizona: <span className="font-jetbrains text-green-400">+47%</span></div>
-                    
-                    {/* Small sentiment legend */}
-                    <div className="mt-3 pt-2 border-t border-white/10">
-                      <div className="flex items-center justify-end gap-1.5 text-[8px]">
-                        <span className="text-white/50 uppercase font-barlow">Sentiment:</span>
-                        <div className="flex items-center gap-0.5">
-                          <div className="w-2 h-2 bg-rose-400 rounded-sm"></div>
-                          <span className="text-white/40">Neg</span>
-                        </div>
-                        <div className="flex items-center gap-0.5">
-                          <div className="w-2 h-2 bg-gray-400 rounded-sm"></div>
-                          <span className="text-white/40">Neu</span>
-                        </div>
-                        <div className="flex items-center gap-0.5">
-                          <div className="w-2 h-2 bg-emerald-400 rounded-sm"></div>
-                          <span className="text-white/40">Pos</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <Card
+                variant="glass"
+                padding="md"
+                className="political-map hoverable"
+              >
+                <MentionlyticsPoliticalMap />
               </Card>
 
               {/* SWOT Radar - Keep Core Component Untouched */}
-              <Card variant="glass" padding="md" className="fresh-swot-radar hoverable hover:scale-[1.02] transition-all duration-200">
+              <Card
+                variant="glass"
+                padding="md"
+                className="fresh-swot-radar hoverable"
+              >
                 <WidgetErrorBoundary widgetName="SWOT Radar Dashboard">
                   <SWOTRadarDashboard />
                 </WidgetErrorBoundary>
@@ -283,19 +289,23 @@ export default function Dashboard() {
             <div className="right-column">
               {/* Dual Pie Charts - Compact Height */}
               <DualPieCharts />
-              
+
               {/* Phrase Cloud - Under Crisis Risk & Share of Voice */}
               <WidgetErrorBoundary widgetName="Phrase Cloud">
                 <PhraseCloud />
               </WidgetErrorBoundary>
-              
+
               {/* Competitor Analysis */}
               <WidgetErrorBoundary widgetName="Competitor Analysis">
                 <CompetitorAnalysis />
               </WidgetErrorBoundary>
-              
+
               {/* Quick Actions Grid */}
-              <Card variant="glass" padding="none" className="quick-actions hoverable hover:scale-[1.02] transition-all duration-200" style={{ overflow: "hidden" }}>
+              <Card
+                variant="glass"
+                padding="none"
+                className="quick-actions hoverable"
+              >
                 <div className="bg-white/10 px-3 py-2 border-b border-white/30">
                   <div className="text-xs text-white/60 uppercase font-semibold tracking-wider font-barlow">
                     Quick Actions
@@ -303,48 +313,48 @@ export default function Dashboard() {
                 </div>
                 <div
                   style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(3, 1fr)",
-                    gridTemplateRows: "repeat(2, 1fr)",
-                    height: "calc(100% - 40px)",
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gridTemplateRows: 'repeat(2, 1fr)',
+                    height: 'calc(100% - 40px)',
                   }}
                 >
-                  <div 
+                  <div
                     onClick={() => handleQuickActionClick('quick-campaign')}
                     className="bg-white/5 border-r border-b border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/15 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
                   >
                     <Zap className="w-4 h-4 text-yellow-400" />
                     Quick Campaign
                   </div>
-                  <div 
+                  <div
                     onClick={() => handleQuickActionClick('live-monitor')}
                     className="bg-white/5 border-r border-b border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/15 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
                   >
                     <Radio className="w-4 h-4 text-green-400" />
                     Live Monitor
                   </div>
-                  <div 
+                  <div
                     onClick={handleOpenSetup}
                     className="bg-black/10 border-b border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/10 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
                   >
                     <Settings className="w-4 h-4 text-blue-400" />
                     Campaign Setup
                   </div>
-                  <div 
+                  <div
                     onClick={() => handleQuickActionClick('trend-ops')}
                     className="bg-black/10 border-r border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/10 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
                   >
                     <TrendingUp className="w-4 h-4 text-purple-400" />
                     Trend Ops
                   </div>
-                  <div 
+                  <div
                     onClick={() => handleQuickActionClick('social-media')}
                     className="bg-black/10 border-r border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/10 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
                   >
                     <Smartphone className="w-4 h-4 text-cyan-400" />
                     Social Media
                   </div>
-                  <div 
+                  <div
                     onClick={() => handleQuickActionClick('alert-center')}
                     className="bg-white/5 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/15 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
                   >
@@ -357,19 +367,15 @@ export default function Dashboard() {
               {/* Social Media Posts */}
               <SocialMediaPosts />
             </div>
-          </div>
-
-          {/* Bottom spacer */}
-          <div className="dashboard-footer"></div>
         </div>
+
+        {/* Campaign Setup Modal */}
+        <CampaignSetupModal
+          isOpen={showSetupModal}
+          onClose={() => setShowSetupModal(false)}
+          onComplete={handleSetupComplete}
+        />
       </div>
-      
-      {/* Campaign Setup Modal */}
-      <CampaignSetupModal 
-        isOpen={showSetupModal}
-        onClose={() => setShowSetupModal(false)}
-        onComplete={handleSetupComplete}
-      />
     </PageLayout>
   );
 }

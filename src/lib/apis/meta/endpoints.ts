@@ -58,13 +58,10 @@ export class MetaEndpoints {
   async getCampaigns(accountId: string): Promise<Campaign[]> {
     const campaigns: Campaign[] = [];
 
-    for await (const batch of this.client.paginate<Campaign>(
-      `act_${accountId}/campaigns`,
-      {
-        fields: 'id,name,status,objective,created_time,updated_time,daily_budget,lifetime_budget',
-        limit: 50,
-      },
-    )) {
+    for await (const batch of this.client.paginate<Campaign>(`act_${accountId}/campaigns`, {
+      fields: 'id,name,status,objective,created_time,updated_time,daily_budget,lifetime_budget',
+      limit: 50,
+    })) {
       campaigns.push(...batch);
     }
 
@@ -74,34 +71,21 @@ export class MetaEndpoints {
   /**
    * Get insights for ad account
    */
-  async getAccountInsights(
-    accountId: string,
-    params?: InsightParams,
-  ): Promise<InsightData[]> {
+  async getAccountInsights(accountId: string, params?: InsightParams): Promise<InsightData[]> {
     // Generate cache key
     const cacheKey = MetaApiCache.generateInsightKey(accountId, params || {});
 
     const defaultParams: InsightParams = {
       level: 'account',
-      fields: [
-        'spend',
-        'impressions',
-        'clicks',
-        'cpm',
-        'cpc',
-        'ctr',
-      ],
+      fields: ['spend', 'impressions', 'clicks', 'cpm', 'cpc', 'ctr'],
       date_preset: 'last_7d',
       ...params,
     };
 
-    const response = await this.client.request<InsightData[]>(
-      `act_${accountId}/insights`,
-      {
-        params: this.formatInsightParams(defaultParams),
-        cacheTTL: 5 * 60 * 1000, // Cache for 5 minutes
-      },
-    );
+    const response = await this.client.request<InsightData[]>(`act_${accountId}/insights`, {
+      params: this.formatInsightParams(defaultParams),
+      cacheTTL: 5 * 60 * 1000, // Cache for 5 minutes
+    });
 
     return response.data;
   }
@@ -109,10 +93,7 @@ export class MetaEndpoints {
   /**
    * Get insights for campaign
    */
-  async getCampaignInsights(
-    campaignId: string,
-    params?: InsightParams,
-  ): Promise<InsightData[]> {
+  async getCampaignInsights(campaignId: string, params?: InsightParams): Promise<InsightData[]> {
     const defaultParams: InsightParams = {
       level: 'campaign',
       fields: [
@@ -131,13 +112,10 @@ export class MetaEndpoints {
       ...params,
     };
 
-    const response = await this.client.request<InsightData[]>(
-      `${campaignId}/insights`,
-      {
-        params: this.formatInsightParams(defaultParams),
-        cacheTTL: 5 * 60 * 1000,
-      },
-    );
+    const response = await this.client.request<InsightData[]>(`${campaignId}/insights`, {
+      params: this.formatInsightParams(defaultParams),
+      cacheTTL: 5 * 60 * 1000,
+    });
 
     return response.data;
   }
@@ -148,7 +126,7 @@ export class MetaEndpoints {
   async getAggregatedInsights(
     accountId: string,
     campaignIds?: string[],
-    params?: InsightParams,
+    params?: InsightParams
   ): Promise<{
     total: InsightData;
     byCampaign: Record<string, InsightData>;
@@ -204,12 +182,16 @@ export class MetaEndpoints {
     const byDate: Record<string, InsightData> = {};
 
     // Process insights
-    insights.forEach(insight => {
+    insights.forEach((insight) => {
       // Aggregate totals
       total.spend = String(parseFloat(total.spend) + parseFloat(insight.spend || '0'));
-      total.impressions = String(parseInt(total.impressions) + parseInt(insight.impressions || '0'));
+      total.impressions = String(
+        parseInt(total.impressions) + parseInt(insight.impressions || '0')
+      );
       total.clicks = String(parseInt(total.clicks) + parseInt(insight.clicks || '0'));
-      total.conversions = String(parseInt(total.conversions || '0') + parseInt(insight.conversions || '0'));
+      total.conversions = String(
+        parseInt(total.conversions || '0') + parseInt(insight.conversions || '0')
+      );
 
       // Group by campaign
       if (insight.campaign_id) {
@@ -223,7 +205,7 @@ export class MetaEndpoints {
         } else {
           // Aggregate for this date
           byDate[insight.date_start].spend = String(
-            parseFloat(byDate[insight.date_start].spend) + parseFloat(insight.spend || '0'),
+            parseFloat(byDate[insight.date_start].spend) + parseFloat(insight.spend || '0')
           );
           // ... aggregate other metrics
         }
@@ -240,7 +222,7 @@ export class MetaEndpoints {
     }
     if (parseInt(total.conversions || '0') > 0) {
       total.cost_per_conversion = String(
-        parseFloat(total.spend) / parseInt(total.conversions || '1'),
+        parseFloat(total.spend) / parseInt(total.conversions || '1')
       );
     }
 
@@ -252,7 +234,7 @@ export class MetaEndpoints {
    */
   async getSpendTrend(
     accountId: string,
-    days = 30,
+    days = 30
   ): Promise<Array<{ date: string; spend: number }>> {
     const insights = await this.getAccountInsights(accountId, {
       level: 'account',
@@ -264,7 +246,7 @@ export class MetaEndpoints {
       breakdowns: ['time_breakdown'],
     });
 
-    return insights.map(insight => ({
+    return insights.map((insight) => ({
       date: insight.date_start,
       spend: parseFloat(insight.spend || '0'),
     }));
@@ -276,14 +258,30 @@ export class MetaEndpoints {
   private formatInsightParams(params: InsightParams): Record<string, any> {
     const formatted: Record<string, any> = {};
 
-    if (params.level) {formatted.level = params.level;}
-    if (params.fields) {formatted.fields = params.fields.join(',');}
-    if (params.date_preset) {formatted.date_preset = params.date_preset;}
-    if (params.time_range) {formatted.time_range = JSON.stringify(params.time_range);}
-    if (params.filtering) {formatted.filtering = JSON.stringify(params.filtering);}
-    if (params.breakdowns) {formatted.breakdowns = params.breakdowns.join(',');}
-    if (params.sort) {formatted.sort = params.sort.join(',');}
-    if (params.limit) {formatted.limit = params.limit;}
+    if (params.level) {
+      formatted.level = params.level;
+    }
+    if (params.fields) {
+      formatted.fields = params.fields.join(',');
+    }
+    if (params.date_preset) {
+      formatted.date_preset = params.date_preset;
+    }
+    if (params.time_range) {
+      formatted.time_range = JSON.stringify(params.time_range);
+    }
+    if (params.filtering) {
+      formatted.filtering = JSON.stringify(params.filtering);
+    }
+    if (params.breakdowns) {
+      formatted.breakdowns = params.breakdowns.join(',');
+    }
+    if (params.sort) {
+      formatted.sort = params.sort.join(',');
+    }
+    if (params.limit) {
+      formatted.limit = params.limit;
+    }
 
     return formatted;
   }

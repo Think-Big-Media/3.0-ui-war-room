@@ -4,7 +4,12 @@
  */
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { adInsightsApi, type AdInsightsResponse, type RealTimeAlert, type CampaignHealthData } from '../services/adInsightsApi';
+import {
+  adInsightsApi,
+  type AdInsightsResponse,
+  type RealTimeAlert,
+  type CampaignHealthData,
+} from '../services/adInsightsApi';
 import { createLogger } from '../utils/logger';
 
 const logger = createLogger('useAdInsights');
@@ -15,18 +20,21 @@ const adInsightsKeys = {
   campaigns: (params?: any) => [...adInsightsKeys.all, 'campaigns', params] as const,
   alerts: (params?: any) => [...adInsightsKeys.all, 'alerts', params] as const,
   health: () => [...adInsightsKeys.all, 'health'] as const,
-  platform: (platform: string, params?: any) => [...adInsightsKeys.all, 'platform', platform, params] as const,
+  platform: (platform: string, params?: any) =>
+    [...adInsightsKeys.all, 'platform', platform, params] as const,
 };
 
 /**
  * Hook to get unified campaign insights
  */
-export function useAdInsights(params: {
-  date_preset?: 'today' | 'yesterday' | 'last_7d' | 'last_30d';
-  account_ids?: string;
-  include_inactive?: boolean;
-  real_time?: boolean;
-} = {}) {
+export function useAdInsights(
+  params: {
+    date_preset?: 'today' | 'yesterday' | 'last_7d' | 'last_30d';
+    account_ids?: string;
+    include_inactive?: boolean;
+    real_time?: boolean;
+  } = {}
+) {
   return useQuery({
     queryKey: adInsightsKeys.campaigns(params),
     queryFn: () => adInsightsApi.getCampaignInsights(params),
@@ -45,11 +53,13 @@ export function useAdInsights(params: {
 /**
  * Hook to get real-time alerts
  */
-export function useAdAlerts(params: {
-  severity?: 'low' | 'medium' | 'high' | 'critical';
-  platform?: 'meta' | 'google';
-  limit?: number;
-} = {}) {
+export function useAdAlerts(
+  params: {
+    severity?: 'low' | 'medium' | 'high' | 'critical';
+    platform?: 'meta' | 'google';
+    limit?: number;
+  } = {}
+) {
   return useQuery({
     queryKey: adInsightsKeys.alerts(params),
     queryFn: () => adInsightsApi.getAlerts(params),
@@ -90,10 +100,13 @@ export function useCampaignHealth() {
 /**
  * Hook to get platform-specific metrics
  */
-export function usePlatformMetrics(platform: 'meta' | 'google', params: {
-  date_preset?: string;
-  account_id?: string;
-} = {}) {
+export function usePlatformMetrics(
+  platform: 'meta' | 'google',
+  params: {
+    date_preset?: string;
+    account_id?: string;
+  } = {}
+) {
   return useQuery({
     queryKey: adInsightsKeys.platform(platform, params),
     queryFn: () => adInsightsApi.getPlatformMetrics(platform, params),

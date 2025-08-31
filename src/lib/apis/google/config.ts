@@ -10,10 +10,7 @@ import { ConfigurationError } from './errors';
  * Securely load Google Ads configuration from environment variables
  */
 export function loadGoogleAdsConfig(): GoogleAdsConfig {
-  const requiredEnvVars = [
-    'GOOGLE_ADS_DEVELOPER_TOKEN',
-    'GOOGLE_ADS_LOGIN_CUSTOMER_ID',
-  ];
+  const requiredEnvVars = ['GOOGLE_ADS_DEVELOPER_TOKEN', 'GOOGLE_ADS_LOGIN_CUSTOMER_ID'];
 
   // Check required environment variables
   // Use import.meta.env for browser/Vite builds; process.env only in Node contexts
@@ -23,7 +20,7 @@ export function loadGoogleAdsConfig(): GoogleAdsConfig {
       throw new ConfigurationError(
         `Missing required environment variable: ${envVar}`,
         envVar,
-        'string',
+        'string'
       );
     }
   }
@@ -34,7 +31,7 @@ export function loadGoogleAdsConfig(): GoogleAdsConfig {
     throw new ConfigurationError(
       'Invalid developer token format',
       'GOOGLE_ADS_DEVELOPER_TOKEN',
-      'string (minimum 20 characters)',
+      'string (minimum 20 characters)'
     );
   }
 
@@ -44,7 +41,7 @@ export function loadGoogleAdsConfig(): GoogleAdsConfig {
     throw new ConfigurationError(
       'Invalid login customer ID format',
       'GOOGLE_ADS_LOGIN_CUSTOMER_ID',
-      'string (exactly 10 digits)',
+      'string (exactly 10 digits)'
     );
   }
 
@@ -66,7 +63,9 @@ export function loadGoogleAdsConfig(): GoogleAdsConfig {
       defaultTtl: parseInt(import.meta.env.GOOGLE_ADS_CACHE_TTL || '300'),
       maxMemoryMB: parseInt(import.meta.env.GOOGLE_ADS_CACHE_MAX_MEMORY || '50'),
       compressionEnabled: import.meta.env.GOOGLE_ADS_CACHE_COMPRESSION !== 'false',
-      compressionThreshold: parseInt(import.meta.env.GOOGLE_ADS_CACHE_COMPRESSION_THRESHOLD || '1024'),
+      compressionThreshold: parseInt(
+        import.meta.env.GOOGLE_ADS_CACHE_COMPRESSION_THRESHOLD || '1024'
+      ),
     },
     // Circuit breaker configuration
     circuitBreakerConfig: {
@@ -85,7 +84,7 @@ export function loadGoogleAdsConfig(): GoogleAdsConfig {
     throw new ConfigurationError(
       'No service account configuration found. Set GOOGLE_SERVICE_ACCOUNT_JSON environment variable.',
       'GOOGLE_SERVICE_ACCOUNT_JSON',
-      'JSON string',
+      'JSON string'
     );
   }
 
@@ -100,7 +99,7 @@ export function parseServiceAccountJson(json?: string): ServiceAccountConfig {
     throw new ConfigurationError(
       'Service account JSON not provided',
       'serviceAccountJson',
-      'JSON string',
+      'JSON string'
     );
   }
 
@@ -111,14 +110,20 @@ export function parseServiceAccountJson(json?: string): ServiceAccountConfig {
     throw new ConfigurationError(
       'Invalid JSON in service account configuration',
       'serviceAccountJson',
-      'valid JSON string',
+      'valid JSON string'
     );
   }
 
   // Validate required fields
   const requiredFields = [
-    'type', 'project_id', 'private_key_id', 'private_key',
-    'client_email', 'client_id', 'auth_uri', 'token_uri',
+    'type',
+    'project_id',
+    'private_key_id',
+    'private_key',
+    'client_email',
+    'client_id',
+    'auth_uri',
+    'token_uri',
   ];
 
   for (const field of requiredFields) {
@@ -126,7 +131,7 @@ export function parseServiceAccountJson(json?: string): ServiceAccountConfig {
       throw new ConfigurationError(
         `Service account missing required field: ${field}`,
         field,
-        'string',
+        'string'
       );
     }
   }
@@ -136,7 +141,7 @@ export function parseServiceAccountJson(json?: string): ServiceAccountConfig {
     throw new ConfigurationError(
       'Service account type must be "service_account"',
       'type',
-      'service_account',
+      'service_account'
     );
   }
 
@@ -144,7 +149,7 @@ export function parseServiceAccountJson(json?: string): ServiceAccountConfig {
     throw new ConfigurationError(
       'Invalid service account email format',
       'client_email',
-      'valid email address',
+      'valid email address'
     );
   }
 
@@ -152,7 +157,7 @@ export function parseServiceAccountJson(json?: string): ServiceAccountConfig {
     throw new ConfigurationError(
       'Invalid private key format',
       'private_key',
-      'PEM format private key',
+      'PEM format private key'
     );
   }
 
@@ -227,7 +232,7 @@ export function validateConfig(config: GoogleAdsConfig): void {
       throw new ConfigurationError(
         'Invalid maxRequestsPerDay value',
         'maxRequestsPerDay',
-        'number between 1 and 100000',
+        'number between 1 and 100000'
       );
     }
 
@@ -235,7 +240,7 @@ export function validateConfig(config: GoogleAdsConfig): void {
       throw new ConfigurationError(
         'Invalid tokensPerSecond value',
         'tokensPerSecond',
-        'number between 0 and 10',
+        'number between 0 and 10'
       );
     }
 
@@ -243,7 +248,7 @@ export function validateConfig(config: GoogleAdsConfig): void {
       throw new ConfigurationError(
         'Invalid bucketSize value',
         'bucketSize',
-        'number between 1 and 1000',
+        'number between 1 and 1000'
       );
     }
   }
@@ -252,19 +257,21 @@ export function validateConfig(config: GoogleAdsConfig): void {
   if (config.cacheConfig) {
     const { defaultTtl, maxMemoryMB } = config.cacheConfig;
 
-    if (defaultTtl !== undefined && (defaultTtl < 0 || defaultTtl > 86400)) { // Max 24 hours
+    if (defaultTtl !== undefined && (defaultTtl < 0 || defaultTtl > 86400)) {
+      // Max 24 hours
       throw new ConfigurationError(
         'Invalid defaultTtl value',
         'defaultTtl',
-        'number between 0 and 86400 seconds',
+        'number between 0 and 86400 seconds'
       );
     }
 
-    if (maxMemoryMB !== undefined && (maxMemoryMB <= 0 || maxMemoryMB > 1024)) { // Max 1GB
+    if (maxMemoryMB !== undefined && (maxMemoryMB <= 0 || maxMemoryMB > 1024)) {
+      // Max 1GB
       throw new ConfigurationError(
         'Invalid maxMemoryMB value',
         'maxMemoryMB',
-        'number between 1 and 1024',
+        'number between 1 and 1024'
       );
     }
   }

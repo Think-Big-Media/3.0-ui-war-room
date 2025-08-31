@@ -4,7 +4,12 @@
  */
 
 import { type MetaAPIClient } from './client';
-import { type CustomAudience, type LookalikeAudience, type SavedAudience, type MetaAPIResponse } from './types';
+import {
+  type CustomAudience,
+  type LookalikeAudience,
+  type SavedAudience,
+  type MetaAPIResponse,
+} from './types';
 import { MetaAPIError } from './errors';
 import { type RateLimiter } from './rateLimiter';
 import { type CircuitBreaker } from './circuitBreaker';
@@ -12,7 +17,21 @@ import { type CircuitBreaker } from './circuitBreaker';
 export interface CustomAudienceCreateParams {
   name: string;
   description?: string;
-  subtype: 'CUSTOM' | 'WEBSITE' | 'APP' | 'OFFLINE_CONVERSION' | 'CLAIM' | 'PARTNER' | 'MANAGED' | 'VIDEO' | 'LOOKALIKE' | 'ENGAGEMENT' | 'DATA_SET' | 'BAG_OF_ACCOUNTS' | 'STUDY_RULE_AUDIENCE' | 'FOX';
+  subtype:
+    | 'CUSTOM'
+    | 'WEBSITE'
+    | 'APP'
+    | 'OFFLINE_CONVERSION'
+    | 'CLAIM'
+    | 'PARTNER'
+    | 'MANAGED'
+    | 'VIDEO'
+    | 'LOOKALIKE'
+    | 'ENGAGEMENT'
+    | 'DATA_SET'
+    | 'BAG_OF_ACCOUNTS'
+    | 'STUDY_RULE_AUDIENCE'
+    | 'FOX';
   customer_file_source?: 'USER_PROVIDED' | 'PARTNER_PROVIDED' | 'BOTH_USER_AND_PARTNER_PROVIDED';
   retention_days?: number; // 1-180 days
   rule?: AudienceRule;
@@ -103,7 +122,7 @@ export class MetaAudienceService {
   constructor(
     private client: MetaAPIClient,
     private rateLimiter: RateLimiter,
-    private circuitBreaker: CircuitBreaker,
+    private circuitBreaker: CircuitBreaker
   ) {}
 
   /**
@@ -111,7 +130,7 @@ export class MetaAudienceService {
    */
   async createCustomAudience(
     accountId: string,
-    params: CustomAudienceCreateParams,
+    params: CustomAudienceCreateParams
   ): Promise<CustomAudience> {
     try {
       // Validate required fields
@@ -145,10 +164,7 @@ export class MetaAudienceService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to create custom audience: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to create custom audience: ${(error as Error).message}`, 500);
     }
   }
 
@@ -157,7 +173,7 @@ export class MetaAudienceService {
    */
   async createLookalikeAudience(
     accountId: string,
-    params: LookalikeAudienceCreateParams,
+    params: LookalikeAudienceCreateParams
   ): Promise<LookalikeAudience> {
     try {
       // Validate required fields
@@ -198,7 +214,7 @@ export class MetaAudienceService {
       }
       throw new MetaAPIError(
         `Failed to create lookalike audience: ${(error as Error).message}`,
-        500,
+        500
       );
     }
   }
@@ -208,7 +224,7 @@ export class MetaAudienceService {
    */
   async createSavedAudience(
     accountId: string,
-    params: SavedAudienceCreateParams,
+    params: SavedAudienceCreateParams
   ): Promise<SavedAudience> {
     try {
       // Validate required fields
@@ -243,10 +259,7 @@ export class MetaAudienceService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to create saved audience: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to create saved audience: ${(error as Error).message}`, 500);
     }
   }
 
@@ -268,7 +281,7 @@ export class MetaAudienceService {
       'delivery_status',
       'operation_status',
       'permission_for_actions',
-    ],
+    ]
   ): Promise<CustomAudience> {
     try {
       await this.rateLimiter.checkLimit(`audiences:read:${audienceId}`);
@@ -283,20 +296,14 @@ export class MetaAudienceService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to get custom audience: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to get custom audience: ${(error as Error).message}`, 500);
     }
   }
 
   /**
    * Get a lookalike audience by ID
    */
-  async getLookalikeAudience(
-    audienceId: string,
-    fields?: string[],
-  ): Promise<LookalikeAudience> {
+  async getLookalikeAudience(audienceId: string, fields?: string[]): Promise<LookalikeAudience> {
     const defaultFields = [
       'id',
       'name',
@@ -308,7 +315,10 @@ export class MetaAudienceService {
       'approximate_count',
     ];
 
-    return this.getCustomAudience(audienceId, fields || defaultFields) as Promise<LookalikeAudience>;
+    return this.getCustomAudience(
+      audienceId,
+      fields || defaultFields
+    ) as Promise<LookalikeAudience>;
   }
 
   /**
@@ -324,7 +334,7 @@ export class MetaAudienceService {
       'time_created',
       'time_updated',
       'approximate_count',
-    ],
+    ]
   ): Promise<SavedAudience> {
     try {
       await this.rateLimiter.checkLimit(`saved:read:${audienceId}`);
@@ -339,10 +349,7 @@ export class MetaAudienceService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to get saved audience: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to get saved audience: ${(error as Error).message}`, 500);
     }
   }
 
@@ -351,7 +358,7 @@ export class MetaAudienceService {
    */
   async listCustomAudiences(
     accountId: string,
-    params: AudienceListParams = {},
+    params: AudienceListParams = {}
   ): Promise<MetaAPIResponse<CustomAudience[]>> {
     try {
       await this.rateLimiter.checkLimit(`audiences:list:${accountId}`);
@@ -374,7 +381,9 @@ export class MetaAudienceService {
           ...(params.after && { after: params.after }),
           ...(params.filtering && { filtering: JSON.stringify(params.filtering) }),
         });
-        return this.client.request<MetaAPIResponse<CustomAudience[]>>(`/act_${accountId}/customaudiences?${queryParams}`);
+        return this.client.request<MetaAPIResponse<CustomAudience[]>>(
+          `/act_${accountId}/customaudiences?${queryParams}`
+        );
       });
 
       await this.rateLimiter.trackUsage(`audiences:list:${accountId}`);
@@ -383,10 +392,7 @@ export class MetaAudienceService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to list custom audiences: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to list custom audiences: ${(error as Error).message}`, 500);
     }
   }
 
@@ -395,7 +401,7 @@ export class MetaAudienceService {
    */
   async updateCustomAudience(
     audienceId: string,
-    params: CustomAudienceUpdateParams,
+    params: CustomAudienceUpdateParams
   ): Promise<CustomAudience> {
     try {
       await this.rateLimiter.checkLimit(`audiences:update:${audienceId}`);
@@ -417,10 +423,7 @@ export class MetaAudienceService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to update custom audience: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to update custom audience: ${(error as Error).message}`, 500);
     }
   }
 
@@ -442,10 +445,7 @@ export class MetaAudienceService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to delete custom audience: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to delete custom audience: ${(error as Error).message}`, 500);
     }
   }
 
@@ -465,15 +465,15 @@ export class MetaAudienceService {
       zip?: string;
       country?: string;
     }>,
-    schema: string[] = ['EMAIL', 'PHONE'],
+    schema: string[] = ['EMAIL', 'PHONE']
   ): Promise<{ audience_id: string; session_id: string; num_received: number }> {
     try {
       await this.rateLimiter.checkLimit(`audiences:add_users:${audienceId}`);
 
       // Hash user data as required by Meta
-      const hashedUsers = users.map(user => {
+      const hashedUsers = users.map((user) => {
         const hashedUser: any = [];
-        schema.forEach(field => {
+        schema.forEach((field) => {
           const value = user[field.toLowerCase() as keyof typeof user];
           if (value) {
             // In production, implement proper hashing (SHA256)
@@ -503,10 +503,7 @@ export class MetaAudienceService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to add users to audience: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to add users to audience: ${(error as Error).message}`, 500);
     }
   }
 
@@ -516,15 +513,15 @@ export class MetaAudienceService {
   async removeUsersFromAudience(
     audienceId: string,
     users: Array<{ email?: string; phone?: string }>,
-    schema: string[] = ['EMAIL', 'PHONE'],
+    schema: string[] = ['EMAIL', 'PHONE']
   ): Promise<{ audience_id: string; session_id: string; num_received: number }> {
     try {
       await this.rateLimiter.checkLimit(`audiences:remove_users:${audienceId}`);
 
       // Hash user data
-      const hashedUsers = users.map(user => {
+      const hashedUsers = users.map((user) => {
         const hashedUser: any = [];
-        schema.forEach(field => {
+        schema.forEach((field) => {
           const value = user[field.toLowerCase() as keyof typeof user];
           if (value) {
             hashedUser.push(this.hashValue(value));
@@ -555,7 +552,7 @@ export class MetaAudienceService {
       }
       throw new MetaAPIError(
         `Failed to remove users from audience: ${(error as Error).message}`,
-        500,
+        500
       );
     }
   }
@@ -563,10 +560,7 @@ export class MetaAudienceService {
   /**
    * Get audience insights
    */
-  async getAudienceInsights(
-    accountId: string,
-    params: AudienceInsightsParams = {},
-  ): Promise<any> {
+  async getAudienceInsights(accountId: string, params: AudienceInsightsParams = {}): Promise<any> {
     try {
       await this.rateLimiter.checkLimit(`insights:audience:${accountId}`);
 
@@ -588,20 +582,14 @@ export class MetaAudienceService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to get audience insights: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to get audience insights: ${(error as Error).message}`, 500);
     }
   }
 
   /**
    * Share an audience with another ad account
    */
-  async shareAudience(
-    audienceId: string,
-    targetAccountIds: string[],
-  ): Promise<void> {
+  async shareAudience(audienceId: string, targetAccountIds: string[]): Promise<void> {
     try {
       await this.rateLimiter.checkLimit(`audiences:share:${audienceId}`);
 
@@ -619,10 +607,7 @@ export class MetaAudienceService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to share audience: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to share audience: ${(error as Error).message}`, 500);
     }
   }
 
@@ -631,13 +616,15 @@ export class MetaAudienceService {
    */
   async getAudienceOverlap(
     audienceId1: string,
-    audienceId2: string,
+    audienceId2: string
   ): Promise<{ overlap_count: number; overlap_percentage: number }> {
     try {
       await this.rateLimiter.checkLimit(`audiences:overlap:${audienceId1}`);
 
       const response = await this.circuitBreaker.execute(async () => {
-        return this.client.request<any>(`/${audienceId1}/audienceoverlap?comparison_audience_id=${audienceId2}`);
+        return this.client.request<any>(
+          `/${audienceId1}/audienceoverlap?comparison_audience_id=${audienceId2}`
+        );
       });
 
       await this.rateLimiter.trackUsage(`audiences:overlap:${audienceId1}`);
@@ -649,10 +636,7 @@ export class MetaAudienceService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to get audience overlap: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to get audience overlap: ${(error as Error).message}`, 500);
     }
   }
 

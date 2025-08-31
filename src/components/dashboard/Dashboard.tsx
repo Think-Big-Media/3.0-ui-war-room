@@ -42,9 +42,7 @@ const DashboardHeader = memo(() => {
             {wsStatus.connected ? (
               <>
                 <Wifi className="text-green-500" size={20} />
-                <span className="text-sm text-green-600 dark:text-green-400">
-                  Connected
-                </span>
+                <span className="text-sm text-green-600 dark:text-green-400">Connected</span>
                 <button
                   onClick={disconnect}
                   className="ml-2 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
@@ -62,9 +60,7 @@ const DashboardHeader = memo(() => {
             ) : (
               <>
                 <WifiOff className="text-red-500" size={20} />
-                <span className="text-sm text-red-600 dark:text-red-400">
-                  Disconnected
-                </span>
+                <span className="text-sm text-red-600 dark:text-red-400">Disconnected</span>
                 <button
                   onClick={connect}
                   className="ml-2 px-3 py-1 text-xs bg-blue-500 text-white rounded hover:bg-blue-600"
@@ -166,9 +162,7 @@ export const Dashboard: React.FC = memo(() => {
           <section>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div>
-                <h2 className="text-lg font-semibold mb-4">
-                  Crisis Monitoring
-                </h2>
+                <h2 className="text-lg font-semibold mb-4">Crisis Monitoring</h2>
                 <AlertCenter />
               </div>
 

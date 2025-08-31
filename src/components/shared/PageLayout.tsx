@@ -16,11 +16,7 @@ type PageLayoutProps = {
   placeholder: string; // For chat bar
 };
 
-const PageLayout: React.FC<PageLayoutProps> = ({
-  children,
-  pageTitle,
-  placeholder,
-}) => {
+const PageLayout: React.FC<PageLayoutProps> = ({ children, pageTitle, placeholder }) => {
   const location = useLocation();
   const pageAccent = getRouteAccent(location.pathname);
   const { themeConfig } = useBackgroundTheme();
@@ -42,7 +38,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
       {themeConfig.overlayClass && (
         <div className={`absolute inset-0 ${themeConfig.overlayClass}`} />
       )}
-      
+
       {/* Content layer with consistent theming */}
       <div className="min-h-screen w-full flex flex-col relative z-10">
         {/* Fixed Top Nav */}
@@ -66,10 +62,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
 
         {/* Fixed Bottom Elements */}
         <div className="fixed bottom-16 left-0 right-0 z-50 px-4 lg:px-6">
-          <FloatingChatBar
-            onSendMessage={handleSendMessage}
-            placeholder={placeholder}
-          />
+          <FloatingChatBar onSendMessage={handleSendMessage} placeholder={placeholder} />
         </div>
       </div>
     </div>

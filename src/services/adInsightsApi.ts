@@ -101,18 +101,28 @@ class AdInsightsApiService {
   /**
    * Get unified campaign insights from all platforms
    */
-  async getCampaignInsights(params: {
-    date_preset?: 'today' | 'yesterday' | 'last_7d' | 'last_30d';
-    account_ids?: string;
-    include_inactive?: boolean;
-    real_time?: boolean;
-  } = {}): Promise<AdInsightsResponse> {
+  async getCampaignInsights(
+    params: {
+      date_preset?: 'today' | 'yesterday' | 'last_7d' | 'last_30d';
+      account_ids?: string;
+      include_inactive?: boolean;
+      real_time?: boolean;
+    } = {}
+  ): Promise<AdInsightsResponse> {
     const searchParams = new URLSearchParams();
 
-    if (params.date_preset) {searchParams.append('date_preset', params.date_preset);}
-    if (params.account_ids) {searchParams.append('account_ids', params.account_ids);}
-    if (params.include_inactive) {searchParams.append('include_inactive', 'true');}
-    if (params.real_time) {searchParams.append('real_time', 'true');}
+    if (params.date_preset) {
+      searchParams.append('date_preset', params.date_preset);
+    }
+    if (params.account_ids) {
+      searchParams.append('account_ids', params.account_ids);
+    }
+    if (params.include_inactive) {
+      searchParams.append('include_inactive', 'true');
+    }
+    if (params.real_time) {
+      searchParams.append('real_time', 'true');
+    }
 
     const endpoint = `/ad-insights/campaigns${searchParams.toString() ? `?${searchParams}` : ''}`;
     return this.makeRequest<AdInsightsResponse>(endpoint);
@@ -121,16 +131,24 @@ class AdInsightsApiService {
   /**
    * Get real-time alerts
    */
-  async getAlerts(params: {
-    severity?: 'low' | 'medium' | 'high' | 'critical';
-    platform?: 'meta' | 'google';
-    limit?: number;
-  } = {}): Promise<RealTimeAlert[]> {
+  async getAlerts(
+    params: {
+      severity?: 'low' | 'medium' | 'high' | 'critical';
+      platform?: 'meta' | 'google';
+      limit?: number;
+    } = {}
+  ): Promise<RealTimeAlert[]> {
     const searchParams = new URLSearchParams();
 
-    if (params.severity) {searchParams.append('severity', params.severity);}
-    if (params.platform) {searchParams.append('platform', params.platform);}
-    if (params.limit) {searchParams.append('limit', params.limit.toString());}
+    if (params.severity) {
+      searchParams.append('severity', params.severity);
+    }
+    if (params.platform) {
+      searchParams.append('platform', params.platform);
+    }
+    if (params.limit) {
+      searchParams.append('limit', params.limit.toString());
+    }
 
     const endpoint = `/ad-insights/alerts${searchParams.toString() ? `?${searchParams}` : ''}`;
     return this.makeRequest<RealTimeAlert[]>(endpoint);
@@ -146,7 +164,9 @@ class AdInsightsApiService {
   /**
    * Trigger manual campaign sync
    */
-  async triggerSync(platforms?: ('meta' | 'google')[]): Promise<{ success: boolean; message: string }> {
+  async triggerSync(
+    platforms?: ('meta' | 'google')[]
+  ): Promise<{ success: boolean; message: string }> {
     const body = platforms ? { platforms } : {};
 
     return this.makeRequest('/ad-insights/sync', {
@@ -158,15 +178,22 @@ class AdInsightsApiService {
   /**
    * Get performance metrics for specific platform
    */
-  async getPlatformMetrics(platform: 'meta' | 'google', params: {
-    date_preset?: string;
-    account_id?: string;
-  } = {}): Promise<UnifiedCampaignMetrics[]> {
+  async getPlatformMetrics(
+    platform: 'meta' | 'google',
+    params: {
+      date_preset?: string;
+      account_id?: string;
+    } = {}
+  ): Promise<UnifiedCampaignMetrics[]> {
     const searchParams = new URLSearchParams();
     searchParams.append('platform', platform);
 
-    if (params.date_preset) {searchParams.append('date_preset', params.date_preset);}
-    if (params.account_id) {searchParams.append('account_id', params.account_id);}
+    if (params.date_preset) {
+      searchParams.append('date_preset', params.date_preset);
+    }
+    if (params.account_id) {
+      searchParams.append('account_id', params.account_id);
+    }
 
     const endpoint = `/ad-insights/platform-metrics?${searchParams}`;
     return this.makeRequest<UnifiedCampaignMetrics[]>(endpoint);

@@ -28,7 +28,11 @@ const AssetControls: React.FC<AssetControlsProps> = ({
   // Dropdown options
   const categoryOptions = [
     { value: 'all', label: 'All Categories', icon: <Folder className="w-4 h-4" /> },
-    { value: 'Campaign Content', label: 'Campaign Content', icon: <FileText className="w-4 h-4" /> },
+    {
+      value: 'Campaign Content',
+      label: 'Campaign Content',
+      icon: <FileText className="w-4 h-4" />,
+    },
     { value: 'Research', label: 'Research', icon: <BarChart3 className="w-4 h-4" /> },
     { value: 'Brand Assets', label: 'Brand Assets', icon: <Palette className="w-4 h-4" /> },
     { value: 'Templates', label: 'Templates', icon: <Image className="w-4 h-4" /> },

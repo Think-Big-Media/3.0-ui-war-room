@@ -17,7 +17,7 @@ jest.mock('ioredis', () => {
     keys: jest.fn(),
     pipeline: jest.fn().mockReturnValue({
       hmget: jest.fn().mockReturnThis(),
-      exec: jest.fn().mockResolvedValue([])
+      exec: jest.fn().mockResolvedValue([]),
     }),
     hmget: jest.fn(),
     hmset: jest.fn(),
@@ -132,7 +132,7 @@ describe('TokenBucketRateLimiter', () => {
         expect.any(String),
         expect.any(String),
         expect.any(String),
-        expect.any(String),
+        expect.any(String)
       );
     });
   });
@@ -180,7 +180,7 @@ describe('TokenBucketRateLimiter', () => {
         expect.stringMatching(/^google_ads_rate_limit:[a-f0-9]{16}$/),
         expect.any(String),
         expect.any(String),
-        expect.any(String),
+        expect.any(String)
       );
     });
   });
@@ -195,7 +195,7 @@ describe('TokenBucketRateLimiter', () => {
         expect.any(String), // Key
         '100', // Bucket size
         '0.173', // Tokens per second
-        expect.any(String), // Timestamp
+        expect.any(String) // Timestamp
       );
     });
 
@@ -211,7 +211,7 @@ describe('TokenBucketRateLimiter', () => {
         '100', // Bucket size
         '0.173', // Tokens per second
         expect.any(String), // Timestamp
-        '2', // Tokens requested
+        '2' // Tokens requested
       );
     });
 
@@ -241,13 +241,10 @@ describe('TokenBucketRateLimiter', () => {
         {
           tokensPerSecond: '0.5',
           bucketSize: '200',
-        },
+        }
       );
 
-      expect(mockRedis.expire).toHaveBeenCalledWith(
-        expect.any(String),
-        86400,
-      );
+      expect(mockRedis.expire).toHaveBeenCalledWith(expect.any(String), 86400);
     });
 
     it('should remove customer-specific rate limits', async () => {
@@ -288,7 +285,7 @@ describe('TokenBucketRateLimiter', () => {
         '100', // Default bucket size (custom config loading happens in private method)
         '0.173', // Default tokens per second
         expect.any(String),
-        '1',
+        '1'
       );
     });
   });
@@ -339,8 +336,8 @@ describe('TokenBucketRateLimiter', () => {
       const mockPipeline = {
         exec: jest.fn().mockResolvedValueOnce([
           [null, ['100']], // Most tokens
-          [null, ['50']],   // Medium tokens
-          [null, ['10']],    // Least tokens (top consumer)
+          [null, ['50']], // Medium tokens
+          [null, ['10']], // Least tokens (top consumer)
         ]),
       };
 
@@ -389,7 +386,7 @@ describe('TokenBucketRateLimiter', () => {
       await rateLimiter.reset(customerId);
 
       expect(mockRedis.del).toHaveBeenCalledWith(
-        expect.stringMatching(/^google_ads_rate_limit:[a-f0-9]{16}$/),
+        expect.stringMatching(/^google_ads_rate_limit:[a-f0-9]{16}$/)
       );
     });
 
@@ -420,7 +417,7 @@ describe('TokenBucketRateLimiter', () => {
         expect.any(String),
         expect.any(String),
         expect.any(String),
-        expect.any(String),
+        expect.any(String)
       );
 
       // Should use a hashed version
@@ -477,8 +474,8 @@ describe('TokenBucketRateLimiter', () => {
 
     it('should measure response time accurately', async () => {
       // Simulate slow Redis response
-      mockRedis.ping.mockImplementation(() =>
-        new Promise(resolve => setTimeout(() => resolve('PONG'), 100)),
+      mockRedis.ping.mockImplementation(
+        () => new Promise((resolve) => setTimeout(() => resolve('PONG'), 100))
       );
 
       const health = await rateLimiter.healthCheck();
@@ -513,10 +510,9 @@ describe('TokenBucketRateLimiter', () => {
     });
 
     it('should handle timeout in Redis operations', async () => {
-      mockRedis.eval.mockImplementation(() =>
-        new Promise((_, reject) =>
-          setTimeout(() => reject(new Error('Operation timeout')), 100),
-        ),
+      mockRedis.eval.mockImplementation(
+        () =>
+          new Promise((_, reject) => setTimeout(() => reject(new Error('Operation timeout')), 100))
       );
 
       await expect(rateLimiter.acquireToken(1)).rejects.toThrow('Operation timeout');
@@ -545,8 +541,7 @@ describe('TokenBucketRateLimiter', () => {
         bucketSize: 0,
       };
 
-      expect(() => new TokenBucketRateLimiter(configWithZeroBucket, mockRedis))
-        .not.toThrow();
+      expect(() => new TokenBucketRateLimiter(configWithZeroBucket, mockRedis)).not.toThrow();
     });
 
     it('should handle very high token rates', () => {
@@ -555,8 +550,7 @@ describe('TokenBucketRateLimiter', () => {
         tokensPerSecond: 1000,
       };
 
-      expect(() => new TokenBucketRateLimiter(configWithHighRate, mockRedis))
-        .not.toThrow();
+      expect(() => new TokenBucketRateLimiter(configWithHighRate, mockRedis)).not.toThrow();
     });
 
     it('should handle fractional token requests', async () => {

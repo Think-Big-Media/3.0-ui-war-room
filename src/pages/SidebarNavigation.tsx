@@ -56,10 +56,7 @@ const TopNavigation: React.FC = () => {
   // Close notifications when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        notificationsRef.current &&
-        !notificationsRef.current.contains(event.target as Node)
-      ) {
+      if (notificationsRef.current && !notificationsRef.current.contains(event.target as Node)) {
         setShowNotifications(false);
       }
     };
@@ -131,9 +128,7 @@ const TopNavigation: React.FC = () => {
   const formatTimestamp = (timestamp: string) => {
     const date = new Date(timestamp);
     const now = new Date();
-    const diffMinutes = Math.floor(
-      (now.getTime() - date.getTime()) / (1000 * 60)
-    );
+    const diffMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60));
 
     if (diffMinutes < 60) {
       return `${diffMinutes}m ago`;
@@ -187,9 +182,7 @@ const TopNavigation: React.FC = () => {
                 onClick={() => handleNavigation(item.path)}
                 aria-current={item.active ? 'page' : undefined}
                 className={`group px-3 py-1 rounded-lg text-sm transition-all duration-200 flex items-center space-x-1 ${
-                  item.active
-                    ? getNavActiveClasses(item.theme)
-                    : 'text-white/70 hover:bg-white/10'
+                  item.active ? getNavActiveClasses(item.theme) : 'text-white/70 hover:bg-white/10'
                 }`}
               >
                 <item.icon
@@ -274,9 +267,7 @@ const TopNavigation: React.FC = () => {
                             }`}
                           >
                             <div className="flex items-start space-x-3">
-                              <div
-                                className={`p-2 rounded-lg ${getPriorityColor(alert.priority)}`}
-                              >
+                              <div className={`p-2 rounded-lg ${getPriorityColor(alert.priority)}`}>
                                 <Bell className="w-4 h-4" />
                               </div>
                               <div className="flex-1 min-w-0">

@@ -21,9 +21,7 @@ const CollaborationModal: React.FC<CollaborationModalProps> = ({
 
   const handleMemberToggle = (memberId: string) => {
     setSelectedMembers((prev) =>
-      prev.includes(memberId)
-        ? prev.filter((id) => id !== memberId)
-        : [...prev, memberId]
+      prev.includes(memberId) ? prev.filter((id) => id !== memberId) : [...prev, memberId]
     );
   };
 
@@ -48,13 +46,8 @@ const CollaborationModal: React.FC<CollaborationModalProps> = ({
         onClick={(e: React.MouseEvent) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-xl font-semibold text-white/95">
-            Collaborate on Alert
-          </h3>
-          <button
-            onClick={onClose}
-            className="text-white/60 hover:text-white transition-colors"
-          >
+          <h3 className="text-xl font-semibold text-white/95">Collaborate on Alert</h3>
+          <button onClick={onClose} className="text-white/60 hover:text-white transition-colors">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -67,9 +60,7 @@ const CollaborationModal: React.FC<CollaborationModalProps> = ({
 
         {/* Team Members */}
         <div className="mb-4">
-          <h4 className="text-white/90 font-medium mb-2">
-            Select Team Members
-          </h4>
+          <h4 className="text-white/90 font-medium mb-2">Select Team Members</h4>
           <div className="space-y-2">
             {teamMembers.map((member) => (
               <label

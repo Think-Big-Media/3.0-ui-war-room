@@ -5,19 +5,19 @@ export const useDataMode = () => {
 
   useEffect(() => {
     // Check if we have real API credentials configured
-    const hasCredentials = import.meta.env.VITE_MENTIONLYTICS_TOKEN || 
-                          localStorage.getItem('mentionlytics-token');
-    
+    const hasCredentials =
+      import.meta.env.VITE_MENTIONLYTICS_TOKEN || localStorage.getItem('mentionlytics-token');
+
     setIsLive(!!hasCredentials);
   }, []);
 
   const toggleMode = () => {
-    setIsLive(prev => !prev);
+    setIsLive((prev) => !prev);
   };
 
   return {
     isLive,
     toggleMode,
-    dataMode: isLive ? 'LIVE' : 'MOCK'
+    dataMode: isLive ? 'LIVE' : 'MOCK',
   };
 };

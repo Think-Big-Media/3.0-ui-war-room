@@ -96,16 +96,36 @@ export function RegisterForm() {
     }
 
     // Character variety checks
-    if (/[a-z]/.test(password)) {score += 1;} else {feedback.push('Include lowercase letters');}
+    if (/[a-z]/.test(password)) {
+      score += 1;
+    } else {
+      feedback.push('Include lowercase letters');
+    }
 
-    if (/[A-Z]/.test(password)) {score += 1;} else {feedback.push('Include uppercase letters');}
+    if (/[A-Z]/.test(password)) {
+      score += 1;
+    } else {
+      feedback.push('Include uppercase letters');
+    }
 
-    if (/\d/.test(password)) {score += 1;} else {feedback.push('Include numbers');}
+    if (/\d/.test(password)) {
+      score += 1;
+    } else {
+      feedback.push('Include numbers');
+    }
 
-    if (/[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/.test(password)) {score += 1;} else {feedback.push('Include special characters');}
+    if (/[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/.test(password)) {
+      score += 1;
+    } else {
+      feedback.push('Include special characters');
+    }
 
     // Common patterns check
-    if (!/(.)\1{2,}/.test(password)) {score += 1;} else {feedback.push('Avoid repeating characters');}
+    if (!/(.)\1{2,}/.test(password)) {
+      score += 1;
+    } else {
+      feedback.push('Avoid repeating characters');
+    }
 
     setPasswordStrength({ score, feedback });
   };
@@ -120,7 +140,6 @@ export function RegisterForm() {
       return { label: 'Good', color: 'bg-blue-500', textColor: 'text-blue-600' };
     }
     return { label: 'Strong', color: 'bg-green-500', textColor: 'text-green-600' };
-
   };
 
   // Form validation
@@ -168,7 +187,7 @@ export function RegisterForm() {
     } else if (formData.password.length < 12) {
       newErrors.password = 'Password must be at least 12 characters';
     } else if (passwordStrength.score < 5) {
-      newErrors.password = `Password is too weak. ${  passwordStrength.feedback.join(', ')}`;
+      newErrors.password = `Password is too weak. ${passwordStrength.feedback.join(', ')}`;
     }
 
     // Confirm password validation
@@ -190,7 +209,7 @@ export function RegisterForm() {
   // Handle input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
@@ -205,16 +224,12 @@ export function RegisterForm() {
     }
 
     try {
-      await signUpWithEmail(
-        formData.email.trim().toLowerCase(),
-        formData.password,
-        {
-          firstName: formData.firstName.trim(),
-          lastName: formData.lastName.trim(),
-          username: formData.username?.trim().toLowerCase() || '',
-          phone: formData.phone?.trim() || undefined,
-        },
-      );
+      await signUpWithEmail(formData.email.trim().toLowerCase(), formData.password, {
+        firstName: formData.firstName.trim(),
+        lastName: formData.lastName.trim(),
+        username: formData.username?.trim().toLowerCase() || '',
+        phone: formData.phone?.trim() || undefined,
+      });
 
       // Registration successful
       navigate('/verify-email', {
@@ -262,9 +277,7 @@ export function RegisterForm() {
               />
             </svg>
           </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Join War Room
-          </h2>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Join War Room</h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Create your campaign command center account
           </p>
@@ -333,9 +346,7 @@ export function RegisterForm() {
                   } placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
                   placeholder="Last name"
                 />
-                {errors.lastName && (
-                  <p className="mt-1 text-sm text-red-600">{errors.lastName}</p>
-                )}
+                {errors.lastName && <p className="mt-1 text-sm text-red-600">{errors.lastName}</p>}
               </div>
             </div>
 
@@ -357,9 +368,7 @@ export function RegisterForm() {
                 } placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
                 placeholder="your.email@example.com"
               />
-              {errors.email && (
-                <p className="mt-1 text-sm text-red-600">{errors.email}</p>
-              )}
+              {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
             </div>
 
             {/* Username field */}
@@ -379,9 +388,7 @@ export function RegisterForm() {
                 } placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
                 placeholder="your_username"
               />
-              {errors.username && (
-                <p className="mt-1 text-sm text-red-600">{errors.username}</p>
-              )}
+              {errors.username && <p className="mt-1 text-sm text-red-600">{errors.username}</p>}
             </div>
 
             {/* Phone field */}
@@ -400,9 +407,7 @@ export function RegisterForm() {
                 } placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
                 placeholder="+1 (555) 123-4567"
               />
-              {errors.phone && (
-                <p className="mt-1 text-sm text-red-600">{errors.phone}</p>
-              )}
+              {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
             </div>
 
             {/* Password field */}
@@ -430,12 +435,27 @@ export function RegisterForm() {
                 >
                   {showPassword ? (
                     <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"
+                      />
                     </svg>
                   ) : (
                     <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      />
                     </svg>
                   )}
                 </button>
@@ -465,9 +485,7 @@ export function RegisterForm() {
                 </div>
               )}
 
-              {errors.password && (
-                <p className="mt-1 text-sm text-red-600">{errors.password}</p>
-              )}
+              {errors.password && <p className="mt-1 text-sm text-red-600">{errors.password}</p>}
             </div>
 
             {/* Confirm password field */}
@@ -516,9 +534,7 @@ export function RegisterForm() {
                   Privacy Policy
                 </Link>
               </label>
-              {errors.acceptTerms && (
-                <p className="mt-1 text-red-600">{errors.acceptTerms}</p>
-              )}
+              {errors.acceptTerms && <p className="mt-1 text-red-600">{errors.acceptTerms}</p>}
             </div>
           </div>
 

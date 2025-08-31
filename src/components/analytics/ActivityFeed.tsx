@@ -145,7 +145,8 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
   // Render activity item
   const renderActivity = (activity: Activity | ActivityItem) => {
     const Icon = activityIcons[activity.type as keyof typeof activityIcons] || Users;
-    const colorClass = activityColors[activity.type as keyof typeof activityColors] || 'text-gray-600 bg-gray-100';
+    const colorClass =
+      activityColors[activity.type as keyof typeof activityColors] || 'text-gray-600 bg-gray-100';
 
     // Handle both Activity and ActivityItem interfaces
     const title = 'title' in activity ? activity.title : activity.message;
@@ -162,14 +163,8 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
         </div>
 
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-gray-900 truncate">
-            {title}
-          </p>
-          {description && (
-            <p className="text-sm text-gray-500 truncate">
-              {description}
-            </p>
-          )}
+          <p className="text-sm font-medium text-gray-900 truncate">{title}</p>
+          {description && <p className="text-sm text-gray-500 truncate">{description}</p>}
           <p className="text-xs text-gray-400 mt-1" data-testid="activity-time">
             {formatDistanceToNow(new Date(activity.timestamp), { addSuffix: true })}
           </p>
@@ -200,14 +195,9 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2">
           <div
-            className={cn(
-              'h-2 w-2 rounded-full',
-              isConnected ? 'bg-green-500' : 'bg-gray-400',
-            )}
+            className={cn('h-2 w-2 rounded-full', isConnected ? 'bg-green-500' : 'bg-gray-400')}
           />
-          <span className="text-xs text-gray-500">
-            {isConnected ? 'Live updates' : 'Offline'}
-          </span>
+          <span className="text-xs text-gray-500">{isConnected ? 'Live updates' : 'Offline'}</span>
         </div>
 
         <button

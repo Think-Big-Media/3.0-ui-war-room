@@ -5,7 +5,7 @@ export class MetaAPIError extends Error {
     message: string,
     public code?: number,
     public subcode?: number,
-    public fbtraceId?: string,
+    public fbtraceId?: string
   ) {
     super(message);
     this.name = 'MetaAPIError';
@@ -15,7 +15,7 @@ export class MetaAPIError extends Error {
 export class MetaRateLimitError extends MetaAPIError {
   constructor(
     message: string,
-    public estimatedTimeToRegainAccess?: number,
+    public estimatedTimeToRegainAccess?: number
   ) {
     super(message, 4, 2446079);
     this.name = 'MetaRateLimitError';

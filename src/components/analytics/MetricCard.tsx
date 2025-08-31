@@ -63,14 +63,11 @@ const colorMap = {
   },
 };
 
-export const MetricCard: React.FC<MetricCardProps> = ({
-  title,
-  metric,
-  icon,
-  color,
-}) => {
+export const MetricCard: React.FC<MetricCardProps> = ({ title, metric, icon, color }) => {
   const dateRange = useAppSelector((state) => state.analytics.dateRange);
-  const { data, isLoading, error } = useGetMetricCardsQuery({ dateRange: dateRange as DateRangeEnum });
+  const { data, isLoading, error } = useGetMetricCardsQuery({
+    dateRange: dateRange as DateRangeEnum,
+  });
 
   const Icon = iconMap[icon];
   const colors = colorMap[color];
@@ -108,21 +105,31 @@ export const MetricCard: React.FC<MetricCardProps> = ({
 
   // Determine trend icon and color
   const getTrendIcon = () => {
-    if (!metricData.change) {return <Minus className="h-4 w-4" />;}
-    if (metricData.change > 0) {return <ArrowUp className="h-4 w-4" />;}
+    if (!metricData.change) {
+      return <Minus className="h-4 w-4" />;
+    }
+    if (metricData.change > 0) {
+      return <ArrowUp className="h-4 w-4" />;
+    }
     return <ArrowDown className="h-4 w-4" />;
   };
 
   const getTrendColor = () => {
-    if (!metricData.change) {return 'text-gray-500';}
-    if (metricData.change > 0) {return 'text-green-600';}
+    if (!metricData.change) {
+      return 'text-gray-500';
+    }
+    if (metricData.change > 0) {
+      return 'text-green-600';
+    }
     return 'text-red-600';
   };
 
   // Format value based on metric type
   const formatValue = (value: number | string) => {
     const numValue = typeof value === 'number' ? value : parseFloat(value);
-    if (isNaN(numValue)) {return '0';}
+    if (isNaN(numValue)) {
+      return '0';
+    }
     if (metric === 'donations') {
       return new Intl.NumberFormat('en-US', {
         style: 'currency',
@@ -159,9 +166,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
 
       {/* Value */}
       <div className="mb-2">
-        <p className="text-2xl font-bold text-gray-900">
-          {formatValue(metricData.value)}
-        </p>
+        <p className="text-2xl font-bold text-gray-900">{formatValue(metricData.value)}</p>
         <p className="text-sm text-gray-600">{title}</p>
       </div>
 
@@ -173,9 +178,15 @@ export const MetricCard: React.FC<MetricCardProps> = ({
               <Line
                 type="monotone"
                 dataKey="value"
-                stroke={color === 'blue' ? '#3B82F6' :
-                  color === 'green' ? '#10B981' :
-                    color === 'purple' ? '#8B5CF6' : '#F59E0B'}
+                stroke={
+                  color === 'blue'
+                    ? '#3B82F6'
+                    : color === 'green'
+                      ? '#10B981'
+                      : color === 'purple'
+                        ? '#8B5CF6'
+                        : '#F59E0B'
+                }
                 strokeWidth={2}
                 dot={false}
               />

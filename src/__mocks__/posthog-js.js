@@ -15,5 +15,5 @@ module.exports = {
       set: jest.fn(),
       set_once: jest.fn(),
     },
-  }
+  },
 };

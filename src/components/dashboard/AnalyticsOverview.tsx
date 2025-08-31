@@ -32,7 +32,11 @@ export const AnalyticsOverview: React.FC<AnalyticsOverviewProps> = ({
   compact = false,
 }) => {
   // Get live campaign insights
-  const { data: campaignData, isLoading, error } = useAdInsights({
+  const {
+    data: campaignData,
+    isLoading,
+    error,
+  } = useAdInsights({
     date_preset: timeRange === 'Last 7 days' ? 'last_7d' : 'last_30d',
     real_time: false,
   });
@@ -73,7 +77,10 @@ export const AnalyticsOverview: React.FC<AnalyticsOverviewProps> = ({
       ];
     }
 
-    const totalConversions = (campaignData as any).campaigns.reduce((sum: number, c: any) => sum + c.conversions, 0);
+    const totalConversions = (campaignData as any).campaigns.reduce(
+      (sum: number, c: any) => sum + c.conversions,
+      0
+    );
     const avgCtr = (campaignData as any).average_ctr;
     const totalSpend = (campaignData as any).total_spend;
     const totalImpressions = (campaignData as any).total_impressions;
@@ -81,7 +88,10 @@ export const AnalyticsOverview: React.FC<AnalyticsOverviewProps> = ({
     return [
       {
         label: 'Impressions',
-        value: totalImpressions > 1000 ? `${(totalImpressions / 1000).toFixed(1)}K` : totalImpressions.toString(),
+        value:
+          totalImpressions > 1000
+            ? `${(totalImpressions / 1000).toFixed(1)}K`
+            : totalImpressions.toString(),
         change: 12.5, // Would need historical data to calculate
         trend: 'up' as const,
         icon: Eye,
@@ -90,12 +100,12 @@ export const AnalyticsOverview: React.FC<AnalyticsOverviewProps> = ({
         label: 'Click Rate',
         value: `${avgCtr.toFixed(2)}%`,
         change: 2.1,
-        trend: avgCtr > 2.0 ? 'up' as const : 'down' as const,
+        trend: avgCtr > 2.0 ? ('up' as const) : ('down' as const),
         icon: MousePointer,
       },
       {
         label: 'Total Spend',
-        value: `$${totalSpend > 1000 ? `${(totalSpend / 1000).toFixed(1)  }K` : totalSpend.toFixed(0)}`,
+        value: `$${totalSpend > 1000 ? `${(totalSpend / 1000).toFixed(1)}K` : totalSpend.toFixed(0)}`,
         change: 8.7,
         trend: 'up' as const,
         icon: DollarSign,
@@ -104,7 +114,7 @@ export const AnalyticsOverview: React.FC<AnalyticsOverviewProps> = ({
         label: 'Conversions',
         value: totalConversions.toString(),
         change: 15.3,
-        trend: totalConversions > 50 ? 'up' as const : 'down' as const,
+        trend: totalConversions > 50 ? ('up' as const) : ('down' as const),
         icon: Target,
       },
     ];
@@ -129,7 +139,9 @@ export const AnalyticsOverview: React.FC<AnalyticsOverviewProps> = ({
 
     // Group campaigns by platform for visualization
     const metaCampaigns = (campaignData as any).campaigns.filter((c: any) => c.platform === 'meta');
-    const googleCampaigns = (campaignData as any).campaigns.filter((c: any) => c.platform === 'google');
+    const googleCampaigns = (campaignData as any).campaigns.filter(
+      (c: any) => c.platform === 'google'
+    );
 
     // Calculate daily data (simplified - would need actual daily breakdowns from API)
     const totalSpend = (campaignData as any).total_spend;
@@ -137,13 +149,41 @@ export const AnalyticsOverview: React.FC<AnalyticsOverviewProps> = ({
 
     return {
       campaigns: [
-        { day: 'Mon', spend: dailyAverage * 0.8, impressions: (campaignData as any).total_impressions * 0.12 },
-        { day: 'Tue', spend: dailyAverage * 1.1, impressions: (campaignData as any).total_impressions * 0.15 },
-        { day: 'Wed', spend: dailyAverage * 1.3, impressions: (campaignData as any).total_impressions * 0.18 },
-        { day: 'Thu', spend: dailyAverage * 0.9, impressions: (campaignData as any).total_impressions * 0.13 },
-        { day: 'Fri', spend: dailyAverage * 1.5, impressions: (campaignData as any).total_impressions * 0.20 },
-        { day: 'Sat', spend: dailyAverage * 1.2, impressions: (campaignData as any).total_impressions * 0.16 },
-        { day: 'Sun', spend: dailyAverage * 1.1, impressions: (campaignData as any).total_impressions * 0.14 },
+        {
+          day: 'Mon',
+          spend: dailyAverage * 0.8,
+          impressions: (campaignData as any).total_impressions * 0.12,
+        },
+        {
+          day: 'Tue',
+          spend: dailyAverage * 1.1,
+          impressions: (campaignData as any).total_impressions * 0.15,
+        },
+        {
+          day: 'Wed',
+          spend: dailyAverage * 1.3,
+          impressions: (campaignData as any).total_impressions * 0.18,
+        },
+        {
+          day: 'Thu',
+          spend: dailyAverage * 0.9,
+          impressions: (campaignData as any).total_impressions * 0.13,
+        },
+        {
+          day: 'Fri',
+          spend: dailyAverage * 1.5,
+          impressions: (campaignData as any).total_impressions * 0.2,
+        },
+        {
+          day: 'Sat',
+          spend: dailyAverage * 1.2,
+          impressions: (campaignData as any).total_impressions * 0.16,
+        },
+        {
+          day: 'Sun',
+          spend: dailyAverage * 1.1,
+          impressions: (campaignData as any).total_impressions * 0.14,
+        },
       ],
     };
   }, [campaignData, isLoading, error]);
@@ -173,10 +213,12 @@ export const AnalyticsOverview: React.FC<AnalyticsOverviewProps> = ({
             <div key={metric.label} className="space-y-1">
               <p className="text-xs text-gray-500">{metric.label}</p>
               <p className="text-lg font-bold text-gray-900">{metric.value}</p>
-              <div className={cn(
-                'flex items-center text-xs font-medium',
-                metric.trend === 'up' ? 'text-green-600' : 'text-red-600',
-              )}>
+              <div
+                className={cn(
+                  'flex items-center text-xs font-medium',
+                  metric.trend === 'up' ? 'text-green-600' : 'text-red-600'
+                )}
+              >
                 {metric.trend === 'up' ? (
                   <TrendingUp className="w-3 h-3 mr-1" />
                 ) : (
@@ -204,13 +246,18 @@ export const AnalyticsOverview: React.FC<AnalyticsOverviewProps> = ({
             >
               <div className="flex items-center justify-between mb-3">
                 <Icon className="w-5 h-5 text-gray-400" />
-                <div className={cn(
-                  'flex items-center text-xs font-medium',
-                  metric.trend === 'up' && metric.label !== 'Bounce Rate' ? 'text-green-600' :
-                    metric.trend === 'down' && metric.label !== 'Bounce Rate' ? 'text-red-600' :
-                      metric.trend === 'up' && metric.label === 'Bounce Rate' ? 'text-red-600' :
-                        'text-green-600',
-                )}>
+                <div
+                  className={cn(
+                    'flex items-center text-xs font-medium',
+                    metric.trend === 'up' && metric.label !== 'Bounce Rate'
+                      ? 'text-green-600'
+                      : metric.trend === 'down' && metric.label !== 'Bounce Rate'
+                        ? 'text-red-600'
+                        : metric.trend === 'up' && metric.label === 'Bounce Rate'
+                          ? 'text-red-600'
+                          : 'text-green-600'
+                  )}
+                >
                   {metric.trend === 'up' ? (
                     <TrendingUp className="w-3 h-3 mr-1" />
                   ) : (
@@ -242,7 +289,7 @@ export const AnalyticsOverview: React.FC<AnalyticsOverviewProps> = ({
           {/* Simple Bar Chart */}
           <div className="space-y-3">
             {chartData.campaigns.map((day) => {
-              const maxSpend = Math.max(...chartData.campaigns.map(d => d.spend));
+              const maxSpend = Math.max(...chartData.campaigns.map((d) => d.spend));
               const percentage = (day.spend / maxSpend) * 100;
               return (
                 <div key={day.day} className="flex items-center space-x-3">
@@ -253,7 +300,10 @@ export const AnalyticsOverview: React.FC<AnalyticsOverviewProps> = ({
                       style={{ width: `${percentage}%` }}
                     >
                       <span className="text-xs text-white font-medium">
-                        ${day.spend > 1000 ? `${(day.spend / 1000).toFixed(1)  }k` : day.spend.toFixed(0)}
+                        $
+                        {day.spend > 1000
+                          ? `${(day.spend / 1000).toFixed(1)}k`
+                          : day.spend.toFixed(0)}
                       </span>
                     </div>
                   </div>
@@ -266,12 +316,12 @@ export const AnalyticsOverview: React.FC<AnalyticsOverviewProps> = ({
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-2xl font-bold text-gray-900">
-                  ${campaignData ?
-                    (campaignData.total_spend > 1000 ?
-                      `${(campaignData.total_spend / 1000).toFixed(1)  }k` :
-                      campaignData.total_spend.toFixed(0)
-                    ) : '124.5k'
-                  }
+                  $
+                  {campaignData
+                    ? campaignData.total_spend > 1000
+                      ? `${(campaignData.total_spend / 1000).toFixed(1)}k`
+                      : campaignData.total_spend.toFixed(0)
+                    : '124.5k'}
                 </p>
                 <p className="text-sm text-gray-500">Total spend {timeRange.toLowerCase()}</p>
               </div>
@@ -356,7 +406,9 @@ export const AnalyticsOverview: React.FC<AnalyticsOverviewProps> = ({
         <div className="grid grid-cols-8 gap-4">
           <div />
           {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
-            <div key={day} className="text-xs text-gray-500 text-center">{day}</div>
+            <div key={day} className="text-xs text-gray-500 text-center">
+              {day}
+            </div>
           ))}
 
           {['12am', '6am', '12pm', '6pm'].map((hour) => (
@@ -369,11 +421,15 @@ export const AnalyticsOverview: React.FC<AnalyticsOverviewProps> = ({
                     key={`${hour}-${day}`}
                     className={cn(
                       'aspect-square rounded',
-                      intensity > 0.8 ? 'bg-blue-600' :
-                        intensity > 0.6 ? 'bg-blue-500' :
-                          intensity > 0.4 ? 'bg-blue-400' :
-                            intensity > 0.2 ? 'bg-blue-300' :
-                              'bg-gray-200',
+                      intensity > 0.8
+                        ? 'bg-blue-600'
+                        : intensity > 0.6
+                          ? 'bg-blue-500'
+                          : intensity > 0.4
+                            ? 'bg-blue-400'
+                            : intensity > 0.2
+                              ? 'bg-blue-300'
+                              : 'bg-gray-200'
                     )}
                   />
                 );

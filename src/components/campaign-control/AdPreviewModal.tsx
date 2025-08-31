@@ -31,20 +31,14 @@ interface AdPreviewModalProps {
   onClose: () => void;
 }
 
-const AdPreviewModal: React.FC<AdPreviewModalProps> = ({
-  isOpen,
-  campaign,
-  onClose,
-}) => {
+const AdPreviewModal: React.FC<AdPreviewModalProps> = ({ isOpen, campaign, onClose }) => {
   if (!isOpen || !campaign || !campaign.creative) return null;
 
   const renderGoogleAdsPreview = () => (
     <div className="bg-white rounded-lg shadow-xl max-w-2xl mx-auto">
       {/* Search Result Preview */}
       <div className="p-6">
-        <h3 className="text-gray-600 text-sm mb-4 font-semibold">
-          Search Result Preview
-        </h3>
+        <h3 className="text-gray-600 text-sm mb-4 font-semibold">Search Result Preview</h3>
         <div className="border rounded-lg p-4 bg-gray-50">
           <div className="flex items-start gap-2">
             <span className="bg-yellow-400 text-black text-xs px-1.5 py-0.5 rounded font-bold">
@@ -55,9 +49,7 @@ const AdPreviewModal: React.FC<AdPreviewModalProps> = ({
                 {campaign.creative.headline}
               </h3>
               <div className="flex items-center gap-1 text-sm mt-1">
-                <span className="text-green-700">
-                  {campaign.creative.displayUrl}
-                </span>
+                <span className="text-green-700">{campaign.creative.displayUrl}</span>
               </div>
               <p className="text-gray-600 text-sm mt-2 leading-relaxed">
                 {campaign.creative.description}
@@ -67,17 +59,11 @@ const AdPreviewModal: React.FC<AdPreviewModalProps> = ({
         </div>
 
         {/* Display Ad Preview */}
-        <h3 className="text-gray-600 text-sm mb-4 font-semibold mt-8">
-          Display Ad Preview
-        </h3>
+        <h3 className="text-gray-600 text-sm mb-4 font-semibold mt-8">Display Ad Preview</h3>
         <div className="border rounded-lg overflow-hidden">
           <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-8 text-white">
-            <h2 className="text-2xl font-bold mb-2">
-              {campaign.creative.headline}
-            </h2>
-            <p className="text-white/90 mb-4">
-              {campaign.creative.description}
-            </p>
+            <h2 className="text-2xl font-bold mb-2">{campaign.creative.headline}</h2>
+            <p className="text-white/90 mb-4">{campaign.creative.description}</p>
             <button className="bg-white text-blue-600 px-3 py-1.5 rounded-md font-semibold hover:bg-blue-50 transition-colors">
               {campaign.creative.callToAction}
             </button>
@@ -91,9 +77,7 @@ const AdPreviewModal: React.FC<AdPreviewModalProps> = ({
     <div className="max-w-2xl mx-auto space-y-6">
       {/* Facebook Feed Preview */}
       <div className="bg-white rounded-lg shadow-xl overflow-hidden">
-        <h3 className="text-gray-600 text-sm p-4 pb-0 font-semibold">
-          Facebook Feed
-        </h3>
+        <h3 className="text-gray-600 text-sm p-4 pb-0 font-semibold">Facebook Feed</h3>
         <div className="p-4 border-b">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
@@ -120,18 +104,14 @@ const AdPreviewModal: React.FC<AdPreviewModalProps> = ({
         )}
 
         <div className="p-4">
-          <h4 className="font-bold text-gray-900 text-lg mb-2">
-            {campaign.creative.headline}
-          </h4>
+          <h4 className="font-bold text-gray-900 text-lg mb-2">{campaign.creative.headline}</h4>
           <p className="text-gray-600 mb-4">{campaign.creative.description}</p>
           <div className="bg-gray-100 rounded-lg p-3 flex items-center justify-between">
             <div>
               <p className="text-sm text-gray-600">
                 {new URL(campaign.creative.finalUrl).hostname}
               </p>
-              <p className="text-xs text-gray-500">
-                {campaign.creative.callToAction}
-              </p>
+              <p className="text-xs text-gray-500">{campaign.creative.callToAction}</p>
             </div>
             <button className="bg-blue-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-blue-700 transition-colors">
               {campaign.creative.callToAction}
@@ -150,18 +130,14 @@ const AdPreviewModal: React.FC<AdPreviewModalProps> = ({
 
       {/* Instagram Feed Preview */}
       <div className="bg-white rounded-lg shadow-xl overflow-hidden">
-        <h3 className="text-gray-600 text-sm p-4 pb-0 font-semibold">
-          Instagram Feed
-        </h3>
+        <h3 className="text-gray-600 text-sm p-4 pb-0 font-semibold">Instagram Feed</h3>
         <div className="p-4 border-b">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
               <span className="text-white font-bold">C</span>
             </div>
             <div className="flex-1">
-              <p className="font-semibold text-gray-900 text-sm">
-                campaign2024
-              </p>
+              <p className="font-semibold text-gray-900 text-sm">campaign2024</p>
               <p className="text-xs text-gray-500">Sponsored</p>
             </div>
             <button className="text-gray-600">
@@ -250,15 +226,11 @@ const AdPreviewModal: React.FC<AdPreviewModalProps> = ({
 
         {/* Preview Content */}
         <div className="p-6">
-          {campaign.platform === 'Google Ads'
-            ? renderGoogleAdsPreview()
-            : renderMetaPreview()}
+          {campaign.platform === 'Google Ads' ? renderGoogleAdsPreview() : renderMetaPreview()}
 
           {/* Performance Stats */}
           <div className="mt-8 bg-white/5 rounded-lg p-6">
-            <h3 className="text-white font-semibold mb-4">
-              Campaign Performance
-            </h3>
+            <h3 className="text-white font-semibold mb-4">Campaign Performance</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div>
                 <p className="text-white/60 text-sm">Impressions</p>
@@ -274,15 +246,11 @@ const AdPreviewModal: React.FC<AdPreviewModalProps> = ({
               </div>
               <div>
                 <p className="text-white/60 text-sm">CTR</p>
-                <p className="text-white text-xl font-semibold">
-                  {campaign.ctr.toFixed(2)}%
-                </p>
+                <p className="text-white text-xl font-semibold">{campaign.ctr.toFixed(2)}%</p>
               </div>
               <div>
                 <p className="text-white/60 text-sm">CPC</p>
-                <p className="text-white text-xl font-semibold">
-                  ${campaign.cpc.toFixed(2)}
-                </p>
+                <p className="text-white text-xl font-semibold">${campaign.cpc.toFixed(2)}</p>
               </div>
             </div>
           </div>

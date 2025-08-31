@@ -66,9 +66,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
           <Icon className="w-5 h-5 lg:w-6 lg:h-6 text-white/95 group-hover:text-orange-300 transition-colors duration-300" />
         </div>
         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div className="text-xs text-orange-300 font-medium">
-            Click to explore →
-          </div>
+          <div className="text-xs text-orange-300 font-medium">Click to explore →</div>
         </div>
       </div>
 
@@ -90,16 +88,12 @@ const IntelligenceDashboard: React.FC = () => {
   const navigate = useNavigate();
 
   const handleDashboardClick = () => {
-    logger.debug(
-      'Intelligence Dashboard clicked - navigating to /intelligence-hub'
-    );
+    logger.debug('Intelligence Dashboard clicked - navigating to /intelligence-hub');
     navigate('/intelligence-hub');
   };
 
   const handleMetricClick = (metricLabel: string) => {
-    logger.debug(
-      `Metric clicked: ${metricLabel} - navigating to /intelligence-hub`
-    );
+    logger.debug(`Metric clicked: ${metricLabel} - navigating to /intelligence-hub`);
     navigate('/intelligence-hub');
   };
 
@@ -138,9 +132,7 @@ const IntelligenceDashboard: React.FC = () => {
           <div className="p-2 lg:p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-purple-400/20 group-hover:border-orange-400/30 transition-all duration-300">
             <Target className="w-5 h-5 lg:w-6 lg:h-6 text-white/95" />
           </div>
-          <h3 className="text-xl lg:text-2xl section-header">
-            Intelligence Dashboard
-          </h3>
+          <h3 className="text-xl lg:text-2xl section-header">Intelligence Dashboard</h3>
         </div>
       </div>
 
@@ -160,12 +152,8 @@ const IntelligenceDashboard: React.FC = () => {
             >
               {metric.value}
             </div>
-            <div className="text-xs lg:text-sm text-white/75 mb-2">
-              {metric.label}
-            </div>
-            <div className="text-xs text-green-400 font-medium">
-              {metric.trend}
-            </div>
+            <div className="text-xs lg:text-sm text-white/75 mb-2">{metric.label}</div>
+            <div className="text-xs text-green-400 font-medium">{metric.trend}</div>
           </div>
         ))}
       </div>
@@ -184,16 +172,12 @@ const CampaignOperationsHub: React.FC = () => {
   const navigate = useNavigate();
 
   const handleProjectClick = (projectTitle: string) => {
-    logger.debug(
-      `Project clicked: ${projectTitle} - navigating to /campaign-control`
-    );
+    logger.debug(`Project clicked: ${projectTitle} - navigating to /campaign-control`);
     navigate('/campaign-control');
   };
 
   const handleTemplateClick = (templateName: string) => {
-    logger.debug(
-      `Template clicked: ${templateName} - navigating to /campaign-control`
-    );
+    logger.debug(`Template clicked: ${templateName} - navigating to /campaign-control`);
     navigate('/campaign-control');
   };
 
@@ -248,9 +232,7 @@ const CampaignOperationsHub: React.FC = () => {
           <div className="p-2 lg:p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-purple-400/20 group-hover:border-orange-400/30 transition-all duration-300">
             <Target className="w-5 h-5 lg:w-6 lg:h-6 text-white/95" />
           </div>
-          <h3 className="text-xl lg:text-2xl section-header">
-            Campaign Operations
-          </h3>
+          <h3 className="text-xl lg:text-2xl section-header">Campaign Operations</h3>
         </div>
       </div>
 
@@ -278,9 +260,7 @@ const CampaignOperationsHub: React.FC = () => {
               >
                 <div className="flex items-center justify-between mb-2">
                   <h5 className="content-title">{cluster.title}</h5>
-                  <div
-                    className={`w-2 h-2 rounded-full ${cluster.statusColor}`}
-                  />
+                  <div className={`w-2 h-2 rounded-full ${cluster.statusColor}`} />
                 </div>
                 <div className="flex items-center justify-between text-xs">
                   <span
@@ -355,10 +335,7 @@ const CommandCenter: React.FC = () => {
   );
 
   return (
-    <PageLayout
-      pageTitle="Dashboard"
-      placeholder="Ask War Room about your campaign status..."
-    >
+    <PageLayout pageTitle="Dashboard" placeholder="Ask War Room about your campaign status...">
       {/* Purple gradient background per THEME_CONSTANTS.md */}
       <div className="fixed inset-0 bg-gradient-to-br from-purple-600 via-purple-700 to-indigo-800 -z-10" />
 

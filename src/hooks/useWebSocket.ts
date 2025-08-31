@@ -44,7 +44,7 @@ interface UseWebSocketReturn {
 
 export const useWebSocket = (
   url: string | null,
-  options: WebSocketOptions = {},
+  options: WebSocketOptions = {}
 ): UseWebSocketReturn => {
   const {
     autoReconnect = true,
@@ -85,103 +85,117 @@ export const useWebSocket = (
   }, []);
 
   // Calculate reconnection delay with exponential backoff
-  const calculateReconnectDelay = useCallback((attempt: number): number => {
-    if (!exponentialBackoff) {
-      return reconnectInterval;
-    }
+  const calculateReconnectDelay = useCallback(
+    (attempt: number): number => {
+      if (!exponentialBackoff) {
+        return reconnectInterval;
+      }
 
-    // Exponential backoff: 1s, 2s, 4s, 8s, 16s, 30s (capped)
-    const delay = Math.min(
-      reconnectInterval * Math.pow(2, attempt),
-      30000, // Max 30 seconds
-    );
+      // Exponential backoff: 1s, 2s, 4s, 8s, 16s, 30s (capped)
+      const delay = Math.min(
+        reconnectInterval * Math.pow(2, attempt),
+        30000 // Max 30 seconds
+      );
 
-    // Add jitter to prevent thundering herd
-    const jitter = Math.random() * 1000;
-    return delay + jitter;
-  }, [exponentialBackoff, reconnectInterval]);
+      // Add jitter to prevent thundering herd
+      const jitter = Math.random() * 1000;
+      return delay + jitter;
+    },
+    [exponentialBackoff, reconnectInterval]
+  );
 
   // Send message to WebSocket
-  const sendMessage = useCallback((message: any): boolean => {
-    if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
-      const data = typeof message === 'string' ? message : JSON.stringify(message);
-      wsRef.current.send(data);
-      debug && logger.debug('Sent message:', message);
-      return true;
-    }
-    debug && logger.warn('Cannot send message: WebSocket not connected');
-    return false;
-
-  }, [debug]);
+  const sendMessage = useCallback(
+    (message: any): boolean => {
+      if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+        const data = typeof message === 'string' ? message : JSON.stringify(message);
+        wsRef.current.send(data);
+        debug && logger.debug('Sent message:', message);
+        return true;
+      }
+      debug && logger.warn('Cannot send message: WebSocket not connected');
+      return false;
+    },
+    [debug]
+  );
 
   // Send JSON message
-  const sendJsonMessage = useCallback((message: object): boolean => {
-    return sendMessage(JSON.stringify(message));
-  }, [sendMessage]);
+  const sendJsonMessage = useCallback(
+    (message: object): boolean => {
+      return sendMessage(JSON.stringify(message));
+    },
+    [sendMessage]
+  );
 
   // Subscribe to specific metrics
-  const subscribeToMetrics = useCallback((metrics: string[]) => {
-    sendMessage({
-      type: 'subscribe',
-      metrics,
-    });
-  }, [sendMessage]);
+  const subscribeToMetrics = useCallback(
+    (metrics: string[]) => {
+      sendMessage({
+        type: 'subscribe',
+        metrics,
+      });
+    },
+    [sendMessage]
+  );
 
   // Handle incoming messages
-  const handleMessage = useCallback((event: MessageEvent) => {
-    let jsonMessage = null;
+  const handleMessage = useCallback(
+    (event: MessageEvent) => {
+      let jsonMessage = null;
 
-    try {
-      jsonMessage = JSON.parse(event.data);
+      try {
+        jsonMessage = JSON.parse(event.data);
 
-      // Handle pong response
-      if (jsonMessage.type === 'pong') {
-        debug && logger.debug('Received pong');
-        return;
+        // Handle pong response
+        if (jsonMessage.type === 'pong') {
+          debug && logger.debug('Received pong');
+          return;
+        }
+
+        setLastJsonMessage(jsonMessage);
+      } catch (e) {
+        // Not JSON, that's fine
+        debug && logger.debug('Received non-JSON message');
       }
 
-      setLastJsonMessage(jsonMessage);
-    } catch (e) {
-      // Not JSON, that's fine
-      debug && logger.debug('Received non-JSON message');
-    }
+      const message: WebSocketMessage = jsonMessage || {
+        type: 'raw',
+        data: event.data,
+        timestamp: new Date().toISOString(),
+      };
 
-    const message: WebSocketMessage = jsonMessage || {
-      type: 'raw',
-      data: event.data,
-      timestamp: new Date().toISOString(),
-    };
+      setLastMessage(message);
 
-    setLastMessage(message);
+      // Call custom message handler if provided
+      onMessage?.(jsonMessage || event.data);
 
-    // Call custom message handler if provided
-    onMessage?.(jsonMessage || event.data);
+      // Handle built-in message types
+      if (jsonMessage) {
+        switch (jsonMessage.type) {
+          case 'ping':
+            // Respond to heartbeat
+            sendMessage({ type: 'pong' });
+            break;
 
-    // Handle built-in message types
-    if (jsonMessage) {
-      switch (jsonMessage.type) {
-        case 'ping':
-          // Respond to heartbeat
-          sendMessage({ type: 'pong' });
-          break;
+          case 'error':
+            logger.error('WebSocket server error:', jsonMessage.data);
+            setError(jsonMessage.data);
+            break;
 
-        case 'error':
-          logger.error('WebSocket server error:', jsonMessage.data);
-          setError(jsonMessage.data);
-          break;
+          case 'metrics_update':
+          case 'activity_feed':
+          case 'alert_update':
+            // These are handled by the custom onMessage handler
+            debug && logger.debug(`Received ${jsonMessage.type}:`, jsonMessage.data);
+            break;
 
-        case 'metrics_update':
-        case 'activity_feed':
-        case 'alert_update':
-          // These are handled by the custom onMessage handler
-          debug && logger.debug(`Received ${jsonMessage.type}:`, jsonMessage.data);
-          break;
-
-        default:
-          debug && logger.debug('Unknown message type:', jsonMessage.type);
+          default:
+            debug && logger.debug('Unknown message type:', jsonMessage.type);
+        }
       }
-    }
-  }, [debug, onMessage, sendMessage]);
+    },
+    [debug, onMessage, sendMessage]
+  );
 
   // Connect to WebSocket
   const connect = useCallback(() => {
@@ -253,10 +267,11 @@ export const useWebSocket = (
         onClose?.(event);
 
         // Attempt reconnection if enabled and not a clean close
-        if (autoReconnect &&
-            event.code !== 1000 && // Normal closure
-            reconnectAttemptsRef.current < maxReconnectAttempts) {
-
+        if (
+          autoReconnect &&
+          event.code !== 1000 && // Normal closure
+          reconnectAttemptsRef.current < maxReconnectAttempts
+        ) {
           const attempt = reconnectAttemptsRef.current + 1;
           const delay = calculateReconnectDelay(attempt);
 
@@ -273,13 +288,25 @@ export const useWebSocket = (
           setError('Maximum reconnection attempts reached');
         }
       };
-
     } catch (error) {
       logger.error('Failed to create WebSocket:', error);
       setError('Failed to create WebSocket connection');
       setIsConnecting(false);
     }
-  }, [url, autoReconnect, maxReconnectAttempts, handleMessage, clearTimeouts, calculateReconnectDelay, debug, protocols, onOpen, onError, onClose, onReconnect]);
+  }, [
+    url,
+    autoReconnect,
+    maxReconnectAttempts,
+    handleMessage,
+    clearTimeouts,
+    calculateReconnectDelay,
+    debug,
+    protocols,
+    onOpen,
+    onError,
+    onClose,
+    onReconnect,
+  ]);
 
   // Disconnect from WebSocket
   const disconnect = useCallback(() => {
@@ -300,9 +327,15 @@ export const useWebSocket = (
 
   // Connection state string
   const connectionState = (() => {
-    if (isConnecting) {return 'Connecting';}
-    if (isConnected) {return 'Connected';}
-    if (error) {return 'Error';}
+    if (isConnecting) {
+      return 'Connecting';
+    }
+    if (isConnected) {
+      return 'Connected';
+    }
+    if (error) {
+      return 'Error';
+    }
     return 'Disconnected';
   })();
 
@@ -344,24 +377,19 @@ export const useWebSocket = (
 export const useAnalyticsWebSocket = () => {
   const websocketUrl = `${import.meta.env.VITE_WS_URL || 'ws://localhost:8000'}/ws/analytics`;
 
-  const {
-    isConnected,
-    lastMessage,
-    lastJsonMessage,
-    sendJsonMessage,
-    subscribeToMetrics,
-  } = useWebSocket(websocketUrl, {
-    autoReconnect: true,
-    onOpen: () => {
-      console.log('Analytics WebSocket connected');
-    },
-    onClose: () => {
-      console.log('Analytics WebSocket disconnected');
-    },
-    onError: (error) => {
-      console.error('Analytics WebSocket error:', error);
-    },
-  });
+  const { isConnected, lastMessage, lastJsonMessage, sendJsonMessage, subscribeToMetrics } =
+    useWebSocket(websocketUrl, {
+      autoReconnect: true,
+      onOpen: () => {
+        console.log('Analytics WebSocket connected');
+      },
+      onClose: () => {
+        console.log('Analytics WebSocket disconnected');
+      },
+      onError: (error) => {
+        console.error('Analytics WebSocket error:', error);
+      },
+    });
 
   return {
     isConnected,

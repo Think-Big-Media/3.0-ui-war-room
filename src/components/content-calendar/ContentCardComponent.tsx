@@ -55,9 +55,7 @@ const ContentCardComponent: React.FC<ContentCardComponentProps> = ({
         <PlatformIcon className="w-3 h-3 text-white" />
         {getStatusIcon(content.status)}
       </div>
-      <div className="text-white text-xs font-medium truncate">
-        {content.content}
-      </div>
+      <div className="text-white text-xs font-medium truncate">{content.content}</div>
       <div className="text-white/70 text-xs">{content.time}</div>
     </div>
   );

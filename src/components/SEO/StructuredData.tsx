@@ -5,29 +5,29 @@ import { Helmet } from 'react-helmet-async';
 const baseOrganizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  'name': 'War Room',
-  'description': 'Political Campaign Management Platform',
-  'url': 'https://war-room-oa9t.onrender.com',
-  'logo': {
+  name: 'War Room',
+  description: 'Political Campaign Management Platform',
+  url: 'https://war-room-oa9t.onrender.com',
+  logo: {
     '@type': 'ImageObject',
-    'url': 'https://war-room-oa9t.onrender.com/logo.png',
-    'width': '400',
-    'height': '400',
+    url: 'https://war-room-oa9t.onrender.com/logo.png',
+    width: '400',
+    height: '400',
   },
-  'sameAs': [
+  sameAs: [
     'https://twitter.com/WarRoomPlatform',
     'https://linkedin.com/company/war-room-platform',
     'https://github.com/war-room',
   ],
-  'contactPoint': {
+  contactPoint: {
     '@type': 'ContactPoint',
-    'contactType': 'Customer Support',
-    'email': 'support@warroom.com',
-    'availableLanguage': 'English',
+    contactType: 'Customer Support',
+    email: 'support@warroom.com',
+    availableLanguage: 'English',
   },
-  'address': {
+  address: {
     '@type': 'PostalAddress',
-    'addressCountry': 'US',
+    addressCountry: 'US',
   },
 };
 
@@ -35,28 +35,29 @@ const baseOrganizationSchema = {
 const softwareApplicationSchema = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
-  'name': 'War Room',
-  'description': 'Comprehensive campaign management platform for political campaigns, advocacy groups, and non-profit organizations',
-  'url': 'https://war-room-oa9t.onrender.com',
-  'applicationCategory': 'BusinessApplication',
-  'operatingSystem': 'Web Browser',
-  'offers': {
+  name: 'War Room',
+  description:
+    'Comprehensive campaign management platform for political campaigns, advocacy groups, and non-profit organizations',
+  url: 'https://war-room-oa9t.onrender.com',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web Browser',
+  offers: {
     '@type': 'Offer',
-    'price': '0',
-    'priceCurrency': 'USD',
-    'availability': 'https://schema.org/InStock',
+    price: '0',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
   },
-  'author': baseOrganizationSchema,
-  'publisher': baseOrganizationSchema,
-  'softwareVersion': '1.0',
-  'datePublished': '2024-01-01',
-  'dateModified': new Date().toISOString().split('T')[0],
-  'screenshot': {
+  author: baseOrganizationSchema,
+  publisher: baseOrganizationSchema,
+  softwareVersion: '1.0',
+  datePublished: '2024-01-01',
+  dateModified: new Date().toISOString().split('T')[0],
+  screenshot: {
     '@type': 'ImageObject',
-    'url': 'https://war-room-oa9t.onrender.com/screenshot-dashboard.png',
-    'caption': 'War Room Dashboard',
+    url: 'https://war-room-oa9t.onrender.com/screenshot-dashboard.png',
+    caption: 'War Room Dashboard',
   },
-  'featureList': [
+  featureList: [
     'Volunteer Management',
     'Event Coordination',
     'Real-time Analytics',
@@ -66,12 +67,12 @@ const softwareApplicationSchema = {
     'Fundraising Tools',
     'Campaign Asset Management',
   ],
-  'aggregateRating': {
+  aggregateRating: {
     '@type': 'AggregateRating',
-    'ratingValue': '4.8',
-    'reviewCount': '150',
-    'bestRating': '5',
-    'worstRating': '1',
+    ratingValue: '4.8',
+    reviewCount: '150',
+    bestRating: '5',
+    worstRating: '1',
   },
 };
 
@@ -82,9 +83,7 @@ interface StructuredDataProps {
 export const StructuredData: React.FC<StructuredDataProps> = ({ schema }) => {
   return (
     <Helmet>
-      <script type="application/ld+json">
-        {JSON.stringify(schema, null, 2)}
-      </script>
+      <script type="application/ld+json">{JSON.stringify(schema, null, 2)}</script>
     </Helmet>
   );
 };
@@ -111,27 +110,27 @@ export const WebPageStructuredData: React.FC<{
     name,
     description,
     url,
-    'isPartOf': {
+    isPartOf: {
       '@type': 'WebSite',
-      'name': 'War Room',
-      'url': 'https://war-room-oa9t.onrender.com',
+      name: 'War Room',
+      url: 'https://war-room-oa9t.onrender.com',
     },
-    'potentialAction': {
+    potentialAction: {
       '@type': 'SearchAction',
-      'target': {
+      target: {
         '@type': 'EntryPoint',
-        'urlTemplate': 'https://war-room-oa9t.onrender.com/search?q={search_term_string}',
+        urlTemplate: 'https://war-room-oa9t.onrender.com/search?q={search_term_string}',
       },
       'query-input': 'required name=search_term_string',
     },
     ...(breadcrumbs.length > 0 && {
-      'breadcrumb': {
+      breadcrumb: {
         '@type': 'BreadcrumbList',
-        'itemListElement': breadcrumbs.map((item, index) => ({
+        itemListElement: breadcrumbs.map((item, index) => ({
           '@type': 'ListItem',
-          'position': index + 1,
-          'name': item.name,
-          'item': item.url,
+          position: index + 1,
+          name: item.name,
+          item: item.url,
         })),
       },
     }),
@@ -171,12 +170,12 @@ export const FAQStructuredData: React.FC<{
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    'mainEntity': faqs.map(faq => ({
+    mainEntity: faqs.map((faq) => ({
       '@type': 'Question',
-      'name': faq.question,
-      'acceptedAnswer': {
+      name: faq.question,
+      acceptedAnswer: {
         '@type': 'Answer',
-        'text': faq.answer,
+        text: faq.answer,
       },
     })),
   };
@@ -199,15 +198,15 @@ export const ArticleStructuredData: React.FC<{
     '@type': 'Article',
     headline,
     description,
-    'image': [image],
-    'datePublished': publishedTime,
-    'dateModified': modifiedTime || publishedTime,
-    'author': {
+    image: [image],
+    datePublished: publishedTime,
+    dateModified: modifiedTime || publishedTime,
+    author: {
       '@type': 'Person',
-      'name': author,
+      name: author,
     },
-    'publisher': baseOrganizationSchema,
-    'mainEntityOfPage': {
+    publisher: baseOrganizationSchema,
+    mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': url,
     },

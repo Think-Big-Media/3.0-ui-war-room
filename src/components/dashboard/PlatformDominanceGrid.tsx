@@ -10,7 +10,7 @@ export const PlatformDominanceGrid: React.FC = () => {
       growth: '+23%',
       color: 'from-blue-500 to-cyan-500',
       textColor: 'text-blue-400',
-      trending: 'up'
+      trending: 'up',
     },
     {
       platform: 'FACEBOOK',
@@ -18,7 +18,7 @@ export const PlatformDominanceGrid: React.FC = () => {
       growth: '+12%',
       color: 'from-orange-500 to-yellow-500',
       textColor: 'text-orange-400',
-      trending: 'up'
+      trending: 'up',
     },
     {
       platform: 'INSTAGRAM',
@@ -26,20 +26,22 @@ export const PlatformDominanceGrid: React.FC = () => {
       growth: '+45%',
       color: 'from-blue-400 to-purple-500',
       textColor: 'text-purple-400',
-      trending: 'up'
-    }
+      trending: 'up',
+    },
   ];
 
   return (
-    <Card variant="glass" padding="sm" className="platform-dominance hoverable hover:scale-[1.02] transition-all duration-300">
+    <Card
+      variant="glass"
+      padding="sm"
+      className="platform-dominance hoverable hover:scale-[1.02] transition-all duration-300"
+    >
       <div className="flex items-center justify-between mb-2">
         <h3 className="font-barlow font-semibold text-white text-xs flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></div>
           Platform Dominance
         </h3>
-        <div className="text-xs font-mono text-amber-400">
-          MOCK DATA
-        </div>
+        <div className="text-xs font-mono text-amber-400">MOCK DATA</div>
       </div>
 
       <div className="grid grid-cols-3 gap-3">
@@ -50,19 +52,19 @@ export const PlatformDominanceGrid: React.FC = () => {
           >
             {/* Animated background overlay */}
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
-            
+
             {/* Content */}
             <div className="relative z-10">
               <div className="text-xs font-bold text-white/90 uppercase tracking-wider mb-2">
                 {platform.platform}
               </div>
-              
-              <div className="text-xl font-bold text-white mb-1">
-                {platform.value}
-              </div>
-              
+
+              <div className="text-xl font-bold text-white mb-1">{platform.value}</div>
+
               <div className="flex items-center justify-between">
-                <div className={`text-sm font-semibold ${platform.textColor} flex items-center gap-1`}>
+                <div
+                  className={`text-sm font-semibold ${platform.textColor} flex items-center gap-1`}
+                >
                   {platform.trending === 'up' ? (
                     <TrendingUp className="w-3 h-3" />
                   ) : (
@@ -70,7 +72,7 @@ export const PlatformDominanceGrid: React.FC = () => {
                   )}
                   {platform.growth}
                 </div>
-                
+
                 {/* Mini sparkline effect */}
                 <div className="flex items-end gap-0.5 h-6">
                   {[...Array(8)].map((_, i) => (
@@ -79,7 +81,7 @@ export const PlatformDominanceGrid: React.FC = () => {
                       className="w-1 bg-white/30 rounded-t"
                       style={{
                         height: `${Math.random() * 24 + 8}px`,
-                        animationDelay: `${i * 0.1}s`
+                        animationDelay: `${i * 0.1}s`,
                       }}
                     ></div>
                   ))}

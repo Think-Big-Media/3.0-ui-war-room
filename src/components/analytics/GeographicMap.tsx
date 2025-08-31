@@ -3,13 +3,7 @@
  * Shows volunteer and event distribution across regions.
  */
 import type React from 'react';
-import {
-  ComposableMap,
-  Geographies,
-  Geography,
-  Marker,
-  Annotation,
-} from 'react-simple-maps';
+import { ComposableMap, Geographies, Geography, Marker, Annotation } from 'react-simple-maps';
 import { scaleQuantile } from 'd3-scale';
 import { useGetGeographicDataQuery } from '../../services/analyticsApi';
 import { useAppSelector } from '../../hooks/redux';
@@ -29,7 +23,9 @@ const regionStates: Record<string, string[]> = {
 
 export const GeographicMap: React.FC = () => {
   const dateRange = useAppSelector((state) => state.analytics.dateRange);
-  const { data, isLoading, error } = useGetGeographicDataQuery({ dateRange: dateRange as DateRangeEnum });
+  const { data, isLoading, error } = useGetGeographicDataQuery({
+    dateRange: dateRange as DateRangeEnum,
+  });
 
   if (isLoading) {
     return (
@@ -49,15 +45,13 @@ export const GeographicMap: React.FC = () => {
 
   // Create color scale based on volunteer count
   const volunteerCounts = data.regions.map((r: any) => r.volunteers);
-  const colorScale = scaleQuantile<string>()
-    .domain(volunteerCounts)
-    .range([
-      '#E0E7FF', // lightest
-      '#C7D2FE',
-      '#A5B4FC',
-      '#818CF8',
-      '#6366F1', // darkest
-    ]);
+  const colorScale = scaleQuantile<string>().domain(volunteerCounts).range([
+    '#E0E7FF', // lightest
+    '#C7D2FE',
+    '#A5B4FC',
+    '#818CF8',
+    '#6366F1', // darkest
+  ]);
 
   // Get color for a state based on its region
   const getStateColor = (stateName: string) => {
@@ -74,10 +68,7 @@ export const GeographicMap: React.FC = () => {
 
   return (
     <div className="relative h-64">
-      <ComposableMap
-        projection="geoAlbersUsa"
-        style={{ width: '100%', height: '100%' }}
-      >
+      <ComposableMap projection="geoAlbersUsa" style={{ width: '100%', height: '100%' }}>
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
             geographies.map((geo) => {
@@ -141,7 +132,9 @@ export const GeographicMap: React.FC = () => {
 // Fallback component if map library not available
 export const GeographicMapFallback: React.FC = () => {
   const dateRange = useAppSelector((state) => state.analytics.dateRange);
-  const { data, isLoading, error } = useGetGeographicDataQuery({ dateRange: dateRange as DateRangeEnum });
+  const { data, isLoading, error } = useGetGeographicDataQuery({
+    dateRange: dateRange as DateRangeEnum,
+  });
 
   if (isLoading) {
     return (
@@ -185,9 +178,7 @@ export const GeographicMapFallback: React.FC = () => {
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 {region.volunteers.toLocaleString()}
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                {region.events}
-              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{region.events}</td>
             </tr>
           ))}
         </tbody>

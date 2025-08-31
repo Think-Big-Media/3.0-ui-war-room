@@ -50,9 +50,7 @@ export const DataToggleButton: React.FC = () => {
               <div className="text-sm opacity-90 font-mono">
                 {isMock ? 'MOCK MODE' : 'LIVE MODE'}
               </div>
-              <div className="text-xs opacity-75 font-mono">
-                Click to switch
-              </div>
+              <div className="text-xs opacity-75 font-mono">Click to switch</div>
             </div>
           </div>
 
@@ -95,15 +93,11 @@ export const DataToggleButton: React.FC = () => {
               ${isMock ? 'bg-yellow-300' : 'bg-green-300'}
             `}
             />
-            <span className="font-semibold">
-              {isMock ? 'MOCK DATA MODE' : 'LIVE DATA MODE'}
-            </span>
+            <span className="font-semibold">{isMock ? 'MOCK DATA MODE' : 'LIVE DATA MODE'}</span>
           </div>
           <span className="opacity-75">|</span>
           <span className="opacity-75">
-            {isMock
-              ? 'Perfect for demos & testing'
-              : 'Connected to production backend'}
+            {isMock ? 'Perfect for demos & testing' : 'Connected to production backend'}
           </span>
           <span className="opacity-75">|</span>
           <button

@@ -1,7 +1,7 @@
 /**
  * War Room Data Hooks
  * Custom React hooks for using the DataService
- * 
+ *
  * CTO Pattern: Centralize data fetching logic in hooks
  * This keeps components clean and makes testing easier
  */
@@ -10,10 +10,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { dataService, User, Volunteer, Event, Donation } from '../services/DataService';
 
 // Generic hook for async data operations
-function useAsyncData<T>(
-  asyncFunction: () => Promise<T>,
-  dependencies: any[] = []
-) {
+function useAsyncData<T>(asyncFunction: () => Promise<T>, dependencies: any[] = []) {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -185,7 +182,7 @@ export function useDashboardData() {
 // Hook for checking if using mock data
 export function useDataMode() {
   const isMock = import.meta.env.VITE_USE_MOCK_DATA === 'true';
-  
+
   return {
     isMock,
     mode: isMock ? 'MOCK' : 'LIVE',

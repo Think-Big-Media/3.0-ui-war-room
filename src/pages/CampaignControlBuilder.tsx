@@ -23,7 +23,7 @@ const CampaignControlBuilder: React.FC = () => {
     const fetchContent = async () => {
       try {
         console.log('🔄 Fetching latest Campaign Control from Builder.io...');
-        
+
         // Force fetch fresh content from Builder.io
         const builderContent = await builder
           .get('page', {
@@ -76,8 +76,8 @@ const CampaignControlBuilder: React.FC = () => {
         <div className="text-center text-white/60">
           <p>No content found in Builder.io</p>
           <p className="text-sm mt-2">URL: /campaign-control</p>
-          <button 
-            onClick={() => window.location.reload()} 
+          <button
+            onClick={() => window.location.reload()}
             className="mt-4 px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
           >
             Retry
@@ -89,8 +89,8 @@ const CampaignControlBuilder: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      <BuilderComponent 
-        model="page" 
+      <BuilderComponent
+        model="page"
         content={content}
         options={{
           includeRefs: true,

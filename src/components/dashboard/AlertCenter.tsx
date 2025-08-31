@@ -63,8 +63,7 @@ const AlertItem = memo<{
   onAcknowledge: (id: string) => void;
 }>(({ alert, onAcknowledge }) => {
   const config =
-    severityConfig[alert.severity as keyof typeof severityConfig] ||
-    severityConfig.medium;
+    severityConfig[alert.severity as keyof typeof severityConfig] || severityConfig.medium;
   const Icon = config.icon;
 
   return (
@@ -91,9 +90,7 @@ const AlertItem = memo<{
                 : alert.message}
             </h4>
 
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-              {alert.message}
-            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{alert.message}</p>
 
             {/* Alert metadata */}
             <div className="flex flex-wrap items-center gap-3 mt-3 text-xs text-gray-500 dark:text-gray-400">
@@ -179,9 +176,7 @@ export const AlertCenter: React.FC = memo(() => {
     if (notificationsEnabled && criticalAlertsCount > 0) {
       // Play sound (implementation would depend on audio setup)
       const audio = new Audio('/sounds/critical-alert.mp3');
-      audio
-        .play()
-        .catch((err) => console.error('Failed to play alert sound:', err));
+      audio.play().catch((err) => console.error('Failed to play alert sound:', err));
     }
   }, [criticalAlertsCount, notificationsEnabled]);
 
@@ -248,15 +243,9 @@ export const AlertCenter: React.FC = memo(() => {
                     : 'bg-gray-100 dark:bg-gray-700 text-gray-500'
                 }
               `}
-              title={
-                notificationsEnabled ? 'Notifications on' : 'Notifications off'
-              }
+              title={notificationsEnabled ? 'Notifications on' : 'Notifications off'}
             >
-              {notificationsEnabled ? (
-                <Bell size={18} />
-              ) : (
-                <BellOff size={18} />
-              )}
+              {notificationsEnabled ? <Bell size={18} /> : <BellOff size={18} />}
             </button>
           </div>
         </div>
@@ -273,11 +262,7 @@ export const AlertCenter: React.FC = memo(() => {
         ) : (
           <div className="p-4 space-y-3">
             {filteredAlerts.map((alert) => (
-              <AlertItem
-                key={alert.id}
-                alert={alert}
-                onAcknowledge={handleAcknowledge}
-              />
+              <AlertItem key={alert.id} alert={alert} onAcknowledge={handleAcknowledge} />
             ))}
           </div>
         )}
@@ -288,14 +273,10 @@ export const AlertCenter: React.FC = memo(() => {
         <div className="p-4 border-t border-gray-200 dark:border-gray-700">
           <div className="grid grid-cols-4 gap-4 text-center">
             {Object.entries(severityConfig).map(([severity, config]) => {
-              const count = alerts.filter(
-                (a: RealTimeAlert) => a.severity === severity
-              ).length;
+              const count = alerts.filter((a: RealTimeAlert) => a.severity === severity).length;
               return (
                 <div key={severity} className="text-sm">
-                  <div className={`text-2xl font-bold ${config.textColor}`}>
-                    {count}
-                  </div>
+                  <div className={`text-2xl font-bold ${config.textColor}`}>{count}</div>
                   <div className="text-gray-500 dark:text-gray-400 uppercase font-mono">
                     {severity}
                   </div>

@@ -115,13 +115,17 @@ export const PlatformAdminDashboard: React.FC = () => {
       <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <Shield className={`h-6 w-6 ${
-              healthStatus?.status === 'operational' ? 'text-green-500' : 'text-yellow-500'
-            }`} />
+            <Shield
+              className={`h-6 w-6 ${
+                healthStatus?.status === 'operational' ? 'text-green-500' : 'text-yellow-500'
+              }`}
+            />
             <div>
               <h3 className="font-semibold">System Status</h3>
               <p className="text-sm text-gray-600">
-                {healthStatus?.status === 'operational' ? 'All systems operational' : 'Degraded performance'}
+                {healthStatus?.status === 'operational'
+                  ? 'All systems operational'
+                  : 'Degraded performance'}
               </p>
             </div>
           </div>
@@ -152,9 +156,7 @@ export const PlatformAdminDashboard: React.FC = () => {
                   <p className="font-medium">{signup.org_name}</p>
                   <p className="text-sm text-gray-500">{signup.admin_email}</p>
                 </div>
-                <span className="text-xs text-gray-400">
-                  {formatTimeAgo(signup.created_at)}
-                </span>
+                <span className="text-xs text-gray-400">{formatTimeAgo(signup.created_at)}</span>
               </div>
             )) || <p className="text-gray-500">No recent signups</p>}
           </div>
@@ -168,9 +170,7 @@ export const PlatformAdminDashboard: React.FC = () => {
               <div key={org.org_id} className="flex items-center justify-between">
                 <div>
                   <p className="font-medium">{org.org_name}</p>
-                  <p className="text-sm text-gray-500">
-                    {formatNumber(org.api_calls)} API calls
-                  </p>
+                  <p className="text-sm text-gray-500">{formatNumber(org.api_calls)} API calls</p>
                 </div>
                 <TrendingUp className="h-4 w-4 text-green-500" />
               </div>
@@ -247,9 +247,11 @@ const MetricCard: React.FC<MetricCard> = ({ title, value, change, icon: Icon, co
 
 const StatusIndicator: React.FC<{ label: string; status: string }> = ({ label, status }) => (
   <div className="flex items-center space-x-2">
-    <div className={`h-2 w-2 rounded-full ${
-      status === 'healthy' || status === 'enabled' ? 'bg-green-500' : 'bg-yellow-500'
-    }`} />
+    <div
+      className={`h-2 w-2 rounded-full ${
+        status === 'healthy' || status === 'enabled' ? 'bg-green-500' : 'bg-yellow-500'
+      }`}
+    />
     <span className="text-gray-600">{label}</span>
   </div>
 );
@@ -276,7 +278,6 @@ function formatTimeAgo(timestamp: string): string {
     return `${Math.floor(diffMins / 60)}h ago`;
   }
   return `${Math.floor(diffMins / 1440)}d ago`;
-
 }
 
 export default PlatformAdminDashboard;

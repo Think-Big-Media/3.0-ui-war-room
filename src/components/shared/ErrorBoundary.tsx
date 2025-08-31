@@ -25,14 +25,14 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     this.state = {
       hasError: false,
       error: null,
-      errorInfo: null
+      errorInfo: null,
     };
   }
 
   static getDerivedStateFromError(error: Error): Partial<ErrorBoundaryState> {
     return {
       hasError: true,
-      error
+      error,
     };
   }
 
@@ -42,7 +42,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
     this.setState({
       error,
-      errorInfo
+      errorInfo,
     });
 
     // Call optional error handler
@@ -55,7 +55,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       (window as any).postHog.capture('component_error_boundary_triggered', {
         error: error.message,
         stack: error.stack,
-        componentStack: errorInfo.componentStack
+        componentStack: errorInfo.componentStack,
       });
     }
   }
@@ -64,7 +64,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     this.setState({
       hasError: false,
       error: null,
-      errorInfo: null
+      errorInfo: null,
     });
   };
 
@@ -100,7 +100,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
               <RefreshCw className="w-4 h-4 mr-2" />
               Try Again
             </button>
-            
+
             <button
               onClick={() => window.location.reload()}
               className="inline-flex items-center px-4 py-2 text-sm font-medium text-slate-300 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors"
@@ -145,9 +145,9 @@ export const DashboardErrorBoundary: React.FC<{ children: ReactNode }> = ({ chil
   </ErrorBoundary>
 );
 
-export const WidgetErrorBoundary: React.FC<{ children: ReactNode; widgetName?: string }> = ({ 
-  children, 
-  widgetName = 'Widget' 
+export const WidgetErrorBoundary: React.FC<{ children: ReactNode; widgetName?: string }> = ({
+  children,
+  widgetName = 'Widget',
 }) => (
   <ErrorBoundary
     fallback={
@@ -158,7 +158,10 @@ export const WidgetErrorBoundary: React.FC<{ children: ReactNode; widgetName?: s
       </div>
     }
     onError={(error, errorInfo) => {
-      console.warn(`🔧 [${widgetName}] Widget error caught - other widgets continue to work`, error);
+      console.warn(
+        `🔧 [${widgetName}] Widget error caught - other widgets continue to work`,
+        error
+      );
     }}
   >
     {children}

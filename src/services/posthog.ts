@@ -64,7 +64,9 @@ class PostHogService {
    * Identify user for tracking
    */
   identify(user: AnalyticsUser): void {
-    if (!this.initialized) {return;}
+    if (!this.initialized) {
+      return;
+    }
 
     this.userId = user.id;
     this.orgId = user.orgId;
@@ -87,7 +89,9 @@ class PostHogService {
    * Reset user identification (on logout)
    */
   reset(): void {
-    if (!this.initialized) {return;}
+    if (!this.initialized) {
+      return;
+    }
 
     this.userId = null;
     this.orgId = null;
@@ -98,7 +102,9 @@ class PostHogService {
    * Track custom event
    */
   track(eventName: string, properties?: Record<string, any>): void {
-    if (!this.initialized) {return;}
+    if (!this.initialized) {
+      return;
+    }
 
     const enrichedProps = {
       ...properties,
@@ -123,11 +129,7 @@ class PostHogService {
   /**
    * Track feature usage
    */
-  trackFeatureUsage(
-    feature: string,
-    action: string,
-    metadata?: Record<string, any>,
-  ): void {
+  trackFeatureUsage(feature: string, action: string, metadata?: Record<string, any>): void {
     this.track(`feature_${feature}_${action}`, {
       feature,
       action,
@@ -138,11 +140,7 @@ class PostHogService {
   /**
    * Track UI element clicks
    */
-  trackClick(
-    elementName: string,
-    elementType: string,
-    metadata?: Record<string, any>,
-  ): void {
+  trackClick(elementName: string, elementType: string, metadata?: Record<string, any>): void {
     this.track('ui_element_clicked', {
       element_name: elementName,
       element_type: elementType,
@@ -153,11 +151,7 @@ class PostHogService {
   /**
    * Track form submissions
    */
-  trackFormSubmit(
-    formName: string,
-    success: boolean,
-    metadata?: Record<string, any>,
-  ): void {
+  trackFormSubmit(formName: string, success: boolean, metadata?: Record<string, any>): void {
     this.track('form_submitted', {
       form_name: formName,
       success,
@@ -168,11 +162,7 @@ class PostHogService {
   /**
    * Track API errors
    */
-  trackError(
-    errorType: string,
-    errorMessage: string,
-    context?: Record<string, any>,
-  ): void {
+  trackError(errorType: string, errorMessage: string, context?: Record<string, any>): void {
     this.track('error_occurred', {
       error_type: errorType,
       error_message: errorMessage,
@@ -183,11 +173,7 @@ class PostHogService {
   /**
    * Track timing metrics
    */
-  trackTiming(
-    category: string,
-    variable: string,
-    timeMs: number,
-  ): void {
+  trackTiming(category: string, variable: string, timeMs: number): void {
     this.track('timing_recorded', {
       category,
       variable,
@@ -199,7 +185,9 @@ class PostHogService {
    * Check if feature flag is enabled
    */
   isFeatureEnabled(flagName: string): boolean {
-    if (!this.initialized) {return false;}
+    if (!this.initialized) {
+      return false;
+    }
     return posthog.isFeatureEnabled(flagName) ?? false;
   }
 
@@ -207,7 +195,9 @@ class PostHogService {
    * Get feature flag payload
    */
   getFeatureFlagPayload(flagName: string): any {
-    if (!this.initialized) {return null;}
+    if (!this.initialized) {
+      return null;
+    }
     return posthog.getFeatureFlagPayload(flagName);
   }
 
@@ -215,7 +205,9 @@ class PostHogService {
    * Register super properties (sent with every event)
    */
   registerSuperProperties(properties: Record<string, any>): void {
-    if (!this.initialized) {return;}
+    if (!this.initialized) {
+      return;
+    }
     posthog.register(properties);
   }
 
@@ -223,7 +215,9 @@ class PostHogService {
    * Opt user in/out of tracking
    */
   setOptIn(optIn: boolean): void {
-    if (!this.initialized) {return;}
+    if (!this.initialized) {
+      return;
+    }
 
     if (optIn) {
       posthog.opt_in_capturing();
@@ -253,7 +247,7 @@ export const useTracking = () => {
 export function withTracking<P extends object>(
   Component: React.ComponentType<P>,
   eventName: string,
-  getProperties?: (props: P) => Record<string, any>,
+  getProperties?: (props: P) => Record<string, any>
 ): React.ComponentType<P> {
   return (props: P) => {
     React.useEffect(() => {
@@ -267,7 +261,7 @@ export function withTracking<P extends object>(
 // Tracking directive for elements
 export function trackingProps(
   action: string,
-  properties?: Record<string, any>,
+  properties?: Record<string, any>
 ): Record<string, any> {
   return {
     'data-track': action,

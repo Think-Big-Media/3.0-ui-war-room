@@ -42,14 +42,34 @@ export interface InsightsParams {
   accountId: string;
   fields?: string[];
   level?: 'ad' | 'adset' | 'campaign' | 'account';
-  date_preset?: 'today' | 'yesterday' | 'this_month' | 'last_month' | 'this_quarter' | 'lifetime' | 'last_3d' | 'last_7d' | 'last_14d' | 'last_28d' | 'last_30d' | 'last_90d';
+  date_preset?:
+    | 'today'
+    | 'yesterday'
+    | 'this_month'
+    | 'last_month'
+    | 'this_quarter'
+    | 'lifetime'
+    | 'last_3d'
+    | 'last_7d'
+    | 'last_14d'
+    | 'last_28d'
+    | 'last_30d'
+    | 'last_90d';
   time_range?: {
     since: string;
     until: string;
   };
   filtering?: Array<{
     field: string;
-    operator: 'EQUAL' | 'NOT_EQUAL' | 'GREATER_THAN' | 'LESS_THAN' | 'CONTAIN' | 'NOT_CONTAIN' | 'IN' | 'NOT_IN';
+    operator:
+      | 'EQUAL'
+      | 'NOT_EQUAL'
+      | 'GREATER_THAN'
+      | 'LESS_THAN'
+      | 'CONTAIN'
+      | 'NOT_CONTAIN'
+      | 'IN'
+      | 'NOT_IN';
     value: string | number | string[];
   }>;
   breakdowns?: string[];
@@ -93,7 +113,14 @@ export interface Campaign {
   name: string;
   account_id?: string;
   status: 'ACTIVE' | 'PAUSED' | 'DELETED' | 'ARCHIVED';
-  objective: 'AWARENESS' | 'TRAFFIC' | 'ENGAGEMENT' | 'LEADS' | 'APP_PROMOTION' | 'SALES' | 'CONVERSIONS';
+  objective:
+    | 'AWARENESS'
+    | 'TRAFFIC'
+    | 'ENGAGEMENT'
+    | 'LEADS'
+    | 'APP_PROMOTION'
+    | 'SALES'
+    | 'CONVERSIONS';
   buying_type?: 'AUCTION' | 'RESERVED';
   budget_remaining?: string;
   daily_budget?: string;

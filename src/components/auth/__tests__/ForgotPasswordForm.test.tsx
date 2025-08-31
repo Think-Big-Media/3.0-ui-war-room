@@ -33,10 +33,8 @@ const renderWithProviders = (ui: React.ReactElement) => {
   return {
     ...render(
       <Provider store={store}>
-        <MemoryRouter>
-          {ui}
-        </MemoryRouter>
-      </Provider>,
+        <MemoryRouter>{ui}</MemoryRouter>
+      </Provider>
     ),
     store,
   };
@@ -62,7 +60,11 @@ describe('ForgotPasswordForm Component', () => {
 
       // Check heading and description
       expect(screen.getByRole('heading', { name: /reset your password/i })).toBeInTheDocument();
-      expect(screen.getByText(/enter your email address and we'll send you a link to reset your password/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          /enter your email address and we'll send you a link to reset your password/i
+        )
+      ).toBeInTheDocument();
 
       // Check form elements
       expect(screen.getByLabelText(/email address/i)).toBeInTheDocument();

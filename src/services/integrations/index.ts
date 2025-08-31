@@ -36,4 +36,7 @@ export {
 
 // Type exports for external use
 export type { MetaConfig, InsightsParams as MetaInsightsParams } from '../../api/meta/types';
-export type { GoogleAdsConfig, InsightsParams as GoogleInsightsParams } from '../../api/google/types';
+export type {
+  GoogleAdsConfig,
+  InsightsParams as GoogleInsightsParams,
+} from '../../api/google/types';

@@ -15,11 +15,14 @@ const AuthCallback: React.FC = () => {
     const handleAuthCallback = async () => {
       try {
         // Get the session from the URL
-        const { data: { session }, error } = await supabase.auth.getSession();
+        const {
+          data: { session },
+          error,
+        } = await supabase.auth.getSession();
 
         if (error) {
           console.error('Auth callback error:', error);
-          navigate(`/login?error=${  encodeURIComponent(error.message)}`);
+          navigate(`/login?error=${encodeURIComponent(error.message)}`);
           return;
         }
 

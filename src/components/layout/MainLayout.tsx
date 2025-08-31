@@ -32,9 +32,7 @@ interface NavItem {
 }
 
 export function MainLayout() {
-  console.error(
-    '🚨🚨🚨 MAINLAYOUT LOADED - DEBUG BANNER SHOULD BE VISIBLE 🚨🚨🚨'
-  );
+  console.error('🚨🚨🚨 MAINLAYOUT LOADED - DEBUG BANNER SHOULD BE VISIBLE 🚨🚨🚨');
   const navigate = useNavigate();
   const location = useLocation();
   // const { user, signOut } = useSupabaseAuth();
@@ -78,17 +76,15 @@ export function MainLayout() {
   };
 
   const isActiveRoute = (path: string) => {
-    return (
-      location.pathname === path || location.pathname.startsWith(`${path}/`)
-    );
+    return location.pathname === path || location.pathname.startsWith(`${path}/`);
   };
 
   return (
     <>
       {/* DEBUG BANNER - REMOVE AFTER TESTING */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-yellow-400 text-black text-center py-2 font-bold">
-        🚨 DEBUG: Changes Applied at {new Date().toLocaleTimeString()} - Font:
-        15px (90% scale) - No Transitions
+        🚨 DEBUG: Changes Applied at {new Date().toLocaleTimeString()} - Font: 15px (90% scale) - No
+        Transitions
       </div>
       <div className="flex h-screen bg-gray-50 overflow-hidden pt-8">
         {/* Sidebar */}
@@ -99,16 +95,12 @@ export function MainLayout() {
         >
           {/* Logo Section */}
           <div className="h-16 flex items-center justify-between px-4 border-b border-gray-100">
-            <div
-              className={`flex items-center ${isSidebarCollapsed ? 'justify-center' : ''}`}
-            >
+            <div className={`flex items-center ${isSidebarCollapsed ? 'justify-center' : ''}`}>
               <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
                 <Shield className="w-5 h-5 text-white" />
               </div>
               {!isSidebarCollapsed && (
-                <span className="ml-3 text-xl font-bold text-gray-900">
-                  War Room
-                </span>
+                <span className="ml-3 text-xl font-bold text-gray-900">War Room</span>
               )}
             </div>
             <button
@@ -143,9 +135,7 @@ export function MainLayout() {
                 `}
                 >
                   <div className="flex items-center">
-                    {!isSidebarCollapsed && (
-                      <span className="font-medium">{item.label}</span>
-                    )}
+                    {!isSidebarCollapsed && <span className="font-medium">{item.label}</span>}
                   </div>
                   {!isSidebarCollapsed && item.badge && (
                     <span className="bg-blue-100 text-blue-600 text-xs font-semibold px-2 py-0.5 rounded-full">
@@ -169,9 +159,7 @@ export function MainLayout() {
                 </div>
                 {!isSidebarCollapsed && (
                   <div className="ml-3 text-left flex-1">
-                    <p className="text-sm font-medium text-gray-900 truncate">
-                      Demo User
-                    </p>
+                    <p className="text-sm font-medium text-gray-900 truncate">Demo User</p>
                     <p className="text-xs text-gray-500">Campaign Manager</p>
                   </div>
                 )}
@@ -215,9 +203,7 @@ export function MainLayout() {
               {/* Alert Status */}
               <div className="flex items-center space-x-2 px-3 py-1.5 bg-green-50 text-green-700 rounded-lg">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                <span className="text-sm font-medium">
-                  All Systems Operational
-                </span>
+                <span className="text-sm font-medium">All Systems Operational</span>
               </div>
 
               {/* Notifications */}

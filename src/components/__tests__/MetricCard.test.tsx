@@ -18,13 +18,7 @@ describe('MetricCard', () => {
   });
 
   it('renders with positive change indicator', () => {
-    render(
-      <MetricCard
-        {...defaultProps}
-        change={15.5}
-        changeLabel="from last month"
-      />,
-    );
+    render(<MetricCard {...defaultProps} change={15.5} changeLabel="from last month" />);
 
     expect(screen.getByText('+15.5%')).toBeInTheDocument();
     expect(screen.getByText('from last month')).toBeInTheDocument();
@@ -34,13 +28,7 @@ describe('MetricCard', () => {
   });
 
   it('renders with negative change indicator', () => {
-    render(
-      <MetricCard
-        {...defaultProps}
-        change={-8.2}
-        changeLabel="from last week"
-      />,
-    );
+    render(<MetricCard {...defaultProps} change={-8.2} changeLabel="from last week" />);
 
     expect(screen.getByText('-8.2%')).toBeInTheDocument();
     expect(screen.getByText('from last week')).toBeInTheDocument();
@@ -62,20 +50,14 @@ describe('MetricCard', () => {
       <MetricCard
         {...defaultProps}
         icon={<TrendingDown className="h-4 w-4" data-testid="custom-icon" />}
-      />,
+      />
     );
 
     expect(screen.getByTestId('custom-icon')).toBeInTheDocument();
   });
 
   it('handles zero change correctly', () => {
-    render(
-      <MetricCard
-        {...defaultProps}
-        change={0}
-        changeLabel="no change"
-      />,
-    );
+    render(<MetricCard {...defaultProps} change={0} changeLabel="no change" />);
 
     expect(screen.getByText('0%')).toBeInTheDocument();
     const changeElement = screen.getByText('0%').parentElement;

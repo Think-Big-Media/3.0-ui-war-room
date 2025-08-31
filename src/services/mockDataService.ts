@@ -18,7 +18,7 @@ export const mockDataService = {
     onAuthStateChange: (callback: any) => {
       // Mock auth state listener
       return { unsubscribe: () => {} };
-    }
+    },
   },
 
   // Mock data fetching
@@ -27,22 +27,20 @@ export const mockDataService = {
       return {
         data: [
           { id: '1', name: 'Campaign 1', status: 'active' },
-          { id: '2', name: 'Campaign 2', status: 'draft' }
-        ]
+          { id: '2', name: 'Campaign 2', status: 'draft' },
+        ],
       };
-    }
+    },
   },
 
   // Mock alerts
   alerts: {
     list: async () => {
       return {
-        data: [
-          { id: '1', message: 'System running smoothly', type: 'info' }
-        ]
+        data: [{ id: '1', message: 'System running smoothly', type: 'info' }],
       };
-    }
-  }
+    },
+  },
 };
 
 // Export as default for easy replacement

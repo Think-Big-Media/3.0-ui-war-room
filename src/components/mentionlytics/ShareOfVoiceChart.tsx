@@ -5,16 +5,29 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, AreaChart, Area, XAxis, YAxis, CartesianGrid, BarChart, Bar } from 'recharts';
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  Tooltip,
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  BarChart,
+  Bar,
+} from 'recharts';
 import { useShareOfVoice, useMentionlyticsMode } from '../../hooks/useMentionlytics';
 import { Card } from '../ui/card';
 import { Loader2, TrendingUp, TrendingDown, Users, MessageSquare, Eye } from 'lucide-react';
 
 const PARTY_COLORS = {
-  Democrat: '#3B82F6',  // blue-500
+  Democrat: '#3B82F6', // blue-500
   Republican: '#EF4444', // red-500
   Independent: '#A855F7', // purple-500
-  Other: '#6B7280'      // gray-500
+  Other: '#6B7280', // gray-500
 };
 
 interface ShareOfVoiceChartProps {
@@ -30,7 +43,9 @@ interface ShareOfVoiceChartProps {
 
 export const ShareOfVoiceChart: React.FC<ShareOfVoiceChartProps> = ({ campaignData }) => {
   const { data: shareData, loading, error, dataMode } = useShareOfVoice();
-  const [selectedMetric, setSelectedMetric] = useState<'mentions' | 'reach' | 'engagement'>('mentions');
+  const [selectedMetric, setSelectedMetric] = useState<'mentions' | 'reach' | 'engagement'>(
+    'mentions'
+  );
   const [animatedData, setAnimatedData] = useState<any[]>([]);
 
   // Load campaign data from localStorage if not provided
@@ -67,23 +82,24 @@ export const ShareOfVoiceChart: React.FC<ShareOfVoiceChartProps> = ({ campaignDa
   // Map data to political context
   const mappedData = shareData.map((item, idx) => {
     const isCandidate = idx === 0 || item.brand === campaign.candidateName;
-    const party = isCandidate ? campaign.candidateParty : 
-                  campaign.competitors?.[idx - 1]?.party || 'Other';
-    
+    const party = isCandidate
+      ? campaign.candidateParty
+      : campaign.competitors?.[idx - 1]?.party || 'Other';
+
     return {
       ...item,
       name: item.brand,
       party,
       color: PARTY_COLORS[party as keyof typeof PARTY_COLORS] || PARTY_COLORS.Other,
-      isCandidate
+      isCandidate,
     };
   });
 
   // Calculate trends (mock for now)
-  const trends = mappedData.map(item => ({
+  const trends = mappedData.map((item) => ({
     ...item,
     trend: Math.random() > 0.5 ? 'up' : 'down',
-    trendValue: Math.floor(Math.random() * 20) - 10
+    trendValue: Math.floor(Math.random() * 20) - 10,
   }));
 
   // Time series data (mock)
@@ -92,10 +108,13 @@ export const ShareOfVoiceChart: React.FC<ShareOfVoiceChartProps> = ({ campaignDa
     date.setDate(date.getDate() - (6 - i));
     return {
       date: date.toLocaleDateString('en', { month: 'short', day: 'numeric' }),
-      ...mappedData.reduce((acc, item) => ({
-        ...acc,
-        [item.name]: Math.floor(item.percentage + (Math.random() * 10 - 5))
-      }), {})
+      ...mappedData.reduce(
+        (acc, item) => ({
+          ...acc,
+          [item.name]: Math.floor(item.percentage + (Math.random() * 10 - 5)),
+        }),
+        {}
+      ),
     };
   });
 
@@ -134,7 +153,7 @@ export const ShareOfVoiceChart: React.FC<ShareOfVoiceChartProps> = ({ campaignDa
 
         {/* Metric Selector */}
         <div className="flex space-x-2 mb-4">
-          {(['mentions', 'reach', 'engagement'] as const).map(metric => (
+          {(['mentions', 'reach', 'engagement'] as const).map((metric) => (
             <button
               key={metric}
               onClick={() => setSelectedMetric(metric)}
@@ -164,11 +183,11 @@ export const ShareOfVoiceChart: React.FC<ShareOfVoiceChartProps> = ({ campaignDa
               transition={{ delay: idx * 0.1 }}
               className="relative"
             >
-              <div 
+              <div
                 className="p-4 rounded-xl border transition-all hover:scale-105"
-                style={{ 
+                style={{
                   backgroundColor: `${item.color}20`,
-                  borderColor: `${item.color}40`
+                  borderColor: `${item.color}40`,
                 }}
               >
                 <div className="flex items-center justify-between mb-2">
@@ -180,27 +199,34 @@ export const ShareOfVoiceChart: React.FC<ShareOfVoiceChartProps> = ({ campaignDa
                       </span>
                     )}
                   </span>
-                  <div className={`flex items-center space-x-1 text-sm ${
-                    item.trend === 'up' ? 'text-green-400' : 'text-red-400'
-                  }`}>
-                    {item.trend === 'up' ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
+                  <div
+                    className={`flex items-center space-x-1 text-sm ${
+                      item.trend === 'up' ? 'text-green-400' : 'text-red-400'
+                    }`}
+                  >
+                    {item.trend === 'up' ? (
+                      <TrendingUp className="w-4 h-4" />
+                    ) : (
+                      <TrendingDown className="w-4 h-4" />
+                    )}
                     <span>{Math.abs(item.trendValue)}%</span>
                   </div>
                 </div>
-                
+
                 <div className="text-2xl font-bold text-white mb-1">
                   {item.percentage.toFixed(1)}%
                 </div>
-                
+
                 <div className="text-xs text-white/60">
                   {selectedMetric === 'mentions' && `${item.mentions.toLocaleString()} mentions`}
                   {selectedMetric === 'reach' && `${(item.reach / 1000).toFixed(0)}K reach`}
-                  {selectedMetric === 'engagement' && `${(item.engagement / 1000).toFixed(0)}K engagements`}
+                  {selectedMetric === 'engagement' &&
+                    `${(item.engagement / 1000).toFixed(0)}K engagements`}
                 </div>
 
                 {/* Party indicator */}
                 <div className="absolute top-2 right-2">
-                  <div 
+                  <div
                     className="w-3 h-3 rounded-full"
                     style={{ backgroundColor: item.color }}
                     title={item.party}
@@ -245,7 +271,7 @@ export const ShareOfVoiceChart: React.FC<ShareOfVoiceChartProps> = ({ campaignDa
               contentStyle={{
                 backgroundColor: '#111827',
                 border: '1px solid #374151',
-                borderRadius: '8px'
+                borderRadius: '8px',
               }}
             />
             {mappedData.map((item, idx) => (

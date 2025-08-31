@@ -34,13 +34,16 @@ export const analyticsApi = createApi({
   tagTypes,
   endpoints: (builder) => ({
     // Get full dashboard data
-    getDashboard: builder.query<AnalyticsDashboard, {
-      dateRange: DateRangeEnum;
-      startDate?: string;
-      endDate?: string;
-    }>({
+    getDashboard: builder.query<
+      AnalyticsDashboard,
+      {
+        dateRange: DateRangeEnum;
+        startDate?: string;
+        endDate?: string;
+      }
+    >({
       query: ({ dateRange, startDate, endDate }) => ({
-        url: '/summary',  // Backend provides /summary, not /dashboard
+        url: '/summary', // Backend provides /summary, not /dashboard
         params: {
           date_range: dateRange,
           ...(startDate && { start_date: startDate }),
@@ -55,7 +58,7 @@ export const analyticsApi = createApi({
     // Get metric cards
     getMetricCards: builder.query<MetricCard[], { dateRange: DateRangeEnum }>({
       query: ({ dateRange }) => ({
-        url: '/sentiment',  // Backend provides /sentiment for metrics
+        url: '/sentiment', // Backend provides /sentiment for metrics
         params: { date_range: dateRange },
       }),
       providesTags: ['Metrics'],
@@ -137,7 +140,7 @@ export const invalidateAnalyticsCache = (dispatch: any) => {
 // Subscription endpoint for real-time updates via WebSocket
 export const subscribeToAnalyticsUpdates = (
   dispatch: any,
-  { orgId, metrics }: { orgId: string; metrics: string[] },
+  { orgId, metrics }: { orgId: string; metrics: string[] }
 ) => {
   // This will be used with the WebSocket hook to update cache
   return {

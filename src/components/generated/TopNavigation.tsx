@@ -69,10 +69,7 @@ const TopNavigation: React.FC = () => {
   // Close notifications when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        notificationsRef.current &&
-        !notificationsRef.current.contains(event.target as Node)
-      ) {
+      if (notificationsRef.current && !notificationsRef.current.contains(event.target as Node)) {
         setShowNotifications(false);
       }
     };
@@ -101,7 +98,9 @@ const TopNavigation: React.FC = () => {
       label: NAV_LABELS.LIVE_MONITORING,
       path: ROUTES.LIVE_MONITORING,
       route: 'live-monitoring',
-      active: location.pathname === ROUTES.LIVE_MONITORING || location.pathname === '/real-time-monitoring',
+      active:
+        location.pathname === ROUTES.LIVE_MONITORING ||
+        location.pathname === '/real-time-monitoring',
       theme: getSectionTheme(ROUTES.LIVE_MONITORING),
       accent: 'var(--accent-live-monitoring)',
     },
@@ -119,7 +118,8 @@ const TopNavigation: React.FC = () => {
       label: NAV_LABELS.INTELLIGENCE,
       path: ROUTES.INTELLIGENCE,
       route: 'intelligence',
-      active: location.pathname === ROUTES.INTELLIGENCE || location.pathname === '/intelligence-hub',
+      active:
+        location.pathname === ROUTES.INTELLIGENCE || location.pathname === '/intelligence-hub',
       theme: getSectionTheme(ROUTES.INTELLIGENCE),
       accent: 'var(--accent-intelligence)',
     },
@@ -156,9 +156,7 @@ const TopNavigation: React.FC = () => {
   const formatTimestamp = (timestamp: string) => {
     const date = new Date(timestamp);
     const now = new Date();
-    const diffMinutes = Math.floor(
-      (now.getTime() - date.getTime()) / (1000 * 60)
-    );
+    const diffMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60));
 
     if (diffMinutes < 60) {
       return `${diffMinutes}m ago`;
@@ -190,7 +188,7 @@ const TopNavigation: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo/Brand - Responsive - Click to go to Dashboard */}
-          <button 
+          <button
             onClick={() => handleNavigation('/')}
             className="flex items-center ml-[25px] hover:opacity-80 transition-opacity duration-200 cursor-pointer"
           >
@@ -224,8 +222,7 @@ const TopNavigation: React.FC = () => {
                 data-route={item.route}
                 style={
                   {
-                    transition:
-                      'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                     '--item-accent': item.accent,
                   } as React.CSSProperties
                 }
@@ -243,8 +240,7 @@ const TopNavigation: React.FC = () => {
                       : getNavIconHoverClasses(item.theme)
                   }`}
                   style={{
-                    transition:
-                      'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                     ...(item.icon === Home
                       ? {
                           // More aggressive positioning - both states need similar adjustments
@@ -264,8 +260,7 @@ const TopNavigation: React.FC = () => {
                       : ''
                   }`}
                   style={{
-                    transition:
-                      'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    transition: 'all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                   }}
                 >
                   {/* Full text for large screens */}
@@ -345,9 +340,7 @@ const TopNavigation: React.FC = () => {
                             }`}
                           >
                             <div className="flex items-start space-x-3">
-                              <div
-                                className={`p-2 rounded-lg ${getPriorityColor(alert.priority)}`}
-                              >
+                              <div className={`p-2 rounded-lg ${getPriorityColor(alert.priority)}`}>
                                 <Bell className="w-4 h-4" />
                               </div>
                               <div className="flex-1 min-w-0">

@@ -28,10 +28,7 @@ export class MetaAccountsService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to list ad accounts: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to list ad accounts: ${(error as Error).message}`, 500);
     }
   }
 
@@ -44,7 +41,8 @@ export class MetaAccountsService {
         method: 'GET',
         params: {
           access_token: accessToken,
-          fields: 'id,account_id,name,currency,account_status,business,timezone_name,spend_cap,amount_spent',
+          fields:
+            'id,account_id,name,currency,account_status,business,timezone_name,spend_cap,amount_spent',
         },
       });
 
@@ -53,10 +51,7 @@ export class MetaAccountsService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to get ad account: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to get ad account: ${(error as Error).message}`, 500);
     }
   }
 }

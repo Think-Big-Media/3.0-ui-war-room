@@ -7,9 +7,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '../ui/card';
-import { 
-  TrendingUp, TrendingDown, Zap, AlertTriangle, 
-  Award, Activity, Flame, Target, ArrowUp, ArrowDown 
+import {
+  TrendingUp,
+  TrendingDown,
+  Zap,
+  AlertTriangle,
+  Award,
+  Activity,
+  Flame,
+  Target,
+  ArrowUp,
+  ArrowDown,
 } from 'lucide-react';
 import { useMentionlyticsDashboard } from '../../hooks/useMentionlytics';
 import { LineChart, Line, ResponsiveContainer, Tooltip } from 'recharts';
@@ -43,7 +51,7 @@ export const MomentumIndicators: React.FC = () => {
     // Calculate viral coefficient (engagement/reach ratio)
     const totalReach = mentions.reduce((sum, m) => sum + (m.reach || 0), 0);
     const totalEngagement = mentions.reduce((sum, m) => sum + (m.engagement || 0), 0);
-    const viralCoeff = totalReach > 0 ? (totalEngagement / totalReach * 100).toFixed(1) : '0';
+    const viralCoeff = totalReach > 0 ? ((totalEngagement / totalReach) * 100).toFixed(1) : '0';
     const viralChange = Math.round(Math.random() * 20 - 5);
 
     // Calculate crisis risk (based on negative sentiment spike)
@@ -52,11 +60,10 @@ export const MomentumIndicators: React.FC = () => {
     const crisisChange = Math.round(Math.random() * 10 - 5);
 
     // Calculate engagement quality (positive engagement / total)
-    const positiveMentions = mentions.filter(m => m.sentiment === 'positive');
+    const positiveMentions = mentions.filter((m) => m.sentiment === 'positive');
     const positiveEngagement = positiveMentions.reduce((sum, m) => sum + (m.engagement || 0), 0);
-    const engagementQuality = totalEngagement > 0 
-      ? Math.round((positiveEngagement / totalEngagement) * 100)
-      : 0;
+    const engagementQuality =
+      totalEngagement > 0 ? Math.round((positiveEngagement / totalEngagement) * 100) : 0;
     const qualityChange = Math.round(Math.random() * 15 - 5);
 
     const metrics: MomentumMetric[] = [
@@ -66,8 +73,15 @@ export const MomentumIndicators: React.FC = () => {
         change: velocityChange,
         trend: velocityChange > 0 ? 'up' : velocityChange < 0 ? 'down' : 'stable',
         sparkline: Array.from({ length: 12 }, () => Math.random() * 100 + 50),
-        status: velocity > 100 ? 'excellent' : velocity > 50 ? 'good' : velocity > 20 ? 'warning' : 'critical',
-        icon: Activity
+        status:
+          velocity > 100
+            ? 'excellent'
+            : velocity > 50
+              ? 'good'
+              : velocity > 20
+                ? 'warning'
+                : 'critical',
+        icon: Activity,
       },
       {
         label: 'Viral Coefficient',
@@ -75,8 +89,15 @@ export const MomentumIndicators: React.FC = () => {
         change: viralChange,
         trend: viralChange > 0 ? 'up' : 'down',
         sparkline: Array.from({ length: 12 }, () => Math.random() * 5 + 1),
-        status: Number(viralCoeff) > 5 ? 'excellent' : Number(viralCoeff) > 3 ? 'good' : Number(viralCoeff) > 1 ? 'warning' : 'critical',
-        icon: Flame
+        status:
+          Number(viralCoeff) > 5
+            ? 'excellent'
+            : Number(viralCoeff) > 3
+              ? 'good'
+              : Number(viralCoeff) > 1
+                ? 'warning'
+                : 'critical',
+        icon: Flame,
       },
       {
         label: 'Crisis Risk',
@@ -84,18 +105,41 @@ export const MomentumIndicators: React.FC = () => {
         change: crisisChange,
         trend: crisisChange > 0 ? 'up' : 'down',
         sparkline: Array.from({ length: 12 }, () => Math.random() * 50 + 25),
-        status: crisisRisk < 20 ? 'excellent' : crisisRisk < 40 ? 'good' : crisisRisk < 60 ? 'warning' : 'critical',
-        icon: AlertTriangle
+        status:
+          crisisRisk < 20
+            ? 'excellent'
+            : crisisRisk < 40
+              ? 'good'
+              : crisisRisk < 60
+                ? 'warning'
+                : 'critical',
+        icon: AlertTriangle,
       },
       {
         label: 'Quality Score',
-        value: engagementQuality >= 80 ? 'A+' : engagementQuality >= 70 ? 'A' : engagementQuality >= 60 ? 'B' : engagementQuality >= 50 ? 'C' : 'D',
+        value:
+          engagementQuality >= 80
+            ? 'A+'
+            : engagementQuality >= 70
+              ? 'A'
+              : engagementQuality >= 60
+                ? 'B'
+                : engagementQuality >= 50
+                  ? 'C'
+                  : 'D',
         change: qualityChange,
         trend: qualityChange > 0 ? 'up' : 'down',
         sparkline: Array.from({ length: 12 }, () => Math.random() * 30 + 60),
-        status: engagementQuality >= 80 ? 'excellent' : engagementQuality >= 60 ? 'good' : engagementQuality >= 40 ? 'warning' : 'critical',
-        icon: Award
-      }
+        status:
+          engagementQuality >= 80
+            ? 'excellent'
+            : engagementQuality >= 60
+              ? 'good'
+              : engagementQuality >= 40
+                ? 'warning'
+                : 'critical',
+        icon: Award,
+      },
     ];
 
     setAnimatedMetrics(metrics);
@@ -105,13 +149,13 @@ export const MomentumIndicators: React.FC = () => {
     excellent: 'text-green-400 bg-green-500/10 border-green-400/30',
     good: 'text-blue-400 bg-blue-500/10 border-blue-400/30',
     warning: 'text-yellow-400 bg-yellow-500/10 border-yellow-400/30',
-    critical: 'text-red-400 bg-red-500/10 border-red-400/30'
+    critical: 'text-red-400 bg-red-500/10 border-red-400/30',
   };
 
   const trendIcons = {
     up: TrendingUp,
     down: TrendingDown,
-    stable: Activity
+    stable: Activity,
   };
 
   return (
@@ -144,28 +188,34 @@ export const MomentumIndicators: React.FC = () => {
                   <metric.icon className="w-4 h-4" />
                   <span className="text-xs text-white/80">{metric.label}</span>
                 </div>
-                <div className={`flex items-center space-x-1 text-xs ${
-                  metric.trend === 'up' ? 'text-green-400' : 
-                  metric.trend === 'down' ? 'text-red-400' : 
-                  'text-gray-400'
-                }`}>
-                  {metric.trend === 'up' ? <ArrowUp className="w-3 h-3" /> : <ArrowDown className="w-3 h-3" />}
+                <div
+                  className={`flex items-center space-x-1 text-xs ${
+                    metric.trend === 'up'
+                      ? 'text-green-400'
+                      : metric.trend === 'down'
+                        ? 'text-red-400'
+                        : 'text-gray-400'
+                  }`}
+                >
+                  {metric.trend === 'up' ? (
+                    <ArrowUp className="w-3 h-3" />
+                  ) : (
+                    <ArrowDown className="w-3 h-3" />
+                  )}
                   <span>{Math.abs(metric.change)}%</span>
                 </div>
               </div>
 
               <div className="flex items-end justify-between">
-                <div className="text-2xl font-bold text-white">
-                  {metric.value}
-                </div>
-                
+                <div className="text-2xl font-bold text-white">{metric.value}</div>
+
                 {metric.sparkline && (
                   <div className="w-20 h-8">
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={metric.sparkline.map((v, i) => ({ value: v }))}>
-                        <Line 
-                          type="monotone" 
-                          dataKey="value" 
+                        <Line
+                          type="monotone"
+                          dataKey="value"
                           stroke={metric.trend === 'up' ? '#10b981' : '#ef4444'}
                           strokeWidth={1.5}
                           dot={false}
@@ -215,32 +265,44 @@ export const MomentumIndicators: React.FC = () => {
                   <metric.icon className="w-4 h-4" />
                   <span className="text-xs text-white/80">{metric.label}</span>
                 </div>
-                <div className={`flex items-center space-x-1 text-xs ${
-                  metric.label === 'Crisis Risk' 
-                    ? (metric.trend === 'up' ? 'text-red-400' : 'text-green-400')
-                    : (metric.trend === 'up' ? 'text-green-400' : 'text-red-400')
-                }`}>
-                  {metric.trend === 'up' ? <ArrowUp className="w-3 h-3" /> : <ArrowDown className="w-3 h-3" />}
+                <div
+                  className={`flex items-center space-x-1 text-xs ${
+                    metric.label === 'Crisis Risk'
+                      ? metric.trend === 'up'
+                        ? 'text-red-400'
+                        : 'text-green-400'
+                      : metric.trend === 'up'
+                        ? 'text-green-400'
+                        : 'text-red-400'
+                  }`}
+                >
+                  {metric.trend === 'up' ? (
+                    <ArrowUp className="w-3 h-3" />
+                  ) : (
+                    <ArrowDown className="w-3 h-3" />
+                  )}
                   <span>{Math.abs(metric.change)}%</span>
                 </div>
               </div>
 
               <div className="flex items-end justify-between">
-                <div className="text-2xl font-bold text-white">
-                  {metric.value}
-                </div>
-                
+                <div className="text-2xl font-bold text-white">{metric.value}</div>
+
                 {metric.sparkline && (
                   <div className="w-20 h-8">
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={metric.sparkline.map((v, i) => ({ value: v }))}>
-                        <Line 
-                          type="monotone" 
-                          dataKey="value" 
+                        <Line
+                          type="monotone"
+                          dataKey="value"
                           stroke={
                             metric.label === 'Crisis Risk'
-                              ? (metric.trend === 'up' ? '#ef4444' : '#10b981')
-                              : (metric.trend === 'up' ? '#10b981' : '#ef4444')
+                              ? metric.trend === 'up'
+                                ? '#ef4444'
+                                : '#10b981'
+                              : metric.trend === 'up'
+                                ? '#10b981'
+                                : '#ef4444'
                           }
                           strokeWidth={1.5}
                           dot={false}

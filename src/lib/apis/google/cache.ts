@@ -166,7 +166,8 @@ export class GoogleAdsCache extends EventEmitter {
       // Compress if enabled and above threshold
       if (this.config.compressionEnabled && originalSize > this.config.compressionThreshold!) {
         const compressedBuffer = await gzip(serialized);
-        if (compressedBuffer.length < originalSize * 0.9) { // Only use if >10% savings
+        if (compressedBuffer.length < originalSize * 0.9) {
+          // Only use if >10% savings
           finalValue = compressedBuffer.toString('base64');
           compressed = 'true';
           compressedSize = compressedBuffer.length;
@@ -189,11 +190,10 @@ export class GoogleAdsCache extends EventEmitter {
         effectiveTtl.toString(),
         compressed,
         originalSize.toString(),
-        compressedSize.toString(),
+        compressedSize.toString()
       );
 
       this.emit('set', { key: fullKey, size: compressedSize, ttl: effectiveTtl });
-
     } catch (error) {
       this.emit('error', { operation: 'set', key: fullKey, error });
       throw error;
@@ -209,13 +209,13 @@ export class GoogleAdsCache extends EventEmitter {
     const startTime = Date.now();
 
     try {
-      const result = await this.redis.eval(
+      const result = (await this.redis.eval(
         this.getWithStatsScript,
         2,
         fullKey,
         statsKey,
-        startTime.toString(),
-      ) as [string | null, string];
+        startTime.toString()
+      )) as [string | null, string];
 
       const [value, hitType] = result;
 
@@ -248,7 +248,6 @@ export class GoogleAdsCache extends EventEmitter {
       this.emit('hit', { key: fullKey, value: parsed });
 
       return parsed;
-
     } catch (error) {
       this.emit('error', { operation: 'get', key: fullKey, error });
       // Return null instead of throwing to prevent cache failures from breaking the app
@@ -279,7 +278,6 @@ export class GoogleAdsCache extends EventEmitter {
       }
 
       return false;
-
     } catch (error) {
       this.emit('error', { operation: 'delete', key: fullKey, error });
       throw error;
@@ -338,7 +336,6 @@ export class GoogleAdsCache extends EventEmitter {
 
       this.emit('extended', { key: fullKey, newTtl });
       return true;
-
     } catch (error) {
       this.emit('error', { operation: 'extend', key: fullKey, error });
       return false;
@@ -353,16 +350,15 @@ export class GoogleAdsCache extends EventEmitter {
     const statsKey = this.buildStatsKey();
 
     try {
-      const deleted = await this.redis.eval(
+      const deleted = (await this.redis.eval(
         this.invalidatePatternScript,
         0,
         fullPattern,
-        statsKey,
-      ) as number;
+        statsKey
+      )) as number;
 
       this.emit('patternInvalidated', { pattern: fullPattern, deleted });
       return deleted;
-
     } catch (error) {
       this.emit('error', { operation: 'invalidatePattern', pattern: fullPattern, error });
       throw error;
@@ -385,8 +381,14 @@ export class GoogleAdsCache extends EventEmitter {
     try {
       const rawStats = await this.redis.hmget(
         statsKey,
-        'hits', 'misses', 'sets', 'deletes', 'evictions',
-        'total_original_size', 'total_compressed_size', 'total_response_time',
+        'hits',
+        'misses',
+        'sets',
+        'deletes',
+        'evictions',
+        'total_original_size',
+        'total_compressed_size',
+        'total_response_time'
       );
 
       const hits = parseInt(rawStats[0] || '0') || 0;
@@ -400,14 +402,17 @@ export class GoogleAdsCache extends EventEmitter {
 
       const totalRequests = hits + misses;
       const hitRate = totalRequests > 0 ? (hits / totalRequests) * 100 : 0;
-      const compressionRatio = totalOriginalSize > 0 ?
-        ((totalOriginalSize - totalCompressedSize) / totalOriginalSize) * 100 : 0;
+      const compressionRatio =
+        totalOriginalSize > 0
+          ? ((totalOriginalSize - totalCompressedSize) / totalOriginalSize) * 100
+          : 0;
       const avgResponseTime = hits > 0 ? totalResponseTime / hits / 1000 : 0; // Convert to ms
 
       // Get memory usage
-      const memoryInfo = await this.redis.memory('USAGE', `${this.keyPrefix  }*`);
-      const memoryUsage = Array.isArray(memoryInfo) ?
-        memoryInfo.reduce((sum: any, usage: any) => sum + (usage as number), 0) : 0;
+      const memoryInfo = await this.redis.memory('USAGE', `${this.keyPrefix}*`);
+      const memoryUsage = Array.isArray(memoryInfo)
+        ? memoryInfo.reduce((sum: any, usage: any) => sum + (usage as number), 0)
+        : 0;
 
       return {
         hits,
@@ -420,7 +425,6 @@ export class GoogleAdsCache extends EventEmitter {
         memoryUsage: memoryUsage / (1024 * 1024), // Convert to MB
         avgResponseTime,
       };
-
     } catch (error) {
       this.emit('error', { operation: 'getStats', error });
       return this.stats; // Return default stats on error
@@ -448,7 +452,7 @@ export class GoogleAdsCache extends EventEmitter {
   async getEntriesByPattern(
     pattern: string,
     limit = 100,
-    requesterRole?: 'admin' | 'user' | 'readonly',
+    requesterRole?: 'admin' | 'user' | 'readonly'
   ): Promise<CacheEntry[]> {
     // Security: Implement access control for cache pattern access
     if (!this.canAccessPattern(pattern, requesterRole)) {
@@ -462,17 +466,25 @@ export class GoogleAdsCache extends EventEmitter {
       const entries: CacheEntry[] = [];
 
       for (const key of keys.slice(0, limit)) {
-        if (key.endsWith(':meta')) {continue;}
+        if (key.endsWith(':meta')) {
+          continue;
+        }
 
         const [value, ttl, metadata] = await Promise.all([
           this.redis.get(key),
           this.redis.ttl(key),
-          this.redis.hmget(`${key}:meta`, 'compressed', 'original_size', 'compressed_size', 'created_at'),
+          this.redis.hmget(
+            `${key}:meta`,
+            'compressed',
+            'original_size',
+            'compressed_size',
+            'created_at'
+          ),
         ]);
 
         if (value) {
           entries.push({
-            key: key.replace(`${this.keyPrefix  }:`, ''),
+            key: key.replace(`${this.keyPrefix}:`, ''),
             size: parseInt(metadata[2] || '0') || Buffer.byteLength(value, 'utf8'),
             ttl,
             compressed: metadata[0] === 'true',
@@ -482,7 +494,6 @@ export class GoogleAdsCache extends EventEmitter {
       }
 
       return entries.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
-
     } catch (error) {
       this.emit('error', { operation: 'getEntriesByPattern', pattern: fullPattern, error });
       return [];
@@ -499,13 +510,15 @@ export class GoogleAdsCache extends EventEmitter {
 
     try {
       const keys = await this.redis.keys(pattern);
-      const maxSize = ((this.config.maxMemoryMB || 100) * 1024 * 1024) * 0.8; // 80% of max memory
+      const maxSize = (this.config.maxMemoryMB || 100) * 1024 * 1024 * 0.8; // 80% of max memory
 
       const entries: Array<{ key: string; size: number; lastAccess: number }> = [];
 
       // Collect entry information
       for (const key of keys) {
-        if (key.endsWith(':meta')) {continue;}
+        if (key.endsWith(':meta')) {
+          continue;
+        }
 
         const [ttl, metadata] = await Promise.all([
           this.redis.ttl(key),
@@ -513,7 +526,8 @@ export class GoogleAdsCache extends EventEmitter {
         ]);
 
         // Remove expired entries
-        if (ttl === -2) { // Key doesn't exist
+        if (ttl === -2) {
+          // Key doesn't exist
           continue;
         }
 
@@ -530,7 +544,9 @@ export class GoogleAdsCache extends EventEmitter {
       // Sort by size (largest first) and age (oldest first)
       entries.sort((a, b) => {
         const sizeDiff = b.size - a.size;
-        if (sizeDiff !== 0) {return sizeDiff;}
+        if (sizeDiff !== 0) {
+          return sizeDiff;
+        }
         return a.lastAccess - b.lastAccess;
       });
 
@@ -538,9 +554,11 @@ export class GoogleAdsCache extends EventEmitter {
       let currentMemory = entries.reduce((sum, entry) => sum + entry.size, 0);
 
       for (const entry of entries) {
-        if (currentMemory <= maxSize) {break;}
+        if (currentMemory <= maxSize) {
+          break;
+        }
 
-        await this.delete(entry.key.replace(`${this.keyPrefix  }:`, ''));
+        await this.delete(entry.key.replace(`${this.keyPrefix}:`, ''));
         removed++;
         spaceSaved += entry.size;
         currentMemory -= entry.size;
@@ -549,7 +567,6 @@ export class GoogleAdsCache extends EventEmitter {
       this.emit('optimized', { removed, spaceSaved });
 
       return { removed, spaceSaved };
-
     } catch (error) {
       this.emit('error', { operation: 'optimize', error });
       return { removed: 0, spaceSaved: 0 };
@@ -580,7 +597,6 @@ export class GoogleAdsCache extends EventEmitter {
         hitRate: stats.hitRate || 0,
         responseTime,
       };
-
     } catch (error) {
       return {
         status: 'unhealthy',
@@ -600,13 +616,16 @@ export class GoogleAdsCache extends EventEmitter {
       clearInterval(this.cleanupInterval);
     }
 
-    this.cleanupInterval = setInterval(async () => {
-      try {
-        await this.optimize();
-      } catch (error) {
-        this.emit('error', { operation: 'cleanup', error });
-      }
-    }, 5 * 60 * 1000); // Every 5 minutes
+    this.cleanupInterval = setInterval(
+      async () => {
+        try {
+          await this.optimize();
+        } catch (error) {
+          this.emit('error', { operation: 'cleanup', error });
+        }
+      },
+      5 * 60 * 1000
+    ); // Every 5 minutes
   }
 
   /**
@@ -621,16 +640,10 @@ export class GoogleAdsCache extends EventEmitter {
    */
   private canAccessPattern(pattern: string, role?: string): boolean {
     // Restrict access to sensitive patterns
-    const sensitivePatterns = [
-      '*customer*',
-      '*auth*',
-      '*token*',
-      '*key*',
-      '*secret*',
-    ];
+    const sensitivePatterns = ['*customer*', '*auth*', '*token*', '*key*', '*secret*'];
 
-    const isSensitive = sensitivePatterns.some(sensitive =>
-      pattern.toLowerCase().includes(sensitive.replace(/\*/g, '')),
+    const isSensitive = sensitivePatterns.some((sensitive) =>
+      pattern.toLowerCase().includes(sensitive.replace(/\*/g, ''))
     );
 
     if (isSensitive && role !== 'admin') {

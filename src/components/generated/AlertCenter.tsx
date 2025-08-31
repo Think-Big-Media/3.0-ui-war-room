@@ -56,10 +56,7 @@ const AlertCenter: React.FC = () => {
   };
 
   return (
-    <PageLayout
-      pageTitle="Alert Center"
-      placeholder="Ask War Room about campaign alerts..."
-    >
+    <PageLayout pageTitle="Alert Center" placeholder="Ask War Room about campaign alerts...">
       {/* Purple gradient background */}
       <div className="fixed inset-0 bg-gradient-to-br from-purple-600 via-purple-700 to-indigo-800 -z-10" />
 
@@ -130,10 +127,7 @@ const AlertCenter: React.FC = () => {
             {/* Sidebar */}
             <div className="space-y-6">
               {/* Assigned Alerts Tracker */}
-              <AssignedAlertsTracker
-                alerts={alerts}
-                teamMembers={mockTeamMembers}
-              />
+              <AssignedAlertsTracker alerts={alerts} teamMembers={mockTeamMembers} />
 
               {/* Quick Stats */}
               <AlertSummary alerts={alerts} />
@@ -145,9 +139,7 @@ const AlertCenter: React.FC = () => {
             isOpen={collaborationModal.isOpen}
             alert={collaborationModal.alert}
             teamMembers={mockTeamMembers}
-            onClose={() =>
-              setCollaborationModal({ isOpen: false, alert: null })
-            }
+            onClose={() => setCollaborationModal({ isOpen: false, alert: null })}
           />
         </>
       )}

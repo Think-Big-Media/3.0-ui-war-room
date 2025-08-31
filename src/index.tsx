@@ -10,24 +10,24 @@ import './index.css';
 
 /**
  * ⚡ PRODUCTION FRONTEND CONFIGURATION ⚡
- * 
+ *
  * 🎯 ACTIVE: AppBrandBOS.tsx
  * - Purple/blue gradient theme
  * - CommandCenter dashboard
  * - Glassmorphic cards
  * - Top navigation with WR logo
- * 
+ *
  * ❌ NOT IN USE:
  * - App.tsx (legacy with Supabase auth)
  * - AppNoAuth.tsx (testing only)
- * 
+ *
  * 🔍 Visual Check: You should see purple/blue gradients
  * 📊 Dashboard: CommandCenter, not Dashboard
  * 🧭 Navigation: Top bar, not sidebar
- * 
+ *
  * ⚠️ DO NOT CHANGE THIS IMPORT unless migrating the entire frontend architecture
  */
-import App from './App';  // ← INTEGRATED FRONTEND
+import App from './App'; // ← INTEGRATED FRONTEND
 
 // Legacy options (DO NOT USE):
 // import App from './App';        // Old version with Supabase auth
@@ -49,5 +49,5 @@ root.render(
         <App />
       </ErrorBoundary>
     </Provider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

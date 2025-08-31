@@ -25,9 +25,7 @@ export const usePerformanceMonitor = (componentName: string) => {
 
       if (renderTime > 16) {
         // More than one frame (60fps)
-        console.warn(
-          `🐌 Slow render in ${componentName}: ${renderTime.toFixed(2)}ms`
-        );
+        console.warn(`🐌 Slow render in ${componentName}: ${renderTime.toFixed(2)}ms`);
       }
 
       // Track memory usage (only in development)
@@ -85,9 +83,7 @@ export const trackBundleSize = () => {
       }
     });
 
-    console.log(
-      `📦 Estimated bundle size: ~${totalSize}kb (optimized from ~800kb)`
-    );
+    console.log(`📦 Estimated bundle size: ~${totalSize}kb (optimized from ~800kb)`);
   }
 };
 
@@ -104,9 +100,7 @@ export const trackCoreWebVitals = () => {
     // Track First Input Delay
     new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
-        console.log(
-          `⚡ FID: ${(entry as any).processingStart - entry.startTime}ms`
-        );
+        console.log(`⚡ FID: ${(entry as any).processingStart - entry.startTime}ms`);
       }
     }).observe({ entryTypes: ['first-input'] });
 

@@ -133,10 +133,11 @@ const sessionStorageMock = {
 global.sessionStorage = sessionStorageMock as Storage;
 
 // Mock fetch
-global.fetch = (() => Promise.resolve({
-  ok: true,
-  json: () => Promise.resolve({}),
-})) as any;
+global.fetch = (() =>
+  Promise.resolve({
+    ok: true,
+    json: () => Promise.resolve({}),
+  })) as any;
 
 // Mock WebSocket
 global.WebSocket = jest.fn().mockImplementation(() => ({
@@ -518,22 +519,32 @@ jest.mock('lucide-react', () => {
 
   const createMockIcon = (name: string) => {
     const MockIcon = (props: any) =>
-      React.createElement('div', {
-        ...props,
-        'data-lucide': name.toLowerCase().replace(/([A-Z])/g, '-$1').substring(1),
-      }, name);
+      React.createElement(
+        'div',
+        {
+          ...props,
+          'data-lucide': name
+            .toLowerCase()
+            .replace(/([A-Z])/g, '-$1')
+            .substring(1),
+        },
+        name
+      );
     MockIcon.displayName = name;
     return MockIcon;
   };
 
-  return new Proxy({}, {
-    get: (target, prop) => {
-      if (typeof prop === 'string') {
-        return createMockIcon(prop);
-      }
-      return undefined;
-    },
-  });
+  return new Proxy(
+    {},
+    {
+      get: (target, prop) => {
+        if (typeof prop === 'string') {
+          return createMockIcon(prop);
+        }
+        return undefined;
+      },
+    }
+  );
 });
 
 // Suppress console errors in tests unless explicitly testing them

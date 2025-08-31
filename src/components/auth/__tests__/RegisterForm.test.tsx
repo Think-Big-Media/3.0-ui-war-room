@@ -26,8 +26,7 @@ const createTestStore = () => {
     reducer: {
       [authApi.reducerPath]: authApi.reducer,
     },
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(authApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware),
   });
 };
 
@@ -39,11 +38,9 @@ const renderWithProviders = (ui: React.ReactElement, { route = '/register' } = {
     ...render(
       <Provider store={store}>
         <MemoryRouter initialEntries={[route]}>
-          <AuthProvider>
-            {ui}
-          </AuthProvider>
+          <AuthProvider>{ui}</AuthProvider>
         </MemoryRouter>
-      </Provider>,
+      </Provider>
     ),
     store,
   };
@@ -82,7 +79,9 @@ describe('RegisterForm Component', () => {
       renderWithProviders(<RegisterForm />);
 
       // Check heading
-      expect(screen.getByRole('heading', { name: /create your war room account/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('heading', { name: /create your war room account/i })
+      ).toBeInTheDocument();
       expect(screen.getByText(/join the campaign command center/i)).toBeInTheDocument();
 
       // Check form fields
@@ -170,7 +169,9 @@ describe('RegisterForm Component', () => {
       await user.click(submitButton);
 
       await waitFor(() => {
-        expect(screen.getByText(/username can only contain letters, numbers, and underscores/i)).toBeInTheDocument();
+        expect(
+          screen.getByText(/username can only contain letters, numbers, and underscores/i)
+        ).toBeInTheDocument();
       });
     });
 
@@ -340,7 +341,7 @@ describe('RegisterForm Component', () => {
           <BrowserRouter>
             <RegisterForm />
           </BrowserRouter>
-        </Provider>,
+        </Provider>
       );
 
       // Fill in the form
@@ -364,7 +365,7 @@ describe('RegisterForm Component', () => {
           expect.objectContaining({
             method: 'POST',
             body: expect.stringContaining('john.doe@example.com'),
-          }),
+          })
         );
       });
 
@@ -381,9 +382,9 @@ describe('RegisterForm Component', () => {
       renderWithProviders(<RegisterForm />);
 
       // Mock a delayed response
-      global.fetch = jest.fn().mockImplementation(() =>
-        new Promise(resolve => setTimeout(resolve, 100)),
-      );
+      global.fetch = jest
+        .fn()
+        .mockImplementation(() => new Promise((resolve) => setTimeout(resolve, 100)));
 
       // Fill in valid form
       await user.type(screen.getByLabelText(/first name/i), 'John');
@@ -512,7 +513,9 @@ describe('RegisterForm Component', () => {
       expect(screen.getByLabelText(/confirm password/i)).toBeInTheDocument();
 
       // Checkbox should be properly labeled
-      expect(screen.getByRole('checkbox', { name: /i accept the terms and conditions/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('checkbox', { name: /i accept the terms and conditions/i })
+      ).toBeInTheDocument();
 
       // Submit button should be properly labeled
       expect(screen.getByRole('button', { name: /create account/i })).toBeInTheDocument();

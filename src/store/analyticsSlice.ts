@@ -51,5 +51,6 @@ const analyticsSlice = createSlice({
   },
 });
 
-export const { setDateRange, setCustomDates, setFilters, clearFilters, setActiveExportJob } = analyticsSlice.actions;
+export const { setDateRange, setCustomDates, setFilters, clearFilters, setActiveExportJob } =
+  analyticsSlice.actions;
 export default analyticsSlice.reducer;

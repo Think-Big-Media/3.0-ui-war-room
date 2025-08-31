@@ -30,7 +30,7 @@ describe('ErrorBoundary - Stability Improvements', () => {
     render(
       <ErrorBoundary>
         <ThrowError shouldThrow={false} />
-      </ErrorBoundary>,
+      </ErrorBoundary>
     );
 
     expect(screen.getByText('No error')).toBeInTheDocument();
@@ -40,7 +40,7 @@ describe('ErrorBoundary - Stability Improvements', () => {
     render(
       <ErrorBoundary>
         <ThrowError shouldThrow={true} />
-      </ErrorBoundary>,
+      </ErrorBoundary>
     );
 
     // Should show error message instead of crashing
@@ -56,7 +56,7 @@ describe('ErrorBoundary - Stability Improvements', () => {
     render(
       <ErrorBoundary>
         <ThrowError shouldThrow={true} />
-      </ErrorBoundary>,
+      </ErrorBoundary>
     );
 
     // Should have error details in development
@@ -96,7 +96,7 @@ describe('ErrorBoundary - Stability Improvements', () => {
     render(
       <ErrorBoundary fallback={customFallback}>
         <ThrowError shouldThrow={true} />
-      </ErrorBoundary>,
+      </ErrorBoundary>
     );
 
     expect(screen.getByText('Custom error message')).toBeInTheDocument();
@@ -108,7 +108,7 @@ describe('ErrorBoundary - Stability Improvements', () => {
     render(
       <ErrorBoundary>
         <ThrowError shouldThrow={true} />
-      </ErrorBoundary>,
+      </ErrorBoundary>
     );
 
     // Should have called console.error with error details

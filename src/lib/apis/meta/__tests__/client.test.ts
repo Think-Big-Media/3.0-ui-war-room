@@ -107,7 +107,7 @@ describe('MetaBusinessClient', () => {
             headers: expect.objectContaining({
               'Content-Type': 'application/x-www-form-urlencoded',
             }),
-          }),
+          })
         );
       });
 
@@ -126,15 +126,15 @@ describe('MetaBusinessClient', () => {
           json: () => Promise.resolve(mockError),
         });
 
-        await expect(client.exchangeCodeForToken('invalid-code'))
-          .rejects.toThrow('Invalid authorization code');
+        await expect(client.exchangeCodeForToken('invalid-code')).rejects.toThrow(
+          'Invalid authorization code'
+        );
       });
 
       it('should handle network errors', async () => {
         mockFetch.mockRejectedValueOnce(new Error('Network error'));
 
-        await expect(client.exchangeCodeForToken('test-code'))
-          .rejects.toThrow('Network error');
+        await expect(client.exchangeCodeForToken('test-code')).rejects.toThrow('Network error');
       });
 
       it('should handle malformed response', async () => {
@@ -143,8 +143,7 @@ describe('MetaBusinessClient', () => {
           json: () => Promise.resolve({}),
         });
 
-        await expect(client.exchangeCodeForToken('test-code'))
-          .rejects.toThrow();
+        await expect(client.exchangeCodeForToken('test-code')).rejects.toThrow();
       });
     });
 
@@ -181,8 +180,9 @@ describe('MetaBusinessClient', () => {
           json: () => Promise.resolve(mockError),
         });
 
-        await expect(client.refreshAccessToken('expired-token'))
-          .rejects.toThrow('Invalid refresh token');
+        await expect(client.refreshAccessToken('expired-token')).rejects.toThrow(
+          'Invalid refresh token'
+        );
       });
     });
   });
@@ -208,9 +208,9 @@ describe('MetaBusinessClient', () => {
           expect.objectContaining({
             method: 'GET',
             headers: expect.objectContaining({
-              'Authorization': 'Bearer test-access-token',
+              Authorization: 'Bearer test-access-token',
             }),
-          }),
+          })
         );
       });
 
@@ -237,7 +237,7 @@ describe('MetaBusinessClient', () => {
             headers: expect.objectContaining({
               'Content-Type': 'application/json',
             }),
-          }),
+          })
         );
       });
 
@@ -245,8 +245,7 @@ describe('MetaBusinessClient', () => {
         const rateLimiter = client.rateLimiter as any;
         rateLimiter.checkLimit.mockResolvedValueOnce(false);
 
-        await expect(client.makeRequest('/test-endpoint'))
-          .rejects.toThrow('Rate limit exceeded');
+        await expect(client.makeRequest('/test-endpoint')).rejects.toThrow('Rate limit exceeded');
       });
 
       it('should handle API errors with details', async () => {
@@ -266,8 +265,9 @@ describe('MetaBusinessClient', () => {
           json: () => Promise.resolve(mockError),
         });
 
-        await expect(client.makeRequest('/test-endpoint'))
-          .rejects.toThrow('Insufficient permissions');
+        await expect(client.makeRequest('/test-endpoint')).rejects.toThrow(
+          'Insufficient permissions'
+        );
       });
 
       it('should retry on temporary errors', async () => {
@@ -314,10 +314,7 @@ describe('MetaBusinessClient', () => {
 
         await client.makeRequest('/test-endpoint');
 
-        expect(cache.set).toHaveBeenCalledWith(
-          expect.any(String),
-          mockResponse,
-        );
+        expect(cache.set).toHaveBeenCalledWith(expect.any(String), mockResponse);
       });
     });
 
@@ -372,19 +369,15 @@ describe('MetaBusinessClient', () => {
           json: () => Promise.reject(new Error('Not JSON')),
         });
 
-        await expect(client.makeRequest('/test-endpoint'))
-          .rejects.toThrow('HTTP 500');
+        await expect(client.makeRequest('/test-endpoint')).rejects.toThrow('HTTP 500');
       });
 
       it('should handle timeout errors', async () => {
-        mockFetch.mockImplementationOnce(() =>
-          new Promise((_, reject) =>
-            setTimeout(() => reject(new Error('Timeout')), 100),
-          ),
+        mockFetch.mockImplementationOnce(
+          () => new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 100))
         );
 
-        await expect(client.makeRequest('/test-endpoint'))
-          .rejects.toThrow('Timeout');
+        await expect(client.makeRequest('/test-endpoint')).rejects.toThrow('Timeout');
       });
 
       it('should handle malformed JSON responses', async () => {
@@ -394,8 +387,7 @@ describe('MetaBusinessClient', () => {
           text: () => Promise.resolve('invalid json response'),
         });
 
-        await expect(client.makeRequest('/test-endpoint'))
-          .rejects.toThrow('Invalid JSON');
+        await expect(client.makeRequest('/test-endpoint')).rejects.toThrow('Invalid JSON');
       });
     });
   });
@@ -416,8 +408,7 @@ describe('MetaBusinessClient', () => {
     it('should throw error when making request without token', async () => {
       client.clearAccessToken();
 
-      await expect(client.makeRequest('/test-endpoint'))
-        .rejects.toThrow('Access token required');
+      await expect(client.makeRequest('/test-endpoint')).rejects.toThrow('Access token required');
     });
   });
 
@@ -446,14 +437,12 @@ describe('MetaBusinessClient', () => {
         expect.objectContaining({
           method: 'POST',
           body: expect.stringContaining('batch='),
-        }),
+        })
       );
     });
 
     it('should handle batch request errors', async () => {
-      const batchRequests = [
-        { method: 'GET', relative_url: 'invalid-endpoint' },
-      ];
+      const batchRequests = [{ method: 'GET', relative_url: 'invalid-endpoint' }];
 
       const mockResponse = [
         {
@@ -494,7 +483,7 @@ describe('MetaBusinessClient', () => {
         expect.stringContaining('access_token'),
         expect.objectContaining({
           method: 'GET',
-        }),
+        })
       );
     });
   });

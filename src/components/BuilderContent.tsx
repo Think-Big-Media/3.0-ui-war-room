@@ -38,7 +38,7 @@ export const BuilderContent: React.FC<BuilderContentProps> = ({
         try {
           setIsLoading(true);
           const urlPath = window.location.pathname || '/';
-          
+
           const content = await builder
             .get(modelName, {
               url: urlPath,
@@ -48,7 +48,7 @@ export const BuilderContent: React.FC<BuilderContentProps> = ({
               },
             })
             .promise();
-          
+
           setContent(content);
         } catch (err) {
           console.error('Error fetching Builder content:', err);

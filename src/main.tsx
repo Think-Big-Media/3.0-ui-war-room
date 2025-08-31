@@ -23,7 +23,10 @@ const queryClient = new QueryClient({
 });
 
 // Check if we're in dark mode
-if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+if (
+  localStorage.theme === 'dark' ||
+  (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+) {
   document.documentElement.classList.add('dark');
 } else {
   document.documentElement.classList.remove('dark');
@@ -63,5 +66,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </Provider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

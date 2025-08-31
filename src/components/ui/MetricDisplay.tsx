@@ -106,11 +106,7 @@ interface TrendIndicatorProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
-const TrendIndicator: React.FC<TrendIndicatorProps> = ({
-  trend,
-  change,
-  size = 'md',
-}) => {
+const TrendIndicator: React.FC<TrendIndicatorProps> = ({ trend, change, size = 'md' }) => {
   const iconSize = {
     sm: 'w-3 h-3',
     md: 'w-4 h-4',
@@ -190,8 +186,7 @@ const Sparkline: React.FC<SparklineProps> = ({
   const points = data
     .map((value, index) => {
       const x = (index / (data.length - 1)) * width;
-      const y =
-        range === 0 ? height / 2 : height - ((value - min) / range) * height;
+      const y = range === 0 ? height / 2 : height - ((value - min) / range) * height;
       return `${x},${y}`;
     })
     .join(' ');
@@ -199,13 +194,7 @@ const Sparkline: React.FC<SparklineProps> = ({
   return (
     <svg width={width} height={height} className="overflow-visible">
       <defs>
-        <linearGradient
-          id="sparkline-gradient"
-          x1="0%"
-          y1="0%"
-          x2="0%"
-          y2="100%"
-        >
+        <linearGradient id="sparkline-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" style={{ stopColor: color, stopOpacity: 0.3 }} />
           <stop offset="100%" style={{ stopColor: color, stopOpacity: 0 }} />
         </linearGradient>
@@ -273,12 +262,7 @@ const MetricDisplay = forwardRef<HTMLDivElement, MetricDisplayProps>(
   ) => {
     if (loading) {
       return (
-        <MetricCard
-          ref={ref}
-          className={cn('animate-pulse', className)}
-          accent={accent}
-          {...props}
-        >
+        <MetricCard ref={ref} className={cn('animate-pulse', className)} accent={accent} {...props}>
           <CardHeader size="sm">
             <div className="flex items-start justify-between">
               <div className="space-y-2 flex-1">
@@ -325,20 +309,12 @@ const MetricDisplay = forwardRef<HTMLDivElement, MetricDisplayProps>(
 
                 <div>
                   <p className={cn(metricLabelVariants({ size }))}>{label}</p>
-                  {subtitle && (
-                    <p className="text-xs text-gray-500 mt-0.5">{subtitle}</p>
-                  )}
+                  {subtitle && <p className="text-xs text-gray-500 mt-0.5">{subtitle}</p>}
                 </div>
               </div>
 
               {/* Trend indicator */}
-              {trend && (
-                <TrendIndicator
-                  trend={trend}
-                  change={change}
-                  size={size || undefined}
-                />
-              )}
+              {trend && <TrendIndicator trend={trend} change={change} size={size || undefined} />}
 
               {/* Action menu */}
               {onAction && (
@@ -356,9 +332,7 @@ const MetricDisplay = forwardRef<HTMLDivElement, MetricDisplayProps>(
 
             {/* Value display */}
             <div className="space-y-2">
-              <p className={cn(metricValueVariants({ size }))}>
-                {formatValue(value, format)}
-              </p>
+              <p className={cn(metricValueVariants({ size }))}>{formatValue(value, format)}</p>
 
               {/* Sparkline */}
               {sparklineData && sparklineData.length > 1 && (
@@ -415,11 +389,7 @@ const MetricGrid: React.FC<MetricGridProps> = ({
   };
 
   return (
-    <div
-      className={cn('grid', gridClasses[columns], gapClasses[gap], className)}
-    >
-      {children}
-    </div>
+    <div className={cn('grid', gridClasses[columns], gapClasses[gap], className)}>{children}</div>
   );
 };
 

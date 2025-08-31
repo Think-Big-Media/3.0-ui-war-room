@@ -12,7 +12,7 @@ export class GoogleAdsAuthManager {
 
   constructor(config: GoogleAdsConfig) {
     this.config = config;
-    
+
     // Load cached token from localStorage
     const cachedToken = localStorage.getItem('google_ads_token');
     if (cachedToken) {
@@ -31,7 +31,7 @@ export class GoogleAdsAuthManager {
   getAuthorizationUrl(
     state?: string,
     additionalScopes: string[] = [],
-    accessType: 'online' | 'offline' = 'offline',
+    accessType: 'online' | 'offline' = 'offline'
   ): string {
     const scopes = [this.GOOGLE_ADS_SCOPE, ...additionalScopes];
 
@@ -73,7 +73,7 @@ export class GoogleAdsAuthManager {
         const error = await response.json();
         throw new GoogleAdsAuthenticationError(
           `Failed to exchange code: ${error.error_description || error.error}`,
-          error.error,
+          error.error
         );
       }
 
@@ -82,9 +82,7 @@ export class GoogleAdsAuthManager {
       // Calculate expiration time
       const token: GoogleOAuthToken = {
         ...tokenData,
-        expires_at: tokenData.expires_in
-          ? Date.now() + (tokenData.expires_in * 1000)
-          : undefined,
+        expires_at: tokenData.expires_in ? Date.now() + tokenData.expires_in * 1000 : undefined,
       };
 
       // Cache the token
@@ -96,7 +94,7 @@ export class GoogleAdsAuthManager {
         throw error;
       }
       throw new GoogleAdsAuthenticationError(
-        `Token exchange failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        `Token exchange failed: ${error instanceof Error ? error.message : 'Unknown error'}`
       );
     }
   }
@@ -125,7 +123,7 @@ export class GoogleAdsAuthManager {
         const error = await response.json();
         throw new GoogleAdsAuthenticationError(
           `Failed to refresh token: ${error.error_description || error.error}`,
-          error.error,
+          error.error
         );
       }
 
@@ -135,9 +133,7 @@ export class GoogleAdsAuthManager {
       const token: GoogleOAuthToken = {
         ...tokenData,
         refresh_token: tokenData.refresh_token || refreshToken,
-        expires_at: tokenData.expires_in
-          ? Date.now() + (tokenData.expires_in * 1000)
-          : undefined,
+        expires_at: tokenData.expires_in ? Date.now() + tokenData.expires_in * 1000 : undefined,
       };
 
       // Update cached token
@@ -149,7 +145,7 @@ export class GoogleAdsAuthManager {
         throw error;
       }
       throw new GoogleAdsAuthenticationError(
-        `Token refresh failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        `Token refresh failed: ${error instanceof Error ? error.message : 'Unknown error'}`
       );
     }
   }
@@ -165,8 +161,7 @@ export class GoogleAdsAuthManager {
     }
 
     // Check if token is expired or about to expire (5 min buffer)
-    const isExpired = token.expires_at &&
-                     (Date.now() + 300000) >= token.expires_at;
+    const isExpired = token.expires_at && Date.now() + 300000 >= token.expires_at;
 
     if (isExpired && token.refresh_token) {
       // Refresh the token
@@ -183,7 +178,7 @@ export class GoogleAdsAuthManager {
   async validateTokenScopes(accessToken: string): Promise<boolean> {
     try {
       const response = await fetch(
-        `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`,
+        `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
       );
 
       if (!response.ok) {
@@ -197,7 +192,7 @@ export class GoogleAdsAuthManager {
       if (!scopes.includes(this.GOOGLE_ADS_SCOPE)) {
         throw new GoogleAdsPermissionError(
           'Token missing required Google Ads scope',
-          this.GOOGLE_ADS_SCOPE,
+          this.GOOGLE_ADS_SCOPE
         );
       }
 
@@ -242,10 +237,9 @@ export class GoogleAdsAuthManager {
    */
   async revokeToken(token: string): Promise<boolean> {
     try {
-      const response = await fetch(
-        `https://oauth2.googleapis.com/revoke?token=${token}`,
-        { method: 'POST' },
-      );
+      const response = await fetch(`https://oauth2.googleapis.com/revoke?token=${token}`, {
+        method: 'POST',
+      });
 
       return response.ok;
     } catch (error) {
@@ -258,8 +252,9 @@ export class GoogleAdsAuthManager {
    * Generate state parameter for CSRF protection
    */
   generateState(): string {
-    return Math.random().toString(36).substring(2, 15) +
-           Math.random().toString(36).substring(2, 15);
+    return (
+      Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+    );
   }
 
   /**
@@ -290,12 +285,12 @@ export class GoogleAdsAuthManager {
    */
   async createServiceAccountToken(
     serviceAccountKey: any,
-    impersonatedEmail?: string,
+    impersonatedEmail?: string
   ): Promise<GoogleOAuthToken> {
     // This would implement JWT assertion flow for service accounts
     // For now, throw an error indicating it needs implementation
     throw new GoogleAdsAuthenticationError(
-      'Service account authentication not yet implemented. Use OAuth2 flow instead.',
+      'Service account authentication not yet implemented. Use OAuth2 flow instead.'
     );
   }
 }

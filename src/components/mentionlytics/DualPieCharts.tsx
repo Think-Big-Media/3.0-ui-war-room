@@ -14,19 +14,19 @@ import { Loader2, Brain, Heart, TrendingUp, AlertCircle } from 'lucide-react';
 const SENTIMENT_COLORS = {
   positive: '#10b981', // green-500
   negative: '#ef4444', // red-500
-  neutral: '#6b7280'   // gray-500
+  neutral: '#6b7280', // gray-500
 };
 
 // Emotion colors - more nuanced palette
 const EMOTION_COLORS = {
-  joy: '#fbbf24',      // yellow-400
-  trust: '#60a5fa',    // blue-400
-  fear: '#a78bfa',     // purple-400
+  joy: '#fbbf24', // yellow-400
+  trust: '#60a5fa', // blue-400
+  fear: '#a78bfa', // purple-400
   surprise: '#f472b6', // pink-400
-  sadness: '#94a3b8',  // slate-400
-  disgust: '#f87171',  // red-400
-  anger: '#dc2626',    // red-600
-  anticipation: '#34d399' // emerald-400
+  sadness: '#94a3b8', // slate-400
+  disgust: '#f87171', // red-400
+  anger: '#dc2626', // red-600
+  anticipation: '#34d399', // emerald-400
 };
 
 // Mock emotion data (would come from Mentionlytics emotion analysis)
@@ -38,7 +38,7 @@ const mockEmotionData = [
   { name: 'Sadness', value: 98, percentage: 10 },
   { name: 'Surprise', value: 87, percentage: 9 },
   { name: 'Anticipation', value: 76, percentage: 7 },
-  { name: 'Disgust', value: 54, percentage: 4 }
+  { name: 'Disgust', value: 54, percentage: 4 },
 ];
 
 export const DualPieCharts: React.FC = () => {
@@ -47,7 +47,7 @@ export const DualPieCharts: React.FC = () => {
   if (loading) {
     return (
       <div className="grid grid-cols-2 gap-4">
-        {[1, 2].map(i => (
+        {[1, 2].map((i) => (
           <Card key={i} className="p-4 bg-black/40 backdrop-blur-sm border-white/10 h-[280px]">
             <div className="flex items-center justify-center h-full">
               <Loader2 className="h-8 w-8 animate-spin text-white/60" />
@@ -69,14 +69,30 @@ export const DualPieCharts: React.FC = () => {
   }
 
   const sentimentData = [
-    { name: 'Positive', value: sentiment.positive, percentage: ((sentiment.positive / sentiment.total) * 100).toFixed(1) },
-    { name: 'Negative', value: sentiment.negative, percentage: ((sentiment.negative / sentiment.total) * 100).toFixed(1) },
-    { name: 'Neutral', value: sentiment.neutral, percentage: ((sentiment.neutral / sentiment.total) * 100).toFixed(1) }
+    {
+      name: 'Positive',
+      value: sentiment.positive,
+      percentage: ((sentiment.positive / sentiment.total) * 100).toFixed(1),
+    },
+    {
+      name: 'Negative',
+      value: sentiment.negative,
+      percentage: ((sentiment.negative / sentiment.total) * 100).toFixed(1),
+    },
+    {
+      name: 'Neutral',
+      value: sentiment.neutral,
+      percentage: ((sentiment.neutral / sentiment.total) * 100).toFixed(1),
+    },
   ];
 
   // Calculate net sentiment score
-  const netSentiment = ((sentiment.positive - sentiment.negative) / sentiment.total * 100).toFixed(1);
-  const sentimentTrend = Number(netSentiment) > 0 ? 'positive' : Number(netSentiment) < 0 ? 'negative' : 'neutral';
+  const netSentiment = (
+    ((sentiment.positive - sentiment.negative) / sentiment.total) *
+    100
+  ).toFixed(1);
+  const sentimentTrend =
+    Number(netSentiment) > 0 ? 'positive' : Number(netSentiment) < 0 ? 'negative' : 'neutral';
 
   // Custom tooltip
   const CustomTooltip = ({ active, payload }: any) => {
@@ -85,7 +101,9 @@ export const DualPieCharts: React.FC = () => {
       return (
         <div className="bg-gray-900 text-white p-2 rounded-lg shadow-xl border border-white/20">
           <p className="font-semibold text-sm">{data.name}</p>
-          <p className="text-xs">{data.value} mentions ({data.payload.percentage}%)</p>
+          <p className="text-xs">
+            {data.value} mentions ({data.payload.percentage}%)
+          </p>
         </div>
       );
     }
@@ -100,11 +118,11 @@ export const DualPieCharts: React.FC = () => {
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
     return (
-      <text 
-        x={x} 
-        y={y} 
-        fill="white" 
-        textAnchor={x > cx ? 'start' : 'end'} 
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor={x > cx ? 'start' : 'end'}
         dominantBaseline="central"
         className="font-bold text-xs"
       >
@@ -127,13 +145,21 @@ export const DualPieCharts: React.FC = () => {
               <Brain className="w-5 h-5 text-blue-400" />
               <h3 className="text-sm font-bold text-white">Sentiment Analysis</h3>
             </div>
-            <div className={`flex items-center space-x-1 text-xs ${
-              sentimentTrend === 'positive' ? 'text-green-400' : 
-              sentimentTrend === 'negative' ? 'text-red-400' : 'text-gray-400'
-            }`}>
+            <div
+              className={`flex items-center space-x-1 text-xs ${
+                sentimentTrend === 'positive'
+                  ? 'text-green-400'
+                  : sentimentTrend === 'negative'
+                    ? 'text-red-400'
+                    : 'text-gray-400'
+              }`}
+            >
               {sentimentTrend === 'positive' && <TrendingUp className="w-3 h-3" />}
               {sentimentTrend === 'negative' && <AlertCircle className="w-3 h-3" />}
-              <span>{netSentiment > 0 ? '+' : ''}{netSentiment}%</span>
+              <span>
+                {netSentiment > 0 ? '+' : ''}
+                {netSentiment}%
+              </span>
             </div>
           </div>
 
@@ -152,9 +178,11 @@ export const DualPieCharts: React.FC = () => {
                 animationDuration={800}
               >
                 {sentimentData.map((entry, index) => (
-                  <Cell 
-                    key={`cell-${index}`} 
-                    fill={SENTIMENT_COLORS[entry.name.toLowerCase() as keyof typeof SENTIMENT_COLORS]} 
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={
+                      SENTIMENT_COLORS[entry.name.toLowerCase() as keyof typeof SENTIMENT_COLORS]
+                    }
                   />
                 ))}
               </Pie>
@@ -165,9 +193,12 @@ export const DualPieCharts: React.FC = () => {
           <div className="flex justify-around mt-2">
             {sentimentData.map((item, idx) => (
               <div key={idx} className="text-center">
-                <div 
+                <div
                   className="w-2 h-2 rounded-full mx-auto mb-1"
-                  style={{ backgroundColor: SENTIMENT_COLORS[item.name.toLowerCase() as keyof typeof SENTIMENT_COLORS] }}
+                  style={{
+                    backgroundColor:
+                      SENTIMENT_COLORS[item.name.toLowerCase() as keyof typeof SENTIMENT_COLORS],
+                  }}
                 />
                 <div className="text-xs text-white/60">{item.name}</div>
                 <div className="text-xs font-bold text-white">{item.value}</div>
@@ -213,9 +244,9 @@ export const DualPieCharts: React.FC = () => {
                 animationDuration={800}
               >
                 {mockEmotionData.map((entry, index) => (
-                  <Cell 
-                    key={`cell-${index}`} 
-                    fill={EMOTION_COLORS[entry.name.toLowerCase() as keyof typeof EMOTION_COLORS]} 
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={EMOTION_COLORS[entry.name.toLowerCase() as keyof typeof EMOTION_COLORS]}
                   />
                 ))}
               </Pie>
@@ -226,9 +257,12 @@ export const DualPieCharts: React.FC = () => {
           <div className="grid grid-cols-4 gap-1 mt-2">
             {mockEmotionData.slice(0, 4).map((item, idx) => (
               <div key={idx} className="text-center">
-                <div 
+                <div
                   className="w-2 h-2 rounded-full mx-auto mb-0.5"
-                  style={{ backgroundColor: EMOTION_COLORS[item.name.toLowerCase() as keyof typeof EMOTION_COLORS] }}
+                  style={{
+                    backgroundColor:
+                      EMOTION_COLORS[item.name.toLowerCase() as keyof typeof EMOTION_COLORS],
+                  }}
                 />
                 <div className="text-xs text-white/60">{item.name}</div>
                 <div className="text-xs font-bold text-white">{item.percentage}%</div>

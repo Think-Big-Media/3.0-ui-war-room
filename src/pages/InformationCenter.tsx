@@ -28,10 +28,7 @@ import {
 import PageLayout from '../components/shared/PageLayout';
 import Card from '../components/shared/Card';
 import { informationService } from '../services/informationService';
-import {
-  type InformationItem,
-  type InformationFilters,
-} from '../types/information';
+import { type InformationItem, type InformationFilters } from '../types/information';
 
 const InformationCenter: React.FC = () => {
   const [activeTab, setActiveTab] = useState('live-stream');
@@ -157,9 +154,7 @@ const InformationCenter: React.FC = () => {
   const formatTimestamp = (timestamp: string) => {
     const date = new Date(timestamp);
     const now = new Date();
-    const diffMinutes = Math.floor(
-      (now.getTime() - date.getTime()) / (1000 * 60)
-    );
+    const diffMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60));
 
     if (diffMinutes < 60) {
       return `${diffMinutes}m ago`;
@@ -174,7 +169,6 @@ const InformationCenter: React.FC = () => {
       pageTitle="Information Center"
       placeholder="Ask War Room about campaign information..."
     >
-
       {/* Tab Navigation */}
       <div className="flex space-x-4 mb-3 overflow-x-auto">
         {[
@@ -212,16 +206,13 @@ const InformationCenter: React.FC = () => {
             {[
               {
                 title: 'Political News',
-                count: items.filter((i) => i.category === 'political-news')
-                  .length,
+                count: items.filter((i) => i.category === 'political-news').length,
                 icon: Globe,
                 color: 'text-blue-400',
               },
               {
                 title: 'Smart Recommendations',
-                count: items.filter(
-                  (i) => i.category === 'smart-recommendations'
-                ).length,
+                count: items.filter((i) => i.category === 'smart-recommendations').length,
                 icon: Target,
                 color: 'text-orange-400',
               },
@@ -232,16 +223,9 @@ const InformationCenter: React.FC = () => {
                 color: 'text-red-400',
               },
             ].map((stat, index) => (
-              <Card
-                key={index}
-                className="text-center"
-                padding="sm"
-                variant="glass"
-              >
+              <Card key={index} className="text-center" padding="sm" variant="glass">
                 <stat.icon className={`w-8 h-8 ${stat.color} mx-auto mb-2`} />
-                <div className="text-2xl font-bold font-condensed text-white/95">
-                  {stat.count}
-                </div>
+                <div className="text-2xl font-bold font-condensed text-white/95">{stat.count}</div>
                 <div className="text-sm text-white/70">{stat.title}</div>
               </Card>
             ))}
@@ -274,16 +258,12 @@ const InformationCenter: React.FC = () => {
                     onClick={() => handleItemClick(item)}
                   >
                     <div className="flex items-start space-x-3">
-                      <div
-                        className={`p-2 rounded-lg ${getCategoryColor(item.category)}`}
-                      >
+                      <div className={`p-2 rounded-lg ${getCategoryColor(item.category)}`}>
                         <IconComponent className="w-4 h-4" />
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center space-x-2 mb-1">
-                          <h4 className="font-medium text-white/95">
-                            {item.title}
-                          </h4>
+                          <h4 className="font-medium text-white/95">{item.title}</h4>
                           <span
                             className={`px-2 py-1 rounded-full text-xs ${getPriorityColor(item.priority)} border`}
                           >
@@ -293,17 +273,11 @@ const InformationCenter: React.FC = () => {
                             <div className="w-2 h-2 bg-blue-500 rounded-full" />
                           )}
                         </div>
-                        <p className="text-white/70 text-sm mb-2">
-                          {item.text}
-                        </p>
+                        <p className="text-white/70 text-sm mb-2">{item.text}</p>
                         <div className="flex items-center space-x-4 text-xs text-white/60">
                           <span>{formatTimestamp(item.timestamp)}</span>
-                          <span className="capitalize">
-                            {item.category.replace('-', ' ')}
-                          </span>
-                          {item.actionable && (
-                            <span className="text-green-400">• Actionable</span>
-                          )}
+                          <span className="capitalize">{item.category.replace('-', ' ')}</span>
+                          {item.actionable && <span className="text-green-400">• Actionable</span>}
                         </div>
                       </div>
                     </div>
@@ -346,17 +320,14 @@ const InformationCenter: React.FC = () => {
                   onChange={(e) =>
                     setFilters((prev) => ({
                       ...prev,
-                      category: e.target
-                        .value as InformationFilters['category'],
+                      category: e.target.value as InformationFilters['category'],
                     }))
                   }
                   className="bg-black/20 border border-white/30 rounded-xl px-3 py-2.5 text-white/70 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer"
                 >
                   <option value="all">All Categories</option>
                   <option value="political-news">Political News</option>
-                  <option value="smart-recommendations">
-                    Smart Recommendations
-                  </option>
+                  <option value="smart-recommendations">Smart Recommendations</option>
                   <option value="team-alerts">Team Alerts</option>
                 </select>
                 <select
@@ -364,8 +335,7 @@ const InformationCenter: React.FC = () => {
                   onChange={(e) =>
                     setFilters((prev) => ({
                       ...prev,
-                      priority: e.target
-                        .value as InformationFilters['priority'],
+                      priority: e.target.value as InformationFilters['priority'],
                     }))
                   }
                   className="bg-black/20 border border-white/30 rounded-xl px-3 py-2.5 text-white/70 focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer"
@@ -393,13 +363,8 @@ const InformationCenter: React.FC = () => {
                 </select>
               </div>
               <div className="flex items-center space-x-2">
-                <span className="text-white/70 text-sm">
-                  {items.length} items
-                </span>
-                <button
-                  onClick={handleMarkAllAsRead}
-                  className="btn-secondary-neutral"
-                >
+                <span className="text-white/70 text-sm">{items.length} items</span>
+                <button onClick={handleMarkAllAsRead} className="btn-secondary-neutral">
                   Mark All Read
                 </button>
               </div>
@@ -420,16 +385,12 @@ const InformationCenter: React.FC = () => {
                   onClick={() => handleItemClick(item)}
                 >
                   <div className="flex items-start space-x-4">
-                    <div
-                      className={`p-2 rounded-lg ${getCategoryColor(item.category)}`}
-                    >
+                    <div className={`p-2 rounded-lg ${getCategoryColor(item.category)}`}>
                       <IconComponent className="w-5 h-5" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-2">
-                        <h4 className="font-medium text-white/95">
-                          {item.title}
-                        </h4>
+                        <h4 className="font-medium text-white/95">{item.title}</h4>
                         <span
                           className={`px-2 py-1 rounded-full text-xs ${getPriorityColor(item.priority)} border`}
                         >
@@ -443,15 +404,9 @@ const InformationCenter: React.FC = () => {
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4 text-sm text-white/60">
                           <span>{formatTimestamp(item.timestamp)}</span>
-                          <span className="capitalize">
-                            {item.category.replace('-', ' ')}
-                          </span>
-                          {item.actionable && (
-                            <span className="text-green-400">• Actionable</span>
-                          )}
-                          {item.metadata?.assignee && (
-                            <span>• {item.metadata.assignee}</span>
-                          )}
+                          <span className="capitalize">{item.category.replace('-', ' ')}</span>
+                          {item.actionable && <span className="text-green-400">• Actionable</span>}
+                          {item.metadata?.assignee && <span>• {item.metadata.assignee}</span>}
                         </div>
                         <div className="flex items-center space-x-2">
                           <button

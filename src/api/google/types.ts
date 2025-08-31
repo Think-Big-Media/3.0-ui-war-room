@@ -48,7 +48,7 @@ export interface GoogleAdsError {
 export interface GoogleAdsHeaders {
   'developer-token': string;
   'login-customer-id'?: string;
-  'Authorization': string;
+  Authorization: string;
   'Content-Type': string;
 }
 
@@ -148,12 +148,21 @@ export interface ReportingQuery {
   entity: 'campaign' | 'ad_group' | 'ad_group_ad' | 'keyword' | 'customer';
   metrics: string[];
   segments?: string[];
-  dateRange: {
-    startDate: string;
-    endDate: string;
-  } | {
-    predefinedRange: 'TODAY' | 'YESTERDAY' | 'LAST_7_DAYS' | 'LAST_30_DAYS' | 'THIS_MONTH' | 'LAST_MONTH' | 'ALL_TIME';
-  };
+  dateRange:
+    | {
+        startDate: string;
+        endDate: string;
+      }
+    | {
+        predefinedRange:
+          | 'TODAY'
+          | 'YESTERDAY'
+          | 'LAST_7_DAYS'
+          | 'LAST_30_DAYS'
+          | 'THIS_MONTH'
+          | 'LAST_MONTH'
+          | 'ALL_TIME';
+      };
   where?: string;
   orderBy?: string;
   limit?: number;

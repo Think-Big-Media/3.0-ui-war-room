@@ -18,8 +18,7 @@ export const pageGradients = {
 };
 
 // Global card styles with perfect shadow treatment
-export const glassCardStyles =
-  'bg-black/15 backdrop-blur-lg rounded-2xl border border-white/20';
+export const glassCardStyles = 'bg-black/15 backdrop-blur-lg rounded-2xl border border-white/20';
 
 // Global card shadow - subtle and tighter, 50% reduced distance
 export const perfectCardShadow =

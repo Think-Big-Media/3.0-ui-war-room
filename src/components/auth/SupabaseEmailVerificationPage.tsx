@@ -27,7 +27,9 @@ export function SupabaseEmailVerificationPage() {
   useEffect(() => {
     const checkVerificationStatus = async () => {
       try {
-        const { data: { session } } = await supabase.auth.getSession();
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
 
         if (session?.user?.email_confirmed_at) {
           setIsVerified(true);
@@ -46,22 +48,22 @@ export function SupabaseEmailVerificationPage() {
 
   // Listen for auth state changes (happens when email is verified)
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        if (event === 'SIGNED_IN' && session?.user?.email_confirmed_at) {
-          setIsVerified(true);
-          // Redirect to dashboard after showing success
-          setTimeout(() => {
-            navigate('/dashboard', { replace: true });
-          }, 2000);
-        } else if (event === 'USER_UPDATED' && session?.user?.email_confirmed_at) {
-          setIsVerified(true);
-          setTimeout(() => {
-            navigate('/dashboard', { replace: true });
-          }, 2000);
-        }
-      },
-    );
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === 'SIGNED_IN' && session?.user?.email_confirmed_at) {
+        setIsVerified(true);
+        // Redirect to dashboard after showing success
+        setTimeout(() => {
+          navigate('/dashboard', { replace: true });
+        }, 2000);
+      } else if (event === 'USER_UPDATED' && session?.user?.email_confirmed_at) {
+        setIsVerified(true);
+        setTimeout(() => {
+          navigate('/dashboard', { replace: true });
+        }, 2000);
+      }
+    });
 
     return () => {
       subscription.unsubscribe();
@@ -139,9 +141,7 @@ export function SupabaseEmailVerificationPage() {
             <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
               Email verified successfully!
             </h2>
-            <p className="mt-2 text-sm text-gray-600">
-              Redirecting you to your dashboard...
-            </p>
+            <p className="mt-2 text-sm text-gray-600">Redirecting you to your dashboard...</p>
           </div>
 
           <div className="mt-4">
@@ -196,21 +196,13 @@ export function SupabaseEmailVerificationPage() {
           <p className="mt-2 text-center text-sm text-gray-600">
             We've sent a verification link to:
           </p>
-          {email && (
-            <p className="mt-1 text-center text-sm font-medium text-gray-900">
-              {email}
-            </p>
-          )}
+          {email && <p className="mt-1 text-center text-sm font-medium text-gray-900">{email}</p>}
         </div>
 
         <div className="bg-blue-50 border border-blue-200 rounded-md p-4">
           <div className="flex">
             <div className="flex-shrink-0">
-              <svg
-                className="h-5 w-5 text-blue-400"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
+              <svg className="h-5 w-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fillRule="evenodd"
                   d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
@@ -219,13 +211,11 @@ export function SupabaseEmailVerificationPage() {
               </svg>
             </div>
             <div className="ml-3 flex-1">
-              <h3 className="text-sm font-medium text-blue-800">
-                Check your inbox
-              </h3>
+              <h3 className="text-sm font-medium text-blue-800">Check your inbox</h3>
               <div className="mt-2 text-sm text-blue-700">
                 <p>
-                  Click the verification link in your email to activate your account.
-                  If you don't see the email, check your spam folder.
+                  Click the verification link in your email to activate your account. If you don't
+                  see the email, check your spam folder.
                 </p>
               </div>
             </div>
@@ -237,11 +227,7 @@ export function SupabaseEmailVerificationPage() {
           <div className="rounded-md bg-green-50 p-4">
             <div className="flex">
               <div className="flex-shrink-0">
-                <svg
-                  className="h-5 w-5 text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
+                <svg className="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path
                     fillRule="evenodd"
                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -250,9 +236,7 @@ export function SupabaseEmailVerificationPage() {
                 </svg>
               </div>
               <div className="ml-3">
-                <p className="text-sm text-green-800">
-                  Verification email sent successfully!
-                </p>
+                <p className="text-sm text-green-800">Verification email sent successfully!</p>
               </div>
             </div>
           </div>
@@ -263,11 +247,7 @@ export function SupabaseEmailVerificationPage() {
           <div className="rounded-md bg-red-50 p-4">
             <div className="flex">
               <div className="flex-shrink-0">
-                <svg
-                  className="h-5 w-5 text-red-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
+                <svg className="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
                   <path
                     fillRule="evenodd"
                     d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
@@ -287,11 +267,7 @@ export function SupabaseEmailVerificationPage() {
           <div className="rounded-md bg-red-50 p-4">
             <div className="flex">
               <div className="flex-shrink-0">
-                <svg
-                  className="h-5 w-5 text-red-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
+                <svg className="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
                   <path
                     fillRule="evenodd"
                     d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
@@ -348,10 +324,7 @@ export function SupabaseEmailVerificationPage() {
 
           {/* Back to login */}
           <div className="text-center">
-            <a
-              href="/login"
-              className="font-medium text-blue-600 hover:text-blue-500"
-            >
+            <a href="/login" className="font-medium text-blue-600 hover:text-blue-500">
               Back to sign in
             </a>
           </div>
@@ -361,10 +334,7 @@ export function SupabaseEmailVerificationPage() {
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             Having trouble?{' '}
-            <a
-              href="/contact"
-              className="font-medium text-blue-600 hover:text-blue-500"
-            >
+            <a href="/contact" className="font-medium text-blue-600 hover:text-blue-500">
               Contact support
             </a>
           </p>

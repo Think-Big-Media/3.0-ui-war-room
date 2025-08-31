@@ -1,17 +1,7 @@
 // Campaign Control Utility Functions
 
 import React from 'react';
-import {
-  Image,
-  Video,
-  FileText,
-  Play,
-  Folder,
-  Target,
-  Users,
-  Activity,
-  Zap,
-} from 'lucide-react';
+import { Image, Video, FileText, Play, Folder, Target, Users, Activity, Zap } from 'lucide-react';
 
 import {
   type ProjectStatus,

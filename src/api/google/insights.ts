@@ -27,7 +27,7 @@ export class GoogleAdsInsightsService {
       segments?: string[];
       orderBy?: string;
       limit?: number;
-    } = {},
+    } = {}
   ): Promise<Array<GoogleAdsRow & { campaign: Campaign; metrics: Metrics }>> {
     const defaultMetrics = [
       'metrics.impressions',
@@ -45,9 +45,7 @@ export class GoogleAdsInsightsService {
       metrics: params.metrics || defaultMetrics,
       segments: params.segments,
       dateRange: params.dateRange || { predefinedRange: 'LAST_30_DAYS' },
-      where: params.campaignIds
-        ? `campaign.id IN (${params.campaignIds.join(', ')})`
-        : undefined,
+      where: params.campaignIds ? `campaign.id IN (${params.campaignIds.join(', ')})` : undefined,
       orderBy: params.orderBy,
       limit: params.limit,
     });
@@ -70,7 +68,7 @@ export class GoogleAdsInsightsService {
       segments?: string[];
       orderBy?: string;
       limit?: number;
-    } = {},
+    } = {}
   ): Promise<Array<GoogleAdsRow & { adGroup: AdGroup; metrics: Metrics }>> {
     const defaultMetrics = [
       'metrics.impressions',
@@ -118,7 +116,7 @@ export class GoogleAdsInsightsService {
       segments?: string[];
       orderBy?: string;
       limit?: number;
-    } = {},
+    } = {}
   ): Promise<GoogleAdsRow[]> {
     const defaultMetrics = [
       'metrics.impressions',
@@ -161,7 +159,7 @@ export class GoogleAdsInsightsService {
    */
   async getAccountSummary(
     customerId: string,
-    dateRange: ReportingQuery['dateRange'] = { predefinedRange: 'LAST_30_DAYS' },
+    dateRange: ReportingQuery['dateRange'] = { predefinedRange: 'LAST_30_DAYS' }
   ): Promise<{
     customer: any;
     metrics: Metrics;
@@ -228,7 +226,7 @@ export class GoogleAdsInsightsService {
       metrics?: string[];
       entityId?: string;
       granularity?: 'DAY' | 'WEEK' | 'MONTH';
-    },
+    }
   ): Promise<Array<GoogleAdsRow & { date: string }>> {
     const defaultMetrics = [
       'metrics.impressions',
@@ -237,11 +235,12 @@ export class GoogleAdsInsightsService {
       'metrics.conversions',
     ];
 
-    const segments = params.granularity === 'MONTH'
-      ? ['segments.month']
-      : params.granularity === 'WEEK'
-        ? ['segments.week']
-        : ['segments.date'];
+    const segments =
+      params.granularity === 'MONTH'
+        ? ['segments.month']
+        : params.granularity === 'WEEK'
+          ? ['segments.week']
+          : ['segments.date'];
 
     const whereConditions = [];
     if (params.entityId) {
@@ -255,7 +254,7 @@ export class GoogleAdsInsightsService {
       segments,
       dateRange: params.dateRange,
       where: whereConditions.length > 0 ? whereConditions.join(' AND ') : undefined,
-      orderBy: `${segments[0]  } DESC`,
+      orderBy: `${segments[0]} DESC`,
     });
 
     const response = await this.client.search<GoogleAdsRow>(customerId, { query });
@@ -273,13 +272,15 @@ export class GoogleAdsInsightsService {
       campaignId?: string;
       adGroupId?: string;
       limit?: number;
-    } = {},
-  ): Promise<Array<{
-    searchTerm: string;
-    campaign: Campaign;
-    adGroup: AdGroup;
-    metrics: Metrics;
-  }>> {
+    } = {}
+  ): Promise<
+    Array<{
+      searchTerm: string;
+      campaign: Campaign;
+      adGroup: AdGroup;
+      metrics: Metrics;
+    }>
+  > {
     const whereConditions = ['search_term_view.status = "ADDED"'];
 
     if (params.campaignId) {
@@ -311,7 +312,7 @@ export class GoogleAdsInsightsService {
 
     const response = await this.client.search<any>(customerId, { query });
 
-    return response.results.map(row => ({
+    return response.results.map((row) => ({
       searchTerm: row.searchTermView.searchTerm,
       campaign: row.campaign,
       adGroup: row.adGroup,
@@ -325,17 +326,14 @@ export class GoogleAdsInsightsService {
   async *streamInsights(
     customerId: string,
     query: CustomerQuery,
-    batchSize = 1000,
+    batchSize = 1000
   ): AsyncGenerator<GoogleAdsRow[], void, unknown> {
     const queryWithLimit: CustomerQuery = {
       ...query,
       pageSize: batchSize,
     };
 
-    for await (const batch of this.client.searchStream<GoogleAdsRow>(
-      customerId,
-      queryWithLimit,
-    )) {
+    for await (const batch of this.client.searchStream<GoogleAdsRow>(customerId, queryWithLimit)) {
       yield this.transformResults(batch);
     }
   }
@@ -352,7 +350,13 @@ export class GoogleAdsInsightsService {
         fields.push('campaign.id', 'campaign.name', 'campaign.status');
         break;
       case 'ad_group':
-        fields.push('ad_group.id', 'ad_group.name', 'ad_group.status', 'campaign.id', 'campaign.name');
+        fields.push(
+          'ad_group.id',
+          'ad_group.name',
+          'ad_group.status',
+          'campaign.id',
+          'campaign.name'
+        );
         break;
       case 'customer':
         fields.push('customer.id', 'customer.descriptive_name', 'customer.currency_code');
@@ -407,14 +411,13 @@ export class GoogleAdsInsightsService {
       return `segments.date DURING ${dateRange.predefinedRange}`;
     }
     return `segments.date BETWEEN '${dateRange.startDate}' AND '${dateRange.endDate}'`;
-
   }
 
   /**
    * Transform API results to consistent format
    */
   private transformResults(results: any[]): any[] {
-    return results.map(row => {
+    return results.map((row) => {
       // Convert cost from micros to currency
       if (row.metrics?.costMicros) {
         row.metrics.cost = parseInt(row.metrics.costMicros) / 1_000_000;
@@ -437,11 +440,7 @@ export class GoogleAdsInsightsService {
   /**
    * Get campaign insights (alias for getCampaignPerformance)
    */
-  async getCampaignInsights(
-    customerId: string,
-    campaignId: string,
-    params: any = {},
-  ) {
+  async getCampaignInsights(customerId: string, campaignId: string, params: any = {}) {
     return this.getCampaignPerformance(customerId, {
       ...params,
       campaignIds: [campaignId],
@@ -476,7 +475,7 @@ export class GoogleAdsInsightsService {
       throw new GoogleAdsValidationError('No customer data found');
     }
 
-    const {metrics} = result;
+    const { metrics } = result;
     const totalSpend = parseInt(metrics.costMicros || '0') / 1_000_000;
 
     return {

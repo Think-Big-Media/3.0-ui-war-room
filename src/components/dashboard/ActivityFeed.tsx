@@ -70,8 +70,7 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
   const wsConnection = useAdMonitorWebSocket();
 
   const activities = (activityData as any)?.activities || [];
-  const isConnected =
-    (!error && activities.length > 0) || wsConnection.isConnected;
+  const isConnected = (!error && activities.length > 0) || wsConnection.isConnected;
 
   // Activity icon mapping
   const getActivityIcon = (type: string) => {
@@ -134,9 +133,7 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
   const getPriorityIndicator = (priority?: string) => {
     switch (priority) {
       case 'critical':
-        return (
-          <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-        );
+        return <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />;
       case 'high':
         return <div className="w-2 h-2 bg-orange-500 rounded-full" />;
       case 'medium':
@@ -164,9 +161,7 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
             >
               <Icon className="w-4 h-4 text-gray-400" />
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-gray-900 truncate">
-                  {activity.title}
-                </p>
+                <p className="text-sm text-gray-900 truncate">{activity.title}</p>
               </div>
               <span className="text-xs text-gray-400">
                 {formatDistanceToNow(new Date(activity.timestamp), {
@@ -207,9 +202,7 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
             <div
               key={activity.id}
               className={`group relative flex items-start space-x-3 p-4 rounded-xl border border-gray-100 hover:border-gray-200 hover:shadow-md transition-all cursor-pointer ${
-                activity.priority === 'critical'
-                  ? 'border-red-200 bg-red-50/30'
-                  : 'bg-white'
+                activity.priority === 'critical' ? 'border-red-200 bg-red-50/30' : 'bg-white'
               }`}
               onClick={() => onActivityClick?.(activity)}
             >
@@ -232,9 +225,7 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
                     <p className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
                       {activity.title}
                     </p>
-                    <p className="text-sm text-gray-600 mt-0.5">
-                      {activity.description}
-                    </p>
+                    <p className="text-sm text-gray-600 mt-0.5">{activity.description}</p>
 
                     {/* Metadata */}
                     {activity.metadata && (
@@ -296,12 +287,8 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
                     {activity.status === 'success' && (
                       <CheckCircle className="w-3 h-3 text-green-500" />
                     )}
-                    {activity.status === 'pending' && (
-                      <Clock className="w-3 h-3 text-yellow-500" />
-                    )}
-                    {activity.status === 'error' && (
-                      <XCircle className="w-3 h-3 text-red-500" />
-                    )}
+                    {activity.status === 'pending' && <Clock className="w-3 h-3 text-yellow-500" />}
+                    {activity.status === 'error' && <XCircle className="w-3 h-3 text-red-500" />}
                     {activity.status === 'warning' && (
                       <AlertCircle className="w-3 h-3 text-amber-500" />
                     )}

@@ -17,8 +17,8 @@ export default function MinimalTest() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        zIndex: 999999999
-      }
+        zIndex: 999999999,
+      },
     },
     'MINIMAL TEST WORKS!'
   );

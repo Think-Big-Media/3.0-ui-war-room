@@ -5,7 +5,10 @@
  */
 
 import { useEffect, useCallback, useRef, useMemo } from 'react';
-import { getDashboardWebSocket, destroyDashboardWebSocket } from '../lib/websocket/dashboardWebSocket';
+import {
+  getDashboardWebSocket,
+  destroyDashboardWebSocket,
+} from '../lib/websocket/dashboardWebSocket';
 import { useDashboardStore } from '../store/dashboardStore';
 
 interface UseDashboardWebSocketOptions {
@@ -18,17 +21,16 @@ interface UseDashboardWebSocketOptions {
 
 export function useDashboardWebSocket(options: UseDashboardWebSocketOptions = {}) {
   // Memoize options to prevent unnecessary effect re-runs
-  const memoizedOptions = useMemo(() => ({
-    autoConnect: options.autoConnect ?? true,
-    reconnectOnMount: options.reconnectOnMount ?? true,
-    events: options.events ?? {},
-  }), [options.autoConnect, options.reconnectOnMount, options.events]);
+  const memoizedOptions = useMemo(
+    () => ({
+      autoConnect: options.autoConnect ?? true,
+      reconnectOnMount: options.reconnectOnMount ?? true,
+      events: options.events ?? {},
+    }),
+    [options.autoConnect, options.reconnectOnMount, options.events]
+  );
 
-  const {
-    autoConnect,
-    reconnectOnMount,
-    events,
-  } = memoizedOptions;
+  const { autoConnect, reconnectOnMount, events } = memoizedOptions;
 
   const wsRef = useRef(getDashboardWebSocket());
   const unsubscribeRef = useRef<(() => void)[]>([]);
@@ -50,7 +52,7 @@ export function useDashboardWebSocket(options: UseDashboardWebSocketOptions = {}
 
     return () => {
       // Unsubscribe from all events
-      unsubscribeRef.current.forEach(unsubscribe => unsubscribe());
+      unsubscribeRef.current.forEach((unsubscribe) => unsubscribe());
       unsubscribeRef.current = [];
     };
   }, [eventEntries]);
@@ -85,24 +87,38 @@ export function useDashboardWebSocket(options: UseDashboardWebSocketOptions = {}
   }, []);
 
   // Memoize return object to prevent unnecessary re-renders
-  return useMemo(() => ({
-    // Connection status
-    connected: wsStatus.connected,
-    reconnecting: wsStatus.reconnecting,
-    lastConnected: wsStatus.lastConnected,
-    reconnectAttempts: wsStatus.reconnectAttempts,
-    queuedMessages: wsStatus.queuedMessages,
-    error,
+  return useMemo(
+    () => ({
+      // Connection status
+      connected: wsStatus.connected,
+      reconnecting: wsStatus.reconnecting,
+      lastConnected: wsStatus.lastConnected,
+      reconnectAttempts: wsStatus.reconnectAttempts,
+      queuedMessages: wsStatus.queuedMessages,
+      error,
 
-    // Connection methods
-    connect,
-    disconnect,
-    sendMessage,
-    subscribe,
+      // Connection methods
+      connect,
+      disconnect,
+      sendMessage,
+      subscribe,
 
-    // WebSocket instance (for advanced usage)
-    ws: wsRef.current,
-  }), [wsStatus.connected, wsStatus.reconnecting, wsStatus.lastConnected, wsStatus.reconnectAttempts, wsStatus.queuedMessages, error, connect, disconnect, sendMessage, subscribe]);
+      // WebSocket instance (for advanced usage)
+      ws: wsRef.current,
+    }),
+    [
+      wsStatus.connected,
+      wsStatus.reconnecting,
+      wsStatus.lastConnected,
+      wsStatus.reconnectAttempts,
+      wsStatus.queuedMessages,
+      error,
+      connect,
+      disconnect,
+      sendMessage,
+      subscribe,
+    ]
+  );
 }
 
 // Hook for global WebSocket management
@@ -122,18 +138,21 @@ export function useWebSocketManager() {
   }, []);
 
   // Memoize return object
-  return useMemo(() => ({
-    connect,
-    disconnect,
-    destroy,
-  }), [connect, disconnect, destroy]);
+  return useMemo(
+    () => ({
+      connect,
+      disconnect,
+      destroy,
+    }),
+    [connect, disconnect, destroy]
+  );
 }
 
 // Hook for subscribing to specific events
 export function useWebSocketEvent<T = any>(
   event: string,
   handler: (data: T) => void,
-  deps: React.DependencyList = [],
+  deps: React.DependencyList = []
 ) {
   const wsRef = useRef(getDashboardWebSocket());
 
@@ -160,11 +179,14 @@ export function useMetricsUpdates() {
   useWebSocketEvent('google_metrics', googleMetricsHandler);
 
   // Memoize return object
-  return useMemo(() => ({
-    metaMetrics,
-    googleMetrics,
-    aggregatedMetrics,
-  }), [metaMetrics, googleMetrics, aggregatedMetrics]);
+  return useMemo(
+    () => ({
+      metaMetrics,
+      googleMetrics,
+      aggregatedMetrics,
+    }),
+    [metaMetrics, googleMetrics, aggregatedMetrics]
+  );
 }
 
 export function useCrisisAlerts() {
@@ -188,11 +210,14 @@ export function useCrisisAlerts() {
   useWebSocketEvent('crisis_alert', crisisAlertHandler);
 
   // Memoize return object
-  return useMemo(() => ({
-    alerts,
-    unacknowledgedCount,
-    acknowledgeAlert,
-  }), [alerts, unacknowledgedCount, acknowledgeAlert]);
+  return useMemo(
+    () => ({
+      alerts,
+      unacknowledgedCount,
+      acknowledgeAlert,
+    }),
+    [alerts, unacknowledgedCount, acknowledgeAlert]
+  );
 }
 
 export function useSentimentData() {
@@ -206,8 +231,11 @@ export function useSentimentData() {
   useWebSocketEvent('sentiment_update', sentimentHandler);
 
   // Memoize return object
-  return useMemo(() => ({
-    sentiment,
-    sentimentHistory,
-  }), [sentiment, sentimentHistory]);
+  return useMemo(
+    () => ({
+      sentiment,
+      sentimentHistory,
+    }),
+    [sentiment, sentimentHistory]
+  );
 }

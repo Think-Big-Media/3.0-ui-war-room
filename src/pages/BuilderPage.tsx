@@ -9,10 +9,7 @@ import { BuilderContent } from '../components/BuilderContent';
 const BuilderPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
-      <BuilderContent 
-        modelName="page"
-        apiKey={import.meta.env.VITE_BUILDER_IO_KEY}
-      />
+      <BuilderContent modelName="page" apiKey={import.meta.env.VITE_BUILDER_IO_KEY} />
     </div>
   );
 };

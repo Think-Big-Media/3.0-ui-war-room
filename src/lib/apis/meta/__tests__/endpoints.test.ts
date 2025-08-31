@@ -62,7 +62,8 @@ describe('MetaEndpoints', () => {
 
         expect(mockClient.request).toHaveBeenCalledWith('/me/adaccounts', {
           params: {
-            fields: 'id,name,account_status,currency,timezone_name,amount_spent,balance,account_id,business',
+            fields:
+              'id,name,account_status,currency,timezone_name,amount_spent,balance,account_id,business',
             limit: 25,
           },
         });
@@ -121,7 +122,8 @@ describe('MetaEndpoints', () => {
 
         expect(mockClient.request).toHaveBeenCalledWith(`/${accountId}`, {
           params: {
-            fields: 'id,name,account_status,currency,timezone_name,amount_spent,balance,account_id,business',
+            fields:
+              'id,name,account_status,currency,timezone_name,amount_spent,balance,account_id,business',
           },
         });
         expect(result).toEqual(mockAccount);
@@ -156,7 +158,8 @@ describe('MetaEndpoints', () => {
 
         expect(mockClient.request).toHaveBeenCalledWith(`/${accountId}/campaigns`, {
           params: {
-            fields: 'id,name,status,objective,created_time,updated_time,start_time,stop_time,budget_remaining,daily_budget,lifetime_budget',
+            fields:
+              'id,name,status,objective,created_time,updated_time,start_time,stop_time,budget_remaining,daily_budget,lifetime_budget',
             limit: 25,
           },
         });
@@ -246,8 +249,7 @@ describe('MetaEndpoints', () => {
           // Missing objective, status, special_ad_categories
         } as any;
 
-        await expect(endpoints.createCampaign(accountId, incompleteCampaign))
-          .rejects.toThrow();
+        await expect(endpoints.createCampaign(accountId, incompleteCampaign)).rejects.toThrow();
       });
     });
 
@@ -310,8 +312,9 @@ describe('MetaEndpoints', () => {
 
         mockClient.request.mockRejectedValue(error);
 
-        await expect(endpoints.deleteCampaign(campaignId))
-          .rejects.toThrow('Campaign has active ads');
+        await expect(endpoints.deleteCampaign(campaignId)).rejects.toThrow(
+          'Campaign has active ads'
+        );
       });
     });
   });
@@ -342,7 +345,8 @@ describe('MetaEndpoints', () => {
 
         expect(mockClient.request).toHaveBeenCalledWith(`/${accountId}/insights`, {
           params: {
-            fields: 'account_id,impressions,clicks,spend,reach,frequency,cpm,ctr,cpc,cpp,actions,conversions,conversion_values',
+            fields:
+              'account_id,impressions,clicks,spend,reach,frequency,cpm,ctr,cpc,cpp,actions,conversions,conversion_values',
             time_range: JSON.stringify({ since: expect.any(String), until: expect.any(String) }),
             level: 'account',
           },
@@ -452,10 +456,10 @@ describe('MetaEndpoints', () => {
         const result = await endpoints.getBatchCampaignInsights(campaignIds);
 
         expect(mockClient.batchRequest).toHaveBeenCalledWith(
-          campaignIds.map(id => ({
+          campaignIds.map((id) => ({
             method: 'GET',
             relative_url: `${id}/insights?fields=campaign_id,impressions,clicks,spend,reach,frequency,cpm,ctr,cpc,cpp,actions,conversions,conversion_values&time_range=${encodeURIComponent(JSON.stringify({ since: expect.any(String), until: expect.any(String) }))}&level=campaign`,
-          })),
+          }))
         );
         expect(result).toEqual(mockBatchResponse);
       });
@@ -514,16 +518,16 @@ describe('MetaEndpoints', () => {
         special_ad_categories: [],
       };
 
-      await expect(endpoints.createCampaign('act_123', invalidCampaign))
-        .rejects.toThrow();
+      await expect(endpoints.createCampaign('act_123', invalidCampaign)).rejects.toThrow();
     });
 
     it('should validate date ranges', async () => {
       const invalidSince = new Date('invalid-date');
       const until = new Date();
 
-      await expect(endpoints.getAccountInsights('act_123', { since: invalidSince, until }))
-        .rejects.toThrow();
+      await expect(
+        endpoints.getAccountInsights('act_123', { since: invalidSince, until })
+      ).rejects.toThrow();
     });
 
     it('should validate budget values', async () => {
@@ -535,8 +539,9 @@ describe('MetaEndpoints', () => {
         special_ad_categories: [],
       };
 
-      await expect(endpoints.createCampaign('act_123', campaignWithNegativeBudget))
-        .rejects.toThrow();
+      await expect(
+        endpoints.createCampaign('act_123', campaignWithNegativeBudget)
+      ).rejects.toThrow();
     });
   });
 

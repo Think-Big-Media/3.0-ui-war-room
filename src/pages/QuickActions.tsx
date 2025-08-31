@@ -1,12 +1,5 @@
 import type React from 'react';
-import {
-  TrendingUp,
-  Search,
-  Activity,
-  FileText,
-  Zap,
-  Share2,
-} from 'lucide-react';
+import { TrendingUp, Search, Activity, FileText, Zap, Share2 } from 'lucide-react';
 import Card from '../components/shared/Card';
 import { BRAND_TOKENS } from '../tokens/colors';
 
@@ -61,9 +54,7 @@ const QuickActions: React.FC = () => {
           <div className="p-2 lg:p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 hoverable transition-all duration-300">
             <Zap className="w-5 h-5 lg:w-6 lg:h-6 text-white/95" />
           </div>
-          <h3 className="section-header-large ml-3">
-            QUICK ACTIONS
-          </h3>
+          <h3 className="section-header-large ml-3">QUICK ACTIONS</h3>
         </div>
       </div>
 
@@ -81,9 +72,7 @@ const QuickActions: React.FC = () => {
 
       <div className="mt-4 lg:mt-6 pt-4 border-t border-white/20">
         <div className="flex items-center justify-between text-sm">
-          <span className="footer-text text-white/75">
-            Quick access to key features
-          </span>
+          <span className="footer-text text-white/75">Quick access to key features</span>
           <span className="footer-text status-active">Ready</span>
         </div>
       </div>

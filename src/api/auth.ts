@@ -18,11 +18,11 @@ export async function loginUser(credentials: LoginRequest): Promise<AuthResponse
     },
     body: JSON.stringify(credentials),
   });
-  
+
   if (!response.ok) {
     throw new Error('Login failed');
   }
-  
+
   return response.json();
 }
 
@@ -37,11 +37,11 @@ export async function registerUser(userData: RegisterRequest): Promise<AuthRespo
     },
     body: JSON.stringify(userData),
   });
-  
+
   if (!response.ok) {
     throw new Error('Registration failed');
   }
-  
+
   return response.json();
 }
 
@@ -52,14 +52,14 @@ export async function getCurrentUser(): Promise<User> {
   const token = localStorage.getItem('auth_token');
   const response = await fetch(`${API_BASE}/api/v1/auth/me`, {
     headers: {
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
-  
+
   if (!response.ok) {
     throw new Error('Failed to fetch user profile');
   }
-  
+
   return response.json();
 }
 
@@ -71,10 +71,10 @@ export async function logoutUser(): Promise<void> {
   await fetch(`${API_BASE}/api/v1/auth/logout`, {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
-  
+
   localStorage.removeItem('auth_token');
 }
 
@@ -90,10 +90,10 @@ export async function refreshToken(): Promise<AuthResponse> {
     },
     body: JSON.stringify({ refresh_token: refreshToken }),
   });
-  
+
   if (!response.ok) {
     throw new Error('Token refresh failed');
   }
-  
+
   return response.json();
 }

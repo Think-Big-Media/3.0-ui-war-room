@@ -58,32 +58,42 @@
   }
 
   /* Override only within war-room-dashboard context, not globally */
-  .war-room-dashboard body {
-    font-family:
-      -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", sans-serif;
-    /* Remove opaque background to allow gradient to show through */
+  .war-room-dashboard {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
     color: #e2e8f0;
-    width: 100vw;
+    /* Scale entire dashboard up by 3% to match other page widths */
+    transform: scale(1.03);
+    transform-origin: top center;
+    width: 100%;
     min-height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
   }
 
-  /* Main Dashboard Container - transparent to show gradient */
-  .dashboard-wrapper {
-    max-width: 1920px;
-    margin: 0 auto;
-    padding: 15px;
-    background: transparent;
-  }
+  /* Dashboard-wrapper removed - now using PageLayout's container directly */
 
   /* Main Two Equal Columns - transparent to show gradient */
   .dashboard {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.25rem; /* 20px - consistent gap */
     width: 100%;
     background: transparent;
+    padding: 0.3125rem; /* Restore some padding - 5px */
+  }
+
+  /* Ensure columns are truly equal and fill available space */
+  .dashboard .left-column,
+  .dashboard .right-column {
+    min-width: 0; /* Allow shrinking below content width */
+    width: 100%; /* Fill available column space */
+  }
+
+  /* Ensure all cards within columns fill the column width */
+  .dashboard .left-column > *,
+  .dashboard .right-column > * {
+    width: 100%;
+    min-width: 0;
   }
 
   /* Card Base */
@@ -92,6 +102,20 @@
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 8px;
     padding: 12px;
+  }
+  
+  /* Hover effect with scaling */
+  .hoverable {
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .hoverable:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.2);
+    z-index: 10;
   }
 
   .card-title {
@@ -103,6 +127,35 @@
     font-weight: 600;
   }
 
+  /* Additional Responsive Breakpoints for Sidebar */
+  @media (max-width: 1580px) {
+    /* When sidebar is open (approx 300px), adjust layout */
+    .dashboard {
+      gap: 15px;
+    }
+    
+    .political-map .map-container {
+      flex-direction: column;
+    }
+  }
+  
+  @media (max-width: 1380px) {
+    /* Tighter layout with sidebar */
+    .dashboard {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    
+    /* dashboard-wrapper removed - padding handled by PageLayout */
+  }
+  
+  @media (max-width: 1280px) {
+    /* Switch to single column before tablet breakpoint */
+    .dashboard {
+      grid-template-columns: 1fr;
+    }
+  }
+  
   /* Responsive Design - Tablet and Mobile */
   @media (max-width: 1024px) {
     /* Hide swing state text on tablets */
@@ -206,21 +259,31 @@
     flex-direction: column;
     gap: 15px;
     background: transparent;
+    min-width: 0;
   }
 
   /* Political Map - Top Left */
   .political-map {
     height: 280px;
+    min-height: 280px;
     display: flex;
     flex-direction: column;
+    container-type: inline-size;
     /* Let Tailwind bg-white/10 work properly */
     /* opacity and filter at default values */
+  }
+  
+  /* Container query for political map */
+  @container (max-width: 500px) {
+    .political-map .map-container {
+      flex-direction: column;
+    }
   }
 
   .map-container {
     flex: 1;
-    display: grid;
-    grid-template-columns: 460px 1fr;
+    display: flex;
+    flex-direction: row;
     gap: 10px;
     /* No background override - let parent handle it */
   }
@@ -264,7 +327,7 @@
   .swot-intelligence {
     flex: 1;
     display: grid;
-    grid-template-columns: 460px 1fr;
+    grid-template-columns: 1fr;
     gap: 20px;
   }
 
@@ -274,13 +337,11 @@
   }
 
   .radar-container {
-    width: 467px;
-    height: 467px;
-    background: radial-gradient(
-      circle at center,
-      rgba(16, 185, 129, 0.05),
-      transparent
-    );
+    width: 100%;
+    max-width: min(467px, 100%);
+    height: min(467px, 100%);
+    aspect-ratio: 1;
+    background: radial-gradient(circle at center, rgba(16, 185, 129, 0.05), transparent);
     border: 2px solid rgba(16, 185, 129, 0.2);
     position: relative;
     display: flex;
@@ -402,7 +463,7 @@
   }
 
   .feed-container::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -414,7 +475,7 @@
   }
 
   .feed-container::after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 0;
     left: 0;
@@ -493,6 +554,7 @@
     flex-direction: column;
     gap: 15px;
     background: transparent;
+    min-width: 0;
   }
 
   /* Phrase Cloud */
@@ -577,8 +639,7 @@
       font-weight: 600;
     }
     10% {
-      transform: translateY(-50%) translateZ(45px) translateY(-20px)
-        translateX(-15px);
+      transform: translateY(-50%) translateZ(45px) translateY(-20px) translateX(-15px);
       font-size: 18px;
       opacity: 0.9;
       filter: blur(0.5px);
@@ -586,8 +647,7 @@
       z-index: 90;
     }
     20% {
-      transform: translateY(-50%) translateZ(25px) translateY(-35px)
-        translateX(-25px);
+      transform: translateY(-50%) translateZ(25px) translateY(-35px) translateX(-25px);
       font-size: 15px;
       opacity: 0.7;
       filter: blur(2px);
@@ -595,8 +655,7 @@
       z-index: 50;
     }
     30% {
-      transform: translateY(-50%) translateZ(0px) translateY(-45px)
-        translateX(-30px);
+      transform: translateY(-50%) translateZ(0px) translateY(-45px) translateX(-30px);
       font-size: 13px;
       opacity: 0.5;
       filter: blur(3px);
@@ -604,8 +663,7 @@
       z-index: 20;
     }
     40% {
-      transform: translateY(-50%) translateZ(-30px) translateY(-40px)
-        translateX(-25px);
+      transform: translateY(-50%) translateZ(-30px) translateY(-40px) translateX(-25px);
       font-size: 11px;
       opacity: 0.3;
       filter: blur(4px);
@@ -621,8 +679,7 @@
       z-index: 1;
     }
     60% {
-      transform: translateY(-50%) translateZ(-30px) translateY(40px)
-        translateX(25px);
+      transform: translateY(-50%) translateZ(-30px) translateY(40px) translateX(25px);
       font-size: 11px;
       opacity: 0.3;
       filter: blur(4px);
@@ -630,8 +687,7 @@
       z-index: 5;
     }
     70% {
-      transform: translateY(-50%) translateZ(0px) translateY(45px)
-        translateX(30px);
+      transform: translateY(-50%) translateZ(0px) translateY(45px) translateX(30px);
       font-size: 13px;
       opacity: 0.5;
       filter: blur(3px);
@@ -639,8 +695,7 @@
       z-index: 20;
     }
     80% {
-      transform: translateY(-50%) translateZ(25px) translateY(35px)
-        translateX(25px);
+      transform: translateY(-50%) translateZ(25px) translateY(35px) translateX(25px);
       font-size: 15px;
       opacity: 0.7;
       filter: blur(2px);
@@ -648,8 +703,7 @@
       z-index: 50;
     }
     90% {
-      transform: translateY(-50%) translateZ(45px) translateY(20px)
-        translateX(15px);
+      transform: translateY(-50%) translateZ(45px) translateY(20px) translateX(15px);
       font-size: 18px;
       opacity: 0.9;
       filter: blur(0.5px);
@@ -853,7 +907,7 @@
   }
 
   /* Original phrase animation is handled by ellipticalRotate with individual delays */
-  
+
   /* Additional Responsive Enhancements */
   @media (max-width: 1440px) {
     /* Adjust for smaller desktop screens */
@@ -862,46 +916,46 @@
       padding: 12px;
     }
   }
-  
+
   @media (max-width: 1024px) {
     /* Tablet landscape adjustments */
     .left-column,
     .right-column {
       width: 100%;
     }
-    
+
     /* Reduce SWOT radar size on tablets */
     .fresh-swot-radar {
       height: 350px;
     }
-    
+
     /* Adjust metric boxes for tablets */
     .metric-boxes-container {
       grid-template-columns: repeat(2, 1fr);
       height: auto;
     }
-    
+
     .metric-box-square {
       height: 100px;
     }
-    
+
     /* Simplify phrase carousel on tablets */
     .phrase-carousel {
       height: 150px;
     }
-    
+
     /* Hide less important elements */
     .map-data-item {
       font-size: 10px;
     }
   }
-  
+
   @media (max-width: 768px) {
     /* Mobile phone adjustments */
     .dashboard {
       gap: 8px;
     }
-    
+
     /* Stack all cards vertically on mobile */
     .left-column,
     .right-column {
@@ -909,83 +963,82 @@
       flex-direction: column;
       gap: 8px;
     }
-    
+
     /* Reduce political map height on mobile */
     .political-map {
       height: 200px;
     }
-    
+
     /* Simplify SWOT radar on mobile */
     .fresh-swot-radar {
       height: 280px;
     }
-    
+
     /* Adjust phrase cloud for mobile */
     .phrase-cloud {
       height: 180px;
     }
-    
+
     /* Simplify metrics grid on mobile */
     .metrics-table {
       grid-template-columns: repeat(2, 1fr);
       gap: 6px;
     }
-    
+
     /* Smaller metric cells on mobile */
     .metric-cell {
       padding: 6px;
     }
-    
+
     .metric-value {
       font-size: 14px !important;
     }
-    
+
     .metric-label {
       font-size: 9px !important;
     }
-    
+
     /* Adjust quick actions for mobile */
     .quick-actions {
       height: 150px;
     }
-    
+
     /* Simplify social posts on mobile */
     .social-grid {
       grid-template-columns: repeat(3, 1fr);
     }
-    
+
     /* Add padding to account for bottom keywords bar */
     .dashboard-footer {
       height: 80px;
     }
   }
-  
+
   @media (max-width: 480px) {
     /* Small mobile adjustments */
     .dashboard-wrapper {
       padding: 6px;
     }
-    
+
     .card {
       padding: 6px;
       border-radius: 4px;
     }
-    
+
     /* Even smaller fonts for tiny screens */
     .card-title {
       font-size: 10px;
     }
-    
+
     /* 2x2 grid for metrics on small phones */
     .metric-boxes-container {
       grid-template-columns: repeat(2, 1fr);
       gap: 6px;
     }
-    
+
     /* Smaller social grid on small phones */
     .social-grid {
       grid-template-columns: repeat(2, 1fr);
     }
   }
-
 }

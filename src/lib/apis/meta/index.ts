@@ -34,8 +34,10 @@ export function createMetaApi(config?: Partial<MetaConfig>) {
     // Direct endpoint access
     getAdAccounts: () => endpoints.getAdAccounts(),
     getCampaigns: (accountId: string) => endpoints.getCampaigns(accountId),
-    getAccountInsights: (accountId: string, params?: any) => endpoints.getAccountInsights(accountId, params),
-    getCampaignInsights: (campaignId: string, params?: any) => endpoints.getCampaignInsights(campaignId, params),
+    getAccountInsights: (accountId: string, params?: any) =>
+      endpoints.getAccountInsights(accountId, params),
+    getCampaignInsights: (campaignId: string, params?: any) =>
+      endpoints.getCampaignInsights(campaignId, params),
     getAggregatedInsights: (accountId: string, campaignIds?: string[], params?: any) =>
       endpoints.getAggregatedInsights(accountId, campaignIds, params),
   };

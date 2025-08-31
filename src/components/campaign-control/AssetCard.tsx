@@ -13,12 +13,7 @@ interface AssetCardProps {
   onShare?: (asset: Asset) => void;
 }
 
-const AssetCard: React.FC<AssetCardProps> = ({
-  asset,
-  onView,
-  onDownload,
-  onShare,
-}) => {
+const AssetCard: React.FC<AssetCardProps> = ({ asset, onView, onDownload, onShare }) => {
   return (
     <Card className="cursor-pointer hoverable" padding="md" variant="glass">
       <div className="flex items-start justify-between mb-3">
@@ -63,10 +58,7 @@ const AssetCard: React.FC<AssetCardProps> = ({
         </div>
         <div className="flex items-center space-x-2 pb-4">
           {asset.tags.map((tag, index) => (
-            <span
-              key={index}
-              className="bg-white/20 text-white/80 px-2 py-1 rounded text-xs"
-            >
+            <span key={index} className="bg-white/20 text-white/80 px-2 py-1 rounded text-xs">
               {tag}
             </span>
           ))}

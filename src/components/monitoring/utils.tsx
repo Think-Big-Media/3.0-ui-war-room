@@ -75,10 +75,20 @@ export const formatNumber = (num: number): string => {
 
 // Get sentiment percentage width for progress bars
 export const getSentimentWidth = (percentage: number): string => {
-  if (percentage >= 75) {return 'w-3/4';}
-  if (percentage >= 50) {return 'w-1/2';}
-  if (percentage >= 25) {return 'w-1/4';}
-  if (percentage >= 20) {return 'w-1/5';}
-  if (percentage >= 12) {return 'w-1/12';}
+  if (percentage >= 75) {
+    return 'w-3/4';
+  }
+  if (percentage >= 50) {
+    return 'w-1/2';
+  }
+  if (percentage >= 25) {
+    return 'w-1/4';
+  }
+  if (percentage >= 20) {
+    return 'w-1/5';
+  }
+  if (percentage >= 12) {
+    return 'w-1/12';
+  }
   return 'w-0';
 };

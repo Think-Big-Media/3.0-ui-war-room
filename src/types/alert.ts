@@ -1,12 +1,7 @@
 // Alert types for Alert Center
 export interface Alert {
   id: string;
-  type:
-    | 'crisis'
-    | 'opportunity'
-    | 'polling-shift'
-    | 'ad-violation'
-    | 'media-coverage';
+  type: 'crisis' | 'opportunity' | 'polling-shift' | 'ad-violation' | 'media-coverage';
   title: string;
   summary: string;
   timestamp: string;

@@ -1,14 +1,6 @@
 import type React from 'react';
 import { useState, useRef, useEffect } from 'react';
-import {
-  Send,
-  Mic,
-  Paperclip,
-  Sparkles,
-  MessageCircle,
-  X,
-  Clock,
-} from 'lucide-react';
+import { Send, Mic, Paperclip, Sparkles, MessageCircle, X, Clock } from 'lucide-react';
 import { perfectCardShadow } from '../lib/utils';
 
 interface ChatMessage {
@@ -38,9 +30,7 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
   const [message, setMessage] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-  const [chatState, setChatState] = useState<'history' | 'chat' | 'closed'>(
-    'closed'
-  );
+  const [chatState, setChatState] = useState<'history' | 'chat' | 'closed'>('closed');
   const [activeChat, setActiveChat] = useState<ChatSession | null>(null);
   const [currentMessages, setCurrentMessages] = useState<ChatMessage[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -168,9 +158,7 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
 
   const formatTime = (date: Date) => {
     const now = new Date();
-    const diffInDays = Math.floor(
-      (now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24)
-    );
+    const diffInDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
 
     if (diffInDays === 0) {
       return 'Today';
@@ -224,9 +212,7 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
             {/* Chat Window Content */}
             <div
               className={`bg-white/90 rounded-2xl overflow-hidden ${
-                chatState === 'history'
-                  ? 'h-[300px]'
-                  : 'min-h-[300px] max-h-[50vh]'
+                chatState === 'history' ? 'h-[300px]' : 'min-h-[300px] max-h-[50vh]'
               }`}
             >
               {/* Chat History State */}
@@ -248,16 +234,12 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
                           className="w-full p-3 bg-white/60 hover:bg-white/80 rounded-xl border border-gray-200/50 hover:border-gray-300/50 transition-all duration-200 text-left"
                         >
                           <div className="flex justify-between items-start mb-1">
-                            <h4 className="text-gray-800 font-medium text-sm">
-                              {chat.title}
-                            </h4>
+                            <h4 className="text-gray-800 font-medium text-sm">{chat.title}</h4>
                             <span className="text-gray-500 text-xs">
                               {formatTime(chat.timestamp)}
                             </span>
                           </div>
-                          <p className="text-gray-600 text-xs line-clamp-2">
-                            {chat.lastMessage}
-                          </p>
+                          <p className="text-gray-600 text-xs line-clamp-2">{chat.lastMessage}</p>
                         </motion.button>
                       ))}
                     </div>
@@ -271,9 +253,7 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
                   {/* Chat Header */}
                   {activeChat && (
                     <div className="p-3 border-b border-gray-200/50 bg-white/50">
-                      <h3 className="text-gray-800 font-medium text-sm">
-                        {activeChat.title}
-                      </h3>
+                      <h3 className="text-gray-800 font-medium text-sm">{activeChat.title}</h3>
                     </div>
                   )}
 
@@ -287,9 +267,7 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
                         >
                           <div
                             className={`max-w-[80%] p-3 rounded-lg text-sm ${
-                              msg.isUser
-                                ? 'bg-gray-200 text-black'
-                                : 'bg-gray-700 text-white'
+                              msg.isUser ? 'bg-gray-200 text-black' : 'bg-gray-700 text-white'
                             }`}
                           >
                             {msg.text}

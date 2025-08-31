@@ -16,11 +16,7 @@ import {
   type ProjectFilters,
   type AssetFilters,
 } from '../../types/campaign';
-import {
-  mockProjects,
-  mockAssets,
-  mockActivities,
-} from '../../data/campaignData';
+import { mockProjects, mockAssets, mockActivities } from '../../data/campaignData';
 import { createLogger } from '../../utils/logger';
 
 const logger = createLogger('CampaignControl');
@@ -56,35 +52,24 @@ const CampaignControl: React.FC = () => {
   // Filter functions
   const filteredProjects = mockProjects.filter((project) => {
     const matchesSearch =
-      project.title
-        .toLowerCase()
-        .includes(projectFilters.search.toLowerCase()) ||
-      project.description
-        .toLowerCase()
-        .includes(projectFilters.search.toLowerCase());
+      project.title.toLowerCase().includes(projectFilters.search.toLowerCase()) ||
+      project.description.toLowerCase().includes(projectFilters.search.toLowerCase());
     const matchesStatus =
-      projectFilters.status === 'all' ||
-      project.status === projectFilters.status;
+      projectFilters.status === 'all' || project.status === projectFilters.status;
     return matchesSearch && matchesStatus;
   });
 
   const filteredAssets = mockAssets.filter((asset) => {
     const matchesSearch =
       asset.name.toLowerCase().includes(assetFilters.search.toLowerCase()) ||
-      asset.tags.some((tag) =>
-        tag.toLowerCase().includes(assetFilters.search.toLowerCase())
-      );
+      asset.tags.some((tag) => tag.toLowerCase().includes(assetFilters.search.toLowerCase()));
     const matchesCategory =
-      assetFilters.category === 'all' ||
-      asset.category === assetFilters.category;
+      assetFilters.category === 'all' || asset.category === assetFilters.category;
     return matchesSearch && matchesCategory;
   });
 
   return (
-    <PageLayout
-      pageTitle="War Room"
-      placeholder="Ask War Room about campaign operations..."
-    >
+    <PageLayout pageTitle="War Room" placeholder="Ask War Room about campaign operations...">
       {/* Purple gradient background */}
       <div className="fixed inset-0 bg-gradient-to-br from-purple-600 via-purple-700 to-indigo-800 -z-10" />
 
@@ -104,10 +89,7 @@ const CampaignControl: React.FC = () => {
             onFiltersChange={setProjectFilters}
             onNewProject={handleNewProject}
           />
-          <KanbanBoard
-            projects={filteredProjects}
-            onProjectSelect={handleProjectSelect}
-          />
+          <KanbanBoard projects={filteredProjects} onProjectSelect={handleProjectSelect} />
         </div>
       )}
 

@@ -152,14 +152,12 @@ export function SupabaseAuthProvider({ children }: AuthProviderProps) {
     let isSubscribed = true;
 
     const initializeAuth = async () => {
-
       // Only dispatch if component is still mounted
       if (isSubscribed) {
         dispatch({ type: 'AUTH_START' });
       }
 
       try {
-
         // Create a more robust timeout wrapper
         const withTimeout = async (promise: Promise<any>, timeoutMs: number) => {
           let timeoutId: NodeJS.Timeout;
@@ -192,8 +190,10 @@ export function SupabaseAuthProvider({ children }: AuthProviderProps) {
           return;
         }
 
-        const { data: { session }, error: sessionError } = sessionResult || { data: { session: null }, error: null };
-
+        const {
+          data: { session },
+          error: sessionError,
+        } = sessionResult || { data: { session: null }, error: null };
 
         if (sessionError) {
           if (isSubscribed) {
@@ -203,7 +203,6 @@ export function SupabaseAuthProvider({ children }: AuthProviderProps) {
         }
 
         if (session?.user) {
-
           // Try to fetch profile with timeout
           let profile = null;
           try {
@@ -249,39 +248,38 @@ export function SupabaseAuthProvider({ children }: AuthProviderProps) {
 
   // Listen for auth state changes
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event: AuthChangeEvent, session: Session | null) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event: AuthChangeEvent, session: Session | null) => {
+      switch (event) {
+        case 'SIGNED_IN':
+        case 'TOKEN_REFRESHED':
+          if (session?.user) {
+            const profile = await fetchUserProfile(session.user.id);
+            dispatch({
+              type: 'AUTH_SUCCESS',
+              payload: { user: session.user, session, profile: profile || undefined },
+            });
+          }
+          break;
 
-        switch (event) {
-          case 'SIGNED_IN':
-          case 'TOKEN_REFRESHED':
-            if (session?.user) {
-              const profile = await fetchUserProfile(session.user.id);
-              dispatch({
-                type: 'AUTH_SUCCESS',
-                payload: { user: session.user, session, profile: profile || undefined },
-              });
+        case 'SIGNED_OUT':
+          dispatch({ type: 'AUTH_LOGOUT' });
+          break;
+
+        case 'USER_UPDATED':
+          if (session?.user) {
+            const profile = await fetchUserProfile(session.user.id);
+            if (profile) {
+              dispatch({ type: 'AUTH_UPDATE_PROFILE', payload: profile });
             }
-            break;
+          }
+          break;
 
-          case 'SIGNED_OUT':
-            dispatch({ type: 'AUTH_LOGOUT' });
-            break;
-
-          case 'USER_UPDATED':
-            if (session?.user) {
-              const profile = await fetchUserProfile(session.user.id);
-              if (profile) {
-                dispatch({ type: 'AUTH_UPDATE_PROFILE', payload: profile });
-              }
-            }
-            break;
-
-          default:
-            break;
-        }
-      },
-    );
+        default:
+          break;
+      }
+    });
 
     return () => {
       subscription.unsubscribe();
@@ -410,7 +408,10 @@ export function SupabaseAuthProvider({ children }: AuthProviderProps) {
 
   const refreshSession = async () => {
     try {
-      const { data: { session }, error } = await supabase.auth.refreshSession();
+      const {
+        data: { session },
+        error,
+      } = await supabase.auth.refreshSession();
 
       if (error) {
         throw error;
@@ -430,10 +431,14 @@ export function SupabaseAuthProvider({ children }: AuthProviderProps) {
 
   // Permission checking methods
   const hasPermission = (permission: string): boolean => {
-    if (!state.profile) {return false;}
+    if (!state.profile) {
+      return false;
+    }
 
     // Admin has all permissions
-    if (state.profile.role === 'admin') {return true;}
+    if (state.profile.role === 'admin') {
+      return true;
+    }
 
     return state.profile.permissions.includes(permission);
   };
@@ -516,16 +521,10 @@ export function RequireSupabaseAuth({
   }
 
   // Permission checks
-  const missingPermissions = requiredPermissions.filter(
-    (permission) => !hasPermission(permission),
-  );
+  const missingPermissions = requiredPermissions.filter((permission) => !hasPermission(permission));
 
   if (missingPermissions.length > 0) {
-    return (
-      <div>
-        Access denied. Missing permissions: {missingPermissions.join(', ')}
-      </div>
-    );
+    return <div>Access denied. Missing permissions: {missingPermissions.join(', ')}</div>;
   }
 
   return <>{children}</>;

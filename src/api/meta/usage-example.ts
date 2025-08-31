@@ -33,7 +33,7 @@ async function authenticateUser() {
 
   try {
     const token = await metaAPI.auth.exchangeCodeForToken(authCode);
-    console.log('Access token obtained:', `${token.access_token.substring(0, 10)  }...`);
+    console.log('Access token obtained:', `${token.access_token.substring(0, 10)}...`);
 
     // Get long-lived token
     const longLivedToken = await metaAPI.auth.getLongLivedToken(token.access_token);
@@ -59,7 +59,7 @@ async function getAccountInsights(accountId: string) {
     const insights = await metaAPI.insights.getAccountInsights(params);
 
     console.log(`Found ${insights.length} campaigns`);
-    insights.forEach(insight => {
+    insights.forEach((insight) => {
       console.log(`
         Campaign: ${insight.campaign_name}
         Impressions: ${insight.impressions}
@@ -118,7 +118,7 @@ async function streamRealTimeInsights(accountId: string) {
     const timestamp = new Date().toISOString();
     console.log(`[${timestamp}] New insights received:`);
 
-    insights.forEach(insight => {
+    insights.forEach((insight) => {
       console.log(`Spend today: $${insight.spend}`);
       console.log(`Impressions today: ${insight.impressions}`);
       console.log(`Clicks today: ${insight.clicks}`);
@@ -145,14 +145,14 @@ async function robustAPICall(accountId: string) {
       if ((error as any).name === 'MetaRateLimitError') {
         const waitTime = (error as any).estimatedTimeToRegainAccess || 60000;
         console.log(`Rate limited. Waiting ${waitTime / 1000} seconds...`);
-        await new Promise(resolve => setTimeout(resolve, waitTime));
+        await new Promise((resolve) => setTimeout(resolve, waitTime));
       } else if ((error as any).name === 'CircuitBreakerOpenError') {
         console.log('Circuit breaker open. Service unavailable.');
         throw error;
       } else if (attempt < maxRetries) {
         const backoff = 1000 * Math.pow(2, attempt); // Simple exponential backoff
         console.log(`Error occurred. Retrying in ${backoff / 1000} seconds...`);
-        await new Promise(resolve => setTimeout(resolve, backoff));
+        await new Promise((resolve) => setTimeout(resolve, backoff));
       } else {
         throw error;
       }
@@ -177,14 +177,8 @@ async function getInsightsByDemographics(accountId: string) {
       const [age, gender] = key.split('|');
       console.log(`\nAge: ${age}, Gender: ${gender}`);
 
-      const totalSpend = insights.reduce(
-        (sum, i) => sum + parseFloat(i.spend || '0'),
-        0,
-      );
-      const totalClicks = insights.reduce(
-        (sum, i) => sum + parseInt(i.clicks || '0'),
-        0,
-      );
+      const totalSpend = insights.reduce((sum, i) => sum + parseFloat(i.spend || '0'), 0);
+      const totalClicks = insights.reduce((sum, i) => sum + parseInt(i.clicks || '0'), 0);
 
       console.log(`  Spend: $${totalSpend.toFixed(2)}`);
       console.log(`  Clicks: ${totalClicks}`);

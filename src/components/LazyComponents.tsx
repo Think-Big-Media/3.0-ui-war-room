@@ -14,31 +14,17 @@ const LoadingFallback = () => (
 
 // Lazy load main route components
 export const LazyCommandCenter = lazy(() => import('../pages/CommandCenter'));
-export const LazyRealTimeMonitoring = lazy(
-  () => import('../pages/RealTimeMonitoring')
-);
-export const LazyCampaignControl = lazy(
-  () => import('../pages/CampaignControl')
-);
-export const LazyIntelligenceHub = lazy(
-  () => import('../pages/IntelligenceHub')
-);
+export const LazyRealTimeMonitoring = lazy(() => import('../pages/RealTimeMonitoring'));
+export const LazyCampaignControl = lazy(() => import('../pages/CampaignControl'));
+export const LazyIntelligenceHub = lazy(() => import('../pages/IntelligenceHub'));
 export const LazyAlertCenter = lazy(() => import('../pages/AlertCenter'));
 export const LazySettingsPage = lazy(() => import('../pages/SettingsPage'));
-export const LazyContentCalendarPage = lazy(
-  () => import('../pages/ContentCalendarPage')
-);
-export const LazyContentEnginePage = lazy(
-  () => import('../pages/ContentEnginePage')
-);
+export const LazyContentCalendarPage = lazy(() => import('../pages/ContentCalendarPage'));
+export const LazyContentEnginePage = lazy(() => import('../pages/ContentEnginePage'));
 
 // Lazy load heavy dashboard components
-export const LazyDashboard = lazy(
-  () => import('../components/dashboard/Dashboard')
-);
-export const LazyAnalyticsDashboard = lazy(
-  () => import('../pages/AnalyticsDashboard')
-);
+export const LazyDashboard = lazy(() => import('../components/dashboard/Dashboard'));
+export const LazyAnalyticsDashboard = lazy(() => import('../pages/AnalyticsDashboard'));
 
 // HOC for wrapping lazy components with Suspense
 export const withSuspense = (Component: React.ComponentType) => {

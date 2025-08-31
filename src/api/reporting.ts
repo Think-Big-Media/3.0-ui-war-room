@@ -11,8 +11,8 @@ const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
  * Generate analytics report
  */
 export async function generateAnalyticsReport(
-  startDate: string, 
-  endDate: string, 
+  startDate: string,
+  endDate: string,
   type: 'campaign' | 'sentiment' | 'performance'
 ): Promise<AnalyticsReport> {
   const response = await fetch(`${API_BASE}/api/v1/reporting/analytics`, {
@@ -22,11 +22,11 @@ export async function generateAnalyticsReport(
     },
     body: JSON.stringify({ start_date: startDate, end_date: endDate, type }),
   });
-  
+
   if (!response.ok) {
     throw new Error('Failed to generate analytics report');
   }
-  
+
   return response.json();
 }
 
@@ -45,7 +45,7 @@ export async function getCampaignMetrics(campaignId: string): Promise<CampaignMe
  * Export report to various formats
  */
 export async function exportReport(
-  reportId: string, 
+  reportId: string,
   format: 'pdf' | 'excel' | 'csv'
 ): Promise<Blob> {
   const response = await fetch(`${API_BASE}/api/v1/reporting/export/${reportId}?format=${format}`);
@@ -88,10 +88,10 @@ export async function createScheduledReport(config: any): Promise<any> {
     },
     body: JSON.stringify(config),
   });
-  
+
   if (!response.ok) {
     throw new Error('Failed to create scheduled report');
   }
-  
+
   return response.json();
 }

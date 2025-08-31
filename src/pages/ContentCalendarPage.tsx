@@ -43,11 +43,7 @@ const ContentCalendarPage: React.FC = () => {
   };
 
   return (
-    <PageLayout
-      pageTitle="Content Calendar"
-      placeholder="Ask about scheduled content..."
-    >
-
+    <PageLayout pageTitle="Content Calendar" placeholder="Ask about scheduled content...">
       {/* Calendar Controls */}
       <CalendarControls
         currentView={currentView}
@@ -73,15 +69,9 @@ const ContentCalendarPage: React.FC = () => {
         className="mb-8"
       >
         <Card padding="md" variant="glass">
-          {currentView === 'week' && (
-            <WeekView weekData={weekData} timeSlots={timeSlots} />
-          )}
+          {currentView === 'week' && <WeekView weekData={weekData} timeSlots={timeSlots} />}
           {currentView === 'day' && (
-            <DayView
-              weekData={weekData}
-              timeSlots={timeSlots}
-              onEditContent={handleEditContent}
-            />
+            <DayView weekData={weekData} timeSlots={timeSlots} onEditContent={handleEditContent} />
           )}
           {currentView === 'month' && <MonthView />}
         </Card>

@@ -46,7 +46,9 @@ const TestComponent = () => {
   return (
     <div>
       <div data-testid="loading">{isLoading ? 'Loading' : 'Not Loading'}</div>
-      <div data-testid="authenticated">{isAuthenticated ? 'Authenticated' : 'Not Authenticated'}</div>
+      <div data-testid="authenticated">
+        {isAuthenticated ? 'Authenticated' : 'Not Authenticated'}
+      </div>
       <div data-testid="user">{user ? user.email : 'No User'}</div>
       <div data-testid="error">{error || 'No Error'}</div>
     </div>
@@ -68,13 +70,13 @@ describe('SupabaseAuthContext - Resilience Tests', () => {
   test('should handle initialization timeout gracefully', async () => {
     // Mock a slow/hanging session check
     mockSupabase.auth.getSession.mockImplementation(
-      () => new Promise(resolve => setTimeout(resolve, 5000)),
+      () => new Promise((resolve) => setTimeout(resolve, 5000))
     );
 
     render(
       <SupabaseAuthProvider>
         <TestComponent />
-      </SupabaseAuthProvider>,
+      </SupabaseAuthProvider>
     );
 
     // Should start loading
@@ -85,7 +87,7 @@ describe('SupabaseAuthContext - Resilience Tests', () => {
       () => {
         expect(screen.getByTestId('loading')).toHaveTextContent('Not Loading');
       },
-      { timeout: 4000 },
+      { timeout: 4000 }
     );
   });
 
@@ -96,7 +98,7 @@ describe('SupabaseAuthContext - Resilience Tests', () => {
     render(
       <SupabaseAuthProvider>
         <TestComponent />
-      </SupabaseAuthProvider>,
+      </SupabaseAuthProvider>
     );
 
     await waitFor(() => {
@@ -128,7 +130,7 @@ describe('SupabaseAuthContext - Resilience Tests', () => {
     render(
       <SupabaseAuthProvider>
         <TestComponent />
-      </SupabaseAuthProvider>,
+      </SupabaseAuthProvider>
     );
 
     await waitFor(() => {
@@ -166,7 +168,7 @@ describe('SupabaseAuthContext - Resilience Tests', () => {
     render(
       <SupabaseAuthProvider>
         <TestComponent />
-      </SupabaseAuthProvider>,
+      </SupabaseAuthProvider>
     );
 
     await waitFor(() => {
@@ -185,7 +187,7 @@ describe('SupabaseAuthContext - Resilience Tests', () => {
     const { unmount } = render(
       <SupabaseAuthProvider>
         <TestComponent />
-      </SupabaseAuthProvider>,
+      </SupabaseAuthProvider>
     );
 
     unmount();
@@ -208,9 +210,7 @@ describe('SupabaseAuthContext - Permissions', () => {
           <div data-testid="admin-permission">
             {hasPermission('admin.write') ? 'Has Admin' : 'No Admin'}
           </div>
-          <div data-testid="user-role">
-            {hasRole('admin') ? 'Is Admin' : 'Not Admin'}
-          </div>
+          <div data-testid="user-role">{hasRole('admin') ? 'Is Admin' : 'Not Admin'}</div>
         </div>
       );
     };
@@ -218,7 +218,7 @@ describe('SupabaseAuthContext - Permissions', () => {
     render(
       <SupabaseAuthProvider>
         <PermissionTestComponent />
-      </SupabaseAuthProvider>,
+      </SupabaseAuthProvider>
     );
 
     await waitFor(() => {

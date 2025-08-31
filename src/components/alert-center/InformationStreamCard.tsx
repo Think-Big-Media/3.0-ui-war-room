@@ -15,10 +15,7 @@ interface InformationStreamCardProps {
   onClick: (item: InformationItem) => void;
 }
 
-const InformationStreamCard: React.FC<InformationStreamCardProps> = ({
-  item,
-  onClick,
-}) => {
+const InformationStreamCard: React.FC<InformationStreamCardProps> = ({ item, onClick }) => {
   const getIcon = (item: InformationItem) => {
     if (item.icon && iconMap[item.icon]) {
       return iconMap[item.icon];
@@ -44,27 +41,19 @@ const InformationStreamCard: React.FC<InformationStreamCardProps> = ({
           <div className="flex items-center space-x-2 mb-2">
             <h4 className="font-medium text-white/95">{item.title}</h4>
             <span
-              className={`px-2 py-1 rounded-full text-xs ${getPriorityColor(
-                item.priority
-              )} border`}
+              className={`px-2 py-1 rounded-full text-xs ${getPriorityColor(item.priority)} border`}
             >
               {item.priority}
             </span>
-            {item.status === 'unread' && (
-              <div className="w-2 h-2 bg-blue-500 rounded-full" />
-            )}
+            {item.status === 'unread' && <div className="w-2 h-2 bg-blue-500 rounded-full" />}
           </div>
           <p className="text-white/80 mb-3">{item.text}</p>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4 text-sm text-white/60 font-mono uppercase">
               <span>{formatTimestamp(item.timestamp)}</span>
               <span>{item.category.replace('-', ' ')}</span>
-              {item.actionable && (
-                <span className="text-green-400">• ACTIONABLE</span>
-              )}
-              {item.metadata?.assignee && (
-                <span>• {item.metadata.assignee.toUpperCase()}</span>
-              )}
+              {item.actionable && <span className="text-green-400">• ACTIONABLE</span>}
+              {item.metadata?.assignee && <span>• {item.metadata.assignee.toUpperCase()}</span>}
             </div>
           </div>
         </div>

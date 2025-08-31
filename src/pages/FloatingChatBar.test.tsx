@@ -1,11 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from '@jest/globals';
-import {
-  render,
-  screen,
-  fireEvent,
-  waitFor,
-  cleanup,
-} from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import FloatingChatBar from './FloatingChatBar';
 
@@ -33,12 +27,8 @@ jest.mock('framer-motion', () => {
 
   return {
     motion: {
-      div: ({ children, ...props }: any) => (
-        <div {...filterMotionProps(props)}>{children}</div>
-      ),
-      form: ({ children, ...props }: any) => (
-        <form {...filterMotionProps(props)}>{children}</form>
-      ),
+      div: ({ children, ...props }: any) => <div {...filterMotionProps(props)}>{children}</div>,
+      form: ({ children, ...props }: any) => <form {...filterMotionProps(props)}>{children}</form>,
       button: ({ children, ...props }: any) => (
         <button {...filterMotionProps(props)}>{children}</button>
       ),
@@ -76,9 +66,7 @@ describe('FloatingChatBar', () => {
     it('should render with default placeholder', () => {
       renderComponent();
 
-      const input = screen.getByPlaceholderText(
-        'Ask War Room about your campaign...',
-      );
+      const input = screen.getByPlaceholderText('Ask War Room about your campaign...');
       expect(input).toBeInTheDocument();
     });
 
@@ -93,9 +81,7 @@ describe('FloatingChatBar', () => {
       renderComponent();
 
       // Check for buttons by their icons
-      expect(
-        document.querySelector('.lucide-message-circle'),
-      ).toBeInTheDocument();
+      expect(document.querySelector('.lucide-message-circle')).toBeInTheDocument();
       expect(document.querySelector('.lucide-send')).toBeInTheDocument();
       expect(document.querySelector('.lucide-mic')).toBeInTheDocument();
       expect(document.querySelector('.lucide-paperclip')).toBeInTheDocument();
@@ -105,9 +91,7 @@ describe('FloatingChatBar', () => {
       renderComponent();
 
       // Chat window should not be visible initially
-      expect(
-        screen.queryByText('Recent Conversations'),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText('Recent Conversations')).not.toBeInTheDocument();
     });
   });
 
@@ -116,9 +100,7 @@ describe('FloatingChatBar', () => {
       const user = userEvent.setup();
       renderComponent();
 
-      const input = screen.getByPlaceholderText(
-        'Ask War Room about your campaign...',
-      );
+      const input = screen.getByPlaceholderText('Ask War Room about your campaign...');
       await user.type(input, 'Hello world');
 
       expect(input).toHaveValue('Hello world');
@@ -128,9 +110,7 @@ describe('FloatingChatBar', () => {
       const user = userEvent.setup();
       renderComponent();
 
-      const input = screen.getByPlaceholderText(
-        'Ask War Room about your campaign...',
-      );
+      const input = screen.getByPlaceholderText('Ask War Room about your campaign...');
       await user.type(input, 'Test message');
       await user.keyboard('{Enter}');
 
@@ -141,9 +121,7 @@ describe('FloatingChatBar', () => {
       const user = userEvent.setup();
       renderComponent();
 
-      const input = screen.getByPlaceholderText(
-        'Ask War Room about your campaign...',
-      );
+      const input = screen.getByPlaceholderText('Ask War Room about your campaign...');
       await user.type(input, 'Test message');
       await user.keyboard('{Enter}');
 
@@ -154,9 +132,7 @@ describe('FloatingChatBar', () => {
       const user = userEvent.setup();
       renderComponent();
 
-      const input = screen.getByPlaceholderText(
-        'Ask War Room about your campaign...',
-      );
+      const input = screen.getByPlaceholderText('Ask War Room about your campaign...');
       await user.keyboard('{Enter}');
 
       expect(mockOnSendMessage).not.toHaveBeenCalled();
@@ -166,9 +142,7 @@ describe('FloatingChatBar', () => {
       const user = userEvent.setup();
       renderComponent();
 
-      const input = screen.getByPlaceholderText(
-        'Ask War Room about your campaign...',
-      );
+      const input = screen.getByPlaceholderText('Ask War Room about your campaign...');
       await user.type(input, '  Test message  ');
       await user.keyboard('{Enter}');
 
@@ -185,7 +159,9 @@ describe('FloatingChatBar', () => {
       const historyButton = historyIcon?.closest('button');
 
       expect(historyButton).toBeTruthy();
-      if (!historyButton) {return;}
+      if (!historyButton) {
+        return;
+      }
 
       // Click to open
       await user.click(historyButton);
@@ -196,9 +172,7 @@ describe('FloatingChatBar', () => {
       // Click to close
       await user.click(historyButton);
       await waitFor(() => {
-        expect(
-          screen.queryByText('Recent Conversations'),
-        ).not.toBeInTheDocument();
+        expect(screen.queryByText('Recent Conversations')).not.toBeInTheDocument();
       });
     });
 
@@ -208,7 +182,9 @@ describe('FloatingChatBar', () => {
 
       const historyIcon = document.querySelector('.lucide-message-circle');
       const historyButton = historyIcon?.closest('button');
-      if (!historyButton) {return;}
+      if (!historyButton) {
+        return;
+      }
 
       await user.click(historyButton);
 
@@ -228,7 +204,9 @@ describe('FloatingChatBar', () => {
       // Open history first
       const historyIcon = document.querySelector('.lucide-message-circle');
       const historyButton = historyIcon?.closest('button');
-      if (!historyButton) {return;}
+      if (!historyButton) {
+        return;
+      }
 
       await user.click(historyButton);
       await waitFor(() => {
@@ -241,9 +219,7 @@ describe('FloatingChatBar', () => {
 
       // Should show chat messages
       await waitFor(() => {
-        expect(
-          screen.getByText('How did our Q4 campaigns perform?'),
-        ).toBeInTheDocument();
+        expect(screen.getByText('How did our Q4 campaigns perform?')).toBeInTheDocument();
       });
     });
 
@@ -254,7 +230,9 @@ describe('FloatingChatBar', () => {
       // Open history and select a chat
       const historyIcon = document.querySelector('.lucide-message-circle');
       const historyButton = historyIcon?.closest('button');
-      if (!historyButton) {return;}
+      if (!historyButton) {
+        return;
+      }
 
       await user.click(historyButton);
       const chatItem = await screen.findByText('Campaign Performance Q4');
@@ -262,15 +240,11 @@ describe('FloatingChatBar', () => {
 
       // Wait for chat to load
       await waitFor(() => {
-        expect(
-          screen.getByText('How did our Q4 campaigns perform?'),
-        ).toBeInTheDocument();
+        expect(screen.getByText('How did our Q4 campaigns perform?')).toBeInTheDocument();
       });
 
       // Send a new message
-      const input = screen.getByPlaceholderText(
-        'Ask War Room about your campaign...',
-      );
+      const input = screen.getByPlaceholderText('Ask War Room about your campaign...');
       await user.type(input, 'Follow up question');
       await user.keyboard('{Enter}');
 
@@ -312,9 +286,7 @@ describe('FloatingChatBar', () => {
       const user = userEvent.setup();
       renderComponent();
 
-      const input = screen.getByPlaceholderText(
-        'Ask War Room about your campaign...',
-      );
+      const input = screen.getByPlaceholderText('Ask War Room about your campaign...');
       await user.type(input, 'Test');
 
       const sendIcon = document.querySelector('.lucide-send');
@@ -344,7 +316,9 @@ describe('FloatingChatBar', () => {
       // Open chat history and select a chat
       const historyIcon = document.querySelector('.lucide-message-circle');
       const historyButton = historyIcon?.closest('button');
-      if (!historyButton) {return;}
+      if (!historyButton) {
+        return;
+      }
 
       await user.click(historyButton);
       const chatItem = await screen.findByText('Campaign Performance Q4');
@@ -352,12 +326,8 @@ describe('FloatingChatBar', () => {
 
       // Wait for messages to load
       await waitFor(() => {
-        const userMessage = screen.getByText(
-          'How did our Q4 campaigns perform?',
-        );
-        const aiMessage = screen.getByText(
-          /The Q4 campaigns showed 15% increase/,
-        );
+        const userMessage = screen.getByText('How did our Q4 campaigns perform?');
+        const aiMessage = screen.getByText(/The Q4 campaigns showed 15% increase/);
 
         // Check message styling - the text is in a div with the background color
         expect(userMessage).toHaveClass('bg-gray-200');
@@ -374,24 +344,22 @@ describe('FloatingChatBar', () => {
       // Open a chat first
       const historyIcon = document.querySelector('.lucide-message-circle');
       const historyButton = historyIcon?.closest('button');
-      if (!historyButton) {return;}
+      if (!historyButton) {
+        return;
+      }
 
       await user.click(historyButton);
       const chatItem = await screen.findByText('Campaign Performance Q4');
       await user.click(chatItem);
 
       // Send a message
-      const input = screen.getByPlaceholderText(
-        'Ask War Room about your campaign...',
-      );
+      const input = screen.getByPlaceholderText('Ask War Room about your campaign...');
       await user.type(input, 'New question');
       await user.keyboard('{Enter}');
 
       // Check for typing dots
       await waitFor(() => {
-        const typingDots = document.querySelectorAll(
-          '.bg-gray-400.rounded-full',
-        );
+        const typingDots = document.querySelectorAll('.bg-gray-400.rounded-full');
         expect(typingDots.length).toBe(3);
       });
     });
@@ -403,9 +371,7 @@ describe('FloatingChatBar', () => {
       renderComponent();
 
       const longMessage = 'A'.repeat(500);
-      const input = screen.getByPlaceholderText(
-        'Ask War Room about your campaign...',
-      );
+      const input = screen.getByPlaceholderText('Ask War Room about your campaign...');
 
       // Type using paste for efficiency
       await user.click(input);
@@ -419,9 +385,7 @@ describe('FloatingChatBar', () => {
       const user = userEvent.setup();
       renderComponent();
 
-      const input = screen.getByPlaceholderText(
-        'Ask War Room about your campaign...',
-      );
+      const input = screen.getByPlaceholderText('Ask War Room about your campaign...');
 
       // Send multiple messages quickly
       await user.type(input, 'Message 1');

@@ -129,7 +129,7 @@ export const supabaseAuthApi = createApi({
               full_name: `${userData.firstName} ${userData.lastName}`,
               phone: userData.phone,
               username: userData.username,
-            },
+            }
           );
 
           if (authError) {
@@ -420,7 +420,9 @@ export const authUtils = {
   // User management
   getCurrentUser: async (): Promise<UserProfile | null> => {
     const { user } = await auth.getUser();
-    if (!user) {return null;}
+    if (!user) {
+      return null;
+    }
 
     const { data: profile } = await db.profiles
       .select('*, organizations(*)')
@@ -439,10 +441,14 @@ export const authUtils = {
   // Permission checks
   hasPermission: async (permission: string): Promise<boolean> => {
     const profile = await authUtils.getCurrentUser();
-    if (!profile) {return false;}
+    if (!profile) {
+      return false;
+    }
 
     // Admin has all permissions
-    if (profile.role === 'admin') {return true;}
+    if (profile.role === 'admin') {
+      return true;
+    }
 
     return profile.permissions.includes(permission);
   },

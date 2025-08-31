@@ -13,7 +13,7 @@ export const PhraseCloud: React.FC = () => {
     }
 
     // Load trending topics from mentionlytics service
-    mentionlyticsService.getTrendingTopics().then(topics => {
+    mentionlyticsService.getTrendingTopics().then((topics) => {
       const phrases = topics.map((t: any) => t.topic);
       setTrendingPhrases(phrases);
     });
@@ -30,7 +30,7 @@ export const PhraseCloud: React.FC = () => {
     'Public safety remains priority',
     'Healthcare reform now',
     'Jobs and opportunity for all',
-    'Building a stronger tomorrow'
+    'Building a stronger tomorrow',
   ];
 
   // Social media phrases based on trending topics and campaign activity
@@ -44,32 +44,41 @@ export const PhraseCloud: React.FC = () => {
     'Public safety improvements needed',
     'Tax reform benefiting middle class',
     'Social Security protections secured',
-    'Veterans deserve our full support'
+    'Veterans deserve our full support',
   ];
 
   // Combine actual social media phrases based on campaign keywords and trending topics
   const allPhrases = [
     ...socialMediaPhrases,
-    ...(trendingPhrases.map(topic => `Excited about ${topic.toLowerCase()}`)),
+    ...trendingPhrases.map((topic) => `Excited about ${topic.toLowerCase()}`),
     ...(campaignData?.competitors?.map((c: any) => `${c.name} making headlines`) || []),
-    ...defaultPhrases
+    ...defaultPhrases,
   ].slice(0, 10); // Limit to 10 for performance
 
   const phrases = allPhrases.length > 0 ? allPhrases : defaultPhrases;
 
   return (
-    <Card variant="glass" padding="sm" className="phrase-cloud hoverable hover:scale-[1.02] transition-all duration-200">
+    <Card
+      variant="glass"
+      padding="sm"
+      className="phrase-cloud hoverable hover:scale-[1.02] transition-all duration-200"
+    >
       <div className="flex items-center justify-between mb-2">
         <h3 className="font-barlow font-semibold text-white text-xs">Trending Keywords</h3>
         <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
       </div>
-      
+
       <div className="phrase-container">
         <div className="keywords-section">
           <div className="keyword-group">
-            <div className="text-[9px] text-white/60 mb-1 uppercase font-semibold tracking-wider font-barlow">PRIMARY</div>
+            <div className="text-[9px] text-white/60 mb-1 uppercase font-semibold tracking-wider font-barlow">
+              PRIMARY
+            </div>
             {phrases.slice(0, 3).map((phrase: string, idx: number) => (
-              <div key={idx} className="text-white/75 text-[10px] leading-tight uppercase font-barlow mb-1 cursor-pointer hover:text-cyan-300 transition-colors">
+              <div
+                key={idx}
+                className="text-white/75 text-[10px] leading-tight uppercase font-barlow mb-1 cursor-pointer hover:text-cyan-300 transition-colors"
+              >
                 • {phrase}
               </div>
             ))}
@@ -82,9 +91,9 @@ export const PhraseCloud: React.FC = () => {
               <div
                 key={index}
                 className="phrase-item"
-                style={{ 
+                style={{
                   animationDelay: `${index * -3}s`,
-                  zIndex: phrases.length - index
+                  zIndex: phrases.length - index,
                 }}
               >
                 {phrase}
@@ -96,15 +105,24 @@ export const PhraseCloud: React.FC = () => {
 
       <div className="keywords-section mt-2">
         <div className="keyword-group">
-          <div className="text-[9px] text-white/60 mb-1 uppercase font-semibold tracking-wider font-barlow">COMPETITORS</div>
+          <div className="text-[9px] text-white/60 mb-1 uppercase font-semibold tracking-wider font-barlow">
+            COMPETITORS
+          </div>
           {campaignData?.competitors?.map((comp: any, idx: number) => (
-            <div key={idx} className="text-white/75 text-[10px] leading-tight uppercase font-barlow mb-1 cursor-pointer hover:text-cyan-300 transition-colors">
+            <div
+              key={idx}
+              className="text-white/75 text-[10px] leading-tight uppercase font-barlow mb-1 cursor-pointer hover:text-cyan-300 transition-colors"
+            >
               • {comp.name}
             </div>
           )) || (
             <>
-              <div className="text-white/75 text-[10px] leading-tight uppercase font-barlow mb-1 cursor-pointer hover:text-cyan-300 transition-colors">• Joe Biden</div>
-              <div className="text-white/75 text-[10px] leading-tight uppercase font-barlow mb-1 cursor-pointer hover:text-cyan-300 transition-colors">• Ron DeSantis</div>
+              <div className="text-white/75 text-[10px] leading-tight uppercase font-barlow mb-1 cursor-pointer hover:text-cyan-300 transition-colors">
+                • Joe Biden
+              </div>
+              <div className="text-white/75 text-[10px] leading-tight uppercase font-barlow mb-1 cursor-pointer hover:text-cyan-300 transition-colors">
+                • Ron DeSantis
+              </div>
             </>
           )}
         </div>

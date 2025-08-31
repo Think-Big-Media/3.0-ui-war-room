@@ -64,7 +64,7 @@ const EmailVerificationRequired = () => (
         </p>
         <div className="mt-6">
           <button
-            onClick={() => window.location.href = '/verify-email'}
+            onClick={() => (window.location.href = '/verify-email')}
             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
             Go to Email Verification
@@ -101,9 +101,7 @@ const AccessDenied = ({ reason, requiredRole, missingPermissions }: AccessDenied
             />
           </svg>
         </div>
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Access Denied
-        </h2>
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Access Denied</h2>
         <p className="mt-2 text-center text-sm text-gray-600">{reason}</p>
 
         {requiredRole && (
@@ -129,7 +127,7 @@ const AccessDenied = ({ reason, requiredRole, missingPermissions }: AccessDenied
 
         <div className="mt-6">
           <button
-            onClick={() => window.location.href = '/dashboard'}
+            onClick={() => (window.location.href = '/dashboard')}
             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
             Go to Dashboard
@@ -185,9 +183,7 @@ export function ProtectedRoute({
   }
 
   // Check permission requirements
-  const missingPermissions = requiredPermissions.filter(
-    (permission) => !hasPermission(permission),
-  );
+  const missingPermissions = requiredPermissions.filter((permission) => !hasPermission(permission));
 
   if (missingPermissions.length > 0) {
     return (
@@ -212,10 +208,7 @@ interface AdminRouteProps {
 
 export function AdminRoute({ children, requireEmailVerification = true }: AdminRouteProps) {
   return (
-    <ProtectedRoute
-      requiredRole="admin"
-      requireEmailVerification={requireEmailVerification}
-    >
+    <ProtectedRoute requiredRole="admin" requireEmailVerification={requireEmailVerification}>
       {children}
     </ProtectedRoute>
   );
@@ -272,11 +265,7 @@ interface VerifiedRouteProps {
 }
 
 export function VerifiedRoute({ children }: VerifiedRouteProps) {
-  return (
-    <ProtectedRoute requireEmailVerification={true}>
-      {children}
-    </ProtectedRoute>
-  );
+  return <ProtectedRoute requireEmailVerification={true}>{children}</ProtectedRoute>;
 }
 
 // Public route that redirects to dashboard if authenticated
@@ -328,9 +317,7 @@ export function ConditionalRender({
   }
 
   // Check permission requirements
-  const hasAllPermissions = requiredPermissions.every((permission) =>
-    hasPermission(permission),
-  );
+  const hasAllPermissions = requiredPermissions.every((permission) => hasPermission(permission));
 
   if (!hasAllPermissions) {
     return <>{fallback}</>;

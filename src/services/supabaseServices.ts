@@ -36,7 +36,9 @@ export const volunteerService = {
       .is('deleted_at', null)
       .order('created_at', { ascending: false });
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
     return data || [];
   },
 
@@ -49,19 +51,19 @@ export const volunteerService = {
       .is('deleted_at', null)
       .single();
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
     return data;
   },
 
   // Create volunteer
   async createVolunteer(volunteer: VolunteerInsert): Promise<Volunteer> {
-    const { data, error } = await supabase
-      .from('volunteers')
-      .insert(volunteer)
-      .select()
-      .single();
+    const { data, error } = await supabase.from('volunteers').insert(volunteer).select().single();
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
     return data;
   },
 
@@ -74,7 +76,9 @@ export const volunteerService = {
       .select()
       .single();
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
     return data;
   },
 
@@ -85,7 +89,9 @@ export const volunteerService = {
       .update({ deleted_at: new Date().toISOString() })
       .eq('id', id);
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
   },
 };
 
@@ -102,7 +108,9 @@ export const eventService = {
       .is('deleted_at', null)
       .order('start_date', { ascending: true });
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
     return data || [];
   },
 
@@ -115,19 +123,19 @@ export const eventService = {
       .is('deleted_at', null)
       .single();
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
     return data;
   },
 
   // Create event
   async createEvent(event: EventInsert): Promise<Event> {
-    const { data, error } = await supabase
-      .from('events')
-      .insert(event)
-      .select()
-      .single();
+    const { data, error } = await supabase.from('events').insert(event).select().single();
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
     return data;
   },
 
@@ -140,7 +148,9 @@ export const eventService = {
       .select()
       .single();
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
     return data;
   },
 
@@ -151,7 +161,9 @@ export const eventService = {
       .update({ deleted_at: new Date().toISOString() })
       .eq('id', id);
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
   },
 };
 
@@ -168,7 +180,9 @@ export const contactService = {
       .is('deleted_at', null)
       .order('created_at', { ascending: false });
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
     return data || [];
   },
 
@@ -181,19 +195,19 @@ export const contactService = {
       .is('deleted_at', null)
       .single();
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
     return data;
   },
 
   // Create contact
   async createContact(contact: ContactInsert): Promise<Contact> {
-    const { data, error } = await supabase
-      .from('contacts')
-      .insert(contact)
-      .select()
-      .single();
+    const { data, error } = await supabase.from('contacts').insert(contact).select().single();
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
     return data;
   },
 
@@ -206,7 +220,9 @@ export const contactService = {
       .select()
       .single();
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
     return data;
   },
 
@@ -217,7 +233,9 @@ export const contactService = {
       .update({ deleted_at: new Date().toISOString() })
       .eq('id', id);
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
   },
 };
 
@@ -234,7 +252,9 @@ export const documentService = {
       .is('deleted_at', null)
       .order('created_at', { ascending: false });
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
     return data || [];
   },
 
@@ -247,19 +267,19 @@ export const documentService = {
       .is('deleted_at', null)
       .single();
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
     return data;
   },
 
   // Create document record (file upload handled separately)
   async createDocument(document: DocumentInsert): Promise<Document> {
-    const { data, error } = await supabase
-      .from('documents')
-      .insert(document)
-      .select()
-      .single();
+    const { data, error } = await supabase.from('documents').insert(document).select().single();
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
     return data;
   },
 
@@ -272,7 +292,9 @@ export const documentService = {
       .select()
       .single();
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
     return data;
   },
 
@@ -283,7 +305,9 @@ export const documentService = {
       .update({ deleted_at: new Date().toISOString() })
       .eq('id', id);
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
   },
 };
 
@@ -300,7 +324,9 @@ export const donationService = {
       .is('deleted_at', null)
       .order('created_at', { ascending: false });
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
     return data || [];
   },
 
@@ -313,19 +339,19 @@ export const donationService = {
       .is('deleted_at', null)
       .single();
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
     return data;
   },
 
   // Create donation
   async createDonation(donation: DonationInsert): Promise<Donation> {
-    const { data, error } = await supabase
-      .from('donations')
-      .insert(donation)
-      .select()
-      .single();
+    const { data, error } = await supabase.from('donations').insert(donation).select().single();
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
     return data;
   },
 };
@@ -339,41 +365,37 @@ export const fileService = {
     bucket: string,
     path: string,
     file: File,
-    options?: { cacheControl?: string; upsert?: boolean },
+    options?: { cacheControl?: string; upsert?: boolean }
   ): Promise<{ path: string; publicUrl: string }> {
-    const { data, error } = await supabase.storage
-      .from(bucket)
-      .upload(path, file, options);
+    const { data, error } = await supabase.storage.from(bucket).upload(path, file, options);
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
 
-    const { data: { publicUrl } } = supabase.storage
-      .from(bucket)
-      .getPublicUrl(path);
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from(bucket).getPublicUrl(path);
 
     return { path: data.path, publicUrl };
   },
 
   // Delete file from Supabase Storage
   async deleteFile(bucket: string, paths: string[]): Promise<void> {
-    const { error } = await supabase.storage
-      .from(bucket)
-      .remove(paths);
+    const { error } = await supabase.storage.from(bucket).remove(paths);
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
   },
 
   // Get signed URL for private files
-  async getSignedUrl(
-    bucket: string,
-    path: string,
-    expiresIn = 3600,
-  ): Promise<string> {
-    const { data, error } = await supabase.storage
-      .from(bucket)
-      .createSignedUrl(path, expiresIn);
+  async getSignedUrl(bucket: string, path: string, expiresIn = 3600): Promise<string> {
+    const { data, error } = await supabase.storage.from(bucket).createSignedUrl(path, expiresIn);
 
-    if (error) {throw error;}
+    if (error) {
+      throw error;
+    }
     return data.signedUrl;
   },
 };
@@ -386,7 +408,7 @@ export const realtimeService = {
   subscribeToTable<T>(
     table: keyof Tables,
     callback: (payload: any) => void,
-    filter?: { column: string; value: string },
+    filter?: { column: string; value: string }
   ) {
     const subscription = supabase
       .channel(`${table}_changes`)
@@ -398,7 +420,7 @@ export const realtimeService = {
           table: table as string,
           ...(filter && { filter: `${filter.column}=eq.${filter.value}` }),
         },
-        callback,
+        callback
       )
       .subscribe();
 
@@ -411,18 +433,33 @@ export const realtimeService = {
       .channel(`org_${organizationId}`)
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table: 'volunteers', filter: `organization_id=eq.${organizationId}` },
-        callback,
+        {
+          event: '*',
+          schema: 'public',
+          table: 'volunteers',
+          filter: `organization_id=eq.${organizationId}`,
+        },
+        callback
       )
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table: 'events', filter: `organization_id=eq.${organizationId}` },
-        callback,
+        {
+          event: '*',
+          schema: 'public',
+          table: 'events',
+          filter: `organization_id=eq.${organizationId}`,
+        },
+        callback
       )
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table: 'contacts', filter: `organization_id=eq.${organizationId}` },
-        callback,
+        {
+          event: '*',
+          schema: 'public',
+          table: 'contacts',
+          filter: `organization_id=eq.${organizationId}`,
+        },
+        callback
       )
       .subscribe();
 

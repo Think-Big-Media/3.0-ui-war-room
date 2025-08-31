@@ -8,16 +8,21 @@ import type { Database } from './database.types';
 
 // Environment variables with fallback for development
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || import.meta.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseAnonKey =
+  import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 // Check if we have placeholder values
-const hasPlaceholders = supabaseUrl === 'your-supabase-url' || supabaseAnonKey === 'your-supabase-anon-key';
+const hasPlaceholders =
+  supabaseUrl === 'your-supabase-url' || supabaseAnonKey === 'your-supabase-anon-key';
 
 // Comprehensive debug logging
 console.log('🔧 Supabase Client Initialization:');
 console.log('==========================================');
 console.log('📍 URL from env:', supabaseUrl ? `${supabaseUrl.substring(0, 30)}...` : 'MISSING');
-console.log('🔑 Anon key from env:', supabaseAnonKey ? `${supabaseAnonKey.substring(0, 20)}...` : 'MISSING');
+console.log(
+  '🔑 Anon key from env:',
+  supabaseAnonKey ? `${supabaseAnonKey.substring(0, 20)}...` : 'MISSING'
+);
 console.log('🌐 OAuth Configuration:');
 console.log('  - Google Auth Enabled:', import.meta.env.VITE_ENABLE_GOOGLE_AUTH);
 console.log('  - GitHub Auth Enabled:', import.meta.env.VITE_ENABLE_GITHUB_AUTH);
@@ -30,7 +35,8 @@ if (!supabaseUrl || !supabaseAnonKey || hasPlaceholders) {
   console.warn('⚠️ Supabase not configured - using dummy values for development');
   // Use dummy values to prevent crash during development
   const dummyUrl = 'https://xyzcompany.supabase.co';
-  const dummyKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5emNvbXBhbnkiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTYyNzIwODU0MSwibmF0IjoxNjI3MjA4NTQxLCJleHAiOjE5NzQzNjMzNDEsImV4cCI6MTk3NDM2MzM0MX0.dummy_key_for_development_only';
+  const dummyKey =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5emNvbXBhbnkiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTYyNzIwODU0MSwibmF0IjoxNjI3MjA4NTQxLCJleHAiOjE5NzQzNjMzNDEsImV4cCI6MTk3NDM2MzM0MX0.dummy_key_for_development_only';
   var finalUrl = hasPlaceholders ? dummyUrl : supabaseUrl;
   var finalKey = hasPlaceholders ? dummyKey : supabaseAnonKey;
 } else {
@@ -111,13 +117,19 @@ export const auth = {
 
   // Get current user
   getUser: async () => {
-    const { data: { user }, error } = await supabase.auth.getUser();
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser();
     return { user, error };
   },
 
   // Get session
   getSession: async () => {
-    const { data: { session }, error } = await supabase.auth.getSession();
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.getSession();
     return { session, error };
   },
 
@@ -160,8 +172,12 @@ export const auth = {
       timestamp: new Date().toISOString(),
       origin: window.location.origin,
       redirectTo: `${window.location.origin}/dashboard`,
-      authEnabled: provider === 'google' ? import.meta.env.VITE_ENABLE_GOOGLE_AUTH :
-        provider === 'github' ? import.meta.env.VITE_ENABLE_GITHUB_AUTH : 'N/A',
+      authEnabled:
+        provider === 'google'
+          ? import.meta.env.VITE_ENABLE_GOOGLE_AUTH
+          : provider === 'github'
+            ? import.meta.env.VITE_ENABLE_GITHUB_AUTH
+            : 'N/A',
     });
 
     try {
@@ -187,7 +203,7 @@ export const auth = {
       } else {
         console.log('✅ OAuth Success:', {
           provider,
-          url: data?.url ? `${data.url.substring(0, 100)  }...` : 'No URL',
+          url: data?.url ? `${data.url.substring(0, 100)}...` : 'No URL',
           hasProvider: Boolean(data?.provider),
         });
       }
@@ -248,36 +264,28 @@ export const storage = {
 
   // Upload file
   uploadFile: async (bucket: string, path: string, file: File) => {
-    const { data, error } = await supabase.storage
-      .from(bucket)
-      .upload(path, file, {
-        cacheControl: '3600',
-        upsert: false,
-      });
+    const { data, error } = await supabase.storage.from(bucket).upload(path, file, {
+      cacheControl: '3600',
+      upsert: false,
+    });
     return { data, error };
   },
 
   // Get public URL
   getPublicUrl: (bucket: string, path: string) => {
-    const { data } = supabase.storage
-      .from(bucket)
-      .getPublicUrl(path);
+    const { data } = supabase.storage.from(bucket).getPublicUrl(path);
     return data.publicUrl;
   },
 
   // Download file
   downloadFile: async (bucket: string, path: string) => {
-    const { data, error } = await supabase.storage
-      .from(bucket)
-      .download(path);
+    const { data, error } = await supabase.storage.from(bucket).download(path);
     return { data, error };
   },
 
   // Delete file
   deleteFile: async (bucket: string, paths: string[]) => {
-    const { data, error } = await supabase.storage
-      .from(bucket)
-      .remove(paths);
+    const { data, error } = await supabase.storage.from(bucket).remove(paths);
     return { data, error };
   },
 };
@@ -285,11 +293,7 @@ export const storage = {
 // Realtime helpers
 export const realtime = {
   // Subscribe to table changes
-  subscribeToTable: (
-    table: string,
-    callback: (payload: any) => void,
-    filter?: string,
-  ) => {
+  subscribeToTable: (table: string, callback: (payload: any) => void, filter?: string) => {
     const channel = supabase
       .channel(`public:${table}`)
       .on(
@@ -300,7 +304,7 @@ export const realtime = {
           table,
           filter,
         },
-        callback,
+        callback
       )
       .subscribe();
 
@@ -308,11 +312,7 @@ export const realtime = {
   },
 
   // Subscribe to specific record
-  subscribeToRecord: (
-    table: string,
-    id: string,
-    callback: (payload: any) => void,
-  ) => {
+  subscribeToRecord: (table: string, id: string, callback: (payload: any) => void) => {
     return realtime.subscribeToTable(table, callback, `id=eq.${id}`);
   },
 
@@ -323,13 +323,11 @@ export const realtime = {
 
   // Broadcast custom event
   broadcast: async (channel: string, event: string, payload: any) => {
-    const result = await supabase
-      .channel(channel)
-      .send({
-        type: 'broadcast',
-        event,
-        payload,
-      });
+    const result = await supabase.channel(channel).send({
+      type: 'broadcast',
+      event,
+      payload,
+    });
     return { error: (result as any).error || null };
   },
 };
@@ -365,7 +363,9 @@ export const functions = {
 // Helper to check if user has permission
 export const checkPermission = async (permission: string): Promise<boolean> => {
   const { user } = await auth.getUser();
-  if (!user) {return false;}
+  if (!user) {
+    return false;
+  }
 
   // Get user profile with permissions
   const { data: profile } = await db.profiles
@@ -373,10 +373,14 @@ export const checkPermission = async (permission: string): Promise<boolean> => {
     .eq('id', user.id)
     .single();
 
-  if (!profile) {return false;}
+  if (!profile) {
+    return false;
+  }
 
   // Admin has all permissions
-  if (profile.role === 'admin') {return true;}
+  if (profile.role === 'admin') {
+    return true;
+  }
 
   // Check specific permission
   return profile.permissions?.includes(permission) || false;
@@ -385,7 +389,9 @@ export const checkPermission = async (permission: string): Promise<boolean> => {
 // Helper to get user's organization
 export const getUserOrganization = async () => {
   const { user } = await auth.getUser();
-  if (!user) {return null;}
+  if (!user) {
+    return null;
+  }
 
   const { data: profile } = await db.profiles
     .select('*, organizations(*)')

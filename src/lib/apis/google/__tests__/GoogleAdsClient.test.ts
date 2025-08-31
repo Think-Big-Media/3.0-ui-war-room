@@ -12,7 +12,16 @@
  * 7. Integration Tests
  */
 
-import { jest, describe, it, expect, beforeEach, afterEach, beforeAll, afterAll } from '@jest/globals';
+import {
+  jest,
+  describe,
+  it,
+  expect,
+  beforeEach,
+  afterEach,
+  beforeAll,
+  afterAll,
+} from '@jest/globals';
 import { GoogleAdsClient } from '../client';
 import { TokenBucketRateLimiter } from '../rateLimiter';
 import { GoogleAdsCache } from '../cache';
@@ -66,7 +75,8 @@ describe('GoogleAdsClient', () => {
     auth_uri: 'https://accounts.google.com/o/oauth2/auth',
     token_uri: 'https://oauth2.googleapis.com/token',
     auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
-    client_x509_cert_url: 'https://www.googleapis.com/robot/v1/metadata/x509/test%40test-project-12345.iam.gserviceaccount.com',
+    client_x509_cert_url:
+      'https://www.googleapis.com/robot/v1/metadata/x509/test%40test-project-12345.iam.gserviceaccount.com',
     universe_domain: 'googleapis.com',
   };
 
@@ -211,7 +221,7 @@ describe('GoogleAdsClient', () => {
               kid: validServiceAccountConfig.private_key_id,
               typ: 'JWT',
             }),
-          }),
+          })
         );
       });
 
@@ -286,7 +296,7 @@ describe('GoogleAdsClient', () => {
               'User-Agent': 'WarRoom-GoogleAds-Client/1.0',
             }),
             timeout: 10000,
-          }),
+          })
         );
       });
 
@@ -369,7 +379,7 @@ describe('GoogleAdsClient', () => {
         await client.initialize();
 
         // Wait for token to expire
-        await new Promise(resolve => setTimeout(resolve, 1100));
+        await new Promise((resolve) => setTimeout(resolve, 1100));
 
         // Make API call that should trigger refresh
         await client.getCustomers();
@@ -479,7 +489,9 @@ describe('GoogleAdsClient', () => {
         client = new GoogleAdsClient(validConfig);
 
         await expect(client.initialize()).rejects.toThrow(AuthenticationError);
-        await expect(client.initialize()).rejects.toThrow('Service account does not have required permissions');
+        await expect(client.initialize()).rejects.toThrow(
+          'Service account does not have required permissions'
+        );
       });
 
       it('should validate service account configuration fields', async () => {
@@ -574,7 +586,7 @@ describe('GoogleAdsClient', () => {
 
       it('should handle rate limit exceeded error', async () => {
         mockRateLimiter.acquireToken.mockRejectedValueOnce(
-          new RateLimitError('Rate limit exceeded', 100, 0, new Date(Date.now() + 60000), 60000),
+          new RateLimitError('Rate limit exceeded', 100, 0, new Date(Date.now() + 60000), 60000)
         );
 
         await client.initialize();
@@ -649,7 +661,7 @@ describe('GoogleAdsClient', () => {
 
       it('should not retry on non-retryable errors', async () => {
         mockRateLimiter.acquireToken.mockRejectedValueOnce(
-          new ValidationError('Invalid input', 'customerId', 'invalid', 'Must be 10 digits'),
+          new ValidationError('Invalid input', 'customerId', 'invalid', 'Must be 10 digits')
         );
 
         await client.initialize();
@@ -668,7 +680,9 @@ describe('GoogleAdsClient', () => {
         await client.initialize();
 
         // Make multiple concurrent requests
-        const promises = Array(5).fill(null).map(() => client.getCustomers());
+        const promises = Array(5)
+          .fill(null)
+          .map(() => client.getCustomers());
         await Promise.all(promises);
 
         // Each request should acquire a token
@@ -692,12 +706,12 @@ describe('GoogleAdsClient', () => {
         await client.initialize();
 
         // Make 5 requests, but only 3 should succeed immediately
-        const promises = Array(5).fill(null).map(() =>
-          client.getCustomers().catch(e => ({ error: e })),
-        );
+        const promises = Array(5)
+          .fill(null)
+          .map(() => client.getCustomers().catch((e) => ({ error: e })));
 
         const results = await Promise.all(promises);
-        const errors = results.filter(r => 'error' in r);
+        const errors = results.filter((r) => 'error' in r);
 
         expect(errors).toHaveLength(2);
         expect(errors[0].error).toBeInstanceOf(RateLimitError);
@@ -1045,18 +1059,20 @@ describe('GoogleAdsClient', () => {
 
     describe('Large Dataset Pagination', () => {
       it('should handle large result sets within page size limits', async () => {
-        const largeResults = Array(10000).fill(null).map((_, i) => ({
-          campaign: {
-            id: i.toString(),
-            name: `Campaign ${i}`,
-            status: 'ENABLED',
-          },
-          metrics: {
-            impressions: '1000',
-            clicks: '100',
-            conversions: '10',
-          },
-        }));
+        const largeResults = Array(10000)
+          .fill(null)
+          .map((_, i) => ({
+            campaign: {
+              id: i.toString(),
+              name: `Campaign ${i}`,
+              status: 'ENABLED',
+            },
+            metrics: {
+              impressions: '1000',
+              clicks: '100',
+              conversions: '10',
+            },
+          }));
 
         mockAxiosInstance.post.mockResolvedValueOnce({
           data: { results: largeResults },
@@ -1090,7 +1106,7 @@ describe('GoogleAdsClient', () => {
           '/customers/1234567890/googleAds:searchStream',
           expect.objectContaining({
             pageSize: 10000,
-          }),
+          })
         );
       });
     });
@@ -1108,7 +1124,8 @@ describe('GoogleAdsClient', () => {
       });
 
       it('should reject queries with script tags', async () => {
-        const maliciousQuery = "SELECT campaign.id FROM campaign WHERE name = '<script>alert(1)</script>'";
+        const maliciousQuery =
+          "SELECT campaign.id FROM campaign WHERE name = '<script>alert(1)</script>'";
 
         const request: SearchStreamRequest = {
           customerId: '1234567890',
@@ -1119,7 +1136,7 @@ describe('GoogleAdsClient', () => {
       });
 
       it('should reject queries exceeding length limit', async () => {
-        const longQuery = `SELECT campaign.id FROM campaign WHERE name = '${  'x'.repeat(10001)  }'`;
+        const longQuery = `SELECT campaign.id FROM campaign WHERE name = '${'x'.repeat(10001)}'`;
 
         const request: SearchStreamRequest = {
           customerId: '1234567890',
@@ -1142,19 +1159,21 @@ describe('GoogleAdsClient', () => {
     describe('Memory Management', () => {
       it('should handle large response objects without memory leaks', async () => {
         const largeResponse = {
-          results: Array(1000).fill(null).map((_, i) => ({
-            campaign: {
-              id: i.toString(),
-              name: `Campaign ${i}`,
-              status: 'ENABLED',
-            },
-            metrics: {
-              impressions: '1000000',
-              clicks: '100000',
-              conversions: '10000',
-              costMicros: '1000000000',
-            },
-          })),
+          results: Array(1000)
+            .fill(null)
+            .map((_, i) => ({
+              campaign: {
+                id: i.toString(),
+                name: `Campaign ${i}`,
+                status: 'ENABLED',
+              },
+              metrics: {
+                impressions: '1000000',
+                clicks: '100000',
+                conversions: '10000',
+                costMicros: '1000000000',
+              },
+            })),
         };
 
         mockAxiosInstance.post.mockResolvedValueOnce({
@@ -1204,7 +1223,7 @@ describe('GoogleAdsClient', () => {
         expect.objectContaining({
           resourceNames: ['customers/123'],
         }),
-        3600,
+        3600
       );
 
       // Second call - cache hit

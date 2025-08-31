@@ -3,7 +3,12 @@
  * Analyzes monitoring events for potential crises
  */
 
-import { type MonitoringEvent, type CrisisAlert, type CrisisThresholds, type AlertRule } from './types';
+import {
+  type MonitoringEvent,
+  type CrisisAlert,
+  type CrisisThresholds,
+  type AlertRule,
+} from './types';
 
 interface CrisisDetectorConfig {
   thresholds: CrisisThresholds;
@@ -49,19 +54,27 @@ export class CrisisDetector {
 
     // Check velocity spike
     const velocityAlert = this.checkVelocitySpike();
-    if (velocityAlert) {alerts.push(velocityAlert);}
+    if (velocityAlert) {
+      alerts.push(velocityAlert);
+    }
 
     // Check sentiment crash
     const sentimentAlert = this.checkSentimentCrash();
-    if (sentimentAlert) {alerts.push(sentimentAlert);}
+    if (sentimentAlert) {
+      alerts.push(sentimentAlert);
+    }
 
     // Check keyword triggers
     const keywordAlert = this.checkKeywordTriggers();
-    if (keywordAlert) {alerts.push(keywordAlert);}
+    if (keywordAlert) {
+      alerts.push(keywordAlert);
+    }
 
     // Check viral negative content
     const viralAlert = this.checkViralNegative();
-    if (viralAlert) {alerts.push(viralAlert);}
+    if (viralAlert) {
+      alerts.push(viralAlert);
+    }
 
     // Apply custom rules
     if (this.config.customRules) {
@@ -73,7 +86,7 @@ export class CrisisDetector {
     }
 
     // Update active alerts
-    alerts.forEach(alert => this.activeAlerts.set(alert.id, alert));
+    alerts.forEach((alert) => this.activeAlerts.set(alert.id, alert));
 
     return alerts;
   }
@@ -83,19 +96,24 @@ export class CrisisDetector {
    */
   private checkVelocitySpike(): CrisisAlert | null {
     const alertType = 'volume_spike';
-    if (this.isInCooldown(alertType)) {return null;}
+    if (this.isInCooldown(alertType)) {
+      return null;
+    }
 
     const currentVelocity = this.calculateCurrentVelocity();
     const threshold = this.baseline.mentionsPerHour * this.config.thresholds.velocityMultiplier;
 
-    if (currentVelocity > threshold && this.recentEvents.length >= this.config.thresholds.minimumMentions) {
+    if (
+      currentVelocity > threshold &&
+      this.recentEvents.length >= this.config.thresholds.minimumMentions
+    ) {
       const alert: CrisisAlert = {
         id: `crisis_${Date.now()}_velocity`,
         severity: this.calculateSeverity(currentVelocity / this.baseline.mentionsPerHour),
         type: 'volume_spike',
         title: 'Unusual Mention Volume Detected',
         description: `Mention rate is ${(currentVelocity / this.baseline.mentionsPerHour).toFixed(1)}x normal baseline`,
-        trigger_event_ids: this.recentEvents.slice(0, 5).map(e => e.id),
+        trigger_event_ids: this.recentEvents.slice(0, 5).map((e) => e.id),
         trigger_conditions: {
           mentions_per_hour: currentVelocity,
           duration_minutes: this.config.thresholds.duration_minutes,
@@ -124,20 +142,26 @@ export class CrisisDetector {
    */
   private checkSentimentCrash(): CrisisAlert | null {
     const alertType = 'sentiment_drop';
-    if (this.isInCooldown(alertType)) {return null;}
+    if (this.isInCooldown(alertType)) {
+      return null;
+    }
 
     const currentSentiment = this.calculateAverageSentiment();
     const positiveRatio = this.calculatePositiveRatio();
 
-    if (positiveRatio < this.config.thresholds.sentimentThreshold &&
-        this.recentEvents.length >= this.config.thresholds.minimumMentions) {
+    if (
+      positiveRatio < this.config.thresholds.sentimentThreshold &&
+      this.recentEvents.length >= this.config.thresholds.minimumMentions
+    ) {
       const alert: CrisisAlert = {
         id: `crisis_${Date.now()}_sentiment`,
         severity: this.calculateSentimentSeverity(positiveRatio),
         type: 'sentiment_drop',
         title: 'Negative Sentiment Surge',
         description: `Only ${(positiveRatio * 100).toFixed(0)}% positive sentiment (threshold: ${(this.config.thresholds.sentimentThreshold * 100).toFixed(0)}%)`,
-        trigger_event_ids: this.getNegativeEvents().slice(0, 5).map(e => e.id),
+        trigger_event_ids: this.getNegativeEvents()
+          .slice(0, 5)
+          .map((e) => e.id),
         trigger_conditions: {
           sentiment_threshold: currentSentiment,
         },
@@ -166,32 +190,38 @@ export class CrisisDetector {
    */
   private checkKeywordTriggers(): CrisisAlert | null {
     const alertType = 'negative_trend';
-    if (this.isInCooldown(alertType)) {return null;}
+    if (this.isInCooldown(alertType)) {
+      return null;
+    }
 
-    const triggerEvents = this.recentEvents.filter(event => {
-      const content = (`${event.content  } ${  event.title}`).toLowerCase();
-      return this.config.thresholds.keywords.some((keyword: string) =>
-        content.includes(keyword.toLowerCase()),
-      ) && !this.config.thresholds.excludeKeywords.some((exclude: string) =>
-        content.includes(exclude.toLowerCase()),
+    const triggerEvents = this.recentEvents.filter((event) => {
+      const content = `${event.content} ${event.title}`.toLowerCase();
+      return (
+        this.config.thresholds.keywords.some((keyword: string) =>
+          content.includes(keyword.toLowerCase())
+        ) &&
+        !this.config.thresholds.excludeKeywords.some((exclude: string) =>
+          content.includes(exclude.toLowerCase())
+        )
       );
     });
 
-    if (triggerEvents.length >= 3) { // At least 3 mentions with crisis keywords
+    if (triggerEvents.length >= 3) {
+      // At least 3 mentions with crisis keywords
       const alert: CrisisAlert = {
         id: `crisis_${Date.now()}_keywords`,
         severity: 'high',
         type: 'negative_trend',
         title: 'Crisis Keywords Detected',
         description: `Found ${triggerEvents.length} mentions containing crisis keywords`,
-        trigger_event_ids: triggerEvents.slice(0, 5).map(e => e.id),
+        trigger_event_ids: triggerEvents.slice(0, 5).map((e) => e.id),
         trigger_conditions: {},
         created_at: new Date(),
         updated_at: new Date(),
         status: 'active',
         escalated: false,
         affected_keywords: this.config.thresholds.keywords,
-        affected_platforms: [...new Set(triggerEvents.map(e => e.platform))],
+        affected_platforms: [...new Set(triggerEvents.map((e) => e.platform))],
         estimated_reach: triggerEvents.reduce((sum, e) => sum + (e.metrics?.reach || 0), 0),
         metadata: {},
       };
@@ -208,13 +238,16 @@ export class CrisisDetector {
    */
   private checkViralNegative(): CrisisAlert | null {
     const alertType = 'viral_negative';
-    if (this.isInCooldown(alertType)) {return null;}
+    if (this.isInCooldown(alertType)) {
+      return null;
+    }
 
-    const viralNegatives = this.recentEvents.filter(event =>
-      event.sentiment.label === 'negative' &&
-      event.metrics &&
-      (event.metrics.engagement ?? 0) > 1000 &&
-      (event.metrics.reach ?? 0) > 10000,
+    const viralNegatives = this.recentEvents.filter(
+      (event) =>
+        event.sentiment.label === 'negative' &&
+        event.metrics &&
+        (event.metrics.engagement ?? 0) > 1000 &&
+        (event.metrics.reach ?? 0) > 10000
     );
 
     if (viralNegatives.length > 0) {
@@ -225,7 +258,7 @@ export class CrisisDetector {
         type: 'viral_negative',
         title: 'Viral Negative Content Detected',
         description: `Negative content with ${(topViral.metrics?.reach ?? 0).toLocaleString()} reach and ${(topViral.metrics?.engagement ?? 0).toLocaleString()} engagements`,
-        trigger_event_ids: viralNegatives.slice(0, 3).map(e => e.id),
+        trigger_event_ids: viralNegatives.slice(0, 3).map((e) => e.id),
         trigger_conditions: {
           reach_threshold: 10000,
         },
@@ -234,7 +267,7 @@ export class CrisisDetector {
         status: 'active',
         escalated: true, // Auto-escalate viral content
         affected_keywords: this.extractKeywordsFromEvents(viralNegatives),
-        affected_platforms: [...new Set(viralNegatives.map(e => e.platform))],
+        affected_platforms: [...new Set(viralNegatives.map((e) => e.platform))],
         estimated_reach: viralNegatives.reduce((sum, e) => sum + (e.metrics?.reach || 0), 0),
         metadata: {
           geographic_spread: this.extractGeographicSpread(viralNegatives),
@@ -256,7 +289,7 @@ export class CrisisDetector {
 
     // Keep only events from the last hour
     const cutoff = new Date(Date.now() - 60 * 60 * 1000);
-    this.recentEvents = this.recentEvents.filter(e => e.timestamp > cutoff);
+    this.recentEvents = this.recentEvents.filter((e) => e.timestamp > cutoff);
   }
 
   private shouldUpdateBaseline(): boolean {
@@ -267,7 +300,7 @@ export class CrisisDetector {
   private updateBaseline(): void {
     // Calculate baseline from events older than 1 hour
     const cutoff = new Date(Date.now() - 60 * 60 * 1000);
-    const baselineEvents = this.recentEvents.filter(e => e.timestamp < cutoff);
+    const baselineEvents = this.recentEvents.filter((e) => e.timestamp < cutoff);
 
     if (baselineEvents.length > 0) {
       this.baseline = {
@@ -280,52 +313,68 @@ export class CrisisDetector {
 
   private calculateCurrentVelocity(): number {
     const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
-    const recentCount = this.recentEvents.filter(e => e.timestamp > oneHourAgo).length;
+    const recentCount = this.recentEvents.filter((e) => e.timestamp > oneHourAgo).length;
     return recentCount;
   }
 
   private calculateAverageSentiment(events = this.recentEvents): number {
-    if (events.length === 0) {return 0;}
+    if (events.length === 0) {
+      return 0;
+    }
     const sum = events.reduce((acc, e) => acc + e.sentiment.score, 0);
     return sum / events.length;
   }
 
   private calculatePositiveRatio(): number {
-    if (this.recentEvents.length === 0) {return 1;}
-    const positive = this.recentEvents.filter(e => e.sentiment.label === 'positive').length;
+    if (this.recentEvents.length === 0) {
+      return 1;
+    }
+    const positive = this.recentEvents.filter((e) => e.sentiment.label === 'positive').length;
     return positive / this.recentEvents.length;
   }
 
   private calculateSeverity(multiplier: number): CrisisAlert['severity'] {
-    if (multiplier > 10) {return 'critical';}
-    if (multiplier > 5) {return 'high';}
-    if (multiplier > 3) {return 'medium';}
+    if (multiplier > 10) {
+      return 'critical';
+    }
+    if (multiplier > 5) {
+      return 'high';
+    }
+    if (multiplier > 3) {
+      return 'medium';
+    }
     return 'low';
   }
 
   private calculateSentimentSeverity(positiveRatio: number): CrisisAlert['severity'] {
-    if (positiveRatio < 0.1) {return 'critical';}
-    if (positiveRatio < 0.3) {return 'high';}
-    if (positiveRatio < 0.5) {return 'medium';}
+    if (positiveRatio < 0.1) {
+      return 'critical';
+    }
+    if (positiveRatio < 0.3) {
+      return 'high';
+    }
+    if (positiveRatio < 0.5) {
+      return 'medium';
+    }
     return 'low';
   }
 
   private getNegativeEvents(): MonitoringEvent[] {
-    return this.recentEvents.filter(e => e.sentiment.label === 'negative');
+    return this.recentEvents.filter((e) => e.sentiment.label === 'negative');
   }
 
   private getTopNegativePosts(): string[] {
     return this.getNegativeEvents()
       .sort((a, b) => (b.metrics?.engagement || 0) - (a.metrics?.engagement || 0))
       .slice(0, 3)
-      .map(e => e.url);
+      .map((e) => e.url);
   }
 
   private extractTopKeywords(): string[] {
     const keywordCounts = new Map<string, number>();
 
-    this.recentEvents.forEach(event => {
-      event.keywords.forEach(keyword => {
+    this.recentEvents.forEach((event) => {
+      event.keywords.forEach((keyword) => {
         keywordCounts.set(keyword, (keywordCounts.get(keyword) || 0) + 1);
       });
     });
@@ -338,8 +387,8 @@ export class CrisisDetector {
 
   private extractKeywordsFromEvents(events: MonitoringEvent[]): string[] {
     const keywords = new Set<string>();
-    events.forEach(event => {
-      event.keywords.forEach(keyword => keywords.add(keyword));
+    events.forEach((event) => {
+      event.keywords.forEach((keyword) => keywords.add(keyword));
     });
     return Array.from(keywords).slice(0, 10);
   }
@@ -347,7 +396,7 @@ export class CrisisDetector {
   private extractAffectedPlatforms(): string[] {
     const platforms = new Map<string, number>();
 
-    this.recentEvents.forEach(event => {
+    this.recentEvents.forEach((event) => {
       platforms.set(event.platform, (platforms.get(event.platform) || 0) + 1);
     });
 
@@ -358,7 +407,7 @@ export class CrisisDetector {
 
   private extractGeographicSpread(events: MonitoringEvent[]): string[] {
     const locations = new Set<string>();
-    events.forEach(event => {
+    events.forEach((event) => {
       if (event.location?.country) {
         locations.add(event.location.country);
       }
@@ -372,7 +421,9 @@ export class CrisisDetector {
 
   private isInCooldown(alertType: string): boolean {
     const cooldown = this.alertCooldowns.get(alertType);
-    if (!cooldown) {return false;}
+    if (!cooldown) {
+      return false;
+    }
     return Date.now() < cooldown.getTime();
   }
 

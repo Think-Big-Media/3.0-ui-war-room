@@ -40,9 +40,7 @@ const createWrapper = () => {
   });
 
   return ({ children }: { children: React.ReactNode }) => (
-    <QueryClientProvider client={queryClient}>
-      {children}
-    </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
 
@@ -300,7 +298,9 @@ describe('MetaAdsIntegration', () => {
       });
 
       await waitFor(() => {
-        expect(mockMetaAPI.auth.getLongLivedToken).toHaveBeenCalledWith(mockAccessToken.access_token);
+        expect(mockMetaAPI.auth.getLongLivedToken).toHaveBeenCalledWith(
+          mockAccessToken.access_token
+        );
         expect(toast.success).toHaveBeenCalledWith('Token refreshed successfully');
       });
     });
@@ -363,11 +363,12 @@ describe('MetaAdsIntegration', () => {
       mockMetaAPI.insights.getAccountInsights.mockResolvedValue(mockInsights);
 
       const { result } = renderHook(
-        () => useMetaInsights('account', 'act_123456', {
-          accountId: 'act_123456',
-          datePreset: 'last_30d',
-        }),
-        { wrapper: createWrapper() },
+        () =>
+          useMetaInsights('account', 'act_123456', {
+            accountId: 'act_123456',
+            datePreset: 'last_30d',
+          }),
+        { wrapper: createWrapper() }
       );
 
       await waitFor(() => {
@@ -382,10 +383,16 @@ describe('MetaAdsIntegration', () => {
 
       const onError = jest.fn();
       const { result } = renderHook(
-        () => useMetaInsights('account', 'act_123456', {
-          accountId: 'act_123456',
-        }, { onError }),
-        { wrapper: createWrapper() },
+        () =>
+          useMetaInsights(
+            'account',
+            'act_123456',
+            {
+              accountId: 'act_123456',
+            },
+            { onError }
+          ),
+        { wrapper: createWrapper() }
       );
 
       await waitFor(() => {
@@ -400,10 +407,11 @@ describe('MetaAdsIntegration', () => {
       mockMetaAPI.insights.getCampaignInsights.mockRejectedValue(rateLimitError);
 
       const { result } = renderHook(
-        () => useMetaInsights('campaign', 'campaign_123', {
-          accountId: 'act_123456',
-        }),
-        { wrapper: createWrapper() },
+        () =>
+          useMetaInsights('campaign', 'campaign_123', {
+            accountId: 'act_123456',
+          }),
+        { wrapper: createWrapper() }
       );
 
       await waitFor(() => {
@@ -423,10 +431,9 @@ describe('MetaAdsIntegration', () => {
     it('should create campaign successfully', async () => {
       mockMetaAPI.campaigns.create.mockResolvedValue(mockCampaign);
 
-      const { result } = renderHook(
-        () => useMetaCampaignMutations('act_123456'),
-        { wrapper: createWrapper() },
-      );
+      const { result } = renderHook(() => useMetaCampaignMutations('act_123456'), {
+        wrapper: createWrapper(),
+      });
 
       await act(async () => {
         result.current.createCampaign({
@@ -447,10 +454,9 @@ describe('MetaAdsIntegration', () => {
         name: 'Updated Campaign',
       });
 
-      const { result } = renderHook(
-        () => useMetaCampaignMutations('act_123456'),
-        { wrapper: createWrapper() },
-      );
+      const { result } = renderHook(() => useMetaCampaignMutations('act_123456'), {
+        wrapper: createWrapper(),
+      });
 
       await act(async () => {
         result.current.updateCampaign({
@@ -468,10 +474,9 @@ describe('MetaAdsIntegration', () => {
     it('should handle campaign deletion', async () => {
       mockMetaAPI.campaigns.delete.mockResolvedValue(undefined);
 
-      const { result } = renderHook(
-        () => useMetaCampaignMutations('act_123456'),
-        { wrapper: createWrapper() },
-      );
+      const { result } = renderHook(() => useMetaCampaignMutations('act_123456'), {
+        wrapper: createWrapper(),
+      });
 
       await act(async () => {
         result.current.deleteCampaign('campaign_123');
@@ -480,7 +485,7 @@ describe('MetaAdsIntegration', () => {
       await waitFor(() => {
         expect(mockMetaAPI.campaigns.delete).toHaveBeenCalledWith(
           'campaign_123',
-          mockAccessToken.access_token,
+          mockAccessToken.access_token
         );
         expect(toast.success).toHaveBeenCalledWith('Campaign deleted successfully');
       });
@@ -492,10 +497,9 @@ describe('MetaAdsIntegration', () => {
         status: 'PAUSED',
       });
 
-      const { result } = renderHook(
-        () => useMetaCampaignMutations('act_123456'),
-        { wrapper: createWrapper() },
-      );
+      const { result } = renderHook(() => useMetaCampaignMutations('act_123456'), {
+        wrapper: createWrapper(),
+      });
 
       await act(async () => {
         result.current.pauseCampaign('campaign_123');
@@ -505,7 +509,7 @@ describe('MetaAdsIntegration', () => {
         expect(mockMetaAPI.campaigns.update).toHaveBeenCalledWith(
           'campaign_123',
           { status: 'PAUSED' },
-          mockAccessToken.access_token,
+          mockAccessToken.access_token
         );
       });
     });
@@ -521,10 +525,11 @@ describe('MetaAdsIntegration', () => {
       mockMetaAPI.insights.getAccountInsights.mockRejectedValue(networkError);
 
       const { result } = renderHook(
-        () => useMetaInsights('account', 'act_123456', {
-          accountId: 'act_123456',
-        }),
-        { wrapper: createWrapper() },
+        () =>
+          useMetaInsights('account', 'act_123456', {
+            accountId: 'act_123456',
+          }),
+        { wrapper: createWrapper() }
       );
 
       await waitFor(() => {
@@ -541,10 +546,9 @@ describe('MetaAdsIntegration', () => {
       const permissionError = new MetaAPIError('Permission denied', 200);
       mockMetaAPI.campaigns.list.mockRejectedValue(permissionError);
 
-      const { result } = renderHook(
-        () => useMetaCampaigns('act_123456'),
-        { wrapper: createWrapper() },
-      );
+      const { result } = renderHook(() => useMetaCampaigns('act_123456'), {
+        wrapper: createWrapper(),
+      });
 
       await waitFor(() => {
         expect(result.current.error).toEqual(permissionError);

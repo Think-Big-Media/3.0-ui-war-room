@@ -9,14 +9,14 @@ export interface IntelligencePanelProps {
   onExport: () => void;
 }
 
-export const IntelligencePanel: React.FC<IntelligencePanelProps> = ({ 
+export const IntelligencePanel: React.FC<IntelligencePanelProps> = ({
   isConnected,
   dataPoints,
   crisisAlerts,
-  onExport
+  onExport,
 }) => {
   const navigate = useNavigate();
-  
+
   // Convert SWOT data points to intelligence items with proper colors
   const getColorForType = (type: string) => {
     switch (type) {
@@ -33,14 +33,14 @@ export const IntelligencePanel: React.FC<IntelligencePanelProps> = ({
     }
   };
 
-  const intelligenceItems = dataPoints.map(point => ({
+  const intelligenceItems = dataPoints.map((point) => ({
     id: point.id,
     type: point.type.toUpperCase(),
     message: point.label,
     color: getColorForType(point.type),
-    originalType: point.type
+    originalType: point.type,
   }));
-  
+
   const handleItemClick = (item: any) => {
     navigate(`/intelligence-hub?category=${item.originalType}&item=${item.id}`);
   };
@@ -49,9 +49,9 @@ export const IntelligencePanel: React.FC<IntelligencePanelProps> = ({
     <div className="h-full flex flex-col">
       {/* Intelligence Feed - Tighter spacing to reduce radar padding */}
       <div className="flex-1 space-y-2 overflow-y-auto">
-        {intelligenceItems.map(item => (
-          <div 
-            key={item.id} 
+        {intelligenceItems.map((item) => (
+          <div
+            key={item.id}
             className={`${item.color} border-l-4 p-2 rounded-r text-xs cursor-pointer hover:opacity-80 transition-opacity`}
             onClick={() => handleItemClick(item)}
           >

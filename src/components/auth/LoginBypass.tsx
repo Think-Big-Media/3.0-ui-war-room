@@ -20,7 +20,7 @@ export const LoginBypass: React.FC = () => {
     document.cookie.split(';').forEach((c) => {
       document.cookie = c
         .replace(/^ +/, '')
-        .replace(/[=].*/, `=;expires=${  new Date().toUTCString()  };path=/`);
+        .replace(/[=].*/, `=;expires=${new Date().toUTCString()};path=/`);
     });
 
     // Force reload to login

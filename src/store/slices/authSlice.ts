@@ -2,33 +2,33 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../index';
 
 export interface User {
-  id: string
-  email: string
-  name: string
-  role: 'admin' | 'member' | 'viewer'
-  organizationId: string
-  avatarUrl?: string
-  createdAt: string
-  updatedAt: string
-  permissions?: string[]
+  id: string;
+  email: string;
+  name: string;
+  role: 'admin' | 'member' | 'viewer';
+  organizationId: string;
+  avatarUrl?: string;
+  createdAt: string;
+  updatedAt: string;
+  permissions?: string[];
 }
 
 export interface Organization {
-  id: string
-  name: string
-  slug: string
-  logoUrl?: string
-  plan: 'free' | 'pro' | 'enterprise'
-  features: string[]
+  id: string;
+  name: string;
+  slug: string;
+  logoUrl?: string;
+  plan: 'free' | 'pro' | 'enterprise';
+  features: string[];
 }
 
 export interface AuthState {
-  user: User | null
-  organization: Organization | null
-  isAuthenticated: boolean
-  isLoading: boolean
-  error: string | null
-  sessionToken: string | null
+  user: User | null;
+  organization: Organization | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
+  sessionToken: string | null;
 }
 
 const initialState: AuthState = {
@@ -47,10 +47,10 @@ export const authSlice = createSlice({
     setCredentials: (
       state,
       action: PayloadAction<{
-        user: User
-        organization: Organization
-        sessionToken: string
-      }>,
+        user: User;
+        organization: Organization;
+        sessionToken: string;
+      }>
     ) => {
       state.user = action.payload.user;
       state.organization = action.payload.organization;
@@ -84,14 +84,8 @@ export const authSlice = createSlice({
   },
 });
 
-export const {
-  setCredentials,
-  updateUser,
-  updateOrganization,
-  setLoading,
-  setError,
-  logout,
-} = authSlice.actions;
+export const { setCredentials, updateUser, updateOrganization, setLoading, setError, logout } =
+  authSlice.actions;
 
 // Selectors
 export const selectCurrentUser = (state: RootState) => state.auth.user;

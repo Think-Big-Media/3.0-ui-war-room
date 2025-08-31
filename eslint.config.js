@@ -159,7 +159,7 @@ export default tseslint.config(
       'jsx-a11y/tabindex-no-positive': 'error',
       
       // General JavaScript/TypeScript rules
-      'no-console': 'warn',
+      'no-console': 'off', // Allow console statements in development
       'no-debugger': 'error',
       'no-alert': 'warn',
       'no-unused-vars': 'off', // Handled by @typescript-eslint/no-unused-vars
@@ -169,8 +169,8 @@ export default tseslint.config(
       'object-shorthand': 'warn',
       'prefer-arrow-callback': 'warn',
       'arrow-spacing': 'warn',
-      'prefer-destructuring': 'warn',
-      'no-duplicate-imports': 'warn',
+      'prefer-destructuring': 'off', // Too noisy
+      'no-duplicate-imports': 'off', // Can be useful for type imports
       'no-useless-return': 'warn',
       'no-useless-catch': 'warn',
       'no-useless-computed-key': 'warn',
@@ -178,25 +178,26 @@ export default tseslint.config(
       'no-useless-rename': 'warn',
       'no-useless-escape': 'warn',
       'no-multiple-empty-lines': ['warn', { max: 2 }],
-      'no-trailing-spaces': 'warn',
-      'comma-dangle': ['warn', 'always-multiline'],
-      'semi': ['warn', 'always'],
-      'quotes': ['warn', 'single', { avoidEscape: true }],
-      'indent': ['warn', 2, { SwitchCase: 1 }],
-      'max-len': ['warn', { code: 100, ignoreUrls: true, ignoreStrings: true }],
-      'eol-last': ['warn', 'always'],
-      'no-mixed-spaces-and-tabs': 'warn',
-      'keyword-spacing': 'warn',
-      'space-before-blocks': 'warn',
-      'space-infix-ops': 'warn',
-      'space-unary-ops': 'warn',
-      'brace-style': ['warn', '1tbs', { allowSingleLine: true }],
+      // Formatting rules disabled - using Prettier
+      // 'no-trailing-spaces': 'warn',
+      // 'comma-dangle': ['warn', 'always-multiline'],
+      // 'semi': ['warn', 'always'],
+      // 'quotes': ['warn', 'single', { avoidEscape: true }],
+      // 'indent': ['warn', 2, { SwitchCase: 1 }],
+      // 'max-len': ['warn', { code: 100, ignoreUrls: true, ignoreStrings: true }],
+      // 'eol-last': ['warn', 'always'],
+      // 'no-mixed-spaces-and-tabs': 'warn',
+      // 'keyword-spacing': 'warn', // Prettier handles this
+      // 'space-before-blocks': 'warn', // Prettier handles this
+      // 'space-infix-ops': 'warn', // Prettier handles this
+      // 'space-unary-ops': 'warn', // Prettier handles this
+      // 'brace-style': ['warn', '1tbs', { allowSingleLine: true }], // Prettier handles this
       'curly': ['warn', 'all'],
       'eqeqeq': ['error', 'always'],
       'no-eq-null': 'error',
       'no-implicit-coercion': 'warn',
-      'no-magic-numbers': ['warn', { ignore: [-1, 0, 1, 2, 100, 1000] }],
-      'radix': 'warn',
+      'no-magic-numbers': 'off', // Too noisy for practical use
+      'radix': 'off', // Not critical for modern JS
       'yoda': 'error',
       
       // Performance and best practices
@@ -228,7 +229,7 @@ export default tseslint.config(
       'no-self-compare': 'error',
       'no-undef-init': 'error',
       'no-unused-expressions': 'warn',
-      'no-use-before-define': 'warn',
+      'no-use-before-define': 'off', // TypeScript handles this better
       'consistent-return': 'warn',
       'default-case': 'warn',
       'dot-notation': 'warn',
@@ -250,10 +251,7 @@ export default tseslint.config(
       'no-constant-condition': 'warn',
       '@typescript-eslint/no-namespace': 'warn',
       '@typescript-eslint/no-empty-object-type': 'warn',
-      'no-console': 'warn',
-      'no-magic-numbers': 'off',
-      'max-len': 'warn',
-      'prefer-destructuring': 'warn',
+      // Duplicated rules removed
     },
     settings: {
       react: {

@@ -58,7 +58,7 @@ export function useMetaAuth() {
         JSON.stringify({
           token: authState.token,
           accountId: authState.accountId,
-        }),
+        })
       );
     } else {
       localStorage.removeItem(META_AUTH_STORAGE_KEY);
@@ -91,7 +91,8 @@ export function useMetaAuth() {
       'read_insights',
     ].join(',');
 
-    const authUrl = 'https://www.facebook.com/v18.0/dialog/oauth?' +
+    const authUrl =
+      'https://www.facebook.com/v18.0/dialog/oauth?' +
       `client_id=${appId}&` +
       `redirect_uri=${redirectUri}&` +
       `state=${state}&` +
@@ -105,56 +106,59 @@ export function useMetaAuth() {
   /**
    * Handle OAuth callback
    */
-  const handleCallback = useCallback(async (code: string, state: string) => {
-    setAuthState(prev => ({ ...prev, isLoading: true, error: null }));
+  const handleCallback = useCallback(
+    async (code: string, state: string) => {
+      setAuthState((prev) => ({ ...prev, isLoading: true, error: null }));
 
-    try {
-      // Verify state
-      const storedState = sessionStorage.getItem('meta_oauth_state');
-      if (state !== storedState) {
-        throw new Error('Invalid OAuth state');
+      try {
+        // Verify state
+        const storedState = sessionStorage.getItem('meta_oauth_state');
+        if (state !== storedState) {
+          throw new Error('Invalid OAuth state');
+        }
+        sessionStorage.removeItem('meta_oauth_state');
+
+        // Exchange code for token via backend
+        const response = await fetch('/api/v1/meta/auth/callback', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ code, redirect_uri: `${window.location.origin}/meta/callback` }),
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.detail || 'Failed to authenticate');
+        }
+
+        const data = await response.json();
+
+        setAuthState({
+          token: data.access_token,
+          accountId: data.account_id,
+          isAuthenticated: true,
+          isLoading: false,
+          error: null,
+        });
+
+        toast.success('Successfully connected to Meta');
+
+        // Redirect to campaigns page or return URL
+        const returnUrl = sessionStorage.getItem('meta_return_url') || '/campaigns/meta';
+        sessionStorage.removeItem('meta_return_url');
+        navigate(returnUrl);
+      } catch (error: any) {
+        setAuthState((prev) => ({
+          ...prev,
+          isLoading: false,
+          error: error.message,
+        }));
+        toast.error(`Authentication failed: ${error.message}`);
       }
-      sessionStorage.removeItem('meta_oauth_state');
-
-      // Exchange code for token via backend
-      const response = await fetch('/api/v1/meta/auth/callback', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ code, redirect_uri: `${window.location.origin}/meta/callback` }),
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.detail || 'Failed to authenticate');
-      }
-
-      const data = await response.json();
-
-      setAuthState({
-        token: data.access_token,
-        accountId: data.account_id,
-        isAuthenticated: true,
-        isLoading: false,
-        error: null,
-      });
-
-      toast.success('Successfully connected to Meta');
-
-      // Redirect to campaigns page or return URL
-      const returnUrl = sessionStorage.getItem('meta_return_url') || '/campaigns/meta';
-      sessionStorage.removeItem('meta_return_url');
-      navigate(returnUrl);
-    } catch (error: any) {
-      setAuthState(prev => ({
-        ...prev,
-        isLoading: false,
-        error: error.message,
-      }));
-      toast.error(`Authentication failed: ${error.message}`);
-    }
-  }, [navigate]);
+    },
+    [navigate]
+  );
 
   /**
    * Logout and clear credentials
@@ -174,16 +178,18 @@ export function useMetaAuth() {
    * Refresh access token
    */
   const refreshToken = useCallback(async () => {
-    if (!authState.token) {return;}
+    if (!authState.token) {
+      return;
+    }
 
-    setAuthState(prev => ({ ...prev, isLoading: true }));
+    setAuthState((prev) => ({ ...prev, isLoading: true }));
 
     try {
       const response = await fetch('/api/v1/meta/auth/refresh', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${authState.token}`,
+          Authorization: `Bearer ${authState.token}`,
         },
       });
 
@@ -193,7 +199,7 @@ export function useMetaAuth() {
 
       const data = await response.json();
 
-      setAuthState(prev => ({
+      setAuthState((prev) => ({
         ...prev,
         token: data.access_token,
         isLoading: false,
@@ -201,7 +207,7 @@ export function useMetaAuth() {
     } catch (error: any) {
       console.error('Token refresh failed:', error);
       // Don't logout on refresh failure - token might still be valid
-      setAuthState(prev => ({ ...prev, isLoading: false }));
+      setAuthState((prev) => ({ ...prev, isLoading: false }));
     }
   }, [authState.token]);
 
@@ -222,7 +228,9 @@ export function useMetaAuth() {
 
   // Refresh token periodically
   useEffect(() => {
-    if (!authState.token) {return;}
+    if (!authState.token) {
+      return;
+    }
 
     // Refresh every 50 minutes (tokens typically last 60 minutes)
     const interval = setInterval(refreshToken, 50 * 60 * 1000);

@@ -136,7 +136,7 @@ export class MentionlyticsClient implements MonitoringClient {
       (error) => {
         this.handleError(error);
         throw error;
-      },
+      }
     );
   }
 
@@ -178,7 +178,7 @@ export class MentionlyticsClient implements MonitoringClient {
 
     if (timeSinceLastRequest < minInterval) {
       const waitTime = minInterval - timeSinceLastRequest;
-      await new Promise(resolve => setTimeout(resolve, waitTime));
+      await new Promise((resolve) => setTimeout(resolve, waitTime));
     }
 
     this.lastRequestTime = Date.now();
@@ -242,14 +242,17 @@ export class MentionlyticsClient implements MonitoringClient {
   async fetchEvents(config: MonitoringConfig, since?: Date): Promise<MonitoringEvent[]> {
     try {
       const mentions = await this.fetchMentions(config, since);
-      return mentions.map(mention => this.transformToMonitoringEvent(mention));
+      return mentions.map((mention) => this.transformToMonitoringEvent(mention));
     } catch (error) {
       console.error('Error fetching Mentionlytics events:', error);
       throw error;
     }
   }
 
-  private async fetchMentions(config: MonitoringConfig, since?: Date): Promise<MentionlyticsMention[]> {
+  private async fetchMentions(
+    config: MonitoringConfig,
+    since?: Date
+  ): Promise<MentionlyticsMention[]> {
     const allMentions: MentionlyticsMention[] = [];
     let page = 1;
     let hasMore = true;
@@ -273,7 +276,8 @@ export class MentionlyticsClient implements MonitoringClient {
       params.sources = config.platforms.join(',');
     }
 
-    while (hasMore && page <= 10) { // Limit to 10 pages (500 mentions)
+    while (hasMore && page <= 10) {
+      // Limit to 10 pages (500 mentions)
       try {
         await this.rateLimit();
 
@@ -281,12 +285,11 @@ export class MentionlyticsClient implements MonitoringClient {
           params: { ...params, page },
         });
 
-        const mentions = response.data.data.map(item => this.parseMention(item));
+        const mentions = response.data.data.map((item) => this.parseMention(item));
         allMentions.push(...mentions);
 
         hasMore = response.data.meta.has_more && mentions.length > 0;
         page++;
-
       } catch (error) {
         console.error(`Error fetching page ${page}:`, error);
         break;
@@ -329,11 +332,13 @@ export class MentionlyticsClient implements MonitoringClient {
       },
       keywords: data.keywords || [],
       language: data.language || 'en',
-      location: data.location ? {
-        country: data.location.country,
-        region: data.location.region,
-        city: data.location.city,
-      } : undefined,
+      location: data.location
+        ? {
+            country: data.location.country,
+            region: data.location.region,
+            city: data.location.city,
+          }
+        : undefined,
       influence_score: data.influence_score || data.author?.influence_score,
     };
   }
@@ -346,16 +351,16 @@ export class MentionlyticsClient implements MonitoringClient {
 
   private mapSourceType(sourceType: string): string {
     const typeMap: Record<string, string> = {
-      'twitter': 'twitter',
-      'facebook': 'facebook',
-      'instagram': 'instagram',
-      'youtube': 'youtube',
-      'linkedin': 'linkedin',
-      'reddit': 'reddit',
-      'news': 'news',
-      'blog': 'blog',
-      'forum': 'forum',
-      'review': 'review',
+      twitter: 'twitter',
+      facebook: 'facebook',
+      instagram: 'instagram',
+      youtube: 'youtube',
+      linkedin: 'linkedin',
+      reddit: 'reddit',
+      news: 'news',
+      blog: 'blog',
+      forum: 'forum',
+      review: 'review',
     };
 
     return typeMap[sourceType?.toLowerCase()] || 'social';
@@ -363,14 +368,22 @@ export class MentionlyticsClient implements MonitoringClient {
 
   private mapSentimentLabel(label: string | number): 'positive' | 'negative' | 'neutral' {
     if (typeof label === 'number') {
-      if (label > 0.1) {return 'positive';}
-      if (label < -0.1) {return 'negative';}
+      if (label > 0.1) {
+        return 'positive';
+      }
+      if (label < -0.1) {
+        return 'negative';
+      }
       return 'neutral';
     }
 
     const labelLower = label?.toLowerCase() || '';
-    if (labelLower.includes('pos')) {return 'positive';}
-    if (labelLower.includes('neg')) {return 'negative';}
+    if (labelLower.includes('pos')) {
+      return 'positive';
+    }
+    if (labelLower.includes('neg')) {
+      return 'negative';
+    }
     return 'neutral';
   }
 
@@ -414,10 +427,10 @@ export class MentionlyticsClient implements MonitoringClient {
 
   private mapToEventType(sourceType: string): MonitoringEvent['type'] {
     const typeMap: Record<string, MonitoringEvent['type']> = {
-      'news': 'news',
-      'blog': 'social',
-      'forum': 'forum',
-      'review': 'review',
+      news: 'news',
+      blog: 'social',
+      forum: 'forum',
+      review: 'review',
     };
 
     return typeMap[sourceType] || 'social';

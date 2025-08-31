@@ -224,9 +224,11 @@ describe('RateLimiter', () => {
       mockDate.mockReturnValue(startTime + 7200000); // 2 hours
 
       // Old requests should be cleaned up and not count against limits
-      for (let i = 0; i < 200; i++) { // Make many requests
+      for (let i = 0; i < 200; i++) {
+        // Make many requests
         const canMakeRequest = await rateLimiter.checkLimit();
-        if (i < 199) { // Should allow up to limit
+        if (i < 199) {
+          // Should allow up to limit
           expect(canMakeRequest).toBe(true);
         }
       }
@@ -265,10 +267,13 @@ describe('RateLimiter', () => {
 
   describe('Configuration Edge Cases', () => {
     it('should handle zero rate limits', () => {
-      expect(() => new RateLimiter({
-        maxRequestsPerHour: 0,
-        maxRequestsPerSecond: 10,
-      })).not.toThrow();
+      expect(
+        () =>
+          new RateLimiter({
+            maxRequestsPerHour: 0,
+            maxRequestsPerSecond: 10,
+          })
+      ).not.toThrow();
     });
 
     it('should handle very high rate limits', async () => {
@@ -304,8 +309,8 @@ describe('RateLimiter', () => {
       const results = await Promise.all(promises);
 
       // Should have some true and some false results
-      const trueCount = results.filter(r => r === true).length;
-      const falseCount = results.filter(r => r === false).length;
+      const trueCount = results.filter((r) => r === true).length;
+      const falseCount = results.filter((r) => r === false).length;
 
       expect(trueCount).toBeGreaterThan(0);
       expect(trueCount + falseCount).toBe(20);

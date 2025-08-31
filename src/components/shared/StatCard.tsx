@@ -58,12 +58,7 @@ const StatCardComponent: React.FC<StatCardProps> = ({
     <Card
       variant="glass"
       padding="none"
-      className={cn(
-        'bg-gradient-to-br border',
-        colorClasses[color],
-        padding,
-        className
-      )}
+      className={cn('bg-gradient-to-br border', colorClasses[color], padding, className)}
     >
       <div className="flex flex-col gap-3">
         {Icon && (
@@ -73,17 +68,10 @@ const StatCardComponent: React.FC<StatCardProps> = ({
         )}
 
         <div>
-          <p
-            className={cn(
-              'text-white/70 font-medium uppercase tracking-wide',
-              labelText
-            )}
-          >
+          <p className={cn('text-white/70 font-medium uppercase tracking-wide', labelText)}>
             {label}
           </p>
-          <p className={cn('font-bold text-white/95 mt-1', valueText)}>
-            {value}
-          </p>
+          <p className={cn('font-bold text-white/95 mt-1', valueText)}>{value}</p>
           {subValue && <p className="text-sm text-white/60 mt-1">{subValue}</p>}
         </div>
       </div>

@@ -36,7 +36,8 @@ const OAuthSetup: React.FC = () => {
         <div className="bg-white rounded-lg shadow p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4">🔗 Required URLs in Supabase</h2>
           <p className="mb-4">
-            Go to: <a
+            Go to:{' '}
+            <a
               href={`https://supabase.com/dashboard/project/${projectId}/auth/url-configuration`}
               target="_blank"
               rel="noopener noreferrer"
@@ -54,10 +55,18 @@ const OAuthSetup: React.FC = () => {
           <div>
             <h3 className="font-semibold mb-2">Redirect URLs (add all of these):</h3>
             <ul className="space-y-2">
-              <li><code className="bg-gray-100 p-2 rounded block">{currentOrigin}</code></li>
-              <li><code className="bg-gray-100 p-2 rounded block">{currentOrigin}/dashboard</code></li>
-              <li><code className="bg-gray-100 p-2 rounded block">{currentOrigin}/auth/callback</code></li>
-              <li><code className="bg-gray-100 p-2 rounded block">{currentOrigin}/login</code></li>
+              <li>
+                <code className="bg-gray-100 p-2 rounded block">{currentOrigin}</code>
+              </li>
+              <li>
+                <code className="bg-gray-100 p-2 rounded block">{currentOrigin}/dashboard</code>
+              </li>
+              <li>
+                <code className="bg-gray-100 p-2 rounded block">{currentOrigin}/auth/callback</code>
+              </li>
+              <li>
+                <code className="bg-gray-100 p-2 rounded block">{currentOrigin}/login</code>
+              </li>
             </ul>
           </div>
         </div>
@@ -66,8 +75,14 @@ const OAuthSetup: React.FC = () => {
           <h2 className="text-xl font-semibold mb-4">🔧 Google OAuth Setup</h2>
           <p className="mb-4">In Google Cloud Console:</p>
           <ol className="list-decimal list-inside space-y-2">
-            <li>Authorized JavaScript origins: <code className="bg-gray-100 px-2 py-1 rounded">{currentOrigin}</code></li>
-            <li>Authorized redirect URI: <code className="bg-gray-100 px-2 py-1 rounded">{supabaseUrl}/auth/v1/callback</code></li>
+            <li>
+              Authorized JavaScript origins:{' '}
+              <code className="bg-gray-100 px-2 py-1 rounded">{currentOrigin}</code>
+            </li>
+            <li>
+              Authorized redirect URI:{' '}
+              <code className="bg-gray-100 px-2 py-1 rounded">{supabaseUrl}/auth/v1/callback</code>
+            </li>
           </ol>
         </div>
 
@@ -75,8 +90,13 @@ const OAuthSetup: React.FC = () => {
           <h2 className="text-xl font-semibold mb-4">🔧 GitHub OAuth Setup</h2>
           <p className="mb-4">In GitHub OAuth App settings:</p>
           <ol className="list-decimal list-inside space-y-2">
-            <li>Homepage URL: <code className="bg-gray-100 px-2 py-1 rounded">{currentOrigin}</code></li>
-            <li>Authorization callback URL: <code className="bg-gray-100 px-2 py-1 rounded">{supabaseUrl}/auth/v1/callback</code></li>
+            <li>
+              Homepage URL: <code className="bg-gray-100 px-2 py-1 rounded">{currentOrigin}</code>
+            </li>
+            <li>
+              Authorization callback URL:{' '}
+              <code className="bg-gray-100 px-2 py-1 rounded">{supabaseUrl}/auth/v1/callback</code>
+            </li>
           </ol>
         </div>
 

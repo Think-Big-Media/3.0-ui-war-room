@@ -10,7 +10,10 @@ const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 /**
  * Run compliance check on content
  */
-export async function runComplianceCheck(content: string, regulations: string[]): Promise<ComplianceCheck> {
+export async function runComplianceCheck(
+  content: string,
+  regulations: string[]
+): Promise<ComplianceCheck> {
   const response = await fetch(`${API_BASE}/api/v1/compliance/check`, {
     method: 'POST',
     headers: {
@@ -18,11 +21,11 @@ export async function runComplianceCheck(content: string, regulations: string[])
     },
     body: JSON.stringify({ content, regulations }),
   });
-  
+
   if (!response.ok) {
     throw new Error('Compliance check failed');
   }
-  
+
   return response.json();
 }
 
@@ -30,20 +33,20 @@ export async function runComplianceCheck(content: string, regulations: string[])
  * Get audit logs
  */
 export async function getAuditLogs(
-  startDate: string, 
-  endDate: string, 
+  startDate: string,
+  endDate: string,
   userId?: string
 ): Promise<AuditLog[]> {
   let url = `${API_BASE}/api/v1/compliance/audit-logs?start=${startDate}&end=${endDate}`;
   if (userId) {
     url += `&userId=${userId}`;
   }
-  
+
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error('Failed to fetch audit logs');
   }
-  
+
   return response.json();
 }
 
@@ -61,11 +64,11 @@ export async function generateComplianceReport(
     },
     body: JSON.stringify(dateRange),
   });
-  
+
   if (!response.ok) {
     throw new Error('Failed to generate compliance report');
   }
-  
+
   return response.json();
 }
 
@@ -73,9 +76,9 @@ export async function generateComplianceReport(
  * Log user action for audit trail
  */
 export async function logAuditAction(
-  action: string, 
-  resourceType: string, 
-  resourceId: string, 
+  action: string,
+  resourceType: string,
+  resourceId: string,
   metadata?: any
 ): Promise<void> {
   const response = await fetch(`${API_BASE}/api/v1/compliance/audit-logs`, {
@@ -90,7 +93,7 @@ export async function logAuditAction(
       metadata,
     }),
   });
-  
+
   if (!response.ok) {
     throw new Error('Failed to log audit action');
   }
@@ -118,7 +121,7 @@ export async function requestDataDeletion(userId: string, reason: string): Promi
     },
     body: JSON.stringify({ user_id: userId, reason }),
   });
-  
+
   if (!response.ok) {
     throw new Error('Failed to request data deletion');
   }

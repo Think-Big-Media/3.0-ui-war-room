@@ -11,7 +11,7 @@ const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
  * Get current sentiment analysis
  */
 export async function getCurrentSentiment(): Promise<SentimentData> {
-  const response = await fetch(`${API_BASE}/api/v1/monitoring/sentiment`);  // Backend provides /sentiment, not /sentiment/current
+  const response = await fetch(`${API_BASE}/api/v1/monitoring/sentiment`); // Backend provides /sentiment, not /sentiment/current
   if (!response.ok) {
     throw new Error('Failed to fetch sentiment data');
   }
@@ -21,9 +21,12 @@ export async function getCurrentSentiment(): Promise<SentimentData> {
 /**
  * Get sentiment history for date range
  */
-export async function getSentimentHistory(startDate: string, endDate: string): Promise<SentimentData[]> {
+export async function getSentimentHistory(
+  startDate: string,
+  endDate: string
+): Promise<SentimentData[]> {
   const response = await fetch(
-    `${API_BASE}/api/v1/monitoring/sentiment?start=${startDate}&end=${endDate}`  // Backend uses query params on /sentiment
+    `${API_BASE}/api/v1/monitoring/sentiment?start=${startDate}&end=${endDate}` // Backend uses query params on /sentiment
   );
   if (!response.ok) {
     throw new Error('Failed to fetch sentiment history');
@@ -35,7 +38,7 @@ export async function getSentimentHistory(startDate: string, endDate: string): P
  * Get monitoring metrics dashboard data
  */
 export async function getMonitoringMetrics(): Promise<MonitoringMetrics> {
-  const response = await fetch(`${API_BASE}/api/v1/monitoring/mentions`);  // Backend provides /mentions for metrics
+  const response = await fetch(`${API_BASE}/api/v1/monitoring/mentions`); // Backend provides /mentions for metrics
   if (!response.ok) {
     throw new Error('Failed to fetch monitoring metrics');
   }
@@ -46,7 +49,7 @@ export async function getMonitoringMetrics(): Promise<MonitoringMetrics> {
  * Get platform performance data
  */
 export async function getPlatformPerformance(): Promise<PlatformPerformance[]> {
-  const response = await fetch(`${API_BASE}/api/v1/monitoring/trends`);  // Backend provides /trends for platform data
+  const response = await fetch(`${API_BASE}/api/v1/monitoring/trends`); // Backend provides /trends for platform data
   if (!response.ok) {
     throw new Error('Failed to fetch platform performance');
   }

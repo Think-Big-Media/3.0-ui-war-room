@@ -113,11 +113,7 @@ const TickerTape: React.FC = () => {
   };
 
   // Render individual ticker item
-  const renderTickerItem = (
-    item: InformationItem,
-    index: number,
-    keyPrefix: string
-  ) => {
+  const renderTickerItem = (item: InformationItem, index: number, keyPrefix: string) => {
     const IconComponent = getIcon(item);
     return (
       <div
@@ -126,9 +122,7 @@ const TickerTape: React.FC = () => {
         onClick={() => handleItemClick(item, index)}
         title={`${item.category.replace('-', ' ')} - ${item.priority} priority`}
       >
-        <div
-          className={`p-1.5 rounded-full bg-black/20 ${getCategoryColor(item.category)}`}
-        >
+        <div className={`p-1.5 rounded-full bg-black/20 ${getCategoryColor(item.category)}`}>
           <IconComponent className="w-3 h-3 ticker-accent" />
         </div>
         <div className="flex flex-col py-1 space-y-0">
@@ -150,9 +144,7 @@ const TickerTape: React.FC = () => {
   if (tickerItems.length === 0) {
     return (
       <div className="fixed bottom-0 left-0 right-0 z-40 bg-black/90 border-t border-white/20 h-12 flex items-center justify-center">
-        <span className="text-white/50 text-sm font-mono">
-          Loading ticker...
-        </span>
+        <span className="text-white/50 text-sm font-mono">Loading ticker...</span>
       </div>
     );
   }
@@ -210,16 +202,12 @@ const TickerTape: React.FC = () => {
       <div className="ticker-track">
         {/* First copy of content */}
         <div className="ticker-content">
-          {tickerItems.map((item, index) =>
-            renderTickerItem(item, index, 'first')
-          )}
+          {tickerItems.map((item, index) => renderTickerItem(item, index, 'first'))}
         </div>
 
         {/* Second copy for seamless loop - positioned immediately after first */}
         <div className="ticker-content">
-          {tickerItems.map((item, index) =>
-            renderTickerItem(item, index, 'second')
-          )}
+          {tickerItems.map((item, index) => renderTickerItem(item, index, 'second'))}
         </div>
       </div>
 

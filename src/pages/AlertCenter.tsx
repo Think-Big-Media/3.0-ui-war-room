@@ -27,7 +27,7 @@ const AlertCenter: React.FC = () => {
     alert: null as Alert | null,
   });
   const navigate = useNavigate();
-  
+
   // Get Mentionlytics crisis data
   const { alerts: crisisAlerts, loading: crisisLoading } = useCrisisAlerts();
   const { mode: dataMode } = useMentionlyticsMode();
@@ -60,21 +60,20 @@ const AlertCenter: React.FC = () => {
 
   return (
     <div className="page-alerts" data-route="alert-center">
-      <PageLayout
-        pageTitle="Alert Center"
-        placeholder="Ask War Room about campaign alerts..."
-      >
+      <PageLayout pageTitle="Alert Center" placeholder="Ask War Room about campaign alerts...">
         {/* Data Mode Indicator */}
         <div className="fixed top-20 right-4 z-40">
-          <div className={`px-3 py-1.5 rounded-lg text-xs font-bold backdrop-blur-sm ${
-            dataMode === 'MOCK' 
-              ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30' 
-              : 'bg-green-500/20 text-green-400 border border-green-500/30'
-          }`}>
+          <div
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold backdrop-blur-sm ${
+              dataMode === 'MOCK'
+                ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
+                : 'bg-green-500/20 text-green-400 border border-green-500/30'
+            }`}
+          >
             {dataMode} DATA
           </div>
         </div>
-        
+
         {/* Crisis Alert Banner - Show if Mentionlytics detects crisis */}
         {crisisAlerts?.hasActiveCrisis && (
           <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg">
@@ -152,10 +151,7 @@ const AlertCenter: React.FC = () => {
               {/* Sidebar */}
               <div className="space-y-6">
                 {/* Assigned Alerts Tracker */}
-                <AssignedAlertsTracker
-                  alerts={alerts}
-                  teamMembers={mockTeamMembers}
-                />
+                <AssignedAlertsTracker alerts={alerts} teamMembers={mockTeamMembers} />
 
                 {/* Quick Stats */}
                 <AlertSummary alerts={alerts} />
@@ -167,9 +163,7 @@ const AlertCenter: React.FC = () => {
               isOpen={collaborationModal.isOpen}
               alert={collaborationModal.alert}
               teamMembers={mockTeamMembers}
-              onClose={() =>
-                setCollaborationModal({ isOpen: false, alert: null })
-              }
+              onClose={() => setCollaborationModal({ isOpen: false, alert: null })}
             />
           </>
         )}

@@ -36,17 +36,19 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
   isOpen,
   onClose,
   onComplete,
-  existingData
+  existingData,
 }) => {
   const [step, setStep] = useState(1);
-  const [data, setData] = useState<CampaignSetupData>(existingData || {
-    campaignName: '',
-    candidateName: '',
-    candidateParty: 'Republican',
-    competitors: [],
-    keywords: [],
-    trackingGoals: []
-  });
+  const [data, setData] = useState<CampaignSetupData>(
+    existingData || {
+      campaignName: '',
+      candidateName: '',
+      candidateParty: 'Republican',
+      competitors: [],
+      keywords: [],
+      trackingGoals: [],
+    }
+  );
 
   const [newCompetitor, setNewCompetitor] = useState({ name: '', party: 'Democrat' });
   const [availableKeywords, setAvailableKeywords] = useState<string[]>([]);
@@ -56,7 +58,7 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
     Democrat: 'bg-blue-500',
     Republican: 'bg-red-500',
     Independent: 'bg-purple-500',
-    Other: 'bg-gray-500'
+    Other: 'bg-gray-500',
   };
 
   // Load available keywords when step 3 is reached
@@ -64,7 +66,7 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
     console.log('🔍 Step changed to:', step);
     console.log('🔍 Current availableKeywords length:', availableKeywords.length);
     console.log('🔍 Current availableKeywords:', availableKeywords);
-    
+
     if ((step === 3 || step === 4) && availableKeywords.length === 0) {
       console.log('🔍 Loading keywords for step', step);
       loadAvailableKeywords();
@@ -83,7 +85,7 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
       // Fallback keywords if API fails
       const fallbackKeywords = [
         'Healthcare Reform',
-        'Economic Policy', 
+        'Economic Policy',
         'Infrastructure',
         'Education',
         'Climate Change',
@@ -91,7 +93,7 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
         'Tax Policy',
         'Gun Control',
         'Foreign Policy',
-        'Job Creation'
+        'Job Creation',
       ];
       console.log('🔍 Using fallback keywords:', fallbackKeywords);
       setAvailableKeywords(fallbackKeywords);
@@ -106,11 +108,14 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
     if (newCompetitor.name) {
       const updatedData = {
         ...data,
-        competitors: [...data.competitors, {
-          ...newCompetitor,
-          isMainCompetitor: data.competitors.length === 0,
-          keywords: []
-        }]
+        competitors: [
+          ...data.competitors,
+          {
+            ...newCompetitor,
+            isMainCompetitor: data.competitors.length === 0,
+            keywords: [],
+          },
+        ],
       };
       console.log('🔍 Updated data with new competitor:', updatedData);
       setData(updatedData);
@@ -124,25 +129,28 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
     console.log('🎯 Campaign Setup Complete:', data);
     console.log('🎯 Calling onComplete with:', data);
     console.log('🎯 Calling onClose...');
-    
+
     // Save to localStorage for persistence
     localStorage.setItem('warRoomCampaignSetup', JSON.stringify(data));
-    
+
     // Also save to a format the dashboard can easily read
-    localStorage.setItem('warRoomActiveCampaign', JSON.stringify({
-      name: data.campaignName,
-      candidate: data.candidateName,
-      party: data.candidateParty,
-      keywords: data.keywords,
-      competitors: data.competitors.map(c => ({
-        name: c.name,
-        party: c.party,
-        keywords: c.keywords || []
-      })),
-      setupDate: new Date().toISOString(),
-      isActive: true
-    }));
-    
+    localStorage.setItem(
+      'warRoomActiveCampaign',
+      JSON.stringify({
+        name: data.campaignName,
+        candidate: data.candidateName,
+        party: data.candidateParty,
+        keywords: data.keywords,
+        competitors: data.competitors.map((c) => ({
+          name: c.name,
+          party: c.party,
+          keywords: c.keywords || [],
+        })),
+        setupDate: new Date().toISOString(),
+        isActive: true,
+      })
+    );
+
     // Close modal and pass data to parent
     try {
       onComplete(data);
@@ -150,14 +158,14 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
     } catch (error) {
       console.error('🚫 Error calling onComplete:', error);
     }
-    
+
     try {
       onClose();
       console.log('🎯 onClose called successfully');
     } catch (error) {
       console.error('🚫 Error calling onClose:', error);
     }
-    
+
     // Show success feedback with modern toast
     toast.success('🎯 Campaign setup completed successfully!', {
       duration: 4000,
@@ -185,7 +193,7 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            transition={{ type: "spring", duration: 0.3 }}
+            transition={{ type: 'spring', duration: 0.3 }}
             className="w-full max-w-2xl"
             onClick={(e) => e.stopPropagation()}
           >
@@ -196,7 +204,9 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
                   <h2 className="text-2xl font-bold text-gray-900">
                     {data.campaignName ? `${data.campaignName} - Setup` : 'Client Campaign Setup'}
                   </h2>
-                  <p className="text-gray-700 mt-1">Configure client's political tracking campaign</p>
+                  <p className="text-gray-700 mt-1">
+                    Configure client's political tracking campaign
+                  </p>
                 </div>
                 <button
                   onClick={onClose}
@@ -233,7 +243,9 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-gray-800 mb-2 font-mono uppercase text-xs">Campaign Name</label>
+                    <label className="block text-gray-800 mb-2 font-mono uppercase text-xs">
+                      Campaign Name
+                    </label>
                     <input
                       type="text"
                       value={data.campaignName}
@@ -244,7 +256,9 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-gray-800 mb-2 font-mono uppercase text-xs">Candidate Name</label>
+                    <label className="block text-gray-800 mb-2 font-mono uppercase text-xs">
+                      Candidate Name
+                    </label>
                     <input
                       type="text"
                       value={data.candidateName}
@@ -255,21 +269,25 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-gray-800 mb-2 font-mono uppercase text-xs">Party Affiliation</label>
+                    <label className="block text-gray-800 mb-2 font-mono uppercase text-xs">
+                      Party Affiliation
+                    </label>
                     <div className="grid grid-cols-2 gap-3">
-                      {(['Democrat', 'Republican', 'Independent', 'Other'] as const).map(party => (
-                        <button
-                          key={party}
-                          onClick={() => setData({ ...data, candidateParty: party })}
-                          className={`p-3 rounded-lg border transition-all ${
-                            data.candidateParty === party
-                              ? `${partyColors[party]} border-transparent text-white`
-                              : 'bg-white border-gray-300 text-gray-700 hover:border-gray-500'
-                          }`}
-                        >
-                          {party}
-                        </button>
-                      ))}
+                      {(['Democrat', 'Republican', 'Independent', 'Other'] as const).map(
+                        (party) => (
+                          <button
+                            key={party}
+                            onClick={() => setData({ ...data, candidateParty: party })}
+                            className={`p-3 rounded-lg border transition-all ${
+                              data.candidateParty === party
+                                ? `${partyColors[party]} border-transparent text-white`
+                                : 'bg-white border-gray-300 text-gray-700 hover:border-gray-500'
+                            }`}
+                          >
+                            {party}
+                          </button>
+                        )
+                      )}
                     </div>
                   </div>
 
@@ -294,7 +312,9 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
                   <div className="text-center mb-6">
                     <Users className="w-12 h-12 text-gray-700 mx-auto mb-2" />
                     <h3 className="text-xl font-semibold text-gray-900">Track Competitors</h3>
-                    <p className="text-gray-700 text-sm mt-1">Add up to 2 main competitors (Mentionlytics structure)</p>
+                    <p className="text-gray-700 text-sm mt-1">
+                      Add up to 2 main competitors (Mentionlytics structure)
+                    </p>
                   </div>
 
                   {/* Existing Competitors */}
@@ -306,7 +326,9 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
                           className="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-300"
                         >
                           <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 rounded-full ${partyColors[comp.party as keyof typeof partyColors]}`} />
+                            <div
+                              className={`w-3 h-3 rounded-full ${partyColors[comp.party as keyof typeof partyColors]}`}
+                            />
                             <span className="text-gray-900">{comp.name}</span>
                             {comp.isMainCompetitor && (
                               <span className="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded">
@@ -315,10 +337,12 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
                             )}
                           </div>
                           <button
-                            onClick={() => setData({
-                              ...data,
-                              competitors: data.competitors.filter((_, i) => i !== idx)
-                            })}
+                            onClick={() =>
+                              setData({
+                                ...data,
+                                competitors: data.competitors.filter((_, i) => i !== idx),
+                              })
+                            }
                             className="text-red-400 hover:text-red-300"
                           >
                             <X className="w-4 h-4" />
@@ -339,19 +363,23 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
                       </p>
                     </div>
                   )}
-                  
+
                   {data.competitors.length < 2 && (
                     <div className="flex space-x-3">
                       <input
                         type="text"
                         value={newCompetitor.name}
-                        onChange={(e) => setNewCompetitor({ ...newCompetitor, name: e.target.value })}
+                        onChange={(e) =>
+                          setNewCompetitor({ ...newCompetitor, name: e.target.value })
+                        }
                         placeholder="e.g., Mikie Sherrill"
                         className="flex-1 px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder:text-gray-500 focus:border-red-400 focus:outline-none"
                       />
                       <select
                         value={newCompetitor.party}
-                        onChange={(e) => setNewCompetitor({ ...newCompetitor, party: e.target.value })}
+                        onChange={(e) =>
+                          setNewCompetitor({ ...newCompetitor, party: e.target.value })
+                        }
                         className="war-room-select px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 focus:border-red-400 focus:outline-none"
                       >
                         <option value="Democrat">Democrat</option>
@@ -359,20 +387,14 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
                         <option value="Independent">Independent</option>
                         <option value="Other">Other</option>
                       </select>
-                      <button
-                        onClick={handleAddCompetitor}
-                        className="btn-primary-alert"
-                      >
+                      <button onClick={handleAddCompetitor} className="btn-primary-alert">
                         Add
                       </button>
                     </div>
                   )}
 
                   <div className="flex space-x-3">
-                    <button
-                      onClick={() => setStep(1)}
-                      className="flex-1 btn-primary-neutral"
-                    >
+                    <button onClick={() => setStep(1)} className="flex-1 btn-primary-neutral">
                       Back
                     </button>
                     <button
@@ -411,10 +433,12 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
                           <Hash className="w-4 h-4" />
                           <span>{keyword}</span>
                           <button
-                            onClick={() => setData({
-                              ...data,
-                              keywords: data.keywords.filter((_, i) => i !== idx)
-                            })}
+                            onClick={() =>
+                              setData({
+                                ...data,
+                                keywords: data.keywords.filter((_, i) => i !== idx),
+                              })
+                            }
                             className="ml-2 hover:text-red-400"
                           >
                             <X className="w-3 h-3" />
@@ -440,7 +464,7 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
                               if (e.target.value && !data.keywords.includes(e.target.value)) {
                                 setData({
                                   ...data,
-                                  keywords: [...data.keywords, e.target.value]
+                                  keywords: [...data.keywords, e.target.value],
                                 });
                                 e.target.value = '';
                               }
@@ -448,13 +472,12 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
                           >
                             <option value="">Select a keyword to track...</option>
                             {availableKeywords
-                              .filter(keyword => !data.keywords.includes(keyword))
-                              .map(keyword => (
+                              .filter((keyword) => !data.keywords.includes(keyword))
+                              .map((keyword) => (
                                 <option key={keyword} value={keyword}>
                                   {keyword}
                                 </option>
-                              ))
-                            }
+                              ))}
                           </select>
                         </div>
                       )}
@@ -463,17 +486,15 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
 
                   <div className="bg-gray-200 border border-gray-300 rounded-lg p-4">
                     <p className="text-gray-900 text-sm">
-                      💡 <strong>Keywords from Mentionlytics Account</strong><br/>
+                      💡 <strong>Keywords from Mentionlytics Account</strong>
+                      <br />
                       These trending keywords are pulled directly from your Mentionlytics dashboard.
                       They will be tracked across all social media platforms and news sources.
                     </p>
                   </div>
 
                   <div className="flex space-x-3">
-                    <button
-                      onClick={() => setStep(2)}
-                      className="flex-1 btn-primary-neutral"
-                    >
+                    <button onClick={() => setStep(2)} className="flex-1 btn-primary-neutral">
                       Back
                     </button>
                     <button
@@ -498,7 +519,9 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
                   <div className="text-center mb-6">
                     <Target className="w-12 h-12 text-gray-700 mx-auto mb-2" />
                     <h3 className="text-xl font-semibold text-gray-900">Competitor Keywords</h3>
-                    <p className="text-gray-700 text-sm mt-1">Track competitor-specific keywords (up to 2)</p>
+                    <p className="text-gray-700 text-sm mt-1">
+                      Track competitor-specific keywords (up to 2)
+                    </p>
                   </div>
 
                   {/* Competitor Keywords Section */}
@@ -521,7 +544,9 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
                       {data.competitors.map((competitor, idx) => (
                         <div key={idx} className="space-y-3">
                           <div className="flex items-center space-x-2">
-                            <div className={`w-3 h-3 rounded-full ${partyColors[competitor.party as keyof typeof partyColors].split(' ')[0]}`} />
+                            <div
+                              className={`w-3 h-3 rounded-full ${partyColors[competitor.party as keyof typeof partyColors].split(' ')[0]}`}
+                            />
                             <h4 className="text-gray-900 font-medium">{competitor.name}</h4>
                             {competitor.isMainCompetitor && (
                               <span className="text-xs bg-red-500 text-white px-2 py-1 rounded">
@@ -533,11 +558,14 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
                             <select
                               className="flex-1 px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 focus:border-red-500 focus:outline-none"
                               onChange={(e) => {
-                                if (e.target.value && !competitor.keywords?.includes(e.target.value)) {
+                                if (
+                                  e.target.value &&
+                                  !competitor.keywords?.includes(e.target.value)
+                                ) {
                                   const updatedCompetitors = [...data.competitors];
                                   updatedCompetitors[idx] = {
                                     ...competitor,
-                                    keywords: [...(competitor.keywords || []), e.target.value]
+                                    keywords: [...(competitor.keywords || []), e.target.value],
                                   };
                                   setData({ ...data, competitors: updatedCompetitors });
                                   e.target.value = '';
@@ -546,8 +574,12 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
                             >
                               <option value="">Select keyword for {competitor.name}...</option>
                               {availableKeywords
-                                .filter(keyword => !competitor.keywords?.includes(keyword) && !data.keywords.includes(keyword))
-                                .map(keyword => (
+                                .filter(
+                                  (keyword) =>
+                                    !competitor.keywords?.includes(keyword) &&
+                                    !data.keywords.includes(keyword)
+                                )
+                                .map((keyword) => (
                                   <option key={keyword} value={keyword}>
                                     {keyword}
                                   </option>
@@ -564,7 +596,7 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
                               Clear
                             </button>
                           </div>
-                          
+
                           {/* Show selected competitor keywords */}
                           {competitor.keywords && competitor.keywords.length > 0 && (
                             <div className="flex flex-wrap gap-2">
@@ -579,7 +611,8 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
                                       const updatedCompetitors = [...data.competitors];
                                       updatedCompetitors[idx] = {
                                         ...competitor,
-                                        keywords: competitor.keywords?.filter((_, i) => i !== keyIdx) || []
+                                        keywords:
+                                          competitor.keywords?.filter((_, i) => i !== keyIdx) || [],
                                       };
                                       setData({ ...data, competitors: updatedCompetitors });
                                     }}
@@ -599,18 +632,16 @@ export const CampaignSetupModal: React.FC<CampaignSetupModalProps> = ({
                   {data.competitors.length > 0 && (
                     <div className="bg-white border border-gray-200 rounded-lg p-4">
                       <p className="text-gray-700 text-sm">
-                        🎯 <strong>Keywords from Mentionlytics Account</strong><br/>
-                        Select competitor-specific keywords to monitor their messaging and campaign focus.
-                        These are pulled from your Mentionlytics dashboard.
+                        🎯 <strong>Keywords from Mentionlytics Account</strong>
+                        <br />
+                        Select competitor-specific keywords to monitor their messaging and campaign
+                        focus. These are pulled from your Mentionlytics dashboard.
                       </p>
                     </div>
                   )}
 
                   <div className="flex space-x-3">
-                    <button
-                      onClick={() => setStep(3)}
-                      className="flex-1 btn-primary-neutral"
-                    >
+                    <button onClick={() => setStep(3)} className="flex-1 btn-primary-neutral">
                       Back
                     </button>
                     <button

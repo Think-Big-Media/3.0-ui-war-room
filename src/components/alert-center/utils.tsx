@@ -135,9 +135,7 @@ export const getCategoryColor = (category: string) => {
 export const formatTimestamp = (timestamp: string) => {
   const date = new Date(timestamp);
   const now = new Date();
-  const diffMinutes = Math.floor(
-    (now.getTime() - date.getTime()) / (1000 * 60),
-  );
+  const diffMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60));
 
   if (diffMinutes < 60) {
     return `${diffMinutes}m ago`;
@@ -145,5 +143,4 @@ export const formatTimestamp = (timestamp: string) => {
     return `${Math.floor(diffMinutes / 60)}h ago`;
   }
   return `${Math.floor(diffMinutes / 1440)}d ago`;
-
 };

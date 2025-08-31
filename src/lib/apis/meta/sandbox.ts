@@ -93,31 +93,34 @@ export function createMetaSandbox() {
 
     // Mock API methods with delays to simulate real calls
     getAdAccounts: async () => {
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise((resolve) => setTimeout(resolve, 300));
       return mockAdAccounts;
     },
 
     getCampaigns: async (accountId: string) => {
-      await new Promise(resolve => setTimeout(resolve, 400));
+      await new Promise((resolve) => setTimeout(resolve, 400));
       console.log(`Fetching campaigns for account: ${accountId}`);
       return mockCampaigns;
     },
 
     getAccountInsights: async (accountId: string, params?: any) => {
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 500));
       console.log(`Fetching insights for account: ${accountId}`, params);
       return mockInsights;
     },
 
     getCampaignInsights: async (campaignId: string, params?: any) => {
-      await new Promise(resolve => setTimeout(resolve, 450));
+      await new Promise((resolve) => setTimeout(resolve, 450));
       console.log(`Fetching insights for campaign: ${campaignId}`, params);
-      return mockInsights.filter(i => i.campaign_id === campaignId);
+      return mockInsights.filter((i) => i.campaign_id === campaignId);
     },
 
     getAggregatedInsights: async (accountId: string, campaignIds?: string[], params?: any) => {
-      await new Promise(resolve => setTimeout(resolve, 600));
-      console.log(`Fetching aggregated insights for account: ${accountId}`, { campaignIds, params });
+      await new Promise((resolve) => setTimeout(resolve, 600));
+      console.log(`Fetching aggregated insights for account: ${accountId}`, {
+        campaignIds,
+        params,
+      });
 
       const total: InsightData = {
         date_start: '2024-07-01',
@@ -132,14 +135,17 @@ export function createMetaSandbox() {
         cost_per_conversion: '10.89',
       };
 
-      const byCampaign = mockCampaigns.reduce((acc, campaign) => {
-        acc[campaign.id] = mockInsights.find(i => i.campaign_id === campaign.id) || {
-          ...mockInsights[0],
-          campaign_id: campaign.id,
-          campaign_name: campaign.name,
-        };
-        return acc;
-      }, {} as Record<string, InsightData>);
+      const byCampaign = mockCampaigns.reduce(
+        (acc, campaign) => {
+          acc[campaign.id] = mockInsights.find((i) => i.campaign_id === campaign.id) || {
+            ...mockInsights[0],
+            campaign_id: campaign.id,
+            campaign_name: campaign.name,
+          };
+          return acc;
+        },
+        {} as Record<string, InsightData>
+      );
 
       return { total, byCampaign, byDate: {} };
     },
@@ -190,13 +196,13 @@ export async function runSandboxTests() {
     console.log('2️⃣ Fetching Ad Accounts...');
     const accounts = await sandbox.getAdAccounts();
     console.log(`✅ Found ${accounts.length} ad accounts`);
-    console.log(accounts.map(a => `- ${a.name} (${a.currency})`).join('\n'), '\n');
+    console.log(accounts.map((a) => `- ${a.name} (${a.currency})`).join('\n'), '\n');
 
     // Test 3: Get Campaigns
     console.log('3️⃣ Fetching Campaigns...');
     const campaigns = await sandbox.getCampaigns(accounts[0].account_id);
     console.log(`✅ Found ${campaigns.length} campaigns`);
-    console.log(campaigns.map(c => `- ${c.name} (${c.status})`).join('\n'), '\n');
+    console.log(campaigns.map((c) => `- ${c.name} (${c.status})`).join('\n'), '\n');
 
     // Test 4: Get Insights
     console.log('4️⃣ Fetching Account Insights...');
@@ -208,7 +214,7 @@ export async function runSandboxTests() {
     console.log('5️⃣ Fetching Aggregated Insights...');
     const aggregated = await sandbox.getAggregatedInsights(
       accounts[0].account_id,
-      campaigns.map(c => c.id),
+      campaigns.map((c) => c.id)
     );
     console.log('✅ Aggregated data:');
     console.log(`- Total spend: $${aggregated.total.spend}`);
@@ -226,7 +232,6 @@ export async function runSandboxTests() {
     console.log('✅ Caching working\n');
 
     console.log('🎉 All sandbox tests passed!');
-
   } catch (error) {
     console.error('❌ Sandbox test failed:', error);
   }

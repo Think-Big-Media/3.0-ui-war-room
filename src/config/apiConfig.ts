@@ -8,7 +8,8 @@
 export const API_CONFIG = {
   // Backend API
   backend: {
-    baseURL: import.meta.env.VITE_API_URL || 'https://war-room-3-backend-d2msjrk82vjjq794glog.lp.dev',
+    baseURL:
+      import.meta.env.VITE_API_URL || 'https://war-room-3-backend-d2msjrk82vjjq794glog.lp.dev',
     timeout: 30000,
   },
 
@@ -53,27 +54,27 @@ export const getEnvironmentConfig = () => {
     apiUrl: import.meta.env.VITE_API_URL,
     nodeEnv: import.meta.env.NODE_ENV || 'development',
     isProduction: import.meta.env.NODE_ENV === 'production',
-    
+
     // Meta/Facebook credentials
     meta: {
       appId: import.meta.env.VITE_META_APP_ID,
       appSecret: import.meta.env.VITE_META_APP_SECRET,
       accessToken: import.meta.env.VITE_META_ACCESS_TOKEN,
     },
-    
+
     // Google Ads credentials
     googleAds: {
       clientId: import.meta.env.VITE_GOOGLE_ADS_CLIENT_ID,
       clientSecret: import.meta.env.VITE_GOOGLE_ADS_CLIENT_SECRET,
       developerToken: import.meta.env.VITE_GOOGLE_ADS_DEVELOPER_TOKEN,
     },
-    
+
     // SendGrid credentials
     sendgrid: {
       email: import.meta.env.VITE_SENDGRID_EMAIL,
       password: import.meta.env.VITE_SENDGRID_PASSWORD,
     },
-    
+
     // Mentionlytics credentials
     mentionlytics: {
       email: import.meta.env.VITE_MENTIONLYTICS_EMAIL,
@@ -81,22 +82,22 @@ export const getEnvironmentConfig = () => {
       apiToken: import.meta.env.VITE_MENTIONLYTICS_API_TOKEN,
       projectId: import.meta.env.VITE_MENTIONLYTICS_PROJECT_ID,
     },
-    
+
     // Other services
     supabase: {
       url: import.meta.env.VITE_SUPABASE_URL,
       anonKey: import.meta.env.VITE_SUPABASE_ANON_KEY,
     },
-    
+
     posthog: {
       key: import.meta.env.VITE_POSTHOG_KEY,
       host: import.meta.env.VITE_POSTHOG_HOST,
     },
-    
+
     openai: {
       apiKey: import.meta.env.VITE_OPENAI_API_KEY,
     },
-    
+
     // Feature flags
     features: {
       analytics: import.meta.env.VITE_ENABLE_ANALYTICS === 'true',
@@ -105,7 +106,7 @@ export const getEnvironmentConfig = () => {
       realApiCalls: import.meta.env.VITE_ENABLE_REAL_API_CALLS === 'true',
       mockMode: import.meta.env.VITE_ENABLE_MOCK_MODE === 'true',
     },
-    
+
     // Debug settings
     debug: {
       apiCalls: import.meta.env.VITE_DEBUG_API_CALLS === 'true',
@@ -118,7 +119,7 @@ export const getEnvironmentConfig = () => {
 // Check if we have real API credentials
 export const hasRealCredentials = () => {
   const config = getEnvironmentConfig();
-  
+
   const hasMetaCredentials =
     isValidCredential(config.meta.appId) &&
     isValidCredential(config.meta.appSecret) &&
@@ -128,19 +129,16 @@ export const hasRealCredentials = () => {
     isValidCredential(config.googleAds.clientId) &&
     isValidCredential(config.googleAds.clientSecret) &&
     isValidCredential(config.googleAds.developerToken);
-    
+
   const hasSendGridCredentials =
-    isValidCredential(config.sendgrid.email) &&
-    isValidCredential(config.sendgrid.password);
-    
+    isValidCredential(config.sendgrid.email) && isValidCredential(config.sendgrid.password);
+
   const hasSupabaseCredentials =
-    isValidCredential(config.supabase.url) &&
-    isValidCredential(config.supabase.anonKey);
-    
+    isValidCredential(config.supabase.url) && isValidCredential(config.supabase.anonKey);
+
   const hasPostHogCredentials =
-    isValidCredential(config.posthog.key) &&
-    isValidCredential(config.posthog.host);
-    
+    isValidCredential(config.posthog.key) && isValidCredential(config.posthog.host);
+
   const hasMentionlyticsCredentials =
     isValidCredential(config.mentionlytics.email) &&
     isValidCredential(config.mentionlytics.password);
@@ -152,8 +150,17 @@ export const hasRealCredentials = () => {
     mentionlytics: hasMentionlyticsCredentials,
     supabase: hasSupabaseCredentials,
     posthog: hasPostHogCredentials,
-    any: hasMetaCredentials || hasGoogleCredentials || hasSendGridCredentials || hasMentionlyticsCredentials,
-    all: hasMetaCredentials && hasGoogleCredentials && hasSendGridCredentials && hasSupabaseCredentials && hasMentionlyticsCredentials,
+    any:
+      hasMetaCredentials ||
+      hasGoogleCredentials ||
+      hasSendGridCredentials ||
+      hasMentionlyticsCredentials,
+    all:
+      hasMetaCredentials &&
+      hasGoogleCredentials &&
+      hasSendGridCredentials &&
+      hasSupabaseCredentials &&
+      hasMentionlyticsCredentials,
   };
 };
 
@@ -206,19 +213,19 @@ export const validateConfiguration = () => {
   const config = getEnvironmentConfig();
   const credentials = hasRealCredentials();
   const endpoints = getAPIEndpoints();
-  
+
   const issues: string[] = [];
-  
+
   // Check core configuration
   if (!config.apiUrl) {
     issues.push('Missing VITE_API_URL');
   }
-  
+
   // Check required credentials
   if (!credentials.supabase) {
     issues.push('Missing or invalid Supabase credentials');
   }
-  
+
   // Check API credentials if real API calls are enabled
   if (config.features.realApiCalls) {
     if (!credentials.meta) {
@@ -228,12 +235,12 @@ export const validateConfiguration = () => {
       issues.push('Missing or invalid Google Ads API credentials');
     }
   }
-  
+
   // Check analytics if enabled
   if (config.features.analytics && !credentials.posthog) {
     issues.push('Analytics enabled but PostHog credentials missing');
   }
-  
+
   return {
     isValid: issues.length === 0,
     issues,
@@ -246,7 +253,6 @@ export const validateConfiguration = () => {
 // Check if APIs are configured (backwards compatibility)
 export const checkAPIConfiguration = () => {
   const validation = validateConfiguration();
-  
 
   return {
     isConfigured: validation.credentials.any,
@@ -261,7 +267,7 @@ export const checkAPIConfiguration = () => {
 // Helper function to get safe configuration for logging (without sensitive data)
 export const getSafeConfigForLogging = () => {
   const config = getEnvironmentConfig();
-  
+
   return {
     apiUrl: config.apiUrl,
     nodeEnv: config.nodeEnv,

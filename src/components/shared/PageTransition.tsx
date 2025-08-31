@@ -84,9 +84,7 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
     setCurrentBg(newBg);
 
     // Add stagger effect to cards (only for non-War Room pages)
-    const cards = document.querySelectorAll(
-      '[class*="Card"], .card, [class*="card"]'
-    );
+    const cards = document.querySelectorAll('[class*="Card"], .card, [class*="card"]');
     cards.forEach((card, index) => {
       if (card instanceof HTMLElement) {
         card.style.animationDelay = `${index * 100}ms`;

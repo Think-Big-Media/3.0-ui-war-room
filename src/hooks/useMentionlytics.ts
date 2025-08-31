@@ -10,14 +10,11 @@ import type {
   MentionlyticsLocation,
   MentionlyticsMention,
   MentionlyticsInfluencer,
-  ShareOfVoiceData
+  ShareOfVoiceData,
 } from '../services/mentionlytics/mockData';
 
 // Generic hook for async Mentionlytics data
-function useMentionlyticsData<T>(
-  fetchFunction: () => Promise<T>,
-  dependencies: any[] = []
-) {
+function useMentionlyticsData<T>(fetchFunction: () => Promise<T>, dependencies: any[] = []) {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -47,17 +44,12 @@ function useMentionlyticsData<T>(
 
 // Sentiment Analysis Hook
 export function useSentimentAnalysis(period: string = '7days') {
-  return useMentionlyticsData(
-    () => mentionlyticsService.getSentimentAnalysis(period),
-    [period]
-  );
+  return useMentionlyticsData(() => mentionlyticsService.getSentimentAnalysis(period), [period]);
 }
 
 // Geographic Mentions Hook
 export function useGeographicMentions() {
-  return useMentionlyticsData(
-    () => mentionlyticsService.getGeographicMentions()
-  );
+  return useMentionlyticsData(() => mentionlyticsService.getGeographicMentions());
 }
 
 // Live Feed Hook with real-time updates
@@ -86,7 +78,7 @@ export function useLiveMentionsFeed(limit: number = 10) {
 
     // Subscribe to live updates
     const unsubscribe = mentionlyticsService.subscribeToLiveFeed((newMention) => {
-      setMentions(prev => {
+      setMentions((prev) => {
         const updated = [newMention, ...prev].slice(0, limit);
         return updated;
       });
@@ -102,33 +94,22 @@ export function useLiveMentionsFeed(limit: number = 10) {
 
 // Top Influencers Hook
 export function useTopInfluencers(limit: number = 10) {
-  return useMentionlyticsData(
-    () => mentionlyticsService.getTopInfluencers(limit),
-    [limit]
-  );
+  return useMentionlyticsData(() => mentionlyticsService.getTopInfluencers(limit), [limit]);
 }
 
 // Share of Voice Hook
 export function useShareOfVoice() {
-  return useMentionlyticsData(
-    () => mentionlyticsService.getShareOfVoice()
-  );
+  return useMentionlyticsData(() => mentionlyticsService.getShareOfVoice());
 }
 
 // Sentiment Trends Hook
 export function useSentimentTrends(days: number = 7) {
-  return useMentionlyticsData(
-    () => mentionlyticsService.getSentimentTrends(days),
-    [days]
-  );
+  return useMentionlyticsData(() => mentionlyticsService.getSentimentTrends(days), [days]);
 }
 
 // Trending Topics Hook
 export function useTrendingTopics(period: string = '24hours') {
-  return useMentionlyticsData(
-    () => mentionlyticsService.getTrendingTopics(period),
-    [period]
-  );
+  return useMentionlyticsData(() => mentionlyticsService.getTrendingTopics(period), [period]);
 }
 
 // Crisis Alerts Hook
@@ -172,11 +153,21 @@ export function useMentionlyticsDashboard() {
   const trends = useSentimentTrends();
   const crisis = useCrisisAlerts();
 
-  const loading = sentiment.loading || geographic.loading || liveFeed.loading || 
-                  influencers.loading || shareOfVoice.loading || trends.loading;
-  
-  const error = sentiment.error || geographic.error || liveFeed.error || 
-                influencers.error || shareOfVoice.error || trends.error;
+  const loading =
+    sentiment.loading ||
+    geographic.loading ||
+    liveFeed.loading ||
+    influencers.loading ||
+    shareOfVoice.loading ||
+    trends.loading;
+
+  const error =
+    sentiment.error ||
+    geographic.error ||
+    liveFeed.error ||
+    influencers.error ||
+    shareOfVoice.error ||
+    trends.error;
 
   return {
     sentiment: sentiment.data,
@@ -195,9 +186,9 @@ export function useMentionlyticsDashboard() {
         geographic.refetch(),
         influencers.refetch(),
         shareOfVoice.refetch(),
-        trends.refetch()
+        trends.refetch(),
       ]);
-    }
+    },
   };
 }
 

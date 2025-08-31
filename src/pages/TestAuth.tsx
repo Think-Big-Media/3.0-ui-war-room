@@ -36,11 +36,11 @@ export default function TestAuth() {
         setStatus('Checking session...');
         const sessionPromise = supabase.auth.getSession();
         const timeoutPromise = new Promise((_, reject) =>
-          setTimeout(() => reject(new Error('Timeout after 3s')), 3000),
+          setTimeout(() => reject(new Error('Timeout after 3s')), 3000)
         );
 
         try {
-          const result = await Promise.race([sessionPromise, timeoutPromise]) as any;
+          const result = (await Promise.race([sessionPromise, timeoutPromise])) as any;
           setDetails((prev: TestDetails) => ({
             ...prev,
             sessionCheck: 'Success',
@@ -49,12 +49,18 @@ export default function TestAuth() {
           }));
         } catch (timeoutErr) {
           const errorMessage = timeoutErr instanceof Error ? timeoutErr.message : 'Unknown error';
-          setDetails((prev: TestDetails) => ({ ...prev, sessionCheck: 'Timeout', error: errorMessage }));
+          setDetails((prev: TestDetails) => ({
+            ...prev,
+            sessionCheck: 'Timeout',
+            error: errorMessage,
+          }));
         }
 
         // Test 3: Check auth state
         setStatus('Checking auth state...');
-        const { data: { user } } = await supabase.auth.getUser();
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
         setDetails((prev: TestDetails) => ({ ...prev, currentUser: user?.email || 'None' }));
 
         // Test 4: Check environment variables
@@ -105,11 +111,7 @@ export default function TestAuth() {
 
         <div className="bg-white rounded-lg shadow p-6 mb-4">
           <h2 className="font-semibold mb-2">Status: {status}</h2>
-          {error && (
-            <div className="text-red-600 mb-4">
-              Error: {error}
-            </div>
-          )}
+          {error && <div className="text-red-600 mb-4">Error: {error}</div>}
 
           <pre className="bg-gray-100 p-4 rounded overflow-auto text-sm">
             {JSON.stringify(details, null, 2)}
@@ -126,7 +128,7 @@ export default function TestAuth() {
               Test Google OAuth
             </button>
             <button
-              onClick={() => window.location.href = '/login'}
+              onClick={() => (window.location.href = '/login')}
               className="w-full px-3 py-1.5 bg-gray-600 text-white rounded hover:bg-gray-700"
             >
               Go to Login Page

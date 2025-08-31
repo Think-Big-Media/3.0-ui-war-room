@@ -18,6 +18,6 @@ globalThis.import = {
       DEV: true,
       NODE_ENV: 'test',
       MODE: 'test',
-    }
-  }
+    },
+  },
 };

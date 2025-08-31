@@ -22,23 +22,23 @@ export class GoogleAdsRateLimiter {
 
   // Google Ads API daily operation limits by access level
   private readonly accessLevelLimits: AccessLevelLimits = {
-    TEST: 15_000,      // Test account access
-    BASIC: 15_000,     // Basic access
+    TEST: 15_000, // Test account access
+    BASIC: 15_000, // Basic access
     STANDARD: 1_000_000, // Standard access
     ADVANCED: 10_000_000, // Advanced access (effectively unlimited)
   };
 
   // Request-level limits
   private readonly requestLimits = {
-    maxOperationsPerMutate: 5000,  // Max operations in single mutate request
-    maxRequestSizeMB: 64,          // Max gRPC message size
-    requestsPerSecond: 100,        // Approximate RPS limit
-    burstSize: 1000,               // Burst capacity
+    maxOperationsPerMutate: 5000, // Max operations in single mutate request
+    maxRequestSizeMB: 64, // Max gRPC message size
+    requestsPerSecond: 100, // Approximate RPS limit
+    burstSize: 1000, // Burst capacity
   };
 
   constructor(
     private accessLevel: keyof AccessLevelLimits = 'BASIC',
-    private customLimits?: Partial<AccessLevelLimits>,
+    private customLimits?: Partial<AccessLevelLimits>
   ) {
     if (customLimits) {
       Object.assign(this.accessLevelLimits, customLimits);
@@ -48,10 +48,7 @@ export class GoogleAdsRateLimiter {
   /**
    * Check if operation can proceed based on rate limits
    */
-  async checkLimit(
-    developerToken: string,
-    operationCount = 1,
-  ): Promise<boolean> {
+  async checkLimit(developerToken: string, operationCount = 1): Promise<boolean> {
     const bucket = this.getBucket(developerToken);
     const now = Date.now();
 
@@ -67,7 +64,7 @@ export class GoogleAdsRateLimiter {
         `Daily operations limit exceeded. Limit: ${bucket.dailyLimit}, Current: ${bucket.operations}`,
         'DAILY_OPERATIONS',
         bucket.dailyLimit,
-        bucket.operations,
+        bucket.operations
       );
     }
 
@@ -80,13 +77,14 @@ export class GoogleAdsRateLimiter {
       const currentRate = bucket.requestTimestamps.length / (timeWindow / 1000);
 
       if (currentRate > this.requestLimits.requestsPerSecond) {
-        const waitTime = Math.ceil(
-          (bucket.requestTimestamps.length / this.requestLimits.requestsPerSecond) * 1000,
-        ) - timeWindow;
+        const waitTime =
+          Math.ceil(
+            (bucket.requestTimestamps.length / this.requestLimits.requestsPerSecond) * 1000
+          ) - timeWindow;
 
         throw new GoogleAdsRateLimitError(
           `Request rate limit exceeded. Please wait ${waitTime}ms`,
-          Math.ceil(waitTime / 1000),
+          Math.ceil(waitTime / 1000)
         );
       }
     }
@@ -97,7 +95,7 @@ export class GoogleAdsRateLimiter {
         `Too many operations in single request. Max: ${this.requestLimits.maxOperationsPerMutate}`,
         'MUTATE_OPERATIONS',
         this.requestLimits.maxOperationsPerMutate,
-        operationCount,
+        operationCount
       );
     }
 
@@ -151,7 +149,7 @@ export class GoogleAdsRateLimiter {
   setAccessLevel(level: keyof AccessLevelLimits): void {
     this.accessLevel = level;
     // Update existing buckets with new limit
-    this.buckets.forEach(bucket => {
+    this.buckets.forEach((bucket) => {
       bucket.dailyLimit = this.accessLevelLimits[level];
     });
   }
@@ -164,10 +162,7 @@ export class GoogleAdsRateLimiter {
     const maxDelay = 64000; // 64 seconds
     const jitter = Math.random() * 1000; // 0-1 second jitter
 
-    const delay = Math.min(
-      baseDelay * Math.pow(2, attempt) + jitter,
-      maxDelay,
-    );
+    const delay = Math.min(baseDelay * Math.pow(2, attempt) + jitter, maxDelay);
 
     return Math.floor(delay);
   }
@@ -183,7 +178,7 @@ export class GoogleAdsRateLimiter {
         `Request size exceeds limit. Max: ${this.requestLimits.maxRequestSizeMB}MB`,
         'REQUEST_SIZE',
         maxSizeBytes,
-        sizeBytes,
+        sizeBytes
       );
     }
   }
@@ -205,9 +200,11 @@ export class GoogleAdsRateLimiter {
     const lastReset = new Date(bucket.lastReset);
 
     // Reset if it's a new day (UTC)
-    if (now.getUTCDate() !== lastReset.getUTCDate() ||
-        now.getUTCMonth() !== lastReset.getUTCMonth() ||
-        now.getUTCFullYear() !== lastReset.getUTCFullYear()) {
+    if (
+      now.getUTCDate() !== lastReset.getUTCDate() ||
+      now.getUTCMonth() !== lastReset.getUTCMonth() ||
+      now.getUTCFullYear() !== lastReset.getUTCFullYear()
+    ) {
       bucket.operations = 0;
       bucket.lastReset = now;
       bucket.requestTimestamps = [];
@@ -217,8 +214,6 @@ export class GoogleAdsRateLimiter {
   private cleanOldTimestamps(bucket: RateLimitBucket, now: number): void {
     // Keep only timestamps from last 60 seconds
     const cutoff = now - 60000;
-    bucket.requestTimestamps = bucket.requestTimestamps.filter(
-      timestamp => timestamp > cutoff,
-    );
+    bucket.requestTimestamps = bucket.requestTimestamps.filter((timestamp) => timestamp > cutoff);
   }
 }

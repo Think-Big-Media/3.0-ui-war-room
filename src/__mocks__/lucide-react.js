@@ -2,21 +2,26 @@
 const React = require('react');
 
 // Generic icon mock factory
-const createMockIcon = (iconName) => React.forwardRef((props, ref) => 
-  React.createElement('svg', { 
-    ...props, 
-    ref,
-    'data-testid': props['data-testid'] || 'icon',
-    'data-lucide': iconName,
-    width: props.size || props.width || 24,
-    height: props.size || props.height || 24,
-    fill: 'none',
-    stroke: 'currentColor',
-    strokeWidth: '2',
-    strokeLinecap: 'round',
-    strokeLinejoin: 'round',
-  }, React.createElement('rect', { x: '3', y: '3', width: '18', height: '18' }))
-);
+const createMockIcon = (iconName) =>
+  React.forwardRef((props, ref) =>
+    React.createElement(
+      'svg',
+      {
+        ...props,
+        ref,
+        'data-testid': props['data-testid'] || 'icon',
+        'data-lucide': iconName,
+        width: props.size || props.width || 24,
+        height: props.size || props.height || 24,
+        fill: 'none',
+        stroke: 'currentColor',
+        strokeWidth: '2',
+        strokeLinecap: 'round',
+        strokeLinejoin: 'round',
+      },
+      React.createElement('rect', { x: '3', y: '3', width: '18', height: '18' })
+    )
+  );
 
 // Generic icon mock (fallback)
 const MockIcon = createMockIcon('generic');

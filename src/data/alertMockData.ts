@@ -11,8 +11,7 @@ export const mockAlerts: Alert[] = [
     location: 'District 3',
     audience: 'Swing Voters',
     issue: 'Healthcare',
-    suggestedAction:
-      'Immediate response video highlighting healthcare achievements',
+    suggestedAction: 'Immediate response video highlighting healthcare achievements',
     assignedTo: 'Communications Team',
     status: 'new',
     priority: 'critical',
@@ -22,8 +21,7 @@ export const mockAlerts: Alert[] = [
     id: '2',
     type: 'opportunity',
     title: 'Positive Endorsement Opportunity',
-    summary:
-      'Local teachers union president expressing support - opportunity for amplification',
+    summary: 'Local teachers union president expressing support - opportunity for amplification',
     timestamp: '15 minutes ago',
     location: 'Statewide',
     audience: 'Education Voters',
@@ -37,14 +35,12 @@ export const mockAlerts: Alert[] = [
     id: '3',
     type: 'polling-shift',
     title: 'Suburban Voter Sentiment Change',
-    summary:
-      'Polling data shows 8% increase in favorability among suburban women',
+    summary: 'Polling data shows 8% increase in favorability among suburban women',
     timestamp: '1 hour ago',
     location: 'District 7',
     audience: 'Suburban Women',
     issue: 'General',
-    suggestedAction:
-      'Increase targeted advertising in successful messaging areas',
+    suggestedAction: 'Increase targeted advertising in successful messaging areas',
     status: 'new',
     priority: 'medium',
   },
@@ -52,8 +48,7 @@ export const mockAlerts: Alert[] = [
     id: '4',
     type: 'ad-violation',
     title: 'Campaign Finance Disclosure Issue',
-    summary:
-      'Automated compliance check flagged potential disclosure requirement',
+    summary: 'Automated compliance check flagged potential disclosure requirement',
     timestamp: '2 hours ago',
     location: 'Legal',
     audience: 'Compliance',

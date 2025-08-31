@@ -27,7 +27,9 @@
     "type-check:tests": "tsc --noEmit --project tsconfig.test.json"
   },
   "jest": {
-    "projects": ["<rootDir>/jest.config.js"]
+    "projects": [
+      "<rootDir>/jest.config.js"
+    ]
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",

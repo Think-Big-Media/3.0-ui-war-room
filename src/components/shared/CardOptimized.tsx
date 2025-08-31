@@ -39,9 +39,7 @@ const Card: React.FC<CardProps> = memo(
 
     // Memoize class names to prevent re-calculation
     const cardClasses = useMemo(() => {
-      const baseClasses = [
-        'rounded-lg backdrop-blur-md border transition-all duration-200',
-      ];
+      const baseClasses = ['rounded-lg backdrop-blur-md border transition-all duration-200'];
 
       // Add animation classes
       if (initial) {

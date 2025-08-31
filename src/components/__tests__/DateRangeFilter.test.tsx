@@ -146,7 +146,7 @@ describe('DateRangeFilter', () => {
       <div>
         <DateRangeFilter onChange={mockOnChange} />
         <div data-testid="outside">Outside element</div>
-      </div>,
+      </div>
     );
 
     const button = screen.getByRole('button');

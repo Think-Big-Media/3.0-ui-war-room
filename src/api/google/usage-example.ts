@@ -51,26 +51,23 @@ async function authenticateUser() {
 // Example 2: Get Campaign Performance
 async function getCampaignPerformance(customerId: string) {
   try {
-    const campaigns = await googleAdsAPI.insights.getCampaignPerformance(
-      customerId,
-      {
-        dateRange: { predefinedRange: 'LAST_30_DAYS' },
-        metrics: [
-          'metrics.impressions',
-          'metrics.clicks',
-          'metrics.cost_micros',
-          'metrics.conversions',
-          'metrics.ctr',
-          'metrics.average_cpc',
-        ],
-        orderBy: 'metrics.impressions DESC',
-        limit: 10,
-      },
-    );
+    const campaigns = await googleAdsAPI.insights.getCampaignPerformance(customerId, {
+      dateRange: { predefinedRange: 'LAST_30_DAYS' },
+      metrics: [
+        'metrics.impressions',
+        'metrics.clicks',
+        'metrics.cost_micros',
+        'metrics.conversions',
+        'metrics.ctr',
+        'metrics.average_cpc',
+      ],
+      orderBy: 'metrics.impressions DESC',
+      limit: 10,
+    });
 
     console.log(`Found ${campaigns.length} campaigns`);
 
-    campaigns.forEach(row => {
+    campaigns.forEach((row) => {
       console.log(`
         Campaign: ${row.campaign.name} (${row.campaign.id})
         Status: ${row.campaign.status}
@@ -93,10 +90,9 @@ async function getCampaignPerformance(customerId: string) {
 // Example 3: Get Account Summary
 async function getAccountSummary(customerId: string) {
   try {
-    const summary = await googleAdsAPI.insights.getAccountSummary(
-      customerId,
-      { predefinedRange: 'LAST_7_DAYS' },
-    );
+    const summary = await googleAdsAPI.insights.getAccountSummary(customerId, {
+      predefinedRange: 'LAST_7_DAYS',
+    });
 
     console.log('Account Summary (Last 7 Days):');
     console.log(`Customer: ${summary.customer.descriptiveName}`);
@@ -143,7 +139,7 @@ async function searchWithGAQL(customerId: string) {
     const results = await googleAdsAPI.client.search(customerId, { query });
 
     console.log('Top Spending Keywords:');
-    results.results.forEach(row => {
+    results.results.forEach((row) => {
       const costInDollars = parseInt(row.metrics.costMicros) / 1_000_000;
       console.log(`
         Keyword: ${row.adGroupCriterion.keyword.text}
@@ -165,24 +161,23 @@ async function searchWithGAQL(customerId: string) {
 // Example 5: Performance by Date
 async function getPerformanceTimeline(customerId: string) {
   try {
-    const timeline = await googleAdsAPI.insights.getPerformanceByDate(
-      customerId,
-      {
-        entity: 'customer',
-        dateRange: {
-          startDate: '2025-01-01',
-          endDate: '2025-01-30',
-        },
-        granularity: 'DAY',
+    const timeline = await googleAdsAPI.insights.getPerformanceByDate(customerId, {
+      entity: 'customer',
+      dateRange: {
+        startDate: '2025-01-01',
+        endDate: '2025-01-30',
       },
-    );
+      granularity: 'DAY',
+    });
 
     console.log('Daily Performance:');
-    timeline.forEach(day => {
+    timeline.forEach((day) => {
       const date = day.segments?.date || 'Unknown';
       const cost = parseInt(day.metrics?.costMicros || '0') / 1_000_000;
 
-      console.log(`${date}: $${cost.toFixed(2)} | ${day.metrics?.clicks} clicks | ${day.metrics?.conversions} conversions`);
+      console.log(
+        `${date}: $${cost.toFixed(2)} | ${day.metrics?.clicks} clicks | ${day.metrics?.conversions} conversions`
+      );
     });
 
     return timeline;
@@ -204,10 +199,9 @@ async function robustAPICall(customerId: string) {
       console.log(`Rate limit status: ${rateLimitInfo.remainingOperations} operations remaining`);
 
       // Make API call
-      const results = await googleAdsAPI.insights.getCampaignPerformance(
-        customerId,
-        { dateRange: { predefinedRange: 'YESTERDAY' } },
-      );
+      const results = await googleAdsAPI.insights.getCampaignPerformance(customerId, {
+        dateRange: { predefinedRange: 'YESTERDAY' },
+      });
 
       return results;
     } catch (error) {
@@ -220,7 +214,7 @@ async function robustAPICall(customerId: string) {
           : googleAdsAPI.client.getRateLimiter().calculateBackoff(attempt);
 
         console.log(`Rate limited. Waiting ${waitTime / 1000} seconds...`);
-        await new Promise(resolve => setTimeout(resolve, waitTime));
+        await new Promise((resolve) => setTimeout(resolve, waitTime));
       } else if (err.name === 'CircuitBreakerOpenError') {
         console.log('Circuit breaker open. Service unavailable.');
         throw error;
@@ -230,7 +224,7 @@ async function robustAPICall(customerId: string) {
       } else if (attempt < maxRetries) {
         const backoff = googleAdsAPI.client.getRateLimiter().calculateBackoff(attempt);
         console.log(`Error occurred. Retrying in ${backoff / 1000} seconds...`);
-        await new Promise(resolve => setTimeout(resolve, backoff));
+        await new Promise((resolve) => setTimeout(resolve, backoff));
       } else {
         throw error;
       }
@@ -241,17 +235,14 @@ async function robustAPICall(customerId: string) {
 // Example 7: Search Terms Report
 async function getSearchTermsReport(customerId: string, campaignId: string) {
   try {
-    const searchTerms = await googleAdsAPI.insights.getSearchTermsReport(
-      customerId,
-      {
-        campaignId,
-        dateRange: { predefinedRange: 'LAST_7_DAYS' },
-        limit: 50,
-      },
-    );
+    const searchTerms = await googleAdsAPI.insights.getSearchTermsReport(customerId, {
+      campaignId,
+      dateRange: { predefinedRange: 'LAST_7_DAYS' },
+      limit: 50,
+    });
 
     console.log('Search Terms Report:');
-    searchTerms.forEach(term => {
+    searchTerms.forEach((term) => {
       const cost = parseInt(term.metrics.costMicros || '0') / 1_000_000;
       console.log(`
         "${term.searchTerm}"
@@ -294,11 +285,11 @@ async function streamAllCampaigns(customerId: string) {
     for await (const batch of googleAdsAPI.insights.streamInsights(
       customerId,
       query,
-      1000, // Process 1000 at a time
+      1000 // Process 1000 at a time
     )) {
       totalCampaigns += batch.length;
 
-      batch.forEach(row => {
+      batch.forEach((row) => {
         totalCost += parseInt(row.metrics?.costMicros || '0') / 1_000_000;
       });
 

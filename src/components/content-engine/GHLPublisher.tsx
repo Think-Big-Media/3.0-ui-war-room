@@ -1,14 +1,6 @@
 import type React from 'react';
 import { useState } from 'react';
-import {
-  Instagram,
-  Twitter,
-  Linkedin,
-  Facebook,
-  Youtube,
-  Send,
-  Loader2,
-} from 'lucide-react';
+import { Instagram, Twitter, Linkedin, Facebook, Youtube, Send, Loader2 } from 'lucide-react';
 import Card from '../shared/Card';
 import { useGHLPost } from '../../services/ghlService';
 import { createLogger } from '../../utils/logger';
@@ -38,9 +30,7 @@ const GHLPublisher: React.FC<GHLPublisherProps> = ({ onPublishSuccess }) => {
 
   const togglePlatform = (platform: string) => {
     setSelectedPlatforms((prev) =>
-      prev.includes(platform)
-        ? prev.filter((p) => p !== platform)
-        : [...prev, platform]
+      prev.includes(platform) ? prev.filter((p) => p !== platform) : [...prev, platform]
     );
   };
 
@@ -64,9 +54,7 @@ const GHLPublisher: React.FC<GHLPublisherProps> = ({ onPublishSuccess }) => {
       // Reset form
       setSelectedPlatforms([]);
       setContentText('');
-      setScheduleDate(
-        new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().slice(0, 16)
-      );
+      setScheduleDate(new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().slice(0, 16));
 
       onPublishSuccess?.();
     } catch (error) {
@@ -77,15 +65,11 @@ const GHLPublisher: React.FC<GHLPublisherProps> = ({ onPublishSuccess }) => {
   return (
     <div className="fade-in">
       <Card padding="md" variant="glass">
-        <h3 className="text-lg font-semibold text-white/95 mb-4">
-          Quick Publish to GoHighLevel
-        </h3>
+        <h3 className="text-lg font-semibold text-white/95 mb-4">Quick Publish to GoHighLevel</h3>
 
         {/* Platform Selection */}
         <div className="mb-4">
-          <label className="block text-sm font-medium text-white/80 mb-2">
-            Select Platforms
-          </label>
+          <label className="block text-sm font-medium text-white/80 mb-2">Select Platforms</label>
           <div className="flex flex-wrap gap-2">
             {platformOptions.map((platform) => (
               <button
@@ -106,9 +90,7 @@ const GHLPublisher: React.FC<GHLPublisherProps> = ({ onPublishSuccess }) => {
 
         {/* Content Input */}
         <div className="mb-4">
-          <label className="block text-sm font-medium text-white/80 mb-2">
-            Content
-          </label>
+          <label className="block text-sm font-medium text-white/80 mb-2">Content</label>
           <textarea
             value={contentText}
             onChange={(e) => setContentText(e.target.value)}
@@ -154,9 +136,7 @@ const GHLPublisher: React.FC<GHLPublisherProps> = ({ onPublishSuccess }) => {
         </button>
 
         {ghlPost.isSuccess && (
-          <p className="text-green-400 text-sm mt-2 text-center">
-            Content published successfully!
-          </p>
+          <p className="text-green-400 text-sm mt-2 text-center">Content published successfully!</p>
         )}
         {ghlPost.isError && (
           <p className="text-red-400 text-sm mt-2 text-center">

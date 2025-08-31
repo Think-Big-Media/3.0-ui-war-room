@@ -1,19 +1,8 @@
 import type React from 'react';
-import {
-  MessageSquare,
-  Link,
-  ChevronDown,
-  ChevronUp,
-  User,
-} from 'lucide-react';
+import { MessageSquare, Link, ChevronDown, ChevronUp, User } from 'lucide-react';
 import Card from '../shared/Card';
 import { type Alert } from '../../types/alert';
-import {
-  getAlertIcon,
-  getPriorityColor,
-  getStatusColor,
-  getStatusIcon,
-} from './utils';
+import { getAlertIcon, getPriorityColor, getStatusColor, getStatusIcon } from './utils';
 
 interface AlertCardProps {
   alert: Alert;
@@ -67,33 +56,23 @@ const AlertCard: React.FC<AlertCardProps> = ({
               <div className="mt-4 pt-4 border-t border-white/10 animate-in fade-in slide-in-from-top-2 duration-200">
                 <div className="space-y-3">
                   <div>
-                    <h4 className="text-sm font-medium text-white/90 mb-1">
-                      Suggested Action
-                    </h4>
-                    <p className="text-sm text-white/70">
-                      {alert.suggestedAction}
-                    </p>
+                    <h4 className="text-sm font-medium text-white/90 mb-1">Suggested Action</h4>
+                    <p className="text-sm text-white/70">{alert.suggestedAction}</p>
                   </div>
 
                   {alert.assignedTo && (
                     <div>
-                      <h4 className="text-sm font-medium text-white/90 mb-1">
-                        Assigned To
-                      </h4>
+                      <h4 className="text-sm font-medium text-white/90 mb-1">Assigned To</h4>
                       <div className="flex items-center space-x-2">
                         <User className="w-4 h-4 text-white/60" />
-                        <span className="text-sm text-white/70">
-                          {alert.assignedTo}
-                        </span>
+                        <span className="text-sm text-white/70">{alert.assignedTo}</span>
                       </div>
                     </div>
                   )}
 
                   {alert.attachments && alert.attachments.length > 0 && (
                     <div>
-                      <h4 className="text-sm font-medium text-white/90 mb-1">
-                        Attachments
-                      </h4>
+                      <h4 className="text-sm font-medium text-white/90 mb-1">Attachments</h4>
                       <div className="space-y-1">
                         {alert.attachments.map((attachment, index) => (
                           <div
@@ -117,16 +96,12 @@ const AlertCard: React.FC<AlertCardProps> = ({
                             e.stopPropagation();
                             onStatusUpdate(
                               alert.id,
-                              alert.status === 'new'
-                                ? 'in-progress'
-                                : 'resolved'
+                              alert.status === 'new' ? 'in-progress' : 'resolved'
                             );
                           }}
                           className="bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded-lg text-sm transition-colors"
                         >
-                          {alert.status === 'new'
-                            ? 'Start Working'
-                            : 'Mark Resolved'}
+                          {alert.status === 'new' ? 'Start Working' : 'Mark Resolved'}
                         </button>
                         <button
                           onClick={(e) => {
@@ -153,11 +128,7 @@ const AlertCard: React.FC<AlertCardProps> = ({
           }}
           className="text-white/60 hover:text-white transition-colors ml-4"
         >
-          {isExpanded ? (
-            <ChevronUp className="w-5 h-5" />
-          ) : (
-            <ChevronDown className="w-5 h-5" />
-          )}
+          {isExpanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
         </button>
       </div>
     </Card>

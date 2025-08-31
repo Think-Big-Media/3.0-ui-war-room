@@ -10,18 +10,15 @@ export class MetaInsightsService {
   /**
    * Get insights for an ad account
    */
-  async getAccountInsights(
-    params: InsightsParams,
-  ): Promise<InsightsData[]> {
+  async getAccountInsights(params: InsightsParams): Promise<InsightsData[]> {
     this.validateParams(params);
 
     const endpoint = `act_${params.accountId}/insights`;
     const queryParams = this.buildQueryParams(params);
 
-    const response = await this.client.request<MetaAPIResponse<InsightsData[]>>(
-      endpoint,
-      { params: queryParams },
-    );
+    const response = await this.client.request<MetaAPIResponse<InsightsData[]>>(endpoint, {
+      params: queryParams,
+    });
 
     return this.transformInsightsData(response.data);
   }
@@ -31,15 +28,14 @@ export class MetaInsightsService {
    */
   async getCampaignInsights(
     campaignId: string,
-    params: Omit<InsightsParams, 'accountId' | 'level'>,
+    params: Omit<InsightsParams, 'accountId' | 'level'>
   ): Promise<InsightsData[]> {
     const endpoint = `${campaignId}/insights`;
     const queryParams = this.buildQueryParams({ ...params, level: 'campaign' });
 
-    const response = await this.client.request<MetaAPIResponse<InsightsData[]>>(
-      endpoint,
-      { params: queryParams },
-    );
+    const response = await this.client.request<MetaAPIResponse<InsightsData[]>>(endpoint, {
+      params: queryParams,
+    });
 
     return this.transformInsightsData(response.data);
   }
@@ -49,15 +45,14 @@ export class MetaInsightsService {
    */
   async getAdSetInsights(
     adSetId: string,
-    params: Omit<InsightsParams, 'accountId' | 'level'>,
+    params: Omit<InsightsParams, 'accountId' | 'level'>
   ): Promise<InsightsData[]> {
     const endpoint = `${adSetId}/insights`;
     const queryParams = this.buildQueryParams({ ...params, level: 'adset' });
 
-    const response = await this.client.request<MetaAPIResponse<InsightsData[]>>(
-      endpoint,
-      { params: queryParams },
-    );
+    const response = await this.client.request<MetaAPIResponse<InsightsData[]>>(endpoint, {
+      params: queryParams,
+    });
 
     return this.transformInsightsData(response.data);
   }
@@ -67,15 +62,14 @@ export class MetaInsightsService {
    */
   async getAdInsights(
     adId: string,
-    params: Omit<InsightsParams, 'accountId' | 'level'>,
+    params: Omit<InsightsParams, 'accountId' | 'level'>
   ): Promise<InsightsData[]> {
     const endpoint = `${adId}/insights`;
     const queryParams = this.buildQueryParams({ ...params, level: 'ad' });
 
-    const response = await this.client.request<MetaAPIResponse<InsightsData[]>>(
-      endpoint,
-      { params: queryParams },
-    );
+    const response = await this.client.request<MetaAPIResponse<InsightsData[]>>(endpoint, {
+      params: queryParams,
+    });
 
     return this.transformInsightsData(response.data);
   }
@@ -83,9 +77,7 @@ export class MetaInsightsService {
   /**
    * Get aggregated insights across multiple campaigns
    */
-  async getAggregatedInsights(
-    params: InsightsParams & { campaignIds?: string[] },
-  ): Promise<{
+  async getAggregatedInsights(params: InsightsParams & { campaignIds?: string[] }): Promise<{
     summary: {
       totalSpend: number;
       totalImpressions: number;
@@ -100,8 +92,8 @@ export class MetaInsightsService {
 
     if (params.campaignIds && params.campaignIds.length > 0) {
       // Get insights for specific campaigns
-      const promises = params.campaignIds.map(campaignId =>
-        this.getCampaignInsights(campaignId, params),
+      const promises = params.campaignIds.map((campaignId) =>
+        this.getCampaignInsights(campaignId, params)
       );
 
       const results = await Promise.all(promises);
@@ -125,7 +117,7 @@ export class MetaInsightsService {
    */
   async *streamInsights(
     params: InsightsParams,
-    pollInterval = 300000, // 5 minutes
+    pollInterval = 300000 // 5 minutes
   ): AsyncGenerator<InsightsData[], void, unknown> {
     while (true) {
       try {
@@ -133,11 +125,11 @@ export class MetaInsightsService {
         yield insights;
 
         // Wait before next poll
-        await new Promise(resolve => setTimeout(resolve, pollInterval));
+        await new Promise((resolve) => setTimeout(resolve, pollInterval));
       } catch (error) {
         console.error('Error streaming insights:', error);
         // Continue streaming after error
-        await new Promise(resolve => setTimeout(resolve, pollInterval));
+        await new Promise((resolve) => setTimeout(resolve, pollInterval));
       }
     }
   }
@@ -148,17 +140,17 @@ export class MetaInsightsService {
   async getInsightsWithBreakdowns(
     params: InsightsParams & {
       breakdowns: string[];
-    },
+    }
   ): Promise<Map<string, InsightsData[]>> {
     const insights = await this.getAccountInsights(params);
 
     // Group by breakdown dimensions
     const grouped = new Map<string, InsightsData[]>();
 
-    insights.forEach(insight => {
+    insights.forEach((insight) => {
       // Create a key from breakdown values
       const key = params.breakdowns
-        .map(breakdown => (insight as any)[breakdown] || 'unknown')
+        .map((breakdown) => (insight as any)[breakdown] || 'unknown')
         .join('|');
 
       if (!grouped.has(key)) {
@@ -253,8 +245,7 @@ export class MetaInsightsService {
     }
 
     if (params.action_attribution_windows) {
-      queryParams.action_attribution_windows =
-        JSON.stringify(params.action_attribution_windows);
+      queryParams.action_attribution_windows = JSON.stringify(params.action_attribution_windows);
     }
 
     if (params.limit) {
@@ -272,7 +263,7 @@ export class MetaInsightsService {
    * Transform and validate insights data
    */
   private transformInsightsData(data: InsightsData[]): InsightsData[] {
-    return data.map(insight => ({
+    return data.map((insight) => ({
       ...insight,
       // Convert string numbers to ensure consistency
       impressions: String(insight.impressions || '0'),
@@ -303,22 +294,16 @@ export class MetaInsightsService {
         impressions: acc.impressions + parseInt(insight.impressions || '0'),
         clicks: acc.clicks + parseInt(insight.clicks || '0'),
       }),
-      { spend: 0, impressions: 0, clicks: 0 },
+      { spend: 0, impressions: 0, clicks: 0 }
     );
 
     return {
       totalSpend: totals.spend,
       totalImpressions: totals.impressions,
       totalClicks: totals.clicks,
-      averageCTR: totals.impressions > 0
-        ? (totals.clicks / totals.impressions) * 100
-        : 0,
-      averageCPC: totals.clicks > 0
-        ? totals.spend / totals.clicks
-        : 0,
-      averageCPM: totals.impressions > 0
-        ? (totals.spend / totals.impressions) * 1000
-        : 0,
+      averageCTR: totals.impressions > 0 ? (totals.clicks / totals.impressions) * 100 : 0,
+      averageCPC: totals.clicks > 0 ? totals.spend / totals.clicks : 0,
+      averageCPM: totals.impressions > 0 ? (totals.spend / totals.impressions) * 1000 : 0,
     };
   }
 
@@ -326,7 +311,9 @@ export class MetaInsightsService {
     const impressions = parseInt(insight.impressions || '0');
     const clicks = parseInt(insight.clicks || '0');
 
-    if (impressions === 0) {return '0';}
+    if (impressions === 0) {
+      return '0';
+    }
 
     return ((clicks / impressions) * 100).toFixed(2);
   }
@@ -335,7 +322,9 @@ export class MetaInsightsService {
     const spend = parseFloat(insight.spend || '0');
     const clicks = parseInt(insight.clicks || '0');
 
-    if (clicks === 0) {return '0';}
+    if (clicks === 0) {
+      return '0';
+    }
 
     return (spend / clicks).toFixed(2);
   }
@@ -344,7 +333,9 @@ export class MetaInsightsService {
     const spend = parseFloat(insight.spend || '0');
     const impressions = parseInt(insight.impressions || '0');
 
-    if (impressions === 0) {return '0';}
+    if (impressions === 0) {
+      return '0';
+    }
 
     return ((spend / impressions) * 1000).toFixed(2);
   }

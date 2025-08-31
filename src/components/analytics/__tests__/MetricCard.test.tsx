@@ -78,12 +78,7 @@ describe('MetricCard Component', () => {
       });
 
       renderWithProviders(
-        <MetricCard
-          title="Total Volunteers"
-          metric="volunteers"
-          icon="users"
-          color="blue"
-        />,
+        <MetricCard title="Total Volunteers" metric="volunteers" icon="users" color="blue" />
       );
 
       // Check title
@@ -107,12 +102,7 @@ describe('MetricCard Component', () => {
       });
 
       renderWithProviders(
-        <MetricCard
-          title="Active Events"
-          metric="events"
-          icon="calendar"
-          color="green"
-        />,
+        <MetricCard title="Active Events" metric="events" icon="calendar" color="green" />
       );
 
       await waitFor(() => {
@@ -132,12 +122,7 @@ describe('MetricCard Component', () => {
       });
 
       renderWithProviders(
-        <MetricCard
-          title="Total Reach"
-          metric="reach"
-          icon="trending-up"
-          color="purple"
-        />,
+        <MetricCard title="Total Reach" metric="reach" icon="trending-up" color="purple" />
       );
 
       await waitFor(() => {
@@ -157,12 +142,7 @@ describe('MetricCard Component', () => {
       });
 
       renderWithProviders(
-        <MetricCard
-          title="Total Donations"
-          metric="donations"
-          icon="dollar-sign"
-          color="yellow"
-        />,
+        <MetricCard title="Total Donations" metric="donations" icon="dollar-sign" color="yellow" />
       );
 
       await waitFor(() => {
@@ -175,17 +155,12 @@ describe('MetricCard Component', () => {
   describe('Loading State', () => {
     it('should show loading skeleton while fetching data', () => {
       // Mock delayed response
-      global.fetch = jest.fn().mockImplementation(() =>
-        new Promise(resolve => setTimeout(resolve, 100)),
-      );
+      global.fetch = jest
+        .fn()
+        .mockImplementation(() => new Promise((resolve) => setTimeout(resolve, 100)));
 
       renderWithProviders(
-        <MetricCard
-          title="Total Volunteers"
-          metric="volunteers"
-          icon="users"
-          color="blue"
-        />,
+        <MetricCard title="Total Volunteers" metric="volunteers" icon="users" color="blue" />
       );
 
       // Check for loading skeleton
@@ -200,12 +175,7 @@ describe('MetricCard Component', () => {
       });
 
       renderWithProviders(
-        <MetricCard
-          title="Total Volunteers"
-          metric="volunteers"
-          icon="users"
-          color="blue"
-        />,
+        <MetricCard title="Total Volunteers" metric="volunteers" icon="users" color="blue" />
       );
 
       // Initially showing skeleton
@@ -225,12 +195,7 @@ describe('MetricCard Component', () => {
       global.fetch = jest.fn().mockRejectedValueOnce(new Error('Network error'));
 
       renderWithProviders(
-        <MetricCard
-          title="Total Volunteers"
-          metric="volunteers"
-          icon="users"
-          color="blue"
-        />,
+        <MetricCard title="Total Volunteers" metric="volunteers" icon="users" color="blue" />
       );
 
       await waitFor(() => {
@@ -243,12 +208,7 @@ describe('MetricCard Component', () => {
       global.fetch = jest.fn().mockRejectedValueOnce(new Error('Network error'));
 
       renderWithProviders(
-        <MetricCard
-          title="Total Volunteers"
-          metric="volunteers"
-          icon="users"
-          color="blue"
-        />,
+        <MetricCard title="Total Volunteers" metric="volunteers" icon="users" color="blue" />
       );
 
       await waitFor(() => {
@@ -259,7 +219,8 @@ describe('MetricCard Component', () => {
 
     it('should retry fetching data when retry button is clicked', async () => {
       // First call fails, second succeeds
-      global.fetch = jest.fn()
+      global.fetch = jest
+        .fn()
         .mockRejectedValueOnce(new Error('Network error'))
         .mockResolvedValueOnce({
           ok: true,
@@ -267,12 +228,7 @@ describe('MetricCard Component', () => {
         });
 
       const { user } = renderWithProviders(
-        <MetricCard
-          title="Total Volunteers"
-          metric="volunteers"
-          icon="users"
-          color="blue"
-        />,
+        <MetricCard title="Total Volunteers" metric="volunteers" icon="users" color="blue" />
       );
 
       // Wait for error state
@@ -300,12 +256,7 @@ describe('MetricCard Component', () => {
       });
 
       renderWithProviders(
-        <MetricCard
-          title="Total Volunteers"
-          metric="volunteers"
-          icon="users"
-          color="blue"
-        />,
+        <MetricCard title="Total Volunteers" metric="volunteers" icon="users" color="blue" />
       );
 
       await waitFor(() => {
@@ -330,12 +281,7 @@ describe('MetricCard Component', () => {
       });
 
       renderWithProviders(
-        <MetricCard
-          title="Total Volunteers"
-          metric="volunteers"
-          icon="users"
-          color="blue"
-        />,
+        <MetricCard title="Total Volunteers" metric="volunteers" icon="users" color="blue" />
       );
 
       await waitFor(() => {
@@ -346,7 +292,8 @@ describe('MetricCard Component', () => {
 
   describe('Date Range Integration', () => {
     it('should refetch data when date range changes', async () => {
-      const fetchSpy = jest.fn()
+      const fetchSpy = jest
+        .fn()
         .mockResolvedValueOnce({
           ok: true,
           json: async () => mockMetricData,
@@ -370,13 +317,8 @@ describe('MetricCard Component', () => {
       const store = createTestStore(initialState);
 
       renderWithProviders(
-        <MetricCard
-          title="Total Volunteers"
-          metric="volunteers"
-          icon="users"
-          color="blue"
-        />,
-        { store },
+        <MetricCard title="Total Volunteers" metric="volunteers" icon="users" color="blue" />,
+        { store }
       );
 
       // Initial load
@@ -406,12 +348,7 @@ describe('MetricCard Component', () => {
       });
 
       renderWithProviders(
-        <MetricCard
-          title="Total Volunteers"
-          metric="volunteers"
-          icon="users"
-          color="blue"
-        />,
+        <MetricCard title="Total Volunteers" metric="volunteers" icon="users" color="blue" />
       );
 
       await waitFor(() => {
@@ -427,12 +364,7 @@ describe('MetricCard Component', () => {
       });
 
       renderWithProviders(
-        <MetricCard
-          title="Total Volunteers"
-          metric="volunteers"
-          icon="users"
-          color="blue"
-        />,
+        <MetricCard title="Total Volunteers" metric="volunteers" icon="users" color="blue" />
       );
 
       await waitFor(() => {
@@ -455,12 +387,7 @@ describe('MetricCard Component', () => {
       });
 
       const { container } = renderWithProviders(
-        <MetricCard
-          title="Test Metric"
-          metric="volunteers"
-          icon="users"
-          color={color as any}
-        />,
+        <MetricCard title="Test Metric" metric="volunteers" icon="users" color={color as any} />
       );
 
       await waitFor(() => {

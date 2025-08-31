@@ -52,7 +52,7 @@ describe('PageLayout', () => {
     return render(
       <TestRouterWrapper>
         <PageLayout {...defaultProps} />
-      </TestRouterWrapper>,
+      </TestRouterWrapper>
     );
   };
 
@@ -85,9 +85,7 @@ describe('PageLayout', () => {
       const { container } = renderComponent();
       // PageLayout is now theme-independent - each page sets its own gradient
       // So we just check that the layout structure is correct
-      const layoutDiv = container.querySelector(
-        '.min-h-screen.w-full.flex.flex-col',
-      );
+      const layoutDiv = container.querySelector('.min-h-screen.w-full.flex.flex-col');
 
       expect(layoutDiv).toBeInTheDocument();
       expect(layoutDiv).toHaveClass(
@@ -96,7 +94,7 @@ describe('PageLayout', () => {
         'flex',
         'flex-col',
         'relative',
-        'z-10',
+        'z-10'
       );
     });
 
@@ -104,9 +102,7 @@ describe('PageLayout', () => {
       const { container } = renderComponent();
 
       // Check min-height and flex container
-      const mainContainer = container.querySelector(
-        '.min-h-screen.flex.flex-col',
-      );
+      const mainContainer = container.querySelector('.min-h-screen.flex.flex-col');
       expect(mainContainer).toBeInTheDocument();
 
       // Check main content area
@@ -132,7 +128,7 @@ describe('PageLayout', () => {
         'right-0',
         'z-50',
         'px-4',
-        'lg:px-6',
+        'lg:px-6'
       );
     });
 
@@ -141,12 +137,7 @@ describe('PageLayout', () => {
       const contentContainer = container.querySelector('.max-w-7xl');
 
       expect(contentContainer).toBeInTheDocument();
-      expect(contentContainer).toHaveClass(
-        'max-w-7xl',
-        'mx-auto',
-        'px-4',
-        'py-8',
-      );
+      expect(contentContainer).toHaveClass('max-w-7xl', 'mx-auto', 'px-4', 'py-8');
     });
   });
 
@@ -155,17 +146,14 @@ describe('PageLayout', () => {
       renderComponent({ placeholder: 'Custom placeholder text' });
 
       const chatInput = screen.getByTestId('chat-input');
-      expect(chatInput).toHaveAttribute(
-        'placeholder',
-        'Custom placeholder text',
-      );
+      expect(chatInput).toHaveAttribute('placeholder', 'Custom placeholder text');
     });
 
     it('should log page title on render', () => {
       renderComponent({ pageTitle: 'Analytics Dashboard' });
 
       expect(consoleLogSpy).toHaveBeenCalledWith(
-        '🔍 PageLayout rendering for: Analytics Dashboard',
+        '🔍 PageLayout rendering for: Analytics Dashboard'
       );
     });
 
@@ -181,10 +169,7 @@ describe('PageLayout', () => {
 
     it('should handle array of children', () => {
       renderComponent({
-        children: [
-          <div key="1">First child</div>,
-          <div key="2">Second child</div>,
-        ],
+        children: [<div key="1">First child</div>, <div key="2">Second child</div>],
       });
       expect(screen.getByText('First child')).toBeInTheDocument();
       expect(screen.getByText('Second child')).toBeInTheDocument();
@@ -202,10 +187,7 @@ describe('PageLayout', () => {
       await user.type(chatInput, 'Hello from test');
       await user.keyboard('{Enter}');
 
-      expect(consoleLogSpy).toHaveBeenCalledWith(
-        'Message from Test Page:',
-        'Hello from test',
-      );
+      expect(consoleLogSpy).toHaveBeenCalledWith('Message from Test Page:', 'Hello from test');
     });
 
     it('should include page context in chat messages', async () => {
@@ -219,7 +201,7 @@ describe('PageLayout', () => {
 
       expect(consoleLogSpy).toHaveBeenCalledWith(
         'Message from Performance Analytics:',
-        'Show me the metrics',
+        'Show me the metrics'
       );
     });
   });
@@ -266,9 +248,7 @@ describe('PageLayout', () => {
       const { container } = renderComponent();
 
       // Main content should have proper z-index
-      const mainContent = container.querySelector(
-        '.min-h-screen.w-full.flex.flex-col',
-      );
+      const mainContent = container.querySelector('.min-h-screen.w-full.flex.flex-col');
       expect(mainContent).toBeInTheDocument();
       expect(mainContent).toHaveClass('z-10');
 
@@ -297,9 +277,7 @@ describe('PageLayout', () => {
       const children = contentContainer?.children;
 
       // Footer should be the last child
-      expect(children?.[children.length - 1]).toBe(
-        screen.getByTestId('mock-footer'),
-      );
+      expect(children?.[children.length - 1]).toBe(screen.getByTestId('mock-footer'));
     });
   });
 
@@ -308,9 +286,7 @@ describe('PageLayout', () => {
       const longTitle = 'A'.repeat(200);
       renderComponent({ pageTitle: longTitle });
 
-      expect(consoleLogSpy).toHaveBeenCalledWith(
-        `🔍 PageLayout rendering for: ${longTitle}`,
-      );
+      expect(consoleLogSpy).toHaveBeenCalledWith(`🔍 PageLayout rendering for: ${longTitle}`);
     });
 
     it('should handle empty placeholder', () => {
@@ -347,7 +323,7 @@ describe('PageLayout', () => {
             <PageLayout pageTitle="Test" placeholder="Test">
               Content
             </PageLayout>
-          </TestRouterWrapper>,
+          </TestRouterWrapper>
         );
       }).not.toThrow();
     });

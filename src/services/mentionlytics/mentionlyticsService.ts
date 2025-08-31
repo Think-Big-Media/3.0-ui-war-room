@@ -19,21 +19,22 @@ import {
   type MentionlyticsLocation,
   type MentionlyticsMention,
   type MentionlyticsInfluencer,
-  type ShareOfVoiceData
+  type ShareOfVoiceData,
 } from './mockData';
 
 class MentionlyticsService {
   private isMockMode: boolean;
   private endpoints: ReturnType<typeof getAPIEndpoints>;
   private config: ReturnType<typeof getEnvironmentConfig>;
-  
+
   constructor() {
     this.config = getEnvironmentConfig();
     this.endpoints = getAPIEndpoints();
     // Check if we're in mock mode from localStorage or env
-    this.isMockMode = localStorage.getItem('VITE_USE_MOCK_DATA') === 'true' || 
-                      this.config.features.mockMode || 
-                      !this.config.mentionlytics.apiToken;
+    this.isMockMode =
+      localStorage.getItem('VITE_USE_MOCK_DATA') === 'true' ||
+      this.config.features.mockMode ||
+      !this.config.mentionlytics.apiToken;
   }
 
   // Toggle between mock and live data
@@ -55,13 +56,13 @@ class MentionlyticsService {
         ...mockSentimentData,
         positive: Math.round(mockSentimentData.positive + variance),
         negative: Math.round(mockSentimentData.negative - variance),
-        period
+        period,
       };
     }
 
     try {
       const response = await axios.get(this.endpoints.data.mentionlytics.sentiment, {
-        params: { period }
+        params: { period },
       });
       return response.data;
     } catch (error) {
@@ -75,9 +76,9 @@ class MentionlyticsService {
   async getGeographicMentions(): Promise<MentionlyticsLocation[]> {
     if (this.isMockMode) {
       // Add slight variations to mock data
-      return mockGeographicData.map(location => ({
+      return mockGeographicData.map((location) => ({
         ...location,
-        mentions: location.mentions + Math.floor(Math.random() * 20 - 10)
+        mentions: location.mentions + Math.floor(Math.random() * 20 - 10),
       }));
     }
 
@@ -94,13 +95,15 @@ class MentionlyticsService {
   async getMentionsFeed(limit: number = 10): Promise<MentionlyticsMention[]> {
     if (this.isMockMode) {
       // Mix existing mock data with newly generated mentions
-      const newMentions = Array(2).fill(null).map(() => generateLiveMention());
+      const newMentions = Array(2)
+        .fill(null)
+        .map(() => generateLiveMention());
       return [...newMentions, ...mockMentionsFeed].slice(0, limit);
     }
 
     try {
       const response = await axios.get(this.endpoints.data.mentionlytics.feed, {
-        params: { limit }
+        params: { limit },
       });
       return response.data;
     } catch (error) {
@@ -117,7 +120,7 @@ class MentionlyticsService {
 
     try {
       const response = await axios.get(this.endpoints.data.mentionlytics.influencers, {
-        params: { limit }
+        params: { limit },
       });
       return response.data;
     } catch (error) {
@@ -155,7 +158,7 @@ class MentionlyticsService {
 
     try {
       const response = await axios.get(this.endpoints.data.mentionlytics.sentiment, {
-        params: { trend: true, days }
+        params: { trend: true, days },
       });
       return response.data;
     } catch (error) {
@@ -172,13 +175,13 @@ class MentionlyticsService {
         { topic: 'Economic Policy', mentions: 289, sentiment: 'neutral', growth: '+12%' },
         { topic: 'Infrastructure', mentions: 267, sentiment: 'positive', growth: '+45%' },
         { topic: 'Education', mentions: 198, sentiment: 'negative', growth: '-8%' },
-        { topic: 'Climate', mentions: 176, sentiment: 'neutral', growth: '+5%' }
+        { topic: 'Climate', mentions: 176, sentiment: 'neutral', growth: '+5%' },
       ];
     }
 
     try {
       const response = await axios.get(this.endpoints.data.mentionlytics.trending, {
-        params: { period }
+        params: { period },
       });
       return response.data;
     } catch (error) {
@@ -205,7 +208,7 @@ class MentionlyticsService {
         'Rural Development',
         'Urban Planning',
         'Energy Policy',
-        'Foreign Policy'
+        'Foreign Policy',
       ];
     }
 
@@ -224,10 +227,13 @@ class MentionlyticsService {
   subscribeToLiveFeed(callback: (mention: MentionlyticsMention) => void): () => void {
     if (this.isMockMode) {
       // Simulate live updates every 5-15 seconds
-      const interval = setInterval(() => {
-        const newMention = generateLiveMention();
-        callback(newMention);
-      }, Math.random() * 10000 + 5000);
+      const interval = setInterval(
+        () => {
+          const newMention = generateLiveMention();
+          callback(newMention);
+        },
+        Math.random() * 10000 + 5000
+      );
 
       return () => clearInterval(interval);
     }
@@ -256,9 +262,9 @@ class MentionlyticsService {
             topic: 'Negative sentiment spike',
             description: 'Negative mentions increased by 45% in the last hour',
             timestamp: new Date().toISOString(),
-            affected_states: ['Pennsylvania', 'Michigan']
-          }
-        ]
+            affected_states: ['Pennsylvania', 'Michigan'],
+          },
+        ],
       };
     }
 

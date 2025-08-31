@@ -8,11 +8,7 @@ interface DayViewProps {
   onEditContent?: (content: any) => void;
 }
 
-const DayView: React.FC<DayViewProps> = ({
-  weekData,
-  timeSlots,
-  onEditContent,
-}) => {
+const DayView: React.FC<DayViewProps> = ({ weekData, timeSlots, onEditContent }) => {
   const todayData = weekData.find((day) => day.isToday);
 
   return (
@@ -28,10 +24,8 @@ const DayView: React.FC<DayViewProps> = ({
           })}
         </h3>
         <div className="text-white/70 text-sm">
-          <span className="font-medium text-white">
-            {todayData?.content.length || 0}
-          </span>{' '}
-          posts scheduled
+          <span className="font-medium text-white">{todayData?.content.length || 0}</span> posts
+          scheduled
         </div>
       </div>
 
@@ -47,21 +41,13 @@ const DayView: React.FC<DayViewProps> = ({
               key={slot.hour}
               className="flex items-center bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-colors p-4"
             >
-              <div className="w-20 text-white/60 text-sm font-medium">
-                {slot.label}
-              </div>
+              <div className="w-20 text-white/60 text-sm font-medium">{slot.label}</div>
 
               <div className="flex-1 ml-6">
                 {todayContent ? (
-                  <ContentCardComponent
-                    content={todayContent}
-                    isDetailed
-                    onEdit={onEditContent}
-                  />
+                  <ContentCardComponent content={todayContent} isDetailed onEdit={onEditContent} />
                 ) : (
-                  <div className="text-white/40 text-sm italic">
-                    No content scheduled
-                  </div>
+                  <div className="text-white/40 text-sm italic">No content scheduled</div>
                 )}
               </div>
             </div>

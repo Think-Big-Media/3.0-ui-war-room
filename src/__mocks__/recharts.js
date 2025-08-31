@@ -1,14 +1,18 @@
 // Mock for recharts
 const React = require('react');
 
-const mockComponent = (name) => 
-  React.forwardRef((props, ref) => 
-    React.createElement('div', { 
-      ...props, 
-      ref,
-      'data-testid': name.toLowerCase(),
-      className: `recharts-${name.toLowerCase()} ${props.className || ''}`.trim(),
-    }, props.children)
+const mockComponent = (name) =>
+  React.forwardRef((props, ref) =>
+    React.createElement(
+      'div',
+      {
+        ...props,
+        ref,
+        'data-testid': name.toLowerCase(),
+        className: `recharts-${name.toLowerCase()} ${props.className || ''}`.trim(),
+      },
+      props.children
+    )
   );
 
 module.exports = {

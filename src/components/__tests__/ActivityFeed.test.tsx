@@ -50,7 +50,7 @@ describe('ActivityFeed', () => {
     // Should show relative time (e.g., "2 hours ago")
     const timeElements = screen.getAllByTestId('activity-time');
     expect(timeElements).toHaveLength(3);
-    timeElements.forEach(element => {
+    timeElements.forEach((element) => {
       expect(element.textContent).toMatch(/ago$/);
     });
   });

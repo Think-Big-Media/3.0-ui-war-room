@@ -135,7 +135,7 @@ describe('getAnimationClass Utility - Accessibility Tests', () => {
     const result = getAnimationClass(
       false, // prefersReducedMotion = false
       'animate-bounce transition-all',
-      'static-fallback',
+      'static-fallback'
     );
 
     expect(result).toBe('animate-bounce transition-all');
@@ -145,7 +145,7 @@ describe('getAnimationClass Utility - Accessibility Tests', () => {
     const result = getAnimationClass(
       true, // prefersReducedMotion = true
       'animate-bounce transition-all',
-      'static-fallback',
+      'static-fallback'
     );
 
     expect(result).toBe('static-fallback');
@@ -154,7 +154,7 @@ describe('getAnimationClass Utility - Accessibility Tests', () => {
   test('should return empty string as fallback when motion is reduced', () => {
     const result = getAnimationClass(
       true, // prefersReducedMotion = true
-      'animate-bounce transition-all',
+      'animate-bounce transition-all'
       // No static class provided
     );
 
@@ -165,7 +165,7 @@ describe('getAnimationClass Utility - Accessibility Tests', () => {
     const result = getAnimationClass(
       false, // prefersReducedMotion = false
       '', // empty animation class
-      'static-fallback',
+      'static-fallback'
     );
 
     expect(result).toBe('');
@@ -187,13 +187,13 @@ describe('useReducedMotion Integration Tests', () => {
     const hoverClass = getAnimationClass(
       prefersReducedMotion,
       'hover:shadow-xl transition-all duration-300',
-      'hover:shadow-lg',
+      'hover:shadow-lg'
     );
 
     const scaleClass = getAnimationClass(
       prefersReducedMotion,
       'group-hover:scale-110 transition-transform duration-300',
-      '',
+      ''
     );
 
     expect(hoverClass).toBe('hover:shadow-lg'); // Reduced motion version
@@ -209,13 +209,13 @@ describe('useReducedMotion Integration Tests', () => {
     const hoverClass = getAnimationClass(
       prefersReducedMotion,
       'hover:shadow-xl transition-all duration-300',
-      'hover:shadow-lg',
+      'hover:shadow-lg'
     );
 
     const scaleClass = getAnimationClass(
       prefersReducedMotion,
       'group-hover:scale-110 transition-transform duration-300',
-      '',
+      ''
     );
 
     expect(hoverClass).toBe('hover:shadow-xl transition-all duration-300'); // Full animation

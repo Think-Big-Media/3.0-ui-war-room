@@ -113,7 +113,7 @@ export interface ApiError {
 export enum CircuitBreakerState {
   CLOSED = 'CLOSED',
   OPEN = 'OPEN',
-  HALF_OPEN = 'HALF_OPEN'
+  HALF_OPEN = 'HALF_OPEN',
 }
 
 export interface CustomerListResponse {
@@ -223,7 +223,7 @@ export enum CampaignStatus {
   UNKNOWN = 'UNKNOWN',
   ENABLED = 'ENABLED',
   PAUSED = 'PAUSED',
-  REMOVED = 'REMOVED'
+  REMOVED = 'REMOVED',
 }
 
 export enum CampaignServingStatus {
@@ -233,7 +233,7 @@ export enum CampaignServingStatus {
   NONE = 'NONE',
   ENDED = 'ENDED',
   PENDING = 'PENDING',
-  SUSPENDED = 'SUSPENDED'
+  SUSPENDED = 'SUSPENDED',
 }
 
 export enum AdvertisingChannelType {
@@ -250,7 +250,7 @@ export enum AdvertisingChannelType {
   PERFORMANCE_MAX = 'PERFORMANCE_MAX',
   LOCAL_SERVICES = 'LOCAL_SERVICES',
   DISCOVERY = 'DISCOVERY',
-  TRAVEL = 'TRAVEL'
+  TRAVEL = 'TRAVEL',
 }
 
 export enum AdvertisingChannelSubType {
@@ -274,7 +274,7 @@ export enum AdvertisingChannelSubType {
   VIDEO_SEQUENCE = 'VIDEO_SEQUENCE',
   APP_CAMPAIGN_FOR_PRE_REGISTRATION = 'APP_CAMPAIGN_FOR_PRE_REGISTRATION',
   VIDEO_REACH_TARGET_FREQUENCY = 'VIDEO_REACH_TARGET_FREQUENCY',
-  TRAVEL_ACTIVITIES = 'TRAVEL_ACTIVITIES'
+  TRAVEL_ACTIVITIES = 'TRAVEL_ACTIVITIES',
 }
 
 export enum BiddingStrategyType {
@@ -296,7 +296,7 @@ export enum BiddingStrategyType {
   TARGET_IMPRESSION_SHARE = 'TARGET_IMPRESSION_SHARE',
   TARGET_OUTRANK_SHARE = 'TARGET_OUTRANK_SHARE',
   TARGET_ROAS = 'TARGET_ROAS',
-  TARGET_SPEND = 'TARGET_SPEND'
+  TARGET_SPEND = 'TARGET_SPEND',
 }
 
 // Budget Management
@@ -324,21 +324,21 @@ export enum BudgetStatus {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   ENABLED = 'ENABLED',
-  REMOVED = 'REMOVED'
+  REMOVED = 'REMOVED',
 }
 
 export enum BudgetDeliveryMethod {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   STANDARD = 'STANDARD',
-  ACCELERATED = 'ACCELERATED'
+  ACCELERATED = 'ACCELERATED',
 }
 
 export enum BudgetPeriod {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   DAILY = 'DAILY',
-  CUSTOM_PERIOD = 'CUSTOM_PERIOD'
+  CUSTOM_PERIOD = 'CUSTOM_PERIOD',
 }
 
 export enum BudgetType {
@@ -348,7 +348,7 @@ export enum BudgetType {
   HOTEL_ADS_COMMISSION = 'HOTEL_ADS_COMMISSION',
   FIXED_CPA = 'FIXED_CPA',
   SMART_CAMPAIGN = 'SMART_CAMPAIGN',
-  LOCAL_SERVICES = 'LOCAL_SERVICES'
+  LOCAL_SERVICES = 'LOCAL_SERVICES',
 }
 
 export interface AccountBudget {
@@ -377,7 +377,7 @@ export enum AccountBudgetStatus {
   UNKNOWN = 'UNKNOWN',
   PROPOSED = 'PROPOSED',
   APPROVED = 'APPROVED',
-  CANCELLED = 'CANCELLED'
+  CANCELLED = 'CANCELLED',
 }
 
 // Metrics and Performance
@@ -502,7 +502,7 @@ export enum InteractionEventType {
   CLICK = 'CLICK',
   ENGAGEMENT = 'ENGAGEMENT',
   VIDEO_VIEW = 'VIDEO_VIEW',
-  NONE = 'NONE'
+  NONE = 'NONE',
 }
 
 // Segments (for reporting)
@@ -614,7 +614,7 @@ export enum SummaryRowSetting {
   UNSPECIFIED = 'UNSPECIFIED',
   NO_SUMMARY_ROW = 'NO_SUMMARY_ROW',
   SUMMARY_ROW_WITH_RESULTS = 'SUMMARY_ROW_WITH_RESULTS',
-  SUMMARY_ROW_ONLY = 'SUMMARY_ROW_ONLY'
+  SUMMARY_ROW_ONLY = 'SUMMARY_ROW_ONLY',
 }
 
 export interface SearchGoogleAdsResponse {
@@ -720,7 +720,7 @@ export enum ConversionTrackingStatus {
   NOT_CONVERSION_TRACKED = 'NOT_CONVERSION_TRACKED',
   CONVERSION_TRACKING_MANAGED_BY_SELF = 'CONVERSION_TRACKING_MANAGED_BY_SELF',
   CONVERSION_TRACKING_MANAGED_BY_THIS_MANAGER = 'CONVERSION_TRACKING_MANAGED_BY_THIS_MANAGER',
-  CONVERSION_TRACKING_MANAGED_BY_ANOTHER_MANAGER = 'CONVERSION_TRACKING_MANAGED_BY_ANOTHER_MANAGER'
+  CONVERSION_TRACKING_MANAGED_BY_ANOTHER_MANAGER = 'CONVERSION_TRACKING_MANAGED_BY_ANOTHER_MANAGER',
 }
 
 export interface RemarketingSetting {
@@ -744,7 +744,7 @@ export enum RealTimeBiddingStrategyType {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   TARGET_CPA = 'TARGET_CPA',
-  TARGET_ROAS = 'TARGET_ROAS'
+  TARGET_ROAS = 'TARGET_ROAS',
 }
 
 export interface TargetCpa {
@@ -806,14 +806,14 @@ export enum TargetingDimension {
   AGE_RANGE = 'AGE_RANGE',
   PLACEMENT = 'PLACEMENT',
   PARENTAL_STATUS = 'PARENTAL_STATUS',
-  INCOME_RANGE = 'INCOME_RANGE'
+  INCOME_RANGE = 'INCOME_RANGE',
 }
 
 export enum TargetRestrictionOperator {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   ADD = 'ADD',
-  REMOVE = 'REMOVE'
+  REMOVE = 'REMOVE',
 }
 
 export interface GeoTargetTypeSetting {
@@ -826,14 +826,14 @@ export enum PositiveGeoTargetType {
   UNKNOWN = 'UNKNOWN',
   PRESENCE_OR_INTEREST = 'PRESENCE_OR_INTEREST',
   SEARCH_INTEREST = 'SEARCH_INTEREST',
-  PRESENCE = 'PRESENCE'
+  PRESENCE = 'PRESENCE',
 }
 
 export enum NegativeGeoTargetType {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   PRESENCE_OR_INTEREST = 'PRESENCE_OR_INTEREST',
-  PRESENCE = 'PRESENCE'
+  PRESENCE = 'PRESENCE',
 }
 
 export interface LocalCampaignSetting {
@@ -844,7 +844,7 @@ export enum LocationSourceType {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   GOOGLE_MY_BUSINESS = 'GOOGLE_MY_BUSINESS',
-  AFFILIATE = 'AFFILIATE'
+  AFFILIATE = 'AFFILIATE',
 }
 
 export interface AppCampaignSetting {
@@ -857,7 +857,7 @@ export enum AppStore {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   APPLE_APP_STORE = 'APPLE_APP_STORE',
-  GOOGLE_APP_STORE = 'GOOGLE_APP_STORE'
+  GOOGLE_APP_STORE = 'GOOGLE_APP_STORE',
 }
 
 export enum AppCampaignBiddingStrategyGoalType {
@@ -869,7 +869,7 @@ export enum AppCampaignBiddingStrategyGoalType {
   OPTIMIZE_FOR_TARGET_INSTALL_COST = 'OPTIMIZE_FOR_TARGET_INSTALL_COST',
   OPTIMIZE_FOR_RETURN_ON_ADVERTISING_SPEND = 'OPTIMIZE_FOR_RETURN_ON_ADVERTISING_SPEND',
   OPTIMIZE_FOR_INSTALL_CONVERSION_VOLUME_WITHOUT_TARGET_INSTALL_COST = 'OPTIMIZE_FOR_INSTALL_CONVERSION_VOLUME_WITHOUT_TARGET_INSTALL_COST',
-  OPTIMIZE_FOR_PRE_REGISTRATION_CONVERSION_VOLUME = 'OPTIMIZE_FOR_PRE_REGISTRATION_CONVERSION_VOLUME'
+  OPTIMIZE_FOR_PRE_REGISTRATION_CONVERSION_VOLUME = 'OPTIMIZE_FOR_PRE_REGISTRATION_CONVERSION_VOLUME',
 }
 
 export enum CampaignExperimentType {
@@ -877,7 +877,7 @@ export enum CampaignExperimentType {
   UNKNOWN = 'UNKNOWN',
   BASE = 'BASE',
   DRAFT = 'DRAFT',
-  EXPERIMENT = 'EXPERIMENT'
+  EXPERIMENT = 'EXPERIMENT',
 }
 
 export interface FrequencyCap {
@@ -897,14 +897,14 @@ export enum FrequencyCapLevel {
   UNKNOWN = 'UNKNOWN',
   AD_GROUP_AD = 'AD_GROUP_AD',
   AD_GROUP = 'AD_GROUP',
-  CAMPAIGN = 'CAMPAIGN'
+  CAMPAIGN = 'CAMPAIGN',
 }
 
 export enum FrequencyCapEventType {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   IMPRESSION = 'IMPRESSION',
-  VIDEO_VIEW = 'VIDEO_VIEW'
+  VIDEO_VIEW = 'VIDEO_VIEW',
 }
 
 export enum FrequencyCapTimeUnit {
@@ -915,7 +915,7 @@ export enum FrequencyCapTimeUnit {
   DAY = 'DAY',
   WEEK = 'WEEK',
   MONTH = 'MONTH',
-  LIFETIME = 'LIFETIME'
+  LIFETIME = 'LIFETIME',
 }
 
 export enum BrandSafetySuitability {
@@ -923,7 +923,7 @@ export enum BrandSafetySuitability {
   UNKNOWN = 'UNKNOWN',
   EXPANDED_INVENTORY = 'EXPANDED_INVENTORY',
   STANDARD_INVENTORY = 'STANDARD_INVENTORY',
-  LIMITED_INVENTORY = 'LIMITED_INVENTORY'
+  LIMITED_INVENTORY = 'LIMITED_INVENTORY',
 }
 
 export interface VanityPharma {
@@ -935,7 +935,7 @@ export enum VanityPharmaDisplayUrlMode {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   MANUFACTURER_WEBSITE_URL = 'MANUFACTURER_WEBSITE_URL',
-  WEBSITE_DESCRIPTION = 'WEBSITE_DESCRIPTION'
+  WEBSITE_DESCRIPTION = 'WEBSITE_DESCRIPTION',
 }
 
 export enum VanityPharmaText {
@@ -952,7 +952,7 @@ export enum VanityPharmaText {
   PRESCRIPTION_CONTRACEPTION_WEBSITE_EN = 'PRESCRIPTION_CONTRACEPTION_WEBSITE_EN',
   PRESCRIPTION_CONTRACEPTION_WEBSITE_ES = 'PRESCRIPTION_CONTRACEPTION_WEBSITE_ES',
   PRESCRIPTION_VACCINE_WEBSITE_EN = 'PRESCRIPTION_VACCINE_WEBSITE_EN',
-  PRESCRIPTION_VACCINE_WEBSITE_ES = 'PRESCRIPTION_VACCINE_WEBSITE_ES'
+  PRESCRIPTION_VACCINE_WEBSITE_ES = 'PRESCRIPTION_VACCINE_WEBSITE_ES',
 }
 
 export interface SelectiveOptimization {
@@ -968,7 +968,7 @@ export enum OptimizationGoalType {
   UNKNOWN = 'UNKNOWN',
   CALL_CLICKS = 'CALL_CLICKS',
   DRIVING_DIRECTIONS = 'DRIVING_DIRECTIONS',
-  APP_PRE_REGISTRATION = 'APP_PRE_REGISTRATION'
+  APP_PRE_REGISTRATION = 'APP_PRE_REGISTRATION',
 }
 
 export interface TrackingSetting {
@@ -981,7 +981,7 @@ export enum PaymentMode {
   CLICKS = 'CLICKS',
   CONVERSION_VALUE = 'CONVERSION_VALUE',
   CONVERSIONS = 'CONVERSIONS',
-  GUEST_STAY = 'GUEST_STAY'
+  GUEST_STAY = 'GUEST_STAY',
 }
 
 export enum AssetFieldType {
@@ -1013,7 +1013,7 @@ export enum AssetFieldType {
   CALL_TO_ACTION_SELECTION = 'CALL_TO_ACTION_SELECTION',
   AD_IMAGE = 'AD_IMAGE',
   BUSINESS_LOGO = 'BUSINESS_LOGO',
-  HOTEL_PROPERTY = 'HOTEL_PROPERTY'
+  HOTEL_PROPERTY = 'HOTEL_PROPERTY',
 }
 
 export enum AssetSetType {
@@ -1024,7 +1024,7 @@ export enum AssetSetType {
   MERCHANT_CENTER = 'MERCHANT_CENTER',
   RESTAURANT_LOCATION = 'RESTAURANT_LOCATION',
   CHAIN_LOCATION = 'CHAIN_LOCATION',
-  HOTEL_PROPERTY = 'HOTEL_PROPERTY'
+  HOTEL_PROPERTY = 'HOTEL_PROPERTY',
 }
 
 export interface PerformanceMaxUpgrade {
@@ -1045,7 +1045,7 @@ export enum PerformanceMaxUpgradeIneligibilityReason {
   MISSING_LANDING_PAGE = 'MISSING_LANDING_PAGE',
   MISSING_LISTING_ID = 'MISSING_LISTING_ID',
   NON_IMAGE_AD_GROUP = 'NON_IMAGE_AD_GROUP',
-  TOO_MANY_PRODUCTS = 'TOO_MANY_PRODUCTS'
+  TOO_MANY_PRODUCTS = 'TOO_MANY_PRODUCTS',
 }
 
 export enum PerformanceMaxUpgradeStatus {
@@ -1054,13 +1054,13 @@ export enum PerformanceMaxUpgradeStatus {
   UPGRADE_ELIGIBLE = 'UPGRADE_ELIGIBLE',
   UPGRADE_IN_PROGRESS = 'UPGRADE_IN_PROGRESS',
   UPGRADE_COMPLETE = 'UPGRADE_COMPLETE',
-  UPGRADE_FAILED = 'UPGRADE_FAILED'
+  UPGRADE_FAILED = 'UPGRADE_FAILED',
 }
 
 export enum ListingType {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
-  VEHICLES = 'VEHICLES'
+  VEHICLES = 'VEHICLES',
 }
 
 // Additional supporting enums and interfaces...
@@ -1069,7 +1069,7 @@ export enum TimeType {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   NOW = 'NOW',
-  FOREVER = 'FOREVER'
+  FOREVER = 'FOREVER',
 }
 
 export interface AccountBudgetProposal {
@@ -1101,7 +1101,7 @@ export enum AccountBudgetProposalType {
   CREATE = 'CREATE',
   UPDATE = 'UPDATE',
   END = 'END',
-  REMOVE = 'REMOVE'
+  REMOVE = 'REMOVE',
 }
 
 export enum AccountBudgetProposalStatus {
@@ -1111,21 +1111,21 @@ export enum AccountBudgetProposalStatus {
   APPROVED_HELD = 'APPROVED_HELD',
   APPROVED = 'APPROVED',
   CANCELLED = 'CANCELLED',
-  REJECTED = 'REJECTED'
+  REJECTED = 'REJECTED',
 }
 
 export enum SpendingLimitType {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   INFINITE = 'INFINITE',
-  FINITE = 'FINITE'
+  FINITE = 'FINITE',
 }
 
 export enum AccountBudgetProposalProposer {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   CUSTOMER = 'CUSTOMER',
-  GOOGLE = 'GOOGLE'
+  GOOGLE = 'GOOGLE',
 }
 
 // Additional enums for segments
@@ -1140,7 +1140,7 @@ export enum AdDestinationType {
   LOCATION_LISTING = 'LOCATION_LISTING',
   MESSAGE = 'MESSAGE',
   LEAD_FORM = 'LEAD_FORM',
-  YOUTUBE = 'YOUTUBE'
+  YOUTUBE = 'YOUTUBE',
 }
 
 export enum AdNetworkType {
@@ -1151,14 +1151,14 @@ export enum AdNetworkType {
   CONTENT = 'CONTENT',
   YOUTUBE_SEARCH = 'YOUTUBE_SEARCH',
   YOUTUBE_WATCH = 'YOUTUBE_WATCH',
-  MIXED = 'MIXED'
+  MIXED = 'MIXED',
 }
 
 export enum BudgetCampaignAssociationStatus {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   ENABLED = 'ENABLED',
-  REMOVED = 'REMOVED'
+  REMOVED = 'REMOVED',
 }
 
 export enum ClickType {
@@ -1271,7 +1271,7 @@ export enum ClickType {
   HOTELS_PRICE = 'HOTELS_PRICE',
   HOTELS_BOOK_ON_GOOGLE_ROOM_SELECTION = 'HOTELS_BOOK_ON_GOOGLE_ROOM_SELECTION',
   HOTELS_BOOK_ON_GOOGLE_BOOK_NOW = 'HOTELS_BOOK_ON_GOOGLE_BOOK_NOW',
-  HOTELS_PARTNER_BOOK_NOW = 'HOTELS_PARTNER_BOOK_NOW'
+  HOTELS_PARTNER_BOOK_NOW = 'HOTELS_PARTNER_BOOK_NOW',
 }
 
 export enum ConversionActionCategory {
@@ -1298,7 +1298,7 @@ export enum ConversionActionCategory {
   STORE_VISIT = 'STORE_VISIT',
   STORE_SALE = 'STORE_SALE',
   QUALIFIED_LEAD = 'QUALIFIED_LEAD',
-  CONVERTED_LEAD = 'CONVERTED_LEAD'
+  CONVERTED_LEAD = 'CONVERTED_LEAD',
 }
 
 export enum ConversionLagBucket {
@@ -1322,7 +1322,7 @@ export enum ConversionLagBucket {
   TWENTY_ONE_TO_THIRTY_DAYS = 'TWENTY_ONE_TO_THIRTY_DAYS',
   THIRTY_TO_FORTY_FIVE_DAYS = 'THIRTY_TO_FORTY_FIVE_DAYS',
   FORTY_FIVE_TO_SIXTY_DAYS = 'FORTY_FIVE_TO_SIXTY_DAYS',
-  SIXTY_TO_NINETY_DAYS = 'SIXTY_TO_NINETY_DAYS'
+  SIXTY_TO_NINETY_DAYS = 'SIXTY_TO_NINETY_DAYS',
 }
 
 export enum ConversionOrAdjustmentLagBucket {
@@ -1366,7 +1366,7 @@ export enum ConversionOrAdjustmentLagBucket {
   ADJUSTMENT_THIRTY_TO_FORTY_FIVE_DAYS = 'ADJUSTMENT_THIRTY_TO_FORTY_FIVE_DAYS',
   ADJUSTMENT_FORTY_FIVE_TO_SIXTY_DAYS = 'ADJUSTMENT_FORTY_FIVE_TO_SIXTY_DAYS',
   ADJUSTMENT_SIXTY_TO_NINETY_DAYS = 'ADJUSTMENT_SIXTY_TO_NINETY_DAYS',
-  UNKNOWN_ADJUSTMENT_DATE = 'UNKNOWN_ADJUSTMENT_DATE'
+  UNKNOWN_ADJUSTMENT_DATE = 'UNKNOWN_ADJUSTMENT_DATE',
 }
 
 export enum DayOfWeek {
@@ -1378,7 +1378,7 @@ export enum DayOfWeek {
   THURSDAY = 'THURSDAY',
   FRIDAY = 'FRIDAY',
   SATURDAY = 'SATURDAY',
-  SUNDAY = 'SUNDAY'
+  SUNDAY = 'SUNDAY',
 }
 
 export enum Device {
@@ -1388,7 +1388,7 @@ export enum Device {
   TABLET = 'TABLET',
   DESKTOP = 'DESKTOP',
   CONNECTED_TV = 'CONNECTED_TV',
-  OTHER = 'OTHER'
+  OTHER = 'OTHER',
 }
 
 export enum ExternalConversionSource {
@@ -1416,14 +1416,14 @@ export enum ExternalConversionSource {
   GOOGLE_HOSTED = 'GOOGLE_HOSTED',
   GOOGLE_ANALYTICS_4 = 'GOOGLE_ANALYTICS_4',
   GOOGLE_ANALYTICS_AND_GOOGLE_ADS_LINKED = 'GOOGLE_ANALYTICS_AND_GOOGLE_ADS_LINKED',
-  FLOODLIGHT_CROSS_ENVIRONMENT = 'FLOODLIGHT_CROSS_ENVIRONMENT'
+  FLOODLIGHT_CROSS_ENVIRONMENT = 'FLOODLIGHT_CROSS_ENVIRONMENT',
 }
 
 export enum HotelDateSelectionType {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   DEFAULT_SELECTION = 'DEFAULT_SELECTION',
-  USER_SELECTED = 'USER_SELECTED'
+  USER_SELECTED = 'USER_SELECTED',
 }
 
 export enum HotelRateType {
@@ -1432,7 +1432,7 @@ export enum HotelRateType {
   UNAVAILABLE = 'UNAVAILABLE',
   PUBLIC_RATE = 'PUBLIC_RATE',
   QUALIFIED_PUBLIC_RATE = 'QUALIFIED_PUBLIC_RATE',
-  PRIVATE_RATE = 'PRIVATE_RATE'
+  PRIVATE_RATE = 'PRIVATE_RATE',
 }
 
 export enum HotelPriceBucket {
@@ -1441,7 +1441,7 @@ export enum HotelPriceBucket {
   LOWEST_UNIQUE = 'LOWEST_UNIQUE',
   LOWEST_TIED = 'LOWEST_TIED',
   NOT_LOWEST = 'NOT_LOWEST',
-  ONLY_PARTNER_SHOWN = 'ONLY_PARTNER_SHOWN'
+  ONLY_PARTNER_SHOWN = 'ONLY_PARTNER_SHOWN',
 }
 
 export interface Keyword {
@@ -1459,7 +1459,7 @@ export enum KeywordMatchType {
   UNKNOWN = 'UNKNOWN',
   EXACT = 'EXACT',
   PHRASE = 'PHRASE',
-  BROAD = 'BROAD'
+  BROAD = 'BROAD',
 }
 
 export enum MonthOfYear {
@@ -1476,7 +1476,7 @@ export enum MonthOfYear {
   SEPTEMBER = 'SEPTEMBER',
   OCTOBER = 'OCTOBER',
   NOVEMBER = 'NOVEMBER',
-  DECEMBER = 'DECEMBER'
+  DECEMBER = 'DECEMBER',
 }
 
 export enum PlaceholderType {
@@ -1502,21 +1502,21 @@ export enum PlaceholderType {
   DYNAMIC_LOCAL = 'DYNAMIC_LOCAL',
   DYNAMIC_JOB = 'DYNAMIC_JOB',
   IMAGE = 'IMAGE',
-  LEAD_FORM = 'LEAD_FORM'
+  LEAD_FORM = 'LEAD_FORM',
 }
 
 export enum ProductChannel {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   ONLINE = 'ONLINE',
-  LOCAL = 'LOCAL'
+  LOCAL = 'LOCAL',
 }
 
 export enum ProductChannelExclusivity {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   SINGLE_CHANNEL = 'SINGLE_CHANNEL',
-  MULTI_CHANNEL = 'MULTI_CHANNEL'
+  MULTI_CHANNEL = 'MULTI_CHANNEL',
 }
 
 export enum ProductCondition {
@@ -1525,7 +1525,7 @@ export enum ProductCondition {
   OLD = 'OLD',
   NEW = 'NEW',
   REFURBISHED = 'REFURBISHED',
-  USED = 'USED'
+  USED = 'USED',
 }
 
 export enum SearchEngineResultsPageType {
@@ -1533,7 +1533,7 @@ export enum SearchEngineResultsPageType {
   UNKNOWN = 'UNKNOWN',
   ADS_ONLY = 'ADS_ONLY',
   ORGANIC_ONLY = 'ORGANIC_ONLY',
-  ADS_AND_ORGANIC = 'ADS_AND_ORGANIC'
+  ADS_AND_ORGANIC = 'ADS_AND_ORGANIC',
 }
 
 export enum SearchTermMatchType {
@@ -1543,7 +1543,7 @@ export enum SearchTermMatchType {
   EXACT = 'EXACT',
   PHRASE = 'PHRASE',
   NEAR_EXACT = 'NEAR_EXACT',
-  NEAR_PHRASE = 'NEAR_PHRASE'
+  NEAR_PHRASE = 'NEAR_PHRASE',
 }
 
 export enum Slot {
@@ -1553,7 +1553,7 @@ export enum Slot {
   SEARCH_TOP = 'SEARCH_TOP',
   SEARCH_OTHER = 'SEARCH_OTHER',
   CONTENT = 'CONTENT',
-  SEARCH_ABSOLUTE_TOP = 'SEARCH_ABSOLUTE_TOP'
+  SEARCH_ABSOLUTE_TOP = 'SEARCH_ABSOLUTE_TOP',
 }
 
 // Rate limiting and caching interfaces
@@ -1634,7 +1634,7 @@ export enum AdGroupStatus {
   UNKNOWN = 'UNKNOWN',
   ENABLED = 'ENABLED',
   PAUSED = 'PAUSED',
-  REMOVED = 'REMOVED'
+  REMOVED = 'REMOVED',
 }
 
 export enum AdGroupType {
@@ -1657,14 +1657,14 @@ export enum AdGroupType {
   DISPLAY_UPLOAD_AD = 'DISPLAY_UPLOAD_AD',
   VIDEO_RESPONSIVE = 'VIDEO_RESPONSIVE',
   VIDEO_EFFICIENT_REACH = 'VIDEO_EFFICIENT_REACH',
-  SMART_CAMPAIGN_ADS = 'SMART_CAMPAIGN_ADS'
+  SMART_CAMPAIGN_ADS = 'SMART_CAMPAIGN_ADS',
 }
 
 export enum AdGroupAdRotationMode {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   OPTIMIZE = 'OPTIMIZE',
-  ROTATE_FOREVER = 'ROTATE_FOREVER'
+  ROTATE_FOREVER = 'ROTATE_FOREVER',
 }
 
 export interface AdGroupAd {
@@ -1683,7 +1683,7 @@ export enum AdGroupAdStatus {
   UNKNOWN = 'UNKNOWN',
   ENABLED = 'ENABLED',
   PAUSED = 'PAUSED',
-  REMOVED = 'REMOVED'
+  REMOVED = 'REMOVED',
 }
 
 export interface Ad {
@@ -1758,7 +1758,7 @@ export enum AdType {
   APP_PRE_REGISTRATION_AD = 'APP_PRE_REGISTRATION_AD',
   IN_FEED_VIDEO_AD = 'IN_FEED_VIDEO_AD',
   VIDEO_EFFICIENT_REACH_AD = 'VIDEO_EFFICIENT_REACH_AD',
-  PERFORMANCE_MAX_AD = 'PERFORMANCE_MAX_AD'
+  PERFORMANCE_MAX_AD = 'PERFORMANCE_MAX_AD',
 }
 
 // Supporting interfaces for Ad types
@@ -1790,7 +1790,7 @@ export enum PolicyTopicType {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   PROHIBITED = 'PROHIBITED',
-  LIMITED = 'LIMITED'
+  LIMITED = 'LIMITED',
 }
 
 export interface PolicyTopicEvidence {
@@ -1834,14 +1834,14 @@ export enum PolicyTopicEvidenceDestinationMismatchUrlType {
   FINAL_URL = 'FINAL_URL',
   FINAL_MOBILE_URL = 'FINAL_MOBILE_URL',
   TRACKING_URL = 'TRACKING_URL',
-  MOBILE_TRACKING_URL = 'MOBILE_TRACKING_URL'
+  MOBILE_TRACKING_URL = 'MOBILE_TRACKING_URL',
 }
 
 export enum PolicyTopicEvidenceDestinationNotWorkingDnsErrorType {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   HOSTNAME_NOT_FOUND = 'HOSTNAME_NOT_FOUND',
-  GOOGLE_CRAWLER_DNS_ISSUE = 'GOOGLE_CRAWLER_DNS_ISSUE'
+  GOOGLE_CRAWLER_DNS_ISSUE = 'GOOGLE_CRAWLER_DNS_ISSUE',
 }
 
 export interface PolicyTopicConstraint {
@@ -1856,8 +1856,7 @@ export interface PolicyTopicConstraintCountryConstraintList {
   countries: GeoTargetConstant[];
 }
 
-export interface PolicyTopicConstraintResellerConstraint {
-}
+export interface PolicyTopicConstraintResellerConstraint {}
 
 export interface GeoTargetConstant {
   resourceName: string;
@@ -1874,7 +1873,7 @@ export enum GeoTargetConstantStatus {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   ENABLED = 'ENABLED',
-  REMOVAL_PLANNED = 'REMOVAL_PLANNED'
+  REMOVAL_PLANNED = 'REMOVAL_PLANNED',
 }
 
 export enum AdStrength {
@@ -1885,7 +1884,7 @@ export enum AdStrength {
   POOR = 'POOR',
   AVERAGE = 'AVERAGE',
   GOOD = 'GOOD',
-  EXCELLENT = 'EXCELLENT'
+  EXCELLENT = 'EXCELLENT',
 }
 
 // Additional supporting enums
@@ -1903,7 +1902,7 @@ export enum DisplayCustomBidDimension {
   AGE_RANGE = 'AGE_RANGE',
   PLACEMENT = 'PLACEMENT',
   PARENTAL_STATUS = 'PARENTAL_STATUS',
-  INCOME_RANGE = 'INCOME_RANGE'
+  INCOME_RANGE = 'INCOME_RANGE',
 }
 
 export enum BiddingSource {
@@ -1911,7 +1910,7 @@ export enum BiddingSource {
   UNKNOWN = 'UNKNOWN',
   CAMPAIGN_BIDDING_STRATEGY = 'CAMPAIGN_BIDDING_STRATEGY',
   AD_GROUP = 'AD_GROUP',
-  AD_GROUP_CRITERION = 'AD_GROUP_CRITERION'
+  AD_GROUP_CRITERION = 'AD_GROUP_CRITERION',
 }
 
 export interface AdGroupTypeDetails {
@@ -1923,20 +1922,20 @@ export enum DeviceType {
   UNKNOWN = 'UNKNOWN',
   MOBILE = 'MOBILE',
   DESKTOP = 'DESKTOP',
-  TABLET = 'TABLET'
+  TABLET = 'TABLET',
 }
 
 export enum MobileAppVendor {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   APPLE_APP_STORE = 'APPLE_APP_STORE',
-  GOOGLE_APP_STORE = 'GOOGLE_APP_STORE'
+  GOOGLE_APP_STORE = 'GOOGLE_APP_STORE',
 }
 
 export enum SystemManagedResourceSource {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
-  AD_VARIATIONS = 'AD_VARIATIONS'
+  AD_VARIATIONS = 'AD_VARIATIONS',
 }
 
 // Ad-specific interfaces (simplified versions - would need more detail in production)
@@ -1978,7 +1977,7 @@ export enum CallConversionReportingState {
   UNKNOWN = 'UNKNOWN',
   DISABLED = 'DISABLED',
   USE_ACCOUNT_LEVEL_CALL_CONVERSION_ACTION = 'USE_ACCOUNT_LEVEL_CALL_CONVERSION_ACTION',
-  USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION = 'USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION'
+  USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION = 'USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION',
 }
 
 export interface ExpandedDynamicSearchAdInfo {
@@ -1986,14 +1985,11 @@ export interface ExpandedDynamicSearchAdInfo {
   description2?: string;
 }
 
-export interface HotelAdInfo {
-}
+export interface HotelAdInfo {}
 
-export interface ShoppingSmartAdInfo {
-}
+export interface ShoppingSmartAdInfo {}
 
-export interface ShoppingProductAdInfo {
-}
+export interface ShoppingProductAdInfo {}
 
 export interface ImageAdInfo {
   pixelWidth?: number;
@@ -2021,7 +2017,7 @@ export enum MimeType {
   RTF = 'RTF',
   AUDIO_WAV = 'AUDIO_WAV',
   AUDIO_MP3 = 'AUDIO_MP3',
-  HTML5_AD_ZIP = 'HTML5_AD_ZIP'
+  HTML5_AD_ZIP = 'HTML5_AD_ZIP',
 }
 
 export interface VideoAdInfo {
@@ -2122,7 +2118,7 @@ export enum LegacyAppInstallAdAppStore {
   UNSPECIFIED = 'UNSPECIFIED',
   UNKNOWN = 'UNKNOWN',
   APPLE_APP_STORE = 'APPLE_APP_STORE',
-  GOOGLE_PLAY = 'GOOGLE_PLAY'
+  GOOGLE_PLAY = 'GOOGLE_PLAY',
 }
 
 export interface ResponsiveDisplayAdInfo {
@@ -2173,7 +2169,7 @@ export enum DisplayUploadProductType {
   DYNAMIC_HTML5_REAL_ESTATE_AD = 'DYNAMIC_HTML5_REAL_ESTATE_AD',
   DYNAMIC_HTML5_CUSTOM_AD = 'DYNAMIC_HTML5_CUSTOM_AD',
   DYNAMIC_HTML5_TRAVEL_AD = 'DYNAMIC_HTML5_TRAVEL_AD',
-  DYNAMIC_HTML5_HOTEL_AD = 'DYNAMIC_HTML5_HOTEL_AD'
+  DYNAMIC_HTML5_HOTEL_AD = 'DYNAMIC_HTML5_HOTEL_AD',
 }
 
 export interface AppEngagementAdInfo {
@@ -2199,8 +2195,7 @@ export interface CallToActionAdInfo {
   callToActionAsset?: string;
 }
 
-export interface PerformanceMaxAdInfo {
-}
+export interface PerformanceMaxAdInfo {}
 
 // Asset-related interfaces
 export interface AdTextAsset {
@@ -2229,7 +2224,7 @@ export enum ServedAssetFieldType {
   HEADLINE_2 = 'HEADLINE_2',
   HEADLINE_3 = 'HEADLINE_3',
   DESCRIPTION_1 = 'DESCRIPTION_1',
-  DESCRIPTION_2 = 'DESCRIPTION_2'
+  DESCRIPTION_2 = 'DESCRIPTION_2',
 }
 
 export enum DisplayAdFormatSetting {
@@ -2237,7 +2232,7 @@ export enum DisplayAdFormatSetting {
   UNKNOWN = 'UNKNOWN',
   ALL_FORMATS = 'ALL_FORMATS',
   NON_NATIVE = 'NON_NATIVE',
-  NATIVE = 'NATIVE'
+  NATIVE = 'NATIVE',
 }
 
 export interface ControlSpec {

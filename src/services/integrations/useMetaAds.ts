@@ -1,12 +1,7 @@
 // React Query hooks for Meta Business API integration
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { createMetaAPI } from '../../api/meta';
-import type {
-  InsightsParams,
-  InsightsData,
-  AccessToken,
-  MetaConfig,
-} from '../../api/meta/types';
+import type { InsightsParams, InsightsData, AccessToken, MetaConfig } from '../../api/meta/types';
 import { MetaAPIError } from '../../api/meta/errors';
 import { useCallback, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
@@ -17,7 +12,8 @@ const getMetaAPI = () => {
     appId: import.meta.env.VITE_META_APP_ID || '',
     appSecret: import.meta.env.VITE_META_APP_SECRET || '',
     apiVersion: '21.0', // Using latest stable version
-    redirectUri: import.meta.env.VITE_META_REDIRECT_URI || `${window.location.origin  }/api/meta/callback`,
+    redirectUri:
+      import.meta.env.VITE_META_REDIRECT_URI || `${window.location.origin}/api/meta/callback`,
   };
 
   if (!config.appId || !config.appSecret) {
@@ -60,9 +56,12 @@ export const useMetaAuth = () => {
   });
 
   // Generate login URL
-  const getLoginUrl = useCallback((scopes: string[] = ['ads_read', 'ads_management']) => {
-    return metaAPI.auth.getLoginUrl(scopes);
-  }, [metaAPI]);
+  const getLoginUrl = useCallback(
+    (scopes: string[] = ['ads_read', 'ads_management']) => {
+      return metaAPI.auth.getLoginUrl(scopes);
+    },
+    [metaAPI]
+  );
 
   // Exchange code for token
   const exchangeCode = useMutation({
@@ -123,7 +122,7 @@ export const useMetaAccountInsights = (
   options?: {
     enabled?: boolean;
     refetchInterval?: number;
-  },
+  }
 ) => {
   const metaAPI = useMemo(() => getMetaAPI(), []);
 
@@ -172,7 +171,7 @@ export const useMetaCampaignInsights = (
   options?: {
     enabled?: boolean;
     refetchInterval?: number;
-  },
+  }
 ) => {
   const metaAPI = useMemo(() => getMetaAPI(), []);
 
@@ -198,7 +197,7 @@ export const useMetaAdSetInsights = (
   params: Omit<InsightsParams, 'accountId'>,
   options?: {
     enabled?: boolean;
-  },
+  }
 ) => {
   const metaAPI = useMemo(() => getMetaAPI(), []);
 
@@ -223,7 +222,7 @@ export const useMetaAdInsights = (
   params: Omit<InsightsParams, 'accountId'>,
   options?: {
     enabled?: boolean;
-  },
+  }
 ) => {
   const metaAPI = useMemo(() => getMetaAPI(), []);
 
@@ -248,7 +247,7 @@ export const useMetaAggregatedInsights = (
   options?: {
     enabled?: boolean;
     refetchInterval?: number;
-  },
+  }
 ) => {
   const metaAPI = useMemo(() => getMetaAPI(), []);
 
@@ -270,16 +269,12 @@ export const useMetaInsightsStream = (
   options?: {
     enabled?: boolean;
     pollInterval?: number; // Default 5 minutes
-  },
+  }
 ) => {
-  const { data, refetch, isLoading, error } = useMetaAccountInsights(
-    params.accountId,
-    params,
-    {
-      enabled: options?.enabled,
-      refetchInterval: options?.pollInterval || 5 * 60 * 1000, // 5 minutes default
-    },
-  );
+  const { data, refetch, isLoading, error } = useMetaAccountInsights(params.accountId, params, {
+    enabled: options?.enabled,
+    refetchInterval: options?.pollInterval || 5 * 60 * 1000, // 5 minutes default
+  });
 
   return {
     insights: data,
@@ -307,27 +302,30 @@ export const useMetaErrorHandler = () => {
   const queryClient = useQueryClient();
   const { logout } = useMetaAuth();
 
-  const handleError = useCallback((error: unknown) => {
-    if (error instanceof MetaAPIError) {
-      switch (error.code) {
-        case 190: // Invalid token
-          logout();
-          toast.error('Session expired. Please login again.');
-          break;
-        case 4: // Rate limit
-        case 17: // User request limit reached
-          toast.error('Rate limit reached. Please try again later.');
-          break;
-        case 200: // Permission error
-          toast.error('Insufficient permissions. Please check your access.');
-          break;
-        default:
-          toast.error(error.message || 'An error occurred with Meta API');
+  const handleError = useCallback(
+    (error: unknown) => {
+      if (error instanceof MetaAPIError) {
+        switch (error.code) {
+          case 190: // Invalid token
+            logout();
+            toast.error('Session expired. Please login again.');
+            break;
+          case 4: // Rate limit
+          case 17: // User request limit reached
+            toast.error('Rate limit reached. Please try again later.');
+            break;
+          case 200: // Permission error
+            toast.error('Insufficient permissions. Please check your access.');
+            break;
+          default:
+            toast.error(error.message || 'An error occurred with Meta API');
+        }
+      } else {
+        toast.error('An unexpected error occurred');
       }
-    } else {
-      toast.error('An unexpected error occurred');
-    }
-  }, [logout]);
+    },
+    [logout]
+  );
 
   return { handleError };
 };

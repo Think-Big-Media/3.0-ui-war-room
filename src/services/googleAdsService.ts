@@ -7,9 +7,7 @@ const logger = createLogger('googleAdsService');
 
 // Google Ads API configuration
 const googleAdsApi = axios.create({
-  baseURL:
-    import.meta.env.VITE_GOOGLE_ADS_API_URL ||
-    'https://googleads.googleapis.com/v20',
+  baseURL: import.meta.env.VITE_GOOGLE_ADS_API_URL || 'https://googleads.googleapis.com/v20',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -128,11 +126,9 @@ export const googleAdsService = {
     }
 
     // Real API implementation
-    const response = await googleAdsApi.get(
-      '/customers/{customer_id}/campaigns',
-      {
-        params: {
-          query: `
+    const response = await googleAdsApi.get('/customers/{customer_id}/campaigns', {
+      params: {
+        query: `
           SELECT
             campaign.id,
             campaign.name,
@@ -147,9 +143,8 @@ export const googleAdsService = {
           ORDER BY metrics.cost_micros DESC
           LIMIT 4
         `,
-        },
       },
-    );
+    });
 
     // Transform response to match our schema
     return CampaignPerformanceResponseSchema.parse(response.data);
@@ -176,26 +171,23 @@ export const googleAdsService = {
     // 1. Pause the worst performing campaign
     // 2. Create a new campaign for the new cluster
     // 3. Transfer the budget
-    const response = await googleAdsApi.post(
-      '/customers/{customer_id}/campaigns:mutate',
-      {
-        operations: [
-          {
-            update: {
-              resourceName: `customers/{customer_id}/campaigns/${worstCampaignId}`,
-              status: 'PAUSED',
-            },
+    const response = await googleAdsApi.post('/customers/{customer_id}/campaigns:mutate', {
+      operations: [
+        {
+          update: {
+            resourceName: `customers/{customer_id}/campaigns/${worstCampaignId}`,
+            status: 'PAUSED',
           },
-          {
-            create: {
-              name: newClusterId,
-              status: 'ENABLED',
-              // ... other campaign settings
-            },
+        },
+        {
+          create: {
+            name: newClusterId,
+            status: 'ENABLED',
+            // ... other campaign settings
           },
-        ],
-      },
-    );
+        },
+      ],
+    });
 
     return BudgetRotationResponseSchema.parse(response.data);
   },

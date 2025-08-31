@@ -44,9 +44,7 @@ const ErrorFallback: React.FC<{ error: Error; resetErrorBoundary: () => void }> 
 }) => (
   <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
     <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
-    <h3 className="text-lg font-semibold text-red-900 mb-2">
-      Something went wrong
-    </h3>
+    <h3 className="text-lg font-semibold text-red-900 mb-2">Something went wrong</h3>
     <p className="text-red-700 mb-4">{error.message}</p>
     <button
       onClick={resetErrorBoundary}
@@ -71,13 +69,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
 
     // Subscribe to real-time updates
     if (isConnected) {
-      subscribeToMetrics([
-        'volunteers',
-        'events',
-        'donations',
-        'reach',
-        'activity_feed',
-      ]);
+      subscribeToMetrics(['volunteers', 'events', 'donations', 'reach', 'activity_feed']);
     }
   }, [isConnected, subscribeToMetrics, dateRange, user]);
 
@@ -88,9 +80,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">
-                Campaign Analytics Dashboard
-              </h1>
+              <h1 className="text-2xl font-bold text-gray-900">Campaign Analytics Dashboard</h1>
               <p className="text-sm text-gray-600 mt-1">
                 Real-time insights and performance metrics
               </p>
@@ -104,9 +94,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
                     isConnected ? 'bg-green-500' : 'bg-gray-400'
                   }`}
                 />
-                <span className="text-sm text-gray-600">
-                  {isConnected ? 'Live' : 'Offline'}
-                </span>
+                <span className="text-sm text-gray-600">{isConnected ? 'Live' : 'Offline'}</span>
               </div>
 
               {/* Date range filter */}
@@ -125,24 +113,9 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
           <Suspense fallback={<DashboardSkeleton />}>
             {/* Metric cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-              <MetricCard
-                title="Active Volunteers"
-                metric="volunteers"
-                icon="users"
-                color="blue"
-              />
-              <MetricCard
-                title="Events Hosted"
-                metric="events"
-                icon="calendar"
-                color="green"
-              />
-              <MetricCard
-                title="Total Reach"
-                metric="reach"
-                icon="trending-up"
-                color="purple"
-              />
+              <MetricCard title="Active Volunteers" metric="volunteers" icon="users" color="blue" />
+              <MetricCard title="Events Hosted" metric="events" icon="calendar" color="green" />
+              <MetricCard title="Total Reach" metric="reach" icon="trending-up" color="purple" />
               <MetricCard
                 title="Donations Raised"
                 metric="donations"

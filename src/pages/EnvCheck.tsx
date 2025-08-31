@@ -47,7 +47,11 @@ const EnvCheck: React.FC = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {value ? (
-                      key.includes('KEY') ? `${value.substring(0, 20)}...` : value
+                      key.includes('KEY') ? (
+                        `${value.substring(0, 20)}...`
+                      ) : (
+                        value
+                      )
                     ) : (
                       <span className="text-red-500">undefined</span>
                     )}
@@ -71,7 +75,8 @@ const EnvCheck: React.FC = () => {
 
         <div className="mt-6 p-4 bg-yellow-50 rounded-lg">
           <p className="text-sm text-yellow-800">
-            <strong>Note:</strong> After updating vite.config.ts, you need to restart the dev server for changes to take effect.
+            <strong>Note:</strong> After updating vite.config.ts, you need to restart the dev server
+            for changes to take effect.
           </p>
         </div>
       </div>

@@ -24,18 +24,24 @@ function AppNoAuth() {
     <Router>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route index element={
-            <React.Suspense fallback={<LazyLoadFallback componentName="Dashboard" />}>
-              <Dashboard />
-            </React.Suspense>
-          } />
+          <Route
+            index
+            element={
+              <React.Suspense fallback={<LazyLoadFallback componentName="Dashboard" />}>
+                <Dashboard />
+              </React.Suspense>
+            }
+          />
         </Route>
         <Route path="/dashboard" element={<MainLayout />}>
-          <Route index element={
-            <React.Suspense fallback={<LazyLoadFallback componentName="Dashboard" />}>
-              <Dashboard />
-            </React.Suspense>
-          } />
+          <Route
+            index
+            element={
+              <React.Suspense fallback={<LazyLoadFallback componentName="Dashboard" />}>
+                <Dashboard />
+              </React.Suspense>
+            }
+          />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

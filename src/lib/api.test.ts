@@ -34,9 +34,7 @@ describe('API Client', () => {
 
   describe('Configuration', () => {
     it('should have correct base URL from environment variable', () => {
-      expect(api.defaults.baseURL).toBe(
-        import.meta.env.VITE_API_URL || 'http://localhost:8000',
-      );
+      expect(api.defaults.baseURL).toBe(import.meta.env.VITE_API_URL || 'http://localhost:8000');
     });
 
     it('should have correct default headers', () => {
@@ -56,9 +54,7 @@ describe('API Client', () => {
       const response = await api.get('/test');
 
       // Verify auth header was added
-      expect(mock.history.get[0].headers?.Authorization).toBe(
-        `Bearer ${testToken}`,
-      );
+      expect(mock.history.get[0].headers?.Authorization).toBe(`Bearer ${testToken}`);
       expect(response.data).toEqual({ data: 'success' });
     });
 
@@ -88,9 +84,7 @@ describe('API Client', () => {
       it('should clear auth token and throw authentication error', async () => {
         mock.onGet('/test').reply(401);
 
-        await expect(api.get('/test')).rejects.toThrow(
-          'Authentication required. Please log in.',
-        );
+        await expect(api.get('/test')).rejects.toThrow('Authentication required. Please log in.');
 
         expect(localStorageMock.removeItem).toHaveBeenCalledWith('authToken');
         // Note: console.error is called in the axios-mock-adapter internals
@@ -102,7 +96,7 @@ describe('API Client', () => {
         mock.onGet('/test').reply(403);
 
         await expect(api.get('/test')).rejects.toThrow(
-          'You do not have permission to perform this action.',
+          'You do not have permission to perform this action.'
         );
       });
     });
@@ -111,9 +105,7 @@ describe('API Client', () => {
       it('should throw not found error', async () => {
         mock.onGet('/test').reply(404);
 
-        await expect(api.get('/test')).rejects.toThrow(
-          'The requested resource was not found.',
-        );
+        await expect(api.get('/test')).rejects.toThrow('The requested resource was not found.');
       });
     });
 
@@ -121,9 +113,7 @@ describe('API Client', () => {
       it('should throw server error message', async () => {
         mock.onGet('/test').reply(500);
 
-        await expect(api.get('/test')).rejects.toThrow(
-          'Server error. Please try again later.',
-        );
+        await expect(api.get('/test')).rejects.toThrow('Server error. Please try again later.');
       });
     });
 
@@ -143,9 +133,7 @@ describe('API Client', () => {
       it('should use default message for unknown errors', async () => {
         mock.onGet('/test').reply(418); // I'm a teapot!
 
-        await expect(api.get('/test')).rejects.toThrow(
-          'An unexpected error occurred.',
-        );
+        await expect(api.get('/test')).rejects.toThrow('An unexpected error occurred.');
       });
     });
 
@@ -153,17 +141,13 @@ describe('API Client', () => {
       it('should handle network errors', async () => {
         mock.onGet('/test').networkError();
 
-        await expect(api.get('/test')).rejects.toThrow(
-          'An unexpected error occurred.',
-        );
+        await expect(api.get('/test')).rejects.toThrow('An unexpected error occurred.');
       });
 
       it('should handle timeout errors', async () => {
         mock.onGet('/test').timeout();
 
-        await expect(api.get('/test')).rejects.toThrow(
-          'An unexpected error occurred.',
-        );
+        await expect(api.get('/test')).rejects.toThrow('An unexpected error occurred.');
       });
     });
 
@@ -252,9 +236,7 @@ describe('API Client', () => {
         },
       });
 
-      expect(mock.history.get[0].headers?.['X-Custom-Header']).toBe(
-        'custom-value',
-      );
+      expect(mock.history.get[0].headers?.['X-Custom-Header']).toBe('custom-value');
     });
 
     it('should merge custom headers with defaults', async () => {
@@ -267,10 +249,10 @@ describe('API Client', () => {
           headers: {
             'X-Custom-Header': 'custom-value',
           },
-        },
+        }
       );
 
-      const {headers} = mock.history.post[0];
+      const { headers } = mock.history.post[0];
       expect(headers?.['Content-Type']).toBe('application/json');
       expect(headers?.['X-Custom-Header']).toBe('custom-value');
     });
@@ -354,9 +336,7 @@ describe('API Client', () => {
     it('should handle malformed error responses', async () => {
       mock.onGet('/bad-error').reply(400, 'Not JSON');
 
-      await expect(api.get('/bad-error')).rejects.toThrow(
-        'An unexpected error occurred.',
-      );
+      await expect(api.get('/bad-error')).rejects.toThrow('An unexpected error occurred.');
     });
   });
 });

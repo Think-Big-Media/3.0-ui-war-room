@@ -44,10 +44,7 @@ const ContentCalendarPage: React.FC = () => {
   };
 
   return (
-    <PageLayout
-      pageTitle="Content Calendar"
-      placeholder="Ask about scheduled content..."
-    >
+    <PageLayout pageTitle="Content Calendar" placeholder="Ask about scheduled content...">
       {/* Orange gradient background per THEME_CONSTANTS.md */}
       <div className="fixed inset-0 bg-gradient-to-br from-orange-600 via-orange-700 to-orange-800 -z-10" />
 
@@ -81,15 +78,9 @@ const ContentCalendarPage: React.FC = () => {
         className="mb-8"
       >
         <Card padding="md" variant="glass">
-          {currentView === 'week' && (
-            <WeekView weekData={weekData} timeSlots={timeSlots} />
-          )}
+          {currentView === 'week' && <WeekView weekData={weekData} timeSlots={timeSlots} />}
           {currentView === 'day' && (
-            <DayView
-              weekData={weekData}
-              timeSlots={timeSlots}
-              onEditContent={handleEditContent}
-            />
+            <DayView weekData={weekData} timeSlots={timeSlots} onEditContent={handleEditContent} />
           )}
           {currentView === 'month' && <MonthView />}
         </Card>

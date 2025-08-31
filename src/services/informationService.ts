@@ -176,31 +176,22 @@ export class InformationService {
       ...generatePoliticalNews(),
       ...generateSmartRecommendations(),
       ...generateTeamAlerts(),
-    ].sort(
-      (a, b) =>
-        new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
-    );
+    ].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
   }
 
   getItems(filters?: InformationFilters): InformationItem[] {
     let filteredItems = [...this.items];
 
     if (filters?.category && filters.category !== 'all') {
-      filteredItems = filteredItems.filter(
-        (item) => item.category === filters.category,
-      );
+      filteredItems = filteredItems.filter((item) => item.category === filters.category);
     }
 
     if (filters?.priority && filters.priority !== 'all') {
-      filteredItems = filteredItems.filter(
-        (item) => item.priority === filters.priority,
-      );
+      filteredItems = filteredItems.filter((item) => item.priority === filters.priority);
     }
 
     if (filters?.status && filters.status !== 'all') {
-      filteredItems = filteredItems.filter(
-        (item) => item.status === filters.status,
-      );
+      filteredItems = filteredItems.filter((item) => item.status === filters.status);
     }
 
     if (filters?.searchTerm) {
@@ -209,9 +200,7 @@ export class InformationService {
         (item) =>
           item.title.toLowerCase().includes(searchLower) ||
           item.text.toLowerCase().includes(searchLower) ||
-          item.metadata?.tags?.some((tag) =>
-            tag.toLowerCase().includes(searchLower),
-          ),
+          item.metadata?.tags?.some((tag) => tag.toLowerCase().includes(searchLower))
       );
     }
 
@@ -231,9 +220,7 @@ export class InformationService {
           break;
       }
 
-      filteredItems = filteredItems.filter(
-        (item) => new Date(item.timestamp) >= cutoff,
-      );
+      filteredItems = filteredItems.filter((item) => new Date(item.timestamp) >= cutoff);
     }
 
     return filteredItems;
@@ -244,23 +231,18 @@ export class InformationService {
     const unread = this.items.filter((item) => item.status === 'unread').length;
 
     const byCategory = {
-      'political-news': this.items.filter(
-        (item) => item.category === 'political-news',
-      ).length,
+      'political-news': this.items.filter((item) => item.category === 'political-news').length,
       'smart-recommendations': this.items.filter(
-        (item) => item.category === 'smart-recommendations',
+        (item) => item.category === 'smart-recommendations'
       ).length,
-      'team-alerts': this.items.filter(
-        (item) => item.category === 'team-alerts',
-      ).length,
+      'team-alerts': this.items.filter((item) => item.category === 'team-alerts').length,
     };
 
     const byPriority = {
       low: this.items.filter((item) => item.priority === 'low').length,
       medium: this.items.filter((item) => item.priority === 'medium').length,
       high: this.items.filter((item) => item.priority === 'high').length,
-      critical: this.items.filter((item) => item.priority === 'critical')
-        .length,
+      critical: this.items.filter((item) => item.priority === 'critical').length,
     };
 
     return { total, unread, byCategory, byPriority };

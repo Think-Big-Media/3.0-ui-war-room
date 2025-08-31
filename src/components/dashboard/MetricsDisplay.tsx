@@ -38,24 +38,13 @@ interface PlatformMetricsProps {
 
 // Memoized metric card for performance
 const MetricCard = memo<MetricCardProps>(
-  ({
-    label,
-    value,
-    change,
-    icon,
-    color,
-    prefix = '',
-    suffix = '',
-    loading = false,
-  }) => {
+  ({ label, value, change, icon, color, prefix = '', suffix = '', loading = false }) => {
     const isPositiveChange = change && change > 0;
 
     return (
       <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700 will-change-transform fade-in">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
-            {label}
-          </span>
+          <span className="text-sm font-medium text-gray-600 dark:text-gray-400">{label}</span>
           <div className={`p-2 rounded-lg ${color}`}>{icon}</div>
         </div>
 
@@ -76,11 +65,7 @@ const MetricCard = memo<MetricCardProps>(
                 isPositiveChange ? 'text-green-600' : 'text-red-600'
               }`}
             >
-              {isPositiveChange ? (
-                <TrendingUp size={16} />
-              ) : (
-                <TrendingDown size={16} />
-              )}
+              {isPositiveChange ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
               <span className="ml-1">{formatPercentage(Math.abs(change))}</span>
             </div>
           )}
@@ -93,84 +78,74 @@ const MetricCard = memo<MetricCardProps>(
 MetricCard.displayName = 'MetricCard';
 
 // Platform-specific metrics display
-const PlatformMetrics = memo<PlatformMetricsProps>(
-  ({ platform, metrics, color }) => {
-    if (!metrics || metrics.length === 0) {
-      return (
-        <div className={`rounded-lg p-4 ${color} bg-opacity-10`}>
-          <h3 className="text-lg font-semibold mb-3 uppercase font-condensed tracking-wide text-white/40">
-            {platform} ADS
-          </h3>
-          <div className="grid grid-cols-2 gap-4">
-            {[1, 2, 3, 4].map((i) => (
-              <div
-                key={i}
-                className="h-16 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"
-              />
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // Aggregate metrics from campaigns array
-    const aggregated = metrics.reduce(
-      (acc: any, campaign: any) => ({
-        spend: acc.spend + campaign.spend,
-        impressions: acc.impressions + campaign.impressions,
-        clicks: acc.clicks + campaign.clicks,
-        conversions: acc.conversions + campaign.conversions,
-        ctr: acc.ctr + campaign.ctr,
-        cpc: acc.cpc + campaign.cpc,
-      }),
-      { spend: 0, impressions: 0, clicks: 0, conversions: 0, ctr: 0, cpc: 0 }
-    );
-
-    const avgCtr = metrics.length > 0 ? aggregated.ctr / metrics.length : 0;
-    const avgCpc = metrics.length > 0 ? aggregated.cpc / metrics.length : 0;
-    const roas =
-      aggregated.spend > 0
-        ? (aggregated.conversions * 50) / aggregated.spend
-        : 0; // Estimated conversion value
-
+const PlatformMetrics = memo<PlatformMetricsProps>(({ platform, metrics, color }) => {
+  if (!metrics || metrics.length === 0) {
     return (
-      <div className={`rounded-lg p-4 ${color} bg-opacity-10 fade-in`}>
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="text-lg font-semibold uppercase font-condensed tracking-wide text-white/40">
-            {platform} ADS
-          </h3>
-          <span className="text-sm text-gray-500 dark:text-gray-400">
-            {metrics.length} campaign{metrics.length !== 1 ? 's' : ''}
-          </span>
-        </div>
-
+      <div className={`rounded-lg p-4 ${color} bg-opacity-10`}>
+        <h3 className="text-lg font-semibold mb-3 uppercase font-condensed tracking-wide text-white/40">
+          {platform} ADS
+        </h3>
         <div className="grid grid-cols-2 gap-4">
-          <div className="bg-white dark:bg-gray-800 rounded p-3">
-            <p className="text-sm text-gray-600 dark:text-gray-400">Spend</p>
-            <p className="text-lg font-bold">
-              {formatCurrency(aggregated.spend)}
-            </p>
-          </div>
-
-          <div className="bg-white dark:bg-gray-800 rounded p-3">
-            <p className="text-sm text-gray-600 dark:text-gray-400">ROAS</p>
-            <p className="text-lg font-bold">{roas.toFixed(2)}x</p>
-          </div>
-
-          <div className="bg-white dark:bg-gray-800 rounded p-3">
-            <p className="text-sm text-gray-600 dark:text-gray-400">CTR</p>
-            <p className="text-lg font-bold">{formatPercentage(avgCtr)}</p>
-          </div>
-
-          <div className="bg-white dark:bg-gray-800 rounded p-3">
-            <p className="text-sm text-gray-600 dark:text-gray-400">CPC</p>
-            <p className="text-lg font-bold">{formatCurrency(avgCpc)}</p>
-          </div>
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="h-16 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
+          ))}
         </div>
       </div>
     );
   }
-);
+
+  // Aggregate metrics from campaigns array
+  const aggregated = metrics.reduce(
+    (acc: any, campaign: any) => ({
+      spend: acc.spend + campaign.spend,
+      impressions: acc.impressions + campaign.impressions,
+      clicks: acc.clicks + campaign.clicks,
+      conversions: acc.conversions + campaign.conversions,
+      ctr: acc.ctr + campaign.ctr,
+      cpc: acc.cpc + campaign.cpc,
+    }),
+    { spend: 0, impressions: 0, clicks: 0, conversions: 0, ctr: 0, cpc: 0 }
+  );
+
+  const avgCtr = metrics.length > 0 ? aggregated.ctr / metrics.length : 0;
+  const avgCpc = metrics.length > 0 ? aggregated.cpc / metrics.length : 0;
+  const roas = aggregated.spend > 0 ? (aggregated.conversions * 50) / aggregated.spend : 0; // Estimated conversion value
+
+  return (
+    <div className={`rounded-lg p-4 ${color} bg-opacity-10 fade-in`}>
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="text-lg font-semibold uppercase font-condensed tracking-wide text-white/40">
+          {platform} ADS
+        </h3>
+        <span className="text-sm text-gray-500 dark:text-gray-400">
+          {metrics.length} campaign{metrics.length !== 1 ? 's' : ''}
+        </span>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div className="bg-white dark:bg-gray-800 rounded p-3">
+          <p className="text-sm text-gray-600 dark:text-gray-400">Spend</p>
+          <p className="text-lg font-bold">{formatCurrency(aggregated.spend)}</p>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded p-3">
+          <p className="text-sm text-gray-600 dark:text-gray-400">ROAS</p>
+          <p className="text-lg font-bold">{roas.toFixed(2)}x</p>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded p-3">
+          <p className="text-sm text-gray-600 dark:text-gray-400">CTR</p>
+          <p className="text-lg font-bold">{formatPercentage(avgCtr)}</p>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded p-3">
+          <p className="text-sm text-gray-600 dark:text-gray-400">CPC</p>
+          <p className="text-lg font-bold">{formatCurrency(avgCpc)}</p>
+        </div>
+      </div>
+    </div>
+  );
+});
 
 PlatformMetrics.displayName = 'PlatformMetrics';
 
@@ -186,19 +161,13 @@ export const MetricsDisplay: React.FC = memo(() => {
     real_time: true,
   });
 
-  const { data: metaMetrics, isLoading: metaLoading } = usePlatformMetrics(
-    'meta',
-    {
-      date_preset: 'last_7d',
-    }
-  );
+  const { data: metaMetrics, isLoading: metaLoading } = usePlatformMetrics('meta', {
+    date_preset: 'last_7d',
+  });
 
-  const { data: googleMetrics, isLoading: googleLoading } = usePlatformMetrics(
-    'google',
-    {
-      date_preset: 'last_7d',
-    }
-  );
+  const { data: googleMetrics, isLoading: googleLoading } = usePlatformMetrics('google', {
+    date_preset: 'last_7d',
+  });
 
   const totalSpend = campaignData?.total_spend || 0;
   const isAnyLoading = isLoading || metaLoading || googleLoading;
@@ -320,17 +289,9 @@ export const MetricsDisplay: React.FC = memo(() => {
 
       {/* Platform-Specific Metrics */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <PlatformMetrics
-          platform="meta"
-          metrics={metaMetrics}
-          color="bg-blue-500"
-        />
+        <PlatformMetrics platform="meta" metrics={metaMetrics} color="bg-blue-500" />
 
-        <PlatformMetrics
-          platform="google"
-          metrics={googleMetrics}
-          color="bg-green-500"
-        />
+        <PlatformMetrics platform="google" metrics={googleMetrics} color="bg-green-500" />
       </div>
 
       {/* Spend Distribution Chart */}
@@ -381,16 +342,11 @@ export const MetricsDisplay: React.FC = memo(() => {
                   <>
                     <div className="flex items-center">
                       <div className="w-3 h-3 bg-blue-500 rounded mr-2" />
-                      <span>
-                        Meta: {formatPercentage((metaSpend / totalSpend) * 100)}
-                      </span>
+                      <span>Meta: {formatPercentage((metaSpend / totalSpend) * 100)}</span>
                     </div>
                     <div className="flex items-center">
                       <div className="w-3 h-3 bg-green-500 rounded mr-2" />
-                      <span>
-                        Google:{' '}
-                        {formatPercentage((googleSpend / totalSpend) * 100)}
-                      </span>
+                      <span>Google: {formatPercentage((googleSpend / totalSpend) * 100)}</span>
                     </div>
                   </>
                 );

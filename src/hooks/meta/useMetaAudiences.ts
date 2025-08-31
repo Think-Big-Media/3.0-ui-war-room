@@ -2,7 +2,13 @@
  * React Query hooks for Meta Audience Management
  */
 
-import { useQuery, useMutation, useQueryClient, type UseQueryOptions, type UseMutationOptions } from '@tanstack/react-query';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  type UseQueryOptions,
+  type UseMutationOptions,
+} from '@tanstack/react-query';
 import {
   MetaAudienceService,
   type CustomAudienceCreateParams,
@@ -12,7 +18,12 @@ import {
   type AudienceListParams,
   type AudienceInsightsParams,
 } from '@/api/meta/audiences';
-import { type CustomAudience, type LookalikeAudience, type SavedAudience, type MetaAPIResponse } from '@/api/meta/types';
+import {
+  type CustomAudience,
+  type LookalikeAudience,
+  type SavedAudience,
+  type MetaAPIResponse,
+} from '@/api/meta/types';
 import { useMetaClient } from './useMetaClient';
 import { toast } from 'sonner';
 
@@ -43,7 +54,7 @@ export const audienceKeys = {
 export function useMetaCustomAudiences(
   accountId: string,
   params?: AudienceListParams,
-  options?: UseQueryOptions<MetaAPIResponse<CustomAudience[]>>,
+  options?: UseQueryOptions<MetaAPIResponse<CustomAudience[]>>
 ) {
   const { audienceService } = useMetaClient();
 
@@ -60,7 +71,7 @@ export function useMetaCustomAudiences(
  */
 export function useMetaCustomAudience(
   audienceId: string,
-  options?: UseQueryOptions<CustomAudience>,
+  options?: UseQueryOptions<CustomAudience>
 ) {
   const { audienceService } = useMetaClient();
 
@@ -77,7 +88,7 @@ export function useMetaCustomAudience(
  */
 export function useMetaLookalikeAudience(
   audienceId: string,
-  options?: UseQueryOptions<LookalikeAudience>,
+  options?: UseQueryOptions<LookalikeAudience>
 ) {
   const { audienceService } = useMetaClient();
 
@@ -92,10 +103,7 @@ export function useMetaLookalikeAudience(
 /**
  * Hook to fetch a saved audience
  */
-export function useMetaSavedAudience(
-  audienceId: string,
-  options?: UseQueryOptions<SavedAudience>,
-) {
+export function useMetaSavedAudience(audienceId: string, options?: UseQueryOptions<SavedAudience>) {
   const { audienceService } = useMetaClient();
 
   return useQuery({
@@ -110,17 +118,20 @@ export function useMetaSavedAudience(
  * Hook to create a custom audience
  */
 export function useCreateMetaCustomAudience(
-  options?: UseMutationOptions<CustomAudience, Error, {
-    accountId: string;
-    params: CustomAudienceCreateParams
-  }>,
+  options?: UseMutationOptions<
+    CustomAudience,
+    Error,
+    {
+      accountId: string;
+      params: CustomAudienceCreateParams;
+    }
+  >
 ) {
   const queryClient = useQueryClient();
   const { audienceService } = useMetaClient();
 
   return useMutation({
-    mutationFn: ({ accountId, params }) =>
-      audienceService.createCustomAudience(accountId, params),
+    mutationFn: ({ accountId, params }) => audienceService.createCustomAudience(accountId, params),
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({ queryKey: audienceKeys.customLists() });
       queryClient.setQueryData(audienceKeys.customDetail(data.id), data);
@@ -137,10 +148,14 @@ export function useCreateMetaCustomAudience(
  * Hook to create a lookalike audience
  */
 export function useCreateMetaLookalikeAudience(
-  options?: UseMutationOptions<LookalikeAudience, Error, {
-    accountId: string;
-    params: LookalikeAudienceCreateParams
-  }>,
+  options?: UseMutationOptions<
+    LookalikeAudience,
+    Error,
+    {
+      accountId: string;
+      params: LookalikeAudienceCreateParams;
+    }
+  >
 ) {
   const queryClient = useQueryClient();
   const { audienceService } = useMetaClient();
@@ -164,17 +179,20 @@ export function useCreateMetaLookalikeAudience(
  * Hook to create a saved audience
  */
 export function useCreateMetaSavedAudience(
-  options?: UseMutationOptions<SavedAudience, Error, {
-    accountId: string;
-    params: SavedAudienceCreateParams
-  }>,
+  options?: UseMutationOptions<
+    SavedAudience,
+    Error,
+    {
+      accountId: string;
+      params: SavedAudienceCreateParams;
+    }
+  >
 ) {
   const queryClient = useQueryClient();
   const { audienceService } = useMetaClient();
 
   return useMutation({
-    mutationFn: ({ accountId, params }) =>
-      audienceService.createSavedAudience(accountId, params),
+    mutationFn: ({ accountId, params }) => audienceService.createSavedAudience(accountId, params),
     onSuccess: (data) => {
       queryClient.setQueryData(audienceKeys.savedDetail(data.id), data);
       toast.success('Saved audience created successfully');
@@ -190,10 +208,14 @@ export function useCreateMetaSavedAudience(
  * Hook to update a custom audience
  */
 export function useUpdateMetaCustomAudience(
-  options?: UseMutationOptions<CustomAudience, Error, {
-    audienceId: string;
-    params: CustomAudienceUpdateParams
-  }>,
+  options?: UseMutationOptions<
+    CustomAudience,
+    Error,
+    {
+      audienceId: string;
+      params: CustomAudienceUpdateParams;
+    }
+  >
 ) {
   const queryClient = useQueryClient();
   const { audienceService } = useMetaClient();
@@ -216,9 +238,7 @@ export function useUpdateMetaCustomAudience(
 /**
  * Hook to delete a custom audience
  */
-export function useDeleteMetaCustomAudience(
-  options?: UseMutationOptions<void, Error, string>,
-) {
+export function useDeleteMetaCustomAudience(options?: UseMutationOptions<void, Error, string>) {
   const queryClient = useQueryClient();
   const { audienceService } = useMetaClient();
 
@@ -258,7 +278,7 @@ export function useAddUsersToAudience(
       }>;
       schema?: string[];
     }
-  >,
+  >
 ) {
   const queryClient = useQueryClient();
   const { audienceService } = useMetaClient();
@@ -291,7 +311,7 @@ export function useRemoveUsersFromAudience(
       users: Array<{ email?: string; phone?: string }>;
       schema?: string[];
     }
-  >,
+  >
 ) {
   const queryClient = useQueryClient();
   const { audienceService } = useMetaClient();
@@ -318,7 +338,7 @@ export function useRemoveUsersFromAudience(
 export function useMetaAudienceInsights(
   accountId: string,
   params?: AudienceInsightsParams,
-  options?: UseQueryOptions<any>,
+  options?: UseQueryOptions<any>
 ) {
   const { audienceService } = useMetaClient();
 
@@ -336,7 +356,7 @@ export function useMetaAudienceInsights(
 export function useMetaAudienceOverlap(
   audienceId1: string,
   audienceId2: string,
-  options?: UseQueryOptions<{ overlap_count: number; overlap_percentage: number }>,
+  options?: UseQueryOptions<{ overlap_count: number; overlap_percentage: number }>
 ) {
   const { audienceService } = useMetaClient();
 
@@ -353,10 +373,14 @@ export function useMetaAudienceOverlap(
  * Hook to share an audience
  */
 export function useShareMetaAudience(
-  options?: UseMutationOptions<void, Error, {
-    audienceId: string;
-    targetAccountIds: string[];
-  }>,
+  options?: UseMutationOptions<
+    void,
+    Error,
+    {
+      audienceId: string;
+      targetAccountIds: string[];
+    }
+  >
 ) {
   const { audienceService } = useMetaClient();
 

@@ -26,9 +26,9 @@ export class PerformanceMonitor {
   private metrics: Map<string, PerformanceMetrics> = new Map();
   private observers: Map<string, PerformanceObserver> = new Map();
   private thresholds: PerformanceThresholds = {
-    renderTime: 100,        // 100ms max render time
-    updateLatency: 2000,    // 2s max update latency
-    websocketLatency: 500,  // 500ms max WebSocket latency
+    renderTime: 100, // 100ms max render time
+    updateLatency: 2000, // 2s max update latency
+    websocketLatency: 500, // 500ms max WebSocket latency
     memoryUsage: 50 * 1024 * 1024, // 50MB memory threshold
   };
 
@@ -82,7 +82,7 @@ export class PerformanceMonitor {
   private startMemoryMonitoring(): void {
     if ('performance' in window && 'memory' in performance) {
       setInterval(() => {
-        const {memory} = (performance as any);
+        const { memory } = performance as any;
         if (memory.usedJSHeapSize > this.thresholds.memoryUsage) {
           console.warn('High memory usage detected:', {
             used: this.formatBytes(memory.usedJSHeapSize),
@@ -103,7 +103,8 @@ export class PerformanceMonitor {
       existing.updateCount++;
       existing.lastUpdate = new Date();
       existing.averageRenderTime =
-        (existing.averageRenderTime * (existing.updateCount - 1) + renderTime) / existing.updateCount;
+        (existing.averageRenderTime * (existing.updateCount - 1) + renderTime) /
+        existing.updateCount;
       existing.maxRenderTime = Math.max(existing.maxRenderTime, renderTime);
     } else {
       this.metrics.set(componentName, {
@@ -164,14 +165,14 @@ export class PerformanceMonitor {
       maxRenderTime: number;
       componentsExceedingThreshold: string[];
     };
-    } {
+  } {
     const components = Array.from(this.metrics.values());
     const componentsExceedingThreshold = components
-      .filter(m => m.averageRenderTime > this.thresholds.renderTime)
-      .map(m => m.componentName);
+      .filter((m) => m.averageRenderTime > this.thresholds.renderTime)
+      .map((m) => m.componentName);
 
     const totalRenderTime = components.reduce((sum, m) => sum + m.averageRenderTime, 0);
-    const maxRenderTime = Math.max(...components.map(m => m.maxRenderTime), 0);
+    const maxRenderTime = Math.max(...components.map((m) => m.maxRenderTime), 0);
 
     return {
       components,
@@ -196,18 +197,20 @@ export class PerformanceMonitor {
 
   // Utility to format bytes
   private formatBytes(bytes: number): string {
-    if (bytes === 0) {return '0 Bytes';}
+    if (bytes === 0) {
+      return '0 Bytes';
+    }
 
     const k = 1024;
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-    return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))  } ${  sizes[i]}`;
+    return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))} ${sizes[i]}`;
   }
 
   // Cleanup
   destroy(): void {
-    this.observers.forEach(observer => observer.disconnect());
+    this.observers.forEach((observer) => observer.disconnect());
     this.observers.clear();
     this.metrics.clear();
   }
@@ -237,7 +240,7 @@ export function usePerformanceTracking(componentName: string) {
 // HOC for automatic performance tracking
 export function withPerformanceTracking<P extends object>(
   Component: React.ComponentType<P>,
-  componentName: string,
+  componentName: string
 ): React.ComponentType<P> {
   return React.memo((props: P) => {
     const startTime = React.useRef(performance.now());

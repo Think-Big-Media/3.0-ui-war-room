@@ -1,12 +1,5 @@
 import type React from 'react';
-import {
-  ChevronLeft,
-  ChevronRight,
-  Calendar,
-  TrendingUp,
-  Target,
-  Zap,
-} from 'lucide-react';
+import { ChevronLeft, ChevronRight, Calendar, TrendingUp, Target, Zap } from 'lucide-react';
 import Card from '../shared/Card';
 import { formatWeekDisplay } from './utils';
 
@@ -29,9 +22,7 @@ const ContentClusterHeader: React.FC<ContentClusterHeaderProps> = ({
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center">
             <div className="w-3 h-3 bg-emerald-400 rounded-full mr-3" />
-            <h2 className="text-xl font-bold text-white">
-              Content Cluster: {selectedCluster}
-            </h2>
+            <h2 className="text-xl font-bold text-white">Content Cluster: {selectedCluster}</h2>
           </div>
           <div className="flex items-center space-x-4">
             <button

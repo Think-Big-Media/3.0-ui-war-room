@@ -27,9 +27,7 @@ const logger = createLogger('CampaignControl');
 const CampaignControl: React.FC = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState<CampaignTab>('analytics'); // Default to Ad Campaigns
-  const [analyticsPlatform, setAnalyticsPlatform] = useState<
-    'meta' | 'google' | 'both'
-  >('both');
+  const [analyticsPlatform, setAnalyticsPlatform] = useState<'meta' | 'google' | 'both'>('both');
 
   // Check if we're coming from Settings with a specific platform
   useEffect(() => {
@@ -75,37 +73,25 @@ const CampaignControl: React.FC = () => {
   // Filter functions
   const filteredProjects = mockProjects.filter((project) => {
     const matchesSearch =
-      project.title
-        .toLowerCase()
-        .includes(projectFilters.search.toLowerCase()) ||
-      project.description
-        .toLowerCase()
-        .includes(projectFilters.search.toLowerCase());
+      project.title.toLowerCase().includes(projectFilters.search.toLowerCase()) ||
+      project.description.toLowerCase().includes(projectFilters.search.toLowerCase());
     const matchesStatus =
-      projectFilters.status === 'all' ||
-      project.status === projectFilters.status;
+      projectFilters.status === 'all' || project.status === projectFilters.status;
     return matchesSearch && matchesStatus;
   });
 
   const filteredAssets = mockAssets.filter((asset) => {
     const matchesSearch =
       asset.name.toLowerCase().includes(assetFilters.search.toLowerCase()) ||
-      asset.tags.some((tag) =>
-        tag.toLowerCase().includes(assetFilters.search.toLowerCase())
-      );
+      asset.tags.some((tag) => tag.toLowerCase().includes(assetFilters.search.toLowerCase()));
     const matchesCategory =
-      assetFilters.category === 'all' ||
-      asset.category === assetFilters.category;
+      assetFilters.category === 'all' || asset.category === assetFilters.category;
     return matchesSearch && matchesCategory;
   });
 
   return (
     <div className="page-warroom" data-route="war-room">
-      <PageLayout
-        pageTitle="War Room"
-        placeholder="Ask War Room about campaign operations..."
-      >
-
+      <PageLayout pageTitle="War Room" placeholder="Ask War Room about campaign operations...">
         <div />
 
         {/* Tab Navigation */}
@@ -119,10 +105,7 @@ const CampaignControl: React.FC = () => {
               onFiltersChange={setProjectFilters}
               onNewProject={handleNewProject}
             />
-            <KanbanBoard
-              projects={filteredProjects}
-              onProjectSelect={handleProjectSelect}
-            />
+            <KanbanBoard projects={filteredProjects} onProjectSelect={handleProjectSelect} />
           </div>
         )}
 
@@ -139,14 +122,10 @@ const CampaignControl: React.FC = () => {
         )}
 
         {/* Team Activity */}
-        {activeTab === 'activity' && (
-          <ActivityFeed activities={mockActivities} />
-        )}
+        {activeTab === 'activity' && <ActivityFeed activities={mockActivities} />}
 
         {/* Analytics & AI Insights Tab */}
-        {activeTab === 'analytics' && (
-          <PlatformAnalytics platform={analyticsPlatform} />
-        )}
+        {activeTab === 'analytics' && <PlatformAnalytics platform={analyticsPlatform} />}
       </PageLayout>
     </div>
   );

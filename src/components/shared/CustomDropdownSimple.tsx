@@ -42,10 +42,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
@@ -176,12 +173,8 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
                     )}
                   >
                     <div className="flex items-center space-x-2">
-                      {option.icon && (
-                        <span className="text-white/70">{option.icon}</span>
-                      )}
-                      <span className="font-mono uppercase">
-                        {option.label}
-                      </span>
+                      {option.icon && <span className="text-white/70">{option.icon}</span>}
+                      <span className="font-mono uppercase">{option.label}</span>
                     </div>
                   </button>
                 ))}

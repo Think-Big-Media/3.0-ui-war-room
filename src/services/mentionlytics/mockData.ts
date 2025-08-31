@@ -61,7 +61,7 @@ export const mockSentimentData: MentionlyticsSentiment = {
   negative: 504,
   neutral: 194,
   total: 1039,
-  period: '7days'
+  period: '7days',
 };
 
 // Mock Geographic Data (US Swing States)
@@ -70,62 +70,62 @@ export const mockGeographicData: MentionlyticsLocation[] = [
     state: 'Pennsylvania',
     mentions: 156,
     sentiment: { positive: 67, negative: 52, neutral: 37 },
-    topKeywords: ['economy', 'healthcare', 'jobs']
+    topKeywords: ['economy', 'healthcare', 'jobs'],
   },
   {
     state: 'Michigan',
     mentions: 142,
     sentiment: { positive: 45, negative: 68, neutral: 29 },
-    topKeywords: ['manufacturing', 'auto', 'economy']
+    topKeywords: ['manufacturing', 'auto', 'economy'],
   },
   {
     state: 'Wisconsin',
     mentions: 98,
     sentiment: { positive: 34, negative: 41, neutral: 23 },
-    topKeywords: ['dairy', 'agriculture', 'healthcare']
+    topKeywords: ['dairy', 'agriculture', 'healthcare'],
   },
   {
     state: 'Arizona',
     mentions: 121,
     sentiment: { positive: 58, negative: 39, neutral: 24 },
-    topKeywords: ['immigration', 'water', 'economy']
+    topKeywords: ['immigration', 'water', 'economy'],
   },
   {
     state: 'Georgia',
     mentions: 189,
     sentiment: { positive: 92, negative: 61, neutral: 36 },
-    topKeywords: ['voting', 'economy', 'infrastructure']
+    topKeywords: ['voting', 'economy', 'infrastructure'],
   },
   {
     state: 'Nevada',
     mentions: 76,
     sentiment: { positive: 28, negative: 31, neutral: 17 },
-    topKeywords: ['tourism', 'gaming', 'economy']
+    topKeywords: ['tourism', 'gaming', 'economy'],
   },
   {
     state: 'Florida',
     mentions: 234,
     sentiment: { positive: 89, negative: 98, neutral: 47 },
-    topKeywords: ['insurance', 'climate', 'economy']
+    topKeywords: ['insurance', 'climate', 'economy'],
   },
   {
     state: 'North Carolina',
     mentions: 145,
     sentiment: { positive: 62, negative: 53, neutral: 30 },
-    topKeywords: ['tech', 'education', 'healthcare']
+    topKeywords: ['tech', 'education', 'healthcare'],
   },
   {
     state: 'Ohio',
     mentions: 167,
     sentiment: { positive: 71, negative: 66, neutral: 30 },
-    topKeywords: ['manufacturing', 'energy', 'jobs']
+    topKeywords: ['manufacturing', 'energy', 'jobs'],
   },
   {
     state: 'Texas',
     mentions: 298,
     sentiment: { positive: 134, negative: 112, neutral: 52 },
-    topKeywords: ['energy', 'border', 'tech']
-  }
+    topKeywords: ['energy', 'border', 'tech'],
+  },
 ];
 
 // Mock Live Feed - Mix of political content
@@ -140,7 +140,7 @@ export const mockMentionsFeed: MentionlyticsMention[] = [
     engagement: 342,
     timestamp: new Date(Date.now() - 2 * 60000).toISOString(),
     url: 'https://twitter.com/example/1',
-    location: 'Pennsylvania'
+    location: 'Pennsylvania',
   },
   {
     id: '2',
@@ -152,11 +152,11 @@ export const mockMentionsFeed: MentionlyticsMention[] = [
     engagement: 189,
     timestamp: new Date(Date.now() - 7 * 60000).toISOString(),
     url: 'https://facebook.com/example/2',
-    location: 'Michigan'
+    location: 'Michigan',
   },
   {
     id: '3',
-    text: 'Interesting perspective on economic policy shared in today\'s press conference.',
+    text: "Interesting perspective on economic policy shared in today's press conference.",
     author: 'News Channel 5',
     platform: 'news',
     sentiment: 'neutral',
@@ -164,7 +164,7 @@ export const mockMentionsFeed: MentionlyticsMention[] = [
     engagement: 782,
     timestamp: new Date(Date.now() - 15 * 60000).toISOString(),
     url: 'https://news.example.com/article/3',
-    location: 'Georgia'
+    location: 'Georgia',
   },
   {
     id: '4',
@@ -176,7 +176,7 @@ export const mockMentionsFeed: MentionlyticsMention[] = [
     engagement: 423,
     timestamp: new Date(Date.now() - 32 * 60000).toISOString(),
     url: 'https://instagram.com/p/example4',
-    location: 'Arizona'
+    location: 'Arizona',
   },
   {
     id: '5',
@@ -188,8 +188,8 @@ export const mockMentionsFeed: MentionlyticsMention[] = [
     engagement: 156,
     timestamp: new Date(Date.now() - 60 * 60000).toISOString(),
     url: 'https://blog.example.com/post/5',
-    location: 'Wisconsin'
-  }
+    location: 'Wisconsin',
+  },
 ];
 
 // Mock Influencers - Political figures and media
@@ -202,7 +202,7 @@ export const mockInfluencers: MentionlyticsInfluencer[] = [
     followers: 125000,
     mentions: 45,
     sentiment: 'positive',
-    engagement_rate: 4.2
+    engagement_rate: 4.2,
   },
   {
     id: '2',
@@ -212,7 +212,7 @@ export const mockInfluencers: MentionlyticsInfluencer[] = [
     followers: 890000,
     mentions: 38,
     sentiment: 'neutral',
-    engagement_rate: 2.8
+    engagement_rate: 2.8,
   },
   {
     id: '3',
@@ -222,7 +222,7 @@ export const mockInfluencers: MentionlyticsInfluencer[] = [
     followers: 45000,
     mentions: 67,
     sentiment: 'positive',
-    engagement_rate: 6.5
+    engagement_rate: 6.5,
   },
   {
     id: '4',
@@ -232,7 +232,7 @@ export const mockInfluencers: MentionlyticsInfluencer[] = [
     followers: 78000,
     mentions: 52,
     sentiment: 'negative',
-    engagement_rate: 5.1
+    engagement_rate: 5.1,
   },
   {
     id: '5',
@@ -242,7 +242,7 @@ export const mockInfluencers: MentionlyticsInfluencer[] = [
     followers: 234000,
     mentions: 29,
     sentiment: 'neutral',
-    engagement_rate: 3.7
+    engagement_rate: 3.7,
   },
   {
     id: '6',
@@ -252,7 +252,7 @@ export const mockInfluencers: MentionlyticsInfluencer[] = [
     followers: 67000,
     mentions: 41,
     sentiment: 'positive',
-    engagement_rate: 4.8
+    engagement_rate: 4.8,
   },
   {
     id: '7',
@@ -262,7 +262,7 @@ export const mockInfluencers: MentionlyticsInfluencer[] = [
     followers: 156000,
     mentions: 33,
     sentiment: 'mixed',
-    engagement_rate: 7.2
+    engagement_rate: 7.2,
   },
   {
     id: '8',
@@ -272,8 +272,8 @@ export const mockInfluencers: MentionlyticsInfluencer[] = [
     followers: 445000,
     mentions: 28,
     sentiment: 'neutral',
-    engagement_rate: 2.3
-  }
+    engagement_rate: 2.3,
+  },
 ];
 
 // Mock Share of Voice - Campaign comparison
@@ -283,29 +283,29 @@ export const mockShareOfVoice: ShareOfVoiceData[] = [
     percentage: 35,
     mentions: 2847,
     reach: 1234000,
-    engagement: 45678
+    engagement: 45678,
   },
   {
     brand: 'Mikie Sherrill',
     percentage: 28,
     mentions: 2276,
     reach: 987000,
-    engagement: 34567
+    engagement: 34567,
   },
   {
     brand: 'Josh Gottheimer',
     percentage: 22,
     mentions: 1789,
     reach: 756000,
-    engagement: 28901
+    engagement: 28901,
   },
   {
     brand: 'Others',
     percentage: 15,
     mentions: 1220,
     reach: 523000,
-    engagement: 19876
-  }
+    engagement: 19876,
+  },
 ];
 
 // Mock sentiment trend data (last 7 days)
@@ -316,28 +316,44 @@ export const mockSentimentTrend = [
   { date: '2025-08-28', positive: 56, negative: 32, neutral: 12 },
   { date: '2025-08-29', positive: 61, negative: 29, neutral: 10 },
   { date: '2025-08-30', positive: 43, negative: 45, neutral: 12 },
-  { date: '2025-08-31', positive: 49, negative: 36, neutral: 15 }
+  { date: '2025-08-31', positive: 49, negative: 36, neutral: 15 },
 ];
 
 // Helper function to generate real-time updates
 export function generateLiveMention(): MentionlyticsMention {
-  const platforms: MentionlyticsMention['platform'][] = ['twitter', 'facebook', 'instagram', 'news', 'blog'];
-  const states = ['Pennsylvania', 'Michigan', 'Wisconsin', 'Arizona', 'Georgia', 'Nevada', 'Florida', 'Ohio', 'North Carolina'];
-  
+  const platforms: MentionlyticsMention['platform'][] = [
+    'twitter',
+    'facebook',
+    'instagram',
+    'news',
+    'blog',
+  ];
+  const states = [
+    'Pennsylvania',
+    'Michigan',
+    'Wisconsin',
+    'Arizona',
+    'Georgia',
+    'Nevada',
+    'Florida',
+    'Ohio',
+    'North Carolina',
+  ];
+
   const templates = [
     { text: 'Great job on the recent policy announcement! #Leadership', sentiment: 'positive' },
-    { text: 'Concerned about the direction we\'re heading. Need change.', sentiment: 'negative' },
-    { text: 'Interesting developments in today\'s press conference.', sentiment: 'neutral' },
+    { text: "Concerned about the direction we're heading. Need change.", sentiment: 'negative' },
+    { text: "Interesting developments in today's press conference.", sentiment: 'neutral' },
     { text: 'This is exactly the leadership we need! #Progress', sentiment: 'positive' },
     { text: 'Not impressed with the latest decisions. Disappointing.', sentiment: 'negative' },
     { text: 'Following the campaign with interest. Time will tell.', sentiment: 'neutral' },
     { text: 'Strong stance on healthcare! Finally someone who gets it.', sentiment: 'positive' },
     { text: 'The economic policy needs serious reconsideration.', sentiment: 'negative' },
-    { text: 'Campaign rally scheduled for next week in town.', sentiment: 'neutral' }
+    { text: 'Campaign rally scheduled for next week in town.', sentiment: 'neutral' },
   ];
-  
+
   const template = templates[Math.floor(Math.random() * templates.length)];
-  
+
   return {
     id: Date.now().toString(),
     text: template.text,
@@ -348,7 +364,7 @@ export function generateLiveMention(): MentionlyticsMention {
     engagement: Math.floor(Math.random() * 1000) + 10,
     timestamp: new Date().toISOString(),
     url: 'https://example.com/' + Date.now(),
-    location: states[Math.floor(Math.random() * states.length)]
+    location: states[Math.floor(Math.random() * states.length)],
   };
 }
 
@@ -360,9 +376,9 @@ export function generateCrisisAlert() {
     'Misinformation spreading rapidly',
     'Competitor attack campaign identified',
     'Viral negative post gaining traction',
-    'Media criticism intensifying'
+    'Media criticism intensifying',
   ];
-  
+
   return {
     id: Date.now().toString(),
     severity: severities[Math.floor(Math.random() * severities.length)],
@@ -370,6 +386,6 @@ export function generateCrisisAlert() {
     description: `Alert: Unusual activity detected in social media mentions`,
     timestamp: new Date().toISOString(),
     affected_states: ['Pennsylvania', 'Michigan'].slice(0, Math.floor(Math.random() * 2) + 1),
-    recommended_action: 'Review and respond to trending topics immediately'
+    recommended_action: 'Review and respond to trending topics immediately',
   };
 }

@@ -63,7 +63,9 @@ const DocumentIntelligence: React.FC = () => {
 
   // File upload handling
   const handleFileUpload = useCallback(async (files: FileList) => {
-    if (!files.length) {return;}
+    if (!files.length) {
+      return;
+    }
 
     setIsUploading(true);
     try {
@@ -76,13 +78,13 @@ const DocumentIntelligence: React.FC = () => {
           method: 'POST',
           body: formData,
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
 
         if (response.ok) {
           const newDocument = await response.json();
-          setDocuments(prev => [newDocument, ...prev]);
+          setDocuments((prev) => [newDocument, ...prev]);
         }
       }
     } catch (error) {
@@ -98,17 +100,22 @@ const DocumentIntelligence: React.FC = () => {
     e.preventDefault();
   }, []);
 
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    const {files} = e.dataTransfer;
-    if (files.length) {
-      handleFileUpload(files);
-    }
-  }, [handleFileUpload]);
+  const handleDrop = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      const { files } = e.dataTransfer;
+      if (files.length) {
+        handleFileUpload(files);
+      }
+    },
+    [handleFileUpload]
+  );
 
   // Document search
   const handleSearch = useCallback(async () => {
-    if (!searchQuery.trim()) {return;}
+    if (!searchQuery.trim()) {
+      return;
+    }
 
     setIsSearching(true);
     try {
@@ -116,7 +123,7 @@ const DocumentIntelligence: React.FC = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
         body: JSON.stringify({
           query: searchQuery,
@@ -138,29 +145,43 @@ const DocumentIntelligence: React.FC = () => {
   // Get status icon
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'completed': return <CheckCircle className="w-5 h-5 text-green-600" />;
-      case 'processing': return <Clock className="w-5 h-5 text-yellow-600 animate-spin" />;
-      case 'failed': return <XCircle className="w-5 h-5 text-red-600" />;
-      default: return <AlertCircle className="w-5 h-5 text-gray-600" />;
+      case 'completed':
+        return <CheckCircle className="w-5 h-5 text-green-600" />;
+      case 'processing':
+        return <Clock className="w-5 h-5 text-yellow-600 animate-spin" />;
+      case 'failed':
+        return <XCircle className="w-5 h-5 text-red-600" />;
+      default:
+        return <AlertCircle className="w-5 h-5 text-gray-600" />;
     }
   };
 
   // Get file type icon
   const getFileIcon = (type: string) => {
     switch (type) {
-      case 'pdf': return <FileText className="w-6 h-6 text-red-600" />;
-      case 'csv': return <File className="w-6 h-6 text-green-600" />;
-      case 'docx': return <FileText className="w-6 h-6 text-blue-600" />;
-      case 'image': return <Image className="w-6 h-6 text-purple-600" />;
-      case 'video': return <Video className="w-6 h-6 text-orange-600" />;
-      default: return <File className="w-6 h-6 text-gray-600" />;
+      case 'pdf':
+        return <FileText className="w-6 h-6 text-red-600" />;
+      case 'csv':
+        return <File className="w-6 h-6 text-green-600" />;
+      case 'docx':
+        return <FileText className="w-6 h-6 text-blue-600" />;
+      case 'image':
+        return <Image className="w-6 h-6 text-purple-600" />;
+      case 'video':
+        return <Video className="w-6 h-6 text-orange-600" />;
+      default:
+        return <File className="w-6 h-6 text-gray-600" />;
     }
   };
 
   // Filter documents
-  const filteredDocuments = documents.filter(doc => {
-    if (statusFilter !== 'all' && doc.processing_status !== statusFilter) {return false;}
-    if (typeFilter !== 'all' && doc.document_type !== typeFilter) {return false;}
+  const filteredDocuments = documents.filter((doc) => {
+    if (statusFilter !== 'all' && doc.processing_status !== statusFilter) {
+      return false;
+    }
+    if (typeFilter !== 'all' && doc.document_type !== typeFilter) {
+      return false;
+    }
     return true;
   });
 
@@ -168,7 +189,9 @@ const DocumentIntelligence: React.FC = () => {
     <div className="p-6 max-w-7xl mx-auto">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Document Intelligence</h1>
-        <p className="text-gray-600">Upload, process, and search documents with AI-powered insights</p>
+        <p className="text-gray-600">
+          Upload, process, and search documents with AI-powered insights
+        </p>
       </div>
 
       {/* Tab Navigation */}
@@ -200,12 +223,8 @@ const DocumentIntelligence: React.FC = () => {
             }`}
           >
             <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">
-              Upload Documents
-            </h3>
-            <p className="text-gray-600 mb-4">
-              Drag and drop files here, or click to select files
-            </p>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">Upload Documents</h3>
+            <p className="text-gray-600 mb-4">Drag and drop files here, or click to select files</p>
             <input
               type="file"
               multiple
@@ -269,7 +288,10 @@ const DocumentIntelligence: React.FC = () => {
                 Search Results ({searchResults.length})
               </h3>
               {searchResults.map((result) => (
-                <div key={result.id} className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                <div
+                  key={result.id}
+                  className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+                >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center mb-2">
@@ -281,9 +303,7 @@ const DocumentIntelligence: React.FC = () => {
                           {Math.round(result.similarity_score * 100)}% match
                         </span>
                       </div>
-                      <p className="text-gray-600 mb-2 line-clamp-3">
-                        {result.chunk_text}
-                      </p>
+                      <p className="text-gray-600 mb-2 line-clamp-3">{result.chunk_text}</p>
                       <div className="flex items-center text-sm text-gray-500">
                         <span>Chunk {result.chunk_index + 1}</span>
                         <span className="mx-2">•</span>
@@ -308,7 +328,9 @@ const DocumentIntelligence: React.FC = () => {
             <div className="text-center py-8">
               <Search className="w-12 h-12 text-gray-400 mx-auto mb-4" />
               <h3 className="text-lg font-medium text-gray-900 mb-2">No results found</h3>
-              <p className="text-gray-600">Try adjusting your search query or upload more documents</p>
+              <p className="text-gray-600">
+                Try adjusting your search query or upload more documents
+              </p>
             </div>
           )}
         </div>
@@ -373,7 +395,10 @@ const DocumentIntelligence: React.FC = () => {
                           <Tag className="w-4 h-4 text-gray-400 mr-1" />
                           <div className="flex space-x-1">
                             {document.tags.map((tag) => (
-                              <span key={tag} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
+                              <span
+                                key={tag}
+                                className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded"
+                              >
                                 {tag}
                               </span>
                             ))}

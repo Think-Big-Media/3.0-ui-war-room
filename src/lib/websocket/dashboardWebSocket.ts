@@ -84,7 +84,9 @@ export class DashboardWebSocket {
   }
 
   private setupEventHandlers(): void {
-    if (!this.socket) {return;}
+    if (!this.socket) {
+      return;
+    }
 
     // Connection events
     this.socket.on('connect', this.handleConnect.bind(this));
@@ -215,7 +217,7 @@ export class DashboardWebSocket {
   private processQueuedMessages(): void {
     const messages = this.messageQueue.dequeueAll();
 
-    messages.forEach(message => {
+    messages.forEach((message) => {
       this.sendMessage(message.type, message.data);
     });
 
@@ -227,7 +229,9 @@ export class DashboardWebSocket {
 
   // Subscription management
   private subscribeToChannels(): void {
-    if (!this.socket) {return;}
+    if (!this.socket) {
+      return;
+    }
 
     // Subscribe to monitoring channels
     this.socket.emit('subscribe', {
@@ -262,7 +266,7 @@ export class DashboardWebSocket {
   private notifySubscribers(event: string, data: any): void {
     const callbacks = this.subscriptions.get(event);
     if (callbacks) {
-      callbacks.forEach(callback => {
+      callbacks.forEach((callback) => {
         try {
           callback(data);
         } catch (error) {

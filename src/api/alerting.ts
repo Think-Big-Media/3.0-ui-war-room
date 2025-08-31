@@ -21,7 +21,9 @@ export async function getCrisisAlerts(): Promise<CrisisAlert[]> {
 /**
  * Get alerts by severity level
  */
-export async function getAlertsBySeverity(severity: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL'): Promise<CrisisAlert[]> {
+export async function getAlertsBySeverity(
+  severity: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL'
+): Promise<CrisisAlert[]> {
   const response = await fetch(`${API_BASE}/api/v1/alerts/crisis?severity=${severity}`);
   if (!response.ok) {
     throw new Error(`Failed to fetch ${severity} alerts`);
@@ -32,7 +34,9 @@ export async function getAlertsBySeverity(severity: 'LOW' | 'MEDIUM' | 'HIGH' | 
 /**
  * Create a new crisis alert
  */
-export async function createCrisisAlert(alert: Omit<CrisisAlert, 'id' | 'detected_at'>): Promise<CrisisAlert> {
+export async function createCrisisAlert(
+  alert: Omit<CrisisAlert, 'id' | 'detected_at'>
+): Promise<CrisisAlert> {
   const response = await fetch(`${API_BASE}/api/v1/alerts/crisis`, {
     method: 'POST',
     headers: {
@@ -40,18 +44,21 @@ export async function createCrisisAlert(alert: Omit<CrisisAlert, 'id' | 'detecte
     },
     body: JSON.stringify(alert),
   });
-  
+
   if (!response.ok) {
     throw new Error('Failed to create crisis alert');
   }
-  
+
   return response.json();
 }
 
 /**
  * Update alert status
  */
-export async function updateAlertStatus(id: string, status: 'ACTIVE' | 'RESOLVED' | 'DISMISSED'): Promise<void> {
+export async function updateAlertStatus(
+  id: string,
+  status: 'ACTIVE' | 'RESOLVED' | 'DISMISSED'
+): Promise<void> {
   const response = await fetch(`${API_BASE}/api/v1/alerts/crisis/${id}/status`, {
     method: 'PATCH',
     headers: {
@@ -59,7 +66,7 @@ export async function updateAlertStatus(id: string, status: 'ACTIVE' | 'RESOLVED
     },
     body: JSON.stringify({ status }),
   });
-  
+
   if (!response.ok) {
     throw new Error('Failed to update alert status');
   }
@@ -72,7 +79,7 @@ export async function deleteCrisisAlert(id: string): Promise<void> {
   const response = await fetch(`${API_BASE}/api/v1/alerts/crisis/${id}`, {
     method: 'DELETE',
   });
-  
+
   if (!response.ok) {
     throw new Error('Failed to delete crisis alert');
   }

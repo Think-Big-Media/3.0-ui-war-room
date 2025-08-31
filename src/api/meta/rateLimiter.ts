@@ -14,13 +14,11 @@ export class MetaRateLimiter {
   // Meta API limits (conservative defaults)
   private readonly limits = {
     user: { tokens: 200, window: 3600000 }, // 200 calls per hour
-    app: { tokens: 200, window: 3600000 },   // 200 calls per hour
-    adAccount: { percentage: 0.1 },           // 10% of daily limit
+    app: { tokens: 200, window: 3600000 }, // 200 calls per hour
+    adAccount: { percentage: 0.1 }, // 10% of daily limit
   };
 
-  constructor(
-    private customLimits?: Partial<typeof MetaRateLimiter.prototype.limits>,
-  ) {
+  constructor(private customLimits?: Partial<typeof MetaRateLimiter.prototype.limits>) {
     if (customLimits) {
       Object.assign(this.limits, customLimits);
     }
@@ -44,7 +42,7 @@ export class MetaRateLimiter {
       const timeToWait = this.calculateTimeToWait(bucket);
       throw new MetaRateLimitError(
         `Rate limit exceeded. Please wait ${Math.ceil(timeToWait / 1000)} seconds.`,
-        timeToWait,
+        timeToWait
       );
     }
 
@@ -125,22 +123,17 @@ export class MetaRateLimiter {
     const limit = this.limits.user;
 
     // Calculate tokens to add based on time passed
-    const tokensToAdd = Math.floor(
-      (timePassed / limit.window) * limit.tokens,
-    );
+    const tokensToAdd = Math.floor((timePassed / limit.window) * limit.tokens);
 
     if (tokensToAdd > 0) {
-      bucket.tokens = Math.min(
-        bucket.tokens + tokensToAdd,
-        limit.tokens,
-      );
+      bucket.tokens = Math.min(bucket.tokens + tokensToAdd, limit.tokens);
       bucket.lastRefill = now;
     }
   }
 
   private cleanOldRequests(bucket: RateLimitBucket, now: number): void {
     const windowStart = now - this.limits.user.window;
-    bucket.requests = bucket.requests.filter(time => time > windowStart);
+    bucket.requests = bucket.requests.filter((time) => time > windowStart);
   }
 
   private calculateTimeToWait(bucket: RateLimitBucket): number {
@@ -160,10 +153,7 @@ export class MetaRateLimiter {
     const maxDelay = 32000; // 32 seconds
     const jitter = Math.random() * 1000; // 0-1 second jitter
 
-    const delay = Math.min(
-      baseDelay * Math.pow(2, attempt) + jitter,
-      maxDelay,
-    );
+    const delay = Math.min(baseDelay * Math.pow(2, attempt) + jitter, maxDelay);
 
     return Math.floor(delay);
   }

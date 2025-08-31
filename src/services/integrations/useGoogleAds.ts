@@ -23,7 +23,8 @@ const getGoogleAdsAPI = () => {
     clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID || '',
     clientSecret: import.meta.env.VITE_GOOGLE_CLIENT_SECRET || '',
     developerToken: import.meta.env.VITE_GOOGLE_DEVELOPER_TOKEN || '',
-    redirectUri: import.meta.env.VITE_GOOGLE_REDIRECT_URI || `${window.location.origin  }/api/google/callback`,
+    redirectUri:
+      import.meta.env.VITE_GOOGLE_REDIRECT_URI || `${window.location.origin}/api/google/callback`,
     apiVersion: 'v20', // Updated to latest stable version
   };
 
@@ -40,7 +41,8 @@ export const googleAdsQueryKeys = {
   auth: () => [...googleAdsQueryKeys.all, 'auth'] as const,
   customers: () => [...googleAdsQueryKeys.all, 'customers'] as const,
   customer: (customerId: string) => [...googleAdsQueryKeys.customers(), customerId] as const,
-  campaigns: (customerId: string) => [...googleAdsQueryKeys.customer(customerId), 'campaigns'] as const,
+  campaigns: (customerId: string) =>
+    [...googleAdsQueryKeys.customer(customerId), 'campaigns'] as const,
   campaign: (customerId: string, campaignId: string) =>
     [...googleAdsQueryKeys.campaigns(customerId), campaignId] as const,
   adGroups: (customerId: string, campaignId: string) =>
@@ -70,9 +72,12 @@ export const useGoogleAdsAuth = () => {
   });
 
   // Generate login URL
-  const getLoginUrl = useCallback((scopes: string[] = ['https://www.googleapis.com/auth/adwords']) => {
-    return googleAdsAPI.auth.getLoginUrl(scopes);
-  }, [googleAdsAPI]);
+  const getLoginUrl = useCallback(
+    (scopes: string[] = ['https://www.googleapis.com/auth/adwords']) => {
+      return googleAdsAPI.auth.getLoginUrl(scopes);
+    },
+    [googleAdsAPI]
+  );
 
   // Exchange code for token
   const exchangeCode = useMutation({
@@ -154,7 +159,7 @@ export const useGoogleAdsCampaigns = (
   options?: {
     enabled?: boolean;
     includeRemoved?: boolean;
-  },
+  }
 ) => {
   const googleAdsAPI = useMemo(() => getGoogleAdsAPI(), []);
 
@@ -181,7 +186,7 @@ export const useGoogleAdsCampaignInsights = (
   options?: {
     enabled?: boolean;
     refetchInterval?: number;
-  },
+  }
 ) => {
   const googleAdsAPI = useMemo(() => getGoogleAdsAPI(), []);
 
@@ -195,7 +200,7 @@ export const useGoogleAdsCampaignInsights = (
       const insights = await googleAdsAPI.insights.getCampaignInsights(
         customerId,
         campaignId,
-        params,
+        params
       );
       return insights;
     },
@@ -209,7 +214,7 @@ export const useGoogleAdsCampaignInsights = (
 export const useGoogleAdsAdGroups = (
   customerId: string,
   campaignId: string,
-  options?: { enabled?: boolean },
+  options?: { enabled?: boolean }
 ) => {
   const googleAdsAPI = useMemo(() => getGoogleAdsAPI(), []);
 
@@ -220,10 +225,7 @@ export const useGoogleAdsAdGroups = (
         throw new Error('Customer ID and Campaign ID are required');
       }
 
-      const adGroups = await googleAdsAPI.adGroups.listAdGroups(
-        customerId,
-        campaignId,
-      );
+      const adGroups = await googleAdsAPI.adGroups.listAdGroups(customerId, campaignId);
       return adGroups;
     },
     enabled: options?.enabled !== false && Boolean(customerId) && Boolean(campaignId),
@@ -235,7 +237,7 @@ export const useGoogleAdsAdGroups = (
 export const useGoogleAdsKeywords = (
   customerId: string,
   adGroupId: string,
-  options?: { enabled?: boolean },
+  options?: { enabled?: boolean }
 ) => {
   const googleAdsAPI = useMemo(() => getGoogleAdsAPI(), []);
 
@@ -246,10 +248,7 @@ export const useGoogleAdsKeywords = (
         throw new Error('Customer ID and Ad Group ID are required');
       }
 
-      const keywords = await googleAdsAPI.keywords.listKeywords(
-        customerId,
-        adGroupId,
-      );
+      const keywords = await googleAdsAPI.keywords.listKeywords(customerId, adGroupId);
       return keywords;
     },
     enabled: options?.enabled !== false && Boolean(customerId) && Boolean(adGroupId),
@@ -264,7 +263,7 @@ export const useGoogleAdsSearchTerms = (
     campaignId?: string;
     dateRange: { startDate: string; endDate: string };
   },
-  options?: { enabled?: boolean },
+  options?: { enabled?: boolean }
 ) => {
   const googleAdsAPI = useMemo(() => getGoogleAdsAPI(), []);
 
@@ -275,10 +274,7 @@ export const useGoogleAdsSearchTerms = (
         throw new Error('Customer ID is required');
       }
 
-      const searchTerms = await googleAdsAPI.reports.getSearchTermsReport(
-        customerId,
-        params,
-      );
+      const searchTerms = await googleAdsAPI.reports.getSearchTermsReport(customerId, params);
       return searchTerms;
     },
     enabled: options?.enabled !== false && Boolean(customerId),
@@ -293,7 +289,7 @@ export const useGoogleAdsAccountInsights = (
   options?: {
     enabled?: boolean;
     refetchInterval?: number;
-  },
+  }
 ) => {
   const googleAdsAPI = useMemo(() => getGoogleAdsAPI(), []);
 
@@ -304,10 +300,7 @@ export const useGoogleAdsAccountInsights = (
         throw new Error('Customer ID is required');
       }
 
-      const insights = await googleAdsAPI.insights.getAccountInsights(
-        customerId,
-        params,
-      );
+      const insights = await googleAdsAPI.insights.getAccountInsights(customerId, params);
       return insights;
     },
     enabled: options?.enabled !== false && Boolean(customerId),
@@ -322,12 +315,14 @@ export const useGoogleAdsCampaignMutations = (customerId: string) => {
   const queryClient = useQueryClient();
 
   const updateBudget = useMutation({
-    mutationFn: async ({ campaignId, dailyBudget }: { campaignId: string; dailyBudget: number }) => {
-      return await googleAdsAPI.campaigns.updateCampaignBudget(
-        customerId,
-        campaignId,
-        dailyBudget,
-      );
+    mutationFn: async ({
+      campaignId,
+      dailyBudget,
+    }: {
+      campaignId: string;
+      dailyBudget: number;
+    }) => {
+      return await googleAdsAPI.campaigns.updateCampaignBudget(customerId, campaignId, dailyBudget);
     },
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
@@ -387,7 +382,7 @@ export const useGoogleAdsChangeHistory = (
     dateRange: { startDate: string; endDate: string };
     resourceType?: string;
   },
-  options?: { enabled?: boolean },
+  options?: { enabled?: boolean }
 ) => {
   const googleAdsAPI = useMemo(() => getGoogleAdsAPI(), []);
 
@@ -398,10 +393,7 @@ export const useGoogleAdsChangeHistory = (
         throw new Error('Customer ID is required');
       }
 
-      const changes = await googleAdsAPI.changes.getChangeHistory(
-        customerId,
-        params,
-      );
+      const changes = await googleAdsAPI.changes.getChangeHistory(customerId, params);
       return changes;
     },
     enabled: options?.enabled !== false && Boolean(customerId),
@@ -416,7 +408,7 @@ export const useGoogleAdsPerformanceStream = (
   options?: {
     enabled?: boolean;
     pollInterval?: number; // Default 5 minutes
-  },
+  }
 ) => {
   const params: InsightsParams = {
     account_id: customerId,
@@ -424,14 +416,10 @@ export const useGoogleAdsPerformanceStream = (
     fields: ['impressions', 'clicks', 'cost', 'conversions'],
   };
 
-  const { data, refetch, isLoading, error } = useGoogleAdsAccountInsights(
-    customerId,
-    params,
-    {
-      enabled: options?.enabled && campaignIds.length > 0,
-      refetchInterval: options?.pollInterval || 5 * 60 * 1000,
-    },
-  );
+  const { data, refetch, isLoading, error } = useGoogleAdsAccountInsights(customerId, params, {
+    enabled: options?.enabled && campaignIds.length > 0,
+    refetchInterval: options?.pollInterval || 5 * 60 * 1000,
+  });
 
   return {
     performance: data,
@@ -483,17 +471,20 @@ export const useGoogleAdsErrorHandler = () => {
   const queryClient = useQueryClient();
   const { logout } = useGoogleAdsAuth();
 
-  const handleError = useCallback((error: unknown) => {
-    if (error instanceof GoogleAdsAPIError) {
-      handleGoogleAdsError(error);
+  const handleError = useCallback(
+    (error: unknown) => {
+      if (error instanceof GoogleAdsAPIError) {
+        handleGoogleAdsError(error);
 
-      if (error.status === 'UNAUTHENTICATED' || error.code === 401) {
-        logout();
+        if (error.status === 'UNAUTHENTICATED' || error.code === 401) {
+          logout();
+        }
+      } else {
+        toast.error('An unexpected error occurred');
       }
-    } else {
-      toast.error('An unexpected error occurred');
-    }
-  }, [logout]);
+    },
+    [logout]
+  );
 
   return { handleError };
 };
@@ -506,7 +497,7 @@ export const useGoogleAdsAggregatedInsights = (
   options?: {
     enabled?: boolean;
     refetchInterval?: number;
-  },
+  }
 ) => {
   const googleAdsAPI = useMemo(() => getGoogleAdsAPI(), []);
 
@@ -518,8 +509,8 @@ export const useGoogleAdsAggregatedInsights = (
       }
 
       // Fetch insights for all campaigns in parallel
-      const promises = campaignIds.map(campaignId =>
-        googleAdsAPI.insights.getCampaignInsights(customerId, campaignId, params),
+      const promises = campaignIds.map((campaignId) =>
+        googleAdsAPI.insights.getCampaignInsights(customerId, campaignId, params)
       );
 
       const results = await Promise.all(promises);

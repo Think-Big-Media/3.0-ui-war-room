@@ -4,10 +4,10 @@ import { CircuitBreakerOpenError } from './errors';
 import { type CircuitBreakerState } from './types';
 
 interface CircuitBreakerConfig {
-  failureThreshold: number;     // Number of failures before opening
-  resetTimeout: number;          // Time in ms before attempting to close
-  halfOpenRequests: number;      // Number of requests to test in half-open state
-  monitoringPeriod: number;      // Time window for failure counting
+  failureThreshold: number; // Number of failures before opening
+  resetTimeout: number; // Time in ms before attempting to close
+  halfOpenRequests: number; // Number of requests to test in half-open state
+  monitoringPeriod: number; // Time window for failure counting
 }
 
 export class MetaCircuitBreaker {
@@ -24,9 +24,9 @@ export class MetaCircuitBreaker {
 
   private readonly config: CircuitBreakerConfig = {
     failureThreshold: 5,
-    resetTimeout: 60000,        // 1 minute
+    resetTimeout: 60000, // 1 minute
     halfOpenRequests: 3,
-    monitoringPeriod: 300000,    // 5 minutes
+    monitoringPeriod: 300000, // 5 minutes
   };
 
   private stateChangeCallbacks: {
@@ -34,10 +34,10 @@ export class MetaCircuitBreaker {
     onClose: Array<() => void>;
     onHalfOpen: Array<() => void>;
   } = {
-      onOpen: [],
-      onClose: [],
-      onHalfOpen: [],
-    };
+    onOpen: [],
+    onClose: [],
+    onHalfOpen: [],
+  };
 
   constructor(config?: Partial<CircuitBreakerConfig>) {
     if (config) {
@@ -114,7 +114,7 @@ export class MetaCircuitBreaker {
     successRate: number;
     lastFailure?: Date;
     nextRetry?: Date;
-    } {
+  } {
     const total = this.successCount + this.state.failures;
     const successRate = total > 0 ? (this.successCount / total) * 100 : 100;
 
@@ -122,12 +122,8 @@ export class MetaCircuitBreaker {
       state: this.state.status,
       failures: this.state.failures,
       successRate: Math.round(successRate),
-      lastFailure: this.state.lastFailureTime
-        ? new Date(this.state.lastFailureTime)
-        : undefined,
-      nextRetry: this.state.nextRetryTime
-        ? new Date(this.state.nextRetryTime)
-        : undefined,
+      lastFailure: this.state.lastFailureTime ? new Date(this.state.lastFailureTime) : undefined,
+      nextRetry: this.state.nextRetryTime ? new Date(this.state.nextRetryTime) : undefined,
     };
   }
 
@@ -177,7 +173,7 @@ export class MetaCircuitBreaker {
     console.warn('Circuit breaker opened due to excessive failures');
 
     // Notify listeners
-    this.stateChangeCallbacks.onOpen.forEach(cb => cb());
+    this.stateChangeCallbacks.onOpen.forEach((cb) => cb());
   }
 
   private transitionToHalfOpen(): void {
@@ -187,7 +183,7 @@ export class MetaCircuitBreaker {
     console.info('Circuit breaker transitioning to half-open');
 
     // Notify listeners
-    this.stateChangeCallbacks.onHalfOpen.forEach(cb => cb());
+    this.stateChangeCallbacks.onHalfOpen.forEach((cb) => cb());
   }
 
   private transitionToClosed(): void {
@@ -200,17 +196,14 @@ export class MetaCircuitBreaker {
     console.info('Circuit breaker closed');
 
     // Notify listeners
-    this.stateChangeCallbacks.onClose.forEach(cb => cb());
+    this.stateChangeCallbacks.onClose.forEach((cb) => cb());
   }
 
   private cleanOldFailures(): void {
     const cutoff = Date.now() - this.config.monitoringPeriod;
-    this.failureTimestamps = this.failureTimestamps.filter(
-      timestamp => timestamp > cutoff,
-    );
+    this.failureTimestamps = this.failureTimestamps.filter((timestamp) => timestamp > cutoff);
   }
 }
-
 
 // Export alias for compatibility
 export { MetaCircuitBreaker as CircuitBreaker };

@@ -77,18 +77,28 @@ class ActivityApiService {
   /**
    * Get recent campaign activities
    */
-  async getRecentActivities(params: {
-    limit?: number;
-    hours?: number;
-    types?: string[];
-    severity?: string;
-  } = {}): Promise<ActivityResponse> {
+  async getRecentActivities(
+    params: {
+      limit?: number;
+      hours?: number;
+      types?: string[];
+      severity?: string;
+    } = {}
+  ): Promise<ActivityResponse> {
     const searchParams = new URLSearchParams();
 
-    if (params.limit) {searchParams.append('limit', params.limit.toString());}
-    if (params.hours) {searchParams.append('hours', params.hours.toString());}
-    if (params.types) {searchParams.append('types', params.types.join(','));}
-    if (params.severity) {searchParams.append('severity', params.severity);}
+    if (params.limit) {
+      searchParams.append('limit', params.limit.toString());
+    }
+    if (params.hours) {
+      searchParams.append('hours', params.hours.toString());
+    }
+    if (params.types) {
+      searchParams.append('types', params.types.join(','));
+    }
+    if (params.severity) {
+      searchParams.append('severity', params.severity);
+    }
 
     const endpoint = `/activities${searchParams.toString() ? `?${searchParams}` : ''}`;
 
@@ -109,7 +119,9 @@ class ActivityApiService {
   private async generateActivitiesFromCampaigns(): Promise<ActivityResponse> {
     try {
       // Get campaign insights to generate activities
-      const campaignResponse = await fetch(`${BASE}/api/v1/ad-insights/campaigns?date_preset=today`);
+      const campaignResponse = await fetch(
+        `${BASE}/api/v1/ad-insights/campaigns?date_preset=today`
+      );
       const alertsResponse = await fetch(`${BASE}/api/v1/ad-insights/alerts`);
 
       const campaigns = campaignResponse.ok ? await campaignResponse.json() : null;
@@ -125,7 +137,8 @@ class ActivityApiService {
           type: 'spend_alert',
           title: `${alert.platform.charAt(0).toUpperCase() + alert.platform.slice(1)} Alert: ${alert.alert_type.replace('_', ' ')}`,
           description: alert.message,
-          timestamp: alert.timestamp || new Date(now.getTime() - index * 5 * 60 * 1000).toISOString(),
+          timestamp:
+            alert.timestamp || new Date(now.getTime() - index * 5 * 60 * 1000).toISOString(),
           platform: alert.platform,
           campaign_id: alert.campaign_id,
           campaign_name: alert.campaign_name,
@@ -140,7 +153,8 @@ class ActivityApiService {
       // Generate activities from campaign performance
       if (campaigns?.campaigns) {
         campaigns.campaigns.forEach((campaign: any, index: number) => {
-          if (campaign.spend > 100) { // Only show campaigns with significant spend
+          if (campaign.spend > 100) {
+            // Only show campaigns with significant spend
             activities.push({
               id: `campaign-${campaign.campaign_id}-${index}`,
               type: 'campaign_update',
@@ -181,20 +195,21 @@ class ActivityApiService {
         total_count: activities.length,
         last_updated: new Date().toISOString(),
       };
-
     } catch (error) {
       logger.error('Failed to generate activities from campaign data', error);
 
       // Ultimate fallback: return basic system activity
       return {
-        activities: [{
-          id: 'system-1',
-          type: 'system_alert',
-          title: 'War Room System Active',
-          description: 'Monitoring campaign performance and alerts',
-          timestamp: new Date().toISOString(),
-          severity: 'low',
-        }],
+        activities: [
+          {
+            id: 'system-1',
+            type: 'system_alert',
+            title: 'War Room System Active',
+            description: 'Monitoring campaign performance and alerts',
+            timestamp: new Date().toISOString(),
+            severity: 'low',
+          },
+        ],
         total_count: 1,
         last_updated: new Date().toISOString(),
       };

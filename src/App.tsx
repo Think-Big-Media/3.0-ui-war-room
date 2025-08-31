@@ -40,8 +40,13 @@ import { BackgroundThemeProvider } from './contexts/BackgroundThemeContext';
 import './warroom.css';
 
 function App() {
+  // Apply saved theme on app load
+  React.useEffect(() => {
+    const savedTheme = localStorage.getItem('war-room-background-theme') || 'tactical-camo';
+    document.body.classList.add(`war-room-${savedTheme}`);
+  }, []);
   return (
-    <>      
+    <>
       <SupabaseAuthProvider>
         <BackgroundThemeProvider>
           <Router>
@@ -50,8 +55,8 @@ function App() {
                 {/* Command Center - Fresh 30-Aug with SWOT radar */}
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/command-center" element={<Dashboard />} />
-                <Route path="/dashboard" element={<Dashboard />} /> {/* Legacy route for compatibility */}
-                
+                <Route path="/dashboard" element={<Dashboard />} />{' '}
+                {/* Legacy route for compatibility */}
                 {/* Core Navigation Routes */}
                 <Route path="/command-center" element={<CommandCenter />} />
                 <Route path="/real-time-monitoring" element={<RealTimeMonitoring />} />
@@ -59,7 +64,6 @@ function App() {
                 <Route path="/intelligence-hub" element={<IntelligenceHub />} />
                 <Route path="/alert-center" element={<AlertCenter />} />
                 <Route path="/settings" element={<SettingsPage />} />
-                
                 {/* Additional Dashboard Routes - Temporarily disabled */}
                 {/* <Route path="/analytics" element={<AnalyticsDashboard />} />
                 <Route path="/automation" element={<AutomationDashboard />} />
@@ -78,11 +82,10 @@ function App() {
                 {import.meta.env.DEV && (
                   <Route path="/debug" element={<DebugDashboard />} />
                 )} */}
-                
                 {/* 404 Fallback */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
-              
+
               {/* Global Components */}
               <TickerTape />
             </ErrorBoundary>

@@ -49,7 +49,7 @@ export const useReducedMotion = (): boolean => {
 export const getAnimationClass = (
   prefersReducedMotion: boolean,
   animationClass: string,
-  staticClass = '',
+  staticClass = ''
 ): string => {
   return prefersReducedMotion ? staticClass : animationClass;
 };

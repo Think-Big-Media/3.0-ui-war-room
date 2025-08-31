@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  CheckCircle,
-  Clock,
-  Calendar,
-  AlertCircle,
-} from 'lucide-react';
+import { CheckCircle, Clock, Calendar, AlertCircle } from 'lucide-react';
 
 // Get category color for content formats
 export const getCategoryColor = (category: string) => {

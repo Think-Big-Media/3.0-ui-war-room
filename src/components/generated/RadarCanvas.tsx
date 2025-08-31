@@ -8,11 +8,7 @@ interface RadarCanvasProps {
 }
 
 // @component: RadarCanvas
-export const RadarCanvas = ({
-  dataPoints,
-  onSweepHit,
-  onBlobClick
-}: RadarCanvasProps) => {
+export const RadarCanvas = ({ dataPoints, onSweepHit, onBlobClick }: RadarCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
   const sweepAngleRef = useRef<number>(0);
@@ -20,10 +16,10 @@ export const RadarCanvas = ({
   const backgroundCacheRef = useRef<HTMLCanvasElement | null>(null);
   const isAnimatingRef = useRef<boolean>(false);
   const lastHitPointsRef = useRef<Set<string>>(new Set());
-  
+
   // Constants
   const SWEEP_SPEED = 0.03; // degrees per millisecond (360 degrees in 12 seconds)
-  
+
   // Create background cache
   const createBackgroundCache = useCallback((width: number, height: number) => {
     const offscreenCanvas = document.createElement('canvas');
@@ -31,7 +27,7 @@ export const RadarCanvas = ({
     offscreenCanvas.height = height;
     const ctx = offscreenCanvas.getContext('2d');
     if (!ctx) return null;
-    
+
     const centerX = width / 2;
     const centerY = height / 2;
     const radarSize = Math.min(width, height);
@@ -62,13 +58,13 @@ export const RadarCanvas = ({
     for (let i = 1; i < 20; i++) {
       const x = centerX - halfSize + (radarSize / 20) * i;
       const y = centerY - halfSize + (radarSize / 20) * i;
-      
+
       // Vertical
       ctx.beginPath();
       ctx.moveTo(x, centerY - halfSize);
       ctx.lineTo(x, centerY + halfSize);
       ctx.stroke();
-      
+
       // Horizontal
       ctx.beginPath();
       ctx.moveTo(centerX - halfSize, y);
@@ -109,7 +105,7 @@ export const RadarCanvas = ({
     ctx.fillText('THREATS', centerX + halfSize - 10, centerY + halfSize - 10);
 
     ctx.shadowBlur = 0;
-    
+
     return offscreenCanvas;
   }, []);
 
@@ -117,7 +113,7 @@ export const RadarCanvas = ({
   const animate = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
@@ -174,22 +170,22 @@ export const RadarCanvas = ({
     const minWidth = 1; // Thin needle at edge
     const maxOpacity = 0.9; // More visible (was 0.8, too dim)
     const minOpacity = 0.5; // Less fade at tip (was 0.3, too translucent)
-    
+
     // Draw tapered line segments
     for (let i = 0; i < segments; i++) {
       const progress = i / (segments - 1); // 0 to 1
       const segmentLength = halfSize / segments;
-      
+
       // Calculate positions for this segment
       const startX = centerX + Math.cos(radians) * (segmentLength * i);
       const startY = centerY + Math.sin(radians) * (segmentLength * i);
       const endSegX = centerX + Math.cos(radians) * (segmentLength * (i + 1));
       const endSegY = centerY + Math.sin(radians) * (segmentLength * (i + 1));
-      
+
       // Interpolate width and opacity (thick->thin, bright->dim)
       const lineWidth = maxWidth - (maxWidth - minWidth) * progress;
       const opacity = maxOpacity - (maxOpacity - minOpacity) * progress;
-      
+
       // Draw segment with subtle glow
       ctx.strokeStyle = `rgba(52, 211, 153, ${opacity})`;
       ctx.lineWidth = lineWidth;
@@ -200,22 +196,22 @@ export const RadarCanvas = ({
       ctx.lineTo(endSegX, endSegY);
       ctx.stroke();
     }
-    
+
     ctx.shadowBlur = 0;
 
     // Check for sweep hits
     const sweepRadians = (sweepAngle - 90) * (Math.PI / 180);
     const hitPoints = new Set<string>();
-    
-    dataPoints.forEach(point => {
+
+    dataPoints.forEach((point) => {
       // Calculate angle from center to point
       const pointAngle = Math.atan2(point.y - centerY, point.x - centerX);
-      const pointDegrees = ((pointAngle * 180 / Math.PI) + 90 + 360) % 360;
-      
+      const pointDegrees = ((pointAngle * 180) / Math.PI + 90 + 360) % 360;
+
       // Check if sweep is passing over this point (within 5 degree tolerance)
       const angleDiff = Math.abs(sweepAngle - pointDegrees);
       const isHit = angleDiff < 5 || angleDiff > 355;
-      
+
       if (isHit) {
         hitPoints.add(point.id);
         // If this point wasn't hit in the last frame, trigger the callback
@@ -224,13 +220,13 @@ export const RadarCanvas = ({
         }
       }
     });
-    
+
     // Update last hit points
     lastHitPointsRef.current = hitPoints;
 
     // Draw data points
     const currentTimeMs = Date.now();
-    dataPoints.forEach(point => {
+    dataPoints.forEach((point) => {
       const pulseIntensity = Math.sin(currentTimeMs * 0.003 + point.x * 0.01) * 0.4 + 0.8;
       const blobRadius = 6 + point.intensity * 8 * pulseIntensity;
 
@@ -238,12 +234,19 @@ export const RadarCanvas = ({
         strength: '#34d399',
         weakness: '#fb7185', // Softer rose-400
         opportunity: '#38bdf8', // sky-400
-        threat: '#fbbf24' // amber-400
+        threat: '#fbbf24', // amber-400
       };
       const color = colorMap[point.type];
 
       // Glow effect
-      const gradient = ctx.createRadialGradient(point.x, point.y, 0, point.x, point.y, blobRadius * 2);
+      const gradient = ctx.createRadialGradient(
+        point.x,
+        point.y,
+        0,
+        point.x,
+        point.y,
+        blobRadius * 2
+      );
       gradient.addColorStop(0, color);
       gradient.addColorStop(0.5, `${color}60`);
       gradient.addColorStop(1, 'transparent');
@@ -275,30 +278,34 @@ export const RadarCanvas = ({
   }, [dataPoints, createBackgroundCache]);
 
   // Handle canvas click
-  const handleCanvasClick = useCallback((event: MouseEvent) => {
-    const canvas = canvasRef.current;
-    if (!canvas || !onBlobClick) return;
-    
-    const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-    
-    // Check if click is on any data point
-    dataPoints.forEach(point => {
-      const distance = Math.sqrt(Math.pow(x - point.x, 2) + Math.pow(y - point.y, 2));
-      const blobRadius = 6 + point.intensity * 8; // Base radius without animation
-      
-      if (distance <= blobRadius * 2) { // Click within blob area (including glow)
-        onBlobClick(point);
-      }
-    });
-  }, [dataPoints, onBlobClick]);
+  const handleCanvasClick = useCallback(
+    (event: MouseEvent) => {
+      const canvas = canvasRef.current;
+      if (!canvas || !onBlobClick) return;
+
+      const rect = canvas.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      // Check if click is on any data point
+      dataPoints.forEach((point) => {
+        const distance = Math.sqrt(Math.pow(x - point.x, 2) + Math.pow(y - point.y, 2));
+        const blobRadius = 6 + point.intensity * 8; // Base radius without animation
+
+        if (distance <= blobRadius * 2) {
+          // Click within blob area (including glow)
+          onBlobClick(point);
+        }
+      });
+    },
+    [dataPoints, onBlobClick]
+  );
 
   // Initialize canvas and start animation
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
+
     const rect = canvas.getBoundingClientRect();
     const parent = canvas.parentElement;
     if (parent) {
@@ -316,7 +323,7 @@ export const RadarCanvas = ({
     isAnimatingRef.current = true;
     lastTimeRef.current = performance.now();
     animate();
-    
+
     // Add click listener
     canvas.addEventListener('click', handleCanvasClick);
 
@@ -330,14 +337,14 @@ export const RadarCanvas = ({
   }, [animate, createBackgroundCache, handleCanvasClick]);
 
   return (
-    <canvas 
-      ref={canvasRef} 
+    <canvas
+      ref={canvasRef}
       className="absolute inset-0 w-full h-full"
       style={{
         filter: 'contrast(1.05) brightness(1.05)',
         background: 'transparent',
-        cursor: 'crosshair'
-      }} 
+        cursor: 'crosshair',
+      }}
     />
   );
 };

@@ -6,11 +6,7 @@
 import { MetaAuth } from './auth';
 import { rateLimiter } from './rateLimiter';
 import { metaCache } from './cache';
-import {
-  type MetaApiResponse,
-  type MetaApiError,
-  type MetaConfig,
-} from './types';
+import { type MetaApiResponse, type MetaApiError, type MetaConfig } from './types';
 
 interface RequestOptions {
   method?: 'GET' | 'POST' | 'DELETE';
@@ -45,10 +41,7 @@ export class MetaApiClient {
   /**
    * Make authenticated API request
    */
-  async request<T>(
-    endpoint: string,
-    options: RequestOptions = {},
-  ): Promise<MetaApiResponse<T>> {
+  async request<T>(endpoint: string, options: RequestOptions = {}): Promise<MetaApiResponse<T>> {
     const startTime = Date.now();
     const { method = 'GET', params = {}, body, skipCache = false, cacheTTL } = options;
 
@@ -139,7 +132,6 @@ export class MetaApiClient {
       }
 
       return responseData as MetaApiResponse<T>;
-
     } catch (error) {
       // Log error
       this.logRequest({
@@ -161,7 +153,7 @@ export class MetaApiClient {
   async *paginate<T>(
     endpoint: string,
     params: Record<string, any> = {},
-    maxPages = 10,
+    maxPages = 10
   ): AsyncGenerator<T[], void, unknown> {
     let nextUrl: string | undefined;
     let pageCount = 0;
@@ -169,25 +161,26 @@ export class MetaApiClient {
     do {
       const response = await this.request<T[]>(
         nextUrl ? nextUrl.replace(`${this.baseUrl}/${this.apiVersion}/`, '') : endpoint,
-        { params: nextUrl ? {} : params },
+        { params: nextUrl ? {} : params }
       );
 
       yield response.data;
 
       nextUrl = response.paging?.next;
       pageCount++;
-
     } while (nextUrl && pageCount < maxPages);
   }
 
   /**
    * Batch multiple requests
    */
-  async batch(requests: Array<{
-    method: string;
-    relative_url: string;
-    body?: string;
-  }>): Promise<any[]> {
+  async batch(
+    requests: Array<{
+      method: string;
+      relative_url: string;
+      body?: string;
+    }>
+  ): Promise<any[]> {
     const batchParams = {
       batch: JSON.stringify(requests),
     };

@@ -55,10 +55,7 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
         icon: AlertTriangle,
         color: 'text-red-600 bg-red-50',
         label: 'Connection Error',
-        description:
-          reconnectAttempts >= maxReconnectAttempts
-            ? 'Max retries reached'
-            : error,
+        description: reconnectAttempts >= maxReconnectAttempts ? 'Max retries reached' : error,
       };
     }
 
@@ -79,9 +76,7 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
         <div className={cn('p-1 rounded-full', config.color)}>
           <Icon className={cn('w-3 h-3', isConnecting && 'animate-spin')} />
         </div>
-        <span className="text-xs font-medium text-gray-700">
-          {config.label}
-        </span>
+        <span className="text-xs font-medium text-gray-700">{config.label}</span>
       </div>
     );
   }
@@ -124,9 +119,7 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
         </div>
 
         <div>
-          <p className={cn('text-sm font-medium', config.color.split(' ')[0])}>
-            {config.label}
-          </p>
+          <p className={cn('text-sm font-medium', config.color.split(' ')[0])}>{config.label}</p>
           <p className="text-xs text-gray-500">{config.description}</p>
         </div>
       </div>

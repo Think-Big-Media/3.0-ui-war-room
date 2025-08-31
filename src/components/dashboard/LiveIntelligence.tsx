@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import Card from '../shared/Card';
 import { MessageCircle, Heart, Share2, TrendingUp, Clock } from 'lucide-react';
 
@@ -13,7 +13,7 @@ interface SocialPost {
   isBreaking?: boolean;
 }
 
-export const LiveIntelligence: React.FC = () => {
+export const LiveIntelligence: React.FC = memo(() => {
   const [posts, setPosts] = useState<SocialPost[]>([
     {
       id: '1',
@@ -23,16 +23,16 @@ export const LiveIntelligence: React.FC = () => {
       sentiment: 'positive',
       engagement: 847,
       timestamp: '2 min ago',
-      isBreaking: true
+      isBreaking: true,
     },
     {
-      id: '2', 
+      id: '2',
       text: 'The infrastructure investment plan announcement has been well received across the business community in Newark.',
       author: 'NJ Business Daily',
       platform: 'news',
       sentiment: 'positive',
       engagement: 1203,
-      timestamp: '7 min ago'
+      timestamp: '7 min ago',
     },
     {
       id: '3',
@@ -41,16 +41,16 @@ export const LiveIntelligence: React.FC = () => {
       platform: 'facebook',
       sentiment: 'negative',
       engagement: 432,
-      timestamp: '12 min ago'
+      timestamp: '12 min ago',
     },
     {
       id: '4',
-      text: 'Interesting perspective shared at today\'s town hall meeting in Camden. Looking forward to seeing how this develops.',
+      text: "Interesting perspective shared at today's town hall meeting in Camden. Looking forward to seeing how this develops.",
       author: 'Local News 7',
       platform: 'news',
       sentiment: 'neutral',
       engagement: 678,
-      timestamp: '18 min ago'
+      timestamp: '18 min ago',
     },
     {
       id: '5',
@@ -59,26 +59,35 @@ export const LiveIntelligence: React.FC = () => {
       platform: 'twitter',
       sentiment: 'positive',
       engagement: 956,
-      timestamp: '23 min ago'
-    }
+      timestamp: '23 min ago',
+    },
   ]);
 
   const getSentimentColor = (sentiment: string) => {
     switch (sentiment) {
-      case 'positive': return 'border-l-emerald-400 bg-emerald-400/5';
-      case 'negative': return 'border-l-rose-400 bg-rose-400/5';
-      default: return 'border-l-slate-400 bg-slate-400/5';
+      case 'positive':
+        return 'border-l-emerald-400 bg-emerald-400/5';
+      case 'negative':
+        return 'border-l-rose-400 bg-rose-400/5';
+      default:
+        return 'border-l-slate-400 bg-slate-400/5';
     }
   };
 
   const getPlatformIcon = (platform: string) => {
     switch (platform) {
-      case 'twitter': return '🐦';
-      case 'facebook': return '👥';
-      case 'instagram': return '📸';
-      case 'news': return '📰';
-      case 'tiktok': return '🎵';
-      default: return '💬';
+      case 'twitter':
+        return '🐦';
+      case 'facebook':
+        return '👥';
+      case 'instagram':
+        return '📸';
+      case 'news':
+        return '📰';
+      case 'tiktok':
+        return '🎵';
+      default:
+        return '💬';
     }
   };
 
@@ -86,17 +95,23 @@ export const LiveIntelligence: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       // Randomly update engagement numbers to simulate live activity
-      setPosts(prev => prev.map(post => ({
-        ...post,
-        engagement: post.engagement + Math.floor(Math.random() * 10)
-      })));
+      setPosts((prev) =>
+        prev.map((post) => ({
+          ...post,
+          engagement: post.engagement + Math.floor(Math.random() * 10),
+        }))
+      );
     }, 30000); // Update every 30 seconds
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <Card variant="glass" padding="sm" className="live-intelligence hoverable hover:scale-[1.02] transition-all duration-200">
+    <Card
+      variant="glass"
+      padding="sm"
+      className="live-intelligence hoverable hover:scale-[1.02] transition-all duration-200"
+    >
       <div className="flex items-center justify-between mb-2">
         <h3 className="font-barlow font-semibold text-white text-xs flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
@@ -121,7 +136,7 @@ export const LiveIntelligence: React.FC = () => {
                 </span>
               </div>
             )}
-            
+
             <div className="flex items-start justify-between mb-1">
               <div className="flex items-center gap-2">
                 <span className="text-sm">{getPlatformIcon(post.platform)}</span>
@@ -133,26 +148,28 @@ export const LiveIntelligence: React.FC = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-1 text-[9px] text-sky-400">
                 <TrendingUp className="w-2.5 h-2.5" />
                 {post.engagement.toLocaleString()}
               </div>
             </div>
-            
-            <p className="text-[10px] text-white/80 leading-relaxed line-clamp-2">
-              {post.text}
-            </p>
-            
+
+            <p className="text-[10px] text-white/80 leading-relaxed line-clamp-2">{post.text}</p>
+
             <div className="flex items-center justify-between mt-1">
-              <div className={`text-[8px] px-1.5 py-0.5 rounded uppercase font-semibold ${
-                post.sentiment === 'positive' ? 'bg-emerald-400/20 text-emerald-400' :
-                post.sentiment === 'negative' ? 'bg-rose-400/20 text-rose-400' :
-                'bg-slate-400/20 text-slate-400'
-              }`}>
+              <div
+                className={`text-[8px] px-1.5 py-0.5 rounded uppercase font-semibold ${
+                  post.sentiment === 'positive'
+                    ? 'bg-emerald-400/20 text-emerald-400'
+                    : post.sentiment === 'negative'
+                      ? 'bg-rose-400/20 text-rose-400'
+                      : 'bg-slate-400/20 text-slate-400'
+                }`}
+              >
                 {post.sentiment}
               </div>
-              
+
               <div className="flex items-center gap-2 text-white/40">
                 <div className="flex items-center gap-1 text-[8px]">
                   <MessageCircle className="w-2 h-2" />
@@ -171,7 +188,7 @@ export const LiveIntelligence: React.FC = () => {
           </div>
         ))}
       </div>
-      
+
       <div className="mt-2 pt-2 border-t border-white/10 flex justify-between text-center">
         <div>
           <div className="text-xs font-bold text-white">{posts.length}</div>
@@ -179,7 +196,7 @@ export const LiveIntelligence: React.FC = () => {
         </div>
         <div>
           <div className="text-xs font-bold text-emerald-400">
-            {posts.filter(p => p.sentiment === 'positive').length}
+            {posts.filter((p) => p.sentiment === 'positive').length}
           </div>
           <div className="text-[9px] text-white/60 uppercase">Positive</div>
         </div>
@@ -192,4 +209,6 @@ export const LiveIntelligence: React.FC = () => {
       </div>
     </Card>
   );
-};
+});
+
+LiveIntelligence.displayName = 'LiveIntelligence';

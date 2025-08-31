@@ -124,7 +124,6 @@ export class TokenBucketRateLimiter extends EventEmitter {
         if (attempt < maxRetries - 1) {
           await this.sleep(delay + jitter);
         }
-
       } catch (error) {
         this.emit('error', error);
         throw error;
@@ -135,7 +134,7 @@ export class TokenBucketRateLimiter extends EventEmitter {
     const status = await this.getStatus(customerId);
     throw new RateLimitError(
       `Rate limit exceeded. ${status.tokensRemaining} tokens remaining. ` +
-      `Next refill in ${status.nextRefillIn}ms.`,
+        `Next refill in ${status.nextRefillIn}ms.`
     );
   }
 
@@ -145,15 +144,15 @@ export class TokenBucketRateLimiter extends EventEmitter {
   private async tryAcquireToken(key: string, tokensRequested: number): Promise<boolean> {
     const now = Date.now() / 1000;
 
-    const result = await this.redis.eval(
+    const result = (await this.redis.eval(
       this.consumeScript,
       1,
       key,
       this.config.bucketSize.toString(),
       this.config.tokensPerSecond.toString(),
       now.toString(),
-      tokensRequested.toString(),
-    ) as [number, number, number];
+      tokensRequested.toString()
+    )) as [number, number, number];
 
     return result[0] === 1;
   }
@@ -165,23 +164,23 @@ export class TokenBucketRateLimiter extends EventEmitter {
     const key = this.buildKey(customerId);
     const now = Date.now() / 1000;
 
-    const result = await this.redis.eval(
+    const result = (await this.redis.eval(
       this.refillScript,
       1,
       key,
       this.config.bucketSize.toString(),
       this.config.tokensPerSecond.toString(),
-      now.toString(),
-    ) as [number, number];
+      now.toString()
+    )) as [number, number];
 
     const [tokensRemaining, bucketSize] = result;
 
     // Calculate time until bucket is full
     const tokensNeeded = bucketSize - tokensRemaining;
-    const timeToFull = tokensNeeded / this.config.tokensPerSecond * 1000; // ms
+    const timeToFull = (tokensNeeded / this.config.tokensPerSecond) * 1000; // ms
 
     // Calculate next refill time (when at least 1 token will be available)
-    const nextRefillIn = tokensRemaining > 0 ? 0 : (1 / this.config.tokensPerSecond * 1000);
+    const nextRefillIn = tokensRemaining > 0 ? 0 : (1 / this.config.tokensPerSecond) * 1000;
 
     return {
       tokensRemaining: Math.floor(tokensRemaining),
@@ -226,7 +225,7 @@ export class TokenBucketRateLimiter extends EventEmitter {
     }
 
     const pipeline = this.redis.pipeline();
-    keys.forEach(key => {
+    keys.forEach((key) => {
       pipeline.hmget(key, 'tokens');
     });
 
@@ -242,8 +241,9 @@ export class TokenBucketRateLimiter extends EventEmitter {
       }
     });
 
-    const averageTokens = tokenCounts.reduce((sum, item) => sum + item.tokensRemaining, 0) / tokenCounts.length;
-    const customersAtLimit = tokenCounts.filter(item => item.tokensRemaining < 1).length;
+    const averageTokens =
+      tokenCounts.reduce((sum, item) => sum + item.tokensRemaining, 0) / tokenCounts.length;
+    const customersAtLimit = tokenCounts.filter((item) => item.tokensRemaining < 1).length;
     const topConsumers = tokenCounts
       .sort((a, b) => a.tokensRemaining - b.tokensRemaining)
       .slice(0, 10);
@@ -275,7 +275,7 @@ export class TokenBucketRateLimiter extends EventEmitter {
     }
 
     const tokensNeeded = tokensRequested - status.tokensRemaining;
-    const timeNeeded = tokensNeeded / this.config.tokensPerSecond * 1000;
+    const timeNeeded = (tokensNeeded / this.config.tokensPerSecond) * 1000;
 
     return Math.ceil(timeNeeded);
   }
@@ -286,7 +286,7 @@ export class TokenBucketRateLimiter extends EventEmitter {
   async setCustomerLimit(
     customerId: string,
     tokensPerSecond: number,
-    bucketSize: number,
+    bucketSize: number
   ): Promise<void> {
     const key = `${this.keyPrefix}:config:${customerId}`;
 
@@ -307,10 +307,7 @@ export class TokenBucketRateLimiter extends EventEmitter {
     const configKey = `${this.keyPrefix}:config:${customerId}`;
     const bucketKey = this.buildKey(customerId);
 
-    await Promise.all([
-      this.redis.del(configKey),
-      this.redis.del(bucketKey),
-    ]);
+    await Promise.all([this.redis.del(configKey), this.redis.del(bucketKey)]);
 
     this.emit('customLimitRemoved', { customerId });
   }
@@ -346,10 +343,7 @@ export class TokenBucketRateLimiter extends EventEmitter {
     }
 
     // Hash customer ID for security (prevents enumeration)
-    const hash = crypto.createHash('sha256')
-      .update(customerId)
-      .digest('hex')
-      .substring(0, 16); // Use first 16 chars for readability
+    const hash = crypto.createHash('sha256').update(customerId).digest('hex').substring(0, 16); // Use first 16 chars for readability
 
     return `${this.keyPrefix}:${hash}`;
   }
@@ -358,7 +352,7 @@ export class TokenBucketRateLimiter extends EventEmitter {
    * Sleep utility
    */
   private sleep(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   /**

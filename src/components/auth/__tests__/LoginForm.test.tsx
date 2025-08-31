@@ -26,8 +26,7 @@ const createTestStore = () => {
     reducer: {
       [authApi.reducerPath]: authApi.reducer,
     },
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(authApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware),
   });
 };
 
@@ -39,11 +38,9 @@ const renderWithProviders = (ui: React.ReactElement, { route = '/login' } = {}) 
     ...render(
       <Provider store={store}>
         <MemoryRouter initialEntries={[route]}>
-          <AuthProvider>
-            {ui}
-          </AuthProvider>
+          <AuthProvider>{ui}</AuthProvider>
         </MemoryRouter>
-      </Provider>,
+      </Provider>
     ),
     store,
   };
@@ -270,7 +267,7 @@ describe('LoginForm Component', () => {
           <BrowserRouter>
             <LoginForm />
           </BrowserRouter>
-        </Provider>,
+        </Provider>
       );
 
       // Fill in form
@@ -293,7 +290,7 @@ describe('LoginForm Component', () => {
           expect.objectContaining({
             method: 'POST',
             body: expect.any(URLSearchParams),
-          }),
+          })
         );
       });
 
@@ -304,7 +301,7 @@ describe('LoginForm Component', () => {
             access_token: mockLoginResponse.access_token,
             refresh_token: mockLoginResponse.refresh_token,
           },
-          mockLoginResponse.user,
+          mockLoginResponse.user
         );
       });
     });
@@ -314,9 +311,9 @@ describe('LoginForm Component', () => {
       renderWithProviders(<LoginForm />);
 
       // Mock a delayed response
-      global.fetch = jest.fn().mockImplementation(() =>
-        new Promise(resolve => setTimeout(resolve, 100)),
-      );
+      global.fetch = jest
+        .fn()
+        .mockImplementation(() => new Promise((resolve) => setTimeout(resolve, 100)));
 
       // Fill in valid form
       const emailInput = screen.getByLabelText(/email address/i);
@@ -380,7 +377,9 @@ describe('LoginForm Component', () => {
 
       // Check error message
       await waitFor(() => {
-        expect(screen.getByText(/account is inactive. please contact support/i)).toBeInTheDocument();
+        expect(
+          screen.getByText(/account is inactive. please contact support/i)
+        ).toBeInTheDocument();
       });
     });
 
@@ -402,7 +401,9 @@ describe('LoginForm Component', () => {
 
       // Check error message
       await waitFor(() => {
-        expect(screen.getByText(/too many login attempts. please try again later/i)).toBeInTheDocument();
+        expect(
+          screen.getByText(/too many login attempts. please try again later/i)
+        ).toBeInTheDocument();
       });
     });
 
@@ -446,7 +447,7 @@ describe('LoginForm Component', () => {
       // Verify rememberMe was included in request
       await waitFor(() => {
         const fetchCall = (global.fetch as jest.Mock).mock.calls[0];
-        const {body} = fetchCall[1];
+        const { body } = fetchCall[1];
         expect(body.toString()).toContain('grant_type=password');
       });
     });

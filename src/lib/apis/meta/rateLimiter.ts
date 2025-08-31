@@ -42,11 +42,13 @@ export class RateLimiter {
    * Wait for rate limit if needed
    */
   async waitForRateLimit(): Promise<void> {
-    if (this.canMakeRequest()) {return;}
+    if (this.canMakeRequest()) {
+      return;
+    }
 
     const waitTime = this.getWaitTime();
     console.log(`Rate limit reached. Waiting ${waitTime}ms before retry...`);
-    await new Promise(resolve => setTimeout(resolve, waitTime));
+    await new Promise((resolve) => setTimeout(resolve, waitTime));
 
     // Reset window if needed after wait
     this.resetWindowIfNeeded();
@@ -75,10 +77,7 @@ export class RateLimiter {
       this.state.retryAfter = Date.now() + retryAfter * 1000;
     } else {
       // Exponential backoff
-      const backoffMs = Math.min(
-        1000 * this.state.backoffMultiplier,
-        this.maxBackoffMs,
-      );
+      const backoffMs = Math.min(1000 * this.state.backoffMultiplier, this.maxBackoffMs);
       this.state.retryAfter = Date.now() + backoffMs;
       this.state.backoffMultiplier *= 2;
     }
@@ -91,7 +90,7 @@ export class RateLimiter {
     requestsRemaining: number;
     resetTime: Date;
     inBackoff: boolean;
-    } {
+  } {
     this.resetWindowIfNeeded();
 
     return {

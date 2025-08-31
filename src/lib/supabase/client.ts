@@ -11,9 +11,7 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://placeholder.su
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'placeholder-key';
 
 if (!import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE_SUPABASE_ANON_KEY) {
-  console.warn(
-    'Missing Supabase environment variables. App running in demo mode.',
-  );
+  console.warn('Missing Supabase environment variables. App running in demo mode.');
 }
 
 export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {

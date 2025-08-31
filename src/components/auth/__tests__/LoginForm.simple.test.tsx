@@ -17,8 +17,7 @@ const createTestStore = () => {
     reducer: {
       [authApi.reducerPath]: authApi.reducer,
     },
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(authApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware),
   });
 };
 
@@ -57,7 +56,7 @@ describe('LoginForm Component - Simple Tests', () => {
         <MemoryRouter>
           <LoginForm />
         </MemoryRouter>
-      </Provider>,
+      </Provider>
     );
 
     // Check if main heading is rendered
@@ -72,7 +71,7 @@ describe('LoginForm Component - Simple Tests', () => {
         <MemoryRouter>
           <LoginForm />
         </MemoryRouter>
-      </Provider>,
+      </Provider>
     );
 
     // Check form fields
@@ -88,7 +87,7 @@ describe('LoginForm Component - Simple Tests', () => {
         <MemoryRouter>
           <LoginForm />
         </MemoryRouter>
-      </Provider>,
+      </Provider>
     );
 
     // Check submit button

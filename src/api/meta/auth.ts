@@ -40,13 +40,13 @@ export class MetaAuthManager {
     try {
       const response = await fetch(
         `https://graph.facebook.com/v${this.config.apiVersion}/oauth/access_token?${params}`,
-        { method: 'GET' },
+        { method: 'GET' }
       );
 
       if (!response.ok) {
         const error = await response.json();
         throw new MetaAuthenticationError(
-          error.error?.message || 'Failed to exchange code for token',
+          error.error?.message || 'Failed to exchange code for token'
         );
       }
 
@@ -60,9 +60,7 @@ export class MetaAuthManager {
       if (error instanceof MetaAuthenticationError) {
         throw error;
       }
-      throw new MetaAuthenticationError(
-        `Token exchange failed: ${(error as Error).message}`,
-      );
+      throw new MetaAuthenticationError(`Token exchange failed: ${(error as Error).message}`);
     }
   }
 
@@ -80,14 +78,12 @@ export class MetaAuthManager {
     try {
       const response = await fetch(
         `https://graph.facebook.com/v${this.config.apiVersion}/oauth/access_token?${params}`,
-        { method: 'GET' },
+        { method: 'GET' }
       );
 
       if (!response.ok) {
         const error = await response.json();
-        throw new MetaAuthenticationError(
-          error.error?.message || 'Failed to refresh token',
-        );
+        throw new MetaAuthenticationError(error.error?.message || 'Failed to refresh token');
       }
 
       const token: AccessToken = await response.json();
@@ -100,9 +96,7 @@ export class MetaAuthManager {
       if (error instanceof MetaAuthenticationError) {
         throw error;
       }
-      throw new MetaAuthenticationError(
-        `Token refresh failed: ${(error as Error).message}`,
-      );
+      throw new MetaAuthenticationError(`Token refresh failed: ${(error as Error).message}`);
     }
   }
 
@@ -113,8 +107,8 @@ export class MetaAuthManager {
     try {
       const response = await fetch(
         'https://graph.facebook.com/debug_token?' +
-        `input_token=${token}&` +
-        `access_token=${this.config.appId}|${this.config.appSecret}`,
+          `input_token=${token}&` +
+          `access_token=${this.config.appId}|${this.config.appSecret}`
       );
 
       if (!response.ok) {
@@ -122,12 +116,14 @@ export class MetaAuthManager {
       }
 
       const result = await response.json();
-      const {data} = result;
+      const { data } = result;
 
       // Check if token is valid and not expired
-      return data.is_valid &&
-             data.app_id === this.config.appId &&
-             (!data.expires_at || data.expires_at * 1000 > Date.now());
+      return (
+        data.is_valid &&
+        data.app_id === this.config.appId &&
+        (!data.expires_at || data.expires_at * 1000 > Date.now())
+      );
     } catch (error) {
       console.error('Token validation error:', error);
       return false;
@@ -173,7 +169,7 @@ export class MetaAuthManager {
     try {
       const response = await fetch(
         `https://graph.facebook.com/v${this.config.apiVersion}/me/permissions?` +
-        `access_token=${token}`,
+          `access_token=${token}`
       );
 
       if (!response.ok) {
@@ -195,8 +191,9 @@ export class MetaAuthManager {
    * Generate random state for OAuth flow (CSRF protection)
    */
   private generateState(): string {
-    return Math.random().toString(36).substring(2, 15) +
-           Math.random().toString(36).substring(2, 15);
+    return (
+      Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+    );
   }
 
   /**
@@ -212,14 +209,12 @@ export class MetaAuthManager {
 
     try {
       const response = await fetch(
-        `https://graph.facebook.com/v${this.config.apiVersion}/oauth/access_token?${params}`,
+        `https://graph.facebook.com/v${this.config.apiVersion}/oauth/access_token?${params}`
       );
 
       if (!response.ok) {
         const error = await response.json();
-        throw new MetaAuthenticationError(
-          error.error?.message || 'Failed to get long-lived token',
-        );
+        throw new MetaAuthenticationError(error.error?.message || 'Failed to get long-lived token');
       }
 
       const token: AccessToken = await response.json();
@@ -233,7 +228,7 @@ export class MetaAuthManager {
         throw error;
       }
       throw new MetaAuthenticationError(
-        `Long-lived token exchange failed: ${(error as Error).message}`,
+        `Long-lived token exchange failed: ${(error as Error).message}`
       );
     }
   }

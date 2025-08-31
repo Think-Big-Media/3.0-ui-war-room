@@ -31,7 +31,9 @@ export class MetaApiCache {
     const fullKey = this.getFullKey(key);
     const entry = this.cache.get(fullKey);
 
-    if (!entry) {return null;}
+    if (!entry) {
+      return null;
+    }
 
     // Check if expired
     if (Date.now() - entry.timestamp > entry.ttl) {
@@ -85,7 +87,7 @@ export class MetaApiCache {
       }
     }
 
-    keysToDelete.forEach(key => this.cache.delete(key));
+    keysToDelete.forEach((key) => this.cache.delete(key));
   }
 
   /**
@@ -102,7 +104,7 @@ export class MetaApiCache {
     size: number;
     maxSize: number;
     hitRate: number;
-    } {
+  } {
     return {
       size: this.cache.size,
       maxSize: this.config.maxSize,
@@ -113,13 +115,10 @@ export class MetaApiCache {
   /**
    * Generate cache key for insights
    */
-  static generateInsightKey(
-    accountId: string,
-    params: Record<string, any>,
-  ): string {
+  static generateInsightKey(accountId: string, params: Record<string, any>): string {
     const sortedParams = Object.keys(params)
       .sort()
-      .map(key => `${key}:${JSON.stringify(params[key])}`)
+      .map((key) => `${key}:${JSON.stringify(params[key])}`)
       .join('|');
 
     return `insights:${accountId}:${sortedParams}`;

@@ -5,7 +5,7 @@ import GoogleAdsIntegrationComponent from './GoogleAdsIntegration';
 // Add diagnostics
 console.log('[BUILD] OAuth components loaded:', {
   Meta: !!MetaIntegrationComponent,
-  GoogleAds: !!GoogleAdsIntegrationComponent
+  GoogleAds: !!GoogleAdsIntegrationComponent,
 });
 
 export const MetaIntegration = MetaIntegrationComponent;

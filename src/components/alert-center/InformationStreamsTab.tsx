@@ -3,10 +3,7 @@ import { Search, Globe, Target, Bell } from 'lucide-react';
 import Card from '../shared/Card';
 import CustomDropdown from '../shared/CustomDropdown';
 import InformationStreamCard from './InformationStreamCard';
-import {
-  type InformationItem,
-  type InformationFilters,
-} from '../../types/information';
+import { type InformationItem, type InformationFilters } from '../../types/information';
 
 interface InformationStreamsTabProps {
   items: InformationItem[];
@@ -98,9 +95,7 @@ const InformationStreamsTab: React.FC<InformationStreamsTabProps> = ({
                 type="text"
                 placeholder="Search information..."
                 value={filters.searchTerm || ''}
-                onChange={(e) =>
-                  onFilterChange({ ...filters, searchTerm: e.target.value })
-                }
+                onChange={(e) => onFilterChange({ ...filters, searchTerm: e.target.value })}
                 className="pl-10 bg-black/20 border border-white/30 rounded-lg px-3 py-2 text-white placeholder-white/50"
               />
             </div>
@@ -157,11 +152,7 @@ const InformationStreamsTab: React.FC<InformationStreamsTabProps> = ({
       {/* Information Items */}
       <div className="space-y-4">
         {items.map((item) => (
-          <InformationStreamCard
-            key={item.id}
-            item={item}
-            onClick={onItemClick}
-          />
+          <InformationStreamCard key={item.id} item={item} onClick={onItemClick} />
         ))}
       </div>
     </div>

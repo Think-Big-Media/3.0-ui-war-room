@@ -33,9 +33,7 @@ class ErrorBoundary extends Component<Props, State> {
             <p className="text-xl mb-4">Please try refreshing the page</p>
             {this.state.error && (
               <details className="mt-4 text-left bg-black/20 p-4 rounded-lg">
-                <summary className="cursor-pointer text-orange-400">
-                  Show error details
-                </summary>
+                <summary className="cursor-pointer text-orange-400">Show error details</summary>
                 <pre className="mt-2 text-sm text-white/80 overflow-auto">
                   {this.state.error.toString()}
                 </pre>

@@ -43,8 +43,8 @@ export class UnifiedMonitor {
         'mentionlytics',
         createMentionlyticsClient(
           this.config.mentionlytics.apiKey,
-          this.config.mentionlytics.projectId,
-        ),
+          this.config.mentionlytics.projectId
+        )
       );
     }
   }
@@ -172,7 +172,7 @@ export class UnifiedMonitor {
             uptime_percentage: 0,
           };
         }
-      }),
+      })
     );
 
     this.metrics.service_health = healthChecks;
@@ -187,7 +187,7 @@ export class UnifiedMonitor {
     const timeDiff = Date.now() - this.metrics.last_updated.getTime();
     const minutes = timeDiff / 60000;
     this.metrics.events_per_minute = Math.round(
-      this.metrics.events_processed_total / Math.max(1, minutes),
+      this.metrics.events_processed_total / Math.max(1, minutes)
     );
 
     return { ...this.metrics };
@@ -234,7 +234,7 @@ export class UnifiedMonitor {
     const words1 = new Set(event1.content.toLowerCase().split(/\s+/));
     const words2 = new Set(event2.content.toLowerCase().split(/\s+/));
 
-    const intersection = new Set([...words1].filter(x => words2.has(x)));
+    const intersection = new Set([...words1].filter((x) => words2.has(x)));
     const union = new Set([...words1, ...words2]);
 
     return intersection.size / union.size;
@@ -253,7 +253,6 @@ export class UnifiedMonitor {
     }
     this.metrics.platform_distribution[event.platform]++;
   }
-
 
   /**
    * Get recent events from cache

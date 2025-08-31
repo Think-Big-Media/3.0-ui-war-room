@@ -13,16 +13,16 @@ const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 export async function analyzeDocument(file: File): Promise<DocumentAnalysis> {
   const formData = new FormData();
   formData.append('document', file);
-  
+
   const response = await fetch(`${API_BASE}/api/v1/intelligence/documents/analyze`, {
     method: 'POST',
     body: formData,
   });
-  
+
   if (!response.ok) {
     throw new Error('Document analysis failed');
   }
-  
+
   return response.json();
 }
 
@@ -48,11 +48,11 @@ export async function generateThreatAssessment(target: string): Promise<ThreatAs
     },
     body: JSON.stringify({ target }),
   });
-  
+
   if (!response.ok) {
     throw new Error('Threat assessment generation failed');
   }
-  
+
   return response.json();
 }
 

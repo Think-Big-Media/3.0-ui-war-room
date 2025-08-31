@@ -109,10 +109,7 @@ export class AlertService {
           try {
             await this.sendToSubscriber(alert, subscriber);
           } catch (error) {
-            console.error(
-              `Failed to send alert to subscriber ${subscriber.id}:`,
-              error
-            );
+            console.error(`Failed to send alert to subscriber ${subscriber.id}:`, error);
           }
         }
       }
@@ -124,36 +121,25 @@ export class AlertService {
   /**
    * Check if alert matches subscriber filters
    */
-  private shouldSendToSubscriber(
-    alert: CrisisAlert,
-    subscriber: AlertSubscriber
-  ): boolean {
+  private shouldSendToSubscriber(alert: CrisisAlert, subscriber: AlertSubscriber): boolean {
     if (!subscriber.filters) {
       return true;
     }
 
     // Check severity filter
-    if (
-      subscriber.filters.severity &&
-      !subscriber.filters.severity.includes(alert.severity)
-    ) {
+    if (subscriber.filters.severity && !subscriber.filters.severity.includes(alert.severity)) {
       return false;
     }
 
     // Check type filter
-    if (
-      subscriber.filters.types &&
-      !subscriber.filters.types.includes(alert.type)
-    ) {
+    if (subscriber.filters.types && !subscriber.filters.types.includes(alert.type)) {
       return false;
     }
 
     // Check keyword filter
     if (subscriber.filters.keywords) {
       const hasKeyword = subscriber.filters.keywords.some((keyword) =>
-        alert.affected_keywords.some((ak) =>
-          ak.toLowerCase().includes(keyword.toLowerCase())
-        )
+        alert.affected_keywords.some((ak) => ak.toLowerCase().includes(keyword.toLowerCase()))
       );
       if (!hasKeyword) {
         return false;
@@ -166,10 +152,7 @@ export class AlertService {
   /**
    * Send alert to specific subscriber
    */
-  private async sendToSubscriber(
-    alert: CrisisAlert,
-    subscriber: AlertSubscriber
-  ): Promise<void> {
+  private async sendToSubscriber(alert: CrisisAlert, subscriber: AlertSubscriber): Promise<void> {
     switch (subscriber.type) {
       case 'websocket':
         this.sendWebSocketAlert(alert, subscriber);
@@ -195,10 +178,7 @@ export class AlertService {
   /**
    * Send WebSocket alert
    */
-  private sendWebSocketAlert(
-    alert: CrisisAlert,
-    subscriber: AlertSubscriber
-  ): void {
+  private sendWebSocketAlert(alert: CrisisAlert, subscriber: AlertSubscriber): void {
     const ws = this.websocketConnections.get(subscriber.id);
     if (ws && ws.readyState === WS.OPEN) {
       ws.send(
@@ -214,10 +194,7 @@ export class AlertService {
   /**
    * Send email alert
    */
-  private async sendEmailAlert(
-    alert: CrisisAlert,
-    subscriber: AlertSubscriber
-  ): Promise<void> {
+  private async sendEmailAlert(alert: CrisisAlert, subscriber: AlertSubscriber): Promise<void> {
     // Integration with email service (SendGrid, etc.)
     console.log(`Sending email alert to ${subscriber.endpoint}`);
 
@@ -235,10 +212,7 @@ export class AlertService {
   /**
    * Send SMS alert
    */
-  private async sendSMSAlert(
-    alert: CrisisAlert,
-    subscriber: AlertSubscriber
-  ): Promise<void> {
+  private async sendSMSAlert(alert: CrisisAlert, subscriber: AlertSubscriber): Promise<void> {
     // Integration with SMS service (Twilio, etc.)
     console.log(`Sending SMS alert to ${subscriber.endpoint}`);
 
@@ -251,10 +225,7 @@ export class AlertService {
   /**
    * Send webhook alert
    */
-  private async sendWebhookAlert(
-    alert: CrisisAlert,
-    subscriber: AlertSubscriber
-  ): Promise<void> {
+  private async sendWebhookAlert(alert: CrisisAlert, subscriber: AlertSubscriber): Promise<void> {
     try {
       const response = await fetch(subscriber.endpoint, {
         method: 'POST',
@@ -270,10 +241,7 @@ export class AlertService {
         throw new Error(`Webhook failed: ${response.status}`);
       }
     } catch (error) {
-      console.error(
-        `Webhook delivery failed for ${subscriber.endpoint}:`,
-        error
-      );
+      console.error(`Webhook delivery failed for ${subscriber.endpoint}:`, error);
     }
   }
 
@@ -388,9 +356,7 @@ export class AlertService {
    * Subscribe to alerts
    */
   subscribe(subscriber: AlertSubscriber): string {
-    const id =
-      subscriber.id ||
-      `sub_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const id = subscriber.id || `sub_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     subscriber.id = id;
     this.subscribers.set(id, subscriber);
     return id;
@@ -436,9 +402,7 @@ export class AlertService {
   /**
    * Get alert statistics
    */
-  async getAlertStats(
-    timeframe: 'hour' | 'day' | 'week' = 'day'
-  ): Promise<any> {
+  async getAlertStats(timeframe: 'hour' | 'day' | 'week' = 'day'): Promise<any> {
     const since = new Date();
     switch (timeframe) {
       case 'hour':
@@ -471,8 +435,7 @@ export class AlertService {
 
     data.forEach((alert: any) => {
       // By severity
-      stats.bySeverity[alert.severity] =
-        (stats.bySeverity[alert.severity] || 0) + 1;
+      stats.bySeverity[alert.severity] = (stats.bySeverity[alert.severity] || 0) + 1;
 
       // By type
       stats.byType[alert.type] = (stats.byType[alert.type] || 0) + 1;

@@ -54,9 +54,7 @@ export const Head: React.FC<HeadProps> = ({
   noIndex = false,
   canonicalUrl,
 }) => {
-  const siteTitle = title
-    ? `${title} | ${defaultMeta.title}`
-    : defaultMeta.title;
+  const siteTitle = title ? `${title} | ${defaultMeta.title}` : defaultMeta.title;
   const metaDescription = description || defaultMeta.description;
   const metaImage = image || defaultMeta.image;
   const metaUrl = url || defaultMeta.url;
@@ -91,15 +89,9 @@ export const Head: React.FC<HeadProps> = ({
       {/* Article specific Open Graph tags */}
       {type === 'article' && (
         <>
-          {publishedTime && (
-            <meta property="article:published_time" content={publishedTime} />
-          )}
-          {modifiedTime && (
-            <meta property="article:modified_time" content={modifiedTime} />
-          )}
-          {metaAuthor && (
-            <meta property="article:author" content={metaAuthor} />
-          )}
+          {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+          {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+          {metaAuthor && <meta property="article:author" content={metaAuthor} />}
           {section && <meta property="article:section" content={section} />}
           {tags.map((tag, index) => (
             <meta key={index} property="article:tag" content={tag} />
@@ -125,23 +117,9 @@ export const Head: React.FC<HeadProps> = ({
 
       {/* Favicon and app icons */}
       <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href="/favicon-16x16.png"
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href="/favicon-32x32.png"
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="180x180"
-        href="/apple-touch-icon.png"
-      />
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
       <link rel="manifest" href="/site.webmanifest" />
     </Helmet>
   );
@@ -152,11 +130,7 @@ export const DashboardHead: React.FC<Partial<HeadProps>> = (props) => (
   <Head
     title="Dashboard"
     description="Campaign command center with real-time monitoring, analytics, and crisis management tools."
-    keywords={[
-      'campaign dashboard',
-      'real-time monitoring',
-      'campaign metrics',
-    ]}
+    keywords={['campaign dashboard', 'real-time monitoring', 'campaign metrics']}
     {...props}
   />
 );
@@ -201,11 +175,7 @@ export const RealTimeMonitoringHead: React.FC<Partial<HeadProps>> = (props) => (
   <Head
     title="Live Monitoring"
     description="Live monitoring of campaign performance, social media, and public sentiment."
-    keywords={[
-      'real-time monitoring',
-      'social media monitoring',
-      'sentiment analysis',
-    ]}
+    keywords={['real-time monitoring', 'social media monitoring', 'sentiment analysis']}
     {...props}
   />
 );

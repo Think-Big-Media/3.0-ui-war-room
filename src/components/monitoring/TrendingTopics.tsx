@@ -37,9 +37,7 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
           >
             <div className="flex items-center justify-between mb-2 -mt-2">
               <h4 className="font-medium text-white/95">{topic.keyword}</h4>
-              <div
-                className={`flex items-center space-x-1 ${getTrendColor(topic.change)}`}
-              >
+              <div className={`flex items-center space-x-1 ${getTrendColor(topic.change)}`}>
                 {topic.change > 0 ? (
                   <TrendingUp className="w-4 h-4" />
                 ) : (
@@ -59,16 +57,10 @@ const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
               <span>LAST {topic.timeframe}</span>
             </div>
             <div className="flex items-center space-x-2 mt-4 -ml-2">
-              <button
-                onClick={() => handleViewMentions(topic)}
-                className="btn-secondary-action"
-              >
+              <button onClick={() => handleViewMentions(topic)} className="btn-secondary-action">
                 View mentions
               </button>
-              <button
-                onClick={() => handleDraftResponse(topic)}
-                className="btn-secondary-neutral"
-              >
+              <button onClick={() => handleDraftResponse(topic)} className="btn-secondary-neutral">
                 Draft response
               </button>
             </div>

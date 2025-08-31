@@ -108,12 +108,8 @@ const MetaIntegration: React.FC = () => {
               <span className="text-white font-bold text-xl">f</span>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-white">
-                Meta Business Suite
-              </h3>
-              <p className="text-sm text-white/70">
-                {isConnected ? 'Connected' : 'Not connected'}
-              </p>
+              <h3 className="text-lg font-semibold text-white">Meta Business Suite</h3>
+              <p className="text-sm text-white/70">{isConnected ? 'Connected' : 'Not connected'}</p>
             </div>
           </div>
 
@@ -159,9 +155,7 @@ const MetaIntegration: React.FC = () => {
                 <Shield className="w-5 h-5 text-green-600" />
                 <div>
                   <div className="text-sm text-gray-600">Business Account</div>
-                  <div className="text-sm font-medium text-gray-900">
-                    Think Big Business
-                  </div>
+                  <div className="text-sm font-medium text-gray-900">Think Big Business</div>
                   <div className="text-xs text-gray-500">ID: act_987654321</div>
                   <div className="text-xs text-gray-500 mt-1">
                     Last synced: {new Date().toLocaleString()}
@@ -171,9 +165,7 @@ const MetaIntegration: React.FC = () => {
             </div>
             <div className="flex space-x-2 mt-3">
               <button
-                onClick={() =>
-                  navigate('/campaign-control?platform=meta&tab=analytics')
-                }
+                onClick={() => navigate('/campaign-control?platform=meta&tab=analytics')}
                 className="btn-primary-action flex-1 text-center"
               >
                 View Campaigns
@@ -187,9 +179,7 @@ const MetaIntegration: React.FC = () => {
 
         {/* Permissions Section */}
         <div className="mt-4 p-3 bg-purple-50/50 rounded-lg border border-purple-200/50">
-          <h4 className="text-xs font-semibold text-purple-900 mb-2">
-            Required Permissions:
-          </h4>
+          <h4 className="text-xs font-semibold text-purple-900 mb-2">Required Permissions:</h4>
           <div className="grid grid-cols-2 gap-2">
             <div className="flex items-center space-x-1">
               <BarChart3 className="w-3 h-3 text-purple-600" />
@@ -223,9 +213,8 @@ const MetaIntegration: React.FC = () => {
           <div className="flex items-start space-x-2">
             <AlertCircle className="w-4 h-4 text-blue-600 mt-0.5" />
             <p className="text-xs text-gray-600">
-              By connecting, you authorize War Room to access your Meta Ads
-              data. We use industry-standard encryption to protect your
-              information.
+              By connecting, you authorize War Room to access your Meta Ads data. We use
+              industry-standard encryption to protect your information.
             </p>
           </div>
         </div>
@@ -243,15 +232,10 @@ const MetaIntegration: React.FC = () => {
             {/* Campaign Cards */}
             <div className="space-y-3">
               {mockCampaignData.map((campaign) => (
-                <div
-                  key={campaign.id}
-                  className="bg-gray-50 rounded-lg p-4 border border-gray-200"
-                >
+                <div key={campaign.id} className="bg-gray-50 rounded-lg p-4 border border-gray-200">
                   <div className="flex items-center justify-between mb-3">
                     <div>
-                      <h5 className="font-medium text-gray-900">
-                        {campaign.name}
-                      </h5>
+                      <h5 className="font-medium text-gray-900">{campaign.name}</h5>
                       <span
                         className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium mt-1 ${
                           campaign.status === 'active'
@@ -280,27 +264,21 @@ const MetaIntegration: React.FC = () => {
                         <Users className="w-3 h-3" />
                         <span>Clicks</span>
                       </div>
-                      <p className="text-gray-900 font-medium">
-                        {formatNumber(campaign.clicks)}
-                      </p>
+                      <p className="text-gray-900 font-medium">{formatNumber(campaign.clicks)}</p>
                     </div>
                     <div>
                       <div className="flex items-center space-x-1 text-gray-600 text-xs mb-1">
                         <DollarSign className="w-3 h-3" />
                         <span>Spend</span>
                       </div>
-                      <p className="text-gray-900 font-medium">
-                        {formatCurrency(campaign.spend)}
-                      </p>
+                      <p className="text-gray-900 font-medium">{formatCurrency(campaign.spend)}</p>
                     </div>
                     <div>
                       <div className="flex items-center space-x-1 text-gray-600 text-xs mb-1">
                         <TrendingUp className="w-3 h-3" />
                         <span>CTR</span>
                       </div>
-                      <p className="text-gray-900 font-medium">
-                        {campaign.ctr}%
-                      </p>
+                      <p className="text-gray-900 font-medium">{campaign.ctr}%</p>
                     </div>
                   </div>
                 </div>

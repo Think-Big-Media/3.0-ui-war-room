@@ -7,11 +7,7 @@ interface StatusIndicatorProps {
 }
 
 // @component: StatusIndicator
-export const StatusIndicator = ({
-  name,
-  status,
-  type
-}: StatusIndicatorProps) => {
+export const StatusIndicator = ({ name, status, type }: StatusIndicatorProps) => {
   const getStatusColor = () => {
     switch (type) {
       case 'success':
@@ -38,17 +34,25 @@ export const StatusIndicator = ({
   };
 
   // @return
-  return <div className="flex items-center gap-1.5">
-      <span className="text-xs leading-none" style={{
-        color: getDotColor()
-      }}>
+  return (
+    <div className="flex items-center gap-1.5">
+      <span
+        className="text-xs leading-none"
+        style={{
+          color: getDotColor(),
+        }}
+      >
         ●
       </span>
-      
-      <span className="text-xs text-gray-400" style={{
-        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
-      }}>
+
+      <span
+        className="text-xs text-gray-400"
+        style={{
+          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+        }}
+      >
         {name}
       </span>
-    </div>;
+    </div>
+  );
 };

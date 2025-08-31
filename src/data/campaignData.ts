@@ -6,8 +6,7 @@ export const mockProjects: Project[] = [
   {
     id: '1',
     title: 'Healthcare Policy Launch',
-    description:
-      'Comprehensive campaign rollout for healthcare policy platform',
+    description: 'Comprehensive campaign rollout for healthcare policy platform',
     status: 'in-progress',
     priority: 'high',
     assignees: ['Sarah Chen', 'Mike Rodriguez'],

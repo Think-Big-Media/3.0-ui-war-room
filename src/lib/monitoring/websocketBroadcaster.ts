@@ -2,11 +2,7 @@
 
 import { EventEmitter } from 'events';
 import WebSocket, { WebSocketServer } from 'ws';
-import {
-  type MonitoringEvent,
-  type CrisisAlert,
-  type PipelineMetrics,
-} from './types';
+import { type MonitoringEvent, type CrisisAlert, type PipelineMetrics } from './types';
 import { createHash, randomBytes } from 'crypto';
 
 interface ConnectedClient {
@@ -70,7 +66,9 @@ export class WebSocketBroadcaster extends EventEmitter {
   }
 
   async start(): Promise<void> {
-    if (this.isRunning) {return;}
+    if (this.isRunning) {
+      return;
+    }
 
     console.log(`📡 Starting WebSocket broadcaster on port ${this.port}...`);
 
@@ -99,7 +97,9 @@ export class WebSocketBroadcaster extends EventEmitter {
   }
 
   async stop(): Promise<void> {
-    if (!this.isRunning) {return;}
+    if (!this.isRunning) {
+      return;
+    }
 
     console.log('🛑 Stopping WebSocket broadcaster...');
 
@@ -173,7 +173,9 @@ export class WebSocketBroadcaster extends EventEmitter {
       const message = JSON.parse(data.toString());
       const client = this.clients.get(clientId);
 
-      if (!client) {return;}
+      if (!client) {
+        return;
+      }
 
       switch (message.type) {
         case 'subscribe':
@@ -203,10 +205,12 @@ export class WebSocketBroadcaster extends EventEmitter {
 
   private handleSubscription(clientId: string, channels: string[]): void {
     const client = this.clients.get(clientId);
-    if (!client) {return;}
+    if (!client) {
+      return;
+    }
 
-    const validChannels = channels.filter(channel => this.channels.has(channel));
-    validChannels.forEach(channel => client.subscriptions.add(channel));
+    const validChannels = channels.filter((channel) => this.channels.has(channel));
+    validChannels.forEach((channel) => client.subscriptions.add(channel));
 
     this.sendToClient(clientId, {
       type: 'heartbeat',
@@ -222,9 +226,11 @@ export class WebSocketBroadcaster extends EventEmitter {
 
   private handleUnsubscription(clientId: string, channels: string[]): void {
     const client = this.clients.get(clientId);
-    if (!client) {return;}
+    if (!client) {
+      return;
+    }
 
-    channels.forEach(channel => client.subscriptions.delete(channel));
+    channels.forEach((channel) => client.subscriptions.delete(channel));
 
     this.sendToClient(clientId, {
       type: 'heartbeat',
@@ -239,7 +245,9 @@ export class WebSocketBroadcaster extends EventEmitter {
   private handleAuthentication(clientId: string, token: string): void {
     // TODO: Implement JWT token validation
     const client = this.clients.get(clientId);
-    if (!client) {return;}
+    if (!client) {
+      return;
+    }
 
     // For now, just acknowledge
     client.metadata.userId = 'authenticated_user'; // Would extract from JWT
@@ -278,7 +286,9 @@ export class WebSocketBroadcaster extends EventEmitter {
 
   // Broadcasting methods
   async broadcastEvents(events: MonitoringEvent[]): Promise<void> {
-    if (!this.isRunning || events.length === 0) {return;}
+    if (!this.isRunning || events.length === 0) {
+      return;
+    }
 
     const startTime = Date.now();
 
@@ -287,7 +297,7 @@ export class WebSocketBroadcaster extends EventEmitter {
       type: 'event',
       timestamp: new Date(),
       data: {
-        events: events.map(event => ({
+        events: events.map((event) => ({
           id: event.id,
           source: event.source,
           type: event.type,
@@ -301,9 +311,8 @@ export class WebSocketBroadcaster extends EventEmitter {
     });
 
     // Check for crisis-level events and broadcast to crisis channel
-    const crisisEvents = events.filter(event =>
-      event.sentiment.score < -0.6 ||
-      (event.metrics.reach || 0) > 50000,
+    const crisisEvents = events.filter(
+      (event) => event.sentiment.score < -0.6 || (event.metrics.reach || 0) > 50000
     );
 
     if (crisisEvents.length > 0) {
@@ -322,7 +331,9 @@ export class WebSocketBroadcaster extends EventEmitter {
   }
 
   async broadcastAlert(alert: CrisisAlert): Promise<void> {
-    if (!this.isRunning) {return;}
+    if (!this.isRunning) {
+      return;
+    }
 
     const startTime = Date.now();
 
@@ -352,7 +363,9 @@ export class WebSocketBroadcaster extends EventEmitter {
   }
 
   async broadcastAlertUpdate(alertId: string, status: string): Promise<void> {
-    if (!this.isRunning) {return;}
+    if (!this.isRunning) {
+      return;
+    }
 
     await this.broadcastToChannel('alerts.all', {
       type: 'alert_update',
@@ -366,7 +379,9 @@ export class WebSocketBroadcaster extends EventEmitter {
   }
 
   async broadcastMetrics(metrics: PipelineMetrics): Promise<void> {
-    if (!this.isRunning) {return;}
+    if (!this.isRunning) {
+      return;
+    }
 
     await this.broadcastToChannel('metrics.pipeline', {
       type: 'metric',
@@ -376,7 +391,9 @@ export class WebSocketBroadcaster extends EventEmitter {
   }
 
   async broadcastServiceHealth(serviceHealth: any): Promise<void> {
-    if (!this.isRunning) {return;}
+    if (!this.isRunning) {
+      return;
+    }
 
     await this.broadcastToChannel('health.services', {
       type: 'metric',
@@ -386,10 +403,13 @@ export class WebSocketBroadcaster extends EventEmitter {
   }
 
   private async broadcastToChannel(channel: string, message: BroadcastMessage): Promise<void> {
-    const subscribedClients = Array.from(this.clients.values())
-      .filter(client => client.subscriptions.has(channel));
+    const subscribedClients = Array.from(this.clients.values()).filter((client) =>
+      client.subscriptions.has(channel)
+    );
 
-    if (subscribedClients.length === 0) {return;}
+    if (subscribedClients.length === 0) {
+      return;
+    }
 
     const messageData = JSON.stringify({
       ...message,
@@ -397,14 +417,14 @@ export class WebSocketBroadcaster extends EventEmitter {
       timestamp: message.timestamp.toISOString(),
     });
 
-    const promises = subscribedClients.map(client =>
-      this.sendToClientSocket(client, messageData),
+    const promises = subscribedClients.map((client) =>
+      this.sendToClientSocket(client, messageData)
     );
 
     const results = await Promise.allSettled(promises);
 
     // Count failed sends
-    const failedSends = results.filter(result => result.status === 'rejected').length;
+    const failedSends = results.filter((result) => result.status === 'rejected').length;
     if (failedSends > 0) {
       this.metrics.failed_sends += failedSends;
       console.warn(`Failed to send to ${failedSends} clients on channel ${channel}`);
@@ -413,7 +433,9 @@ export class WebSocketBroadcaster extends EventEmitter {
 
   private async sendToClient(clientId: string, message: BroadcastMessage): Promise<void> {
     const client = this.clients.get(clientId);
-    if (!client) {return;}
+    if (!client) {
+      return;
+    }
 
     const messageData = JSON.stringify({
       ...message,
@@ -468,14 +490,13 @@ export class WebSocketBroadcaster extends EventEmitter {
     for (const [clientId, client] of this.clients.entries()) {
       const timeSinceHeartbeat = now.getTime() - client.lastHeartbeat.getTime();
 
-      if (timeSinceHeartbeat > staleThreshold ||
-          client.socket.readyState === WebSocket.CLOSED) {
+      if (timeSinceHeartbeat > staleThreshold || client.socket.readyState === WebSocket.CLOSED) {
         staleClients.push(clientId);
       }
     }
 
     // Remove stale clients
-    staleClients.forEach(clientId => {
+    staleClients.forEach((clientId) => {
       const client = this.clients.get(clientId);
       if (client) {
         client.socket.terminate();
@@ -492,8 +513,7 @@ export class WebSocketBroadcaster extends EventEmitter {
   private updateMetrics(messageCount: number, latency: number): void {
     this.metrics.messages_sent += messageCount;
     this.metrics.bytes_transmitted += messageCount * 1024; // Rough estimate
-    this.metrics.average_latency_ms =
-      (this.metrics.average_latency_ms + latency) / 2;
+    this.metrics.average_latency_ms = (this.metrics.average_latency_ms + latency) / 2;
     this.metrics.last_broadcast = new Date();
   }
 
@@ -517,7 +537,9 @@ export class WebSocketBroadcaster extends EventEmitter {
 
   disconnectClient(clientId: string, reason = 'Server request'): boolean {
     const client = this.clients.get(clientId);
-    if (!client) {return false;}
+    if (!client) {
+      return false;
+    }
 
     client.socket.close(1000, reason);
     return true;
@@ -546,7 +568,9 @@ export class WebSocketBroadcaster extends EventEmitter {
 
   // Emergency broadcast (bypasses subscriptions)
   async emergencyBroadcast(message: any): Promise<void> {
-    if (!this.isRunning) {return;}
+    if (!this.isRunning) {
+      return;
+    }
 
     const emergencyMessage = {
       type: 'alert',
@@ -561,8 +585,8 @@ export class WebSocketBroadcaster extends EventEmitter {
     const messageData = JSON.stringify(emergencyMessage);
 
     // Send to all connected clients regardless of subscriptions
-    const promises = Array.from(this.clients.values()).map(client =>
-      this.sendToClientSocket(client, messageData),
+    const promises = Array.from(this.clients.values()).map((client) =>
+      this.sendToClientSocket(client, messageData)
     );
 
     await Promise.allSettled(promises);

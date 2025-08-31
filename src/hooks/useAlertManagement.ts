@@ -21,17 +21,15 @@ export function useAlertManagement() {
       id: Date.now().toString(),
       timestamp: new Date().toISOString(),
     };
-    setAlerts(prev => [newAlert, ...prev]);
+    setAlerts((prev) => [newAlert, ...prev]);
   }, []);
 
   const updateAlert = useCallback((id: string, updates: Partial<Alert>) => {
-    setAlerts(prev => prev.map(alert =>
-      alert.id === id ? { ...alert, ...updates } : alert,
-    ));
+    setAlerts((prev) => prev.map((alert) => (alert.id === id ? { ...alert, ...updates } : alert)));
   }, []);
 
   const handleExpandAlert = useCallback((alertId: string) => {
-    setExpandedAlerts(prev => {
+    setExpandedAlerts((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(alertId)) {
         newSet.delete(alertId);
@@ -42,19 +40,22 @@ export function useAlertManagement() {
     });
   }, []);
 
-  const handleStatusUpdate = useCallback((alertId: string, status: Alert['status']) => {
-    updateAlert(alertId, { status });
-  }, [updateAlert]);
+  const handleStatusUpdate = useCallback(
+    (alertId: string, status: Alert['status']) => {
+      updateAlert(alertId, { status });
+    },
+    [updateAlert]
+  );
 
   const handleMarkAllAsRead = useCallback(() => {
     // Mark all information items as read
-    setInformationItems(prev =>
-      prev.map(item => ({ ...item, isRead: true })),
-    );
+    setInformationItems((prev) => prev.map((item) => ({ ...item, isRead: true })));
   }, []);
 
-  const filteredAlerts = alerts.filter(alert => {
-    if (filter === 'all') {return true;}
+  const filteredAlerts = alerts.filter((alert) => {
+    if (filter === 'all') {
+      return true;
+    }
     return alert.status === filter;
   });
 

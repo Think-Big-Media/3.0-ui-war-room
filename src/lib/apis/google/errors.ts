@@ -22,7 +22,7 @@ export class GoogleAdsError extends Error {
     code = 'GOOGLE_ADS_ERROR',
     details: Record<string, any> = {},
     retryable = false,
-    category: 'client' | 'server' | 'rate_limit' | 'auth' | 'quota' = 'server',
+    category: 'client' | 'server' | 'rate_limit' | 'auth' | 'quota' = 'server'
   ) {
     super(message);
 
@@ -115,11 +115,7 @@ export class GoogleAdsError extends Error {
  * Authentication related errors
  */
 export class AuthenticationError extends GoogleAdsError {
-  constructor(
-    message: string,
-    details: Record<string, any> = {},
-    code = 'AUTHENTICATION_ERROR',
-  ) {
+  constructor(message: string, details: Record<string, any> = {}, code = 'AUTHENTICATION_ERROR') {
     super(message, 401, code, details, false, 'auth');
   }
 }
@@ -135,7 +131,7 @@ export class OAuth2Error extends AuthenticationError {
     message: string,
     grantType?: string,
     scope?: string,
-    details: Record<string, any> = {},
+    details: Record<string, any> = {}
   ) {
     super(message, { ...details, grantType, scope }, 'OAUTH2_ERROR');
     this.grantType = grantType;
@@ -149,11 +145,7 @@ export class OAuth2Error extends AuthenticationError {
 export class ServiceAccountError extends AuthenticationError {
   public readonly configField?: string;
 
-  constructor(
-    message: string,
-    configField?: string,
-    details: Record<string, any> = {},
-  ) {
+  constructor(message: string, configField?: string, details: Record<string, any> = {}) {
     super(message, { ...details, configField }, 'SERVICE_ACCOUNT_ERROR');
     this.configField = configField;
   }
@@ -168,20 +160,14 @@ export class RateLimitError extends GoogleAdsError {
   public readonly resetTime: Date;
   public readonly retryAfter: number;
 
-  constructor(
-    message: string,
-    limit = 0,
-    remaining = 0,
-    resetTime?: Date,
-    retryAfter = 60000,
-  ) {
+  constructor(message: string, limit = 0, remaining = 0, resetTime?: Date, retryAfter = 60000) {
     super(
       message,
       429,
       'RATE_LIMIT_EXCEEDED',
       { limit, remaining, resetTime, retryAfter },
       true,
-      'rate_limit',
+      'rate_limit'
     );
 
     this.limit = limit;
@@ -210,7 +196,7 @@ export class ApiQuotaError extends GoogleAdsError {
     quotaType: 'daily' | 'monthly' | 'concurrent' = 'daily',
     quotaLimit = 0,
     quotaUsed = 0,
-    quotaResetTime?: Date,
+    quotaResetTime?: Date
   ) {
     super(
       message,
@@ -218,7 +204,7 @@ export class ApiQuotaError extends GoogleAdsError {
       'API_QUOTA_EXCEEDED',
       { quotaType, quotaLimit, quotaUsed, quotaResetTime },
       quotaType !== 'monthly', // Monthly quotas typically don't reset quickly
-      'quota',
+      'quota'
     );
 
     this.quotaType = quotaType;
@@ -228,8 +214,9 @@ export class ApiQuotaError extends GoogleAdsError {
   }
 
   getUserMessage(): string {
-    const resetInfo = this.quotaResetTime ?
-      ` Quota resets at ${this.quotaResetTime.toLocaleDateString()}.` : '';
+    const resetInfo = this.quotaResetTime
+      ? ` Quota resets at ${this.quotaResetTime.toLocaleDateString()}.`
+      : '';
     return `${this.quotaType} API quota exceeded (${this.quotaUsed}/${this.quotaLimit}).${resetInfo}`;
   }
 }
@@ -247,7 +234,7 @@ export class ValidationError extends GoogleAdsError {
     field: string,
     value: any,
     constraint: string,
-    details: Record<string, any> = {},
+    details: Record<string, any> = {}
   ) {
     super(
       message,
@@ -255,7 +242,7 @@ export class ValidationError extends GoogleAdsError {
       'VALIDATION_ERROR',
       { ...details, field, value, constraint },
       false,
-      'client',
+      'client'
     );
 
     this.field = field;
@@ -271,11 +258,7 @@ export class ResourceNotFoundError extends GoogleAdsError {
   public readonly resourceType: string;
   public readonly resourceId: string;
 
-  constructor(
-    resourceType: string,
-    resourceId: string,
-    details: Record<string, any> = {},
-  ) {
+  constructor(resourceType: string, resourceId: string, details: Record<string, any> = {}) {
     const message = `${resourceType} with ID '${resourceId}' not found`;
     super(
       message,
@@ -283,7 +266,7 @@ export class ResourceNotFoundError extends GoogleAdsError {
       'RESOURCE_NOT_FOUND',
       { ...details, resourceType, resourceId },
       false,
-      'client',
+      'client'
     );
 
     this.resourceType = resourceType;
@@ -304,7 +287,7 @@ export class PermissionDeniedError extends GoogleAdsError {
     resource: string,
     action: string,
     customerId?: string,
-    details: Record<string, any> = {},
+    details: Record<string, any> = {}
   ) {
     super(
       message,
@@ -312,7 +295,7 @@ export class PermissionDeniedError extends GoogleAdsError {
       'PERMISSION_DENIED',
       { ...details, resource, action, customerId },
       false,
-      'client',
+      'client'
     );
 
     this.resource = resource;
@@ -332,7 +315,7 @@ export class NetworkError extends GoogleAdsError {
     message: string,
     operation: string,
     timeout = false,
-    details: Record<string, any> = {},
+    details: Record<string, any> = {}
   ) {
     super(
       message,
@@ -340,7 +323,7 @@ export class NetworkError extends GoogleAdsError {
       timeout ? 'REQUEST_TIMEOUT' : 'NETWORK_ERROR',
       { ...details, operation, timeout },
       true,
-      'server',
+      'server'
     );
 
     this.operation = operation;
@@ -361,7 +344,7 @@ export class CircuitBreakerError extends GoogleAdsError {
     state: 'OPEN' | 'HALF_OPEN',
     failureCount: number,
     nextAttemptTime: Date,
-    details: Record<string, any> = {},
+    details: Record<string, any> = {}
   ) {
     super(
       message,
@@ -369,7 +352,7 @@ export class CircuitBreakerError extends GoogleAdsError {
       'CIRCUIT_BREAKER_OPEN',
       { ...details, state, failureCount, nextAttemptTime },
       false, // Circuit breaker manages retries internally
-      'server',
+      'server'
     );
 
     this.state = state;
@@ -394,7 +377,7 @@ export class CacheError extends GoogleAdsError {
     message: string,
     operation: 'get' | 'set' | 'delete' | 'invalidate',
     cacheKey?: string,
-    details: Record<string, any> = {},
+    details: Record<string, any> = {}
   ) {
     super(
       message,
@@ -402,7 +385,7 @@ export class CacheError extends GoogleAdsError {
       'CACHE_ERROR',
       { ...details, operation, cacheKey },
       true, // Cache errors are usually temporary
-      'server',
+      'server'
     );
 
     this.operation = operation;
@@ -421,7 +404,7 @@ export class ConfigurationError extends GoogleAdsError {
     message: string,
     configKey: string,
     expectedType?: string,
-    details: Record<string, any> = {},
+    details: Record<string, any> = {}
   ) {
     super(
       message,
@@ -429,7 +412,7 @@ export class ConfigurationError extends GoogleAdsError {
       'CONFIGURATION_ERROR',
       { ...details, configKey, expectedType },
       false,
-      'client',
+      'client'
     );
 
     this.configKey = configKey;
@@ -448,7 +431,7 @@ export class ResponseParsingError extends GoogleAdsError {
     message: string,
     responseData: any,
     expectedFormat: string,
-    details: Record<string, any> = {},
+    details: Record<string, any> = {}
   ) {
     super(
       message,
@@ -456,7 +439,7 @@ export class ResponseParsingError extends GoogleAdsError {
       'RESPONSE_PARSING_ERROR',
       { ...details, responseData, expectedFormat },
       false,
-      'server',
+      'server'
     );
 
     this.responseData = responseData;
@@ -478,7 +461,7 @@ export class GoogleAdsApiError extends GoogleAdsError {
     statusCode = 400,
     trigger?: string,
     location?: string,
-    details: Record<string, any> = {},
+    details: Record<string, any> = {}
   ) {
     super(
       message,
@@ -486,7 +469,7 @@ export class GoogleAdsApiError extends GoogleAdsError {
       'GOOGLE_ADS_API_ERROR',
       { ...details, errorCode, trigger, location },
       false,
-      'client',
+      'client'
     );
 
     this.errorCode = errorCode;
@@ -498,7 +481,7 @@ export class GoogleAdsApiError extends GoogleAdsError {
    * Parse Google Ads API error response
    */
   static fromApiResponse(response: any): GoogleAdsApiError {
-    const {error} = response || {};
+    const { error } = response || {};
     const details = error?.details?.[0];
 
     return new GoogleAdsApiError(
@@ -511,7 +494,7 @@ export class GoogleAdsApiError extends GoogleAdsError {
         requestId: error?.metadata?.requestId,
         errors: details?.errors || [],
         rawResponse: response,
-      },
+      }
     );
   }
 }
@@ -527,9 +510,9 @@ export class BatchOperationError extends GoogleAdsError {
   constructor(
     message: string,
     partialResults: Array<{ success: boolean; error?: any; result?: any }>,
-    details: Record<string, any> = {},
+    details: Record<string, any> = {}
   ) {
-    const successCount = partialResults.filter(r => r.success).length;
+    const successCount = partialResults.filter((r) => r.success).length;
     const failureCount = partialResults.length - successCount;
 
     super(
@@ -538,7 +521,7 @@ export class BatchOperationError extends GoogleAdsError {
       'BATCH_OPERATION_ERROR',
       { ...details, partialResults, successCount, failureCount },
       false,
-      'client',
+      'client'
     );
 
     this.partialResults = partialResults;
@@ -564,9 +547,11 @@ export class ErrorUtils {
     }
 
     // Network errors are generally retryable
-    return error.message.includes('ETIMEDOUT') ||
-           error.message.includes('ECONNRESET') ||
-           error.message.includes('ENOTFOUND');
+    return (
+      error.message.includes('ETIMEDOUT') ||
+      error.message.includes('ECONNRESET') ||
+      error.message.includes('ENOTFOUND')
+    );
   }
 
   /**

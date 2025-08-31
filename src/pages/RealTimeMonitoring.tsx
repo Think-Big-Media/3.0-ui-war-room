@@ -18,12 +18,12 @@ import {
   mockSentimentData,
   mockPlatformPerformance,
 } from '../data/monitoringData';
-import { 
-  useLiveMentionsFeed, 
-  useTrendingTopics, 
-  useTopInfluencers, 
+import {
+  useLiveMentionsFeed,
+  useTrendingTopics,
+  useTopInfluencers,
   useSentimentAnalysis,
-  useMentionlyticsMode
+  useMentionlyticsMode,
 } from '../hooks/useMentionlytics';
 import { createLogger } from '../utils/logger';
 
@@ -36,19 +36,19 @@ const RealTimeMonitoring: React.FC = () => {
     sentiment: 'all',
     region: 'all',
   });
-  
+
   // Get Mentionlytics data
   const { mentions: liveMentions, loading: mentionsLoading } = useLiveMentionsFeed(20);
   const { data: trendingData, loading: trendsLoading } = useTrendingTopics();
   const { data: influencerData, loading: influencersLoading } = useTopInfluencers(5);
   const { data: sentimentData, loading: sentimentLoading } = useSentimentAnalysis();
   const { mode: dataMode } = useMentionlyticsMode();
-  
+
   // Use live data if available, fallback to mock
   const mentions = useMemo(() => {
     if (liveMentions && liveMentions.length > 0) {
       // Convert Mentionlytics format to our format
-      return liveMentions.map(mention => ({
+      return liveMentions.map((mention) => ({
         id: mention.id,
         platform: mention.source || 'twitter',
         author: mention.author,
@@ -63,10 +63,10 @@ const RealTimeMonitoring: React.FC = () => {
     }
     return mockMentions;
   }, [liveMentions]);
-  
+
   const trendingTopics = trendingData || mockTrendingTopics;
   const influencers = influencerData || mockInfluencers;
-  
+
   // Convert sentiment data for the breakdown component
   const sentimentBreakdown = useMemo(() => {
     if (sentimentData) {
@@ -93,28 +93,24 @@ const RealTimeMonitoring: React.FC = () => {
 
   // Filter functions
   const filteredMentions = mentions.filter((mention) => {
-    const matchesSource =
-      filters.source === 'all' || mention.platform === filters.source;
-    const matchesSentiment =
-      filters.sentiment === 'all' || mention.sentiment === filters.sentiment;
-    const matchesRegion =
-      filters.region === 'all' || mention.region === filters.region;
+    const matchesSource = filters.source === 'all' || mention.platform === filters.source;
+    const matchesSentiment = filters.sentiment === 'all' || mention.sentiment === filters.sentiment;
+    const matchesRegion = filters.region === 'all' || mention.region === filters.region;
     return matchesSource && matchesSentiment && matchesRegion;
   });
 
   return (
     <div className="page-monitoring" data-route="live-monitoring">
-      <PageLayout
-        pageTitle="Live Monitoring"
-        placeholder="Ask War Room about monitoring data..."
-      >
+      <PageLayout pageTitle="Live Monitoring" placeholder="Ask War Room about monitoring data...">
         {/* Data Mode Indicator */}
         <div className="fixed top-20 right-4 z-40">
-          <div className={`px-3 py-1.5 rounded-lg text-xs font-bold backdrop-blur-sm ${
-            dataMode === 'MOCK' 
-              ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30' 
-              : 'bg-green-500/20 text-green-400 border border-green-500/30'
-          }`}>
+          <div
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold backdrop-blur-sm ${
+              dataMode === 'MOCK'
+                ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
+                : 'bg-green-500/20 text-green-400 border border-green-500/30'
+            }`}
+          >
             {dataMode} DATA
           </div>
         </div>

@@ -33,7 +33,8 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
     }, 3000);
 
     // Try to get session
-    supabase.auth.getSession()
+    supabase.auth
+      .getSession()
       .then(({ data: { session }, error }) => {
         console.log('✅ Simple Auth: Session check complete', { session: Boolean(session), error });
         if (session) {
@@ -57,7 +58,9 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
   const signIn = async (email: string, password: string) => {
     try {
       const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) {throw error;}
+      if (error) {
+        throw error;
+      }
       setUser(data.user);
       setIsAuthenticated(true);
     } catch (err: any) {
@@ -73,7 +76,9 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <SimpleAuthContext.Provider value={{ isLoading, isAuthenticated, user, error, signIn, signOut }}>
+    <SimpleAuthContext.Provider
+      value={{ isLoading, isAuthenticated, user, error, signIn, signOut }}
+    >
       {children}
     </SimpleAuthContext.Provider>
   );
@@ -81,6 +86,8 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
 
 export const useSimpleAuth = () => {
   const context = useContext(SimpleAuthContext);
-  if (!context) {throw new Error('useSimpleAuth must be used within SimpleAuthProvider');}
+  if (!context) {
+    throw new Error('useSimpleAuth must be used within SimpleAuthProvider');
+  }
   return context;
 };

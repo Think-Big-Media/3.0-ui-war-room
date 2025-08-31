@@ -50,47 +50,57 @@ export default function SimpleRadar() {
     // Draw SWOT labels
     ctx.fillStyle = 'rgba(34, 197, 94, 0.8)';
     ctx.font = 'bold 16px monospace';
-    
+
     ctx.textAlign = 'left';
     ctx.textBaseline = 'top';
     ctx.fillText('STRENGTHS', 50, 50);
-    
+
     ctx.textAlign = 'right';
     ctx.fillText('WEAKNESSES', 550, 50);
-    
+
     ctx.textAlign = 'left';
     ctx.textBaseline = 'bottom';
     ctx.fillText('OPPORTUNITIES', 50, 550);
-    
+
     ctx.textAlign = 'right';
     ctx.fillText('THREATS', 550, 550);
-
   }, []);
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      backgroundColor: '#0f172a',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px'
-    }}>
-      <h1 style={{ color: '#22c55e', marginBottom: '30px', fontFamily: 'monospace', fontSize: '32px' }}>
+    <div
+      style={{
+        minHeight: '100vh',
+        backgroundColor: '#0f172a',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '20px',
+      }}
+    >
+      <h1
+        style={{
+          color: '#22c55e',
+          marginBottom: '30px',
+          fontFamily: 'monospace',
+          fontSize: '32px',
+        }}
+      >
         SWOT Intelligence Radar
       </h1>
-      <div style={{
-        border: '2px solid #22c55e',
-        borderRadius: '8px',
-        padding: '20px',
-        backgroundColor: '#000'
-      }}>
-        <canvas 
+      <div
+        style={{
+          border: '2px solid #22c55e',
+          borderRadius: '8px',
+          padding: '20px',
+          backgroundColor: '#000',
+        }}
+      >
+        <canvas
           ref={canvasRef}
           style={{
             display: 'block',
-            border: '1px solid #22c55e'
+            border: '1px solid #22c55e',
           }}
         />
       </div>

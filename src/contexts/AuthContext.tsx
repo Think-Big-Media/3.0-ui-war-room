@@ -5,7 +5,13 @@
 
 import React, { createContext, useContext, useEffect, useReducer, type ReactNode } from 'react';
 import { supabase } from '../lib/supabase/client';
-import { signIn, signOut, getCurrentUser, onAuthStateChange, type AuthState as SupabaseAuthState } from '../lib/supabase/auth';
+import {
+  signIn,
+  signOut,
+  getCurrentUser,
+  onAuthStateChange,
+  type AuthState as SupabaseAuthState,
+} from '../lib/supabase/auth';
 import type { User } from '@supabase/supabase-js';
 
 // Auth state types - migrated to Supabase
@@ -135,20 +141,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
     });
 
     // Listen to auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        console.log('Auth state changed:', event, session?.user?.id);
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log('Auth state changed:', event, session?.user?.id);
 
-        if (session) {
-          dispatch({
-            type: 'AUTH_SUCCESS',
-            payload: { user: session.user, session },
-          });
-        } else {
-          dispatch({ type: 'AUTH_LOGOUT' });
-        }
-      },
-    );
+      if (session) {
+        dispatch({
+          type: 'AUTH_SUCCESS',
+          payload: { user: session.user, session },
+        });
+      } else {
+        dispatch({ type: 'AUTH_LOGOUT' });
+      }
+    });
 
     return () => subscription.unsubscribe();
   }, []);
@@ -162,7 +168,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
         password,
       });
 
-      if (error) {throw error;}
+      if (error) {
+        throw error;
+      }
 
       // Auth state will be updated via onAuthStateChange listener
     } catch (error: any) {
@@ -183,11 +191,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
         },
       });
 
-      if (error) {throw error;}
+      if (error) {
+        throw error;
+      }
 
       // Check if email confirmation is required
       if (!data.user?.email_confirmed_at) {
-        dispatch({ type: 'AUTH_FAILURE', payload: 'Please check your email to confirm your account' });
+        dispatch({
+          type: 'AUTH_FAILURE',
+          payload: 'Please check your email to confirm your account',
+        });
       }
     } catch (error: any) {
       dispatch({ type: 'AUTH_FAILURE', payload: error.message });
@@ -198,7 +211,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const handleSignOut = async () => {
     try {
       const { error } = await supabase.auth.signOut();
-      if (error) {throw error;}
+      if (error) {
+        throw error;
+      }
       // Auth state will be updated via onAuthStateChange listener
     } catch (error: any) {
       console.error('Logout error:', error);
@@ -296,7 +311,9 @@ export function RequireAuth({
   // For now, only role-based access is implemented
   // Permissions can be added later via RLS policies or user metadata
   if (requiredPermissions.length > 0) {
-    console.warn('Permission-based access control not yet implemented with Supabase. Using role-based access only.');
+    console.warn(
+      'Permission-based access control not yet implemented with Supabase. Using role-based access only.'
+    );
   }
 
   return <>{children}</>;

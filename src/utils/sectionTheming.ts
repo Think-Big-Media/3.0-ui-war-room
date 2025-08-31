@@ -51,11 +51,9 @@ export const SECTION_THEMES: Record<string, SectionTheme> = {
 export function getSectionTheme(pathname: string): SectionTheme {
   // Route to theme mapping
   if (pathname === '/') return SECTION_THEMES.dashboard;
-  if (pathname.startsWith('/real-time-monitoring'))
-    return SECTION_THEMES.monitoring;
+  if (pathname.startsWith('/real-time-monitoring')) return SECTION_THEMES.monitoring;
   if (pathname.startsWith('/campaign-control')) return SECTION_THEMES.warroom;
-  if (pathname.startsWith('/intelligence-hub'))
-    return SECTION_THEMES.intelligence;
+  if (pathname.startsWith('/intelligence-hub')) return SECTION_THEMES.intelligence;
   if (pathname.startsWith('/alert-center')) return SECTION_THEMES.alerts;
   if (pathname.startsWith('/settings')) return SECTION_THEMES.settings;
 

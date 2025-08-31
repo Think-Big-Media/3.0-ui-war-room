@@ -106,11 +106,7 @@ describe('TickerService', () => {
     it('should handle parameters correctly', async () => {
       const params = {
         limit: 10,
-        categories: ['performance', 'insights'] as (
-          | 'performance'
-          | 'general'
-          | 'insights'
-        )[],
+        categories: ['performance', 'insights'] as ('performance' | 'general' | 'insights')[],
         priority_filter: 1,
         sort_by: 'relevance' as const,
       };
@@ -254,9 +250,7 @@ describe('TickerService', () => {
     it('should handle engagement tracking errors gracefully', async () => {
       mockPost.mockRejectedValueOnce(new Error('Server error'));
 
-      const consoleLogSpy = vi
-        .spyOn(console, 'log')
-        .mockImplementation(() => {});
+      const consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
       const { result } = renderHook(() => useTrackEngagement(), {
         wrapper: createWrapper(),
@@ -274,10 +268,7 @@ describe('TickerService', () => {
       });
 
       // Should log locally on error
-      expect(consoleLogSpy).toHaveBeenCalledWith(
-        'Engagement tracked locally:',
-        engagement,
-      );
+      expect(consoleLogSpy).toHaveBeenCalledWith('Engagement tracked locally:', engagement);
 
       consoleLogSpy.mockRestore();
     });
@@ -313,11 +304,7 @@ describe('TickerService', () => {
       mockPost.mockResolvedValueOnce({ data: { status: 'success' } });
 
       const wrapper = ({ children }: { children: React.ReactNode }) =>
-        React.createElement(
-          QueryClientProvider,
-          { client: queryClient },
-          children,
-        );
+        React.createElement(QueryClientProvider, { client: queryClient }, children);
 
       const { result } = renderHook(() => useRefreshTicker(), { wrapper });
 
@@ -464,12 +451,9 @@ describe('TickerService', () => {
       });
 
       // Test usePerformanceUpdates - should refresh every 30 seconds
-      const { result: performanceResult } = renderHook(
-        () => usePerformanceUpdates(),
-        {
-          wrapper: createWrapper(),
-        },
-      );
+      const { result: performanceResult } = renderHook(() => usePerformanceUpdates(), {
+        wrapper: createWrapper(),
+      });
 
       // Verify that all hooks return query objects (indicating they're properly configured)
       expect(feedResult.current).toHaveProperty('data');

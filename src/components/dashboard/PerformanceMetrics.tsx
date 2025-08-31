@@ -14,38 +14,38 @@ const PerformanceMetrics: React.FC = () => {
       label: 'Alert Response',
       value: '45s',
       change: 12,
-      trend: 'up'
+      trend: 'up',
     },
     {
       label: 'Campaign ROI',
       value: '3.2x',
       change: 8,
-      trend: 'up'
+      trend: 'up',
     },
     {
       label: 'Threat Score',
       value: '32',
       change: -5,
-      trend: 'down'
+      trend: 'down',
     },
     {
       label: 'Voter Rate',
       value: '67%',
       change: 0,
-      trend: 'neutral'
+      trend: 'neutral',
     },
     {
       label: 'Media Reach',
       value: '2.4M',
       change: 23,
-      trend: 'up'
+      trend: 'up',
     },
     {
       label: 'Sentiment',
       value: '+18',
       change: 3,
-      trend: 'up'
-    }
+      trend: 'up',
+    },
   ];
 
   const getTrendIcon = (trend: string) => {
@@ -81,17 +81,15 @@ const PerformanceMetrics: React.FC = () => {
       <h3 className="text-lg font-semibold text-[#E8E4D0] mb-6 tracking-wide">
         PERFORMANCE METRICS
       </h3>
-      
+
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
         {metrics.map((metric, index) => (
           <div key={index} className="text-center">
-            <div className="text-sm text-[#C5C1A8] mb-1 font-medium">
-              {metric.label}
-            </div>
-            <div className="text-3xl font-bold text-[#E8E4D0] mb-2">
-              {metric.value}
-            </div>
-            <div className={`flex items-center justify-center space-x-1 text-sm ${getTrendColor(metric.trend)}`}>
+            <div className="text-sm text-[#C5C1A8] mb-1 font-medium">{metric.label}</div>
+            <div className="text-3xl font-bold text-[#E8E4D0] mb-2">{metric.value}</div>
+            <div
+              className={`flex items-center justify-center space-x-1 text-sm ${getTrendColor(metric.trend)}`}
+            >
               {getTrendIcon(metric.trend)}
               <span>{formatChange(metric.change, metric.trend)}</span>
             </div>

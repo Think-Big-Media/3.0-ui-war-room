@@ -29,11 +29,11 @@ export const whileTap = (baseClass: string): string => {
 };
 
 // AnimatedDiv component temporarily commented out due to TypeScript parsing issues
-// export const AnimatedDiv = ({ 
-//   className = '', 
+// export const AnimatedDiv = ({
+//   className = '',
 //   animation = 'fadeIn',
 //   children,
-//   ...props 
+//   ...props
 // }: {
 //   className?: string;
 //   animation?: keyof typeof animationVariants;

@@ -80,7 +80,7 @@ export function renderWithProviders(
     route = '/',
     routerType = 'memory',
     ...renderOptions
-  }: ExtendedRenderOptions = {},
+  }: ExtendedRenderOptions = {}
 ) {
   const RouterComponent = routerType === 'memory' ? MemoryRouter : BrowserRouter;
   const routerProps = routerType === 'memory' ? { initialEntries: [route] } : {};
@@ -88,9 +88,7 @@ export function renderWithProviders(
   function Wrapper({ children }: { children: React.ReactNode }) {
     return (
       <Provider store={store}>
-        <RouterComponent {...routerProps}>
-          {children}
-        </RouterComponent>
+        <RouterComponent {...routerProps}>{children}</RouterComponent>
       </Provider>
     );
   }
@@ -108,7 +106,7 @@ export function renderWithRedux(
     preloadedState,
     store = setupStore(preloadedState),
     ...renderOptions
-  }: Omit<ExtendedRenderOptions, 'route' | 'routerType'> = {},
+  }: Omit<ExtendedRenderOptions, 'route' | 'routerType'> = {}
 ) {
   function Wrapper({ children }: { children: React.ReactNode }) {
     return <Provider store={store}>{children}</Provider>;
@@ -127,7 +125,7 @@ export function renderWithRouter(
     route = '/',
     routerType = 'memory',
     ...renderOptions
-  }: Omit<ExtendedRenderOptions, 'preloadedState' | 'store'> = {},
+  }: Omit<ExtendedRenderOptions, 'preloadedState' | 'store'> = {}
 ) {
   const RouterComponent = routerType === 'memory' ? MemoryRouter : BrowserRouter;
   const routerProps = routerType === 'memory' ? { initialEntries: [route] } : {};
@@ -230,7 +228,7 @@ export const mockStates = {
 // Mock API responses
 export const mockApiResponses = {
   campaigns: { data: [], total: 0, page: 1, limit: 20 },
-  analytics: { 
+  analytics: {
     metrics: {
       volunteers: { value: 1234, change: 12.5 },
       events: { value: 45, change: -5.2 },

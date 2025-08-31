@@ -35,9 +35,7 @@ const PlatformPerformance: React.FC<PlatformPerformanceProps> = ({
       variant="glass"
       className="hoverable hover:scale-[1.02] transition-all duration-200"
     >
-      <h3 className="section-header mb-4 tracking-wide ml-1.5">
-        PLATFORM PERFORMANCE
-      </h3>
+      <h3 className="section-header mb-4 tracking-wide ml-1.5">PLATFORM PERFORMANCE</h3>
       <div className="space-y-3 px-1.5">
         {platformData.map((platform, index) => (
           <div key={index} className="flex items-center justify-between">
@@ -45,9 +43,7 @@ const PlatformPerformance: React.FC<PlatformPerformanceProps> = ({
               {getPlatformIcon(platform.icon)}
               <span className="text-white/80">{platform.platform}</span>
             </div>
-            <span className="text-white/90 font-medium">
-              {platform.percentage}%
-            </span>
+            <span className="text-white/90 font-medium">{platform.percentage}%</span>
           </div>
         ))}
       </div>

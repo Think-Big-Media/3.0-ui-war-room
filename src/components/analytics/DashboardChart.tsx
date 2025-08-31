@@ -70,9 +70,7 @@ export const DashboardChart: React.FC<DashboardChartProps> = ({
       <div className="w-full space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
-          <div className="flex space-x-2">
-            {renderChartTypeButtons()}
-          </div>
+          <div className="flex space-x-2">{renderChartTypeButtons()}</div>
         </div>
         <div
           className="flex flex-col items-center justify-center text-gray-500"
@@ -119,7 +117,8 @@ export const DashboardChart: React.FC<DashboardChartProps> = ({
           <p className="font-semibold text-gray-900">{label}</p>
           {payload.map((entry: any, index: number) => (
             <p key={index} className="text-sm" style={{ color: entry.color }}>
-              {entry.name}: {yAxisFormatter ? yAxisFormatter(entry.value) : entry.value.toLocaleString()}
+              {entry.name}:{' '}
+              {yAxisFormatter ? yAxisFormatter(entry.value) : entry.value.toLocaleString()}
             </p>
           ))}
         </div>
@@ -225,9 +224,7 @@ export const DashboardChart: React.FC<DashboardChartProps> = ({
     <div className="w-full space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
-        <div className="flex space-x-2">
-          {renderChartTypeButtons()}
-        </div>
+        <div className="flex space-x-2">{renderChartTypeButtons()}</div>
       </div>
       <div style={{ height: `${height}px` }}>
         <ResponsiveContainer width="100%" height="100%">

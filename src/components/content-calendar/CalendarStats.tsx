@@ -1,12 +1,6 @@
 import type React from 'react';
 import { motion } from 'framer-motion';
-import {
-  Calendar,
-  CheckCircle,
-  Clock,
-  TrendingUp,
-  Zap,
-} from 'lucide-react';
+import { Calendar, CheckCircle, Clock, TrendingUp, Zap } from 'lucide-react';
 import Card from '../shared/Card';
 
 interface CalendarStatsProps {
@@ -69,9 +63,7 @@ const CalendarStats: React.FC<CalendarStatsProps> = ({
                 <stat.icon className={`w-8 h-8 ${stat.color}`} />
               </div>
               <div className="text-white/70 text-sm mb-1">{stat.label}</div>
-              <div className={`text-2xl font-bold ${stat.color}`}>
-                {stat.value}
-              </div>
+              <div className={`text-2xl font-bold ${stat.color}`}>{stat.value}</div>
               <div className="text-white/60 text-xs mt-1">
                 {stat.trend ? (
                   <span className="text-green-400 flex items-center justify-center">

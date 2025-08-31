@@ -11,7 +11,14 @@ import { type CircuitBreaker } from './circuitBreaker';
 
 export interface CampaignCreateParams {
   name: string;
-  objective: 'AWARENESS' | 'TRAFFIC' | 'ENGAGEMENT' | 'LEADS' | 'APP_PROMOTION' | 'SALES' | 'CONVERSIONS';
+  objective:
+    | 'AWARENESS'
+    | 'TRAFFIC'
+    | 'ENGAGEMENT'
+    | 'LEADS'
+    | 'APP_PROMOTION'
+    | 'SALES'
+    | 'CONVERSIONS';
   status?: 'ACTIVE' | 'PAUSED';
   buying_type?: 'AUCTION' | 'RESERVED';
   daily_budget?: string; // In cents
@@ -53,7 +60,7 @@ export class MetaCampaignService {
   constructor(
     private client: MetaAPIClient,
     private rateLimiter: RateLimiter,
-    private circuitBreaker: CircuitBreaker,
+    private circuitBreaker: CircuitBreaker
   ) {}
 
   /**
@@ -61,33 +68,34 @@ export class MetaCampaignService {
    */
   async list(accountId: string, accessToken: string): Promise<Campaign[]> {
     try {
-      const response = await this.client.request<{ data: Campaign[] }>(`/act_${accountId}/campaigns`, {
-        method: 'GET',
-        params: {
-          access_token: accessToken,
-          fields: 'id,name,status,objective,created_time,updated_time,daily_budget,lifetime_budget',
-        },
-      });
+      const response = await this.client.request<{ data: Campaign[] }>(
+        `/act_${accountId}/campaigns`,
+        {
+          method: 'GET',
+          params: {
+            access_token: accessToken,
+            fields:
+              'id,name,status,objective,created_time,updated_time,daily_budget,lifetime_budget',
+          },
+        }
+      );
 
       return response.data || [];
     } catch (error) {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to list campaigns: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to list campaigns: ${(error as Error).message}`, 500);
     }
   }
 
   /**
-   * Create a new campaign  
+   * Create a new campaign
    */
   async create(
     accountId: string,
     campaignData: Partial<Campaign>,
-    accessToken: string,
+    accessToken: string
   ): Promise<Campaign> {
     try {
       const response = await this.client.request<{ id: string }>(`/act_${accountId}/campaigns`, {
@@ -104,10 +112,7 @@ export class MetaCampaignService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to create campaign: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to create campaign: ${(error as Error).message}`, 500);
     }
   }
 
@@ -117,7 +122,7 @@ export class MetaCampaignService {
   async update(
     campaignId: string,
     updates: Partial<Campaign>,
-    accessToken: string,
+    accessToken: string
   ): Promise<Campaign> {
     try {
       await this.client.request(`/${campaignId}`, {
@@ -134,10 +139,7 @@ export class MetaCampaignService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to update campaign: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to update campaign: ${(error as Error).message}`, 500);
     }
   }
 
@@ -156,10 +158,7 @@ export class MetaCampaignService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to delete campaign: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to delete campaign: ${(error as Error).message}`, 500);
     }
   }
 
@@ -181,10 +180,7 @@ export class MetaCampaignService {
   /**
    * Create a new campaign
    */
-  async createCampaign(
-    accountId: string,
-    params: CampaignCreateParams,
-  ): Promise<Campaign> {
+  async createCampaign(accountId: string, params: CampaignCreateParams): Promise<Campaign> {
     try {
       // Check rate limits
       await this.rateLimiter.checkLimit(`campaigns:create:${accountId}`);
@@ -208,10 +204,7 @@ export class MetaCampaignService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to create campaign: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to create campaign: ${(error as Error).message}`, 500);
     }
   }
 
@@ -235,7 +228,7 @@ export class MetaCampaignService {
       'bid_strategy',
       'budget_remaining',
       'effective_status',
-    ],
+    ]
   ): Promise<Campaign> {
     try {
       await this.rateLimiter.checkLimit(`campaigns:read:${campaignId}`);
@@ -250,10 +243,7 @@ export class MetaCampaignService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to get campaign: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to get campaign: ${(error as Error).message}`, 500);
     }
   }
 
@@ -262,7 +252,7 @@ export class MetaCampaignService {
    */
   async listCampaigns(
     accountId: string,
-    params: CampaignListParams = {},
+    params: CampaignListParams = {}
   ): Promise<MetaAPIResponse<Campaign[]>> {
     try {
       await this.rateLimiter.checkLimit(`campaigns:list:${accountId}`);
@@ -289,7 +279,9 @@ export class MetaCampaignService {
             effective_status: JSON.stringify(params.effective_status),
           }),
         });
-        return this.client.request<MetaAPIResponse<Campaign[]>>(`/act_${accountId}/campaigns?${queryParams}`);
+        return this.client.request<MetaAPIResponse<Campaign[]>>(
+          `/act_${accountId}/campaigns?${queryParams}`
+        );
       });
 
       await this.rateLimiter.trackUsage(`campaigns:list:${accountId}`);
@@ -298,20 +290,14 @@ export class MetaCampaignService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to list campaigns: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to list campaigns: ${(error as Error).message}`, 500);
     }
   }
 
   /**
    * Update an existing campaign
    */
-  async updateCampaign(
-    campaignId: string,
-    params: CampaignUpdateParams,
-  ): Promise<Campaign> {
+  async updateCampaign(campaignId: string, params: CampaignUpdateParams): Promise<Campaign> {
     try {
       await this.rateLimiter.checkLimit(`campaigns:update:${campaignId}`);
 
@@ -332,10 +318,7 @@ export class MetaCampaignService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to update campaign: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to update campaign: ${(error as Error).message}`, 500);
     }
   }
 
@@ -357,10 +340,7 @@ export class MetaCampaignService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to delete campaign: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to delete campaign: ${(error as Error).message}`, 500);
     }
   }
 
@@ -391,7 +371,7 @@ export class MetaCampaignService {
   async duplicateCampaign(
     campaignId: string,
     newName: string,
-    modifications?: Partial<CampaignCreateParams>,
+    modifications?: Partial<CampaignCreateParams>
   ): Promise<Campaign> {
     try {
       // Get original campaign
@@ -418,7 +398,11 @@ export class MetaCampaignService {
         buying_type: original.buying_type,
         daily_budget: original.daily_budget,
         lifetime_budget: original.lifetime_budget,
-        bid_strategy: original.bid_strategy as 'LOWEST_COST_WITHOUT_CAP' | 'LOWEST_COST_WITH_BID_CAP' | 'COST_CAP' | undefined,
+        bid_strategy: original.bid_strategy as
+          | 'LOWEST_COST_WITHOUT_CAP'
+          | 'LOWEST_COST_WITH_BID_CAP'
+          | 'COST_CAP'
+          | undefined,
         special_ad_categories: original.special_ad_categories,
         promoted_object: original.promoted_object,
         ...modifications,
@@ -429,10 +413,7 @@ export class MetaCampaignService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to duplicate campaign: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to duplicate campaign: ${(error as Error).message}`, 500);
     }
   }
 
@@ -470,10 +451,7 @@ export class MetaCampaignService {
       if (error instanceof MetaAPIError) {
         throw error;
       }
-      throw new MetaAPIError(
-        `Failed to get budget utilization: ${(error as Error).message}`,
-        500,
-      );
+      throw new MetaAPIError(`Failed to get budget utilization: ${(error as Error).message}`, 500);
     }
   }
 
@@ -481,7 +459,7 @@ export class MetaCampaignService {
    * Batch update multiple campaigns
    */
   async batchUpdateCampaigns(
-    updates: Array<{ campaignId: string; params: CampaignUpdateParams }>,
+    updates: Array<{ campaignId: string; params: CampaignUpdateParams }>
   ): Promise<Array<{ campaignId: string; success: boolean; error?: string }>> {
     const results = [];
 

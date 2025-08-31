@@ -5,11 +5,11 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-export type BackgroundTheme = 
-  | 'classic-blue'       // Current blue/slate gradient
-  | 'tactical-camo'      // Woodland camo with balanced overlay
-  | 'digital-camo'       // Digital/pixelated camo
-  | 'dark-slate';        // Dark slate theme you've been using all day
+export type BackgroundTheme =
+  | 'tactical-camo' // Woodland camo with balanced overlay - DEFAULT
+  | 'digital-camo' // Digital/pixelated camo
+  | 'classic-blue' // Original blue/slate gradient
+  | 'dark-slate'; // Dark slate theme
 
 export interface BackgroundThemeConfig {
   id: BackgroundTheme;
@@ -22,30 +22,30 @@ export interface BackgroundThemeConfig {
 }
 
 const BACKGROUND_THEMES: Record<BackgroundTheme, BackgroundThemeConfig> = {
-  'classic-blue': {
-    id: 'classic-blue',
-    name: 'Classic Blue',
-    description: 'Original blue/slate gradient theme',
-    baseClass: 'war-room-classic-blue',
-  },
   'tactical-camo': {
     id: 'tactical-camo',
     name: 'Tactical Camo',
-    description: 'Military woodland camouflage pattern',
+    description: 'Woodland operations camouflage - optimized for mission readiness',
     baseClass: 'war-room-tactical-camo',
     overlayClass: 'war-room-camo-overlay',
   },
   'digital-camo': {
     id: 'digital-camo',
     name: 'Digital Camo',
-    description: 'Digital/pixelated military pattern',
+    description: 'Urban warfare digital pattern - adaptive concealment technology',
     baseClass: 'war-room-digital-camo',
     overlayClass: 'war-room-camo-overlay',
+  },
+  'classic-blue': {
+    id: 'classic-blue',
+    name: 'Classic Blue',
+    description: 'Navy command center aesthetics - tradition meets technology',
+    baseClass: 'war-room-classic-blue',
   },
   'dark-slate': {
     id: 'dark-slate',
     name: 'Dark Slate',
-    description: 'Dark slate theme you\'ve been using all day',
+    description: 'Stealth operations interface - minimal signature, maximum focus',
     baseClass: 'war-room-dark-slate',
   },
 };
@@ -57,20 +57,18 @@ interface BackgroundThemeContextType {
   availableThemes: BackgroundThemeConfig[];
 }
 
-
 const BackgroundThemeContext = createContext<BackgroundThemeContextType | undefined>(undefined);
 
 const STORAGE_KEY = 'war-room-background-theme';
 
-
 export const BackgroundThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentTheme, setCurrentTheme] = useState<BackgroundTheme>(() => {
-    // Load theme from localStorage or default to dark-slate
+    // Load theme from localStorage or default to tactical-camo
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved && saved in BACKGROUND_THEMES) {
       return saved as BackgroundTheme;
     }
-    return 'dark-slate'; // Default to the dark slate theme
+    return 'tactical-camo'; // Default to tactical camo theme
   });
 
   const setTheme = (theme: BackgroundTheme) => {
@@ -82,7 +80,13 @@ export const BackgroundThemeProvider: React.FC<{ children: React.ReactNode }> = 
   };
 
   const themeConfig = BACKGROUND_THEMES[currentTheme];
-  const availableThemes = Object.values(BACKGROUND_THEMES);
+  // Order themes with tactical-camo first as it's the default
+  const availableThemes = [
+    BACKGROUND_THEMES['tactical-camo'],
+    BACKGROUND_THEMES['digital-camo'],
+    BACKGROUND_THEMES['classic-blue'],
+    BACKGROUND_THEMES['dark-slate'],
+  ];
 
   return (
     <BackgroundThemeContext.Provider
@@ -111,7 +115,7 @@ export const useBackgroundTheme = () => {
  */
 export const useBackgroundClasses = () => {
   const { themeConfig } = useBackgroundTheme();
-  
+
   return {
     baseClass: themeConfig.baseClass || '',
     overlayClass: themeConfig.overlayClass || '',

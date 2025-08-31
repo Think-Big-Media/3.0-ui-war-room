@@ -20,21 +20,31 @@ const SocialPostModal: React.FC<SocialPostModalProps> = ({ isOpen, onClose, post
 
   const getPlatformIcon = (platform: string) => {
     switch (platform) {
-      case 'facebook': return '📘';
-      case 'instagram': return '📷';
-      case 'twitter': return '🐦';
-      case 'linkedin': return '💼';
-      default: return '📱';
+      case 'facebook':
+        return '📘';
+      case 'instagram':
+        return '📷';
+      case 'twitter':
+        return '🐦';
+      case 'linkedin':
+        return '💼';
+      default:
+        return '📱';
     }
   };
 
   const getPlatformColor = (platform: string) => {
     switch (platform) {
-      case 'facebook': return 'border-blue-500/50 bg-blue-500/20';
-      case 'instagram': return 'border-pink-500/50 bg-pink-500/20';
-      case 'twitter': return 'border-sky-500/50 bg-sky-500/20';
-      case 'linkedin': return 'border-blue-600/50 bg-blue-600/20';
-      default: return 'border-gray-500/50 bg-gray-500/20';
+      case 'facebook':
+        return 'border-blue-500/50 bg-blue-500/20';
+      case 'instagram':
+        return 'border-pink-500/50 bg-pink-500/20';
+      case 'twitter':
+        return 'border-sky-500/50 bg-sky-500/20';
+      case 'linkedin':
+        return 'border-blue-600/50 bg-blue-600/20';
+      default:
+        return 'border-gray-500/50 bg-gray-500/20';
     }
   };
 
@@ -45,7 +55,7 @@ const SocialPostModal: React.FC<SocialPostModalProps> = ({ isOpen, onClose, post
       day: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
-      hour12: true
+      hour12: true,
     });
   };
 
@@ -56,7 +66,7 @@ const SocialPostModal: React.FC<SocialPostModalProps> = ({ isOpen, onClose, post
     likes: Math.floor(Math.random() * 200) + 20,
     comments: Math.floor(Math.random() * 50) + 5,
     shares: Math.floor(Math.random() * 30) + 2,
-    sentimentScore: (Math.random() * 100).toFixed(1)
+    sentimentScore: (Math.random() * 100).toFixed(1),
   };
 
   return (
@@ -67,7 +77,8 @@ const SocialPostModal: React.FC<SocialPostModalProps> = ({ isOpen, onClose, post
           <div className="flex items-center space-x-3">
             <div className={`px-3 py-1.5 rounded-md border ${getPlatformColor(post.platform)}`}>
               <span className="text-sm font-medium font-barlow">
-                {getPlatformIcon(post.platform)} {post.platform.charAt(0).toUpperCase() + post.platform.slice(1)}
+                {getPlatformIcon(post.platform)}{' '}
+                {post.platform.charAt(0).toUpperCase() + post.platform.slice(1)}
               </span>
             </div>
             <span className="text-sm text-white/60 font-jetbrains">
@@ -106,28 +117,36 @@ const SocialPostModal: React.FC<SocialPostModalProps> = ({ isOpen, onClose, post
                 <div className="flex items-center justify-center mb-1">
                   <Eye className="w-4 h-4 text-blue-400 mr-1" />
                 </div>
-                <div className="text-lg font-bold text-blue-400 font-jetbrains">{mockAnalytics.reach.toLocaleString()}</div>
+                <div className="text-lg font-bold text-blue-400 font-jetbrains">
+                  {mockAnalytics.reach.toLocaleString()}
+                </div>
                 <div className="text-xs text-white/60 font-barlow">Reach</div>
               </div>
               <div className="text-center">
                 <div className="flex items-center justify-center mb-1">
                   <Heart className="w-4 h-4 text-red-400 mr-1" />
                 </div>
-                <div className="text-lg font-bold text-red-400 font-jetbrains">{mockAnalytics.likes}</div>
+                <div className="text-lg font-bold text-red-400 font-jetbrains">
+                  {mockAnalytics.likes}
+                </div>
                 <div className="text-xs text-white/60 font-barlow">Likes</div>
               </div>
               <div className="text-center">
                 <div className="flex items-center justify-center mb-1">
                   <MessageCircle className="w-4 h-4 text-green-400 mr-1" />
                 </div>
-                <div className="text-lg font-bold text-green-400 font-jetbrains">{mockAnalytics.comments}</div>
+                <div className="text-lg font-bold text-green-400 font-jetbrains">
+                  {mockAnalytics.comments}
+                </div>
                 <div className="text-xs text-white/60 font-barlow">Comments</div>
               </div>
               <div className="text-center">
                 <div className="flex items-center justify-center mb-1">
                   <Share className="w-4 h-4 text-purple-400 mr-1" />
                 </div>
-                <div className="text-lg font-bold text-purple-400 font-jetbrains">{mockAnalytics.shares}</div>
+                <div className="text-lg font-bold text-purple-400 font-jetbrains">
+                  {mockAnalytics.shares}
+                </div>
                 <div className="text-xs text-white/60 font-barlow">Shares</div>
               </div>
             </div>
@@ -136,20 +155,30 @@ const SocialPostModal: React.FC<SocialPostModalProps> = ({ isOpen, onClose, post
           {/* Engagement & Sentiment */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-white/5 rounded-lg p-4">
-              <h4 className="text-sm font-semibold text-white/90 mb-2 font-barlow">Engagement Rate</h4>
-              <div className="text-2xl font-bold text-orange-400 font-jetbrains">{mockAnalytics.engagement}</div>
+              <h4 className="text-sm font-semibold text-white/90 mb-2 font-barlow">
+                Engagement Rate
+              </h4>
+              <div className="text-2xl font-bold text-orange-400 font-jetbrains">
+                {mockAnalytics.engagement}
+              </div>
               <div className="text-xs text-orange-300">interactions per 1K views</div>
             </div>
             <div className="bg-white/5 rounded-lg p-4">
-              <h4 className="text-sm font-semibold text-white/90 mb-2 font-barlow">Sentiment Score</h4>
-              <div className="text-2xl font-bold text-green-400 font-jetbrains">+{mockAnalytics.sentimentScore}%</div>
+              <h4 className="text-sm font-semibold text-white/90 mb-2 font-barlow">
+                Sentiment Score
+              </h4>
+              <div className="text-2xl font-bold text-green-400 font-jetbrains">
+                +{mockAnalytics.sentimentScore}%
+              </div>
               <div className="text-xs text-green-300">positive sentiment</div>
             </div>
           </div>
 
           {/* Keywords */}
           <div className="bg-white/5 rounded-lg p-4">
-            <h4 className="text-sm font-semibold text-white/90 mb-3 font-barlow">Related Keywords</h4>
+            <h4 className="text-sm font-semibold text-white/90 mb-3 font-barlow">
+              Related Keywords
+            </h4>
             <div className="flex flex-wrap gap-2">
               {post.keywords.map((keyword, index) => (
                 <span

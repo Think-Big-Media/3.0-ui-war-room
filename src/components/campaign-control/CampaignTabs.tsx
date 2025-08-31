@@ -9,10 +9,7 @@ interface CampaignTabsProps {
   onTabChange: (tab: CampaignTab) => void;
 }
 
-const CampaignTabs: React.FC<CampaignTabsProps> = ({
-  activeTab,
-  onTabChange,
-}) => {
+const CampaignTabs: React.FC<CampaignTabsProps> = ({ activeTab, onTabChange }) => {
   const tabs = [
     { id: 'analytics' as CampaignTab, label: 'Ad Campaigns', icon: BarChart3 },
     {

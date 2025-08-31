@@ -88,12 +88,8 @@ export const WebSocketTester: React.FC = () => {
     >
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-lg font-semibold text-gray-900">
-            WebSocket Connection Tester
-          </h3>
-          <p className="text-sm text-gray-500">
-            Test connection resilience and reconnection logic
-          </p>
+          <h3 className="text-lg font-semibold text-gray-900">WebSocket Connection Tester</h3>
+          <p className="text-sm text-gray-500">Test connection resilience and reconnection logic</p>
         </div>
         <div className="flex items-center space-x-2">
           <Wifi className="w-5 h-5 text-blue-500" />
@@ -155,30 +151,22 @@ export const WebSocketTester: React.FC = () => {
       {/* Connection Statistics */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <div className="text-center p-3 bg-gray-50 rounded-lg">
-          <div className="text-2xl font-bold text-gray-900">
-            {ws.isConnected ? '✅' : '❌'}
-          </div>
+          <div className="text-2xl font-bold text-gray-900">{ws.isConnected ? '✅' : '❌'}</div>
           <div className="text-xs text-gray-500">Connected</div>
         </div>
 
         <div className="text-center p-3 bg-gray-50 rounded-lg">
-          <div className="text-2xl font-bold text-gray-900">
-            {ws.reconnectAttempts}
-          </div>
+          <div className="text-2xl font-bold text-gray-900">{ws.reconnectAttempts}</div>
           <div className="text-xs text-gray-500">Reconnect Attempts</div>
         </div>
 
         <div className="text-center p-3 bg-gray-50 rounded-lg">
-          <div className="text-2xl font-bold text-gray-900">
-            {ws.connectionState}
-          </div>
+          <div className="text-2xl font-bold text-gray-900">{ws.connectionState}</div>
           <div className="text-xs text-gray-500">State</div>
         </div>
 
         <div className="text-center p-3 bg-gray-50 rounded-lg">
-          <div className="text-2xl font-bold text-gray-900">
-            {ws.lastJsonMessage ? '📨' : '📭'}
-          </div>
+          <div className="text-2xl font-bold text-gray-900">{ws.lastJsonMessage ? '📨' : '📭'}</div>
           <div className="text-xs text-gray-500">Last Message</div>
         </div>
       </div>
@@ -188,9 +176,7 @@ export const WebSocketTester: React.FC = () => {
         <h4 className="text-sm font-medium text-gray-700 mb-3">Test Log</h4>
         <div className="bg-gray-900 text-green-400 p-4 rounded-lg h-64 overflow-y-auto font-mono text-sm">
           {testLog.length === 0 ? (
-            <div className="text-gray-500">
-              No logs yet. Run a test to see output.
-            </div>
+            <div className="text-gray-500">No logs yet. Run a test to see output.</div>
           ) : (
             testLog.map((log, index) => (
               <div key={index} className="mb-1">
@@ -204,9 +190,7 @@ export const WebSocketTester: React.FC = () => {
       {/* Last Message Display */}
       {ws.lastJsonMessage && (
         <div className="mt-4">
-          <h4 className="text-sm font-medium text-gray-700 mb-2">
-            Last WebSocket Message
-          </h4>
+          <h4 className="text-sm font-medium text-gray-700 mb-2">Last WebSocket Message</h4>
           <pre className="bg-gray-100 p-3 rounded-lg text-xs overflow-x-auto">
             {JSON.stringify(ws.lastJsonMessage, null, 2)}
           </pre>

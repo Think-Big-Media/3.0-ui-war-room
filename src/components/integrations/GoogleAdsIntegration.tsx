@@ -72,9 +72,7 @@ const mockCampaignData: GoogleCampaignData[] = [
 
 const GoogleAdsIntegration: React.FC = () => {
   const navigate = useNavigate();
-  const [authStatus, setAuthStatus] = useState<GoogleAdsAuthStatus | null>(
-    null
-  );
+  const [authStatus, setAuthStatus] = useState<GoogleAdsAuthStatus | null>(null);
   const [isConnecting, setIsConnecting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -141,9 +139,7 @@ const GoogleAdsIntegration: React.FC = () => {
         setAuthStatus({
           is_authenticated: true,
           customer_id: '123-456-7890',
-          expires_at: new Date(
-            Date.now() + 30 * 24 * 60 * 60 * 1000
-          ).toISOString(),
+          expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
           scopes: [],
         });
         setIsConnecting(false);
@@ -281,9 +277,7 @@ const GoogleAdsIntegration: React.FC = () => {
                 <Shield className="w-5 h-5 text-green-600" />
                 <div>
                   <div className="text-sm text-gray-600">Account</div>
-                  <div className="text-sm font-medium text-gray-900">
-                    Think Big Media - Hobby
-                  </div>
+                  <div className="text-sm font-medium text-gray-900">Think Big Media - Hobby</div>
                   <div className="text-xs text-gray-500">ID: 123-456-7890</div>
                   <div className="text-xs text-gray-500 mt-1">
                     Last synced: {new Date().toLocaleString()}
@@ -293,9 +287,7 @@ const GoogleAdsIntegration: React.FC = () => {
             </div>
             <div className="flex space-x-2 mt-3">
               <button
-                onClick={() =>
-                  navigate('/campaign-control?platform=google&tab=analytics')
-                }
+                onClick={() => navigate('/campaign-control?platform=google&tab=analytics')}
                 className="btn-primary-action flex-1 text-center"
               >
                 View Campaigns
@@ -332,15 +324,10 @@ const GoogleAdsIntegration: React.FC = () => {
             {/* Campaign Cards */}
             <div className="space-y-3">
               {mockCampaignData.map((campaign) => (
-                <div
-                  key={campaign.id}
-                  className="bg-gray-50 rounded-lg p-4 border border-gray-200"
-                >
+                <div key={campaign.id} className="bg-gray-50 rounded-lg p-4 border border-gray-200">
                   <div className="flex items-center justify-between mb-3">
                     <div>
-                      <h5 className="font-medium text-gray-900">
-                        {campaign.name}
-                      </h5>
+                      <h5 className="font-medium text-gray-900">{campaign.name}</h5>
                       <span
                         className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium mt-1 ${
                           campaign.status === 'active'
@@ -369,27 +356,21 @@ const GoogleAdsIntegration: React.FC = () => {
                         <MousePointerClick className="w-3 h-3" />
                         <span>Clicks</span>
                       </div>
-                      <p className="text-gray-900 font-medium">
-                        {formatNumber(campaign.clicks)}
-                      </p>
+                      <p className="text-gray-900 font-medium">{formatNumber(campaign.clicks)}</p>
                     </div>
                     <div>
                       <div className="flex items-center space-x-1 text-gray-600 text-xs mb-1">
                         <DollarSign className="w-3 h-3" />
                         <span>Cost</span>
                       </div>
-                      <p className="text-gray-900 font-medium">
-                        {formatCurrency(campaign.cost)}
-                      </p>
+                      <p className="text-gray-900 font-medium">{formatCurrency(campaign.cost)}</p>
                     </div>
                     <div>
                       <div className="flex items-center space-x-1 text-gray-600 text-xs mb-1">
                         <TrendingUp className="w-3 h-3" />
                         <span>CTR</span>
                       </div>
-                      <p className="text-gray-900 font-medium">
-                        {campaign.ctr}%
-                      </p>
+                      <p className="text-gray-900 font-medium">{campaign.ctr}%</p>
                     </div>
                     <div>
                       <div className="flex items-center space-x-1 text-gray-600 text-xs mb-1">

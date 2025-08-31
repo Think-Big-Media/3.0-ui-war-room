@@ -26,9 +26,7 @@ const ContentEnginePage: React.FC<ContentEnginePageProps> = ({
 
   const handleFormatToggle = (formatId: string, enabled: boolean) => {
     setFormats((prev) =>
-      prev.map((format) =>
-        format.id === formatId ? { ...format, enabled } : format,
-      ),
+      prev.map((format) => (format.id === formatId ? { ...format, enabled } : format))
     );
     onFormatToggle?.(formatId, enabled);
   };

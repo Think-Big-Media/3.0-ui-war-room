@@ -1,7 +1,7 @@
 /**
  * War Room Data Service Layer
  * Abstracts API calls and enables mock/real data switching
- * 
+ *
  * Senior Architect Pattern: This abstraction allows parallel development
  * Frontend team works with mocks while backend team builds real APIs
  */
@@ -54,7 +54,7 @@ export interface Donation {
  */
 abstract class BaseDataService {
   protected async delay(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   protected handleError(error: any): never {
@@ -94,7 +94,7 @@ class MockDataService extends BaseDataService {
 
   async getUser(id: string): Promise<User> {
     await this.delay(MOCK_DELAY);
-    const user = mockUsers.find(u => u.id === id);
+    const user = mockUsers.find((u) => u.id === id);
     if (!user) throw new Error('User not found');
     return user;
   }
@@ -106,7 +106,7 @@ class MockDataService extends BaseDataService {
       name: data.name || '',
       email: data.email || '',
       role: data.role || 'user',
-      ...data
+      ...data,
     };
     mockUsers.push(newUser);
     return newUser;
@@ -114,7 +114,7 @@ class MockDataService extends BaseDataService {
 
   async updateUser(id: string, data: Partial<User>): Promise<User> {
     await this.delay(MOCK_DELAY);
-    const index = mockUsers.findIndex(u => u.id === id);
+    const index = mockUsers.findIndex((u) => u.id === id);
     if (index === -1) throw new Error('User not found');
     mockUsers[index] = { ...mockUsers[index], ...data };
     return mockUsers[index];
@@ -122,7 +122,7 @@ class MockDataService extends BaseDataService {
 
   async deleteUser(id: string): Promise<void> {
     await this.delay(MOCK_DELAY);
-    const index = mockUsers.findIndex(u => u.id === id);
+    const index = mockUsers.findIndex((u) => u.id === id);
     if (index === -1) throw new Error('User not found');
     mockUsers.splice(index, 1);
   }
@@ -135,7 +135,7 @@ class MockDataService extends BaseDataService {
 
   async getVolunteer(id: string): Promise<Volunteer> {
     await this.delay(MOCK_DELAY);
-    const volunteer = mockVolunteers.find(v => v.id === id);
+    const volunteer = mockVolunteers.find((v) => v.id === id);
     if (!volunteer) throw new Error('Volunteer not found');
     return volunteer;
   }
@@ -149,7 +149,7 @@ class MockDataService extends BaseDataService {
       phone: data.phone || '',
       skills: data.skills || [],
       availability: data.availability || [],
-      ...data
+      ...data,
     };
     mockVolunteers.push(newVolunteer);
     return newVolunteer;
@@ -163,7 +163,7 @@ class MockDataService extends BaseDataService {
 
   async getEvent(id: string): Promise<Event> {
     await this.delay(MOCK_DELAY);
-    const event = mockEvents.find(e => e.id === id);
+    const event = mockEvents.find((e) => e.id === id);
     if (!event) throw new Error('Event not found');
     return event;
   }
@@ -177,7 +177,7 @@ class MockDataService extends BaseDataService {
       date: data.date || new Date().toISOString(),
       location: data.location || '',
       volunteerCount: data.volunteerCount || 0,
-      ...data
+      ...data,
     };
     mockEvents.push(newEvent);
     return newEvent;
@@ -197,7 +197,7 @@ class MockDataService extends BaseDataService {
       amount: data.amount || 0,
       date: data.date || new Date().toISOString(),
       campaignId: data.campaignId || '',
-      ...data
+      ...data,
     };
     mockDonations.push(newDonation);
     return newDonation;
@@ -209,12 +209,9 @@ class MockDataService extends BaseDataService {
  * Makes actual HTTP requests to the backend
  */
 class ApiDataService extends BaseDataService {
-  private async request<T>(
-    endpoint: string,
-    options: RequestInit = {}
-  ): Promise<T> {
+  private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
     const token = localStorage.getItem('auth_token');
-    
+
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       ...options,
       headers: {
@@ -309,9 +306,7 @@ class ApiDataService extends BaseDataService {
  * Export the appropriate service based on environment
  * This is the ONLY export that components should use
  */
-export const dataService: BaseDataService = USE_MOCK
-  ? new MockDataService()
-  : new ApiDataService();
+export const dataService: BaseDataService = USE_MOCK ? new MockDataService() : new ApiDataService();
 
 /**
  * Hook for React components to use the data service
@@ -332,6 +327,6 @@ if (import.meta.env.DEV) {
     console.log(`Data mode switched to: ${useMock ? 'MOCK' : 'REAL'}`);
     console.log('Reload the page for changes to take effect');
   };
-  
+
   console.log('💡 Tip: Use __switchDataMode(true/false) to switch data modes');
 }

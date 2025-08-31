@@ -21,9 +21,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
     >
       <div className="flex items-start justify-between mb-2">
         <h4 className="font-medium text-white/95 text-sm">{project.title}</h4>
-        <span
-          className={`px-2 py-1 rounded-full text-xs ${getStatusColor(project.status)}`}
-        >
+        <span className={`px-2 py-1 rounded-full text-xs ${getStatusColor(project.status)}`}>
           {project.priority}
         </span>
       </div>
@@ -56,15 +54,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
               className="w-6 h-6 bg-gradient-to-br from-purple-600 to-purple-700 rounded-full flex items-center justify-center"
               title={assignee}
             >
-              <span className="text-white text-xs">
-                {generateAvatar(assignee)}
-              </span>
+              <span className="text-white text-xs">{generateAvatar(assignee)}</span>
             </div>
           ))}
           {project.assignees.length > 2 && (
-            <span className="text-white/60 text-xs">
-              +{project.assignees.length - 2}
-            </span>
+            <span className="text-white/60 text-xs">+{project.assignees.length - 2}</span>
           )}
         </div>
         <div className="flex items-center space-x-2 text-xs text-white/60">
@@ -76,10 +70,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
       {/* Tags */}
       <div className="flex items-center space-x-2 mt-2">
         {project.tags.map((tag, index) => (
-          <span
-            key={index}
-            className="bg-white/20 text-white/80 px-2 py-1 rounded text-xs"
-          >
+          <span key={index} className="bg-white/20 text-white/80 px-2 py-1 rounded text-xs">
             {tag}
           </span>
         ))}

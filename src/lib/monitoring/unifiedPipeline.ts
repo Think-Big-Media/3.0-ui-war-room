@@ -32,11 +32,7 @@ export class UnifiedMonitoringPipeline extends EventEmitter {
     mentionlytics: 1.0,
   };
 
-  constructor(
-    config: MonitoringConfig,
-    eventStore: EventStore,
-    broadcaster: WebSocketBroadcaster,
-  ) {
+  constructor(config: MonitoringConfig, eventStore: EventStore, broadcaster: WebSocketBroadcaster) {
     super();
     this.config = config;
     this.eventStore = eventStore;
@@ -101,7 +97,7 @@ export class UnifiedMonitoringPipeline extends EventEmitter {
 
     // Start polling loop (fallback for webhook failures)
     this.intervalId = setInterval(() => {
-      this.pollForEvents().catch(error => {
+      this.pollForEvents().catch((error) => {
         console.error('Polling error:', error);
         this.emit('error', error);
       });
@@ -112,7 +108,9 @@ export class UnifiedMonitoringPipeline extends EventEmitter {
   }
 
   async stop(): Promise<void> {
-    if (!this.isRunning) {return;}
+    if (!this.isRunning) {
+      return;
+    }
 
     console.log('🛑 Stopping Unified Monitoring Pipeline');
 
@@ -151,10 +149,10 @@ export class UnifiedMonitoringPipeline extends EventEmitter {
             error: error instanceof Error ? error.message : 'Unknown error',
           };
         }
-      }),
+      })
     );
 
-    const unhealthyClients = healthChecks.filter(check => !check.healthy);
+    const unhealthyClients = healthChecks.filter((check) => !check.healthy);
     if (unhealthyClients.length === this.clients.length) {
       throw new Error('All monitoring clients are unhealthy');
     }
@@ -164,8 +162,8 @@ export class UnifiedMonitoringPipeline extends EventEmitter {
     }
 
     this.metrics.service_health = healthChecks
-      .filter(check => check.health)
-      .map(check => check.health!);
+      .filter((check) => check.health)
+      .map((check) => check.health!);
   }
 
   private async pollForEvents(): Promise<void> {
@@ -196,7 +194,6 @@ export class UnifiedMonitoringPipeline extends EventEmitter {
 
       this.metrics.processing_latency_ms = Date.now() - startTime;
       this.metrics.last_updated = new Date();
-
     } catch (error) {
       console.error('Error in polling loop:', error);
       this.emit('error', error);
@@ -228,7 +225,6 @@ export class UnifiedMonitoringPipeline extends EventEmitter {
 
         processedEvents.push(event);
         this.emit('event_processed', event);
-
       } catch (error) {
         console.error(`Error processing event ${event.id}:`, error);
         this.emit('error', error);
@@ -242,7 +238,9 @@ export class UnifiedMonitoringPipeline extends EventEmitter {
       // Broadcast to connected clients
       await this.broadcaster.broadcastEvents(processedEvents);
 
-      console.log(`✅ Processed ${processedEvents.length} events (${events.length - processedEvents.length} duplicates filtered)`);
+      console.log(
+        `✅ Processed ${processedEvents.length} events (${events.length - processedEvents.length} duplicates filtered)`
+      );
     }
 
     // Cleanup old entries from processing cache (keep last 24 hours)
@@ -283,7 +281,7 @@ export class UnifiedMonitoringPipeline extends EventEmitter {
     const similarEvents = await this.eventStore.findSimilarEvents(
       event,
       since,
-      this.config.deduplication.similarity_threshold,
+      this.config.deduplication.similarity_threshold
     );
 
     if (similarEvents.length > 0) {
@@ -306,7 +304,9 @@ export class UnifiedMonitoringPipeline extends EventEmitter {
       event.content?.toLowerCase().trim(),
       event.author.name?.toLowerCase().trim(),
       event.platform,
-    ].filter(Boolean).join('|');
+    ]
+      .filter(Boolean)
+      .join('|');
 
     return createHash('sha256').update(content).digest('hex');
   }
@@ -340,7 +340,6 @@ export class UnifiedMonitoringPipeline extends EventEmitter {
 
       this.metrics.alerts_generated++;
       this.emit('alert', alert);
-
     } catch (error) {
       console.error('Error handling crisis alert:', error);
       this.emit('error', error);
@@ -371,8 +370,9 @@ export class UnifiedMonitoringPipeline extends EventEmitter {
 
     // Calculate events per minute (rolling window)
     const oneMinuteAgo = new Date(Date.now() - 60000);
-    const recentEvents = Array.from(this.processedEvents.values())
-      .filter(timestamp => timestamp > oneMinuteAgo).length;
+    const recentEvents = Array.from(this.processedEvents.values()).filter(
+      (timestamp) => timestamp > oneMinuteAgo
+    ).length;
     this.metrics.events_per_minute = recentEvents;
   }
 
@@ -391,7 +391,7 @@ export class UnifiedMonitoringPipeline extends EventEmitter {
       console.log(`📥 Webhook received from ${service}`);
 
       // Find the appropriate client
-      const client = this.clients.find(c => c.name === service);
+      const client = this.clients.find((c) => c.name === service);
       if (!client) {
         throw new Error(`Unknown service: ${service}`);
       }
@@ -402,7 +402,6 @@ export class UnifiedMonitoringPipeline extends EventEmitter {
       if (events.length > 0) {
         await this.processEvents(events);
       }
-
     } catch (error) {
       console.error(`Webhook error for ${service}:`, error);
       this.emit('error', error);
@@ -439,8 +438,9 @@ export class UnifiedMonitoringPipeline extends EventEmitter {
   }
 
   isHealthy(): boolean {
-    return this.isRunning &&
-           this.metrics.service_health.some(health => health.status === 'healthy');
+    return (
+      this.isRunning && this.metrics.service_health.some((health) => health.status === 'healthy')
+    );
   }
 
   async updateConfig(newConfig: Partial<MonitoringConfig>): Promise<void> {

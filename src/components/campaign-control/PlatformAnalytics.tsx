@@ -37,16 +37,10 @@ interface PlatformAnalyticsProps {
 
 type DensityMode = 'compact' | 'normal' | 'comfortable';
 
-const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
-  platform: initialPlatform,
-}) => {
+const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({ platform: initialPlatform }) => {
   const [selectedCampaign, setSelectedCampaign] = useState<string | null>(null);
-  const [platformFilter, setPlatformFilter] = useState<
-    'all' | 'meta' | 'google'
-  >('all');
-  const [selectedCampaigns, setSelectedCampaigns] = useState<Set<string>>(
-    new Set()
-  );
+  const [platformFilter, setPlatformFilter] = useState<'all' | 'meta' | 'google'>('all');
+  const [selectedCampaigns, setSelectedCampaigns] = useState<Set<string>>(new Set());
   const [bulkActionOpen, setBulkActionOpen] = useState(false);
   const [aiAutoOptimize, setAiAutoOptimize] = useState(false);
   const [densityMode, setDensityMode] = useState<DensityMode>('normal');
@@ -181,9 +175,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
     campaignsToCalculate.forEach((campaign) => {
       totalSpend += parseFloat(campaign.spent.replace(/[$,]/g, ''));
       totalImpressions += parseInt(campaign.impressions.replace(/,/g, ''));
-      totalConversions += parseInt(
-        campaign.conversions?.replace(/,/g, '') || '0'
-      );
+      totalConversions += parseInt(campaign.conversions?.replace(/,/g, '') || '0');
       totalClicks += parseInt(campaign.clicks?.replace(/,/g, '') || '0');
     });
 
@@ -191,10 +183,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
       campaignsToCalculate.length > 0
         ? campaignsToCalculate.reduce(
             (acc, c) =>
-              acc +
-              parseFloat(
-                c.roas?.replace('x', '') || c.ctr?.replace('%', '') || '0'
-              ),
+              acc + parseFloat(c.roas?.replace('x', '') || c.ctr?.replace('%', '') || '0'),
             0
           ) / campaignsToCalculate.length
         : 0;
@@ -252,15 +241,15 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
               <Brain className="h-6 w-6" />
               <div
                 style={{
-                  fontWeight: "500",
+                  fontWeight: '500',
                 }}
               >
                 AI-POWERED CAMPAIGN INTELLIGENCE
               </div>
             </h2>
             <p className="mt-2 text-blue-100">
-              WarRoom's AI analyzes your campaigns in real-time to optimize
-              performance and maximize ROI
+              WarRoom's AI analyzes your campaigns in real-time to optimize performance and maximize
+              ROI
             </p>
           </div>
           <div className="flex items-center gap-2 bg-white/20 px-4 py-2 rounded-lg">
@@ -276,27 +265,21 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
               <Zap className="h-4 w-4 text-yellow-300" />
               Urgent Optimization
             </div>
-            <p className="mt-1 text-sm">
-              Pause underperforming ad sets saving $1,200/month
-            </p>
+            <p className="mt-1 text-sm">Pause underperforming ad sets saving $1,200/month</p>
           </div>
           <div className="bg-white/10 rounded-lg p-3">
             <div className="flex items-center gap-2 text-sm font-medium">
               <TrendingUp className="h-4 w-4 text-green-300" />
               Growth Opportunity
             </div>
-            <p className="mt-1 text-sm">
-              Scale top campaigns for 3.5x ROAS potential
-            </p>
+            <p className="mt-1 text-sm">Scale top campaigns for 3.5x ROAS potential</p>
           </div>
           <div className="bg-white/10 rounded-lg p-3">
             <div className="flex items-center gap-2 text-sm font-medium">
               <Target className="h-4 w-4 text-blue-300" />
               Audience Insight
             </div>
-            <p className="mt-1 text-sm">
-              New high-value segment identified: +23% engagement
-            </p>
+            <p className="mt-1 text-sm">New high-value segment identified: +23% engagement</p>
           </div>
         </div>
       </div>
@@ -378,9 +361,9 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                 </div>
                 <div
                   style={{
-                    color: "rgb(22, 163, 74)",
-                    marginTop: "4px",
-                    font: "400 12px/16.5px JetBrains Mono, monospace ",
+                    color: 'rgb(22, 163, 74)',
+                    marginTop: '4px',
+                    font: '400 12px/16.5px JetBrains Mono, monospace ',
                   }}
                 >
                   ↑ 12% vs last period
@@ -409,9 +392,9 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                 </div>
                 <div
                   style={{
-                    color: "rgb(22, 163, 74)",
-                    marginTop: "4px",
-                    font: "400 12px/16.5px JetBrains Mono, monospace ",
+                    color: 'rgb(22, 163, 74)',
+                    marginTop: '4px',
+                    font: '400 12px/16.5px JetBrains Mono, monospace ',
                   }}
                 >
                   ↑ 28% reach increase
@@ -440,9 +423,9 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                 </div>
                 <div
                   style={{
-                    color: "rgb(22, 163, 74)",
-                    marginTop: "4px",
-                    font: "400 12px/16.5px JetBrains Mono, monospace ",
+                    color: 'rgb(22, 163, 74)',
+                    marginTop: '4px',
+                    font: '400 12px/16.5px JetBrains Mono, monospace ',
                   }}
                 >
                   ↑ 45% conversion rate
@@ -471,9 +454,9 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                 </div>
                 <div
                   style={{
-                    color: "rgb(22, 163, 74)",
-                    marginTop: "4px",
-                    font: "400 12px/16.5px JetBrains Mono, monospace ",
+                    color: 'rgb(22, 163, 74)',
+                    marginTop: '4px',
+                    font: '400 12px/16.5px JetBrains Mono, monospace ',
                   }}
                 >
                   ↑ 0.4x improvement
@@ -552,9 +535,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
 
               {columnSettingsOpen && (
                 <div className="absolute top-full right-0 mt-2 w-56 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200/50 z-10 p-3">
-                  <div className="font-medium text-sm text-gray-900 mb-2">
-                    Show/Hide Columns
-                  </div>
+                  <div className="font-medium text-sm text-gray-900 mb-2">Show/Hide Columns</div>
                   {Object.entries(visibleColumns).map(([key, value]) => (
                     <label
                       key={key}
@@ -563,9 +544,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                       <input
                         type="checkbox"
                         checked={value}
-                        onChange={() =>
-                          toggleColumn(key as keyof typeof visibleColumns)
-                        }
+                        onChange={() => toggleColumn(key as keyof typeof visibleColumns)}
                         className="rounded border-gray-300"
                       />
                       <span className="capitalize">
@@ -574,13 +553,9 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                     </label>
                   ))}
                   <div className="border-t mt-2 pt-2">
-                    <div className="font-medium text-sm text-gray-900 mb-2">
-                      Density
-                    </div>
+                    <div className="font-medium text-sm text-gray-900 mb-2">Density</div>
                     <div className="space-y-1">
-                      {(
-                        ['compact', 'normal', 'comfortable'] as DensityMode[]
-                      ).map((mode) => (
+                      {(['compact', 'normal', 'comfortable'] as DensityMode[]).map((mode) => (
                         <button
                           key={mode}
                           onClick={() => setDensityMode(mode)}
@@ -619,12 +594,9 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
         {/* Campaign Performance Table */}
         <div className="bg-gray-50/30 rounded-xl border border-gray-200/30 overflow-hidden mb-6">
           <div className="px-6 py-6 border-b border-gray-200">
-            <h3 className="text-lg font-semibold text-gray-900">
-              Live Campaign Performance
-            </h3>
+            <h3 className="text-lg font-semibold text-gray-900">Live Campaign Performance</h3>
             <p className="text-sm text-gray-600 mt-0.5">
-              Real-time data synchronized from Meta Business Suite and Google
-              Ads
+              Real-time data synchronized from Meta Business Suite and Google Ads
             </p>
           </div>
 
@@ -639,9 +611,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                       type="checkbox"
                       onChange={(e) => {
                         if (e.target.checked) {
-                          setSelectedCampaigns(
-                            new Set(filteredCampaigns.map((c) => c.id))
-                          );
+                          setSelectedCampaigns(new Set(filteredCampaigns.map((c) => c.id)));
                         } else {
                           setSelectedCampaigns(new Set());
                         }
@@ -710,9 +680,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                     key={campaign.id}
                     className="hover:bg-gray-50 active:scale-[0.999] transition-transform duration-100"
                   >
-                    <td
-                      className={`${densityStyles.padding} sticky left-0 bg-white/95`}
-                    >
+                    <td className={`${densityStyles.padding} sticky left-0 bg-white/95`}>
                       <input
                         type="checkbox"
                         checked={selectedCampaigns.has(campaign.id)}
@@ -721,32 +689,22 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                       />
                     </td>
                     {visibleColumns.campaign && (
-                      <td
-                        className={`${densityStyles.padding} whitespace-nowrap`}
-                      >
+                      <td className={`${densityStyles.padding} whitespace-nowrap`}>
                         <div>
-                          <div
-                            className={`${densityStyles.fontSize} font-medium text-gray-900`}
-                          >
+                          <div className={`${densityStyles.fontSize} font-medium text-gray-900`}>
                             {campaign.name}
                           </div>
-                          <div className="text-xs text-gray-500">
-                            ID: {campaign.id}
-                          </div>
+                          <div className="text-xs text-gray-500">ID: {campaign.id}</div>
                         </div>
                       </td>
                     )}
                     {visibleColumns.platform && (
-                      <td
-                        className={`${densityStyles.padding} whitespace-nowrap`}
-                      >
+                      <td className={`${densityStyles.padding} whitespace-nowrap`}>
                         <div className="flex items-center gap-2">
                           {campaign.platformType === 'meta' ? (
                             <>
                               <Facebook className="h-3.5 w-3.5 text-[#1877F2]" />
-                              <span
-                                className={`${densityStyles.fontSize} text-gray-900`}
-                              >
+                              <span className={`${densityStyles.fontSize} text-gray-900`}>
                                 {campaign.platform.split(' ')[0]}
                               </span>
                             </>
@@ -770,9 +728,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                                   d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                                 />
                               </svg>
-                              <span
-                                className={`${densityStyles.fontSize} text-gray-900`}
-                              >
+                              <span className={`${densityStyles.fontSize} text-gray-900`}>
                                 {campaign.platform.split(' ')[0]}
                               </span>
                             </>
@@ -781,9 +737,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                       </td>
                     )}
                     {visibleColumns.status && (
-                      <td
-                        className={`${densityStyles.padding} whitespace-nowrap`}
-                      >
+                      <td className={`${densityStyles.padding} whitespace-nowrap`}>
                         <span
                           className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
                             campaign.status === 'active'
@@ -803,34 +757,22 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                       </td>
                     )}
                     {visibleColumns.budget && (
-                      <td
-                        className={`${densityStyles.padding} whitespace-nowrap`}
-                      >
-                        <div
-                          className={`${densityStyles.fontSize} text-gray-900`}
-                        >
+                      <td className={`${densityStyles.padding} whitespace-nowrap`}>
+                        <div className={`${densityStyles.fontSize} text-gray-900`}>
                           {campaign.spent}
                         </div>
-                        <div className="text-xs text-gray-500">
-                          of {campaign.budget}
-                        </div>
+                        <div className="text-xs text-gray-500">of {campaign.budget}</div>
                       </td>
                     )}
                     {visibleColumns.performance && (
-                      <td
-                        className={`${densityStyles.padding} whitespace-nowrap`}
-                      >
+                      <td className={`${densityStyles.padding} whitespace-nowrap`}>
                         <div className="flex items-center gap-2">
                           <div>
-                            <div
-                              className={`${densityStyles.fontSize} text-gray-900`}
-                            >
+                            <div className={`${densityStyles.fontSize} text-gray-900`}>
                               {campaign.impressions.split(',')[0]}K
                             </div>
                             <div className="text-xs text-gray-500">
-                              {campaign.clicks
-                                ? `${campaign.clicks.split(',')[0]}K clicks`
-                                : ''}
+                              {campaign.clicks ? `${campaign.clicks.split(',')[0]}K clicks` : ''}
                             </div>
                           </div>
                           {campaign.trend === 'up' && (
@@ -859,9 +801,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                         <div className="flex items-center gap-2">
                           <button
                             className="p-1.5 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded transition-colors"
-                            title={
-                              campaign.status === 'active' ? 'Pause' : 'Resume'
-                            }
+                            title={campaign.status === 'active' ? 'Pause' : 'Resume'}
                           >
                             {campaign.status === 'active' ? (
                               <Pause className="h-4 w-4" />
@@ -926,9 +866,8 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                   Increase Budget: Q4 Voter Outreach
                 </p>
                 <p className="text-xs text-gray-600 mt-1">
-                  This campaign is exceeding KPIs by 23%. Increasing budget by
-                  $2,000 could yield an additional 450 conversions based on
-                  current performance metrics.
+                  This campaign is exceeding KPIs by 23%. Increasing budget by $2,000 could yield an
+                  additional 450 conversions based on current performance metrics.
                 </p>
                 <button className="mt-2 text-xs font-medium text-green-600 hover:text-green-700">
                   Apply Recommendation →
@@ -943,9 +882,8 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                   Audience Refinement: YouTube Campaign
                 </p>
                 <p className="text-xs text-gray-600 mt-1">
-                  Mobile viewers show 40% higher completion rates. Consider
-                  creating mobile-first 15-second versions of your video ads for
-                  better engagement.
+                  Mobile viewers show 40% higher completion rates. Consider creating mobile-first
+                  15-second versions of your video ads for better engagement.
                 </p>
                 <button className="mt-2 text-xs font-medium text-yellow-600 hover:text-yellow-700">
                   Review Suggestion →
@@ -960,9 +898,8 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
                   Pause Underperforming: Generic Display Ads
                 </p>
                 <p className="text-xs text-gray-600 mt-1">
-                  3 ad sets are performing below 1.5x ROAS threshold. Pausing
-                  these could save $1,200/month to reallocate to high-performing
-                  campaigns.
+                  3 ad sets are performing below 1.5x ROAS threshold. Pausing these could save
+                  $1,200/month to reallocate to high-performing campaigns.
                 </p>
                 <button className="mt-2 text-xs font-medium text-red-600 hover:text-red-700">
                   Review Ad Sets →
@@ -979,9 +916,7 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({
           </h3>
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <h4 className="text-sm font-medium text-gray-900 mb-2">
-                Real-Time Optimization
-              </h4>
+              <h4 className="text-sm font-medium text-gray-900 mb-2">Real-Time Optimization</h4>
               <ul className="space-y-2 text-sm text-gray-600">
                 <li className="flex items-start gap-2">
                   <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />

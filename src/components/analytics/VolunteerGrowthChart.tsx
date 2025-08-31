@@ -23,7 +23,9 @@ import { format } from 'date-fns';
 
 export const VolunteerGrowthChart: React.FC = () => {
   const dateRange = useAppSelector((state) => state.analytics.dateRange);
-  const { data, isLoading, error } = useGetVolunteerChartQuery({ dateRange: dateRange as DateRangeEnum });
+  const { data, isLoading, error } = useGetVolunteerChartQuery({
+    dateRange: dateRange as DateRangeEnum,
+  });
 
   if (isLoading) {
     return (
@@ -68,10 +70,7 @@ export const VolunteerGrowthChart: React.FC = () => {
   return (
     <div className="h-64">
       <ResponsiveContainer width="100%" height="100%">
-        <AreaChart
-          data={chartData}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-        >
+        <AreaChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
           <defs>
             <linearGradient id="colorActive" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.8} />
@@ -83,18 +82,8 @@ export const VolunteerGrowthChart: React.FC = () => {
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-          <XAxis
-            dataKey="name"
-            stroke="#6B7280"
-            fontSize={12}
-            tickLine={false}
-          />
-          <YAxis
-            stroke="#6B7280"
-            fontSize={12}
-            tickLine={false}
-            axisLine={false}
-          />
+          <XAxis dataKey="name" stroke="#6B7280" fontSize={12} tickLine={false} />
+          <YAxis stroke="#6B7280" fontSize={12} tickLine={false} axisLine={false} />
           <Tooltip content={<CustomTooltip />} />
           <Legend
             verticalAlign="top"

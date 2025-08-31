@@ -30,7 +30,13 @@ import {
   type CircuitBreakerConfig,
   CircuitBreakerState,
 } from './types';
-import { GoogleAdsError, RateLimitError, AuthenticationError, ApiQuotaError, ValidationError } from './errors';
+import {
+  GoogleAdsError,
+  RateLimitError,
+  AuthenticationError,
+  ApiQuotaError,
+  ValidationError,
+} from './errors';
 import { TokenBucketRateLimiter } from './rateLimiter';
 import { GoogleAdsCache } from './cache';
 
@@ -70,7 +76,7 @@ export class GoogleAdsClient extends EventEmitter {
         'Invalid customer ID format',
         'customerId',
         customerId,
-        'Must be exactly 10 digits',
+        'Must be exactly 10 digits'
       );
     }
   }
@@ -89,12 +95,12 @@ export class GoogleAdsClient extends EventEmitter {
       /javascript:/i,
     ];
 
-    if (dangerousPatterns.some(pattern => pattern.test(query))) {
+    if (dangerousPatterns.some((pattern) => pattern.test(query))) {
       throw new ValidationError(
         'Potentially dangerous query detected',
         'query',
         query.substring(0, 100),
-        'Query contains prohibited patterns',
+        'Query contains prohibited patterns'
       );
     }
 
@@ -104,7 +110,7 @@ export class GoogleAdsClient extends EventEmitter {
         'Query too long',
         'query',
         query.length,
-        'Maximum query length is 10,000 characters',
+        'Maximum query length is 10,000 characters'
       );
     }
   }
@@ -147,16 +153,10 @@ export class GoogleAdsClient extends EventEmitter {
     });
 
     // Initialize rate limiter
-    this.rateLimiter = new TokenBucketRateLimiter(
-      this.config.rateLimitConfig!,
-      this.redis,
-    );
+    this.rateLimiter = new TokenBucketRateLimiter(this.config.rateLimitConfig!, this.redis);
 
     // Initialize cache
-    this.cache = new GoogleAdsCache(
-      this.config.cacheConfig!,
-      this.redis,
-    );
+    this.cache = new GoogleAdsCache(this.config.cacheConfig!, this.redis);
 
     // Initialize circuit breaker
     this.circuitBreaker = {
@@ -190,7 +190,7 @@ export class GoogleAdsClient extends EventEmitter {
 
         return config;
       },
-      (error) => Promise.reject(error),
+      (error) => Promise.reject(error)
     );
 
     // Add response interceptor for error handling
@@ -202,7 +202,7 @@ export class GoogleAdsClient extends EventEmitter {
       (error) => {
         this.handleFailure(error);
         return Promise.reject(this.mapError(error));
-      },
+      }
     );
 
     this.emit('initialized', { config: this.config });
@@ -218,7 +218,9 @@ export class GoogleAdsClient extends EventEmitter {
         try {
           this.serviceAccountConfig = JSON.parse(this.config.serviceAccountJson);
         } catch (parseError) {
-          throw new AuthenticationError('Invalid JSON in GOOGLE_SERVICE_ACCOUNT_JSON environment variable');
+          throw new AuthenticationError(
+            'Invalid JSON in GOOGLE_SERVICE_ACCOUNT_JSON environment variable'
+          );
         }
       }
       // Fallback: Direct config object
@@ -237,7 +239,7 @@ export class GoogleAdsClient extends EventEmitter {
         }
       } else {
         throw new AuthenticationError(
-          'No service account configuration provided. Set GOOGLE_SERVICE_ACCOUNT_JSON environment variable.',
+          'No service account configuration provided. Set GOOGLE_SERVICE_ACCOUNT_JSON environment variable.'
         );
       }
 
@@ -250,7 +252,6 @@ export class GoogleAdsClient extends EventEmitter {
       this.emit('authenticated', {
         customerId: this.config.loginCustomerId,
       });
-
     } catch (error) {
       this.emit('error', error);
       throw error;
@@ -296,20 +297,24 @@ export class GoogleAdsClient extends EventEmitter {
             kid: this.serviceAccountConfig.private_key_id,
             typ: 'JWT',
           },
-        },
+        }
       );
 
       // Exchange JWT for access token with timeout
-      const response = await axios.post(this.TOKEN_URL, {
-        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
-        assertion,
-      }, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'User-Agent': 'WarRoom-GoogleAds-Client/1.0',
+      const response = await axios.post(
+        this.TOKEN_URL,
+        {
+          grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+          assertion,
         },
-        timeout: 10000, // 10 second timeout
-      });
+        {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'User-Agent': 'WarRoom-GoogleAds-Client/1.0',
+          },
+          timeout: 10000, // 10 second timeout
+        }
+      );
 
       const { access_token, expires_in, token_type } = response.data;
 
@@ -329,14 +334,15 @@ export class GoogleAdsClient extends EventEmitter {
       }
 
       return access_token;
-
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const status = error.response?.status;
         const errorData = error.response?.data;
 
         if (status === 400 && errorData?.error === 'invalid_grant') {
-          throw new AuthenticationError('Invalid service account credentials or expired private key');
+          throw new AuthenticationError(
+            'Invalid service account credentials or expired private key'
+          );
         }
         if (status === 403) {
           throw new AuthenticationError('Service account does not have required permissions');
@@ -382,7 +388,6 @@ export class GoogleAdsClient extends EventEmitter {
       await this.cache.set(cacheKey, result, 3600);
 
       return result;
-
     } catch (error) {
       throw this.mapError(error);
     }
@@ -452,7 +457,6 @@ export class GoogleAdsClient extends EventEmitter {
       await this.cache.set(cacheKey, customer, 21600);
 
       return customer;
-
     } catch (error) {
       throw this.mapError(error);
     }
@@ -491,7 +495,7 @@ export class GoogleAdsClient extends EventEmitter {
 
       const response = await this.axiosInstance.post(
         `/customers/${customerId}/googleAds:searchStream`,
-        requestBody,
+        requestBody
       );
 
       const result: SearchStreamResponse = {
@@ -508,7 +512,6 @@ export class GoogleAdsClient extends EventEmitter {
       }
 
       return result;
-
     } catch (error) {
       throw this.mapError(error);
     }
@@ -520,28 +523,45 @@ export class GoogleAdsClient extends EventEmitter {
   async getCampaignPerformance(
     customerId: string,
     campaignIds?: string[],
-    dateRange = 'LAST_30_DAYS',
+    dateRange = 'LAST_30_DAYS'
   ): Promise<CampaignPerformanceMetrics[]> {
     // Security: Validate customer ID
     this.validateCustomerId(customerId);
 
     // Security: Validate campaign IDs if provided
     if (campaignIds) {
-      campaignIds.forEach(id => {
+      campaignIds.forEach((id) => {
         if (!/^\d+$/.test(id)) {
-          throw new ValidationError('Invalid campaign ID format', 'campaignId', id, 'Must be numeric');
+          throw new ValidationError(
+            'Invalid campaign ID format',
+            'campaignId',
+            id,
+            'Must be numeric'
+          );
         }
       });
     }
 
     // Security: Validate date range
     const validDateRanges = [
-      'TODAY', 'YESTERDAY', 'LAST_7_DAYS', 'LAST_14_DAYS', 'LAST_30_DAYS',
-      'LAST_BUSINESS_WEEK', 'LAST_WEEK_SUN_SAT', 'THIS_MONTH', 'LAST_MONTH',
+      'TODAY',
+      'YESTERDAY',
+      'LAST_7_DAYS',
+      'LAST_14_DAYS',
+      'LAST_30_DAYS',
+      'LAST_BUSINESS_WEEK',
+      'LAST_WEEK_SUN_SAT',
+      'THIS_MONTH',
+      'LAST_MONTH',
       'ALL_TIME',
     ];
     if (!validDateRanges.includes(dateRange)) {
-      throw new ValidationError('Invalid date range', 'dateRange', dateRange, 'Must be a valid predefined range');
+      throw new ValidationError(
+        'Invalid date range',
+        'dateRange',
+        dateRange,
+        'Must be a valid predefined range'
+      );
     }
 
     const cacheKey = this.createCacheKey('campaign_performance', {
@@ -558,7 +578,9 @@ export class GoogleAdsClient extends EventEmitter {
 
     let whereClause = '';
     if (campaignIds && campaignIds.length > 0) {
-      const campaignResourceNames = campaignIds.map(id => `customers/${customerId}/campaigns/${id}`);
+      const campaignResourceNames = campaignIds.map(
+        (id) => `customers/${customerId}/campaigns/${id}`
+      );
       whereClause = `WHERE campaign.resource_name IN ('${campaignResourceNames.join("', '")}')`;
     }
 
@@ -591,7 +613,7 @@ export class GoogleAdsClient extends EventEmitter {
         pageSize: 1000,
       });
 
-      const metrics: CampaignPerformanceMetrics[] = response.results.map(row => ({
+      const metrics: CampaignPerformanceMetrics[] = response.results.map((row) => ({
         campaignId: row.campaign.id,
         campaignName: row.campaign.name,
         status: row.campaign.status,
@@ -612,7 +634,6 @@ export class GoogleAdsClient extends EventEmitter {
       await this.cache.set(cacheKey, metrics, 600);
 
       return metrics;
-
     } catch (error) {
       throw this.mapError(error);
     }
@@ -656,7 +677,7 @@ export class GoogleAdsClient extends EventEmitter {
         pageSize: 100,
       });
 
-      const recommendations: BudgetRecommendation[] = response.results.map(row => ({
+      const recommendations: BudgetRecommendation[] = response.results.map((row) => ({
         resourceName: row.recommendation.resourceName,
         type: row.recommendation.type,
         impact: {
@@ -671,15 +692,17 @@ export class GoogleAdsClient extends EventEmitter {
             costMicros: parseInt(row.recommendation.impact.potentialMetrics.costMicros) || 0,
           },
         },
-        currentBudgetAmountMicros: parseInt(row.recommendation.campaignBudgetRecommendation.currentBudgetAmountMicros) || 0,
-        recommendedBudgetAmountMicros: parseInt(row.recommendation.campaignBudgetRecommendation.recommendedBudgetAmountMicros) || 0,
+        currentBudgetAmountMicros:
+          parseInt(row.recommendation.campaignBudgetRecommendation.currentBudgetAmountMicros) || 0,
+        recommendedBudgetAmountMicros:
+          parseInt(row.recommendation.campaignBudgetRecommendation.recommendedBudgetAmountMicros) ||
+          0,
       }));
 
       // Cache for 1 hour
       await this.cache.set(cacheKey, recommendations, 3600);
 
       return recommendations;
-
     } catch (error) {
       throw this.mapError(error);
     }
@@ -745,7 +768,11 @@ export class GoogleAdsClient extends EventEmitter {
 
     if (this.circuitBreaker.failureCount >= this.circuitBreaker.config.failureThreshold) {
       this.circuitBreaker.state = CircuitBreakerState.OPEN;
-      this.circuitBreaker.nextAttempt = now + (this.circuitBreaker.config.recoveryTimeout || this.config.circuitBreakerConfig?.resetTimeoutMs || 60000);
+      this.circuitBreaker.nextAttempt =
+        now +
+        (this.circuitBreaker.config.recoveryTimeout ||
+          this.config.circuitBreakerConfig?.resetTimeoutMs ||
+          60000);
 
       this.emit('circuitBreakerStateChanged', {
         from: CircuitBreakerState.CLOSED,
@@ -791,8 +818,14 @@ export class GoogleAdsClient extends EventEmitter {
     }
 
     const required = [
-      'type', 'project_id', 'private_key_id', 'private_key',
-      'client_email', 'client_id', 'auth_uri', 'token_uri',
+      'type',
+      'project_id',
+      'private_key_id',
+      'private_key',
+      'client_email',
+      'client_id',
+      'auth_uri',
+      'token_uri',
     ];
 
     for (const field of required) {
@@ -835,10 +868,7 @@ export class GoogleAdsClient extends EventEmitter {
       .map(([key, value]) => `${key}:${value}`)
       .join('|');
 
-    return crypto
-      .createHash('md5')
-      .update(`google_ads:${operation}:${paramString}`)
-      .digest('hex');
+    return crypto.createHash('md5').update(`google_ads:${operation}:${paramString}`).digest('hex');
   }
 
   /**
@@ -870,17 +900,19 @@ export class GoogleAdsClient extends EventEmitter {
     try {
       const response = await this.axiosInstance.get('/customers:listAccessibleCustomers');
 
-      return response.data.resourceNames?.map((resourceName: string) => ({
-        resourceName,
-        id: resourceName.split('/').pop() || '',
-        descriptiveName: '',
-        currencyCode: 'USD',
-        timeZone: 'UTC',
-        autoTaggingEnabled: false,
-        hasPartnersBadge: false,
-        manager: false,
-        testAccount: false,
-      })) || [];
+      return (
+        response.data.resourceNames?.map((resourceName: string) => ({
+          resourceName,
+          id: resourceName.split('/').pop() || '',
+          descriptiveName: '',
+          currencyCode: 'USD',
+          timeZone: 'UTC',
+          autoTaggingEnabled: false,
+          hasPartnersBadge: false,
+          manager: false,
+          testAccount: false,
+        })) || []
+      );
     } catch (error) {
       this.handleFailure(error);
       throw this.mapError(error);

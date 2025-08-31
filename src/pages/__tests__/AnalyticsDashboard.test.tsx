@@ -34,9 +34,7 @@ jest.mock('../../components/analytics/MetricCard', () => ({
 }));
 
 jest.mock('../../components/analytics/DonationChart', () => ({
-  DonationChart: ({ data }: any) => (
-    <div data-testid="dashboard-chart">Donation Trends</div>
-  ),
+  DonationChart: ({ data }: any) => <div data-testid="dashboard-chart">Donation Trends</div>,
 }));
 
 jest.mock('../../components/analytics/VolunteerGrowthChart', () => ({
@@ -47,18 +45,21 @@ jest.mock('../../components/analytics/VolunteerGrowthChart', () => ({
 
 jest.mock('../../components/analytics/ActivityFeed', () => ({
   ActivityFeed: ({ activities }: any) => (
-    <div data-testid="activity-feed">
-      {activities?.length || 0} activities
-    </div>
+    <div data-testid="activity-feed">{activities?.length || 0} activities</div>
   ),
 }));
 
 jest.mock('../../components/analytics/DateRangeFilter', () => ({
   DateRangeFilter: ({ onChange }: any) => (
-    <div data-testid="date-range-filter" onClick={() => onChange({
-      from: new Date('2025-01-01'),
-      to: new Date('2025-01-08'),
-    })}>
+    <div
+      data-testid="date-range-filter"
+      onClick={() =>
+        onChange({
+          from: new Date('2025-01-01'),
+          to: new Date('2025-01-08'),
+        })
+      }
+    >
       Date Filter
     </div>
   ),
@@ -69,16 +70,11 @@ const mockStore = configureStore({
     analyticsApi: api.reducer,
     auth: (state = { user: { permissions: ['analytics.view'] } }) => state,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(api.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
 });
 
 const renderWithProvider = (component: React.ReactElement) => {
-  return render(
-    <Provider store={mockStore}>
-      {component}
-    </Provider>,
-  );
+  return render(<Provider store={mockStore}>{component}</Provider>);
 };
 
 describe('AnalyticsDashboard', () => {
@@ -88,7 +84,7 @@ describe('AnalyticsDashboard', () => {
       totalVolunteers: 89,
       totalDonations: 45600,
       totalEvents: 23,
-      avgDonation: 125.50,
+      avgDonation: 125.5,
       contactGrowthRate: 15.2,
       volunteerGrowthRate: 8.5,
       donationGrowthRate: 22.1,
@@ -194,14 +190,13 @@ describe('AnalyticsDashboard', () => {
         analyticsApi: api.reducer,
         auth: (state = { user: { permissions: [] } }) => state,
       },
-      middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(api.middleware),
+      middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
     });
 
     render(
       <Provider store={storeWithoutPermission}>
         <AnalyticsDashboard />
-      </Provider>,
+      </Provider>
     );
 
     expect(screen.getByText('Access Denied')).toBeInTheDocument();

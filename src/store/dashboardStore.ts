@@ -209,16 +209,22 @@ export const useDashboardStore = create<DashboardState>()(
               totalClicks: (meta?.clicks || 0) + (google?.clicks || 0),
               totalConversions: (meta?.conversions || 0) + (google?.conversions || 0),
               avgCtr: calculateWeightedAverage(
-                meta?.ctr || 0, meta?.impressions || 0,
-                google?.ctr || 0, google?.impressions || 0,
+                meta?.ctr || 0,
+                meta?.impressions || 0,
+                google?.ctr || 0,
+                google?.impressions || 0
               ),
               avgCpc: calculateWeightedAverage(
-                meta?.cpc || 0, meta?.clicks || 0,
-                google?.cpc || 0, google?.clicks || 0,
+                meta?.cpc || 0,
+                meta?.clicks || 0,
+                google?.cpc || 0,
+                google?.clicks || 0
               ),
               avgRoas: calculateWeightedAverage(
-                meta?.roas || 0, meta?.spend || 0,
-                google?.roas || 0, google?.spend || 0,
+                meta?.roas || 0,
+                meta?.spend || 0,
+                google?.roas || 0,
+                google?.spend || 0
               ),
               spendByPlatform: {
                 meta: meta?.spend || 0,
@@ -232,7 +238,7 @@ export const useDashboardStore = create<DashboardState>()(
         addAlert: (alert) => {
           set((state) => {
             // Prevent duplicates
-            if (state.alerts.some(a => a.id === alert.id)) {
+            if (state.alerts.some((a) => a.id === alert.id)) {
               return;
             }
 
@@ -244,16 +250,16 @@ export const useDashboardStore = create<DashboardState>()(
             }
 
             // Update unacknowledged count
-            state.unacknowledgedCount = state.alerts.filter(a => !a.acknowledged).length;
+            state.unacknowledgedCount = state.alerts.filter((a) => !a.acknowledged).length;
           });
         },
 
         acknowledgeAlert: (alertId) => {
           set((state) => {
-            const alert = state.alerts.find(a => a.id === alertId);
+            const alert = state.alerts.find((a) => a.id === alertId);
             if (alert) {
               alert.acknowledged = true;
-              state.unacknowledgedCount = state.alerts.filter(a => !a.acknowledged).length;
+              state.unacknowledgedCount = state.alerts.filter((a) => !a.acknowledged).length;
             }
           });
         },
@@ -287,16 +293,14 @@ export const useDashboardStore = create<DashboardState>()(
 
             // Keep only last 24 hours of history
             const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
-            state.sentimentHistory = state.sentimentHistory.filter(
-              h => h.timestamp > oneDayAgo,
-            );
+            state.sentimentHistory = state.sentimentHistory.filter((h) => h.timestamp > oneDayAgo);
 
             // Determine trend
             if (state.sentimentHistory.length >= 2) {
               const recent = state.sentimentHistory.slice(-10);
               const older = state.sentimentHistory.slice(-20, -10);
-              const recentAvg = average(recent.map(h => h.score));
-              const olderAvg = average(older.map(h => h.score));
+              const recentAvg = average(recent.map((h) => h.score));
+              const olderAvg = average(older.map((h) => h.score));
 
               if (recentAvg > olderAvg + 5) {
                 state.sentiment.trend = 'improving';
@@ -337,41 +341,44 @@ export const useDashboardStore = create<DashboardState>()(
         reset: () => {
           set(() => initialState);
         },
-      })),
+      }))
     ),
     {
       name: 'dashboard-store',
-    },
-  ),
+    }
+  )
 );
 
 // Helper functions
 function calculateWeightedAverage(
-  value1: number, weight1: number,
-  value2: number, weight2: number,
+  value1: number,
+  weight1: number,
+  value2: number,
+  weight2: number
 ): number {
   const totalWeight = weight1 + weight2;
-  if (totalWeight === 0) {return 0;}
+  if (totalWeight === 0) {
+    return 0;
+  }
   return (value1 * weight1 + value2 * weight2) / totalWeight;
 }
 
 function average(numbers: number[]): number {
-  if (numbers.length === 0) {return 0;}
+  if (numbers.length === 0) {
+    return 0;
+  }
   return numbers.reduce((a, b) => a + b, 0) / numbers.length;
 }
 
 // Selectors
-export const selectTotalSpend = (state: DashboardState) =>
-  state.aggregatedMetrics?.totalSpend || 0;
+export const selectTotalSpend = (state: DashboardState) => state.aggregatedMetrics?.totalSpend || 0;
 
 export const selectCriticalAlerts = (state: DashboardState) =>
-  state.alerts.filter(a => a.severity === 'critical' && !a.acknowledged);
+  state.alerts.filter((a) => a.severity === 'critical' && !a.acknowledged);
 
-export const selectSentimentTrend = (state: DashboardState) =>
-  state.sentiment?.trend || 'stable';
+export const selectSentimentTrend = (state: DashboardState) => state.sentiment?.trend || 'stable';
 
-export const selectConnectionStatus = (state: DashboardState) =>
-  state.wsStatus.connected;
+export const selectConnectionStatus = (state: DashboardState) => state.wsStatus.connected;
 
 // Subscriptions for performance monitoring
 useDashboardStore.subscribe(
@@ -380,7 +387,7 @@ useDashboardStore.subscribe(
     if (renderTime > 100) {
       console.warn(`Dashboard render time exceeded 100ms: ${renderTime}ms`);
     }
-  },
+  }
 );
 
 useDashboardStore.subscribe(
@@ -389,5 +396,5 @@ useDashboardStore.subscribe(
     if (latency > 2000) {
       console.warn(`Update latency exceeded 2s: ${latency}ms`);
     }
-  },
+  }
 );

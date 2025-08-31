@@ -46,12 +46,7 @@ export function MetaClientProvider({ children }: { children: React.ReactNode }) 
     const circuitBreaker = new CircuitBreaker();
 
     // Initialize API client
-    const client = new MetaAPIClient(
-      config,
-      authManager,
-      rateLimiter,
-      circuitBreaker,
-    );
+    const client = new MetaAPIClient(config, authManager, rateLimiter, circuitBreaker);
 
     // Token is managed through auth manager, not directly on client
 
@@ -77,11 +72,7 @@ export function MetaClientProvider({ children }: { children: React.ReactNode }) 
     accountId: accountId || undefined,
   };
 
-  return (
-    <MetaClientContext.Provider value={value}>
-      {children}
-    </MetaClientContext.Provider>
-  );
+  return <MetaClientContext.Provider value={value}>{children}</MetaClientContext.Provider>;
 }
 
 /**

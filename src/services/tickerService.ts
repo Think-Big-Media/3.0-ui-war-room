@@ -211,8 +211,7 @@ const getMockTickerData = (): TickerFeedResponse => {
       id: '2',
       category: 'insights',
       title: 'Content Opportunity Detected',
-      description:
-        'Video testimonials show 3x higher engagement. Consider creating more.',
+      description: 'Video testimonials show 3x higher engagement. Consider creating more.',
       icon_name: 'Lightbulb',
       type: 'info',
       priority: 3,
@@ -242,8 +241,7 @@ const getMockTickerData = (): TickerFeedResponse => {
       id: '5',
       category: 'insights',
       title: 'Content Strategy Insight',
-      description:
-        'Your audience engages most with case study content on Tuesdays',
+      description: 'Your audience engages most with case study content on Tuesdays',
       icon_name: 'BarChart3',
       type: 'info',
       priority: 3,
@@ -253,8 +251,7 @@ const getMockTickerData = (): TickerFeedResponse => {
       id: '6',
       category: 'general',
       title: 'Industry News: AI Content Creation',
-      description:
-        'New AI tools show 40% improvement in content personalization',
+      description: 'New AI tools show 40% improvement in content personalization',
       icon_name: 'Zap',
       type: 'update',
       priority: 4,
@@ -274,8 +271,7 @@ const getMockTickerData = (): TickerFeedResponse => {
       id: '8',
       category: 'insights',
       title: 'Optimization Opportunity',
-      description:
-        'Consider posting testimonials during 2-4 PM for 35% better reach',
+      description: 'Consider posting testimonials during 2-4 PM for 35% better reach',
       icon_name: 'Target',
       type: 'info',
       priority: 3,

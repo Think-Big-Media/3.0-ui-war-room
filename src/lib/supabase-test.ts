@@ -25,7 +25,10 @@ export async function testSupabaseConnection() {
 
     // Test 2: Auth status
     console.log('\n2️⃣ Checking auth status...');
-    const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+    const {
+      data: { session },
+      error: sessionError,
+    } = await supabase.auth.getSession();
 
     if (sessionError) {
       console.error('❌ Auth check failed:', sessionError.message);
@@ -55,12 +58,14 @@ export async function testSupabaseConnection() {
     if (bucketsError) {
       console.log('⚠️  Cannot list buckets:', bucketsError.message);
     } else {
-      console.log('✅ Storage buckets available:', buckets?.map(b => b.name).join(', ') || 'none');
+      console.log(
+        '✅ Storage buckets available:',
+        buckets?.map((b) => b.name).join(', ') || 'none'
+      );
     }
 
     console.log('\n✅ Supabase connection test completed successfully!');
     return true;
-
   } catch (error) {
     console.error('\n❌ Unexpected error during test:', error);
     return false;

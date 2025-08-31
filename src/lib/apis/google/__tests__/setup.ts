@@ -19,31 +19,32 @@ expect.extend({
       message: () => `expected ${received} to be within range ${floor} - ${ceiling}`,
       pass: false,
     };
-
   },
 
   toHaveBeenCalledWithObjectContaining(received: jest.MockedFunction<any>, expected: any) {
-    const {calls} = received.mock;
+    const { calls } = received.mock;
     const pass = calls.some((call: any) =>
-      call.some((arg: any) =>
-        typeof arg === 'object' &&
-        Object.keys(expected).every(key =>
-          arg && typeof arg === 'object' && key in arg && arg[key] === expected[key],
-        ),
-      ),
+      call.some(
+        (arg: any) =>
+          typeof arg === 'object' &&
+          Object.keys(expected).every(
+            (key) => arg && typeof arg === 'object' && key in arg && arg[key] === expected[key]
+          )
+      )
     );
 
     if (pass) {
       return {
-        message: () => `expected function not to have been called with object containing ${JSON.stringify(expected)}`,
+        message: () =>
+          `expected function not to have been called with object containing ${JSON.stringify(expected)}`,
         pass: true,
       };
     }
     return {
-      message: () => `expected function to have been called with object containing ${JSON.stringify(expected)}`,
+      message: () =>
+        `expected function to have been called with object containing ${JSON.stringify(expected)}`,
       pass: false,
     };
-
   },
 });
 
@@ -161,7 +162,8 @@ export const createMockServiceAccount = (overrides = {}) => ({
   auth_uri: 'https://accounts.google.com/o/oauth2/auth',
   token_uri: 'https://oauth2.googleapis.com/token',
   auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
-  client_x509_cert_url: 'https://www.googleapis.com/robot/v1/metadata/x509/test%40test-project-12345.iam.gserviceaccount.com',
+  client_x509_cert_url:
+    'https://www.googleapis.com/robot/v1/metadata/x509/test%40test-project-12345.iam.gserviceaccount.com',
   universe_domain: 'googleapis.com',
   ...overrides,
 });
@@ -213,12 +215,12 @@ export const createMockAxiosError = (message: string, status = 500, data = {}) =
   return error;
 };
 
-export const waitFor = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+export const waitFor = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const waitCondition = async (
   condition: () => boolean | Promise<boolean>,
   timeout = 5000,
-  interval = 100,
+  interval = 100
 ) => {
   const start = Date.now();
   while (Date.now() - start < timeout) {
@@ -282,43 +284,47 @@ export const logMemoryUsage = (label = 'Memory usage') => {
   if (process.memoryUsage && import.meta.env.DEBUG_TESTS) {
     const usage = process.memoryUsage();
     debugLog(`${label}:`, {
-      rss: `${Math.round(usage.rss / 1024 / 1024 * 100) / 100} MB`,
-      heapTotal: `${Math.round(usage.heapTotal / 1024 / 1024 * 100) / 100} MB`,
-      heapUsed: `${Math.round(usage.heapUsed / 1024 / 1024 * 100) / 100} MB`,
-      external: `${Math.round(usage.external / 1024 / 1024 * 100) / 100} MB`,
+      rss: `${Math.round((usage.rss / 1024 / 1024) * 100) / 100} MB`,
+      heapTotal: `${Math.round((usage.heapTotal / 1024 / 1024) * 100) / 100} MB`,
+      heapUsed: `${Math.round((usage.heapUsed / 1024 / 1024) * 100) / 100} MB`,
+      external: `${Math.round((usage.external / 1024 / 1024) * 100) / 100} MB`,
     });
   }
 };
 
 // Test data generators
 export const generateLargeCampaignData = (count = 1000) => {
-  return Array(count).fill(null).map((_, i) => ({
-    campaign: {
-      id: i.toString(),
-      name: `Campaign ${i}`,
-      status: i % 2 === 0 ? 'ENABLED' : 'PAUSED',
-      biddingStrategyType: 'TARGET_CPA',
-    },
-    metrics: {
-      impressions: Math.floor(Math.random() * 100000),
-      clicks: Math.floor(Math.random() * 10000),
-      conversions: Math.floor(Math.random() * 1000),
-      costMicros: Math.floor(Math.random() * 1000000000),
-    },
-    segments: {
-      date: new Date().toISOString().split('T')[0],
-    },
-  }));
+  return Array(count)
+    .fill(null)
+    .map((_, i) => ({
+      campaign: {
+        id: i.toString(),
+        name: `Campaign ${i}`,
+        status: i % 2 === 0 ? 'ENABLED' : 'PAUSED',
+        biddingStrategyType: 'TARGET_CPA',
+      },
+      metrics: {
+        impressions: Math.floor(Math.random() * 100000),
+        clicks: Math.floor(Math.random() * 10000),
+        conversions: Math.floor(Math.random() * 1000),
+        costMicros: Math.floor(Math.random() * 1000000000),
+      },
+      segments: {
+        date: new Date().toISOString().split('T')[0],
+      },
+    }));
 };
 
 export const generateCustomerData = (count = 10) => {
-  return Array(count).fill(null).map((_, i) => ({
-    resourceName: `customers/${1000000000 + i}`,
-    id: (1000000000 + i).toString(),
-    descriptiveName: `Customer ${i}`,
-    currencyCode: 'USD',
-    timeZone: 'UTC',
-  }));
+  return Array(count)
+    .fill(null)
+    .map((_, i) => ({
+      resourceName: `customers/${1000000000 + i}`,
+      id: (1000000000 + i).toString(),
+      descriptiveName: `Customer ${i}`,
+      currencyCode: 'USD',
+      timeZone: 'UTC',
+    }));
 };
 
 // Export all utilities

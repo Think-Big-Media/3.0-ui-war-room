@@ -53,7 +53,7 @@ export class MetaAuth {
 
     const response = await fetch(
       `https://graph.facebook.com/${this.config.apiVersion}/oauth/access_token?${params}`,
-      { method: 'GET' },
+      { method: 'GET' }
     );
 
     if (!response.ok) {
@@ -61,7 +61,7 @@ export class MetaAuth {
       throw new Error(`Token exchange failed: ${error.error?.message || 'Unknown error'}`);
     }
 
-    const tokenData = await response.json() as MetaTokenResponse;
+    const tokenData = (await response.json()) as MetaTokenResponse;
 
     // Store token for this session
     this.tokenStorage.set('current', tokenData);
@@ -82,15 +82,17 @@ export class MetaAuth {
 
     const response = await fetch(
       `https://graph.facebook.com/${this.config.apiVersion}/oauth/access_token?${params}`,
-      { method: 'GET' },
+      { method: 'GET' }
     );
 
     if (!response.ok) {
       const error = await response.json();
-      throw new Error(`Long-lived token exchange failed: ${error.error?.message || 'Unknown error'}`);
+      throw new Error(
+        `Long-lived token exchange failed: ${error.error?.message || 'Unknown error'}`
+      );
     }
 
-    const tokenData = await response.json() as MetaTokenResponse;
+    const tokenData = (await response.json()) as MetaTokenResponse;
 
     // Update stored token
     this.tokenStorage.set('current', tokenData);
@@ -133,7 +135,7 @@ export class MetaAuth {
 
     const response = await fetch(
       `https://graph.facebook.com/${this.config.apiVersion}/debug_token?${params}`,
-      { method: 'GET' },
+      { method: 'GET' }
     );
 
     if (!response.ok) {
@@ -159,9 +161,9 @@ export class MetaAuth {
       {
         method: 'DELETE',
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
-      },
+      }
     );
 
     if (response.ok) {
@@ -199,7 +201,8 @@ export function createMetaAuth(config: Partial<MetaConfig> = {}): MetaAuth {
   const defaultConfig: MetaConfig = {
     appId: import.meta.env.VITE_META_APP_ID || '',
     appSecret: import.meta.env.VITE_META_APP_SECRET || '',
-    redirectUri: import.meta.env.VITE_META_REDIRECT_URI || `${window.location.origin}/auth/meta/callback`,
+    redirectUri:
+      import.meta.env.VITE_META_REDIRECT_URI || `${window.location.origin}/auth/meta/callback`,
     apiVersion: 'v19.0',
   };
 

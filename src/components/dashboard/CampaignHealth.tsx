@@ -62,7 +62,12 @@ export const CampaignHealth: React.FC<CampaignHealthProps> = ({
   const prefersReducedMotion = useReducedMotion();
 
   // Live API data
-  const { data: healthData, isLoading: isHealthLoading, error: healthError, refetch: refetchHealth } = useCampaignHealth();
+  const {
+    data: healthData,
+    isLoading: isHealthLoading,
+    error: healthError,
+    refetch: refetchHealth,
+  } = useCampaignHealth();
   const { data: alerts, isLoading: isAlertsLoading } = useAdAlerts({ severity: 'high' });
   const { mutate: triggerSync, isPending: isSyncing } = useTriggerSync();
 
@@ -73,7 +78,9 @@ export const CampaignHealth: React.FC<CampaignHealthProps> = ({
 
   // Transform API data to component format
   useEffect(() => {
-    if (!healthData && !healthError) {return;} // Still loading
+    if (!healthData && !healthError) {
+      return;
+    } // Still loading
 
     const liveMetrics: HealthMetric[] = [];
 
@@ -91,8 +98,14 @@ export const CampaignHealth: React.FC<CampaignHealthProps> = ({
         lastChecked: new Date((healthData as any)?.last_updated || Date.now()),
         trend: 'stable',
         details: [
-          { label: 'Active campaigns', value: (healthData as any)?.active_campaigns?.toString() || '0' },
-          { label: 'Daily spend', value: `$${(healthData as any)?.total_daily_spend?.toFixed(2) || '0.00'}` },
+          {
+            label: 'Active campaigns',
+            value: (healthData as any)?.active_campaigns?.toString() || '0',
+          },
+          {
+            label: 'Daily spend',
+            value: `$${(healthData as any)?.total_daily_spend?.toFixed(2) || '0.00'}`,
+          },
         ],
       });
     }
@@ -111,16 +124,22 @@ export const CampaignHealth: React.FC<CampaignHealthProps> = ({
         lastChecked: new Date((healthData as any)?.last_updated || Date.now()),
         trend: 'stable',
         details: [
-          { label: 'Budget usage', value: `${(((healthData as any)?.total_daily_spend || 0) / ((healthData as any)?.daily_spend_limit || 1) * 100).toFixed(1)}%` },
-          { label: 'Spend limit', value: `$${(healthData as any)?.daily_spend_limit?.toFixed(2) || '0.00'}` },
+          {
+            label: 'Budget usage',
+            value: `${((((healthData as any)?.total_daily_spend || 0) / ((healthData as any)?.daily_spend_limit || 1)) * 100).toFixed(1)}%`,
+          },
+          {
+            label: 'Spend limit',
+            value: `$${(healthData as any)?.daily_spend_limit?.toFixed(2) || '0.00'}`,
+          },
         ],
       });
     }
 
     // Add alerts-based health metrics
     if (alerts && alerts.length > 0) {
-      const criticalAlerts = alerts.filter(a => a.severity === 'critical').length;
-      const highAlerts = alerts.filter(a => a.severity === 'high').length;
+      const criticalAlerts = alerts.filter((a) => a.severity === 'critical').length;
+      const highAlerts = alerts.filter((a) => a.severity === 'high').length;
 
       liveMetrics.push({
         id: 'active-alerts',
@@ -176,11 +195,15 @@ export const CampaignHealth: React.FC<CampaignHealthProps> = ({
 
   // Calculate overall health from live data
   const overallHealth = React.useMemo(() => {
-    if (healthError) {return 'critical';}
-    if (healthData?.overall_health) {return healthData.overall_health;}
+    if (healthError) {
+      return 'critical';
+    }
+    if (healthData?.overall_health) {
+      return healthData.overall_health;
+    }
 
-    const criticalCount = metrics.filter(m => m.status === 'critical').length;
-    const warningCount = metrics.filter(m => m.status === 'warning').length;
+    const criticalCount = metrics.filter((m) => m.status === 'critical').length;
+    const warningCount = metrics.filter((m) => m.status === 'warning').length;
 
     if (criticalCount > 0) {
       return 'critical';
@@ -188,7 +211,6 @@ export const CampaignHealth: React.FC<CampaignHealthProps> = ({
       return 'warning';
     }
     return 'healthy';
-
   }, [healthError, healthData?.overall_health, metrics]);
 
   const handleRefresh = useCallback(async () => {
@@ -256,12 +278,16 @@ export const CampaignHealth: React.FC<CampaignHealthProps> = ({
       <div className="bg-white rounded-xl border border-gray-200 p-4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-sm font-semibold text-gray-900">System Health</h3>
-          <div className={cn(
-            'w-3 h-3 rounded-full',
-            overallHealth === 'healthy' ? 'bg-green-500' :
-              overallHealth === 'warning' ? 'bg-yellow-500' :
-                'bg-red-500',
-          )} />
+          <div
+            className={cn(
+              'w-3 h-3 rounded-full',
+              overallHealth === 'healthy'
+                ? 'bg-green-500'
+                : overallHealth === 'warning'
+                  ? 'bg-yellow-500'
+                  : 'bg-red-500'
+            )}
+          />
         </div>
         <div className="space-y-2">
           {metrics.slice(0, 4).map((metric) => {
@@ -269,12 +295,16 @@ export const CampaignHealth: React.FC<CampaignHealthProps> = ({
             return (
               <div key={metric.id} className="flex items-center justify-between">
                 <span className="text-xs text-gray-600">{metric.name}</span>
-                <StatusIcon className={cn(
-                  'w-4 h-4',
-                  metric.status === 'healthy' ? 'text-green-500' :
-                    metric.status === 'warning' ? 'text-yellow-500' :
-                      'text-red-500',
-                )} />
+                <StatusIcon
+                  className={cn(
+                    'w-4 h-4',
+                    metric.status === 'healthy'
+                      ? 'text-green-500'
+                      : metric.status === 'warning'
+                        ? 'text-yellow-500'
+                        : 'text-red-500'
+                  )}
+                />
               </div>
             );
           })}
@@ -289,10 +319,12 @@ export const CampaignHealth: React.FC<CampaignHealthProps> = ({
       <div className="p-6 border-b border-gray-100">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className={cn(
-              'w-10 h-10 rounded-xl bg-gradient-to-br flex items-center justify-center',
-              getOverallHealthColor(),
-            )}>
+            <div
+              className={cn(
+                'w-10 h-10 rounded-xl bg-gradient-to-br flex items-center justify-center',
+                getOverallHealthColor()
+              )}
+            >
               <Shield className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -319,27 +351,29 @@ export const CampaignHealth: React.FC<CampaignHealthProps> = ({
             disabled={isRefreshing}
             className={cn(
               'p-2 rounded-lg transition-all',
-              isRefreshing ? 'bg-gray-100' : 'hover:bg-gray-100',
+              isRefreshing ? 'bg-gray-100' : 'hover:bg-gray-100'
             )}
             title="Refresh campaign data"
           >
-            <RefreshCw className={cn(
-              'w-5 h-5 text-gray-500',
-              isRefreshing && 'animate-spin',
-            )} />
+            <RefreshCw className={cn('w-5 h-5 text-gray-500', isRefreshing && 'animate-spin')} />
           </button>
         </div>
 
         {/* Overall Status Bar */}
         <div className="mt-4 flex items-center space-x-4">
           <div className="flex-1 bg-gray-100 rounded-full h-2 overflow-hidden">
-            <div className={cn(
-              'h-full bg-gradient-to-r transition-all duration-500',
-              getOverallHealthColor(),
-            )} style={{ width: `${metrics.filter(m => m.status === 'healthy').length / metrics.length * 100}%` }} />
+            <div
+              className={cn(
+                'h-full bg-gradient-to-r transition-all duration-500',
+                getOverallHealthColor()
+              )}
+              style={{
+                width: `${(metrics.filter((m) => m.status === 'healthy').length / metrics.length) * 100}%`,
+              }}
+            />
           </div>
           <span className="text-sm font-medium text-gray-700">
-            {metrics.filter(m => m.status === 'healthy').length}/{metrics.length} Healthy
+            {metrics.filter((m) => m.status === 'healthy').length}/{metrics.length} Healthy
           </span>
         </div>
       </div>
@@ -356,9 +390,11 @@ export const CampaignHealth: React.FC<CampaignHealthProps> = ({
               key={metric.id}
               className={cn(
                 'p-4 rounded-xl border transition-all hover:shadow-md',
-                metric.status === 'critical' ? 'border-red-200 bg-red-50/30' :
-                  metric.status === 'warning' ? 'border-yellow-200 bg-yellow-50/30' :
-                    'border-gray-100 bg-white',
+                metric.status === 'critical'
+                  ? 'border-red-200 bg-red-50/30'
+                  : metric.status === 'warning'
+                    ? 'border-yellow-200 bg-yellow-50/30'
+                    : 'border-gray-100 bg-white'
               )}
             >
               {/* Metric Header */}
@@ -374,13 +410,18 @@ export const CampaignHealth: React.FC<CampaignHealthProps> = ({
                     )}
                   </div>
                 </div>
-                <StatusIcon className={cn(
-                  'w-5 h-5',
-                  metric.status === 'healthy' ? 'text-green-500' :
-                    metric.status === 'warning' ? 'text-yellow-500' :
-                      metric.status === 'critical' ? 'text-red-500' :
-                        'text-gray-500',
-                )} />
+                <StatusIcon
+                  className={cn(
+                    'w-5 h-5',
+                    metric.status === 'healthy'
+                      ? 'text-green-500'
+                      : metric.status === 'warning'
+                        ? 'text-yellow-500'
+                        : metric.status === 'critical'
+                          ? 'text-red-500'
+                          : 'text-gray-500'
+                  )}
+                />
               </div>
 
               {/* Metric Value */}
@@ -388,9 +429,7 @@ export const CampaignHealth: React.FC<CampaignHealthProps> = ({
                 <span className="text-2xl font-bold text-gray-900">
                   {metric.value.toLocaleString()}
                 </span>
-                {metric.unit && (
-                  <span className="text-sm text-gray-500">{metric.unit}</span>
-                )}
+                {metric.unit && <span className="text-sm text-gray-500">{metric.unit}</span>}
                 {metric.trend && (
                   <div className="flex items-center">
                     {metric.trend === 'up' ? (

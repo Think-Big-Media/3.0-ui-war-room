@@ -18,13 +18,15 @@ const activityKeys = {
 /**
  * Hook to get recent activities
  */
-export function useRecentActivities(params: {
-  limit?: number;
-  hours?: number;
-  types?: string[];
-  severity?: string;
-  autoRefresh?: boolean;
-} = {}) {
+export function useRecentActivities(
+  params: {
+    limit?: number;
+    hours?: number;
+    types?: string[];
+    severity?: string;
+    autoRefresh?: boolean;
+  } = {}
+) {
   const { autoRefresh = true, ...apiParams } = params;
 
   return useQuery({
@@ -48,10 +50,11 @@ export function useRecentActivities(params: {
 export function useCriticalActivities() {
   return useQuery({
     queryKey: activityKeys.recent({ severity: 'critical' }),
-    queryFn: () => activityApi.getRecentActivities({
-      severity: 'critical',
-      limit: 10,
-    }),
+    queryFn: () =>
+      activityApi.getRecentActivities({
+        severity: 'critical',
+        limit: 10,
+      }),
     staleTime: 1000 * 15, // 15 seconds for critical
     refetchInterval: 1000 * 30, // 30 seconds
   });
@@ -62,11 +65,15 @@ export function useCriticalActivities() {
  */
 export function useCampaignActivities(limit = 15) {
   return useQuery({
-    queryKey: activityKeys.recent({ types: ['campaign_update', 'spend_alert', 'performance_change'], limit }),
-    queryFn: () => activityApi.getRecentActivities({
+    queryKey: activityKeys.recent({
       types: ['campaign_update', 'spend_alert', 'performance_change'],
       limit,
     }),
+    queryFn: () =>
+      activityApi.getRecentActivities({
+        types: ['campaign_update', 'spend_alert', 'performance_change'],
+        limit,
+      }),
     staleTime: 1000 * 45, // 45 seconds
     refetchInterval: 1000 * 90, // 90 seconds
   });

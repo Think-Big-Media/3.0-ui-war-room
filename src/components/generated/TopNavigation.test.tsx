@@ -39,15 +39,11 @@ jest.mock('framer-motion', () => {
 
   return {
     motion: {
-      nav: ({ children, ...props }: any) => (
-        <nav {...filterMotionProps(props)}>{children}</nav>
-      ),
+      nav: ({ children, ...props }: any) => <nav {...filterMotionProps(props)}>{children}</nav>,
       button: ({ children, ...props }: any) => (
         <button {...filterMotionProps(props)}>{children}</button>
       ),
-      div: ({ children, ...props }: any) => (
-        <div {...filterMotionProps(props)}>{children}</div>
-      ),
+      div: ({ children, ...props }: any) => <div {...filterMotionProps(props)}>{children}</div>,
     },
     AnimatePresence: ({ children }: any) => <>{children}</>,
   };
@@ -67,7 +63,7 @@ describe('TopNavigation', () => {
     return render(
       <TestRouterWrapper>
         <TopNavigation />
-      </TestRouterWrapper>,
+      </TestRouterWrapper>
     );
   };
 
@@ -97,12 +93,8 @@ describe('TopNavigation', () => {
     it('should render notification and user profile buttons', () => {
       renderComponent();
       // Find buttons by their icon classes since they don't have accessible names
-      const notificationButton = document
-        .querySelector('button .lucide-bell')
-        ?.closest('button');
-      const userButton = document
-        .querySelector('button .lucide-user')
-        ?.closest('button');
+      const notificationButton = document.querySelector('button .lucide-bell')?.closest('button');
+      const userButton = document.querySelector('button .lucide-user')?.closest('button');
 
       expect(notificationButton).toBeInTheDocument();
       expect(userButton).toBeInTheDocument();
@@ -139,19 +131,12 @@ describe('TopNavigation', () => {
       renderComponent();
 
       const ciaButton = screen.getByText('CIA').closest('button');
-      expect(ciaButton).toHaveClass(
-        'bg-white/20',
-        'text-white',
-        'border',
-        'border-white/30',
-      );
+      expect(ciaButton).toHaveClass('bg-white/20', 'text-white', 'border', 'border-white/30');
     });
 
     it('should navigate to settings when user profile is clicked', async () => {
       renderComponent();
-      const userButton = document
-        .querySelector('button .lucide-user')
-        ?.closest('button');
+      const userButton = document.querySelector('button .lucide-user')?.closest('button');
 
       if (userButton) {
         await userEvent.click(userButton);
@@ -164,9 +149,7 @@ describe('TopNavigation', () => {
   describe('Notifications', () => {
     it('should toggle notifications dropdown when bell icon is clicked', async () => {
       renderComponent();
-      const notificationButton = document
-        .querySelector('button .lucide-bell')
-        ?.closest('button');
+      const notificationButton = document.querySelector('button .lucide-bell')?.closest('button');
 
       // Initially, notifications should not be visible
       expect(screen.queryByText('Notifications')).not.toBeInTheDocument();
@@ -190,9 +173,7 @@ describe('TopNavigation', () => {
 
     it('should close notifications when clicking outside', async () => {
       renderComponent();
-      const notificationButton = document
-        .querySelector('button .lucide-bell')
-        ?.closest('button');
+      const notificationButton = document.querySelector('button .lucide-bell')?.closest('button');
 
       // Open notifications
       if (notificationButton) {
@@ -210,9 +191,7 @@ describe('TopNavigation', () => {
 
     it('should close notifications when X button is clicked', async () => {
       renderComponent();
-      const notificationButton = document
-        .querySelector('button .lucide-bell')
-        ?.closest('button');
+      const notificationButton = document.querySelector('button .lucide-bell')?.closest('button');
 
       // Open notifications
       if (notificationButton) {
@@ -223,9 +202,7 @@ describe('TopNavigation', () => {
       await waitFor(() => {
         expect(screen.getByText('Notifications')).toBeInTheDocument();
       });
-      const closeButton = document
-        .querySelector('.lucide-x')
-        ?.closest('button');
+      const closeButton = document.querySelector('.lucide-x')?.closest('button');
       if (closeButton) {
         await userEvent.click(closeButton);
       }
@@ -237,9 +214,7 @@ describe('TopNavigation', () => {
 
     it('should display notification badge', () => {
       renderComponent();
-      const notificationButton = document
-        .querySelector('button .lucide-bell')
-        ?.closest('button');
+      const notificationButton = document.querySelector('button .lucide-bell')?.closest('button');
       const badge = notificationButton?.querySelector('.bg-orange-500');
 
       expect(badge).toBeInTheDocument();
@@ -301,9 +276,7 @@ describe('TopNavigation', () => {
       await waitFor(() => {
         expect(document.querySelector('.lucide-x')).toBeInTheDocument();
       });
-      const closeButton = document
-        .querySelector('.lucide-x')
-        ?.closest('button');
+      const closeButton = document.querySelector('.lucide-x')?.closest('button');
       if (closeButton) {
         await userEvent.click(closeButton);
       }
@@ -350,14 +323,9 @@ describe('TopNavigation', () => {
       }
 
       const contentEngineButtons = screen.getAllByText('Content Engine');
-      const mobileContentEngineButton =
-        contentEngineButtons[1].closest('button');
+      const mobileContentEngineButton = contentEngineButtons[1].closest('button');
 
-      expect(mobileContentEngineButton).toHaveClass(
-        'bg-white/20',
-        'text-white',
-        'border-l-4',
-      );
+      expect(mobileContentEngineButton).toHaveClass('bg-white/20', 'text-white', 'border-l-4');
     });
   });
 
@@ -375,7 +343,7 @@ describe('TopNavigation', () => {
         'bg-black/20',
         'backdrop-blur-xl',
         'border-b',
-        'border-purple-500/30',
+        'border-purple-500/30'
       );
     });
 

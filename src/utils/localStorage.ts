@@ -10,10 +10,7 @@ export interface SafeParseOptions {
 /**
  * Safely parse JSON from localStorage with fallback and error handling
  */
-export function safeParseJSON<T = any>(
-  key: string, 
-  options: SafeParseOptions = {}
-): T | null {
+export function safeParseJSON<T = any>(key: string, options: SafeParseOptions = {}): T | null {
   const { fallback = null, logErrors = true } = options;
 
   try {
@@ -28,7 +25,7 @@ export function safeParseJSON<T = any>(
       console.warn(`[safeParseJSON] Failed to parse localStorage key "${key}":`, error);
       console.warn(`[safeParseJSON] Corrupted data:`, localStorage.getItem(key));
     }
-    
+
     // Clear corrupted data to prevent future issues
     try {
       localStorage.removeItem(key);
@@ -37,7 +34,10 @@ export function safeParseJSON<T = any>(
       }
     } catch (clearError) {
       if (logErrors) {
-        console.error(`[safeParseJSON] Could not clear corrupted localStorage key "${key}":`, clearError);
+        console.error(
+          `[safeParseJSON] Could not clear corrupted localStorage key "${key}":`,
+          clearError
+        );
       }
     }
 

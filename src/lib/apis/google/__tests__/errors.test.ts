@@ -46,7 +46,7 @@ describe('Google Ads API Error System', () => {
         'CUSTOM_ERROR',
         details,
         true,
-        'client',
+        'client'
       );
 
       expect(error.message).toBe('Custom error');
@@ -111,18 +111,36 @@ describe('Google Ads API Error System', () => {
 
     describe('getUserMessage method', () => {
       it('should return user-friendly message for auth errors', () => {
-        const error = new GoogleAdsError('Internal auth error', 401, 'AUTH_ERROR', {}, false, 'auth');
-        expect(error.getUserMessage()).toBe('Authentication failed. Please verify your API credentials.');
+        const error = new GoogleAdsError(
+          'Internal auth error',
+          401,
+          'AUTH_ERROR',
+          {},
+          false,
+          'auth'
+        );
+        expect(error.getUserMessage()).toBe(
+          'Authentication failed. Please verify your API credentials.'
+        );
       });
 
       it('should return user-friendly message for rate limit errors', () => {
-        const error = new GoogleAdsError('Rate limited', 429, 'RATE_LIMIT', {}, false, 'rate_limit');
+        const error = new GoogleAdsError(
+          'Rate limited',
+          429,
+          'RATE_LIMIT',
+          {},
+          false,
+          'rate_limit'
+        );
         expect(error.getUserMessage()).toBe('Request rate limit exceeded. Please try again later.');
       });
 
       it('should return user-friendly message for quota errors', () => {
         const error = new GoogleAdsError('Quota exceeded', 403, 'QUOTA_ERROR', {}, false, 'quota');
-        expect(error.getUserMessage()).toBe('API quota exceeded. Please contact support if this persists.');
+        expect(error.getUserMessage()).toBe(
+          'API quota exceeded. Please contact support if this persists.'
+        );
       });
 
       it('should return user-friendly message for client errors', () => {
@@ -166,7 +184,7 @@ describe('Google Ads API Error System', () => {
           'RATE_LIMIT',
           { retryAfter: 30000 },
           true,
-          'rate_limit',
+          'rate_limit'
         );
         expect(error.getRetryDelay()).toBe(30000);
       });
@@ -178,7 +196,7 @@ describe('Google Ads API Error System', () => {
           'RATE_LIMIT',
           { retryAfter: 600000 }, // 10 minutes
           true,
-          'rate_limit',
+          'rate_limit'
         );
         expect(error.getRetryDelay()).toBe(300000); // Capped at 5 minutes
       });
@@ -190,7 +208,7 @@ describe('Google Ads API Error System', () => {
           'SERVER_ERROR',
           { attemptCount: 3 },
           true,
-          'server',
+          'server'
         );
         expect(error.getRetryDelay()).toBe(8000); // 1000 * 2^3
       });
@@ -202,7 +220,7 @@ describe('Google Ads API Error System', () => {
           'SERVER_ERROR',
           { attemptCount: 10 },
           true,
-          'server',
+          'server'
         );
         expect(error.getRetryDelay()).toBe(30000); // Capped at 30 seconds
       });
@@ -239,7 +257,7 @@ describe('Google Ads API Error System', () => {
       const error = new OAuth2Error(
         'Invalid grant',
         'urn:ietf:params:oauth:grant-type:jwt-bearer',
-        'https://www.googleapis.com/auth/adwords',
+        'https://www.googleapis.com/auth/adwords'
       );
 
       expect(error).toBeInstanceOf(AuthenticationError);
@@ -336,7 +354,7 @@ describe('Google Ads API Error System', () => {
         'Invalid customer ID',
         'customerId',
         'invalid-id',
-        'Must be exactly 10 digits',
+        'Must be exactly 10 digits'
       );
 
       expect(error).toBeInstanceOf(GoogleAdsError);
@@ -364,12 +382,7 @@ describe('Google Ads API Error System', () => {
 
   describe('PermissionDeniedError', () => {
     it('should create permission denied error', () => {
-      const error = new PermissionDeniedError(
-        'Access denied',
-        'campaign',
-        'read',
-        '1234567890',
-      );
+      const error = new PermissionDeniedError('Access denied', 'campaign', 'read', '1234567890');
 
       expect(error).toBeInstanceOf(GoogleAdsError);
       expect(error.statusCode).toBe(403);
@@ -405,12 +418,7 @@ describe('Google Ads API Error System', () => {
   describe('CircuitBreakerError', () => {
     it('should create circuit breaker error', () => {
       const nextAttemptTime = new Date(Date.now() + 60000);
-      const error = new CircuitBreakerError(
-        'Service unavailable',
-        'OPEN',
-        5,
-        nextAttemptTime,
-      );
+      const error = new CircuitBreakerError('Service unavailable', 'OPEN', 5, nextAttemptTime);
 
       expect(error).toBeInstanceOf(GoogleAdsError);
       expect(error.statusCode).toBe(503);
@@ -446,11 +454,7 @@ describe('Google Ads API Error System', () => {
 
   describe('ConfigurationError', () => {
     it('should create configuration error', () => {
-      const error = new ConfigurationError(
-        'Missing developer token',
-        'developerToken',
-        'string',
-      );
+      const error = new ConfigurationError('Missing developer token', 'developerToken', 'string');
 
       expect(error).toBeInstanceOf(GoogleAdsError);
       expect(error.statusCode).toBe(500);
@@ -467,7 +471,7 @@ describe('Google Ads API Error System', () => {
       const error = new ResponseParsingError(
         'Invalid response format',
         responseData,
-        'SearchStreamResponse',
+        'SearchStreamResponse'
       );
 
       expect(error).toBeInstanceOf(GoogleAdsError);
@@ -486,7 +490,7 @@ describe('Google Ads API Error System', () => {
         'INVALID_CUSTOMER_ID',
         400,
         'customer123',
-        'customerId',
+        'customerId'
       );
 
       expect(error).toBeInstanceOf(GoogleAdsError);
@@ -506,16 +510,20 @@ describe('Google Ads API Error System', () => {
             metadata: {
               requestId: 'req-12345',
             },
-            details: [{
-              errors: [{
-                errorCode: 'INVALID_CUSTOMER_ID',
-                message: 'Customer ID is invalid',
-                trigger: 'customer123',
-                location: {
-                  field: 'customerId',
-                },
-              }],
-            }],
+            details: [
+              {
+                errors: [
+                  {
+                    errorCode: 'INVALID_CUSTOMER_ID',
+                    message: 'Customer ID is invalid',
+                    trigger: 'customer123',
+                    location: {
+                      field: 'customerId',
+                    },
+                  },
+                ],
+              },
+            ],
           },
         };
 
@@ -752,10 +760,7 @@ describe('Google Ads API Error System', () => {
         const error = new GoogleAdsError('Test error');
         ErrorUtils.logError(error);
 
-        expect(consoleSpy).toHaveBeenCalledWith(
-          '[SERVER] Test error',
-          error.toJSON(),
-        );
+        expect(consoleSpy).toHaveBeenCalledWith('[SERVER] Test error', error.toJSON());
       });
 
       it('should use custom logger when provided', () => {
@@ -767,10 +772,7 @@ describe('Google Ads API Error System', () => {
         const error = new GoogleAdsError('Test error', 400, 'ERROR', {}, false, 'client');
         ErrorUtils.logError(error, mockLogger);
 
-        expect(mockLogger.warn).toHaveBeenCalledWith(
-          'Client error occurred',
-          error.toJSON(),
-        );
+        expect(mockLogger.warn).toHaveBeenCalledWith('Client error occurred', error.toJSON());
       });
 
       it('should log different categories at appropriate levels', () => {
@@ -784,7 +786,7 @@ describe('Google Ads API Error System', () => {
         ErrorUtils.logError(authError, mockLogger);
         expect(mockLogger.error).toHaveBeenCalledWith(
           'Authentication error occurred',
-          authError.toJSON(),
+          authError.toJSON()
         );
 
         // Test rate limit error
@@ -792,16 +794,13 @@ describe('Google Ads API Error System', () => {
         ErrorUtils.logError(rateLimitError, mockLogger);
         expect(mockLogger.warn).toHaveBeenCalledWith(
           'Rate limit error occurred',
-          rateLimitError.toJSON(),
+          rateLimitError.toJSON()
         );
 
         // Test quota error
         const quotaError = new ApiQuotaError('Quota exceeded');
         ErrorUtils.logError(quotaError, mockLogger);
-        expect(mockLogger.error).toHaveBeenCalledWith(
-          'Quota error occurred',
-          quotaError.toJSON(),
-        );
+        expect(mockLogger.error).toHaveBeenCalledWith('Quota error occurred', quotaError.toJSON());
       });
     });
   });

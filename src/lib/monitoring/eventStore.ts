@@ -1,11 +1,7 @@
 // Event Store - Supabase-backed Event History & Storage
 
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
-import {
-  type MonitoringEvent,
-  type CrisisAlert,
-  type PipelineMetrics,
-} from './types';
+import { type MonitoringEvent, type CrisisAlert, type PipelineMetrics } from './types';
 import { createHash } from 'crypto';
 
 interface StoredEvent extends Omit<MonitoringEvent, 'timestamp'> {
@@ -37,7 +33,7 @@ export class EventStore {
 
   constructor(
     supabaseUrl: string = import.meta.env.SUPABASE_URL!,
-    supabaseKey: string = import.meta.env.SUPABASE_ANON_KEY!,
+    supabaseKey: string = import.meta.env.SUPABASE_ANON_KEY!
   ) {
     this.supabase = createClient(supabaseUrl, supabaseKey, {
       db: {
@@ -76,7 +72,6 @@ export class EventStore {
       }
 
       console.log('✅ EventStore initialized');
-
     } catch (error) {
       console.error('Error initializing EventStore:', error);
       throw error;
@@ -104,7 +99,6 @@ export class EventStore {
           this.processBatch().catch(console.error);
         }, this.BATCH_TIMEOUT_MS);
       }
-
     } catch (error) {
       console.error('Error storing event:', error);
       throw error;
@@ -112,7 +106,9 @@ export class EventStore {
   }
 
   private async processBatch(): Promise<void> {
-    if (this.batchQueue.length === 0) {return;}
+    if (this.batchQueue.length === 0) {
+      return;
+    }
 
     const eventsToStore = [...this.batchQueue];
     this.batchQueue = [];
@@ -123,9 +119,7 @@ export class EventStore {
     }
 
     try {
-      const { error } = await this.supabase
-        .from('monitoring_events')
-        .insert(eventsToStore);
+      const { error } = await this.supabase.from('monitoring_events').insert(eventsToStore);
 
       if (error) {
         console.error('Batch insert error:', error);
@@ -135,7 +129,6 @@ export class EventStore {
       }
 
       console.log(`💾 Stored batch of ${eventsToStore.length} events`);
-
     } catch (error) {
       console.error('Error processing batch:', error);
       throw error;
@@ -150,10 +143,11 @@ export class EventStore {
         .eq('id', eventId)
         .single();
 
-      if (error || !data) {return null;}
+      if (error || !data) {
+        return null;
+      }
 
       return this.convertStoredEventToMonitoringEvent(data);
-
     } catch (error) {
       console.error('Error getting event:', error);
       return null;
@@ -179,8 +173,7 @@ export class EventStore {
         return [];
       }
 
-      return data.map(item => this.convertStoredEventToMonitoringEvent(item));
-
+      return data.map((item) => this.convertStoredEventToMonitoringEvent(item));
     } catch (error) {
       console.error('Error getting recent events:', error);
       return [];
@@ -200,8 +193,7 @@ export class EventStore {
         return [];
       }
 
-      return data.map(item => this.convertStoredEventToMonitoringEvent(item));
-
+      return data.map((item) => this.convertStoredEventToMonitoringEvent(item));
     } catch (error) {
       console.error('Error getting events since:', error);
       return [];
@@ -211,7 +203,7 @@ export class EventStore {
   async findSimilarEvents(
     event: MonitoringEvent,
     since: Date,
-    similarityThreshold = 0.8,
+    similarityThreshold = 0.8
   ): Promise<SimilarEvent[]> {
     try {
       // Get recent events from same platform
@@ -223,16 +215,15 @@ export class EventStore {
         .neq('id', event.id)
         .limit(100);
 
-      if (error || !data) {return [];}
+      if (error || !data) {
+        return [];
+      }
 
       // Calculate similarity scores
       const similarEvents: SimilarEvent[] = [];
 
       for (const storedEvent of data) {
-        const similarity = this.calculateContentSimilarity(
-          event,
-          storedEvent as any,
-        );
+        const similarity = this.calculateContentSimilarity(event, storedEvent as any);
 
         if (similarity >= similarityThreshold) {
           similarEvents.push({
@@ -244,7 +235,6 @@ export class EventStore {
 
       // Sort by similarity score (highest first)
       return similarEvents.sort((a, b) => b.similarity_score - a.similarity_score);
-
     } catch (error) {
       console.error('Error finding similar events:', error);
       return [];
@@ -285,7 +275,7 @@ export class EventStore {
     const words1 = new Set(str1.toLowerCase().split(/\s+/));
     const words2 = new Set(str2.toLowerCase().split(/\s+/));
 
-    const intersection = new Set([...words1].filter(word => words2.has(word)));
+    const intersection = new Set([...words1].filter((word) => words2.has(word)));
     const union = new Set([...words1, ...words2]);
 
     return union.size > 0 ? intersection.size / union.size : 0;
@@ -299,9 +289,7 @@ export class EventStore {
         updated_at: alert.updated_at.toISOString(),
       };
 
-      const { error } = await this.supabase
-        .from('crisis_alerts')
-        .insert([storedAlert]);
+      const { error } = await this.supabase.from('crisis_alerts').insert([storedAlert]);
 
       if (error) {
         console.error('Error storing alert:', error);
@@ -309,7 +297,6 @@ export class EventStore {
       }
 
       console.log(`🚨 Stored crisis alert: ${alert.id}`);
-
     } catch (error) {
       console.error('Error storing alert:', error);
       throw error;
@@ -329,8 +316,7 @@ export class EventStore {
         return [];
       }
 
-      return data.map(item => this.convertStoredAlertToCrisisAlert(item));
-
+      return data.map((item) => this.convertStoredAlertToCrisisAlert(item));
     } catch (error) {
       console.error('Error getting active alerts:', error);
       return [];
@@ -355,7 +341,6 @@ export class EventStore {
       }
 
       console.log(`✅ Alert acknowledged: ${alertId}`);
-
     } catch (error) {
       console.error('Error acknowledging alert:', error);
       throw error;
@@ -380,7 +365,6 @@ export class EventStore {
       }
 
       console.log(`✅ Alert resolved: ${alertId}`);
-
     } catch (error) {
       console.error('Error resolving alert:', error);
       throw error;
@@ -417,7 +401,7 @@ export class EventStore {
       const sentimentDistribution = { positive: 0, negative: 0, neutral: 0 };
       const platformDistribution: Record<string, number> = {};
 
-      events.forEach(event => {
+      events.forEach((event) => {
         // Sentiment distribution
         if (event.sentiment?.label) {
           sentimentDistribution[event.sentiment.label as keyof typeof sentimentDistribution]++;
@@ -443,7 +427,6 @@ export class EventStore {
         platform_distribution: platformDistribution,
         last_updated: new Date(),
       };
-
     } catch (error) {
       console.error('Error getting event metrics:', error);
       throw error;
@@ -451,7 +434,10 @@ export class EventStore {
   }
 
   // Analytics queries
-  async getTopKeywords(timeRange: { from: Date; to: Date }, limit = 10): Promise<Array<{keyword: string, count: number}>> {
+  async getTopKeywords(
+    timeRange: { from: Date; to: Date },
+    limit = 10
+  ): Promise<Array<{ keyword: string; count: number }>> {
     try {
       const { data, error } = await this.supabase
         .from('monitoring_events')
@@ -459,12 +445,14 @@ export class EventStore {
         .gte('timestamp', timeRange.from.toISOString())
         .lte('timestamp', timeRange.to.toISOString());
 
-      if (error) {throw error;}
+      if (error) {
+        throw error;
+      }
 
       // Count keyword occurrences
       const keywordCounts = new Map<string, number>();
 
-      data.forEach(event => {
+      data.forEach((event) => {
         if (event.keywords && Array.isArray(event.keywords)) {
           event.keywords.forEach((keyword: string) => {
             keywordCounts.set(keyword, (keywordCounts.get(keyword) || 0) + 1);
@@ -477,24 +465,25 @@ export class EventStore {
         .map(([keyword, count]) => ({ keyword, count }))
         .sort((a, b) => b.count - a.count)
         .slice(0, limit);
-
     } catch (error) {
       console.error('Error getting top keywords:', error);
       return [];
     }
   }
 
-  async getSentimentTrend(timeRange: { from: Date; to: Date }, bucketSize: 'hour' | 'day' = 'hour'): Promise<Array<{timestamp: string, sentiment: number, count: number}>> {
+  async getSentimentTrend(
+    timeRange: { from: Date; to: Date },
+    bucketSize: 'hour' | 'day' = 'hour'
+  ): Promise<Array<{ timestamp: string; sentiment: number; count: number }>> {
     try {
       // Use Supabase's date functions to bucket data
       const dateFormat = bucketSize === 'hour' ? 'YYYY-MM-DD HH24:00:00' : 'YYYY-MM-DD';
 
-      const { data, error } = await this.supabase
-        .rpc('get_sentiment_trend', {
-          start_date: timeRange.from.toISOString(),
-          end_date: timeRange.to.toISOString(),
-          date_format: dateFormat,
-        });
+      const { data, error } = await this.supabase.rpc('get_sentiment_trend', {
+        start_date: timeRange.from.toISOString(),
+        end_date: timeRange.to.toISOString(),
+        date_format: dateFormat,
+      });
 
       if (error) {
         console.error('Error getting sentiment trend:', error);
@@ -502,7 +491,6 @@ export class EventStore {
       }
 
       return data || [];
-
     } catch (error) {
       console.error('Error getting sentiment trend:', error);
       return [];
@@ -512,7 +500,7 @@ export class EventStore {
   // Cleanup methods
   async cleanupOldEvents(retentionDays = 30): Promise<number> {
     try {
-      const cutoffDate = new Date(Date.now() - (retentionDays * 24 * 60 * 60 * 1000));
+      const cutoffDate = new Date(Date.now() - retentionDays * 24 * 60 * 60 * 1000);
 
       const { data, error } = await this.supabase
         .from('monitoring_events')
@@ -528,7 +516,6 @@ export class EventStore {
       console.log(`🧹 Cleaned up ${deletedCount} old events (older than ${retentionDays} days)`);
 
       return deletedCount;
-
     } catch (error) {
       console.error('Error cleaning up old events:', error);
       return 0;
@@ -561,10 +548,7 @@ export class EventStore {
   // Health check
   async isHealthy(): Promise<boolean> {
     try {
-      const { error } = await this.supabase
-        .from('monitoring_events')
-        .select('id')
-        .limit(1);
+      const { error } = await this.supabase.from('monitoring_events').select('id').limit(1);
 
       return !error;
     } catch {

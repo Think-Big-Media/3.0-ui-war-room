@@ -3,15 +3,7 @@
  * Pie chart showing donation sources and amounts.
  */
 import type React from 'react';
-import {
-  PieChart,
-  Pie,
-  Cell,
-  ResponsiveContainer,
-  Legend,
-  Tooltip,
-  Label,
-} from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, Label } from 'recharts';
 import { useGetDonationChartQuery } from '../../services/analyticsApi';
 import { useAppSelector } from '../../hooks/redux';
 import { type DateRangeEnum } from '../../types/analytics';
@@ -28,7 +20,9 @@ const COLORS = {
 
 export const DonationChart: React.FC = () => {
   const dateRange = useAppSelector((state) => state.analytics.dateRange);
-  const { data, isLoading, error } = useGetDonationChartQuery({ dateRange: dateRange as DateRangeEnum });
+  const { data, isLoading, error } = useGetDonationChartQuery({
+    dateRange: dateRange as DateRangeEnum,
+  });
 
   if (isLoading) {
     return (
@@ -74,19 +68,14 @@ export const DonationChart: React.FC = () => {
   };
 
   // Custom label
-  const renderCustomLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    percent,
-  }: any) => {
+  const renderCustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: any) => {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * Math.PI / 180);
-    const y = cy + radius * Math.sin(-midAngle * Math.PI / 180);
+    const x = cx + radius * Math.cos((-midAngle * Math.PI) / 180);
+    const y = cy + radius * Math.sin((-midAngle * Math.PI) / 180);
 
-    if (percent < 0.05) {return null;} // Don't show label for small slices
+    if (percent < 0.05) {
+      return null;
+    } // Don't show label for small slices
 
     return (
       <text
@@ -110,10 +99,7 @@ export const DonationChart: React.FC = () => {
       <ul className="flex flex-wrap justify-center gap-x-4 gap-y-2 mt-4">
         {payload.map((entry: any, index: number) => (
           <li key={`item-${index}`} className="flex items-center">
-            <span
-              className="w-3 h-3 rounded-full mr-2"
-              style={{ backgroundColor: entry.color }}
-            />
+            <span className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: entry.color }} />
             <span className="text-sm text-gray-600">{entry.value}</span>
           </li>
         ))}

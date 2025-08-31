@@ -44,20 +44,14 @@ const RealTimeMonitoring: React.FC = () => {
 
   // Filter functions
   const filteredMentions = mockMentions.filter((mention) => {
-    const matchesSource =
-      filters.source === 'all' || mention.platform === filters.source;
-    const matchesSentiment =
-      filters.sentiment === 'all' || mention.sentiment === filters.sentiment;
-    const matchesRegion =
-      filters.region === 'all' || mention.region === filters.region;
+    const matchesSource = filters.source === 'all' || mention.platform === filters.source;
+    const matchesSentiment = filters.sentiment === 'all' || mention.sentiment === filters.sentiment;
+    const matchesRegion = filters.region === 'all' || mention.region === filters.region;
     return matchesSource && matchesSentiment && matchesRegion;
   });
 
   return (
-    <PageLayout
-      pageTitle="Live Monitoring"
-      placeholder="Ask War Room about monitoring data..."
-    >
+    <PageLayout pageTitle="Live Monitoring" placeholder="Ask War Room about monitoring data...">
       {/* Purple gradient background */}
       <div className="fixed inset-0 bg-gradient-to-br from-purple-600 via-purple-700 to-indigo-800 -z-10" />
 

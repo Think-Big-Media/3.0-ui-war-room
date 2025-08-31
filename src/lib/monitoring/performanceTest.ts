@@ -3,11 +3,7 @@
 import { UnifiedMonitoringPipeline } from './unifiedPipeline';
 import { EventStore } from './eventStore';
 import { WebSocketBroadcaster } from './websocketBroadcaster';
-import {
-  type MonitoringEvent,
-  type MonitoringConfig,
-  PipelineMetrics,
-} from './types';
+import { type MonitoringEvent, type MonitoringConfig, PipelineMetrics } from './types';
 
 interface PerformanceTestResults {
   test_name: string;
@@ -104,7 +100,6 @@ export class MonitoringPerformanceTest {
 
       // Generate summary report
       this.generatePerformanceReport();
-
     } finally {
       await this.teardownTestEnvironment();
     }
@@ -144,11 +139,7 @@ export class MonitoringPerformanceTest {
     };
 
     // Initialize pipeline
-    this.pipeline = new UnifiedMonitoringPipeline(
-      testConfig,
-      this.eventStore,
-      this.broadcaster,
-    );
+    this.pipeline = new UnifiedMonitoringPipeline(testConfig, this.eventStore, this.broadcaster);
 
     // Start services
     await this.broadcaster.start();
@@ -184,25 +175,33 @@ export class MonitoringPerformanceTest {
 
     this.isRunning = true;
 
-    console.log(`⏱️ Starting ${scenario.name} for ${scenario.duration_seconds}s at ${scenario.events_per_second} events/sec`);
+    console.log(
+      `⏱️ Starting ${scenario.name} for ${scenario.duration_seconds}s at ${scenario.events_per_second} events/sec`
+    );
 
     // Start event generation
-    const eventGenerationPromises = Array.from({ length: scenario.concurrent_sources }, (_, sourceIndex) =>
-      this.generateEventStream(scenario, sourceIndex, (latency) => {
-        processingLatencies.push(latency);
-        eventsProcessed++;
-      }),
+    const eventGenerationPromises = Array.from(
+      { length: scenario.concurrent_sources },
+      (_, sourceIndex) =>
+        this.generateEventStream(scenario, sourceIndex, (latency) => {
+          processingLatencies.push(latency);
+          eventsProcessed++;
+        })
     );
 
     // Monitor performance during test
     const monitoringInterval = setInterval(() => {
-      if (!this.pipeline) {return;}
+      if (!this.pipeline) {
+        return;
+      }
 
       const metrics = this.pipeline.getMetrics();
       const currentRate = metrics.events_per_minute;
       const elapsed = (Date.now() - startTime) / 1000;
 
-      console.log(`📊 [${elapsed.toFixed(0)}s] Rate: ${currentRate.toFixed(0)} events/min, Processed: ${eventsProcessed}, Latency: ${metrics.processing_latency_ms}ms`);
+      console.log(
+        `📊 [${elapsed.toFixed(0)}s] Rate: ${currentRate.toFixed(0)} events/min, Processed: ${eventsProcessed}, Latency: ${metrics.processing_latency_ms}ms`
+      );
     }, 10000); // Every 10 seconds
 
     // Run for specified duration
@@ -227,12 +226,14 @@ export class MonitoringPerformanceTest {
 
     const actualDuration = (endTime - startTime) / 1000;
     const actualEventsPerMinute = (eventsProcessed / actualDuration) * 60;
-    const avgProcessingLatency = processingLatencies.length > 0
-      ? processingLatencies.reduce((sum, lat) => sum + lat, 0) / processingLatencies.length
-      : 0;
+    const avgProcessingLatency =
+      processingLatencies.length > 0
+        ? processingLatencies.reduce((sum, lat) => sum + lat, 0) / processingLatencies.length
+        : 0;
 
     const memoryUsageMB = (endMemory.heapUsed - startMemory.heapUsed) / (1024 * 1024);
-    const cpuUsagePercent = ((endCpuUsage.user + endCpuUsage.system) / (actualDuration * 1000000)) * 100;
+    const cpuUsagePercent =
+      ((endCpuUsage.user + endCpuUsage.system) / (actualDuration * 1000000)) * 100;
     const successRate = eventsGenerated > 0 ? (eventsProcessed / eventsGenerated) * 100 : 0;
 
     // Analyze bottlenecks
@@ -264,7 +265,7 @@ export class MonitoringPerformanceTest {
   private async generateEventStream(
     scenario: LoadTestScenario,
     sourceIndex: number,
-    onProcessed: (latency: number) => void,
+    onProcessed: (latency: number) => void
   ): Promise<number> {
     let eventsGenerated = 0;
     const intervalMs = 1000 / scenario.events_per_second;
@@ -285,7 +286,6 @@ export class MonitoringPerformanceTest {
 
         // Control rate
         await this.sleep(intervalMs);
-
       } catch (error) {
         console.error('Error generating event:', error);
       }
@@ -304,7 +304,10 @@ export class MonitoringPerformanceTest {
     if (sentimentRand < scenario.sentiment_distribution.positive) {
       sentimentLabel = 'positive';
       sentimentScore = 0.2 + Math.random() * 0.8; // 0.2 to 1.0
-    } else if (sentimentRand < scenario.sentiment_distribution.positive + scenario.sentiment_distribution.negative) {
+    } else if (
+      sentimentRand <
+      scenario.sentiment_distribution.positive + scenario.sentiment_distribution.negative
+    ) {
       sentimentLabel = 'negative';
       sentimentScore = -1.0 + Math.random() * 0.8; // -1.0 to -0.2
     } else {
@@ -334,7 +337,12 @@ export class MonitoringPerformanceTest {
         score: sentimentScore,
         label: sentimentLabel,
         confidence: 0.7 + Math.random() * 0.3,
-        emotion: sentimentLabel === 'negative' ? 'anger' : sentimentLabel === 'positive' ? 'joy' : undefined,
+        emotion:
+          sentimentLabel === 'negative'
+            ? 'anger'
+            : sentimentLabel === 'positive'
+              ? 'joy'
+              : undefined,
       },
       metrics: {
         reach: Math.floor(Math.random() * 100000),
@@ -346,11 +354,14 @@ export class MonitoringPerformanceTest {
       keywords: ['test', 'performance', `keyword${Math.floor(Math.random() * 10)}`],
       mentions: ['test_brand', 'competitor'],
       language: 'en',
-      location: Math.random() < 0.3 ? {
-        country: 'US',
-        region: 'California',
-        city: 'San Francisco',
-      } : undefined,
+      location:
+        Math.random() < 0.3
+          ? {
+              country: 'US',
+              region: 'California',
+              city: 'San Francisco',
+            }
+          : undefined,
       influence_score: Math.floor(Math.random() * 100),
       raw_data: { test: true, scenario: scenario.name },
     };
@@ -385,30 +396,30 @@ export class MonitoringPerformanceTest {
   private generateRecommendations(bottlenecks: string[]): string[] {
     const recommendations: string[] = [];
 
-    if (bottlenecks.some(b => b.includes('processing latency'))) {
+    if (bottlenecks.some((b) => b.includes('processing latency'))) {
       recommendations.push('Optimize event processing pipeline');
       recommendations.push('Implement better batching strategies');
       recommendations.push('Consider async processing for non-critical operations');
     }
 
-    if (bottlenecks.some(b => b.includes('success rate'))) {
+    if (bottlenecks.some((b) => b.includes('success rate'))) {
       recommendations.push('Improve error handling and retry mechanisms');
       recommendations.push('Add circuit breakers for external API calls');
     }
 
-    if (bottlenecks.some(b => b.includes('memory usage'))) {
+    if (bottlenecks.some((b) => b.includes('memory usage'))) {
       recommendations.push('Implement better memory management');
       recommendations.push('Add memory-based back-pressure');
       recommendations.push('Consider streaming processing');
     }
 
-    if (bottlenecks.some(b => b.includes('CPU usage'))) {
+    if (bottlenecks.some((b) => b.includes('CPU usage'))) {
       recommendations.push('Profile CPU-intensive operations');
       recommendations.push('Consider worker thread pools');
       recommendations.push('Optimize hot code paths');
     }
 
-    if (bottlenecks.some(b => b.includes('throughput'))) {
+    if (bottlenecks.some((b) => b.includes('throughput'))) {
       recommendations.push('Scale horizontally with multiple instances');
       recommendations.push('Implement load balancing');
       recommendations.push('Optimize database operations');
@@ -425,14 +436,12 @@ export class MonitoringPerformanceTest {
     console.log('\n📈 PERFORMANCE TEST REPORT');
     console.log('================================\n');
 
-    const targetMet = this.testResults.some(r =>
-      r.actual_events_per_minute >= 10000 && r.passed,
-    );
+    const targetMet = this.testResults.some((r) => r.actual_events_per_minute >= 10000 && r.passed);
 
     console.log('🎯 TARGET: 10,000 events/minute');
     console.log(`✅ RESULT: ${targetMet ? 'PASSED' : 'FAILED'}\n`);
 
-    this.testResults.forEach(result => {
+    this.testResults.forEach((result) => {
       console.log(`📏 ${result.test_name}`);
       console.log(`   Target: ${result.target_events_per_minute.toLocaleString()} events/min`);
       console.log(`   Actual: ${result.actual_events_per_minute.toFixed(0)} events/min`);
@@ -450,22 +459,22 @@ export class MonitoringPerformanceTest {
     });
 
     // Overall recommendations
-    const allBottlenecks = [...new Set(this.testResults.flatMap(r => r.bottlenecks))];
-    const allRecommendations = [...new Set(this.testResults.flatMap(r => r.recommendations))];
+    const allBottlenecks = [...new Set(this.testResults.flatMap((r) => r.bottlenecks))];
+    const allRecommendations = [...new Set(this.testResults.flatMap((r) => r.recommendations))];
 
     if (allBottlenecks.length > 0) {
       console.log('🔴 IDENTIFIED BOTTLENECKS:');
-      allBottlenecks.forEach(bottleneck => console.log(`   • ${bottleneck}`));
+      allBottlenecks.forEach((bottleneck) => console.log(`   • ${bottleneck}`));
       console.log('');
     }
 
     console.log('💡 RECOMMENDATIONS:');
-    allRecommendations.forEach(rec => console.log(`   • ${rec}`));
+    allRecommendations.forEach((rec) => console.log(`   • ${rec}`));
     console.log('');
   }
 
   private sleep(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   // Quick benchmark for specific components
@@ -473,14 +482,17 @@ export class MonitoringPerformanceTest {
     console.log(`📋 Benchmarking EventStore with ${numEvents} events...`);
 
     const events = Array.from({ length: numEvents }, (_, i) =>
-      this.generateMockEvent({
-        name: 'benchmark',
-        duration_seconds: 60,
-        events_per_second: 100,
-        concurrent_sources: 1,
-        event_types: ['mention'],
-        sentiment_distribution: { positive: 0.33, negative: 0.33, neutral: 0.34 },
-      }, 0),
+      this.generateMockEvent(
+        {
+          name: 'benchmark',
+          duration_seconds: 60,
+          events_per_second: 100,
+          concurrent_sources: 1,
+          event_types: ['mention'],
+          sentiment_distribution: { positive: 0.33, negative: 0.33, neutral: 0.34 },
+        },
+        0
+      )
     );
 
     const startTime = Date.now();
@@ -529,14 +541,17 @@ export class MonitoringPerformanceTest {
     const alertEngine = new AlertEngine(config, this.eventStore);
 
     const events = Array.from({ length: numEvents }, (_, i) =>
-      this.generateMockEvent({
-        name: 'benchmark',
-        duration_seconds: 60,
-        events_per_second: 100,
-        concurrent_sources: 1,
-        event_types: ['mention'],
-        sentiment_distribution: { positive: 0.1, negative: 0.8, neutral: 0.1 }, // High negative for alerts
-      }, 0),
+      this.generateMockEvent(
+        {
+          name: 'benchmark',
+          duration_seconds: 60,
+          events_per_second: 100,
+          concurrent_sources: 1,
+          event_types: ['mention'],
+          sentiment_distribution: { positive: 0.1, negative: 0.8, neutral: 0.1 }, // High negative for alerts
+        },
+        0
+      )
     );
 
     const startTime = Date.now();
@@ -601,8 +616,9 @@ export class MonitoringPerformanceTest {
     const memoryGrowthMB = memoryGrowth / 1024 / 1024;
 
     // Check for concerning trends
-    const hasMemoryLeak = memoryGrowthMB > 100 || // >100MB growth
-                         (finalMemory / initialMemory) > 2; // >2x initial memory
+    const hasMemoryLeak =
+      memoryGrowthMB > 100 || // >100MB growth
+      finalMemory / initialMemory > 2; // >2x initial memory
 
     console.log('\n📈 Memory Analysis:');
     console.log(`   Initial: ${(initialMemory / 1024 / 1024).toFixed(1)}MB`);
@@ -636,11 +652,12 @@ if (require.main === module) {
       const noLeaks = await test.detectMemoryLeaks(120); // 2 minutes
 
       // Final summary
-      const passed = results.some(r => r.passed) && noLeaks;
-      console.log(`\n🏁 FINAL RESULT: ${passed ? 'PERFORMANCE TARGETS MET' : 'PERFORMANCE IMPROVEMENTS NEEDED'}`);
+      const passed = results.some((r) => r.passed) && noLeaks;
+      console.log(
+        `\n🏁 FINAL RESULT: ${passed ? 'PERFORMANCE TARGETS MET' : 'PERFORMANCE IMPROVEMENTS NEEDED'}`
+      );
 
       process.exit(passed ? 0 : 1);
-
     } catch (error) {
       console.error('❌ Performance test failed:', error);
       process.exit(1);

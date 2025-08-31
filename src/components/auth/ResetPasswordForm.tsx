@@ -81,16 +81,36 @@ export function ResetPasswordForm() {
     }
 
     // Character variety checks
-    if (/[a-z]/.test(password)) {score += 1;} else {feedback.push('Include lowercase letters');}
+    if (/[a-z]/.test(password)) {
+      score += 1;
+    } else {
+      feedback.push('Include lowercase letters');
+    }
 
-    if (/[A-Z]/.test(password)) {score += 1;} else {feedback.push('Include uppercase letters');}
+    if (/[A-Z]/.test(password)) {
+      score += 1;
+    } else {
+      feedback.push('Include uppercase letters');
+    }
 
-    if (/\d/.test(password)) {score += 1;} else {feedback.push('Include numbers');}
+    if (/\d/.test(password)) {
+      score += 1;
+    } else {
+      feedback.push('Include numbers');
+    }
 
-    if (/[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/.test(password)) {score += 1;} else {feedback.push('Include special characters');}
+    if (/[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/.test(password)) {
+      score += 1;
+    } else {
+      feedback.push('Include special characters');
+    }
 
     // Common patterns check
-    if (!/(.)\1{2,}/.test(password)) {score += 1;} else {feedback.push('Avoid repeating characters');}
+    if (!/(.)\1{2,}/.test(password)) {
+      score += 1;
+    } else {
+      feedback.push('Avoid repeating characters');
+    }
 
     setPasswordStrength({ score, feedback });
   };
@@ -105,7 +125,6 @@ export function ResetPasswordForm() {
       return { label: 'Good', color: 'bg-blue-500', textColor: 'text-blue-600' };
     }
     return { label: 'Strong', color: 'bg-green-500', textColor: 'text-green-600' };
-
   };
 
   // Form validation
@@ -123,7 +142,7 @@ export function ResetPasswordForm() {
     } else if (formData.password.length < 12) {
       newErrors.password = 'Password must be at least 12 characters';
     } else if (passwordStrength.score < 5) {
-      newErrors.password = `Password is too weak. ${  passwordStrength.feedback.join(', ')}`;
+      newErrors.password = `Password is too weak. ${passwordStrength.feedback.join(', ')}`;
     }
 
     // Confirm password validation
@@ -140,7 +159,7 @@ export function ResetPasswordForm() {
   // Handle input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   // Handle form submission
@@ -162,7 +181,9 @@ export function ResetPasswordForm() {
       console.error('Reset password error:', err);
 
       if (err.status === 400) {
-        setErrors({ general: 'Invalid or expired reset token. Please request a new password reset.' });
+        setErrors({
+          general: 'Invalid or expired reset token. Please request a new password reset.',
+        });
       } else if (err.status === 422) {
         setErrors({ general: 'Password does not meet requirements. Please try again.' });
       } else {
@@ -195,9 +216,7 @@ export function ResetPasswordForm() {
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
               Invalid Reset Link
             </h2>
-            <p className="mt-2 text-center text-sm text-gray-600">
-              {errors.token}
-            </p>
+            <p className="mt-2 text-center text-sm text-gray-600">{errors.token}</p>
             <div className="mt-6">
               <Link
                 to="/forgot-password"
@@ -288,11 +307,7 @@ export function ResetPasswordForm() {
             <div className="rounded-md bg-red-50 p-4">
               <div className="flex">
                 <div className="flex-shrink-0">
-                  <svg
-                    className="h-5 w-5 text-red-400"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
+                  <svg className="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
                     <path
                       fillRule="evenodd"
                       d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
@@ -335,12 +350,27 @@ export function ResetPasswordForm() {
                 >
                   {showPassword ? (
                     <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"
+                      />
                     </svg>
                   ) : (
                     <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      />
                     </svg>
                   )}
                 </button>
@@ -370,9 +400,7 @@ export function ResetPasswordForm() {
                 </div>
               )}
 
-              {errors.password && (
-                <p className="mt-1 text-sm text-red-600">{errors.password}</p>
-              )}
+              {errors.password && <p className="mt-1 text-sm text-red-600">{errors.password}</p>}
             </div>
 
             {/* Confirm password field */}
@@ -441,10 +469,7 @@ export function ResetPasswordForm() {
           <div className="text-center">
             <p className="text-sm text-gray-600">
               Remember your password?{' '}
-              <Link
-                to="/login"
-                className="font-medium text-blue-600 hover:text-blue-500"
-              >
+              <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500">
                 Sign in here
               </Link>
             </p>

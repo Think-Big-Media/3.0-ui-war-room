@@ -1,6 +1,11 @@
 // Main Meta Business API client
 
-import { type MetaConfig, type MetaAPIResponse, type BatchRequest, type BatchResponse } from './types';
+import {
+  type MetaConfig,
+  type MetaAPIResponse,
+  type BatchRequest,
+  type BatchResponse,
+} from './types';
 import { MetaAuthManager } from './auth';
 import { MetaRateLimiter } from './rateLimiter';
 import { MetaCircuitBreaker } from './circuitBreaker';
@@ -22,7 +27,7 @@ export class MetaAPIClient {
     config: MetaConfig,
     auth?: MetaAuthManager,
     rateLimiter?: MetaRateLimiter,
-    circuitBreaker?: MetaCircuitBreaker,
+    circuitBreaker?: MetaCircuitBreaker
   ) {
     this.baseUrl = `https://graph.facebook.com/v${config.apiVersion}`;
     this.auth = auth || new MetaAuthManager(config);
@@ -43,7 +48,7 @@ export class MetaAPIClient {
       params?: Record<string, any>;
       body?: Record<string, any>;
       token?: string;
-    } = {},
+    } = {}
   ): Promise<T> {
     const { method = 'GET', params = {}, body, token } = options;
 
@@ -101,10 +106,7 @@ export class MetaAPIClient {
   /**
    * Make batch requests to Meta API
    */
-  async batchRequest(
-    requests: BatchRequest[],
-    token?: string,
-  ): Promise<BatchResponse[]> {
+  async batchRequest(requests: BatchRequest[], token?: string): Promise<BatchResponse[]> {
     const accessToken = token || this.auth.getCachedToken()?.access_token;
     if (!accessToken) {
       throw new MetaAuthenticationError('No access token available');
@@ -113,7 +115,7 @@ export class MetaAPIClient {
     // Check rate limits (batch counts as multiple requests)
     await this.rateLimiter.checkLimit(accessToken, requests.length);
 
-    const batch = requests.map(req => ({
+    const batch = requests.map((req) => ({
       method: req.method,
       relative_url: req.relative_url,
       body: req.body ? new URLSearchParams(req.body).toString() : undefined,
@@ -136,7 +138,7 @@ export class MetaAPIClient {
   async *paginate<T>(
     endpoint: string,
     params: Record<string, any> = {},
-    token?: string,
+    token?: string
   ): AsyncGenerator<T[], void, unknown> {
     let nextUrl: string | null = null;
     let isFirstPage = true;
@@ -145,10 +147,7 @@ export class MetaAPIClient {
       let response: MetaAPIResponse<T[]>;
 
       if (isFirstPage) {
-        response = await this.request<MetaAPIResponse<T[]>>(
-          endpoint,
-          { params, token },
-        );
+        response = await this.request<MetaAPIResponse<T[]>>(endpoint, { params, token });
         isFirstPage = false;
       } else if (nextUrl) {
         // Use the full next URL for subsequent pages
@@ -238,11 +237,9 @@ export class MetaAPIClient {
     auth: boolean;
     rateLimiter: any;
     circuitBreaker: any;
-    } {
+  } {
     const token = this.auth.getCachedToken();
-    const rateLimiterStats = token
-      ? this.rateLimiter.getUsageStats(token.access_token)
-      : null;
+    const rateLimiterStats = token ? this.rateLimiter.getUsageStats(token.access_token) : null;
 
     return {
       auth: Boolean(token),

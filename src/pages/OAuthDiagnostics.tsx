@@ -43,7 +43,7 @@ export default function OAuthDiagnostics() {
         status: 'success',
         message: 'All required environment variables are set',
         details: {
-          supabaseUrl: `${envVars.supabaseUrl?.substring(0, 30)  }...`,
+          supabaseUrl: `${envVars.supabaseUrl?.substring(0, 30)}...`,
           hasAnonKey: Boolean(envVars.supabaseKey),
           googleAuthEnabled: envVars.googleAuth,
           githubAuthEnabled: envVars.githubAuth,
@@ -68,8 +68,13 @@ export default function OAuthDiagnostics() {
     });
 
     try {
-      const { data: { session }, error } = await supabase.auth.getSession();
-      if (error) {throw error;}
+      const {
+        data: { session },
+        error,
+      } = await supabase.auth.getSession();
+      if (error) {
+        throw error;
+      }
 
       diagnostics[diagnostics.length - 1] = {
         test: 'Supabase Connection',
@@ -178,7 +183,9 @@ export default function OAuthDiagnostics() {
         diagnostics[diagnostics.length - 1] = {
           test: 'Network Connectivity',
           status: response.ok ? 'success' : 'warning',
-          message: response.ok ? 'Network connectivity is good' : 'Network request returned non-OK status',
+          message: response.ok
+            ? 'Network connectivity is good'
+            : 'Network request returned non-OK status',
           details: {
             status: response.status,
             statusText: response.statusText,
@@ -247,10 +254,7 @@ export default function OAuthDiagnostics() {
 
           <div className="space-y-4">
             {results.map((result, index) => (
-              <div
-                key={index}
-                className={`p-4 rounded-lg ${getStatusColor(result.status)}`}
-              >
+              <div key={index} className={`p-4 rounded-lg ${getStatusColor(result.status)}`}>
                 <div className="flex items-start">
                   <span className="text-2xl mr-3">{getStatusIcon(result.status)}</span>
                   <div className="flex-1">

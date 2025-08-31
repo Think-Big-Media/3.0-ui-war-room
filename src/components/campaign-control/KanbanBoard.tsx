@@ -9,16 +9,8 @@ interface KanbanBoardProps {
   onProjectSelect: (project: Project) => void;
 }
 
-const KanbanBoard: React.FC<KanbanBoardProps> = ({
-  projects,
-  onProjectSelect,
-}) => {
-  const statusColumns: ProjectStatus[] = [
-    'planning',
-    'in-progress',
-    'review',
-    'completed',
-  ];
+const KanbanBoard: React.FC<KanbanBoardProps> = ({ projects, onProjectSelect }) => {
+  const statusColumns: ProjectStatus[] = ['planning', 'in-progress', 'review', 'completed'];
 
   const getStatusLabel = (status: ProjectStatus): string => {
     return status.replace('-', ' ');
@@ -36,9 +28,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({
         return (
           <div key={status} className="space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="section-header uppercase tracking-wide">
-                {getStatusLabel(status)}
-              </h3>
+              <h3 className="section-header uppercase tracking-wide">{getStatusLabel(status)}</h3>
               <span className="bg-white/20 text-white/80 px-2 py-1 rounded-full text-sm">
                 {statusProjects.length}
               </span>
@@ -46,11 +36,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({
 
             <div className="space-y-3">
               {statusProjects.map((project) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  onClick={onProjectSelect}
-                />
+                <ProjectCard key={project.id} project={project} onClick={onProjectSelect} />
               ))}
             </div>
           </div>

@@ -55,9 +55,7 @@ const ContentFormatCard: React.FC<ContentFormatCardProps> = ({
         <div className="space-y-3">
           <div className="flex items-center justify-between text-sm">
             <span className="text-white/60">Status:</span>
-            <span className="text-white/90">
-              {getStatusText(format.status)}
-            </span>
+            <span className="text-white/90">{getStatusText(format.status)}</span>
           </div>
 
           <div className="text-sm text-white/70">

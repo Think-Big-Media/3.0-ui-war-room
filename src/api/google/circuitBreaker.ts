@@ -4,11 +4,11 @@ import { CircuitBreakerOpenError } from './errors';
 import { type CircuitBreakerState } from './types';
 
 interface CircuitBreakerConfig {
-  failureThreshold: number;     // Number of failures before opening
-  resetTimeout: number;          // Time in ms before attempting to close
-  halfOpenRequests: number;      // Number of requests to test in half-open state
-  monitoringPeriod: number;      // Time window for failure counting
-  failureTypes?: string[];       // Specific error types to count as failures
+  failureThreshold: number; // Number of failures before opening
+  resetTimeout: number; // Time in ms before attempting to close
+  halfOpenRequests: number; // Number of requests to test in half-open state
+  monitoringPeriod: number; // Time window for failure counting
+  failureTypes?: string[]; // Specific error types to count as failures
 }
 
 export class GoogleAdsCircuitBreaker {
@@ -26,14 +26,14 @@ export class GoogleAdsCircuitBreaker {
 
   private readonly config: CircuitBreakerConfig = {
     failureThreshold: 5,
-    resetTimeout: 60000,          // 1 minute
+    resetTimeout: 60000, // 1 minute
     halfOpenRequests: 3,
-    monitoringPeriod: 300000,     // 5 minutes
+    monitoringPeriod: 300000, // 5 minutes
     failureTypes: [
-      'UNAVAILABLE',              // Service unavailable
-      'INTERNAL',                 // Internal server error
-      'DEADLINE_EXCEEDED',        // Timeout
-      'RESOURCE_EXHAUSTED',        // Rate limit (severe)
+      'UNAVAILABLE', // Service unavailable
+      'INTERNAL', // Internal server error
+      'DEADLINE_EXCEEDED', // Timeout
+      'RESOURCE_EXHAUSTED', // Rate limit (severe)
     ],
   };
 
@@ -42,10 +42,10 @@ export class GoogleAdsCircuitBreaker {
     onClose: Array<() => void>;
     onHalfOpen: Array<() => void>;
   } = {
-      onOpen: [],
-      onClose: [],
-      onHalfOpen: [],
-    };
+    onOpen: [],
+    onClose: [],
+    onHalfOpen: [],
+  };
 
   constructor(config?: Partial<CircuitBreakerConfig>) {
     if (config) {
@@ -124,7 +124,7 @@ export class GoogleAdsCircuitBreaker {
     lastFailure?: Date;
     nextRetry?: Date;
     failureBreakdown: Record<string, number>;
-    } {
+  } {
     const total = this.successCount + this.state.failures;
     const successRate = total > 0 ? (this.successCount / total) * 100 : 100;
 
@@ -137,12 +137,8 @@ export class GoogleAdsCircuitBreaker {
       state: this.state.status,
       failures: this.state.failures,
       successRate: Math.round(successRate),
-      lastFailure: this.state.lastFailureTime
-        ? new Date(this.state.lastFailureTime)
-        : undefined,
-      nextRetry: this.state.nextRetryTime
-        ? new Date(this.state.nextRetryTime)
-        : undefined,
+      lastFailure: this.state.lastFailureTime ? new Date(this.state.lastFailureTime) : undefined,
+      nextRetry: this.state.nextRetryTime ? new Date(this.state.nextRetryTime) : undefined,
       failureBreakdown,
     };
   }
@@ -170,8 +166,7 @@ export class GoogleAdsCircuitBreaker {
 
     // Check if this error type should trigger circuit breaker
     const errorStatus = error.status || error.code || 'UNKNOWN';
-    const shouldCount = !this.config.failureTypes ||
-                       this.config.failureTypes.includes(errorStatus);
+    const shouldCount = !this.config.failureTypes || this.config.failureTypes.includes(errorStatus);
 
     if (!shouldCount) {
       // Don't count this failure (e.g., validation errors)
@@ -179,10 +174,7 @@ export class GoogleAdsCircuitBreaker {
     }
 
     // Track failure type
-    this.failureDetails.set(
-      errorStatus,
-      (this.failureDetails.get(errorStatus) || 0) + 1,
-    );
+    this.failureDetails.set(errorStatus, (this.failureDetails.get(errorStatus) || 0) + 1);
 
     this.failureTimestamps.push(now);
 
@@ -211,7 +203,7 @@ export class GoogleAdsCircuitBreaker {
     console.warn('Failure breakdown:', Object.fromEntries(this.failureDetails));
 
     // Notify listeners
-    this.stateChangeCallbacks.onOpen.forEach(cb => cb());
+    this.stateChangeCallbacks.onOpen.forEach((cb) => cb());
   }
 
   private transitionToHalfOpen(): void {
@@ -221,7 +213,7 @@ export class GoogleAdsCircuitBreaker {
     console.info('Google Ads API circuit breaker transitioning to half-open');
 
     // Notify listeners
-    this.stateChangeCallbacks.onHalfOpen.forEach(cb => cb());
+    this.stateChangeCallbacks.onHalfOpen.forEach((cb) => cb());
   }
 
   private transitionToClosed(): void {
@@ -235,14 +227,12 @@ export class GoogleAdsCircuitBreaker {
     console.info('Google Ads API circuit breaker closed');
 
     // Notify listeners
-    this.stateChangeCallbacks.onClose.forEach(cb => cb());
+    this.stateChangeCallbacks.onClose.forEach((cb) => cb());
   }
 
   private cleanOldFailures(): void {
     const cutoff = Date.now() - this.config.monitoringPeriod;
-    this.failureTimestamps = this.failureTimestamps.filter(
-      timestamp => timestamp > cutoff,
-    );
+    this.failureTimestamps = this.failureTimestamps.filter((timestamp) => timestamp > cutoff);
 
     // Also clean up old failure details
     if (this.failureTimestamps.length === 0) {

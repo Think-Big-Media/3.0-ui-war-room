@@ -1,25 +1,35 @@
-import React from 'react';
+import React, { memo, useMemo } from 'react';
 import Card from '../shared/Card';
 import { useSentimentAnalysis } from '@/hooks/useMentionlytics';
 
-export const DualPieCharts: React.FC = () => {
+export const DualPieCharts: React.FC = memo(() => {
   const { data: sentimentData, dataMode } = useSentimentAnalysis();
-  
-  const sentimentPercentages = {
-    positive: sentimentData ? Math.round((sentimentData.positive / sentimentData.total) * 100) : 33,
-    negative: sentimentData ? Math.round((sentimentData.negative / sentimentData.total) * 100) : 48,
-    neutral: sentimentData ? Math.round((sentimentData.neutral / sentimentData.total) * 100) : 19
-  };
 
-  const emotionData = {
-    joy: 24,
-    trust: 18,
-    fear: 16,
-    anger: 13,
-    sadness: 15,
-    surprise: 8,
-    disgust: 6
-  };
+  const sentimentPercentages = useMemo(
+    () => ({
+      positive: sentimentData
+        ? Math.round((sentimentData.positive / sentimentData.total) * 100)
+        : 33,
+      negative: sentimentData
+        ? Math.round((sentimentData.negative / sentimentData.total) * 100)
+        : 48,
+      neutral: sentimentData ? Math.round((sentimentData.neutral / sentimentData.total) * 100) : 19,
+    }),
+    [sentimentData]
+  );
+
+  const emotionData = useMemo(
+    () => ({
+      joy: 24,
+      trust: 18,
+      fear: 16,
+      anger: 13,
+      sadness: 15,
+      surprise: 8,
+      disgust: 6,
+    }),
+    []
+  );
 
   const SentimentChart = () => (
     <div className="relative w-32 h-32 mx-auto">
@@ -127,53 +137,62 @@ export const DualPieCharts: React.FC = () => {
   return (
     <div className="grid grid-cols-2 gap-4">
       {/* Sentiment Analysis */}
-      <Card variant="glass" padding="sm" className="sentiment-analysis hoverable hover:scale-[1.02] transition-all duration-300">
+      <Card
+        variant="glass"
+        padding="sm"
+        className="sentiment-analysis hoverable hover:scale-[1.02] transition-all duration-300"
+      >
         <div className="flex items-center justify-between mb-2">
           <h3 className="font-barlow font-semibold text-white text-xs flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></div>
             Sentiment Analysis
           </h3>
-          <div className="text-xs font-mono text-amber-400">
-            {dataMode}
-          </div>
+          <div className="text-xs font-mono text-amber-400">{dataMode}</div>
         </div>
-        
 
         <SentimentChart />
-        
+
         <div className="flex justify-center gap-6 mt-4">
           <div className="text-center">
             <div className="w-3 h-3 bg-emerald-400 rounded-full mx-auto mb-1"></div>
             <div className="text-xs text-white/70">Positive</div>
-            <div className="text-sm font-semibold text-emerald-400">{sentimentData?.positive || 343}</div>
+            <div className="text-sm font-semibold text-emerald-400">
+              {sentimentData?.positive || 343}
+            </div>
           </div>
           <div className="text-center">
             <div className="w-3 h-3 bg-rose-400 rounded-full mx-auto mb-1"></div>
             <div className="text-xs text-white/70">Negative</div>
-            <div className="text-sm font-semibold text-rose-400">{sentimentData?.negative || 502}</div>
+            <div className="text-sm font-semibold text-rose-400">
+              {sentimentData?.negative || 502}
+            </div>
           </div>
           <div className="text-center">
             <div className="w-3 h-3 bg-slate-400 rounded-full mx-auto mb-1"></div>
             <div className="text-xs text-white/70">Neutral</div>
-            <div className="text-sm font-semibold text-slate-400">{sentimentData?.neutral || 194}</div>
+            <div className="text-sm font-semibold text-slate-400">
+              {sentimentData?.neutral || 194}
+            </div>
           </div>
         </div>
       </Card>
 
       {/* Emotion Analysis */}
-      <Card variant="glass" padding="sm" className="emotion-analysis hoverable hover:scale-[1.02] transition-all duration-300">
+      <Card
+        variant="glass"
+        padding="sm"
+        className="emotion-analysis hoverable hover:scale-[1.02] transition-all duration-300"
+      >
         <div className="flex items-center justify-between mb-2">
           <h3 className="font-barlow font-semibold text-white text-xs flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></div>
             Emotion Analysis
           </h3>
-          <div className="text-xs font-mono text-amber-400">
-            8 emotions
-          </div>
+          <div className="text-xs font-mono text-amber-400">8 emotions</div>
         </div>
 
         <EmotionChart />
-        
+
         <div className="flex justify-center gap-4 mt-4">
           <div className="text-center">
             <div className="w-3 h-3 bg-amber-400 rounded-full mx-auto mb-1"></div>
@@ -199,4 +218,6 @@ export const DualPieCharts: React.FC = () => {
       </Card>
     </div>
   );
-};
+});
+
+DualPieCharts.displayName = 'DualPieCharts';

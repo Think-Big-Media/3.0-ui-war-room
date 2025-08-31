@@ -67,12 +67,21 @@ export const SupabaseDebug: React.FC = () => {
       <div className="mt-4 space-y-2">
         <h4 className="font-semibold">📋 Next Steps:</h4>
         <ol className="list-decimal list-inside space-y-1 text-xs">
-          <li>Go to: <code className="bg-gray-200 px-1">https://supabase.com/dashboard/project/{debugInfo.projectId}/auth/providers</code></li>
+          <li>
+            Go to:{' '}
+            <code className="bg-gray-200 px-1">
+              https://supabase.com/dashboard/project/{debugInfo.projectId}/auth/providers
+            </code>
+          </li>
           <li>Enable Google provider and add OAuth credentials</li>
           <li>In Google Cloud Console, add these URLs:</li>
           <ul className="list-disc list-inside ml-4">
-            <li>Authorized origin: <code className="bg-gray-200 px-1">{debugInfo.currentOrigin}</code></li>
-            <li>Redirect URI: <code className="bg-gray-200 px-1">{debugInfo.expectedCallback}</code></li>
+            <li>
+              Authorized origin: <code className="bg-gray-200 px-1">{debugInfo.currentOrigin}</code>
+            </li>
+            <li>
+              Redirect URI: <code className="bg-gray-200 px-1">{debugInfo.expectedCallback}</code>
+            </li>
           </ul>
         </ol>
       </div>

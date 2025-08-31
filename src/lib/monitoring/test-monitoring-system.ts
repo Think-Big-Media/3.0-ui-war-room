@@ -109,7 +109,7 @@ async function testMonitoringSystem() {
     // Test 4: Service health
     console.log('\n🏥 Test 4: Checking service health...');
     const health = await monitor.getHealthStatus();
-    health.forEach(service => {
+    health.forEach((service) => {
       console.log(`${service.service}: ${service.status} (${service.response_time_ms}ms)`);
     });
 
@@ -173,11 +173,12 @@ async function testMonitoringSystem() {
       console.log('- Alert delivery: ✅');
       console.log('- Service health: ✅');
       console.log('- Real-time monitoring: ✅');
-      console.log(`- Supabase integration: ${  SUPABASE_URL.includes('supabase.co') ? '✅' : '⚠️  Using test config'}`);
+      console.log(
+        `- Supabase integration: ${SUPABASE_URL.includes('supabase.co') ? '✅' : '⚠️  Using test config'}`
+      );
 
       process.exit(0);
     }, 120000); // 2 minutes
-
   } catch (error) {
     console.error('❌ Test failed:', error);
     process.exit(1);
@@ -217,7 +218,7 @@ async function testCrisisScenarios() {
 function generateMockEvents(
   count: number,
   sentiment: 'positive' | 'negative' | 'neutral',
-  keywords: string[],
+  keywords: string[]
 ): MonitoringEvent[] {
   const events: MonitoringEvent[] = [];
   const now = Date.now();
@@ -260,39 +261,41 @@ function generateMockEvents(
 
 // Generate viral negative events
 function generateViralEvents(): MonitoringEvent[] {
-  return [{
-    id: 'viral_1',
-    source: 'mentionlytics',
-    type: 'social',
-    timestamp: new Date(),
-    title: 'Major scandal breaks out',
-    content: 'Breaking: Major scandal involving campaign leadership',
-    url: 'https://example.com/viral-post',
-    author: {
-      name: 'Influencer',
-      handle: '@influencer',
-      followers: 1000000,
-      verified: true,
+  return [
+    {
+      id: 'viral_1',
+      source: 'mentionlytics',
+      type: 'social',
+      timestamp: new Date(),
+      title: 'Major scandal breaks out',
+      content: 'Breaking: Major scandal involving campaign leadership',
+      url: 'https://example.com/viral-post',
+      author: {
+        name: 'Influencer',
+        handle: '@influencer',
+        followers: 1000000,
+        verified: true,
+      },
+      platform: 'twitter',
+      sentiment: {
+        score: -0.9,
+        label: 'negative',
+        confidence: 0.95,
+      },
+      metrics: {
+        reach: 5000000,
+        engagement: 50000,
+        likes: 10000,
+        shares: 15000,
+        comments: 25000,
+      },
+      keywords: ['scandal', 'breaking', 'leadership'],
+      mentions: ['@warroom', '@campaign'],
+      language: 'en',
+      influence_score: 95,
+      raw_data: {},
     },
-    platform: 'twitter',
-    sentiment: {
-      score: -0.9,
-      label: 'negative',
-      confidence: 0.95,
-    },
-    metrics: {
-      reach: 5000000,
-      engagement: 50000,
-      likes: 10000,
-      shares: 15000,
-      comments: 25000,
-    },
-    keywords: ['scandal', 'breaking', 'leadership'],
-    mentions: ['@warroom', '@campaign'],
-    language: 'en',
-    influence_score: 95,
-    raw_data: {},
-  }];
+  ];
 }
 
 // Run tests

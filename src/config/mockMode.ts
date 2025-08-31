@@ -4,20 +4,25 @@
  */
 
 // Check if Meta API credentials are available
-const hasMetaCredentials = Boolean(import.meta.env?.VITE_META_APP_ID &&
-  import.meta.env?.VITE_META_APP_SECRET &&
-  import.meta.env?.VITE_META_ACCESS_TOKEN);
+const hasMetaCredentials = Boolean(
+  import.meta.env?.VITE_META_APP_ID &&
+    import.meta.env?.VITE_META_APP_SECRET &&
+    import.meta.env?.VITE_META_ACCESS_TOKEN
+);
 
 // Check if Google Ads credentials are available
-const hasGoogleAdsCredentials = Boolean(import.meta.env?.VITE_GOOGLE_ADS_CLIENT_ID &&
-  import.meta.env?.VITE_GOOGLE_ADS_CLIENT_SECRET &&
-  import.meta.env?.VITE_GOOGLE_ADS_DEVELOPER_TOKEN);
+const hasGoogleAdsCredentials = Boolean(
+  import.meta.env?.VITE_GOOGLE_ADS_CLIENT_ID &&
+    import.meta.env?.VITE_GOOGLE_ADS_CLIENT_SECRET &&
+    import.meta.env?.VITE_GOOGLE_ADS_DEVELOPER_TOKEN
+);
 
 // Check other service credentials
 const hasOpenAICredentials = Boolean(import.meta.env?.VITE_OPENAI_API_KEY);
 const hasSendGridCredentials = Boolean(import.meta.env?.VITE_SENDGRID_API_KEY);
-const hasTwilioCredentials = Boolean(import.meta.env?.VITE_TWILIO_ACCOUNT_SID &&
-  import.meta.env?.VITE_TWILIO_AUTH_TOKEN);
+const hasTwilioCredentials = Boolean(
+  import.meta.env?.VITE_TWILIO_ACCOUNT_SID && import.meta.env?.VITE_TWILIO_AUTH_TOKEN
+);
 
 export const mockModeConfig = {
   // Force mock mode with env var (for development/demo)
@@ -132,7 +137,9 @@ export const mockMetaAdAccounts = {
 
 // Utility function to check if we should use mock data for a service
 export const shouldUseMockData = (service: keyof typeof mockModeConfig) => {
-  if (service === 'forceMockMode') {return mockModeConfig.forceMockMode;}
+  if (service === 'forceMockMode') {
+    return mockModeConfig.forceMockMode;
+  }
   return mockModeConfig[service]?.enabled ?? true;
 };
 
@@ -145,4 +152,3 @@ export const getCredentialStatus = () => ({
   twilio: hasTwilioCredentials,
   forceMockMode: mockModeConfig.forceMockMode,
 });
-

@@ -72,10 +72,7 @@ export class PerformanceMonitor {
     if ('PerformanceObserver' in window) {
       const observer = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          if (
-            entry.entryType === 'layout-shift' &&
-            (entry as any).value > 0.1
-          ) {
+          if (entry.entryType === 'layout-shift' && (entry as any).value > 0.1) {
             console.warn(`📐 Layout Shift detected: ${(entry as any).value}`);
           }
         }
@@ -109,15 +106,9 @@ export class PerformanceMonitor {
     return {
       memory: (performance as any).memory
         ? {
-            used: Math.round(
-              (performance as any).memory.usedJSHeapSize / 1048576
-            ),
-            total: Math.round(
-              (performance as any).memory.totalJSHeapSize / 1048576
-            ),
-            limit: Math.round(
-              (performance as any).memory.jsHeapSizeLimit / 1048576
-            ),
+            used: Math.round((performance as any).memory.usedJSHeapSize / 1048576),
+            total: Math.round((performance as any).memory.totalJSHeapSize / 1048576),
+            limit: Math.round((performance as any).memory.jsHeapSizeLimit / 1048576),
           }
         : 'Not available',
       navigation: performance.getEntriesByType('navigation')[0],
@@ -129,10 +120,7 @@ export class PerformanceMonitor {
 /**
  * React hook for component performance monitoring
  */
-export function usePerformanceMonitor(
-  componentName: string,
-  enabled: boolean = true
-) {
+export function usePerformanceMonitor(componentName: string, enabled: boolean = true) {
   const monitor = PerformanceMonitor.getInstance();
 
   useEffect(() => {

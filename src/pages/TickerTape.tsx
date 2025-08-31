@@ -152,44 +152,40 @@ const TickerTape: React.FC = () => {
         `}</style>
         <div className="ticker-content flex items-center space-x-8 whitespace-nowrap">
           {/* Repeat items multiple times to ensure seamless loop */}
-          {[...tickerItems, ...tickerItems, ...tickerItems].map(
-            (item, index) => {
-              const IconComponent = getIcon(item);
-              return (
+          {[...tickerItems, ...tickerItems, ...tickerItems].map((item, index) => {
+            const IconComponent = getIcon(item);
+            return (
+              <div
+                key={`ticker-${item.id}-${index}`}
+                className={`ticker-item flex items-center space-x-3 px-4 py-1 cursor-pointer rounded-lg transition-all duration-300 ${getPriorityOpacity(item.priority)}`}
+                onClick={() => handleItemClick(item, index)}
+                title={`${item.category.replace('-', ' ')} - ${item.priority} priority`}
+              >
                 <div
-                  key={`ticker-${item.id}-${index}`}
-                  className={`ticker-item flex items-center space-x-3 px-4 py-1 cursor-pointer rounded-lg transition-all duration-300 ${getPriorityOpacity(item.priority)}`}
-                  onClick={() => handleItemClick(item, index)}
-                  title={`${item.category.replace('-', ' ')} - ${item.priority} priority`}
+                  className={`p-1.5 rounded-full bg-black/20 ${getCategoryColor(item.category)}`}
                 >
-                  <div
-                    className={`p-1.5 rounded-full bg-black/20 ${getCategoryColor(item.category)}`}
-                  >
-                    <IconComponent className="w-3 h-3" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-white/90 text-sm font-medium font-mono">
-                      {item.title}
-                    </span>
-                    <span className="text-white/60 text-xs font-mono max-w-md truncate">
-                      {item.text}
-                    </span>
-                  </div>
-                  {/* Category indicator */}
-                  <div
-                    className={`w-1 h-4 rounded-full ${getCategoryColor(item.category).replace('text-', 'bg-')}`}
-                  />
-                  {/* Priority indicator */}
-                  {item.priority === 'critical' && (
-                    <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-                  )}
-                  {index < tickerItems.length * 3 - 1 && (
-                    <div className="w-1 h-1 bg-white/30 rounded-full ml-8" />
-                  )}
+                  <IconComponent className="w-3 h-3" />
                 </div>
-              );
-            }
-          )}
+                <div className="flex flex-col">
+                  <span className="text-white/90 text-sm font-medium font-mono">{item.title}</span>
+                  <span className="text-white/60 text-xs font-mono max-w-md truncate">
+                    {item.text}
+                  </span>
+                </div>
+                {/* Category indicator */}
+                <div
+                  className={`w-1 h-4 rounded-full ${getCategoryColor(item.category).replace('text-', 'bg-')}`}
+                />
+                {/* Priority indicator */}
+                {item.priority === 'critical' && (
+                  <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+                )}
+                {index < tickerItems.length * 3 - 1 && (
+                  <div className="w-1 h-1 bg-white/30 rounded-full ml-8" />
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
 

@@ -81,10 +81,7 @@ export const ghlService = {
   /**
    * Post content to social platforms via GHL
    */
-  postContent: async (
-    platform: string,
-    content: z.infer<typeof ContentPostSchema>,
-  ) => {
+  postContent: async (platform: string, content: z.infer<typeof ContentPostSchema>) => {
     // Mock implementation - replace with actual GHL endpoint
     const mockResponse = {
       success: true,
@@ -115,18 +112,14 @@ export const ghlService = {
           id: '1',
           platform: 'instagram',
           content: 'AI Productivity Tips #1',
-          scheduledDate: new Date(
-            Date.now() + 24 * 60 * 60 * 1000,
-          ).toISOString(),
+          scheduledDate: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
           status: 'scheduled' as const,
         },
         {
           id: '2',
           platform: 'twitter',
           content: 'Thread: 5 AI Tools for Content',
-          scheduledDate: new Date(
-            Date.now() + 48 * 60 * 60 * 1000,
-          ).toISOString(),
+          scheduledDate: new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString(),
           status: 'scheduled' as const,
         },
       ],

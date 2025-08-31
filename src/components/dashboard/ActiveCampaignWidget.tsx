@@ -33,7 +33,7 @@ export const ActiveCampaignWidget: React.FC = () => {
     };
 
     loadCampaign();
-    
+
     // Listen for storage changes (when campaign is updated)
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === 'warRoomActiveCampaign') {
@@ -58,11 +58,11 @@ export const ActiveCampaignWidget: React.FC = () => {
     Republican: 'text-red-400',
     Democrat: 'text-blue-400',
     Independent: 'text-purple-400',
-    Other: 'text-gray-400'
+    Other: 'text-gray-400',
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="bg-white/10 border border-white/20 rounded-lg p-4"
@@ -72,13 +72,13 @@ export const ActiveCampaignWidget: React.FC = () => {
         <h3 className="text-white font-semibold">Active Campaign</h3>
         <span className="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">LIVE</span>
       </div>
-      
+
       <div className="space-y-2">
         <div>
           <div className="text-sm text-white/60">Campaign</div>
           <div className="text-white font-medium">{campaign.name}</div>
         </div>
-        
+
         <div>
           <div className="text-sm text-white/60">Candidate</div>
           <div className={`font-medium ${partyColors[campaign.party]}`}>

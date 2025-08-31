@@ -17,12 +17,9 @@ const MonthView: React.FC<MonthViewProps> = ({
     <div className="space-y-4">
       {/* Month View Header */}
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-2xl font-bold font-condensed text-white">
-          {currentMonth}
-        </h3>
+        <h3 className="text-2xl font-bold font-condensed text-white">{currentMonth}</h3>
         <div className="text-white/70 text-sm">
-          <span className="font-medium text-white">{totalPosts}</span> posts
-          this month
+          <span className="font-medium text-white">{totalPosts}</span> posts this month
         </div>
       </div>
 
@@ -30,10 +27,7 @@ const MonthView: React.FC<MonthViewProps> = ({
       <div className="grid grid-cols-7 gap-4">
         {/* Weekday Headers */}
         {weekDays.map((day) => (
-          <div
-            key={day}
-            className="text-center text-white/70 text-sm font-medium py-2"
-          >
+          <div key={day} className="text-center text-white/70 text-sm font-medium py-2">
             {day}
           </div>
         ))}
@@ -52,9 +46,7 @@ const MonthView: React.FC<MonthViewProps> = ({
           >
             {date > 0 && (
               <>
-                <div className="text-white text-sm font-medium mb-1">
-                  {date}
-                </div>
+                <div className="text-white text-sm font-medium mb-1">{date}</div>
                 <div className="space-y-1">
                   {/* Sample content indicators */}
                   {[3, 7, 12, 15, 18, 22, 25].includes(date) && (

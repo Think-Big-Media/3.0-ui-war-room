@@ -22,14 +22,9 @@ import Card from '../components/shared/Card';
 import PageLayout from '../components/shared/PageLayout';
 import PageHeader from '../components/shared/PageHeader';
 import CustomDropdown from '../components/shared/CustomDropdown';
-import {
-  MetaIntegration,
-  GoogleAdsIntegration,
-} from '../components/integrations';
-import { 
-  useBackgroundTheme,
-  type BackgroundTheme 
-} from '../contexts/BackgroundThemeContext';
+import SimpleThemeButtons from '../components/SimpleThemeButtons';
+import { MetaIntegration, GoogleAdsIntegration } from '../components/integrations';
+import { useBackgroundTheme, type BackgroundTheme } from '../contexts/BackgroundThemeContext';
 
 // Lightweight runtime diagnostics to validate prod behavior
 const BUILD_DIAG = {
@@ -66,7 +61,9 @@ const SettingsSection: React.FC<SettingsSectionProps> = ({
         <div className="p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20">
           <Icon className="w-6 h-6 text-white/95" />
         </div>
-        <h3 className="text-xl font-semibold text-white/40 tracking-wide font-barlow-condensed">{title.toUpperCase()}</h3>
+        <h3 className="text-xl font-semibold text-white/40 tracking-wide font-barlow-condensed">
+          {title.toUpperCase()}
+        </h3>
       </div>
       {children}
     </Card>
@@ -130,9 +127,9 @@ const SettingsPage: React.FC = () => {
   const timezones = ['EST', 'PST', 'CST', 'GMT', 'CET'];
 
   // Dropdown options - use real background themes
-  const themeOptions = themes.map((theme) => ({ 
-    value: theme.id, 
-    label: theme.name 
+  const themeOptions = themes.map((theme) => ({
+    value: theme.id,
+    label: theme.name,
   }));
   const languageOptions = languages.map((lang) => ({
     value: lang,
@@ -148,7 +145,6 @@ const SettingsPage: React.FC = () => {
   return (
     <div className="page-settings" data-route="settings">
       <PageLayout pageTitle="Settings" placeholder="Ask about settings...">
-
         {/* Settings Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* Profile Settings */}
@@ -195,16 +191,11 @@ const SettingsPage: React.FC = () => {
                   <Mail className="w-5 h-5 text-white/75" />
                   <div className="ml-1.5">
                     <p className="content-title ml-1.5">Email Notifications</p>
-                    <p className="content-subtitle">
-                      Receive campaign updates via email
-                    </p>
+                    <p className="content-subtitle">Receive campaign updates via email</p>
                   </div>
                 </div>
                 <div className="mt-1">
-                  <ToggleSwitch
-                    enabled={emailNotifications}
-                    onChange={setEmailNotifications}
-                  />
+                  <ToggleSwitch enabled={emailNotifications} onChange={setEmailNotifications} />
                 </div>
               </div>
               <div className="flex items-start justify-between">
@@ -212,16 +203,11 @@ const SettingsPage: React.FC = () => {
                   <Smartphone className="w-5 h-5 text-white/75" />
                   <div className="ml-1.5">
                     <p className="content-title ml-1.5">Push Notifications</p>
-                    <p className="content-subtitle">
-                      Get instant alerts on your device
-                    </p>
+                    <p className="content-subtitle">Get instant alerts on your device</p>
                   </div>
                 </div>
                 <div className="mt-1">
-                  <ToggleSwitch
-                    enabled={pushNotifications}
-                    onChange={setPushNotifications}
-                  />
+                  <ToggleSwitch enabled={pushNotifications} onChange={setPushNotifications} />
                 </div>
               </div>
               <div className="flex items-start justify-between">
@@ -229,16 +215,11 @@ const SettingsPage: React.FC = () => {
                   <Globe className="w-5 h-5 text-white/75" />
                   <div className="ml-1.5">
                     <p className="content-title ml-1.5">Auto-Publish Content</p>
-                    <p className="content-subtitle">
-                      Automatically publish scheduled content
-                    </p>
+                    <p className="content-subtitle">Automatically publish scheduled content</p>
                   </div>
                 </div>
                 <div className="mt-1">
-                  <ToggleSwitch
-                    enabled={autoPublish}
-                    onChange={setAutoPublish}
-                  />
+                  <ToggleSwitch enabled={autoPublish} onChange={setAutoPublish} />
                 </div>
               </div>
             </div>
@@ -251,19 +232,13 @@ const SettingsPage: React.FC = () => {
                 <label className="block text-sm font-mono text-white/75 mb-1 ml-1.5 uppercase tracking-wider">
                   Theme
                 </label>
-                <div className="ml-1.5">
-                  <CustomDropdown
-                    value={currentTheme}
-                    onChange={(value) => setTheme(value as BackgroundTheme)}
-                    options={themeOptions}
-                    placeholder="Select Theme"
-                    icon={<Palette className="w-4 h-4" />}
-                    className="min-w-[140px]"
-                  />
-                </div>
                 <p className="text-xs text-white/60 mt-2 ml-1.5">
-                  {availableThemes.find(theme => theme.id === currentTheme)?.description || 'Theme description'}
+                  {availableThemes.find((theme) => theme.id === currentTheme)?.description ||
+                    'Theme description'}
                 </p>
+                <div className="ml-1.5">
+                  <SimpleThemeButtons />
+                </div>
               </div>
               <div>
                 <label className="block text-sm font-mono text-white/75 mb-1 ml-1.5 uppercase tracking-wider">
@@ -291,9 +266,7 @@ const SettingsPage: React.FC = () => {
                   <Key className="w-5 h-5 text-white/75" />
                   <div className="ml-1.5">
                     <p className="content-title ml-1.5">Two-Factor Authentication</p>
-                    <p className="content-subtitle">
-                      Add an extra layer of security
-                    </p>
+                    <p className="content-subtitle">Add an extra layer of security</p>
                   </div>
                 </div>
                 <div className="mt-1">
@@ -323,16 +296,11 @@ const SettingsPage: React.FC = () => {
                   <Share2 className="w-5 h-5 text-white/75" />
                   <div className="ml-1.5">
                     <p className="content-title ml-1.5">Data Sharing</p>
-                    <p className="content-subtitle">
-                      Share anonymized data for improvements
-                    </p>
+                    <p className="content-subtitle">Share anonymized data for improvements</p>
                   </div>
                 </div>
                 <div className="mt-1">
-                  <ToggleSwitch
-                    enabled={dataSharing}
-                    onChange={setDataSharing}
-                  />
+                  <ToggleSwitch enabled={dataSharing} onChange={setDataSharing} />
                 </div>
               </div>
               <div>
@@ -403,7 +371,9 @@ const SettingsPage: React.FC = () => {
               <div className="p-3 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20">
                 <Link2 className="w-6 h-6 text-white/95" />
               </div>
-              <h3 className="text-xl font-semibold text-white/40 tracking-wide font-barlow-condensed">PLATFORM INTEGRATIONS</h3>
+              <h3 className="text-xl font-semibold text-white/40 tracking-wide font-barlow-condensed">
+                PLATFORM INTEGRATIONS
+              </h3>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -424,13 +394,9 @@ const SettingsPage: React.FC = () => {
                 ) : (
                   <div className="p-6 bg-black/30 backdrop-blur-sm rounded-xl border border-white/20">
                     <h4 className="content-title mb-2">Meta Business Suite</h4>
-                    <p className="content-subtitle mb-4">
-                      OAuth integration not loaded
-                    </p>
+                    <p className="content-subtitle mb-4">OAuth integration not loaded</p>
                     <div className="p-3 bg-yellow-500/20 border border-yellow-500 rounded">
-                      <p className="text-yellow-200 text-xs">
-                        Component import failed
-                      </p>
+                      <p className="text-yellow-200 text-xs">Component import failed</p>
                     </div>
                   </div>
                 )}
@@ -452,13 +418,9 @@ const SettingsPage: React.FC = () => {
                 ) : (
                   <div className="p-6 bg-black/30 backdrop-blur-sm rounded-xl border border-white/20">
                     <h4 className="content-title mb-2">Google Ads</h4>
-                    <p className="content-subtitle mb-4">
-                      OAuth integration not loaded
-                    </p>
+                    <p className="content-subtitle mb-4">OAuth integration not loaded</p>
                     <div className="p-3 bg-yellow-500/20 border border-yellow-500 rounded">
-                      <p className="text-yellow-200 text-xs">
-                        Component import failed
-                      </p>
+                      <p className="text-yellow-200 text-xs">Component import failed</p>
                     </div>
                   </div>
                 )}
