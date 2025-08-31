@@ -153,7 +153,7 @@ const MentionlyticsPoliticalMap: React.FC = memo(() => {
           className="flex-1 relative flex items-center justify-start"
           style={{ minHeight: '275px' }}
         >
-          <div className="relative w-full max-w-lg md:max-w-none flex justify-start" style={{ height: '275px', marginTop: '-60px' }}>
+          <div className="relative w-full max-w-lg lg:max-w-none flex justify-start" style={{ height: '275px', marginTop: '-60px' }}>
             <ComposableMap
               projection="geoAlbersUsa"
               width={388}

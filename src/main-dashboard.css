@@ -127,32 +127,19 @@
     font-weight: 600;
   }
 
-  /* Additional Responsive Breakpoints for Sidebar */
-  @media (max-width: 1580px) {
-    /* When sidebar is open (approx 300px), adjust layout */
+  /* Additional Responsive Breakpoints - Only for very tight layouts */
+  @media (max-width: 1200px) {
+    /* Slightly tighter gap on smaller desktop screens */
     .dashboard {
       gap: 15px;
     }
-    
-    .political-map .map-container {
-      flex-direction: column;
-    }
   }
   
-  @media (max-width: 1380px) {
-    /* Tighter layout with sidebar */
+  @media (max-width: 992px) {
+    /* Switch to single column on tablet and below */
     .dashboard {
       grid-template-columns: 1fr;
       gap: 12px;
-    }
-    
-    /* dashboard-wrapper removed - padding handled by PageLayout */
-  }
-  
-  @media (max-width: 1280px) {
-    /* Switch to single column before tablet breakpoint */
-    .dashboard {
-      grid-template-columns: 1fr;
     }
   }
   
