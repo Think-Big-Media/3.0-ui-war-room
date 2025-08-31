@@ -3,9 +3,12 @@
  * Routes 5 types of information to appropriate dashboard components
  */
 
+import React from 'react';
 import { mentionlyticsService } from './mentionlytics/mentionlyticsService';
 import { getEnvironmentConfig } from '../config/apiConfig';
 import OpenAI from 'openai';
+import { safeParseJSON } from '../utils/localStorage';
+import { CampaignSetupData, CampaignCompetitor, defaultCampaignData } from '../types/campaign';
 
 // Information Types
 export enum InfoType {
@@ -200,7 +203,10 @@ export class InformationRouter {
     }
 
     try {
-      const campaignData = JSON.parse(localStorage.getItem('warRoomCampaignSetup') || '{}');
+      const campaignData = safeParseJSON<CampaignSetupData>(
+        'warRoomCampaignSetup',
+        { fallback: defaultCampaignData }
+      );
       
       const response = await openai.chat.completions.create({
         model: 'gpt-3.5-turbo',
@@ -208,8 +214,8 @@ export class InformationRouter {
           {
             role: 'system',
             content: `You are a political campaign strategist. Classify mentions into SWOT categories.
-            Campaign: ${campaignData.candidateName || 'Unknown'}
-            Competitors: ${campaignData.competitors?.map((c: any) => c.name).join(', ') || 'Unknown'}`
+            Campaign: ${campaignData?.candidateName || 'Unknown'}
+            Competitors: ${campaignData?.competitors?.map((c: CampaignCompetitor) => c.name).join(', ') || 'Unknown'}`
           },
           {
             role: 'user',
@@ -299,7 +305,10 @@ export class InformationRouter {
   async processMentionlyticsFeed() {
     try {
       const mentions = await mentionlyticsService.getMentionsFeed(20);
-      const campaignData = JSON.parse(localStorage.getItem('warRoomCampaignSetup') || '{}');
+      const campaignData = safeParseJSON<CampaignSetupData>(
+        'warRoomCampaignSetup',
+        { fallback: defaultCampaignData }
+      );
 
       for (const mention of mentions) {
         // Check if it's about a keyword
@@ -406,7 +415,7 @@ export const informationRouter = InformationRouter.getInstance();
 export function useInformationSubscription(
   component: string,
   callback: (item: InfoItem) => void,
-  deps: any[] = []
+  deps: React.DependencyList = []
 ) {
   const { useEffect } = require('react');
   

@@ -52,3 +52,6 @@ warroom-backups/
 *.tar
 *.tar.gz
 *.rar
+
+# Local Netlify folder
+.netlify

@@ -14,6 +14,7 @@ import {
   EyeOff,
   Settings
 } from 'lucide-react';
+import { safeParseJSON, safeSetJSON } from '../utils/localStorage';
 import { useDataMode } from '../hooks/useDataMode';
 import { useMentionlyticsDashboard } from '../hooks/useMentionlytics';
 import { api } from '../lib/api';
@@ -23,6 +24,20 @@ interface DebugSidecarProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+interface DebugPanelSettings {
+  selectedEndpoint: string;
+  lastTestResults: Record<string, any>;
+  testParameters: Record<string, Record<string, any>>;
+  preferredDataMode: 'MOCK' | 'LIVE';
+}
+
+const DEFAULT_DEBUG_SETTINGS: DebugPanelSettings = {
+  selectedEndpoint: '',
+  lastTestResults: {},
+  testParameters: {},
+  preferredDataMode: 'MOCK'
+};
 
 export const DebugSidecar: React.FC<DebugSidecarProps> = ({ isOpen, onClose }) => {
   const [logs, setLogs] = useState<Array<{ timestamp: string; level: string; message: string; }>>([]);
@@ -36,7 +51,13 @@ export const DebugSidecar: React.FC<DebugSidecarProps> = ({ isOpen, onClose }) =
     status: 'idle' | 'testing' | 'success' | 'error';
     message: string;
   }>({ status: 'idle', message: 'Not tested' });
-  const [selectedEndpoint, setSelectedEndpoint] = useState<string>('');
+  // Load persisted settings
+  const [debugSettings, setDebugSettings] = useState<DebugPanelSettings>(() => {
+    const saved = safeParseJSON<DebugPanelSettings>('debug-panel-settings', { fallback: DEFAULT_DEBUG_SETTINGS });
+    return saved || DEFAULT_DEBUG_SETTINGS;
+  });
+  
+  const [selectedEndpoint, setSelectedEndpoint] = useState<string>(debugSettings.selectedEndpoint);
   const [endpointTestResult, setEndpointTestResult] = useState<any>(null);
   const { isLive, toggleMode, dataMode } = useDataMode();
   const { sentiment, loading, error, dataMode: hookDataMode } = useMentionlyticsDashboard();
@@ -84,6 +105,22 @@ export const DebugSidecar: React.FC<DebugSidecarProps> = ({ isOpen, onClose }) =
     }, ...prev.slice(0, 49)]); // Keep last 50 logs
   };
 
+  // Persistence helper functions
+  const saveDebugSettings = (newSettings: Partial<DebugPanelSettings>) => {
+    const updated = { ...debugSettings, ...newSettings };
+    setDebugSettings(updated);
+    safeSetJSON('debug-panel-settings', updated);
+    addLog('debug', `Settings saved: ${Object.keys(newSettings).join(', ')}`);
+  };
+
+  const resetDebugSettings = () => {
+    setDebugSettings(DEFAULT_DEBUG_SETTINGS);
+    setSelectedEndpoint('');
+    setEndpointTestResult(null);
+    safeSetJSON('debug-panel-settings', DEFAULT_DEBUG_SETTINGS);
+    addLog('info', 'Debug panel settings reset to defaults');
+  };
+
   // Simulate debug logs
   useEffect(() => {
     if (!isOpen) return;
@@ -126,6 +163,15 @@ export const DebugSidecar: React.FC<DebugSidecarProps> = ({ isOpen, onClose }) =
 
     return () => clearInterval(interval);
   }, [isOpen, dataMode, error, startTime]);
+
+  // Load previous test results when endpoint is selected
+  useEffect(() => {
+    if (selectedEndpoint && debugSettings.lastTestResults[selectedEndpoint]) {
+      const previousResult = debugSettings.lastTestResults[selectedEndpoint];
+      setEndpointTestResult(previousResult);
+      addLog('info', `Loaded previous test result for ${selectedEndpoint} from ${new Date(previousResult.timestamp).toLocaleTimeString()}`);
+    }
+  }, [selectedEndpoint, debugSettings.lastTestResults]);
 
   const testBackendConnection = async () => {
     setConnectionTest({ status: 'testing', message: 'Testing connection...' });
@@ -191,19 +237,29 @@ export const DebugSidecar: React.FC<DebugSidecarProps> = ({ isOpen, onClose }) =
       }
       
       const responseTime = Date.now() - startTime;
-      setEndpointTestResult({
+      const testResult = {
         success: true,
         status: response.status,
         data: response.data,
-        responseTime
-      });
+        responseTime,
+        timestamp: new Date().toISOString()
+      };
+      setEndpointTestResult(testResult);
+      // Persist the test result
+      const updatedResults = { ...debugSettings.lastTestResults, [selectedEndpoint]: testResult };
+      saveDebugSettings({ lastTestResults: updatedResults });
       addLog('success', `${endpoint.name} - ${response.status} (${responseTime}ms)`);
     } catch (err: any) {
-      setEndpointTestResult({
+      const testResult = {
         success: false,
         error: err.message,
-        status: err.response?.status
-      });
+        status: err.response?.status,
+        timestamp: new Date().toISOString()
+      };
+      setEndpointTestResult(testResult);
+      // Persist the error result
+      const updatedResults = { ...debugSettings.lastTestResults, [selectedEndpoint]: testResult };
+      saveDebugSettings({ lastTestResults: updatedResults });
       addLog('error', `${endpoint.name} failed: ${err.message}`);
     }
   };
@@ -330,7 +386,13 @@ export const DebugSidecar: React.FC<DebugSidecarProps> = ({ isOpen, onClose }) =
                   <div className="flex gap-2">
                     <select
                       value={selectedEndpoint}
-                      onChange={(e) => setSelectedEndpoint(e.target.value)}
+                      onChange={(e) => {
+                        const newEndpoint = e.target.value;
+                        setSelectedEndpoint(newEndpoint);
+                        saveDebugSettings({ selectedEndpoint: newEndpoint });
+                        // Clear previous test result when switching endpoints
+                        setEndpointTestResult(null);
+                      }}
                       className="flex-1 px-2 py-1 text-xs bg-black/30 text-white border border-white/20 rounded font-jetbrains"
                     >
                       <option value="">Select endpoint...</option>
@@ -407,12 +469,20 @@ export const DebugSidecar: React.FC<DebugSidecarProps> = ({ isOpen, onClose }) =
               <div className="flex-1 flex flex-col p-4">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="text-xs text-white/60 font-barlow uppercase">Debug Logs</h3>
-                  <button
-                    onClick={() => setLogs([])}
-                    className="text-xs text-white/40 hover:text-white/60 font-barlow uppercase"
-                  >
-                    Clear
-                  </button>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setLogs([])}
+                      className="text-xs text-white/40 hover:text-white/60 font-barlow uppercase"
+                    >
+                      Clear
+                    </button>
+                    <button
+                      onClick={resetDebugSettings}
+                      className="text-xs text-orange-400 hover:text-orange-300 font-barlow uppercase"
+                    >
+                      Reset Settings
+                    </button>
+                  </div>
                 </div>
                 <div className="flex-1 bg-black/30 rounded-lg p-3 overflow-y-auto">
                   {logs.length === 0 ? (

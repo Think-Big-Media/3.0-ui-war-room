@@ -5,6 +5,7 @@
 
 import { useQuery, useMutation, useQueryClient, type UseQueryOptions } from '@tanstack/react-query';
 import { createMetaAPI } from '../../api/meta';
+import { safeParseJSON, safeSetJSON, safeGetItem } from '../../utils/localStorage';
 import type {
   MetaConfig,
   AccessToken,
@@ -48,17 +49,11 @@ class LocalStorageTokenStorage implements TokenStorage {
   private readonly expiryKey = 'meta_token_expiry';
 
   getToken(): AccessToken | null {
-    const tokenStr = localStorage.getItem(this.tokenKey);
-    if (!tokenStr) {return null;}
-    try {
-      return JSON.parse(tokenStr);
-    } catch {
-      return null;
-    }
+    return safeParseJSON<AccessToken>(this.tokenKey, { fallback: null });
   }
 
   setToken(token: AccessToken): void {
-    localStorage.setItem(this.tokenKey, JSON.stringify(token));
+    safeSetJSON(this.tokenKey, token);
     // Calculate and store expiry time
     const expiryTime = Date.now() + (token.expires_in ? token.expires_in * 1000 : LONG_LIVED_TOKEN_DURATION);
     localStorage.setItem(this.expiryKey, expiryTime.toString());
@@ -70,8 +65,10 @@ class LocalStorageTokenStorage implements TokenStorage {
   }
 
   getTokenExpiry(): number | null {
-    const expiryStr = localStorage.getItem(this.expiryKey);
-    return expiryStr ? parseInt(expiryStr, 10) : null;
+    const expiryStr = safeGetItem(this.expiryKey);
+    if (!expiryStr) return null;
+    const expiry = parseInt(expiryStr, 10);
+    return isNaN(expiry) ? null : expiry;
   }
 }
 

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useGeographicMentions } from '../../hooks/useMentionlytics';
 import usaPoliticalMap from '../../assets/usa-political-map.svg';
 
 interface StateData {
@@ -10,6 +11,15 @@ interface StateData {
   electoralVotes: number;
   demographics: string;
   keyIssues: string[];
+  // Mentionlytics data
+  mentions?: number;
+  sentiment?: {
+    positive: number;
+    negative: number;
+    neutral: number;
+  };
+  topKeywords?: string[];
+  sentimentScore?: number; // Calculated positive - negative percentage
 }
 
 interface TooltipState {
@@ -21,6 +31,8 @@ interface TooltipState {
 
 const InteractivePoliticalMap: React.FC = () => {
   const navigate = useNavigate();
+  const { data: mentionlyticsData, loading, dataMode } = useGeographicMentions();
+  
   const [tooltip, setTooltip] = useState<TooltipState>({
     visible: false,
     x: 0,
@@ -28,8 +40,10 @@ const InteractivePoliticalMap: React.FC = () => {
     data: null
   });
 
-  // Mock data for key swing states
-  const stateData: Record<string, StateData> = {
+  // Enhanced state data with Mentionlytics integration
+  const stateData: Record<string, StateData> = useMemo(() => {
+    // Base static data for key swing states
+    const baseStateData: Record<string, Omit<StateData, 'mentions' | 'sentiment' | 'topKeywords' | 'sentimentScore'>> = {
     pennsylvania: {
       name: 'Pennsylvania',
       abbreviation: 'PA',
@@ -85,6 +99,58 @@ const InteractivePoliticalMap: React.FC = () => {
       keyIssues: ['Tourism', 'Housing', 'Water Rights']
     }
   };
+    
+    const enhanced: Record<string, StateData> = {};
+    
+    // Start with base data
+    for (const [key, base] of Object.entries(baseStateData)) {
+      enhanced[key] = { ...base };
+    }
+    
+    // Merge with Mentionlytics data if available
+    if (mentionlyticsData) {
+      mentionlyticsData.forEach(locationData => {
+        const stateKey = locationData.state.toLowerCase().replace(' ', '');
+        if (enhanced[stateKey]) {
+          const totalMentions = locationData.sentiment.positive + locationData.sentiment.negative + locationData.sentiment.neutral;
+          const sentimentScore = totalMentions > 0 
+            ? ((locationData.sentiment.positive - locationData.sentiment.negative) / totalMentions) * 100
+            : 0;
+            
+          enhanced[stateKey] = {
+            ...enhanced[stateKey],
+            mentions: locationData.mentions,
+            sentiment: locationData.sentiment,
+            topKeywords: locationData.topKeywords,
+            sentimentScore
+          };
+        }
+      });
+    }
+    
+    return enhanced;
+  }, [mentionlyticsData]);
+
+  // Get sentiment-based color for a state
+  const getStateColor = (stateKey: string): string => {
+    const state = stateData[stateKey];
+    if (!state?.sentimentScore) {
+      return '#4B5563'; // Default gray
+    }
+    
+    const score = state.sentimentScore;
+    const intensity = Math.min(Math.abs(score) / 50, 1); // Normalize to 0-1
+    
+    if (score > 0) {
+      // Positive sentiment - green tint
+      const greenValue = Math.floor(100 + (155 * intensity));
+      return `rgba(34, ${greenValue}, 88, 0.7)`;
+    } else {
+      // Negative sentiment - red tint
+      const redValue = Math.floor(100 + (155 * intensity));
+      return `rgba(${redValue}, 56, 56, 0.7)`;
+    }
+  };
 
   const handleStateClick = (stateKey: string, event: React.MouseEvent) => {
     const state = stateData[stateKey];
@@ -137,8 +203,15 @@ const InteractivePoliticalMap: React.FC = () => {
       {/* Clickable overlay regions for key swing states */}
       {/* Pennsylvania */}
       <div 
-        className="absolute cursor-pointer hover:bg-blue-500/20 transition-all duration-200 rounded-sm"
-        style={{ top: '35%', left: '78%', width: '6%', height: '8%' }}
+        className="absolute cursor-pointer hover:bg-white/20 transition-all duration-200 rounded-sm"
+        style={{ 
+          top: '35%', 
+          left: '78%', 
+          width: '6%', 
+          height: '8%',
+          border: `2px solid ${getStateColor('pennsylvania')}`,
+          backgroundColor: 'transparent'
+        }}
         onClick={(e) => handleStateClick('pennsylvania', e)}
         onMouseEnter={(e) => handleStateHover('pennsylvania', e)}
         onMouseLeave={handleStateLeave}
@@ -147,8 +220,15 @@ const InteractivePoliticalMap: React.FC = () => {
       
       {/* Michigan */}
       <div 
-        className="absolute cursor-pointer hover:bg-red-500/20 transition-all duration-200 rounded-sm"
-        style={{ top: '28%', left: '67%', width: '8%', height: '10%' }}
+        className="absolute cursor-pointer hover:bg-white/20 transition-all duration-200 rounded-sm"
+        style={{ 
+          top: '28%', 
+          left: '67%', 
+          width: '8%', 
+          height: '10%',
+          border: `2px solid ${getStateColor('michigan')}`,
+          backgroundColor: 'transparent'
+        }}
         onClick={(e) => handleStateClick('michigan', e)}
         onMouseEnter={(e) => handleStateHover('michigan', e)}
         onMouseLeave={handleStateLeave}
@@ -157,8 +237,15 @@ const InteractivePoliticalMap: React.FC = () => {
       
       {/* Wisconsin */}
       <div 
-        className="absolute cursor-pointer hover:bg-purple-500/20 transition-all duration-200 rounded-sm"
-        style={{ top: '32%', left: '60%', width: '6%', height: '8%' }}
+        className="absolute cursor-pointer hover:bg-white/20 transition-all duration-200 rounded-sm"
+        style={{ 
+          top: '32%', 
+          left: '60%', 
+          width: '6%', 
+          height: '8%',
+          border: `2px solid ${getStateColor('wisconsin')}`,
+          backgroundColor: 'transparent'
+        }}
         onClick={(e) => handleStateClick('wisconsin', e)}
         onMouseEnter={(e) => handleStateHover('wisconsin', e)}
         onMouseLeave={handleStateLeave}
@@ -167,8 +254,14 @@ const InteractivePoliticalMap: React.FC = () => {
       
       {/* Arizona */}
       <div 
-        className="absolute cursor-pointer hover:bg-red-500/20 transition-all duration-200 rounded-sm"
-        style={{ top: '55%', left: '25%', width: '7%', height: '8%' }}
+        className="absolute cursor-pointer hover:bg-white/30 transition-all duration-200 rounded-sm"
+        style={{ 
+          top: '55%', 
+          left: '25%', 
+          width: '7%', 
+          height: '8%',
+          backgroundColor: getStateColor('arizona')
+        }}
         onClick={(e) => handleStateClick('arizona', e)}
         onMouseEnter={(e) => handleStateHover('arizona', e)}
         onMouseLeave={handleStateLeave}
@@ -177,8 +270,14 @@ const InteractivePoliticalMap: React.FC = () => {
       
       {/* Georgia */}
       <div 
-        className="absolute cursor-pointer hover:bg-blue-500/20 transition-all duration-200 rounded-sm"
-        style={{ top: '55%', left: '75%', width: '6%', height: '8%' }}
+        className="absolute cursor-pointer hover:bg-white/30 transition-all duration-200 rounded-sm"
+        style={{ 
+          top: '55%', 
+          left: '75%', 
+          width: '6%', 
+          height: '8%',
+          backgroundColor: getStateColor('georgia')
+        }}
         onClick={(e) => handleStateClick('georgia', e)}
         onMouseEnter={(e) => handleStateHover('georgia', e)}
         onMouseLeave={handleStateLeave}
@@ -187,8 +286,14 @@ const InteractivePoliticalMap: React.FC = () => {
       
       {/* Nevada */}
       <div 
-        className="absolute cursor-pointer hover:bg-purple-500/20 transition-all duration-200 rounded-sm"
-        style={{ top: '45%', left: '15%', width: '5%', height: '8%' }}
+        className="absolute cursor-pointer hover:bg-white/30 transition-all duration-200 rounded-sm"
+        style={{ 
+          top: '45%', 
+          left: '15%', 
+          width: '5%', 
+          height: '8%',
+          backgroundColor: getStateColor('nevada')
+        }}
         onClick={(e) => handleStateClick('nevada', e)}
         onMouseEnter={(e) => handleStateHover('nevada', e)}
         onMouseLeave={handleStateLeave}
@@ -215,6 +320,50 @@ const InteractivePoliticalMap: React.FC = () => {
               <div className="font-jetbrains">
                 Electoral Votes: <span className="text-orange-400 font-bold">{tooltip.data.electoralVotes}</span>
               </div>
+              
+              {/* Mentionlytics Data */}
+              {tooltip.data.mentions && (
+                <>
+                  <div className="border-t border-white/20 pt-2 mt-2">
+                    <div className="font-jetbrains mb-1">
+                      Mentions: <span className="text-blue-400 font-bold">{tooltip.data.mentions.toLocaleString()}</span>
+                      {dataMode === 'MOCK' && <span className="text-yellow-400 ml-1">(MOCK)</span>}
+                    </div>
+                    
+                    {tooltip.data.sentiment && (
+                      <div className="grid grid-cols-3 gap-1 text-xs mb-2">
+                        <div className="text-green-400">
+                          +{tooltip.data.sentiment.positive}
+                        </div>
+                        <div className="text-red-400">
+                          -{tooltip.data.sentiment.negative}
+                        </div>
+                        <div className="text-gray-400">
+                          ={tooltip.data.sentiment.neutral}
+                        </div>
+                      </div>
+                    )}
+                    
+                    {tooltip.data.sentimentScore && (
+                      <div className="mb-1">
+                        <span className="text-purple-300">Sentiment:</span>
+                        <span className={`ml-1 font-bold ${
+                          tooltip.data.sentimentScore > 0 ? 'text-green-400' : 'text-red-400'
+                        }`}>
+                          {tooltip.data.sentimentScore > 0 ? '+' : ''}{tooltip.data.sentimentScore.toFixed(1)}%
+                        </span>
+                      </div>
+                    )}
+                    
+                    {tooltip.data.topKeywords && (
+                      <div className="text-xs">
+                        <span className="text-cyan-300">Trending:</span> {tooltip.data.topKeywords.join(', ')}
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
+              
               <div className="text-white/60">{tooltip.data.demographics}</div>
               <div>
                 <span className="text-blue-300">Key Issues:</span> {tooltip.data.keyIssues.join(', ')}

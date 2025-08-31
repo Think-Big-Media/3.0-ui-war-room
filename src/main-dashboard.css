@@ -197,7 +197,7 @@
 
   /* Make SWOT radar container compact */
   .fresh-swot-radar {
-    height: 420px !important; /* Reduced from 600px to remove dead space */
+    height: 380px !important; /* Further reduced for better fit */
   }
 
   /* Left Column Container - transparent */
@@ -210,7 +210,7 @@
 
   /* Political Map - Top Left */
   .political-map {
-    height: 300px;
+    height: 280px;
     display: flex;
     flex-direction: column;
     /* Let Tailwind bg-white/10 work properly */
@@ -389,7 +389,7 @@
   .live-intelligence {
     display: flex;
     flex-direction: column;
-    height: 486px;
+    height: 380px;
     padding-left: 8px;
   }
 
@@ -397,7 +397,7 @@
     flex: 1;
     overflow: hidden;
     position: relative;
-    height: 440px;
+    height: 340px;
     padding-top: 30px;
   }
 
@@ -722,7 +722,7 @@
 
   /* Performance Metrics */
   .performance-metrics {
-    height: 280px;
+    height: 240px;
     display: flex;
     flex-direction: column;
   }

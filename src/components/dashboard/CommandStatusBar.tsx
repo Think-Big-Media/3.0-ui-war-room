@@ -61,10 +61,10 @@ const CommandStatusBar: React.FC = () => {
   };
 
   return (
-    <div className="fixed top-16 left-0 right-0 z-40">
-      <div className="relative h-14 flex items-center justify-center px-6 border-t border-b border-white/20 bg-black/20 backdrop-blur-xl">
+    <div>
+      <div className="relative h-12 flex items-center justify-between px-6 border border-white/20 bg-black/20 backdrop-blur-xl rounded-lg">
             {/* Left positioned - Platform indicators moved 40px more to the left */}
-            <div className="absolute left-[105px] flex items-baseline gap-3">
+            <div className="absolute left-4 flex items-baseline gap-3">
               <div 
                 onClick={() => handlePlatformClick('meta')}
                 className="flex items-baseline gap-2 bg-green-500/20 px-3 py-1.5 rounded-md border border-green-500/30 cursor-pointer hover:bg-green-500/30 hover:border-green-500/50 transition-all duration-200 transform hover:scale-105"
@@ -95,8 +95,8 @@ const CommandStatusBar: React.FC = () => {
               </div>
             </div>
             
-            {/* Right positioned - Metrics positioned further left with time repositioning */}
-            <div className="absolute right-[380px] flex items-baseline gap-3">
+            {/* Right positioned - Metrics aligned with dashboard content */}
+            <div className="absolute right-[200px] flex items-baseline gap-3">
               <div 
                 onClick={() => handleMetricClick('mentions')}
                 className="bg-gray-700/50 px-3 py-1.5 rounded-md border border-gray-600/50 flex items-baseline cursor-pointer hover:bg-gray-600/60 hover:border-gray-500/60 transition-all duration-200 transform hover:scale-105"
@@ -130,8 +130,8 @@ const CommandStatusBar: React.FC = () => {
               </div>
             </div>
             
-            {/* Far right - Time display moved left above content area */}
-            <div className="absolute right-[124px] flex items-center gap-4">
+            {/* Far right - Time display aligned with dashboard content */}
+            <div className="absolute right-4 flex items-center gap-4">
               {/* Vertical separator */}
               <div className="h-6 w-px bg-gray-600"></div>
               
