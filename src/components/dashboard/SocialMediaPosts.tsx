@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Card from '../shared/Card';
 import SocialPostModal from './SocialPostModal';
 
 interface SocialPost {
@@ -139,12 +140,14 @@ const SocialMediaPosts: React.FC = () => {
   };
 
   return (
-    <div
-      className="bg-black/20 backdrop-blur-sm border border-white/10 rounded-lg p-4 shadow-lg hoverable hover:scale-[1.02] transition-all duration-200"
-      style={{ marginTop: '20px' }}
+    <Card
+      variant="glass"
+      padding="md"
+      className="social-media-posts hoverable hover:scale-[1.02] transition-all duration-200"
     >
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-sm font-semibold text-white/90 uppercase tracking-wider font-barlow">
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="font-barlow font-semibold text-white text-xs flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></div>
           Recent Social Media Posts
         </h3>
         <span className="text-xs text-white/60">Related to your keywords</span>
@@ -188,7 +191,7 @@ const SocialMediaPosts: React.FC = () => {
 
       {/* Social Post Modal */}
       <SocialPostModal isOpen={isModalOpen} onClose={handleCloseModal} post={selectedPost} />
-    </div>
+    </Card>
   );
 };
 

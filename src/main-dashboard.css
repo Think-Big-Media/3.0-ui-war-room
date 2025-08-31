@@ -103,14 +103,14 @@
     border-radius: 8px;
     padding: 12px;
   }
-  
+
   /* Hover effect with scaling */
   .hoverable {
     transition: all 0.2s ease;
     position: relative;
     z-index: 1;
   }
-  
+
   .hoverable:hover {
     transform: scale(1.02);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
@@ -134,7 +134,7 @@
       gap: 15px;
     }
   }
-  
+
   @media (max-width: 992px) {
     /* Switch to single column on tablet and below */
     .dashboard {
@@ -142,7 +142,7 @@
       gap: 12px;
     }
   }
-  
+
   /* Responsive Design - Tablet and Mobile */
   @media (max-width: 1024px) {
     /* Hide swing state text on tablets */
@@ -259,7 +259,7 @@
     /* Let Tailwind bg-white/10 work properly */
     /* opacity and filter at default values */
   }
-  
+
   /* Container query for political map */
   @container (max-width: 500px) {
     .political-map .map-container {
@@ -546,7 +546,7 @@
 
   /* Phrase Cloud */
   .phrase-cloud {
-    height: 250px;
+    height: 188px;
     display: flex;
     flex-direction: column;
   }
@@ -563,6 +563,8 @@
     flex-direction: column;
     gap: 8px;
     font-size: 10px;
+    overflow: hidden;
+    max-height: 60px;
   }
 
   .keyword-group {
@@ -583,6 +585,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transform: translateY(10px);
   }
 
   .phrase-carousel {
@@ -963,7 +966,7 @@
 
     /* Adjust phrase cloud for mobile */
     .phrase-cloud {
-      height: 180px;
+      height: 135px;
     }
 
     /* Simplify metrics grid on mobile */

@@ -64,7 +64,7 @@ export const PhraseCloud: React.FC = () => {
       className="phrase-cloud hoverable hover:scale-[1.02] transition-all duration-200"
     >
       <div className="flex items-center justify-between mb-2">
-        <h3 className="font-barlow font-semibold text-white text-xs">Trending Keywords</h3>
+        <h3 className="font-barlow font-semibold text-white text-xs">Account Keywords</h3>
         <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
       </div>
 

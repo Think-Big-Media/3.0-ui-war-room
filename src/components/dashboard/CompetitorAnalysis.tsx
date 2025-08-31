@@ -37,7 +37,7 @@ export const CompetitorAnalysis: React.FC = () => {
                   <div
                     className={`w-2 h-2 rounded-full ${isLeading ? 'bg-green-400' : 'bg-gray-400'}`}
                   ></div>
-                  <span className="text-xs font-semibold text-white">{competitor.brand}</span>
+                  <span className="text-sm font-bold text-white">{competitor.brand}</span>
                   {isLeading && (
                     <span className="text-[8px] bg-green-500/20 text-green-400 px-1.5 py-0.5 rounded uppercase">
                       Leading
@@ -47,7 +47,9 @@ export const CompetitorAnalysis: React.FC = () => {
 
                 <div className="flex items-center gap-3">
                   <div className="text-right">
-                    <div className="text-xs font-bold text-white">{competitor.percentage}%</div>
+                    <div className="text-xs font-bold text-white">
+                      {competitor.percentage.toFixed(2)}%
+                    </div>
                     <div className="text-[9px] text-white/60">share</div>
                   </div>
                   <div className="text-right">
@@ -105,7 +107,7 @@ export const CompetitorAnalysis: React.FC = () => {
           </div>
           <div>
             <div className="text-sm font-bold text-green-400">
-              {competitors[0]?.percentage || 35}%
+              {competitors[0]?.percentage?.toFixed(2) || '35.00'}%
             </div>
             <div className="text-[9px] text-white/60 uppercase">Leading</div>
           </div>

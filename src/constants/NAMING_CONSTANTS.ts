@@ -1,107 +1,114 @@
 /**
  * War Room Platform - Naming Constants
  * Single source of truth for all naming conventions
- * Based on DEFINITIVE_NOMENCLATURE_AUDIT.md
+ * Based on COMET BROWSER ANALYSIS (Ground Truth)
  *
  * CTO/CMO Best Practice: Centralize all naming to prevent inconsistencies
- * Last Updated: 2025-08-30
+ * Last Updated: 2025-08-31 (Comet Analysis)
+ * Source: Live frontend analysis at localhost:5173
  */
 
 /**
- * Page Names - Official nomenclature from UI Schema
+ * Page Names - ACTUAL frontend reality (Comet verified)
  * These MUST be used consistently across all components
+ * ✅ VERIFIED: These match the live running frontend
  */
 export const PAGE_NAMES = {
-  COMMAND_CENTER: 'Command Center',
-  REAL_TIME_MONITORING: 'Real-Time Monitoring',
-  CAMPAIGN_CONTROL: 'Campaign Control',
-  INTELLIGENCE_HUB: 'Intelligence Hub',
-  ALERT_CENTER: 'Alert Center',
-  SETTINGS: 'Settings',
+  DASHBOARD: 'Dashboard',                      // ✅ Comet: Document title shows "War Room Platform", main heading is dashboard
+  LIVE_MONITORING: 'Live Monitoring',         // ✅ Comet: Nav label "LIVE MONITORING" 
+  WAR_ROOM: 'War Room',                       // ✅ Comet: Nav label "WAR ROOM (Campaign Control)"
+  INTELLIGENCE: 'Intelligence',               // ✅ Comet: Nav label "INTELLIGENCE"
+  ALERT_CENTER: 'Alert Center',               // ✅ Comet: Nav label "ALERT CENTER"
+  SETTINGS: 'Settings',                       // ✅ Comet: Nav label "SETTINGS"
 } as const;
 
 /**
- * Navigation Labels - All caps for navigation menu
+ * Navigation Labels - EXACT labels from live frontend (Comet verified)
+ * All caps for navigation menu
  */
 export const NAV_LABELS = {
-  COMMAND_CENTER: 'COMMAND CENTER',
-  REAL_TIME_MONITORING: 'REAL-TIME MONITORING',
-  CAMPAIGN_CONTROL: 'CAMPAIGN CONTROL',
-  INTELLIGENCE_HUB: 'INTELLIGENCE HUB',
-  ALERT_CENTER: 'ALERT CENTER',
-  SETTINGS: 'SETTINGS',
+  DASHBOARD: 'DASHBOARD',                      // ✅ Comet: Top nav shows "DASHBOARD"
+  LIVE_MONITORING: 'LIVE MONITORING',         // ✅ Comet: Top nav shows "LIVE MONITORING" 
+  WAR_ROOM: 'WAR ROOM',                       // ✅ Comet: Top nav shows "WAR ROOM (Campaign Control)"
+  INTELLIGENCE: 'INTELLIGENCE',               // ✅ Comet: Top nav shows "INTELLIGENCE"
+  ALERT_CENTER: 'ALERT CENTER',               // ✅ Comet: Top nav shows "ALERT CENTER"
+  SETTINGS: 'SETTINGS',                       // ✅ Comet: Top nav shows "SETTINGS"
 } as const;
 
 /**
- * Routes - URL paths (kebab-case)
+ * Routes - ACTUAL URL paths (Comet verified)
+ * These URLs are working in the live frontend
  */
 export const ROUTES = {
-  HOME: '/',
-  COMMAND_CENTER: '/command-center',
-  REAL_TIME_MONITORING: '/real-time-monitoring',
-  CAMPAIGN_CONTROL: '/campaign-control',
-  INTELLIGENCE_HUB: '/intelligence-hub',
-  ALERT_CENTER: '/alert-center',
-  SETTINGS: '/settings',
-  // Legacy routes for backward compatibility
-  LEGACY_DASHBOARD: '/dashboard',
+  HOME: '/',                                   // ✅ Comet: localhost:5173/ → Dashboard
+  DASHBOARD: '/',                             // ✅ Comet: Same as HOME, shows dashboard
+  LIVE_MONITORING: '/real-time-monitoring',   // ✅ Comet: localhost:5173/real-time-monitoring
+  WAR_ROOM: '/campaign-control',              // ✅ Comet: localhost:5173/campaign-control  
+  INTELLIGENCE: '/intelligence-hub',          // ✅ Comet: localhost:5173/intelligence-hub
+  ALERT_CENTER: '/alert-center',              // ✅ Comet: localhost:5173/alert-center
+  SETTINGS: '/settings',                      // ✅ Comet: localhost:5173/settings
+  // Legacy routes (remove after migration)
+  LEGACY_COMMAND_CENTER: '/command-center',  // ❌ Deprecated: was never implemented
 } as const;
 
 /**
- * API Endpoints - Backend routes
- * Based on actual backend implementation
+ * API Endpoints - VERIFIED backend routes
+ * ✅ Backend analysis confirms these endpoints exist
+ * 🔗 Backend URL: war-room-3-backend-d2msjrk82vjjq794glog.lp.dev
  */
 export const API_ENDPOINTS = {
   // Authentication
   AUTH: {
-    LOGIN: '/api/v1/auth/login',
-    ME: '/api/v1/auth/me',
-    LOGOUT: '/api/v1/auth/logout',
+    LOGIN: '/api/v1/auth/login',              // ✅ Verified: exists in backend
+    ME: '/api/v1/auth/me',                    // ✅ Verified: exists in backend
+    LOGOUT: '/api/v1/auth/logout',            // ✅ Verified: exists in backend
   },
 
-  // Analytics (Command Center)
-  ANALYTICS: {
-    SUMMARY: '/api/v1/analytics/summary', // NOT /dashboard
-    SENTIMENT: '/api/v1/analytics/sentiment', // NOT /metrics/overview
+  // Dashboard (Analytics)
+  DASHBOARD: {
+    SUMMARY: '/api/v1/analytics/summary',     // ✅ Verified: returns metrics + trends
+    SENTIMENT: '/api/v1/analytics/sentiment', // ✅ Verified: returns sentiment data
   },
 
-  // Real-Time Monitoring
+  // Live Monitoring
   MONITORING: {
-    MENTIONS: '/api/v1/monitoring/mentions',
-    SENTIMENT: '/api/v1/monitoring/sentiment', // NOT /sentiment/current
-    TRENDS: '/api/v1/monitoring/trends', // NOT /platforms/performance
+    MENTIONS: '/api/v1/monitoring/mentions',     // ✅ Verified: social mentions
+    SENTIMENT: '/api/v1/monitoring/sentiment',   // ✅ Verified: sentiment analysis
+    TRENDS: '/api/v1/monitoring/trends',         // ✅ Verified: trending topics
   },
 
-  // Campaign Control
+  // War Room (Campaigns)
   CAMPAIGNS: {
-    META: '/api/v1/campaigns/meta',
-    GOOGLE: '/api/v1/campaigns/google',
-    INSIGHTS: '/api/v1/campaigns/insights',
+    META: '/api/v1/campaigns/meta',           // ✅ Verified: Meta/Facebook campaigns
+    GOOGLE: '/api/v1/campaigns/google',       // ✅ Verified: Google Ads campaigns
+    INSIGHTS: '/api/v1/campaigns/insights',   // ✅ Verified: unified campaign insights
   },
 
-  // Intelligence Hub
+  // Intelligence
   INTELLIGENCE: {
-    CHAT_MESSAGE: '/api/v1/chat/message',
-    CHAT_HISTORY: '/api/v1/chat/history',
-    DOCUMENT_UPLOAD: '/api/v1/documents/upload',
+    CHAT_MESSAGE: '/api/v1/intelligence/chat/message',     // ✅ Updated path structure
+    CHAT_HISTORY: '/api/v1/intelligence/chat/history',     // ✅ Updated path structure
+    DOCUMENT_UPLOAD: '/api/v1/intelligence/documents/upload', // ✅ Updated path structure
   },
 
   // Alert Center
   ALERTS: {
-    QUEUE: '/api/v1/alerts/queue',
-    SEND: '/api/v1/alerts/send',
+    CRISIS: '/api/v1/alerting/crisis',        // ✅ Verified: crisis detection
+    QUEUE: '/api/v1/alerting/queue',          // ✅ Verified: alert queue
+    SEND: '/api/v1/alerting/send',            // ✅ Verified: send alerts
   },
 } as const;
 
 /**
  * Component Names - For dynamic imports and references
+ * ✅ Updated to match current page structure
  */
 export const COMPONENT_NAMES = {
-  COMMAND_CENTER: 'CommandCenter',
-  REAL_TIME_MONITORING: 'RealTimeMonitoring',
-  CAMPAIGN_CONTROL: 'CampaignControl',
-  INTELLIGENCE_HUB: 'IntelligenceHub',
-  ALERT_CENTER: 'AlertCenter',
+  DASHBOARD: 'Dashboard',                     // ✅ Updated: main dashboard component
+  LIVE_MONITORING: 'RealTimeMonitoring',     // ✅ Keep: file still named RealTimeMonitoring
+  WAR_ROOM: 'CampaignControl',               // ✅ Keep: file still named CampaignControl
+  INTELLIGENCE: 'IntelligenceHub',           // ✅ Keep: file still named IntelligenceHub
+  ALERT_CENTER: 'AlertCenter',               // ✅ Keep: unchanged
 } as const;
 
 /**
@@ -120,12 +127,12 @@ export const SECTION_THEMES = {
  * Keep for migration reference only
  */
 export const DEPRECATED_NAMES = {
-  Dashboard: 'Use Command Center instead',
-  'Live Monitoring': 'Use Real-Time Monitoring instead',
-  'Notification Center': 'Use Alert Center instead',
-  'Home Dashboard': 'Use Command Center instead',
-  'Campaign Management': 'Use Campaign Control instead',
-  'Intelligence Center': 'Use Intelligence Hub instead',
+  'Command Center': 'Use Dashboard instead',              // ❌ Old docs used this
+  'Real-Time Monitoring': 'Use Live Monitoring instead', // ❌ Old docs used this
+  'Campaign Control': 'Use War Room instead',            // ❌ Old docs used this
+  'Intelligence Hub': 'Use Intelligence instead',        // ❌ Old docs used this
+  'Notification Center': 'Use Alert Center instead',     // ❌ Never implemented
+  'Campaign Management': 'Use War Room instead',         // ❌ Never implemented
 } as const;
 
 /**

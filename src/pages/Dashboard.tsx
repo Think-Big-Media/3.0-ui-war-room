@@ -8,7 +8,6 @@ import { WidgetErrorBoundary } from '../components/shared/ErrorBoundary';
 import { SWOTRadarDashboard } from '../components/generated/SWOTRadarDashboard';
 import CommandStatusBar from '../components/dashboard/CommandStatusBar';
 import MentionlyticsPoliticalMap from '../components/political/MentionlyticsPoliticalMap';
-import SocialMediaPosts from '../components/dashboard/SocialMediaPosts';
 import { DualPieCharts } from '../components/dashboard/DualPieCharts';
 import { PlatformDominanceGrid } from '../components/dashboard/PlatformDominanceGrid';
 import { PhraseCloud } from '../components/dashboard/PhraseCloud';
@@ -257,116 +256,102 @@ export default function Dashboard() {
 
         {/* Main Dashboard Grid - Remove wrapper, use full PageLayout width */}
         <div className="dashboard px-4">
-            {/* Left Column */}
-            <div className="left-column">
-              {/* Political Map */}
-              <Card
-                variant="glass"
-                padding="md"
-                className="political-map hoverable"
-              >
-                <MentionlyticsPoliticalMap />
-              </Card>
+          {/* Left Column */}
+          <div className="left-column">
+            {/* Political Map */}
+            <Card variant="glass" padding="md" className="political-map hoverable">
+              <MentionlyticsPoliticalMap />
+            </Card>
 
-              {/* SWOT Radar - Keep Core Component Untouched */}
-              <Card
-                variant="glass"
-                padding="md"
-                className="fresh-swot-radar hoverable"
-              >
-                <WidgetErrorBoundary widgetName="SWOT Radar Dashboard">
-                  <SWOTRadarDashboard />
-                </WidgetErrorBoundary>
-              </Card>
+            {/* Live Intelligence - Moved to top, made taller */}
+            <WidgetErrorBoundary widgetName="Live Intelligence">
+              <LiveIntelligence />
+            </WidgetErrorBoundary>
 
-              {/* Live Intelligence - Added to balance columns */}
-              <WidgetErrorBoundary widgetName="Live Intelligence">
-                <LiveIntelligence />
+            {/* SWOT Radar - Moved down - Keep Core Component Untouched */}
+            <Card variant="glass" padding="md" className="fresh-swot-radar hoverable">
+              <WidgetErrorBoundary widgetName="SWOT Radar Dashboard">
+                <SWOTRadarDashboard />
               </WidgetErrorBoundary>
-            </div>
+            </Card>
+          </div>
 
-            {/* Right Column */}
-            <div className="right-column">
-              {/* Dual Pie Charts - Compact Height */}
-              <DualPieCharts />
+          {/* Right Column */}
+          <div className="right-column">
+            {/* Dual Pie Charts - Compact Height */}
+            <DualPieCharts />
 
-              {/* Phrase Cloud - Under Crisis Risk & Share of Voice */}
-              <WidgetErrorBoundary widgetName="Phrase Cloud">
-                <PhraseCloud />
-              </WidgetErrorBoundary>
+            {/* Phrase Cloud - Under Crisis Risk & Share of Voice */}
+            <WidgetErrorBoundary widgetName="Phrase Cloud">
+              <PhraseCloud />
+            </WidgetErrorBoundary>
 
-              {/* Competitor Analysis */}
-              <WidgetErrorBoundary widgetName="Competitor Analysis">
-                <CompetitorAnalysis />
-              </WidgetErrorBoundary>
+            {/* Competitor Analysis */}
+            <WidgetErrorBoundary widgetName="Competitor Analysis">
+              <CompetitorAnalysis />
+            </WidgetErrorBoundary>
 
-              {/* Quick Actions Grid */}
-              <Card
-                variant="glass"
-                padding="none"
-                className="quick-actions hoverable"
+            {/* Quick Actions Grid */}
+            <Card variant="glass" padding="none" className="quick-actions hoverable">
+              <div className="bg-white/10 px-3 py-2 border-b border-white/30">
+                <div className="text-xs text-white/60 uppercase font-semibold tracking-wider font-barlow">
+                  Quick Actions
+                </div>
+              </div>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(3, 1fr)',
+                  gridTemplateRows: 'repeat(2, 1fr)',
+                  height: 'calc(100% - 40px)',
+                }}
               >
-                <div className="bg-white/10 px-3 py-2 border-b border-white/30">
-                  <div className="text-xs text-white/60 uppercase font-semibold tracking-wider font-barlow">
-                    Quick Actions
-                  </div>
+                <div
+                  onClick={() => handleQuickActionClick('quick-campaign')}
+                  className="bg-white/5 border-r border-b border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/15 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
+                >
+                  <Zap className="w-4 h-4 text-yellow-400" />
+                  Quick Campaign
                 </div>
                 <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(3, 1fr)',
-                    gridTemplateRows: 'repeat(2, 1fr)',
-                    height: 'calc(100% - 40px)',
-                  }}
+                  onClick={() => handleQuickActionClick('live-monitor')}
+                  className="bg-white/5 border-r border-b border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/15 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
                 >
-                  <div
-                    onClick={() => handleQuickActionClick('quick-campaign')}
-                    className="bg-white/5 border-r border-b border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/15 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
-                  >
-                    <Zap className="w-4 h-4 text-yellow-400" />
-                    Quick Campaign
-                  </div>
-                  <div
-                    onClick={() => handleQuickActionClick('live-monitor')}
-                    className="bg-white/5 border-r border-b border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/15 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
-                  >
-                    <Radio className="w-4 h-4 text-green-400" />
-                    Live Monitor
-                  </div>
-                  <div
-                    onClick={handleOpenSetup}
-                    className="bg-black/10 border-b border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/10 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
-                  >
-                    <Settings className="w-4 h-4 text-blue-400" />
-                    Campaign Setup
-                  </div>
-                  <div
-                    onClick={() => handleQuickActionClick('trend-ops')}
-                    className="bg-black/10 border-r border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/10 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
-                  >
-                    <TrendingUp className="w-4 h-4 text-purple-400" />
-                    Trend Ops
-                  </div>
-                  <div
-                    onClick={() => handleQuickActionClick('social-media')}
-                    className="bg-black/10 border-r border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/10 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
-                  >
-                    <Smartphone className="w-4 h-4 text-cyan-400" />
-                    Social Media
-                  </div>
-                  <div
-                    onClick={() => handleQuickActionClick('alert-center')}
-                    className="bg-white/5 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/15 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
-                  >
-                    <AlertTriangle className="w-4 h-4 text-red-400" />
-                    Alert Center
-                  </div>
+                  <Radio className="w-4 h-4 text-green-400" />
+                  Live Monitor
                 </div>
-              </Card>
+                <div
+                  onClick={handleOpenSetup}
+                  className="bg-black/10 border-b border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/10 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
+                >
+                  <Settings className="w-4 h-4 text-blue-400" />
+                  Campaign Setup
+                </div>
+                <div
+                  onClick={() => handleQuickActionClick('trend-ops')}
+                  className="bg-black/10 border-r border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/10 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
+                >
+                  <TrendingUp className="w-4 h-4 text-purple-400" />
+                  Trend Ops
+                </div>
+                <div
+                  onClick={() => handleQuickActionClick('social-media')}
+                  className="bg-black/10 border-r border-white/20 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/10 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
+                >
+                  <Smartphone className="w-4 h-4 text-cyan-400" />
+                  Social Media
+                </div>
+                <div
+                  onClick={() => handleQuickActionClick('alert-center')}
+                  className="bg-white/5 flex flex-col items-center justify-center text-[10px] text-white/90 cursor-pointer hover:bg-white/15 hover:border-orange-500/50 transition-all duration-200 gap-1.5 py-3 uppercase font-semibold font-barlow tracking-wider"
+                >
+                  <AlertTriangle className="w-4 h-4 text-red-400" />
+                  Alert Center
+                </div>
+              </div>
+            </Card>
 
-              {/* Social Media Posts */}
-              <SocialMediaPosts />
-            </div>
+          </div>
         </div>
 
         {/* Campaign Setup Modal */}

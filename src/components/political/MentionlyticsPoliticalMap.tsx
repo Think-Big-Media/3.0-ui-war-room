@@ -79,11 +79,11 @@ const MentionlyticsPoliticalMap: React.FC = memo(() => {
     return states
       .sort((a, b) => b.mentions - a.mentions)
       .slice(0, 7)
-      .map(state => ({
+      .map((state) => ({
         name: state.name,
         mentions: state.mentions,
         sentimentScore: state.sentimentScore,
-        sentiment: state.sentiment
+        sentiment: state.sentiment,
       }));
   }, [stateDataMap]);
 
@@ -136,7 +136,7 @@ const MentionlyticsPoliticalMap: React.FC = memo(() => {
       const score = stateData.sentimentScore;
       // Using dashboard color palette
       if (score > 20) return '#34d399'; // emerald-400
-      if (score > 0) return '#10b981';  // emerald-500
+      if (score > 0) return '#10b981'; // emerald-500
       if (score > -20) return '#0ea5e9'; // sky-500
       if (score > -40) return '#f97316'; // orange-500
       return '#f87171'; // rose-400
@@ -153,7 +153,10 @@ const MentionlyticsPoliticalMap: React.FC = memo(() => {
           className="flex-1 relative flex items-center justify-start"
           style={{ minHeight: '275px' }}
         >
-          <div className="relative w-full max-w-lg lg:max-w-none flex justify-start" style={{ height: '275px', marginTop: '-60px' }}>
+          <div
+            className="relative w-full max-w-lg lg:max-w-none flex justify-start"
+            style={{ height: '275px', marginTop: '-60px' }}
+          >
             <ComposableMap
               projection="geoAlbersUsa"
               width={388}
@@ -168,7 +171,14 @@ const MentionlyticsPoliticalMap: React.FC = memo(() => {
                   {({ geographies }) => {
                     if (!geographies || geographies.length === 0) {
                       return (
-                        <text x="160" y="100" fill="red" fontSize="20" fontWeight="bold" textAnchor="middle">
+                        <text
+                          x="160"
+                          y="100"
+                          fill="red"
+                          fontSize="20"
+                          fontWeight="bold"
+                          textAnchor="middle"
+                        >
                           MAP DATA FAILED TO LOAD!
                         </text>
                       );
@@ -212,15 +222,18 @@ const MentionlyticsPoliticalMap: React.FC = memo(() => {
           </div>
           <div className="space-y-0.5 text-right">
             {topStates.map((state) => {
-              const sentimentColor = 
-                state.sentimentScore > 20 ? 'text-emerald-400' :
-                state.sentimentScore > -20 ? 'text-sky-400' :
-                'text-rose-400';
-              
-              const displayValue = state.sentimentScore !== 0 
-                ? `${state.sentimentScore > 0 ? '+' : ''}${state.sentimentScore.toFixed(0)}%`
-                : `${state.mentions} mentions`;
-              
+              const sentimentColor =
+                state.sentimentScore > 20
+                  ? 'text-emerald-400'
+                  : state.sentimentScore > -20
+                    ? 'text-sky-400'
+                    : 'text-rose-400';
+
+              const displayValue =
+                state.sentimentScore !== 0
+                  ? `${state.sentimentScore > 0 ? '+' : ''}${state.sentimentScore.toFixed(0)}%`
+                  : `${state.mentions} mentions`;
+
               return (
                 <button
                   key={state.name}
@@ -228,16 +241,16 @@ const MentionlyticsPoliticalMap: React.FC = memo(() => {
                   className="w-full text-right hover:bg-white/5 px-1 py-0.5 rounded transition-colors duration-200"
                 >
                   <div className="text-white/80 text-xs font-barlow leading-tight">
-                    {state.name}: <span className={`font-jetbrains ${sentimentColor}`}>{displayValue}</span>
+                    {state.name}:{' '}
+                    <span className={`font-jetbrains ${sentimentColor}`}>{displayValue}</span>
                   </div>
                 </button>
               );
             })}
           </div>
         </div>
-
       </div>
-      
+
       {/* Sentiment Legend - positioned below bottom edge */}
       <div className="absolute left-2 right-2 z-20" style={{ bottom: '-7px' }}>
         <div className="flex items-center gap-2 text-[10px]">
@@ -263,48 +276,48 @@ const MentionlyticsPoliticalMap: React.FC = memo(() => {
 
       {/* Tooltip */}
       {tooltip.visible && tooltip.data && (
-          <div
-            className="fixed z-[70] pointer-events-none"
-            style={{
-              left: `${tooltip.x + 10}px`,
-              top: `${tooltip.y - 10}px`,
-            }}
-          >
-            <div className="bg-black/90 backdrop-blur-md border border-white/20 rounded-lg p-3 shadow-lg max-w-xs">
-              <div className="flex items-center justify-between mb-2">
-                <h4 className="font-bold text-white font-barlow">{tooltip.data.name}</h4>
-                <div
-                  className={`px-2 py-1 rounded text-xs font-bold ${
-                    tooltip.data.sentimentScore > 0 ? 'text-emerald-400' : 'text-rose-400'
-                  }`}
-                >
-                  {tooltip.data.sentimentScore > 0 ? '+' : ''}
-                  {tooltip.data.sentimentScore.toFixed(1)}%
-                </div>
+        <div
+          className="fixed z-[70] pointer-events-none"
+          style={{
+            left: `${tooltip.x + 10}px`,
+            top: `${tooltip.y - 10}px`,
+          }}
+        >
+          <div className="bg-black/90 backdrop-blur-md border border-white/20 rounded-lg p-3 shadow-lg max-w-xs">
+            <div className="flex items-center justify-between mb-2">
+              <h4 className="font-bold text-white font-barlow">{tooltip.data.name}</h4>
+              <div
+                className={`px-2 py-1 rounded text-xs font-bold ${
+                  tooltip.data.sentimentScore > 0 ? 'text-emerald-400' : 'text-rose-400'
+                }`}
+              >
+                {tooltip.data.sentimentScore > 0 ? '+' : ''}
+                {tooltip.data.sentimentScore.toFixed(1)}%
+              </div>
+            </div>
+
+            <div className="space-y-1 text-xs text-white/80">
+              <div className="font-jetbrains">
+                Mentions:{' '}
+                <span className="text-sky-400 font-bold">
+                  {tooltip.data.mentions.toLocaleString()}
+                </span>
               </div>
 
-              <div className="space-y-1 text-xs text-white/80">
-                <div className="font-jetbrains">
-                  Mentions:{' '}
-                  <span className="text-sky-400 font-bold">
-                    {tooltip.data.mentions.toLocaleString()}
-                  </span>
-                </div>
+              <div className="grid grid-cols-3 gap-1 text-xs mb-2">
+                <div className="text-emerald-400">+{tooltip.data.sentiment.positive}</div>
+                <div className="text-rose-400">-{tooltip.data.sentiment.negative}</div>
+                <div className="text-gray-400">={tooltip.data.sentiment.neutral}</div>
+              </div>
 
-                <div className="grid grid-cols-3 gap-1 text-xs mb-2">
-                  <div className="text-emerald-400">+{tooltip.data.sentiment.positive}</div>
-                  <div className="text-rose-400">-{tooltip.data.sentiment.negative}</div>
-                  <div className="text-gray-400">={tooltip.data.sentiment.neutral}</div>
-                </div>
-
-                <div className="text-xs">
-                  <span className="text-cyan-300">Trending:</span>{' '}
-                  {tooltip.data.topKeywords.join(', ')}
-                </div>
+              <div className="text-xs">
+                <span className="text-cyan-300">Trending:</span>{' '}
+                {tooltip.data.topKeywords.join(', ')}
               </div>
             </div>
           </div>
-        )}
+        </div>
+      )}
     </div>
   );
 });

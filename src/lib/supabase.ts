@@ -15,7 +15,7 @@ const supabaseAnonKey =
 const hasPlaceholders =
   supabaseUrl === 'your-supabase-url' || supabaseAnonKey === 'your-supabase-anon-key';
 
-// Comprehensive debug logging
+// Comprehensive debug logging with deployment safety
 console.log('🔧 Supabase Client Initialization:');
 console.log('==========================================');
 console.log('📍 URL from env:', supabaseUrl ? `${supabaseUrl.substring(0, 30)}...` : 'MISSING');
@@ -23,25 +23,41 @@ console.log(
   '🔑 Anon key from env:',
   supabaseAnonKey ? `${supabaseAnonKey.substring(0, 20)}...` : 'MISSING'
 );
+console.log('🌐 Environment Check:');
+console.log('  - Has window object:', typeof window !== 'undefined');
+console.log('  - Is browser context:', typeof window !== 'undefined' && window.location);
 console.log('🌐 OAuth Configuration:');
 console.log('  - Google Auth Enabled:', import.meta.env.VITE_ENABLE_GOOGLE_AUTH);
 console.log('  - GitHub Auth Enabled:', import.meta.env.VITE_ENABLE_GITHUB_AUTH);
-console.log('  - Current Origin:', window.location.origin);
-console.log('  - Expected Redirect:', `${window.location.origin}/auth/callback`);
-// Skip environment variable logging in browser
+
+// 🚨 DEPLOYMENT FIX: Only access window.location in browser context
+const currentOrigin =
+  typeof window !== 'undefined' ? window.location.origin : 'https://example.com';
+console.log('  - Current Origin:', currentOrigin);
+console.log('  - Expected Redirect:', `${currentOrigin}/auth/callback`);
 console.log('==========================================');
+
+// 🚨 DEPLOYMENT FIX: Declare variables before conditional blocks
+let finalUrl: string;
+let finalKey: string;
 
 if (!supabaseUrl || !supabaseAnonKey || hasPlaceholders) {
   console.warn('⚠️ Supabase not configured - using dummy values for development');
+  console.warn('⚠️ This is safe for development/deployment but auth will not work');
+
   // Use dummy values to prevent crash during development
   const dummyUrl = 'https://xyzcompany.supabase.co';
   const dummyKey =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5emNvbXBhbnkiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTYyNzIwODU0MSwibmF0IjoxNjI3MjA4NTQxLCJleHAiOjE5NzQzNjMzNDEsImV4cCI6MTk3NDM2MzM0MX0.dummy_key_for_development_only';
-  var finalUrl = hasPlaceholders ? dummyUrl : supabaseUrl;
-  var finalKey = hasPlaceholders ? dummyKey : supabaseAnonKey;
+
+  finalUrl = hasPlaceholders ? dummyUrl : supabaseUrl || dummyUrl;
+  finalKey = hasPlaceholders ? dummyKey : supabaseAnonKey || dummyKey;
+
+  console.log('🔧 Using dummy Supabase config for deployment safety');
 } else {
-  var finalUrl = supabaseUrl;
-  var finalKey = supabaseAnonKey;
+  finalUrl = supabaseUrl;
+  finalKey = supabaseAnonKey;
+  console.log('✅ Using real Supabase config');
 }
 
 // Create Supabase client with type safety
