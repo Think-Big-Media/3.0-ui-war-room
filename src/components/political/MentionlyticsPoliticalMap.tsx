@@ -129,10 +129,10 @@ const MentionlyticsPoliticalMap: React.FC = () => {
       <div className="relative" style={{ height: '240px' }}>
         <ComposableMap
           projection="geoAlbersUsa"
-          width={460}
+          width={380}
           height={240}
           projectionConfig={{
-            scale: 500,
+            scale: 420,
           }}
         >
           <ZoomableGroup>

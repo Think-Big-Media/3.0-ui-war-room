@@ -228,8 +228,8 @@ export default function Dashboard() {
             <div className="left-column">
               {/* Political Map */}
               <Card variant="glass" padding="md" className="political-map hoverable hover:scale-[1.02] transition-all duration-200">
-                <div className="map-container" style={{ display: 'grid', gridTemplateColumns: '460px 1fr', gap: '10px' }}>
-                  <div style={{ width: "460px", height: "260px", position: "relative" }}>
+                <div className="map-container" style={{ display: 'grid', gridTemplateColumns: '380px 1fr', gap: '10px' }}>
+                  <div style={{ width: "380px", height: "260px", position: "relative" }}>
                     <MentionlyticsPoliticalMap />
                   </div>
                   <div className="map-data" style={{ textAlign: "right", paddingRight: "10px" }}>
@@ -243,6 +243,25 @@ export default function Dashboard() {
                     <div className="text-white/75 text-[10px] leading-tight text-right uppercase truncate font-barlow">Pennsylvania: <span className="font-jetbrains text-green-400">+43%</span></div>
                     <div className="text-white/75 text-[10px] leading-tight text-right uppercase truncate font-barlow">Michigan: <span className="font-jetbrains text-red-400">-48%</span></div>
                     <div className="text-white/75 text-[10px] leading-tight text-right uppercase truncate font-barlow">Arizona: <span className="font-jetbrains text-green-400">+47%</span></div>
+                    
+                    {/* Small sentiment legend */}
+                    <div className="mt-3 pt-2 border-t border-white/10">
+                      <div className="flex items-center justify-end gap-1.5 text-[8px]">
+                        <span className="text-white/50 uppercase font-barlow">Sentiment:</span>
+                        <div className="flex items-center gap-0.5">
+                          <div className="w-2 h-2 bg-red-500 rounded-sm"></div>
+                          <span className="text-white/40">Neg</span>
+                        </div>
+                        <div className="flex items-center gap-0.5">
+                          <div className="w-2 h-2 bg-gray-500 rounded-sm"></div>
+                          <span className="text-white/40">Neu</span>
+                        </div>
+                        <div className="flex items-center gap-0.5">
+                          <div className="w-2 h-2 bg-green-500 rounded-sm"></div>
+                          <span className="text-white/40">Pos</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </Card>
