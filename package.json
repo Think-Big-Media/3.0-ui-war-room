@@ -1,10 +1,13 @@
 {
   "name": "war-room-frontend",
   "private": true,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "overrides": {
     "rollup": "4.13.0"
+  },
+  "resolutions": {
+    "react-redux": "9.2.0"
   },
   "engines": {
     "node": ">=18.0.0",
@@ -59,7 +62,6 @@
     "openai": "^5.16.0",
     "posthog-js": "^1.96.1",
     "react": "^18.3.1",
-    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.3.1",
     "react-error-boundary": "^6.0.0",
     "react-helmet-async": "^2.0.5",
@@ -90,7 +92,6 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.1.0",
     "@types/react": "^18.2.43",
-    "@types/react-beautiful-dnd": "^13.1.8",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",

@@ -11,7 +11,8 @@
 
 import type React from 'react';
 import { useState, useCallback, useEffect } from 'react';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+// Temporarily disable drag & drop until we replace react-beautiful-dnd
+// import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import {
   Zap,
   AlertTriangle,
