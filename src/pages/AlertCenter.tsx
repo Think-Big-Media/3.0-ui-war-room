@@ -15,6 +15,7 @@ import { informationService } from '../services/informationService';
 import { createLogger } from '../utils/logger';
 import { type Alert } from '../types/alert';
 import { type InformationItem } from '../types/information';
+import { useCrisisAlerts, useMentionlyticsMode } from '../hooks/useMentionlytics';
 
 const logger = createLogger('AlertCenter');
 
@@ -26,6 +27,10 @@ const AlertCenter: React.FC = () => {
     alert: null as Alert | null,
   });
   const navigate = useNavigate();
+  
+  // Get Mentionlytics crisis data
+  const { alerts: crisisAlerts, loading: crisisLoading } = useCrisisAlerts();
+  const { mode: dataMode } = useMentionlyticsMode();
 
   const {
     alerts,
@@ -59,6 +64,31 @@ const AlertCenter: React.FC = () => {
         pageTitle="Alert Center"
         placeholder="Ask War Room about campaign alerts..."
       >
+        {/* Data Mode Indicator */}
+        <div className="fixed top-20 right-4 z-40">
+          <div className={`px-3 py-1.5 rounded-lg text-xs font-bold backdrop-blur-sm ${
+            dataMode === 'MOCK' 
+              ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30' 
+              : 'bg-green-500/20 text-green-400 border border-green-500/30'
+          }`}>
+            {dataMode} DATA
+          </div>
+        </div>
+        
+        {/* Crisis Alert Banner - Show if Mentionlytics detects crisis */}
+        {crisisAlerts?.hasActiveCrisis && (
+          <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg">
+            <div className="flex items-center gap-2">
+              <AlertCircle className="w-5 h-5 text-red-400 animate-pulse" />
+              <div>
+                <h3 className="text-sm font-semibold text-red-400">Active Crisis Detected</h3>
+                <p className="text-xs text-white/70">
+                  {crisisAlerts.alerts?.length || 0} critical threats requiring immediate attention
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Tab Navigation */}
         <div className="flex space-x-4 mb-3 overflow-x-auto">

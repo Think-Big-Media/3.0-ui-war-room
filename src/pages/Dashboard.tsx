@@ -146,17 +146,17 @@ export default function Dashboard() {
             <div className="flex items-center justify-between mb-2">
               <h3 className="font-barlow font-semibold text-white text-xs">Sentiment</h3>
               <div className={`w-2 h-2 rounded-full animate-pulse ${
-                dataMode === 'MOCK' ? 'bg-yellow-400' : 'bg-green-400'
+                dataMode === 'MOCK' ? 'bg-amber-400' : 'bg-emerald-400'
               }`}></div>
             </div>
-            <div className="text-2xl font-bold text-green-400 mb-1">
+            <div className="text-2xl font-bold text-emerald-400 mb-1">
               {sentimentData ? `+${Math.round((sentimentData.positive / sentimentData.total) * 100)}%` : '+33%'}
             </div>
             <div className="text-xs text-white/60">
               {sentimentData?.positive || 342} positive • {sentimentData?.negative || 503} negative
             </div>
             {dataMode === 'MOCK' && (
-              <div className="text-xs text-yellow-400 mt-1">MOCK DATA</div>
+              <div className="text-xs text-amber-400/80 mt-1">MOCK DATA</div>
             )}
           </Card>
 
@@ -165,17 +165,17 @@ export default function Dashboard() {
             <div className="flex items-center justify-between mb-2">
               <h3 className="font-barlow font-semibold text-white text-xs">Mention Volume</h3>
               <div className={`w-2 h-2 rounded-full animate-pulse ${
-                dataMode === 'MOCK' ? 'bg-yellow-400' : 'bg-blue-400'
+                dataMode === 'MOCK' ? 'bg-amber-400' : 'bg-sky-400'
               }`}></div>
             </div>
-            <div className="text-2xl font-bold text-blue-400 mb-1">
-              {sentimentData ? sentimentData.total.toLocaleString() : '1,247'}
+            <div className="text-2xl font-bold text-sky-400 mb-1">
+              {sentimentData ? sentimentData.total.toLocaleString() : '1,039'}
             </div>
             <div className="text-xs text-white/60">
               24h volume • +12% vs yesterday
             </div>
             {dataMode === 'MOCK' && (
-              <div className="text-xs text-yellow-400 mt-1">MOCK DATA</div>
+              <div className="text-xs text-amber-400/80 mt-1">MOCK DATA</div>
             )}
           </Card>
 
@@ -184,17 +184,17 @@ export default function Dashboard() {
             <div className="flex items-center justify-between mb-2">
               <h3 className="font-barlow font-semibold text-white text-xs">Share of Voice</h3>
               <div className={`w-2 h-2 rounded-full animate-pulse ${
-                dataMode === 'MOCK' ? 'bg-yellow-400' : 'bg-purple-400'
+                dataMode === 'MOCK' ? 'bg-amber-400' : 'bg-violet-400'
               }`}></div>
             </div>
-            <div className="text-2xl font-bold text-purple-400 mb-1">
-              {dashboard.shareOfVoice?.[0]?.percentage?.toFixed(1) || '44.0'}%
+            <div className="text-2xl font-bold text-violet-400 mb-1">
+              {dashboard.shareOfVoice?.[0]?.percentage?.toFixed(1) || '76.9'}%
             </div>
             <div className="text-xs text-white/60">
               Leading competitor • Reach: 2.4M
             </div>
             {dataMode === 'MOCK' && (
-              <div className="text-xs text-yellow-400 mt-1">MOCK DATA</div>
+              <div className="text-xs text-amber-400/80 mt-1">MOCK DATA</div>
             )}
           </Card>
 
@@ -203,11 +203,11 @@ export default function Dashboard() {
             <div className="flex items-center justify-between mb-2">
               <h3 className="font-barlow font-semibold text-white text-xs">Crisis Risk</h3>
               <div className={`w-2 h-2 rounded-full animate-pulse ${
-                crisisAlerts?.hasActiveCrisis ? 'bg-red-400' : dataMode === 'MOCK' ? 'bg-yellow-400' : 'bg-green-400'
+                crisisAlerts?.hasActiveCrisis ? 'bg-rose-400' : dataMode === 'MOCK' ? 'bg-amber-400' : 'bg-emerald-400'
               }`}></div>
             </div>
             <div className={`text-2xl font-bold mb-1 ${
-              crisisAlerts?.hasActiveCrisis ? 'text-red-400' : 'text-green-400'
+              crisisAlerts?.hasActiveCrisis ? 'text-rose-400' : 'text-emerald-400'
             }`}>
               {crisisAlerts?.hasActiveCrisis ? 'HIGH' : 'LOW'}
             </div>
@@ -215,7 +215,7 @@ export default function Dashboard() {
               {crisisAlerts?.alerts?.length || 1} active threats
             </div>
             {dataMode === 'MOCK' && (
-              <div className="text-xs text-yellow-400 mt-1">MOCK DATA</div>
+              <div className="text-xs text-amber-400/80 mt-1">MOCK DATA</div>
             )}
           </Card>
         </div>
@@ -249,15 +249,15 @@ export default function Dashboard() {
                       <div className="flex items-center justify-end gap-1.5 text-[8px]">
                         <span className="text-white/50 uppercase font-barlow">Sentiment:</span>
                         <div className="flex items-center gap-0.5">
-                          <div className="w-2 h-2 bg-red-500 rounded-sm"></div>
+                          <div className="w-2 h-2 bg-rose-400 rounded-sm"></div>
                           <span className="text-white/40">Neg</span>
                         </div>
                         <div className="flex items-center gap-0.5">
-                          <div className="w-2 h-2 bg-gray-500 rounded-sm"></div>
+                          <div className="w-2 h-2 bg-gray-400 rounded-sm"></div>
                           <span className="text-white/40">Neu</span>
                         </div>
                         <div className="flex items-center gap-0.5">
-                          <div className="w-2 h-2 bg-green-500 rounded-sm"></div>
+                          <div className="w-2 h-2 bg-emerald-400 rounded-sm"></div>
                           <span className="text-white/40">Pos</span>
                         </div>
                       </div>

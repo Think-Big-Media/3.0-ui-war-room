@@ -50,12 +50,12 @@ export const RadarCanvas = ({
     ctx.fillRect(centerX - halfSize, centerY - halfSize, radarSize, radarSize);
 
     // Draw square border
-    ctx.strokeStyle = 'rgba(34, 197, 94, 0.6)';
+    ctx.strokeStyle = 'rgba(52, 211, 153, 0.6)';
     ctx.lineWidth = 2;
     ctx.strokeRect(centerX - halfSize, centerY - halfSize, radarSize, radarSize);
 
     // Draw grid pattern
-    ctx.strokeStyle = 'rgba(34, 197, 94, 0.24)';
+    ctx.strokeStyle = 'rgba(52, 211, 153, 0.24)';
     ctx.lineWidth = 0.8;
 
     // Grid lines
@@ -77,7 +77,7 @@ export const RadarCanvas = ({
     }
 
     // Center crosshairs
-    ctx.strokeStyle = 'rgba(34, 197, 94, 0.42)';
+    ctx.strokeStyle = 'rgba(52, 211, 153, 0.42)';
     ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.moveTo(centerX, centerY - halfSize);
@@ -87,9 +87,9 @@ export const RadarCanvas = ({
     ctx.stroke();
 
     // SWOT labels
-    ctx.fillStyle = 'rgba(34, 197, 94, 0.8)';
+    ctx.fillStyle = 'rgba(52, 211, 153, 0.8)';
     ctx.font = 'bold 14px monospace';
-    ctx.shadowColor = 'rgba(34, 197, 94, 0.5)';
+    ctx.shadowColor = 'rgba(52, 211, 153, 0.5)';
     ctx.shadowBlur = 6;
 
     ctx.textAlign = 'left';
@@ -160,7 +160,7 @@ export const RadarCanvas = ({
       const endRadians = (endAngle - 90) * (Math.PI / 180);
 
       const opacity = Math.max(0, (1 - i / trailSegments) * 0.4);
-      ctx.fillStyle = `rgba(34, 197, 94, ${opacity})`;
+      ctx.fillStyle = `rgba(52, 211, 153, ${opacity})`;
       ctx.beginPath();
       ctx.moveTo(centerX, centerY);
       ctx.arc(centerX, centerY, halfSize, startRadians, endRadians, true);
@@ -191,9 +191,9 @@ export const RadarCanvas = ({
       const opacity = maxOpacity - (maxOpacity - minOpacity) * progress;
       
       // Draw segment with subtle glow
-      ctx.strokeStyle = `rgba(34, 197, 94, ${opacity})`;
+      ctx.strokeStyle = `rgba(52, 211, 153, ${opacity})`;
       ctx.lineWidth = lineWidth;
-      ctx.shadowColor = `rgba(34, 197, 94, ${opacity * 0.5})`;
+      ctx.shadowColor = `rgba(52, 211, 153, ${opacity * 0.5})`;
       ctx.shadowBlur = 4; // Subtle glow
       ctx.beginPath();
       ctx.moveTo(startX, startY);
@@ -235,10 +235,10 @@ export const RadarCanvas = ({
       const blobRadius = 6 + point.intensity * 8 * pulseIntensity;
 
       const colorMap: Record<string, string> = {
-        strength: '#22c55e',
-        weakness: '#f87171', // Softer red (red-400)
-        opportunity: '#3b82f6',
-        threat: '#fb923c' // Softer orange (orange-400)
+        strength: '#34d399',
+        weakness: '#fb7185', // Softer rose-400
+        opportunity: '#38bdf8', // sky-400
+        threat: '#fbbf24' // amber-400
       };
       const color = colorMap[point.type];
 

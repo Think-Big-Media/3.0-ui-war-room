@@ -21,15 +21,15 @@ export const IntelligencePanel: React.FC<IntelligencePanelProps> = ({
   const getColorForType = (type: string) => {
     switch (type) {
       case 'strength':
-        return 'border-green-500 bg-green-500/10 text-green-300';
+        return 'border-emerald-400 bg-emerald-400/10 text-emerald-300';
       case 'weakness':
-        return 'border-orange-500 bg-orange-500/10 text-orange-300';
+        return 'border-rose-400 bg-rose-400/10 text-rose-300';
       case 'opportunity':
-        return 'border-blue-500 bg-blue-500/10 text-blue-300';
+        return 'border-sky-400 bg-sky-400/10 text-sky-300';
       case 'threat':
-        return 'border-red-500 bg-red-500/10 text-red-300';
+        return 'border-amber-400 bg-amber-400/10 text-amber-300';
       default:
-        return 'border-gray-500 bg-gray-500/10 text-gray-300';
+        return 'border-slate-400 bg-slate-400/10 text-slate-300';
     }
   };
 

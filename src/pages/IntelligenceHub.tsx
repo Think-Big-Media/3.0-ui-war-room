@@ -1,5 +1,6 @@
 import type React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import {
   Upload,
   Search,
@@ -17,11 +18,16 @@ import {
   Link,
   Zap,
   BarChart3,
+  TrendingUp,
+  Users,
+  MapPin,
+  AlertCircle,
 } from 'lucide-react';
 import PageLayout from '../components/shared/PageLayout';
 // PageHeader removed - no longer using headers on pages
 import Card from '../components/shared/Card';
 import CustomDropdown from '../components/shared/CustomDropdown';
+import { useSentimentAnalysis, useGeographicMentions, useTopInfluencers, useMentionlyticsMode } from '../hooks/useMentionlytics';
 
 interface IntelligenceFile {
   id: string;
@@ -47,12 +53,35 @@ interface ChatQuery {
 }
 
 const IntelligenceHub: React.FC = () => {
+  const [searchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState('chat');
   const [selectedFile, setSelectedFile] = useState<IntelligenceFile | null>(
     null
   );
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('all');
+  
+  // Get Mentionlytics data
+  const { data: sentimentData, loading: sentimentLoading, dataMode: sentimentMode } = useSentimentAnalysis();
+  const { data: geographicData, loading: geoLoading, dataMode: geoMode } = useGeographicMentions();
+  const { data: influencerData, loading: influencerLoading, dataMode: influencerMode } = useTopInfluencers();
+  const { mode: dataMode } = useMentionlyticsMode();
+  
+  const isLoadingData = sentimentLoading || geoLoading || influencerLoading;
+  
+  // Parse query parameters
+  const urlFilter = searchParams.get('filter');
+  const urlLocation = searchParams.get('location');
+  const urlCategory = searchParams.get('category');
+  const urlTopic = searchParams.get('topic');
+  const urlSearch = searchParams.get('search');
+  
+  // Update search term from URL on mount
+  useEffect(() => {
+    if (urlSearch) {
+      setSearchTerm(urlSearch);
+    }
+  }, [urlSearch]);
 
   // Dropdown options
   const filterOptions = [
@@ -203,6 +232,114 @@ const IntelligenceHub: React.FC = () => {
         pageTitle="Intelligence"
         placeholder="Ask War Room about campaign intelligence..."
       >
+        {/* Data Mode Indicator */}
+        <div className="fixed top-20 right-4 z-40">
+          <div className={`px-3 py-1.5 rounded-lg text-xs font-bold backdrop-blur-sm ${
+            dataMode === 'MOCK' 
+              ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30' 
+              : 'bg-green-500/20 text-green-400 border border-green-500/30'
+          }`}>
+            {dataMode} DATA
+          </div>
+        </div>
+
+        {/* Contextual Header - Show active filters and data */}
+        {(urlFilter || urlLocation || urlCategory) && (
+          <Card variant="glass" padding="sm" className="mb-4 bg-gradient-to-r from-blue-500/10 to-purple-500/10">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                {urlFilter === 'sentiment' && (
+                  <>
+                    <TrendingUp className="w-5 h-5 text-blue-400" />
+                    <div>
+                      <h3 className="text-sm font-semibold text-white">Sentiment Analysis View</h3>
+                      {sentimentLoading ? (
+                        <div className="flex items-center gap-2 mt-1">
+                          <div className="w-3 h-3 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+                          <span className="text-xs text-white/60">Loading sentiment data...</span>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-4 mt-1">
+                          <span className="text-xs text-green-400">
+                            Positive: {sentimentData?.positive || 0} ({sentimentData ? Math.round((sentimentData.positive / sentimentData.total) * 100) : 0}%)
+                          </span>
+                          <span className="text-xs text-red-400">
+                            Negative: {sentimentData?.negative || 0} ({sentimentData ? Math.round((sentimentData.negative / sentimentData.total) * 100) : 0}%)
+                          </span>
+                          <span className="text-xs text-gray-400">
+                            Neutral: {sentimentData?.neutral || 0} ({sentimentData ? Math.round((sentimentData.neutral / sentimentData.total) * 100) : 0}%)
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  </>
+                )}
+                
+                {urlFilter === 'shareOfVoice' && (
+                  <>
+                    <BarChart3 className="w-5 h-5 text-purple-400" />
+                    <div>
+                      <h3 className="text-sm font-semibold text-white">Share of Voice Analysis</h3>
+                      <p className="text-xs text-white/70">Analyzing competitive landscape and brand presence</p>
+                    </div>
+                  </>
+                )}
+                
+                {urlFilter === 'influencers' && (
+                  <>
+                    <Users className="w-5 h-5 text-cyan-400" />
+                    <div>
+                      <h3 className="text-sm font-semibold text-white">Top Influencers</h3>
+                      {influencerLoading ? (
+                        <div className="flex items-center gap-2 mt-1">
+                          <div className="w-3 h-3 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
+                          <span className="text-xs text-white/60">Loading influencer data...</span>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-3 mt-1">
+                          {influencerData?.slice(0, 3).map((influencer, idx) => (
+                            <span key={idx} className="text-xs text-cyan-400">
+                              @{influencer.username} ({influencer.followers.toLocaleString()})
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </>
+                )}
+                
+                {urlLocation && (
+                  <>
+                    <MapPin className="w-5 h-5 text-orange-400" />
+                    <div>
+                      <h3 className="text-sm font-semibold text-white">Location Intelligence: {urlLocation}</h3>
+                      <p className="text-xs text-white/70">
+                        {geographicData?.find(loc => loc.state === urlLocation)?.mentions || 0} mentions in this region
+                      </p>
+                    </div>
+                  </>
+                )}
+                
+                {urlCategory && (
+                  <>
+                    <AlertCircle className="w-5 h-5 text-yellow-400" />
+                    <div>
+                      <h3 className="text-sm font-semibold text-white capitalize">{urlCategory} Analysis</h3>
+                      {urlTopic && <p className="text-xs text-white/70">Topic: {urlTopic.replace(/-/g, ' ')}</p>}
+                    </div>
+                  </>
+                )}
+              </div>
+              
+              <button 
+                onClick={() => window.history.back()}
+                className="text-xs text-white/70 hover:text-white px-3 py-1 rounded-lg hover:bg-white/10 transition-colors"
+              >
+                ← Back to Dashboard
+              </button>
+            </div>
+          </Card>
+        )}
 
         {/* Tab Navigation */}
         <div className="flex space-x-4 mb-3">

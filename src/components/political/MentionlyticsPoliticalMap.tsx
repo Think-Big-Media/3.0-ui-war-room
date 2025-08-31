@@ -67,7 +67,7 @@ const MentionlyticsPoliticalMap: React.FC = () => {
     const sentimentScores = Array.from(stateDataMap.values()).map(state => state.sentimentScore);
     
     if (sentimentScores.length === 0) {
-      return scaleQuantize().domain([-50, 50]).range(['#dc2626', '#ef4444', '#6b7280', '#22c55e', '#16a34a']);
+      return scaleQuantize().domain([-50, 50]).range(['#fb7185', '#fda4af', '#94a3b8', '#86efac', '#34d399']);
     }
     
     const minScore = Math.min(...sentimentScores);
@@ -75,7 +75,7 @@ const MentionlyticsPoliticalMap: React.FC = () => {
     
     return scaleQuantize()
       .domain([Math.min(minScore, -20), Math.max(maxScore, 20)])
-      .range(['#dc2626', '#ef4444', '#6b7280', '#22c55e', '#16a34a']);
+      .range(['#fb7185', '#fda4af', '#94a3b8', '#86efac', '#34d399']);
   }, [stateDataMap]);
 
   const handleStateClick = (geo: any) => {
@@ -118,8 +118,8 @@ const MentionlyticsPoliticalMap: React.FC = () => {
       <div className="absolute top-2 right-2 z-10">
         <div className={`px-2 py-1 rounded text-xs font-bold ${ 
           dataMode === 'MOCK' 
-            ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30' 
-            : 'bg-green-500/20 text-green-400 border border-green-500/30'
+            ? 'bg-amber-400/20 text-amber-400/80 border border-amber-400/30' 
+            : 'bg-emerald-400/20 text-emerald-400 border border-emerald-400/30'
         }`}>
           {loading ? 'Loading...' : dataMode}
         </div>
@@ -179,7 +179,7 @@ const MentionlyticsPoliticalMap: React.FC = () => {
             <div className="flex items-center justify-between mb-2">
               <h4 className="font-bold text-white font-barlow">{tooltip.data.name}</h4>
               <div className={`px-2 py-1 rounded text-xs font-bold ${
-                tooltip.data.sentimentScore > 0 ? 'text-green-400' : 'text-red-400'
+                tooltip.data.sentimentScore > 0 ? 'text-emerald-400' : 'text-rose-400'
               }`}>
                 {tooltip.data.sentimentScore > 0 ? '+' : ''}{tooltip.data.sentimentScore.toFixed(1)}%
               </div>
@@ -187,15 +187,15 @@ const MentionlyticsPoliticalMap: React.FC = () => {
             
             <div className="space-y-1 text-xs text-white/80">
               <div className="font-jetbrains">
-                Mentions: <span className="text-blue-400 font-bold">{tooltip.data.mentions.toLocaleString()}</span>
-                {dataMode === 'MOCK' && <span className="text-yellow-400 ml-1">(MOCK)</span>}
+                Mentions: <span className="text-sky-400 font-bold">{tooltip.data.mentions.toLocaleString()}</span>
+                {dataMode === 'MOCK' && <span className="text-amber-400/80 ml-1">(MOCK)</span>}
               </div>
               
               <div className="grid grid-cols-3 gap-1 text-xs mb-2">
-                <div className="text-green-400">
+                <div className="text-emerald-400">
                   +{tooltip.data.sentiment.positive}
                 </div>
-                <div className="text-red-400">
+                <div className="text-rose-400">
                   -{tooltip.data.sentiment.negative}
                 </div>
                 <div className="text-gray-400">

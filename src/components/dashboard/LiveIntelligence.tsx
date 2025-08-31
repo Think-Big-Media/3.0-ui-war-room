@@ -65,9 +65,9 @@ export const LiveIntelligence: React.FC = () => {
 
   const getSentimentColor = (sentiment: string) => {
     switch (sentiment) {
-      case 'positive': return 'border-l-green-400 bg-green-500/5';
-      case 'negative': return 'border-l-red-400 bg-red-500/5';
-      default: return 'border-l-gray-400 bg-gray-500/5';
+      case 'positive': return 'border-l-emerald-400 bg-emerald-400/5';
+      case 'negative': return 'border-l-rose-400 bg-rose-400/5';
+      default: return 'border-l-slate-400 bg-slate-400/5';
     }
   };
 
@@ -99,11 +99,11 @@ export const LiveIntelligence: React.FC = () => {
     <Card variant="glass" padding="sm" className="live-intelligence hoverable hover:scale-[1.02] transition-all duration-200">
       <div className="flex items-center justify-between mb-2">
         <h3 className="font-barlow font-semibold text-white text-xs flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
           Live Intelligence
         </h3>
-        <div className="flex items-center gap-1 text-xs text-green-400">
-          <div className="w-1 h-1 bg-green-400 rounded-full animate-pulse"></div>
+        <div className="flex items-center gap-1 text-xs text-emerald-400">
+          <div className="w-1 h-1 bg-emerald-400 rounded-full animate-pulse"></div>
           LIVE
         </div>
       </div>
@@ -115,8 +115,8 @@ export const LiveIntelligence: React.FC = () => {
             className={`relative p-2 rounded-lg border-l-2 ${getSentimentColor(post.sentiment)} hover:bg-white/5 transition-all duration-200`}
           >
             {post.isBreaking && (
-              <div className="absolute -top-1 -right-1">
-                <span className="text-[8px] bg-red-500 text-white px-1.5 py-0.5 rounded uppercase font-bold animate-pulse">
+              <div className="absolute top-1 right-1">
+                <span className="text-[8px] bg-rose-400/20 text-rose-400 border border-rose-400/30 px-1.5 py-0.5 rounded uppercase font-bold animate-pulse">
                   BREAKING
                 </span>
               </div>
@@ -134,7 +134,7 @@ export const LiveIntelligence: React.FC = () => {
                 </div>
               </div>
               
-              <div className="flex items-center gap-1 text-[9px] text-cyan-400">
+              <div className="flex items-center gap-1 text-[9px] text-sky-400">
                 <TrendingUp className="w-2.5 h-2.5" />
                 {post.engagement.toLocaleString()}
               </div>
@@ -146,9 +146,9 @@ export const LiveIntelligence: React.FC = () => {
             
             <div className="flex items-center justify-between mt-1">
               <div className={`text-[8px] px-1.5 py-0.5 rounded uppercase font-semibold ${
-                post.sentiment === 'positive' ? 'bg-green-500/20 text-green-400' :
-                post.sentiment === 'negative' ? 'bg-red-500/20 text-red-400' :
-                'bg-gray-500/20 text-gray-400'
+                post.sentiment === 'positive' ? 'bg-emerald-400/20 text-emerald-400' :
+                post.sentiment === 'negative' ? 'bg-rose-400/20 text-rose-400' :
+                'bg-slate-400/20 text-slate-400'
               }`}>
                 {post.sentiment}
               </div>
@@ -178,13 +178,13 @@ export const LiveIntelligence: React.FC = () => {
           <div className="text-[9px] text-white/60 uppercase">Active</div>
         </div>
         <div>
-          <div className="text-xs font-bold text-green-400">
+          <div className="text-xs font-bold text-emerald-400">
             {posts.filter(p => p.sentiment === 'positive').length}
           </div>
           <div className="text-[9px] text-white/60 uppercase">Positive</div>
         </div>
         <div>
-          <div className="text-xs font-bold text-cyan-400">
+          <div className="text-xs font-bold text-sky-400">
             {posts.reduce((sum, p) => sum + p.engagement, 0).toLocaleString()}
           </div>
           <div className="text-[9px] text-white/60 uppercase">Total Reach</div>
