@@ -484,9 +484,8 @@ export default function Dashboard() {
           </div>
         </div>
 
-          {/* Bottom spacer */}
-          <div className="dashboard-footer"></div>
-        </div>
+        {/* Bottom spacer */}
+        <div className="dashboard-footer"></div>
       </div>
       </div>
       
