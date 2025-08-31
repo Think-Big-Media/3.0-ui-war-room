@@ -4,7 +4,7 @@
 
 import type React from 'react';
 import { createContext, useContext, useState, useEffect } from 'react';
-import { supabase } from '../lib/supabase/client';
+import { supabase } from '../lib/supabase';
 
 interface SimpleAuthContextType {
   isLoading: boolean;
@@ -77,6 +77,8 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
       {children}
     </SimpleAuthContext.Provider>
   );
+}
+
 export const useSimpleAuth = () => {
   const context = useContext(SimpleAuthContext);
   if (!context) {throw new Error('useSimpleAuth must be used within SimpleAuthProvider');}

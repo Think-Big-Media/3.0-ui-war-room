@@ -168,7 +168,7 @@ export const AnalyticsOverview: React.FC<AnalyticsOverviewProps> = ({
     return (
       <div className="bg-white rounded-xl border border-gray-200 p-4">
         <h3 className="text-sm font-semibold text-gray-900 mb-3">Quick Analytics</h3>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-4">
           {topMetrics.slice(0, 2).map((metric) => (
             <div key={metric.label} className="space-y-1">
               <p className="text-xs text-gray-500">{metric.label}</p>
@@ -227,7 +227,7 @@ export const AnalyticsOverview: React.FC<AnalyticsOverviewProps> = ({
       </div>
 
       {/* Charts Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Donation Trend */}
         <div className="bg-white rounded-2xl border border-gray-200 p-6">
           <div className="flex items-center justify-between mb-6">
@@ -353,7 +353,7 @@ export const AnalyticsOverview: React.FC<AnalyticsOverviewProps> = ({
         </div>
 
         {/* Days of Week x Hours Grid */}
-        <div className="grid grid-cols-8 gap-1">
+        <div className="grid grid-cols-8 gap-4">
           <div />
           {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
             <div key={day} className="text-xs text-gray-500 text-center">{day}</div>

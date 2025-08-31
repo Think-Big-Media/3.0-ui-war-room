@@ -1,4 +1,3 @@
-}
 /**
  * Meta Business API Audience Management Service
  * Handles custom audiences, lookalike audiences, and saved audiences
@@ -665,3 +664,4 @@ export class MetaAudienceService {
     // and normalize the data according to Meta's requirements
     return value.toLowerCase().trim();
   }
+}

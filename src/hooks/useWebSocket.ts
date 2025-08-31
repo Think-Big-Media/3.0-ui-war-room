@@ -21,13 +21,11 @@ interface WebSocketOptions {
   onReconnect?: (attempt: number) => void;
 }
 
-
 interface WebSocketMessage {
   type: string;
   data: any;
   timestamp: string;
 }
-
 
 interface UseWebSocketReturn {
   isConnected: boolean;
@@ -43,7 +41,6 @@ interface UseWebSocketReturn {
   disconnect: () => void;
   subscribeToMetrics: (metrics: string[]) => void;
 }
-
 
 export const useWebSocket = (
   url: string | null,

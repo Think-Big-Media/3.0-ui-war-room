@@ -1,4 +1,3 @@
-}
 // Circuit breaker pattern implementation for Meta API
 
 import { CircuitBreakerOpenError } from './errors';
@@ -9,8 +8,6 @@ interface CircuitBreakerConfig {
   resetTimeout: number;          // Time in ms before attempting to close
   halfOpenRequests: number;      // Number of requests to test in half-open state
   monitoringPeriod: number;      // Time window for failure counting
-}
-
 }
 
 export class MetaCircuitBreaker {

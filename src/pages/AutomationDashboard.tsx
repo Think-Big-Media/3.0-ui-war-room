@@ -378,9 +378,9 @@ const AutomationDashboard: React.FC = () => {
 
       {/* Overview Tab */}
       {activeTab === 'overview' && (
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="bg-white p-6 rounded-lg border border-gray-200">
               <div className="flex items-center">
                 <Zap className="w-8 h-8 text-blue-600" />
@@ -485,7 +485,7 @@ const AutomationDashboard: React.FC = () => {
 
       {/* Workflows Tab */}
       {activeTab === 'workflows' && (
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* Toolbar */}
           <div className="flex justify-between items-center">
             <div className="flex space-x-4">
@@ -521,7 +521,7 @@ const AutomationDashboard: React.FC = () => {
           </div>
 
           {/* Workflows List */}
-          <div className="grid gap-6">
+          <div className="grid gap-4">
             {workflows.map((workflow) => (
               <div
                 key={workflow.id}
@@ -581,7 +581,7 @@ const AutomationDashboard: React.FC = () => {
 
       {/* Crisis Alerts Tab */}
       {activeTab === 'alerts' && (
-        <div className="space-y-6">
+        <div className="space-y-4">
           <div className="grid gap-4">
             {crisisAlerts.map((alert) => (
               <div

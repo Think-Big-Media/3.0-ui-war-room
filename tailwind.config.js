@@ -36,6 +36,12 @@ export default {
     'text-red-400',
     // Button letter spacing
     'tracking-[-0.05em]',
+    // Background theme CSS classes - CRITICAL: prevent Tailwind purging
+    'war-room-classic-blue',
+    'war-room-tactical-camo',
+    'war-room-digital-camo',
+    'war-room-dark-slate',
+    'war-room-camo-overlay',
   ],
   theme: {
     extend: {

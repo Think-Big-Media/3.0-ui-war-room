@@ -60,31 +60,8 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
 
   return (
     <Card
-      initial={{
-        opacity: 0,
-        y: 20,
-      }}
-      animate={{
-        opacity: 1,
-        y: 0,
-      }}
-      transition={{
-        duration: 0.6,
-        delay,
-      }}
-      whileHover={{
-        y: -4,
-        transition: {
-          duration: 0.2,
-        },
-      }}
-      whileTap={{
-        transition: {
-          duration: 0.1,
-        },
-      }}
       onClick={handleClick}
-      className={`group cursor-pointer hoverable hover:bg-black/25`}
+      className={`group cursor-pointer hoverable hover:bg-white/15 hover:scale-[1.02] transition-all duration-200`}
       padding="md"
       variant="glass"
     >
@@ -118,8 +95,8 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
         >
           {number}
         </div>
-        <h3 className="section-header mb-1">{title}</h3>
-        <p className="content-subtitle">{subtitle}</p> main
+        <h3 className="section-header mb-1 mt-2">{title}</h3>
+        <p className="content-subtitle">{subtitle}</p>
       </div>
     </Card>
   );
@@ -167,31 +144,8 @@ const IntelligenceDashboard: React.FC = () => {
 
   return (
     <Card
-      initial={{
-        opacity: 0,
-        y: 20,
-      }}
-      animate={{
-        opacity: 1,
-        y: 0,
-      }}
-      transition={{
-        duration: 0.6,
-        delay: 0.4,
-      }}
-      whileHover={{
-        y: -2,
-        transition: {
-          duration: 0.2,
-        },
-      }}
-      whileTap={{
-        transition: {
-          duration: 0.1,
-        },
-      }}
       onClick={handleDashboardClick}
-      className="group cursor-pointer hoverable hover:bg-black/25"
+      className="group cursor-pointer hoverable hover:bg-white/15 hover:scale-[1.02] transition-all duration-200"
       padding="md"
       variant="glass"
     >
@@ -200,13 +154,13 @@ const IntelligenceDashboard: React.FC = () => {
           <div className="p-3 lg:p-4 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 hoverable transition-all duration-300">
             <Target className="w-6 h-6 lg:w-8 lg:h-8 text-white/95" />
           </div>
-          <h3 className="text-xl lg:text-2xl section-header">
+          <h3 className="section-header-large ml-3">
             Intelligence Dashboard
           </h3>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-3">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {metrics.map((metric, index) => (
           <div
             key={index}
@@ -214,7 +168,7 @@ const IntelligenceDashboard: React.FC = () => {
               e.stopPropagation();
               handleMetricClick(metric.label);
             }}
-            className="bg-black/20 backdrop-blur-sm rounded-xl p-3 lg:p-4 border border-white/20 hoverable hover:bg-black/25 transition-all duration-300 cursor-pointer"
+            className="bg-black/20 backdrop-blur-sm rounded-xl p-3 lg:p-4 border border-white/20 hoverable hover:bg-white/0 hover:scale-[1.02] transition-all duration-200 cursor-pointer"
           >
             <div
               className="text-xl lg:text-2xl text-white/95 mb-1"
@@ -304,25 +258,7 @@ const CampaignOperationsHub: React.FC = () => {
 
   return (
     <Card
-      initial={{
-        opacity: 0,
-        y: 20,
-      }}
-      animate={{
-        opacity: 1,
-        y: 0,
-      }}
-      transition={{
-        duration: 0.6,
-        delay: 0.3,
-      }}
-      whileHover={{
-        y: -2,
-        transition: {
-          duration: 0.2,
-        },
-      }}
-      className="group hoverable hover:bg-black/25"
+      className="group hoverable hover:bg-white/15 hover:scale-[1.02] transition-all duration-200"
       padding="md"
       variant="glass"
     >
@@ -331,7 +267,7 @@ const CampaignOperationsHub: React.FC = () => {
           <div className="p-3 lg:p-4 bg-black/20 backdrop-blur-sm rounded-xl border border-white/20 hoverable transition-all duration-300">
             <Target className="w-6 h-6 lg:w-8 lg:h-8 text-white/95" />
           </div>
-          <h3 className="text-xl lg:text-2xl section-header">
+          <h3 className="section-header-large ml-3">
             Campaign Operations
           </h3>
         </div>
@@ -339,16 +275,16 @@ const CampaignOperationsHub: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Active Projects */}
-        <div className="space-y-3 lg:space-y-4">
+        <div className="space-y-4">
           <h4 className="text-lg lg:text-xl font-medium text-white/40 mb-3 uppercase font-condensed ml-2">
             ACTIVE PROJECTS
           </h4>
-          <div className="space-y-2 lg:space-y-3">
+          <div className="space-y-4">
             {activeProjects.map((cluster, index) => (
               <div
                 key={index}
                 onClick={() => handleProjectClick(cluster.title)}
-                className="bg-black/20 backdrop-blur-sm rounded-xl p-6 lg:p-7 border border-white/20 hoverable hover:bg-black/25 transition-all duration-300 cursor-pointer"
+                className="bg-black/20 backdrop-blur-sm rounded-xl p-6 lg:p-7 border border-white/20 hoverable hover:bg-white/0 hover:scale-[1.02] transition-all duration-200 cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-2">
                   <h5 className="content-title text-white/90">
@@ -357,7 +293,7 @@ const CampaignOperationsHub: React.FC = () => {
                   <div
                     className={`w-2 h-2 rounded-full ${
                       cluster.status === 'Live'
-                        ? 'bg-green-400'
+                        ? 'bg-[var(--accent-live-monitoring)]'
                         : cluster.status === 'Running'
                           ? 'bg-[var(--accent-war-room)]'
                           : cluster.status === 'Planning'
@@ -388,7 +324,13 @@ const CampaignOperationsHub: React.FC = () => {
         </div>
 
         {/* Content Templates */}
-        <div className="space-y-2 lg:space-y-3">
+        <div
+          className="space-y-2 lg:space-y-3"
+          style={{
+            paddingBottom: "11px",
+            marginBottom: "-1px",
+          }}
+        >
           <h4 className="text-lg lg:text-xl font-medium text-white/40 mb-3 uppercase font-condensed ml-2">
             &nbsp;CONTENT TEMPLATES
           </h4>
@@ -397,7 +339,7 @@ const CampaignOperationsHub: React.FC = () => {
               <div
                 key={index}
                 onClick={() => handleTemplateClick(template.name)}
-                className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-white/20 hoverable hover:bg-black/25 transition-all duration-300 text-center cursor-pointer"
+                className="bg-black/20 backdrop-blur-sm rounded-xl p-5 lg:p-6 border border-white/20 hoverable hover:bg-white/0 hover:scale-[1.02] transition-all duration-200 text-center cursor-pointer"
               >
                 <h5 className="content-title mb-1">{template.name}</h5>
                 <p className="text-xs text-white/65">{template.type}</p>
@@ -418,13 +360,11 @@ const CommandCenter: React.FC = () => {
   );
 
   return (
-    <div className="page-dashboard">
+    <div className="page-dashboard" data-route="command-center">
       <PageLayout
         pageTitle="Dashboard"
         placeholder="Ask War Room about your campaign status..."
       >
-        {/* Slate/Gray gradient background matching Settings page */}
-        <div className="fixed inset-0 bg-gradient-to-br from-slate-600 via-slate-700 to-slate-800 -z-10" />
 
         {/* Top Row - 4 KPI Tiles */}
         <div>
@@ -473,7 +413,7 @@ const CommandCenter: React.FC = () => {
           <div className="mb-4">
             <IntelligenceDashboard />
           </div>
-        </div> main
+        </div>
       </PageLayout>
     </div>
   );

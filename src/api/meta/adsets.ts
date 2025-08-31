@@ -1,4 +1,3 @@
-}
 /**
  * Meta Business API Ad Set Management Service
  * Handles CRUD operations for ad sets within campaigns
@@ -588,3 +587,4 @@ export class MetaAdSetService {
 
     return results;
   }
+}

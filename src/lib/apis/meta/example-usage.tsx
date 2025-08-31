@@ -1,4 +1,3 @@
-}
 /**
  * Example React Component using Meta Business API
  */
@@ -246,3 +245,4 @@ export function MetaIntegrationExample() {
       </div>
     </div>
   );
+}

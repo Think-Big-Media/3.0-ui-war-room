@@ -40,7 +40,7 @@ export const analyticsApi = createApi({
       endDate?: string;
     }>({
       query: ({ dateRange, startDate, endDate }) => ({
-        url: '/dashboard',
+        url: '/summary',  // Backend provides /summary, not /dashboard
         params: {
           date_range: dateRange,
           ...(startDate && { start_date: startDate }),
@@ -55,7 +55,7 @@ export const analyticsApi = createApi({
     // Get metric cards
     getMetricCards: builder.query<MetricCard[], { dateRange: DateRangeEnum }>({
       query: ({ dateRange }) => ({
-        url: '/metrics/overview',
+        url: '/sentiment',  // Backend provides /sentiment for metrics
         params: { date_range: dateRange },
       }),
       providesTags: ['Metrics'],

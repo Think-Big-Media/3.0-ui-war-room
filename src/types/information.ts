@@ -40,3 +40,4 @@ export interface InformationStats {
     high: number;
     critical: number;
   };
+}

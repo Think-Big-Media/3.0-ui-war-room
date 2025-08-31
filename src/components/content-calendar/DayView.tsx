@@ -36,7 +36,7 @@ const DayView: React.FC<DayViewProps> = ({
       </div>
 
       {/* Hourly Schedule */}
-      <div className="grid grid-cols-1 gap-2">
+      <div className="grid grid-cols-1 gap-4">
         {timeSlots.map((slot) => {
           const todayContent = todayData?.content.find(
             (c) => parseInt(c.time.split(':')[0]) === slot.hour

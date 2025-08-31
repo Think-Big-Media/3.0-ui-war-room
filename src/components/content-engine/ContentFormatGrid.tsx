@@ -45,7 +45,7 @@ const ContentFormatGrid: React.FC<ContentFormatGridProps> = ({
       {socialFormats.length > 0 && (
         <div>
           <h3 className="text-lg font-semibold text-white/90 mb-4 flex items-center">
-            <div className="w-3 h-3 bg-green-400 rounded-full mr-2" />
+            <div className="w-3 h-3 bg-[var(--accent-live-monitoring)] rounded-full mr-2" />
             Social Media
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

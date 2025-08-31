@@ -1,4 +1,3 @@
-}
 /**
  * Meta Business API Accounts Service
  * Handles operations for ad accounts
@@ -60,3 +59,4 @@ export class MetaAccountsService {
       );
     }
   }
+}

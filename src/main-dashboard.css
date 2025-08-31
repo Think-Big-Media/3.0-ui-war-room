@@ -1,0 +1,991 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* War Room Dashboard Colors - same for dark mode */
+    --war-room-background: 220 22% 14%; /* #1a1f2e */
+    --war-room-header: 220 20% 19%; /* #252d3d */
+    --war-room-card: 0 0% 0%; /* rgba(0,0,0,0.2) - glassmorphic */
+    --war-room-text: 210 20% 88%; /* #e2e8f0 */
+    --war-room-border: 0 0% 100%; /* rgba(255,255,255,0.3) */
+  }
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    @apply border-border;
+  }
+
+  /* Override only within war-room-dashboard context, not globally */
+  .war-room-dashboard body {
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", sans-serif;
+    /* Remove opaque background to allow gradient to show through */
+    color: #e2e8f0;
+    width: 100vw;
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* Main Dashboard Container - transparent to show gradient */
+  .dashboard-wrapper {
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 15px;
+    background: transparent;
+  }
+
+  /* Main Two Equal Columns - transparent to show gradient */
+  .dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    width: 100%;
+    background: transparent;
+  }
+
+  /* Card Base */
+  .card {
+    background: #2a3342;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 12px;
+  }
+
+  .card-title {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+
+  /* Responsive Design - Tablet and Mobile */
+  @media (max-width: 1024px) {
+    /* Hide swing state text on tablets */
+    .map-data {
+      display: none !important;
+    }
+
+    /* Hide phrase cloud keywords section */
+    .keywords-section {
+      display: none !important;
+    }
+
+    /* Show simplified keywords at bottom */
+    .keywords-bottom {
+      display: block !important;
+    }
+
+    /* Adjust dashboard grid for tablets */
+    .dashboard {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    /* Adjust card spacing */
+    .dashboard-wrapper {
+      padding: 10px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    /* Mobile optimizations */
+    .dashboard {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .dashboard-wrapper {
+      padding: 8px;
+    }
+
+    /* Smaller cards on mobile */
+    .card {
+      padding: 8px;
+      border-radius: 6px;
+    }
+
+    /* Hide swing states completely on mobile */
+    .political-map .map-data {
+      display: none !important;
+    }
+
+    /* Simplify metrics display */
+    .metric-boxes-container {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+
+  /* Keywords bottom display - hidden by default */
+  .keywords-bottom {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(26, 31, 46, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 8px 16px;
+    z-index: 100;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #94a3b8;
+    text-align: center;
+  }
+
+  .keywords-bottom .keyword-item {
+    display: inline-block;
+    margin: 0 8px;
+  }
+
+  .keywords-bottom .keyword-dot {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: #64748b;
+    border-radius: 50%;
+    margin: 0 12px;
+    vertical-align: middle;
+  }
+
+  /* Make SWOT radar container compact */
+  .fresh-swot-radar {
+    height: 420px !important; /* Reduced from 600px to remove dead space */
+  }
+
+  /* Left Column Container - transparent */
+  .left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: transparent;
+  }
+
+  /* Political Map - Top Left */
+  .political-map {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    /* Let Tailwind bg-white/10 work properly */
+    /* opacity and filter at default values */
+  }
+
+  .map-container {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 460px 1fr;
+    gap: 10px;
+    /* No background override - let parent handle it */
+  }
+
+  .map-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 10px;
+    border-radius: 4px;
+    background: transparent !important;
+    /* Ensure no opacity layers */
+    opacity: 1;
+    filter: none;
+  }
+
+  .electoral-map-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .map-data {
+    padding: 0;
+    padding-left: 8px;
+    font-size: 12px;
+    overflow-y: auto;
+    text-align: left;
+  }
+
+  .map-data-item {
+    padding: 6px 0;
+    color: #e2e8f0;
+    opacity: 0.9;
+    font-weight: 500;
+    font-size: 12px;
+  }
+
+  /* SWOT + Intelligence Container - ALIGNED */
+  .swot-intelligence {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 460px 1fr;
+    gap: 20px;
+  }
+
+  .swot-radar {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .radar-container {
+    width: 467px;
+    height: 467px;
+    background: radial-gradient(
+      circle at center,
+      rgba(16, 185, 129, 0.05),
+      transparent
+    );
+    border: 2px solid rgba(16, 185, 129, 0.2);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .war-room-dashboard .radar-sweep {
+    position: absolute !important;
+    width: 50% !important;
+    height: 2px !important;
+    background: linear-gradient(90deg, rgba(16, 185, 129, 0.8), transparent) !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform-origin: left center !important;
+    animation: sweep 12s linear infinite !important;
+  }
+
+  @keyframes sweep {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .radar-quadrant {
+    position: absolute;
+    font-size: 10px;
+    color: #10b981;
+    font-weight: 500;
+  }
+
+  /* Radar Blobs */
+  .radar-blob-container {
+    position: absolute;
+    cursor: pointer;
+  }
+
+  .radar-blob {
+    border-radius: 50%;
+    filter: blur(2px);
+    animation: pulse 2s ease-in-out infinite;
+    width: 100%;
+    height: 100%;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+  }
+
+  .blob-strength {
+    background: radial-gradient(circle, rgba(34, 197, 94, 0.8), transparent);
+  }
+  .blob-weakness {
+    background: radial-gradient(circle, rgba(239, 68, 68, 0.8), transparent);
+  }
+  .blob-opportunity {
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.8), transparent);
+  }
+  .blob-threat {
+    background: radial-gradient(circle, rgba(251, 146, 60, 0.8), transparent);
+  }
+
+  .blob-label {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.95);
+    color: #ffffff;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 50;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  .radar-blob-container:hover .blob-label {
+    opacity: 1;
+  }
+
+  .radar-stats {
+    height: 50px;
+    padding: 12px;
+    font-size: 11px;
+    color: #94a3b8;
+    text-align: left;
+    line-height: 1.5;
+  }
+
+  .live-intelligence {
+    display: flex;
+    flex-direction: column;
+    height: 486px;
+    padding-left: 8px;
+  }
+
+  .feed-container {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    height: 440px;
+    padding-top: 30px;
+  }
+
+  .feed-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: linear-gradient(to bottom, #2a3342, transparent);
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .feed-container::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: linear-gradient(to top, #2a3342, transparent);
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .war-room-dashboard .feed-items-wrapper {
+    animation: scrollFeed 30s linear infinite !important;
+    transition: transform 0.3s ease !important;
+  }
+
+  @keyframes scrollFeed {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-600px);
+    }
+  }
+
+  .feed-container:hover .feed-items-wrapper {
+    animation-play-state: paused;
+  }
+
+  .feed-item {
+    background: #1f2633;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    border-left: 3px solid transparent;
+    font-size: 12px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    transition:
+      background 0.3s,
+      transform 0.3s;
+    line-height: 1.4;
+  }
+
+  .feed-item span {
+    display: block;
+  }
+
+  .feed-item strong {
+    font-weight: 600;
+    display: inline;
+  }
+
+  .feed-item.highlighted {
+    background: #2a3f5f;
+    transform: scale(1.05);
+    margin: 12px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    position: relative;
+  }
+
+  .feed-item.critical {
+    border-left-color: #ef4444;
+  }
+  .feed-item.warning {
+    border-left-color: #f59e0b;
+  }
+  .feed-item.info {
+    border-left-color: #3b82f6;
+  }
+
+  /* Right Column Container - transparent */
+  .right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: transparent;
+  }
+
+  /* Phrase Cloud */
+  .phrase-cloud {
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .phrase-container {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 8px;
+  }
+
+  .keywords-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 10px;
+  }
+
+  .keyword-group {
+    flex: 1;
+  }
+
+  .keyword-list {
+    line-height: 1.5;
+    color: #94a3b8;
+    font-size: 10px;
+  }
+
+  .phrase-3d {
+    padding: 10px 5px;
+    position: relative;
+    overflow: visible;
+    perspective: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .phrase-carousel {
+    position: absolute;
+    width: 110%;
+    height: 100%;
+    left: -5%;
+    transform-style: preserve-3d;
+  }
+
+  .war-room-dashboard .phrase-carousel .phrase-item {
+    position: absolute !important;
+    width: 100% !important;
+    left: 0 !important;
+    top: 50% !important;
+    transform-origin: center !important;
+    font-size: 16px !important;
+    backface-visibility: visible !important;
+    text-align: center !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-family: 'Barlow Condensed', sans-serif !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.5px !important;
+    color: #ffffff !important;
+    padding: 0 10px !important;
+    animation: ellipticalRotate 30s linear infinite !important;
+    white-space: normal !important;
+    line-height: 1.3 !important;
+  }
+
+  @keyframes ellipticalRotate {
+    0% {
+      transform: translateY(-50%) translateZ(60px) translateY(0px);
+      font-size: 19px;
+      opacity: 1;
+      filter: blur(0px);
+      color: #ffffff;
+      z-index: 100;
+      font-weight: 600;
+    }
+    10% {
+      transform: translateY(-50%) translateZ(45px) translateY(-20px)
+        translateX(-15px);
+      font-size: 18px;
+      opacity: 0.9;
+      filter: blur(0.5px);
+      color: #ffffff;
+      z-index: 90;
+    }
+    20% {
+      transform: translateY(-50%) translateZ(25px) translateY(-35px)
+        translateX(-25px);
+      font-size: 15px;
+      opacity: 0.7;
+      filter: blur(2px);
+      color: #ffffff;
+      z-index: 50;
+    }
+    30% {
+      transform: translateY(-50%) translateZ(0px) translateY(-45px)
+        translateX(-30px);
+      font-size: 13px;
+      opacity: 0.5;
+      filter: blur(3px);
+      color: #ffffff;
+      z-index: 20;
+    }
+    40% {
+      transform: translateY(-50%) translateZ(-30px) translateY(-40px)
+        translateX(-25px);
+      font-size: 11px;
+      opacity: 0.3;
+      filter: blur(4px);
+      color: #ffffff;
+      z-index: 5;
+    }
+    50% {
+      transform: translateY(-50%) translateZ(-45px) translateY(0px);
+      font-size: 10px;
+      opacity: 0.2;
+      filter: blur(5px);
+      color: #ffffff;
+      z-index: 1;
+    }
+    60% {
+      transform: translateY(-50%) translateZ(-30px) translateY(40px)
+        translateX(25px);
+      font-size: 11px;
+      opacity: 0.3;
+      filter: blur(4px);
+      color: #ffffff;
+      z-index: 5;
+    }
+    70% {
+      transform: translateY(-50%) translateZ(0px) translateY(45px)
+        translateX(30px);
+      font-size: 13px;
+      opacity: 0.5;
+      filter: blur(3px);
+      color: #ffffff;
+      z-index: 20;
+    }
+    80% {
+      transform: translateY(-50%) translateZ(25px) translateY(35px)
+        translateX(25px);
+      font-size: 15px;
+      opacity: 0.7;
+      filter: blur(2px);
+      color: #ffffff;
+      z-index: 50;
+    }
+    90% {
+      transform: translateY(-50%) translateZ(45px) translateY(20px)
+        translateX(15px);
+      font-size: 18px;
+      opacity: 0.9;
+      filter: blur(0.5px);
+      color: #ffffff;
+      z-index: 90;
+    }
+    100% {
+      transform: translateY(-50%) translateZ(60px) translateY(0px);
+      font-size: 19px;
+      opacity: 1;
+      filter: blur(0px);
+      color: #ffffff;
+      z-index: 100;
+      font-weight: 600;
+    }
+  }
+
+  .war-room-dashboard .phrase-carousel .phrase-item:nth-child(1) {
+    animation-delay: 0s !important;
+  }
+  .war-room-dashboard .phrase-carousel .phrase-item:nth-child(2) {
+    animation-delay: -3s !important;
+  }
+  .war-room-dashboard .phrase-carousel .phrase-item:nth-child(3) {
+    animation-delay: -6s !important;
+  }
+  .war-room-dashboard .phrase-carousel .phrase-item:nth-child(4) {
+    animation-delay: -9s !important;
+  }
+  .war-room-dashboard .phrase-carousel .phrase-item:nth-child(5) {
+    animation-delay: -12s !important;
+  }
+  .war-room-dashboard .phrase-carousel .phrase-item:nth-child(6) {
+    animation-delay: -15s !important;
+  }
+  .war-room-dashboard .phrase-carousel .phrase-item:nth-child(7) {
+    animation-delay: -18s !important;
+  }
+  .war-room-dashboard .phrase-carousel .phrase-item:nth-child(8) {
+    animation-delay: -21s !important;
+  }
+  .war-room-dashboard .phrase-carousel .phrase-item:nth-child(9) {
+    animation-delay: -24s !important;
+  }
+  .war-room-dashboard .phrase-carousel .phrase-item:nth-child(10) {
+    animation-delay: -27s !important;
+  }
+
+  /* Golden Measure Squares */
+  .metric-boxes-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    height: 130px;
+  }
+
+  .metric-box-square {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Quick Actions */
+  .quick-actions {
+    height: 215px;
+  }
+
+  /* Performance Metrics */
+  .performance-metrics {
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .metrics-table {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .metric-cell {
+    background: #1f2633;
+    border-radius: 4px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .metric-label {
+    font-size: 9px;
+    color: #64748b;
+    margin-bottom: 4px;
+    font-family: 'Barlow', sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .metric-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #e2e8f0;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .metric-trend {
+    font-size: 10px;
+    margin-top: 3px;
+  }
+
+  .trend-up {
+    color: #10b981;
+  }
+  .trend-down {
+    color: #ef4444;
+  }
+  .trend-neutral {
+    color: #94a3b8;
+  }
+
+  /* Social Post Thumbnails */
+  .social-posts {
+    height: 165px;
+    display: flex;
+    flex-direction: column;
+    grid-column: 1 / -1;
+  }
+
+  .social-grid {
+    flex: 1;
+    display: flex;
+    gap: 10px;
+    overflow: hidden;
+    position: relative;
+    padding: 5px 0;
+  }
+
+  .war-room-dashboard .social-grid-wrapper {
+    display: flex !important;
+    gap: 10px !important;
+    animation: scrollLeft 30s linear infinite !important;
+  }
+
+  .social-grid:hover .social-grid-wrapper {
+    animation-play-state: paused;
+  }
+
+  @keyframes scrollLeft {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .social-thumbnail {
+    background: #1f2633;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 180px;
+    height: 120px;
+    flex-shrink: 0;
+  }
+
+  .social-thumbnail:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .social-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: 4px 5px;
+    font-size: 9px;
+    color: white;
+  }
+
+  .social-metrics {
+    display: flex;
+    gap: 8px;
+    font-size: 9px;
+  }
+
+  /* Bottom spacing */
+  .dashboard-footer {
+    height: 50px;
+  }
+
+  /* Original phrase animation is handled by ellipticalRotate with individual delays */
+  
+  /* Additional Responsive Enhancements */
+  @media (max-width: 1440px) {
+    /* Adjust for smaller desktop screens */
+    .dashboard-wrapper {
+      max-width: 100%;
+      padding: 12px;
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    /* Tablet landscape adjustments */
+    .left-column,
+    .right-column {
+      width: 100%;
+    }
+    
+    /* Reduce SWOT radar size on tablets */
+    .fresh-swot-radar {
+      height: 350px;
+    }
+    
+    /* Adjust metric boxes for tablets */
+    .metric-boxes-container {
+      grid-template-columns: repeat(2, 1fr);
+      height: auto;
+    }
+    
+    .metric-box-square {
+      height: 100px;
+    }
+    
+    /* Simplify phrase carousel on tablets */
+    .phrase-carousel {
+      height: 150px;
+    }
+    
+    /* Hide less important elements */
+    .map-data-item {
+      font-size: 10px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    /* Mobile phone adjustments */
+    .dashboard {
+      gap: 8px;
+    }
+    
+    /* Stack all cards vertically on mobile */
+    .left-column,
+    .right-column {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    /* Reduce political map height on mobile */
+    .political-map {
+      height: 200px;
+    }
+    
+    /* Simplify SWOT radar on mobile */
+    .fresh-swot-radar {
+      height: 280px;
+    }
+    
+    /* Adjust phrase cloud for mobile */
+    .phrase-cloud {
+      height: 180px;
+    }
+    
+    /* Simplify metrics grid on mobile */
+    .metrics-table {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+    }
+    
+    /* Smaller metric cells on mobile */
+    .metric-cell {
+      padding: 6px;
+    }
+    
+    .metric-value {
+      font-size: 14px !important;
+    }
+    
+    .metric-label {
+      font-size: 9px !important;
+    }
+    
+    /* Adjust quick actions for mobile */
+    .quick-actions {
+      height: 150px;
+    }
+    
+    /* Simplify social posts on mobile */
+    .social-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    /* Add padding to account for bottom keywords bar */
+    .dashboard-footer {
+      height: 80px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    /* Small mobile adjustments */
+    .dashboard-wrapper {
+      padding: 6px;
+    }
+    
+    .card {
+      padding: 6px;
+      border-radius: 4px;
+    }
+    
+    /* Even smaller fonts for tiny screens */
+    .card-title {
+      font-size: 10px;
+    }
+    
+    /* 2x2 grid for metrics on small phones */
+    .metric-boxes-container {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+    }
+    
+    /* Smaller social grid on small phones */
+    .social-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+}

@@ -50,7 +50,7 @@ const AlertSummary: React.FC<AlertSummaryProps> = ({ alerts }) => {
 
   return (
     <Card padding="sm" variant="glass">
-      <h3 className="section-header mb-4 tracking-wide">QUICK STATS</h3>
+      <h3 className="text-xl font-semibold text-white/40 tracking-wide font-barlow-condensed mb-4">QUICK STATS</h3>
       <div className="space-y-3">
         {summaryItems.map((item, index) => (
           <div key={index} className="flex items-center justify-between">

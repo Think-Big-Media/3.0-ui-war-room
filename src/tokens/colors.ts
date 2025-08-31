@@ -4,8 +4,8 @@
  */
 
 export const DASHBOARD_ORANGE = '#D97706';
-export const LIVE_MONITORING_GREEN = '#2A434A';
-export const WAR_ROOM_FUSCHIA = '#DB2777';
+export const LIVE_MONITORING_GREEN = '#4ade80';
+export const WAR_ROOM_SALMON = '#d7484f';
 export const INTELLIGENCE_BLUE = '#60A5FA';
 export const ALERT_CENTER_YELLOW = '#FACC15';
 export const SETTINGS_MAUVE = '#818CF8';
@@ -13,7 +13,7 @@ export const SETTINGS_MAUVE = '#818CF8';
 export const BRAND_TOKENS = {
   dashboard: DASHBOARD_ORANGE,
   liveMonitoring: LIVE_MONITORING_GREEN,
-  warRoom: WAR_ROOM_FUSCHIA,
+  warRoom: WAR_ROOM_SALMON,
   intelligence: INTELLIGENCE_BLUE,
   alertCenter: ALERT_CENTER_YELLOW,
   settings: SETTINGS_MAUVE,

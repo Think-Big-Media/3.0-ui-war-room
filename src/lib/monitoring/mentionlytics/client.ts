@@ -18,8 +18,6 @@ interface MentionlyticsConfig {
   };
 }
 
-}
-
 interface MentionlyticsResponse {
   data: any[];
   meta: {
@@ -33,8 +31,6 @@ interface MentionlyticsResponse {
     reset: number;
     limit: number;
   };
-}
-
 }
 
 interface MentionlyticsMention {
@@ -75,8 +71,6 @@ interface MentionlyticsMention {
     city?: string;
   };
   influence_score?: number;
-}
-
 }
 
 export class MentionlyticsClient implements MonitoringClient {
@@ -489,3 +483,4 @@ export class MentionlyticsClient implements MonitoringClient {
       throw error;
     }
   }
+}

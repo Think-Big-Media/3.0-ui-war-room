@@ -122,3 +122,4 @@ export async function requestDataDeletion(userId: string, reason: string): Promi
   if (!response.ok) {
     throw new Error('Failed to request data deletion');
   }
+}

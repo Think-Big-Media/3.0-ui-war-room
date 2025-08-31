@@ -20,8 +20,6 @@ interface RequestOptions {
   cacheTTL?: number;
 }
 
-}
-
 interface RequestLog {
   timestamp: Date;
   method: string;
@@ -30,8 +28,6 @@ interface RequestLog {
   response?: any;
   error?: any;
   duration: number;
-}
-
 }
 
 export class MetaApiClient {
@@ -268,3 +264,4 @@ export function createMetaApiClient(config?: Partial<MetaConfig>): MetaApiClient
   });
 
   return new MetaApiClient(auth, config);
+}

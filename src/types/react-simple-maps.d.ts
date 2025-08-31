@@ -54,3 +54,4 @@ declare module 'react-simple-maps' {
   export const Geography: React.FC<GeographyProps>;
   export const Marker: React.FC<MarkerProps>;
   export const Annotation: React.FC<AnnotationProps>;
+}

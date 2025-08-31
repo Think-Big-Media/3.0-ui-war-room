@@ -1,4 +1,3 @@
-}
 // Custom error classes for Google Ads API integration
 
 export class GoogleAdsAPIError extends Error {
@@ -96,3 +95,4 @@ export class CircuitBreakerOpenError extends Error {
     super('Circuit breaker is OPEN. Google Ads API temporarily unavailable.');
     this.name = 'CircuitBreakerOpenError';
   }
+}

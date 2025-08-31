@@ -14,6 +14,7 @@ const CampaignTabs: React.FC<CampaignTabsProps> = ({
   onTabChange,
 }) => {
   const tabs = [
+    { id: 'analytics' as CampaignTab, label: 'Ad Campaigns', icon: BarChart3 },
     {
       id: 'projects' as CampaignTab,
       label: 'Strategic Projects',
@@ -21,7 +22,6 @@ const CampaignTabs: React.FC<CampaignTabsProps> = ({
     },
     { id: 'assets' as CampaignTab, label: 'Asset Library', icon: FileText },
     { id: 'activity' as CampaignTab, label: 'Team Activity', icon: Activity },
-    { id: 'analytics' as CampaignTab, label: 'Ad Campaigns', icon: BarChart3 },
   ];
 
   return (

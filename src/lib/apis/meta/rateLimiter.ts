@@ -12,8 +12,6 @@ interface RateLimitState {
   backoffMultiplier: number;
 }
 
-}
-
 export class RateLimiter {
   private state: RateLimitState = {
     requestCount: 0,

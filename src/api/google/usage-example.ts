@@ -1,4 +1,3 @@
-}
 // Example usage of Google Ads API client
 
 import { createGoogleAdsAPI } from './index';

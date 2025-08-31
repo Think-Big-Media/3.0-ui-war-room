@@ -123,3 +123,4 @@ export interface CacheConfig {
   ttl: number; // Time to live in seconds
   maxSize: number; // Maximum number of entries
   namespace: string;
+}

@@ -6,6 +6,7 @@
 import type React from 'react';
 import { useState } from 'react';
 import { useNavigate, useLocation, Outlet } from 'react-router-dom';
+// import { useSupabaseAuth } from '../../contexts/SupabaseAuthContext';
 import {
   LayoutDashboard,
   FileText,
@@ -235,3 +236,4 @@ export function MainLayout() {
       </div>
     </>
   );
+}

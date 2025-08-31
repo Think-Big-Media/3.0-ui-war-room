@@ -1,99 +1,117 @@
-import { defineConfig, loadEnv } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from 'path'
-import { visualizer } from 'rollup-plugin-visualizer'
+import { defineConfig, loadEnv } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   // Load env file based on `mode` in the current working directory.
   // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
-  const env = loadEnv(mode, '.', '')
-  
+  const env = loadEnv(mode, '.', '');
+
   return {
     plugins: [
       react(),
       // Bundle analyzer - only in production with analyze flag
-      env.ANALYZE && visualizer({
-        filename: 'dist/stats.html',
-        open: true,
-        gzipSize: true,
-        brotliSize: true,
-      }),
+      env.ANALYZE &&
+        visualizer({
+          filename: 'dist/stats.html',
+          open: true,
+          gzipSize: true,
+          brotliSize: true,
+        }),
     ].filter(Boolean),
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
       },
     },
-    // Define process.env.NODE_ENV for any legacy code that might use it
-    define: {
-      'process.env.NODE_ENV': JSON.stringify(mode === 'production' ? 'production' : 'development')
-    },
+    // IMPORTANT: Never use process.env in define section - it breaks browser builds!
+    // Vite automatically handles VITE_ prefixed env vars via import.meta.env
+    // No define section needed for env vars
     build: {
-      // Bundle size optimization
-      chunkSizeWarningLimit: 500,
+      // Optimize bundle size and performance
+      chunkSizeWarningLimit: 800,
+      target: 'es2020', // Modern browsers for better optimization
       rollupOptions: {
         output: {
+          // Optimized manual chunks for better caching and loading
           manualChunks: (id) => {
-            // Only split if module actually exists
-            if (!id) return;
-            // Aggressive code splitting for better caching and smaller chunks
+            // Core React bundle - highest priority
+            if (
+              ['react', 'react-dom', 'react-router-dom'].some((pkg) =>
+                id.includes(pkg)
+              )
+            ) {
+              return 'react-core';
+            }
+
+            // Remove framer-motion from bundle (not used anymore)
+            // Heavy animation library replaced with CSS animations
+
+            // UI and state management
+            if (
+              ['@reduxjs/toolkit', 'react-redux', 'zustand'].some((pkg) =>
+                id.includes(pkg)
+              )
+            ) {
+              return 'state-management';
+            }
+
+            // Forms and validation
+            if (
+              ['react-hook-form', '@hookform/resolvers', 'yup', 'zod'].some(
+                (pkg) => id.includes(pkg)
+              )
+            ) {
+              return 'forms';
+            }
+
+            // Charts - lazy load for dashboard
+            if (['recharts', 'd3-scale'].some((pkg) => id.includes(pkg))) {
+              return 'charts';
+            }
+
+            // Authentication
+            if (id.includes('@supabase/')) {
+              return 'auth';
+            }
+
+            // Icons - separate chunk as they're used everywhere
+            if (id.includes('lucide-react')) {
+              return 'icons';
+            }
+
+            // Utilities
+            if (
+              [
+                'date-fns',
+                'clsx',
+                'tailwind-merge',
+                'class-variance-authority',
+              ].some((pkg) => id.includes(pkg))
+            ) {
+              return 'utils';
+            }
+
+            // Large individual packages
+            if (id.includes('react-beautiful-dnd')) return 'dnd';
+            if (id.includes('react-simple-maps')) return 'maps';
+            if (id.includes('posthog-js')) return 'analytics';
+
+            // Node modules as vendor chunk
             if (id.includes('node_modules')) {
-              // Bundle React, React-DOM, React-Redux, and Redux Toolkit together
-              // to avoid useSyncExternalStore errors
-              if (id.includes('react') || id.includes('react-dom') || id.includes('react-router') || 
-                  id.includes('@reduxjs') || id.includes('react-redux')) {
-                return 'react-vendor';
-              }
-              if (id.includes('recharts') || id.includes('d3')) {
-                return 'charts-vendor';
-              }
-              if (id.includes('lucide-react')) {
-                return 'icons-vendor';
-              }
-              if (id.includes('@builder.io')) {
-                return 'builder-vendor';
-              }
-              if (id.includes('posthog')) {
-                return 'analytics-vendor';
-              }
-              if (id.includes('date-fns') || id.includes('clsx') || id.includes('tailwind-merge')) {
-                return 'utils-vendor';
-              }
-              // All other node_modules in a shared vendor chunk
               return 'vendor';
             }
-            // Split each page into its own chunk
-            if (id.includes('src/pages/')) {
-              const pageName = id.split('/pages/')[1].split('.')[0];
-              return `page-${pageName.toLowerCase()}`;
-            }
           },
-          // Optimize chunk names for production
-          chunkFileNames: (chunkInfo) => {
-            const facadeModuleId = chunkInfo.facadeModuleId ? chunkInfo.facadeModuleId.split('/').pop() : 'chunk';
-            return `assets/${facadeModuleId}-[hash].js`;
-          }
         },
-        // External dependencies that should not be bundled
-        external: [],
-        // Tree-shaking optimizations - FIXED to not eliminate everything
-        treeshake: {
-          moduleSideEffects: true,  // Allow side effects
-          propertyReadSideEffects: true,
-          tryCatchDeoptimization: true
-        }
       },
-      // Disable source maps in production for smaller bundle
+      // Disable source maps in production for performance
       sourcemap: false,
-      // Use esbuild for faster minification
+      // Use esbuild for fastest minification
       minify: 'esbuild',
-      // Target modern browsers for smaller output
-      target: 'es2020',
-      // Enable CSS code splitting
-      cssCodeSplit: true,
-      // Compress assets
-      assetsInlineLimit: 4096,
+      // CSS optimization
+      cssMinify: true,
     },
     server: {
       port: env.VITE_PORT ? parseInt(env.VITE_PORT) : 5173,
@@ -115,9 +133,9 @@ export default defineConfig(({ mode }) => {
           '**/migrations/**',
           '**/logs/**',
           '**/tmp/**',
-          '**/temp/**'
-        ]
-      }
+          '**/temp/**',
+        ],
+      },
     },
-  }
-})
+  };
+});

@@ -9,6 +9,7 @@ import {
   X,
   Clock,
 } from 'lucide-react';
+import { perfectCardShadow } from '../lib/utils';
 
 interface ChatMessage {
   id: string;
@@ -210,121 +211,117 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
 
   return (
     <div className="max-w-6xl mx-auto">
-      <>
-        {isExpanded && (
+      {isExpanded && (
+        <div
+          ref={expandedRef}
+          className="mb-4 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 animate-in slide-in-from-bottom-5 fade-in duration-200"
+        >
+          {/* Chat Window Content */}
           <div
-            ref={expandedRef}
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-            className="mb-4 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20"
+            className={`bg-white/10 backdrop-blur-xl rounded-2xl overflow-hidden ${
+              chatState === 'history'
+                ? 'h-[600px]'
+                : 'min-h-[600px] max-h-[70vh]'
+            }`}
           >
-            {/* Chat Window Content */}
-            <div
-              className={`bg-white/10 backdrop-blur-xl rounded-2xl overflow-hidden ${
-                chatState === 'history'
-                  ? 'h-[600px]'
-                  : 'min-h-[600px] max-h-[70vh]'
-              }`}
-            >
-              {/* Chat History State */}
-              {chatState === 'history' && (
-                <div className="flex flex-col h-full">
-                  <div className="p-4 border-b border-gray-200/50">
-                    <h3 className="text-gray-800 font-medium flex items-center">
-                      <Clock className="w-4 h-4 mr-2" />
-                      Recent Conversations
+            {/* Chat History State */}
+            {chatState === 'history' && (
+              <div className="flex flex-col h-full">
+                <div className="p-4 border-b border-gray-200/50">
+                  <h3 className="text-gray-800 font-medium flex items-center">
+                    <Clock className="w-4 h-4 mr-2" />
+                    Recent Conversations
+                  </h3>
+                </div>
+                <div className="flex-1 overflow-y-auto p-4 scroll-fade-subtle">
+                  <div className="space-y-2">
+                    {chatHistory.map((chat) => (
+                      <button
+                        key={chat.id}
+                        onClick={() => openChat(chat)}
+                        className="w-full p-3 bg-white/60 hover:bg-white/80 rounded-xl border border-gray-200/50 hover:border-gray-300/50 transition-all duration-200 text-left hover:scale-[1.02]"
+                      >
+                        <div className="flex justify-between items-start mb-1">
+                          <h4 className="text-gray-800 font-medium text-sm">
+                            {chat.title}
+                          </h4>
+                          <span className="text-gray-500 text-xs">
+                            {formatTime(chat.timestamp)}
+                          </span>
+                        </div>
+                        <p className="text-gray-600 text-xs line-clamp-2">
+                          {chat.lastMessage}
+                        </p>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Active Chat State */}
+            {chatState === 'chat' && (
+              <div className="flex flex-col h-full">
+                {/* Chat Header */}
+                {activeChat && (
+                  <div className="p-3 border-b border-gray-200/50 bg-white/50">
+                    <h3 className="text-gray-800 font-medium text-sm">
+                      {activeChat.title}
                     </h3>
                   </div>
-                  <div className="flex-1 overflow-y-auto p-4 scroll-fade-subtle">
-                    <div className="space-y-2">
-                      {chatHistory.map((chat) => (
-                        <motion.button
-                          key={chat.id}
-                          onClick={() => openChat(chat)}
-                          whileHover={{ scale: 1.02 }}
-                          className="w-full p-3 bg-white/60 hover:bg-white/80 rounded-xl border border-gray-200/50 hover:border-gray-300/50 transition-all duration-200 text-left"
-                        >
-                          <div className="flex justify-between items-start mb-1">
-                            <h4 className="text-gray-800 font-medium text-sm">
-                              {chat.title}
-                            </h4>
-                            <span className="text-gray-500 text-xs">
-                              {formatTime(chat.timestamp)}
-                            </span>
-                          </div>
-                          <p className="text-gray-600 text-xs line-clamp-2">
-                            {chat.lastMessage}
-                          </p>
-                        </motion.button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
+                )}
 
-              {/* Active Chat State */}
-              {chatState === 'chat' && (
-                <div className="flex flex-col h-full">
-                  {/* Chat Header */}
-                  {activeChat && (
-                    <div className="p-3 border-b border-gray-200/50 bg-white/50">
-                      <h3 className="text-gray-800 font-medium text-sm">
-                        {activeChat.title}
-                      </h3>
-                    </div>
-                  )}
-
-                  {/* Messages Area */}
-                  <div className="flex-1 p-4 overflow-y-auto scroll-fade-subtle">
-                    <div className="space-y-3">
-                      {currentMessages.map((msg) => (
+                {/* Messages Area */}
+                <div className="flex-1 p-4 overflow-y-auto scroll-fade-subtle">
+                  <div className="space-y-3">
+                    {currentMessages.map((msg) => (
+                      <div
+                        key={msg.id}
+                        className={`flex ${msg.isUser ? 'justify-end' : 'justify-start'}`}
+                      >
                         <div
-                          key={msg.id}
-                          className={`flex ${msg.isUser ? 'justify-end' : 'justify-start'}`}
+                          className={`max-w-[80%] p-3 rounded-lg text-sm ${
+                            msg.isUser
+                              ? 'bg-gray-200 text-black'
+                              : 'bg-gray-700 text-white'
+                          }`}
                         >
-                          <div
-                            className={`max-w-[80%] p-3 rounded-lg text-sm ${
-                              msg.isUser
-                                ? 'bg-gray-200 text-black'
-                                : 'bg-gray-700 text-white'
-                            }`}
-                          >
-                            {msg.text}
-                          </div>
+                          {msg.text}
                         </div>
-                      ))}
+                      </div>
+                    ))}
 
-                      {/* Typing Indicator */}
-                      {isTyping && (
-                        <div className="flex justify-start">
-                          <div className="bg-gray-100 p-3 rounded-lg">
-                            <div className="flex space-x-1">
-                              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                              />
-                              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}
-                              />
-                              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}
-                              />
-                            </div>
+                    {/* Typing Indicator */}
+                    {isTyping && (
+                      <div className="flex justify-start">
+                        <div className="bg-gray-100 p-3 rounded-lg">
+                          <div className="flex space-x-1">
+                            <div
+                              className="w-2 h-2 bg-gray-400 rounded-full animate-pulse"
+                              style={{ animationDelay: '0ms' }}
+                            />
+                            <div
+                              className="w-2 h-2 bg-gray-400 rounded-full animate-pulse"
+                              style={{ animationDelay: '200ms' }}
+                            />
+                            <div
+                              className="w-2 h-2 bg-gray-400 rounded-full animate-pulse"
+                              style={{ animationDelay: '400ms' }}
+                            />
                           </div>
                         </div>
-                      )}
-                    </div>
+                      </div>
+                    )}
                   </div>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
-        )}
-      </>
+        </div>
+      )}
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="bg-white/20 backdrop-blur-xl rounded-2xl border border-white/40"
+      <div
+        className="bg-white/20 backdrop-blur-xl rounded-2xl border border-white/40 animate-in slide-in-from-bottom-5 fade-in duration-400"
         style={{ boxShadow: perfectCardShadow }}
       >
         <form onSubmit={handleSubmit} className="flex items-center p-4">
@@ -360,18 +357,7 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
 
             {/* AI Indicator */}
             <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-              <div
-                animate={{
-                  scale: [1, 1.1, 1],
-                  opacity: [0.7, 1, 0.7],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
-                className="w-2 h-2 bg-white/60 rounded-full"
-              />
+              <div className="w-2 h-2 bg-white/60 rounded-full animate-pulse" />
             </div>
           </div>
 
@@ -405,26 +391,24 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
 
             {/* Send Button */}
             <div className="relative group">
-              <motion.button
+              <button
                 type="submit"
                 disabled={!message.trim()}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`p-1.5 rounded-xl transition-all duration-200 ${
+                className={`p-1.5 rounded-xl transition-all duration-200 hover:scale-105 active:scale-95 ${
                   message.trim()
                     ? 'bg-white/80 text-gray-800 shadow-lg hover:bg-white'
                     : 'bg-white/30 text-white cursor-not-allowed'
                 }`}
               >
                 <Send className="w-5 h-5" />
-              </motion.button>
+              </button>
               <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
                 Send Message
               </div>
             </div>
           </div>
         </form>
-      </motion.div>
+      </div>
     </div>
   );
 };

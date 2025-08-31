@@ -443,3 +443,4 @@ export class GoogleAdsClient {
       circuitBreaker: this.circuitBreaker.getMetrics(),
     };
   }
+}
