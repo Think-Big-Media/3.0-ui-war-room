@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PageLayout from "../components/shared/PageLayout";
 import Card from "../components/shared/Card";
+import { SWOTRadarDashboard } from "../components/generated/SWOTRadarDashboard";
 import CommandStatusBar from "../components/dashboard/CommandStatusBar";
 import InteractivePoliticalMap from "../components/political/InteractivePoliticalMap";
 import SocialMediaPosts from "../components/dashboard/SocialMediaPosts";
 import { ShareOfVoiceChart } from "../components/mentionlytics/ShareOfVoiceChart";
 import { DualPieCharts } from "../components/mentionlytics/DualPieCharts";
-import { MomentumIndicators } from "../components/mentionlytics/MomentumIndicators";
+import { CampaignMomentum } from "../components/mentionlytics/CampaignMomentum";
+import { RiskQualityIndicators } from "../components/mentionlytics/RiskQualityIndicators";
 import { PlatformDominanceGrid } from "../components/mentionlytics/PlatformDominanceGrid";
 import { InfluencerPowerMatrix } from "../components/mentionlytics/InfluencerPowerMatrix";
 import { CampaignSetupModal } from "../components/mentionlytics/CampaignSetupModal";
@@ -210,8 +212,39 @@ export default function Dashboard() {
       <CommandStatusBar />
       
       <div className="30-aug-dashboard war-room-dashboard font-barlow" style={{ paddingTop: '47px' }}>
-      <div>
-      {/* Main Dashboard Wrapper */}
+        {/* Top Header - 4 Boxes Across (2 over each column) */}
+        <div className="grid grid-cols-4 gap-4 mb-6">
+          <CampaignMomentum />
+          <RiskQualityIndicators />
+          <Card 
+            variant="glass" 
+            padding="sm" 
+            className="flex flex-col items-center justify-center cursor-pointer transform transition-all duration-200 hover:scale-[1.02]"
+            onClick={() => handleMetricBoxClick('mentions')}
+          >
+            <div className="text-3xl font-normal text-green-400" style={{fontFamily: 'Barlow Condensed', fontWeight: 400}}>
+              2847
+            </div>
+            <div className="text-[10px] text-white/60 uppercase mt-2 text-center font-semibold tracking-wider font-barlow">
+              Mention Volume
+            </div>
+          </Card>
+          <Card 
+            variant="glass" 
+            padding="sm" 
+            className="flex flex-col items-center justify-center cursor-pointer transform transition-all duration-200 hover:scale-[1.02]"
+            onClick={() => handleMetricBoxClick('sentiment')}
+          >
+            <div className="text-3xl font-normal text-green-400" style={{fontFamily: 'Barlow Condensed', fontWeight: 400}}>
+              74
+            </div>
+            <div className="text-[10px] text-white/60 uppercase mt-2 text-center font-semibold tracking-wider font-barlow">
+              Sentiment Score
+            </div>
+          </Card>
+        </div>
+        
+      {/* Main Dashboard Wrapper - 2 Columns */}
       <div className="dashboard-wrapper">
         <div className="dashboard">
           {/* Left Column */}
@@ -238,17 +271,19 @@ export default function Dashboard() {
               </div>
             </Card>
 
+            {/* SWOT Radar - Keep this important component */}
+            <Card variant="glass" padding="md" className="fresh-swot-radar hoverable hover:scale-[1.02] transition-all duration-200">
+              <SWOTRadarDashboard />
+            </Card>
+
             {/* Mentionlytics Share of Voice Chart */}
             <ShareOfVoiceChart campaignData={campaignData} />
-
-            {/* Dual Pie Charts - Sentiment & Emotion */}
-            <DualPieCharts />
           </div>
 
           {/* Right Column */}
           <div className="right-column">
-            {/* Momentum Indicators */}
-            <MomentumIndicators />
+            {/* Dual Pie Charts - Sentiment & Emotion */}
+            <DualPieCharts />
             
             {/* Platform Dominance Grid */}
             <PlatformDominanceGrid />
