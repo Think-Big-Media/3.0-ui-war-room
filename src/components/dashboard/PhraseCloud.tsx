@@ -110,7 +110,7 @@ export const PhraseCloud: React.FC = () => {
               Manatee County
             </div>
             
-            <div className="text-[9px] text-white/60 uppercase font-semibold tracking-wider font-barlow mt-3 mb-1">
+            <div className="text-[9px] text-white/60 uppercase font-semibold tracking-wider font-barlow mt-4 mb-1">
               OPPONENTS
             </div>
             <div
