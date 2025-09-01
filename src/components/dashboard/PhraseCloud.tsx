@@ -37,16 +37,16 @@ export const PhraseCloud: React.FC = () => {
 
   // Social media phrases based on trending topics and campaign activity
   const socialMediaPhrases = [
-    'Great to see progress on infrastructure',
-    'Healthcare reform is long overdue',
-    'Economic policies making real difference',
-    'Education funding victory for students',
-    'Climate action plan looks promising',
-    'Working families finally getting help',
-    'Public safety improvements needed',
-    'Tax reform benefiting middle class',
-    'Social Security protections secured',
-    'Veterans deserve our full support',
+    'New Jersey families are finally seeing real progress on infrastructure investments',
+    'Healthcare reform initiatives are gaining momentum across suburban districts',
+    'Economic development policies are making a tangible difference for working families',
+    'Education funding breakthrough represents a major victory for students statewide',
+    'Climate action initiatives show promising results in environmental protection',
+    'Working class families are getting the support they deserve after years of neglect',
+    'Public safety improvements remain a top priority for community leaders',
+    'Tax reform measures are delivering real benefits to middle class households',
+    'Social Security protection measures ensure retirement security for seniors',
+    'Veterans advocacy programs demonstrate our commitment to those who served',
   ];
 
   // Combine actual social media phrases based on campaign keywords and trending topics
@@ -130,7 +130,7 @@ export const PhraseCloud: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex-1 relative" style={{ height: '100%', overflow: 'hidden' }}>
+        <div className="flex-1 relative phrase-3d" style={{ height: '100%', overflow: 'hidden' }}>
           <div className="phrase-carousel">
             {phrases.map((phrase: string, index: number) => (
               <div
@@ -141,8 +141,9 @@ export const PhraseCloud: React.FC = () => {
                   animationDelay: `${index * -3}s`,
                   zIndex: phrases.length - index,
                 }}
+                title={phrase}
               >
-                {phrase}
+                {phrase.length > 55 ? `${phrase.substring(0, 55)}...` : phrase}
               </div>
             ))}
           </div>

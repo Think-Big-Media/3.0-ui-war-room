@@ -113,15 +113,28 @@ const MentionlyticsPoliticalMap: React.FC = memo(() => {
   const handleStateHover = (geo: any, event: React.MouseEvent) => {
     const stateName = geo.properties.name;
     const stateData = stateDataMap.get(stateName);
+    
+    // Get the container bounds for better positioning
+    const containerRect = containerRef.current?.getBoundingClientRect();
+    const relativeX = containerRect ? event.clientX - containerRect.left : event.clientX;
+    const relativeY = containerRect ? event.clientY - containerRect.top : event.clientY;
 
-    if (stateData) {
-      setTooltip({
-        visible: true,
-        x: event.clientX,
-        y: event.clientY,
-        data: stateData,
-      });
-    }
+    // Show tooltip for all states, with default data for states without activity
+    const tooltipData = stateData || {
+      id: stateName,
+      name: stateName,
+      mentions: 0,
+      sentiment: { positive: 0, negative: 0, neutral: 0 },
+      sentimentScore: 0,
+      topKeywords: ['No activity']
+    };
+
+    setTooltip({
+      visible: true,
+      x: relativeX,
+      y: relativeY,
+      data: tooltipData,
+    });
   };
 
   const handleStateLeave = () => {
@@ -155,7 +168,7 @@ const MentionlyticsPoliticalMap: React.FC = memo(() => {
         >
           <div
             className="relative w-full max-w-lg lg:max-w-none flex justify-start"
-            style={{ height: '275px', marginTop: '-60px' }}
+            style={{ height: '275px', marginTop: '-80px' }}
           >
             <ComposableMap
               projection="geoAlbersUsa"
@@ -165,6 +178,7 @@ const MentionlyticsPoliticalMap: React.FC = memo(() => {
               projectionConfig={{
                 scale: 428,
               }}
+              className="political-map-svg"
             >
               <ZoomableGroup>
                 <Geographies geography={geoUrl}>
@@ -275,14 +289,14 @@ const MentionlyticsPoliticalMap: React.FC = memo(() => {
       </div>
 
       {/* Tooltip */}
-      {tooltip.visible && tooltip.data && (
-        <div
-          className="fixed z-[70] pointer-events-none"
-          style={{
-            left: `${tooltip.x + 10}px`,
-            top: `${tooltip.y - 10}px`,
-          }}
-        >
+      <div
+        className={`absolute political-map-tooltip ${tooltip.visible && tooltip.data ? 'visible' : ''}`}
+        style={{
+          left: `${tooltip.x + 10}px`,
+          top: `${tooltip.y - 10}px`,
+        }}
+      >
+        {tooltip.data && (
           <div className="bg-black/90 backdrop-blur-md border border-white/20 rounded-lg p-3 shadow-lg max-w-xs">
             <div className="flex items-center justify-between mb-2">
               <h4 className="font-bold text-white font-barlow">{tooltip.data.name}</h4>
@@ -316,8 +330,8 @@ const MentionlyticsPoliticalMap: React.FC = memo(() => {
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 });

@@ -198,34 +198,37 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
   }, [isExpanded, chatState]);
 
   return (
-    <div className="max-w-6xl mx-auto">
-      {isExpanded && (
-        <div
-          ref={expandedRef}
-          className="mb-4 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 animate-in slide-in-from-bottom-5 fade-in duration-200"
-        >
-          {/* Chat Window Content */}
+    <div className="max-w-4xl mx-auto">
+      <div
+        ref={expandedRef}
+        className={`bg-white/20 backdrop-blur-xl rounded-2xl border border-white/40 animate-in slide-in-from-bottom-5 fade-in duration-400 ${
+          isExpanded ? 'pb-0' : ''
+        }`}
+        style={{ boxShadow: perfectCardShadow }}
+      >
+        {/* Chat Window Content - rendered above input when expanded */}
+        {isExpanded && (
           <div
-            className={`bg-white/10 backdrop-blur-xl rounded-2xl overflow-hidden ${
-              chatState === 'history' ? 'h-[600px]' : 'min-h-[600px] max-h-[70vh]'
+            className={`bg-white/10 backdrop-blur-xl rounded-t-2xl overflow-hidden border-b border-white/20 ${
+              chatState === 'history' ? 'h-[400px]' : 'min-h-[400px] max-h-[50vh]'
             }`}
           >
             {/* Chat History State */}
             {chatState === 'history' && (
               <div className="flex flex-col h-full">
-                <div className="p-4 border-b border-gray-200/50">
-                  <h3 className="text-gray-800 font-medium flex items-center">
+                <div className="p-3 border-b border-gray-200/50">
+                  <h3 className="text-gray-800 font-medium flex items-center text-sm">
                     <Clock className="w-4 h-4 mr-2" />
                     Recent Conversations
                   </h3>
                 </div>
-                <div className="flex-1 overflow-y-auto p-4 scroll-fade-subtle">
+                <div className="flex-1 overflow-y-auto p-3 scroll-fade-subtle">
                   <div className="space-y-2">
                     {chatHistory.map((chat) => (
                       <button
                         key={chat.id}
                         onClick={() => openChat(chat)}
-                        className="w-full p-3 bg-white/60 hover:bg-white/80 rounded-xl border border-gray-200/50 hover:border-gray-300/50 transition-all duration-200 text-left hover:scale-[1.02]"
+                        className="w-full p-2.5 bg-white/60 hover:bg-white/80 rounded-lg border border-gray-200/50 hover:border-gray-300/50 transition-all duration-200 text-left hover:scale-[1.01]"
                       >
                         <div className="flex justify-between items-start mb-1">
                           <h4 className="text-gray-800 font-medium text-sm">{chat.title}</h4>
@@ -252,16 +255,18 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
                 )}
 
                 {/* Messages Area */}
-                <div className="flex-1 p-4 overflow-y-auto scroll-fade-subtle">
-                  <div className="space-y-3">
+                <div className="flex-1 p-3 overflow-y-auto scroll-fade-subtle">
+                  <div className="space-y-2">
                     {currentMessages.map((msg) => (
                       <div
                         key={msg.id}
                         className={`flex ${msg.isUser ? 'justify-end' : 'justify-start'}`}
                       >
                         <div
-                          className={`max-w-[80%] p-3 rounded-lg text-sm ${
-                            msg.isUser ? 'bg-gray-200 text-black' : 'bg-gray-700 text-white'
+                          className={`max-w-[75%] px-3 py-2 text-sm leading-tight ${
+                            msg.isUser 
+                              ? 'bg-blue-500 text-white rounded-l-2xl rounded-tr-2xl rounded-br-md' 
+                              : 'bg-gray-200 text-gray-800 rounded-r-2xl rounded-tl-2xl rounded-bl-md'
                           }`}
                         >
                           {msg.text}
@@ -295,14 +300,10 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
               </div>
             )}
           </div>
-        </div>
-      )}
+        )}
 
-      <div
-        className="bg-white/20 backdrop-blur-xl rounded-2xl border border-white/40 animate-in slide-in-from-bottom-5 fade-in duration-400"
-        style={{ boxShadow: perfectCardShadow }}
-      >
-        <form onSubmit={handleSubmit} className="flex items-center p-4">
+        {/* Input Bar - always rendered at bottom of container */}
+        <form onSubmit={handleSubmit} className="flex items-center p-3">
           {/* Chat History Button with Tooltip */}
           <div className="relative group">
             <button
@@ -330,7 +331,7 @@ const FloatingChatBar: React.FC<FloatingChatBarProps> = ({
               onChange={(e) => setMessage(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder={placeholder}
-              className="w-full bg-white/70 text-gray-600 placeholder-gray-500 rounded-xl px-4 py-4 pr-12 border border-white/50 focus:border-white/70 focus:outline-none focus:ring-0 transition-all duration-200"
+              className="w-full bg-white/70 text-gray-600 placeholder-gray-500 rounded-xl px-4 py-3 pr-12 border border-white/50 focus:border-white/70 focus:outline-none focus:ring-0 transition-all duration-200"
             />
 
             {/* AI Indicator */}

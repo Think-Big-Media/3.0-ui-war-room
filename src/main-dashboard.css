@@ -273,6 +273,14 @@
     }
   }
 
+  /* Desktop map scaling - 20% bigger at 1024px+ */
+  @media (min-width: 1024px) {
+    .political-map-svg {
+      transform: scale(1.2) !important;
+      transform-origin: left top !important;
+    }
+  }
+
   /* Container query for political map */
   @container (max-width: 500px) {
     .political-map .map-container {
@@ -592,6 +600,9 @@
     align-items: center;
     justify-content: center;
     height: 140px;
+    /* Ensure 3D context is preserved */
+    transform-style: preserve-3d;
+    will-change: transform;
   }
 
   .phrase-carousel {
@@ -600,33 +611,58 @@
     height: 100%;
     left: 0;
     transform-style: preserve-3d;
+    will-change: transform;
+    /* Ensure GPU acceleration */
+    backface-visibility: visible;
   }
 
   .war-room-dashboard .phrase-carousel .phrase-item {
     position: absolute !important;
     width: 100% !important;
-    left: 0 !important;
-    top: 50% !important;
+    left: 10px !important;
+    top: calc(50% - 30px) !important; /* Move up 30px from center (20px + 10px more) */
     transform-origin: center !important;
-    font-size: 16px !important;
-    backface-visibility: visible !important;
     text-align: center !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    font-size: 15px !important;
+    backface-visibility: visible !important;
     font-family: 'Barlow Condensed', sans-serif !important;
-    font-weight: 400 !important;
+    font-weight: 300 !important;
     letter-spacing: 0.5px !important;
     color: #ffffff !important;
-    padding: 0 10px !important;
     animation: ellipticalRotate 30s linear infinite !important;
     white-space: normal !important;
     line-height: 1.3 !important;
+    padding: 5px 10px !important;
+    max-width: 95% !important;
+    word-wrap: break-word !important;
+    overflow: visible !important;
+    /* Performance optimizations */
+    will-change: transform, opacity, filter, font-size !important;
+    transform-style: preserve-3d !important;
+    /* Clickability only when not blurred */
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+  }
+
+  /* Enhanced clickability for focused (non-blurred) phrases */
+  .war-room-dashboard .phrase-carousel .phrase-item:hover {
+    transform-style: preserve-3d !important;
+  }
+
+  /* Disable pointer events for heavily blurred phrases */
+  .war-room-dashboard .phrase-carousel .phrase-item[style*="blur(3px)"],
+  .war-room-dashboard .phrase-carousel .phrase-item[style*="blur(4px)"],
+  .war-room-dashboard .phrase-carousel .phrase-item[style*="blur(5px)"] {
+    pointer-events: none !important;
+    cursor: default !important;
   }
 
   @keyframes ellipticalRotate {
     0% {
-      transform: translateY(-50%) translateZ(60px) translateY(0px);
+      transform: translateZ(60px) translateY(0px);
       font-size: 19px;
       opacity: 1;
       filter: blur(0px);
@@ -635,7 +671,7 @@
       font-weight: 600;
     }
     10% {
-      transform: translateY(-50%) translateZ(45px) translateY(-20px) translateX(-15px);
+      transform: translateZ(45px) translateY(-20px) translateX(-15px);
       font-size: 18px;
       opacity: 0.9;
       filter: blur(0.5px);
@@ -643,7 +679,7 @@
       z-index: 90;
     }
     20% {
-      transform: translateY(-50%) translateZ(25px) translateY(-35px) translateX(-25px);
+      transform: translateZ(25px) translateY(-35px) translateX(-25px);
       font-size: 15px;
       opacity: 0.7;
       filter: blur(2px);
@@ -651,7 +687,7 @@
       z-index: 50;
     }
     30% {
-      transform: translateY(-50%) translateZ(0px) translateY(-45px) translateX(-30px);
+      transform: translateZ(0px) translateY(-45px) translateX(-30px);
       font-size: 13px;
       opacity: 0.5;
       filter: blur(3px);
@@ -659,7 +695,7 @@
       z-index: 20;
     }
     40% {
-      transform: translateY(-50%) translateZ(-30px) translateY(-40px) translateX(-25px);
+      transform: translateZ(-30px) translateY(-40px) translateX(-25px);
       font-size: 11px;
       opacity: 0.3;
       filter: blur(4px);
@@ -667,7 +703,7 @@
       z-index: 5;
     }
     50% {
-      transform: translateY(-50%) translateZ(-45px) translateY(0px);
+      transform: translateZ(-45px) translateY(0px);
       font-size: 10px;
       opacity: 0.2;
       filter: blur(5px);
@@ -675,7 +711,7 @@
       z-index: 1;
     }
     60% {
-      transform: translateY(-50%) translateZ(-30px) translateY(40px) translateX(25px);
+      transform: translateZ(-30px) translateY(40px) translateX(25px);
       font-size: 11px;
       opacity: 0.3;
       filter: blur(4px);
@@ -683,7 +719,7 @@
       z-index: 5;
     }
     70% {
-      transform: translateY(-50%) translateZ(0px) translateY(45px) translateX(30px);
+      transform: translateZ(0px) translateY(45px) translateX(30px);
       font-size: 13px;
       opacity: 0.5;
       filter: blur(3px);
@@ -691,7 +727,7 @@
       z-index: 20;
     }
     80% {
-      transform: translateY(-50%) translateZ(25px) translateY(35px) translateX(25px);
+      transform: translateZ(25px) translateY(35px) translateX(25px);
       font-size: 15px;
       opacity: 0.7;
       filter: blur(2px);
@@ -699,7 +735,7 @@
       z-index: 50;
     }
     90% {
-      transform: translateY(-50%) translateZ(45px) translateY(20px) translateX(15px);
+      transform: translateZ(45px) translateY(20px) translateX(15px);
       font-size: 18px;
       opacity: 0.9;
       filter: blur(0.5px);
@@ -707,7 +743,7 @@
       z-index: 90;
     }
     100% {
-      transform: translateY(-50%) translateZ(60px) translateY(0px);
+      transform: translateZ(60px) translateY(0px);
       font-size: 19px;
       opacity: 1;
       filter: blur(0px);
@@ -747,6 +783,13 @@
   .war-room-dashboard .phrase-carousel .phrase-item:nth-child(10) {
     animation-delay: -27s !important;
   }
+
+  .phrase-3d {
+    perspective: 300px !important;
+    transform-style: preserve-3d !important;
+    will-change: transform !important;
+  }
+
 
   /* Golden Measure Squares */
   .metric-boxes-container {
@@ -1140,4 +1183,32 @@
       grid-template-columns: repeat(2, 1fr);
     }
   }
+}
+
+/* Political Map Responsive - 1200px+ breakpoint for larger size (was already there, removing duplicate) */
+
+/* Political Map Tooltip Enhancements */
+.political-map-tooltip {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.2s ease-out;
+  transform: translateY(10px);
+  pointer-events: none;
+  z-index: 70;
+}
+
+.political-map-tooltip.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Smooth hover transitions for map states */
+.political-map svg path {
+  transition: fill 0.2s ease-in-out, filter 0.2s ease-in-out;
+}
+
+.political-map svg path:hover {
+  filter: brightness(1.1) drop-shadow(0 0 8px rgba(255,255,255,0.3));
+  transition: fill 0.1s ease-in-out, filter 0.1s ease-in-out;
 }
