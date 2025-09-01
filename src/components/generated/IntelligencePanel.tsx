@@ -46,7 +46,7 @@ export const IntelligencePanel: React.FC<IntelligencePanelProps> = ({
   };
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="intelligence-panel h-full flex flex-col">
       {/* Intelligence Feed - Tighter spacing to reduce radar padding */}
       <div className="flex-1 space-y-2 overflow-y-auto">
         {intelligenceItems.map((item) => (

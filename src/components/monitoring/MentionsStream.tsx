@@ -251,7 +251,7 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({ mentions, filters, onFi
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-start gap-2">
                       <div>
-                        <span className="text-lg font-semibold text-white">{post.author}</span>
+                        <span className="text-lg font-semibold text-white font-barlow">{post.author}</span>
                         <div className="flex items-center gap-2 text-sm text-white/60">
                           <Clock className="w-4 h-4" />
                           {new Date(post.timestamp).toLocaleString('en-US', {
@@ -267,12 +267,12 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({ mentions, filters, onFi
 
                     <div className="flex items-center gap-2 text-sm text-sky-400">
                       <TrendingUp className="w-4 h-4" />
-                      <span className="font-barlow-condensed font-bold">{post.engagement.toLocaleString()}</span>
+                      <span className="font-jetbrains font-bold">{post.engagement.toLocaleString()}</span>
                     </div>
                   </div>
 
                   {/* Enhanced text with more context - expanded view */}
-                  <p className="text-base text-white/80 leading-relaxed my-4 whitespace-pre-wrap min-h-[4rem]">
+                  <p className="text-sm text-white/80 leading-tight my-3 whitespace-pre-wrap min-h-[3rem] font-barlow" style={{lineHeight: '1.4'}}>
                     {post.text}
                   </p>
 
@@ -301,13 +301,13 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({ mentions, filters, onFi
                     <div className="flex items-center gap-2">
                       <button 
                         onClick={() => handleAddToAlert(mention)} 
-                        className="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-xs font-mono uppercase hover:bg-orange-500/30 transition-all duration-200"
+                        className="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-xs font-barlow font-semibold uppercase hover:bg-orange-500/30 transition-all duration-200"
                       >
                         ADD TO ALERT
                       </button>
                       <button
                         onClick={() => handleGenerateResponse(mention)}
-                        className="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-xs font-mono uppercase hover:bg-blue-500/30 transition-all duration-200"
+                        className="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-xs font-barlow font-semibold uppercase hover:bg-blue-500/30 transition-all duration-200"
                       >
                         GENERATE RESPONSE
                       </button>
@@ -317,15 +317,15 @@ const MentionsStream: React.FC<MentionsStreamProps> = ({ mentions, filters, onFi
                     <div className="flex items-center gap-4 text-white/50">
                       <div className="flex items-center gap-1 text-sm">
                         <MessageCircle className="w-4 h-4" />
-                        <span className="font-mono uppercase">{Math.floor(post.engagement * 0.3)}</span>
+                        <span className="font-jetbrains font-bold">{Math.floor(post.engagement * 0.3)}</span>
                       </div>
                       <div className="flex items-center gap-1 text-sm">
                         <Heart className="w-4 h-4" />
-                        <span className="font-mono uppercase">{Math.floor(post.engagement * 0.6)}</span>
+                        <span className="font-jetbrains font-bold">{Math.floor(post.engagement * 0.6)}</span>
                       </div>
                       <div className="flex items-center gap-1 text-sm">
                         <Share2 className="w-4 h-4" />
-                        <span className="font-mono uppercase">{Math.floor(post.engagement * 0.1)}</span>
+                        <span className="font-jetbrains font-bold">{Math.floor(post.engagement * 0.1)}</span>
                       </div>
                     </div>
                   </div>

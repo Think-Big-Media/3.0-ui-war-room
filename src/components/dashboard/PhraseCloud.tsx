@@ -59,6 +59,11 @@ export const PhraseCloud: React.FC = () => {
 
   const phrases = allPhrases.length > 0 ? allPhrases : defaultPhrases;
 
+  // Handle phrase click - navigate to live monitoring with keyword filter
+  const handlePhraseClick = (phrase: string) => {
+    navigate(`/real-time-monitoring?keyword=${encodeURIComponent(phrase)}`);
+  };
+
   // Handle keyword click - navigate to intelligence hub with search
   const handleKeywordClick = (keyword: string) => {
     navigate(`/intelligence-hub?search=${encodeURIComponent(keyword)}&filter=mentions`);
@@ -76,34 +81,62 @@ export const PhraseCloud: React.FC = () => {
       className="phrase-cloud hoverable hover:scale-[1.02] transition-all duration-200"
     >
       <div className="flex items-center justify-between mb-2">
-        <h3 className="font-barlow font-semibold text-white text-xs">Account Keywords</h3>
+        <h3 className="font-barlow font-semibold text-white text-xs">Brand Monitoring</h3>
         <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
       </div>
 
-      <div className="phrase-container">
-        <div className="keywords-section">
-          <div className="keyword-group">
-            <div className="text-[9px] text-white/60 mb-1 uppercase font-semibold tracking-wider font-barlow">
-              PRIMARY
+      <div className="flex" style={{ height: '140px' }}>
+        <div className="flex-shrink-0" style={{ width: '120px', paddingRight: '10px' }}>
+          <div className="space-y-1">
+            <div
+              onClick={() => handleKeywordClick('Jack Ciattarelli')}
+              className="text-white/90 text-[10px] font-barlow cursor-pointer hover:text-cyan-300 transition-colors flex items-center"
+            >
+              <span className="w-2 h-2 bg-red-500 rounded-full mr-2 flex-shrink-0"></span>
+              Jack Ciattarelli
             </div>
-            {(campaignData?.keywords || ['Healthcare Reform', 'Economic Policy', 'Infrastructure']).slice(0, 3).map((keyword: string, idx: number) => (
-              <div
-                key={idx}
-                onClick={() => handleKeywordClick(keyword)}
-                className="text-white/75 text-[10px] leading-tight uppercase font-barlow mb-1 cursor-pointer hover:text-cyan-300 transition-colors hover:scale-105"
-              >
-                • {keyword}
-              </div>
-            ))}
+            <div
+              onClick={() => handleKeywordClick('Owned Media')}
+              className="text-white/90 text-[10px] font-barlow cursor-pointer hover:text-cyan-300 transition-colors flex items-center"
+            >
+              <span className="w-2 h-2 bg-yellow-500 rounded-full mr-2 flex-shrink-0"></span>
+              Owned Media
+            </div>
+            <div
+              onClick={() => handleKeywordClick('Manatee County')}
+              className="text-white/90 text-[10px] font-barlow cursor-pointer hover:text-cyan-300 transition-colors flex items-center"
+            >
+              <span className="w-2 h-2 bg-blue-500 rounded-full mr-2 flex-shrink-0"></span>
+              Manatee County
+            </div>
+            
+            <div className="text-[9px] text-white/60 uppercase font-semibold tracking-wider font-barlow mt-3 mb-1">
+              OPPONENTS
+            </div>
+            <div
+              onClick={() => handleCompetitorClick('Mikie Sherrill')}
+              className="text-white/90 text-[10px] font-barlow cursor-pointer hover:text-cyan-300 transition-colors flex items-center"
+            >
+              <span className="w-2 h-2 bg-indigo-500 rounded-full mr-2 flex-shrink-0"></span>
+              Mikie Sherrill
+            </div>
+            <div
+              onClick={() => handleCompetitorClick('Josh Gottheimer')}
+              className="text-white/90 text-[10px] font-barlow cursor-pointer hover:text-cyan-300 transition-colors flex items-center"
+            >
+              <span className="w-2 h-2 bg-green-500 rounded-full mr-2 flex-shrink-0"></span>
+              Josh Gottheimer
+            </div>
           </div>
         </div>
 
-        <div className="phrase-3d">
+        <div className="flex-1 relative" style={{ height: '100%', overflow: 'hidden' }}>
           <div className="phrase-carousel">
             {phrases.map((phrase: string, index: number) => (
               <div
                 key={index}
-                className="phrase-item"
+                className="phrase-item cursor-pointer hover:scale-105 transition-transform"
+                onClick={() => handlePhraseClick(phrase)}
                 style={{
                   animationDelay: `${index * -3}s`,
                   zIndex: phrases.length - index,
@@ -113,38 +146,6 @@ export const PhraseCloud: React.FC = () => {
               </div>
             ))}
           </div>
-        </div>
-      </div>
-
-      <div className="keywords-section mt-2">
-        <div className="keyword-group">
-          <div className="text-[9px] text-white/60 mb-1 uppercase font-semibold tracking-wider font-barlow">
-            COMPETITORS
-          </div>
-          {campaignData?.competitors?.map((comp: any, idx: number) => (
-            <div
-              key={idx}
-              onClick={() => handleCompetitorClick(comp.name)}
-              className="text-white/75 text-[10px] leading-tight uppercase font-barlow mb-1 cursor-pointer hover:text-cyan-300 transition-colors hover:scale-105"
-            >
-              • {comp.name}
-            </div>
-          )) || (
-            <>
-              <div 
-                onClick={() => handleCompetitorClick('Joe Biden')}
-                className="text-white/75 text-[10px] leading-tight uppercase font-barlow mb-1 cursor-pointer hover:text-cyan-300 transition-colors hover:scale-105"
-              >
-                • Joe Biden
-              </div>
-              <div 
-                onClick={() => handleCompetitorClick('Ron DeSantis')}
-                className="text-white/75 text-[10px] leading-tight uppercase font-barlow mb-1 cursor-pointer hover:text-cyan-300 transition-colors hover:scale-105"
-              >
-                • Ron DeSantis
-              </div>
-            </>
-          )}
         </div>
       </div>
     </Card>

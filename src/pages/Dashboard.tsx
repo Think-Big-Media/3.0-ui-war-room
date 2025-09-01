@@ -19,6 +19,7 @@ import {
   useMentionlyticsDashboard,
   useCrisisAlerts,
 } from '../hooks/useMentionlytics';
+import { useCampaignSummary } from '../hooks/useCampaignData';
 import { Zap, Radio, PenTool, TrendingUp, Smartphone, AlertTriangle, Settings } from 'lucide-react';
 import '../main-dashboard.css';
 
@@ -31,6 +32,9 @@ export default function Dashboard() {
   const { data: sentimentData, dataMode } = useSentimentAnalysis();
   const { alerts: crisisAlerts } = useCrisisAlerts();
   const dashboard = useMentionlyticsDashboard();
+
+  // Campaign Data Hooks
+  const { meta: metaCampaigns, google: googleCampaigns, loading: campaignLoading } = useCampaignSummary();
 
   console.log('🏠 [DASHBOARD PAGE] Rendering at', window.location.pathname);
   console.log('🔄 [DASHBOARD] Component render at', performance.now());
@@ -170,7 +174,7 @@ export default function Dashboard() {
                 }`}
               ></div>
             </div>
-            <div className="text-2xl font-bold text-emerald-400 mb-1 font-barlow-condensed" style={{fontWeight: 400}}>
+            <div className="text-2xl font-bold text-emerald-400 mb-1 font-jetbrains" style={{fontWeight: 400}}>
               {sentimentData
                 ? `+${Math.round((sentimentData.positive / sentimentData.total) * 100)}%`
                 : '+33%'}
@@ -195,7 +199,7 @@ export default function Dashboard() {
                 }`}
               ></div>
             </div>
-            <div className="text-2xl font-bold text-sky-400 mb-1 font-barlow-condensed" style={{fontWeight: 400}}>
+            <div className="text-2xl font-bold text-sky-400 mb-1 font-jetbrains" style={{fontWeight: 400}}>
               {sentimentData ? sentimentData.total.toLocaleString() : '1,039'}
             </div>
             <div className="text-xs text-white/60">24h volume • +12% vs yesterday</div>
@@ -216,7 +220,7 @@ export default function Dashboard() {
                 }`}
               ></div>
             </div>
-            <div className="text-2xl font-bold text-violet-400 mb-1 font-barlow-condensed" style={{fontWeight: 400}}>
+            <div className="text-2xl font-bold text-violet-400 mb-1 font-jetbrains" style={{fontWeight: 400}}>
               {dashboard.shareOfVoice?.[0]?.percentage?.toFixed(1) || '76.9'}%
             </div>
             <div className="text-xs text-white/60">Leading competitor • Reach: 2.4M</div>
@@ -242,7 +246,7 @@ export default function Dashboard() {
               ></div>
             </div>
             <div
-              className={`text-2xl font-bold mb-1 font-barlow-condensed ${
+              className={`text-2xl font-bold mb-1 font-jetbrains ${
                 crisisAlerts?.hasActiveCrisis ? 'text-rose-400' : 'text-emerald-400'
               }`}
               style={{fontWeight: 400}}
@@ -290,6 +294,110 @@ export default function Dashboard() {
             {/* Competitor Analysis */}
             <WidgetErrorBoundary widgetName="Competitor Analysis">
               <CompetitorAnalysis />
+            </WidgetErrorBoundary>
+
+            {/* Campaign Performance Summary */}
+            <WidgetErrorBoundary widgetName="Campaign Summary">
+              <Card 
+                variant="glass" 
+                padding="md" 
+                className="campaign-summary-widget hoverable cursor-pointer" 
+                onClick={() => navigate('/campaign-control')}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-xs text-white/60 uppercase font-semibold tracking-wider font-barlow">
+                    CAMPAIGN PERFORMANCE
+                  </h3>
+                  <div className="flex items-center gap-2">
+                    <div
+                      className={`w-2 h-2 rounded-full animate-pulse ${
+                        dataMode === 'MOCK' ? 'bg-amber-400' : 'bg-green-400'
+                      }`}
+                    ></div>
+                    <div className="text-xs text-white/60">24h summary</div>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-6">
+                  {/* Meta Column */}
+                  <div className="meta-summary">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="w-6 h-6 bg-[#1877F2] rounded flex items-center justify-center">
+                        <span className="text-white text-xs font-bold">f</span>
+                      </div>
+                      <span className="text-sm font-barlow font-semibold text-white">Meta Ads</span>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-3 text-xs">
+                      <div>
+                        <div className="text-white/60 mb-1">Total Spend</div>
+                        <div className="font-jetbrains font-bold text-white">
+                          {campaignLoading ? '...' : `$${metaCampaigns.data?.totalSpend.toLocaleString() || '0'}`}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-white/60 mb-1">Impressions</div>
+                        <div className="font-jetbrains font-bold text-sky-400">
+                          {campaignLoading ? '...' : (metaCampaigns.data?.totalImpressions.toLocaleString() || '0')}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-white/60 mb-1">Conversions</div>
+                        <div className="font-jetbrains font-bold text-emerald-400">
+                          {campaignLoading ? '...' : (metaCampaigns.data?.totalConversions.toLocaleString() || '0')}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-white/60 mb-1">Avg ROAS</div>
+                        <div className="font-jetbrains font-bold text-violet-400">
+                          {campaignLoading ? '...' : `${metaCampaigns.data?.averageRoas || '0'}x`}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Google Column */}
+                  <div className="google-summary">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="w-6 h-6 bg-gradient-to-r from-[#4285F4] via-[#EA4335] to-[#FBBC05] rounded flex items-center justify-center">
+                        <span className="text-white text-xs font-bold">G</span>
+                      </div>
+                      <span className="text-sm font-barlow font-semibold text-white">Google Ads</span>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-3 text-xs">
+                      <div>
+                        <div className="text-white/60 mb-1">Total Cost</div>
+                        <div className="font-jetbrains font-bold text-white">
+                          {campaignLoading ? '...' : `$${googleCampaigns.data?.totalCost.toLocaleString() || '0'}`}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-white/60 mb-1">Impressions</div>
+                        <div className="font-jetbrains font-bold text-sky-400">
+                          {campaignLoading ? '...' : (googleCampaigns.data?.totalImpressions.toLocaleString() || '0')}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-white/60 mb-1">Conversions</div>
+                        <div className="font-jetbrains font-bold text-emerald-400">
+                          {campaignLoading ? '...' : (googleCampaigns.data?.totalConversions.toLocaleString() || '0')}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-white/60 mb-1">Avg ROAS</div>
+                        <div className="font-jetbrains font-bold text-violet-400">
+                          {campaignLoading ? '...' : `${googleCampaigns.data?.averageRoas || '0'}x`}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-4 text-center">
+                  <div className="text-xs text-white/60 uppercase tracking-wider">Click to view full campaign details</div>
+                </div>
+              </Card>
             </WidgetErrorBoundary>
 
             {/* Quick Actions Grid */}

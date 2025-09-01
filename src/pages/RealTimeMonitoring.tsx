@@ -1,7 +1,8 @@
 'use client';
 
 import type React from 'react';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import PageLayout from '../components/shared/PageLayout';
 import MonitoringControls from '../components/monitoring/MonitoringControls';
 import MentionsStream from '../components/monitoring/MentionsStream';
@@ -30,12 +31,14 @@ import { createLogger } from '../utils/logger';
 const logger = createLogger('RealTimeMonitoring');
 
 const RealTimeMonitoring: React.FC = () => {
+  const location = useLocation();
   const [isLive, setIsLive] = useState(true);
   const [filters, setFilters] = useState<MonitoringFilters>({
     source: 'all',
     sentiment: 'all',
     region: 'all',
   });
+  const [keywordFilter, setKeywordFilter] = useState<string | null>(null);
 
   // Get Mentionlytics data
   const { mentions: liveMentions, loading: mentionsLoading } = useLiveMentionsFeed(20);
@@ -43,6 +46,13 @@ const RealTimeMonitoring: React.FC = () => {
   const { data: influencerData, loading: influencersLoading } = useTopInfluencers(5);
   const { data: sentimentData, loading: sentimentLoading } = useSentimentAnalysis();
   const { mode: dataMode } = useMentionlyticsMode();
+
+  // Handle URL parameters for keyword filtering
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const keyword = searchParams.get('keyword');
+    setKeywordFilter(keyword);
+  }, [location.search]);
 
   // Use live data if available, fallback to mock
   const mentions = useMemo(() => {
@@ -96,7 +106,13 @@ const RealTimeMonitoring: React.FC = () => {
     const matchesSource = filters.source === 'all' || mention.platform === filters.source;
     const matchesSentiment = filters.sentiment === 'all' || mention.sentiment === filters.sentiment;
     const matchesRegion = filters.region === 'all' || mention.region === filters.region;
-    return matchesSource && matchesSentiment && matchesRegion;
+    
+    // Keyword filtering: check if mention content includes the keyword
+    const matchesKeyword = !keywordFilter || 
+      mention.content.toLowerCase().includes(keywordFilter.toLowerCase()) ||
+      mention.hashtags?.some(tag => tag.toLowerCase().includes(keywordFilter.toLowerCase()));
+    
+    return matchesSource && matchesSentiment && matchesRegion && matchesKeyword;
   });
 
   return (
@@ -114,6 +130,26 @@ const RealTimeMonitoring: React.FC = () => {
             {dataMode} DATA
           </div>
         </div>
+
+        {/* Keyword Filter Indicator */}
+        {keywordFilter && (
+          <div className="mb-4 px-4">
+            <div className="bg-blue-500/20 border border-blue-500/30 rounded-lg p-3 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                <span className="text-blue-400 font-barlow font-semibold text-sm">
+                  Filtering by keyword: "{keywordFilter}"
+                </span>
+              </div>
+              <button
+                onClick={() => setKeywordFilter(null)}
+                className="text-blue-400 hover:text-blue-300 text-sm font-barlow"
+              >
+                Clear filter
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Dynamic Alert Banner - Moved to top */}
         <MonitoringAlert onAction={handleAlertAction} />

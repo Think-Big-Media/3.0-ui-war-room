@@ -216,7 +216,7 @@ const MentionlyticsPoliticalMap: React.FC = memo(() => {
         </div>
 
         {/* Right side - TOP ACTIVITY list */}
-        <div className="hidden lg:flex w-48 pl-4 flex-col justify-start pt-4">
+        <div className="hidden md:flex w-48 pl-4 flex-col justify-start pt-4">
           <div className="text-xs text-white/60 mb-2 uppercase font-semibold tracking-wider font-barlow text-right">
             TOP ACTIVITY
           </div>

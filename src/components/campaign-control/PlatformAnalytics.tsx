@@ -1,5 +1,7 @@
 import type React from 'react';
 import { useState } from 'react';
+import { useCampaignSummary } from '../../hooks/useCampaignData';
+import { useNotifications } from '../shared/NotificationSystem';
 import {
   BarChart3,
   TrendingUp,
@@ -40,6 +42,10 @@ type DensityMode = 'compact' | 'normal' | 'comfortable';
 const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({ platform: initialPlatform }) => {
   const [selectedCampaign, setSelectedCampaign] = useState<string | null>(null);
   const [platformFilter, setPlatformFilter] = useState<'all' | 'meta' | 'google'>('all');
+  
+  // Real campaign data hooks
+  const { meta: metaCampaignsData, google: googleCampaignsData, loading: campaignLoading, syncAll } = useCampaignSummary();
+  const { showSuccess, showError } = useNotifications();
   const [selectedCampaigns, setSelectedCampaigns] = useState<Set<string>>(new Set());
   const [bulkActionOpen, setBulkActionOpen] = useState(false);
   const [aiAutoOptimize, setAiAutoOptimize] = useState(false);
@@ -55,89 +61,43 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({ platform: initial
     actions: true,
   });
 
-  // Mock Meta campaign data
-  const metaCampaigns = [
-    {
-      id: 'meta-1',
-      name: 'Q4 Voter Outreach Campaign',
-      platform: 'Meta Business Suite',
-      platformType: 'meta' as const,
-      status: 'active' as const,
-      budget: '$15,000',
-      spent: '$4,850.75',
-      impressions: '245,680',
-      clicks: '12,284',
-      conversions: '892',
-      ctr: '5.0%',
-      cpm: '$19.75',
-      roas: '3.2x',
-      aiInsight:
-        'Campaign performing 23% above industry average. Consider increasing budget by $2,000 to maximize reach before early voting.',
-      trend: 'up' as const,
-    },
-    {
-      id: 'meta-2',
-      name: 'Early Voting Awareness Drive',
-      platform: 'Instagram & Facebook',
-      platformType: 'meta' as const,
-      status: 'active' as const,
-      budget: '$10,000',
-      spent: '$7,235.50',
-      impressions: '189,342',
-      clicks: '7,574',
-      conversions: '523',
-      ctr: '4.0%',
-      cpm: '$38.22',
-      roas: '2.8x',
-      aiInsight:
-        'High engagement from 25-34 demographic. AI recommends shifting 20% budget to Instagram Stories for better conversion.',
-      trend: 'stable' as const,
-    },
-  ];
+  // Transform real Meta campaign data to match UI structure
+  const metaCampaigns = metaCampaignsData.data?.campaigns?.map((campaign) => ({
+    id: campaign.id || 'unknown',
+    name: campaign.name || 'Unnamed Campaign',
+    platform: 'Meta Business Suite',
+    platformType: 'meta' as const,
+    status: campaign.status || 'unknown',
+    budget: 'N/A', // Budget not available in current API structure
+    spent: `$${(campaign.spend || 0).toLocaleString()}`,
+    impressions: (campaign.impressions || 0).toLocaleString(),
+    clicks: Math.round((campaign.impressions || 0) * (campaign.ctr || 0) / 100).toLocaleString(),
+    conversions: (campaign.conversions || 0).toString(),
+    ctr: `${(campaign.ctr || 0)}%`,
+    cpm: `$${(campaign.cpm || 0).toFixed(2)}`,
+    roas: `${(campaign.roas || 0)}x`,
+    aiInsight: `Campaign ROAS of ${campaign.roas || 0}x ${(campaign.roas || 0) > 3 ? 'exceeds' : (campaign.roas || 0) > 2 ? 'meets' : 'below'} industry average. ${campaign.status === 'active' ? 'Active and optimizing.' : 'Paused - consider resuming.'}`,
+    trend: (campaign.roas || 0) > 3 ? 'up' as const : (campaign.roas || 0) > 2 ? 'stable' as const : 'down' as const,
+  })) || [];
 
-  // Mock Google Ads campaign data
-  const googleCampaigns = [
-    {
-      id: 'google-1',
-      name: 'Search - Voter Registration',
-      platform: 'Google Search Ads',
-      platformType: 'google' as const,
-      status: 'active' as const,
-      budget: '$8,000',
-      spent: '$3,245.80',
-      impressions: '98,450',
-      clicks: '8,956',
-      conversions: '1,234',
-      ctr: '9.1%',
-      cpc: '$0.36',
-      roas: '3.8x',
-      qualityScore: '8/10',
-      aiInsight:
-        'Keywords "register to vote [city]" showing 45% higher conversion. AI suggests expanding keyword variations.',
-      trend: 'up' as const,
-    },
-    {
-      id: 'google-2',
-      name: 'YouTube - Campaign Message',
-      platform: 'YouTube Ads',
-      platformType: 'google' as const,
-      status: 'active' as const,
-      budget: '$12,000',
-      spent: '$5,678.90',
-      impressions: '456,789',
-      clicks: '10,456',
-      conversions: '347',
-      views: '123,456',
-      completionRate: '68%',
-      ctr: '2.3%',
-      cpv: '$0.046',
-      roas: '2.1x',
-      engagementRate: '12%',
-      aiInsight:
-        '15-second ads outperforming 30-second by 40%. AI recommends cutting longer ads for mobile viewers.',
-      trend: 'up' as const,
-    },
-  ];
+  // Transform real Google campaign data to match UI structure
+  const googleCampaigns = googleCampaignsData.data?.campaigns?.map((campaign) => ({
+    id: campaign.id || 'unknown',
+    name: campaign.name || 'Unnamed Campaign',
+    platform: 'Google Ads',
+    platformType: 'google' as const,
+    status: campaign.status || 'unknown',
+    budget: 'N/A', // Budget not available in current API structure
+    spent: `$${(campaign.cost || 0).toLocaleString()}`,
+    impressions: (campaign.impressions || 0).toLocaleString(),
+    clicks: Math.round((campaign.impressions || 0) * (campaign.ctr || 0) / 100).toLocaleString(),
+    conversions: (campaign.conversions || 0).toString(),
+    ctr: `${(campaign.ctr || 0)}%`,
+    cpc: `$${(campaign.cpc || 0).toFixed(2)}`,
+    roas: `${(campaign.roas || 0)}x`,
+    aiInsight: `Campaign with ${campaign.ctr || 0}% CTR and $${(campaign.cpc || 0).toFixed(2)} CPC. ${(campaign.roas || 0) > 3 ? 'Excellent ROAS - consider scaling.' : (campaign.roas || 0) > 2 ? 'Good performance - monitor closely.' : 'Below target - needs optimization.'}`,
+    trend: (campaign.roas || 0) > 3 ? 'up' as const : (campaign.roas || 0) > 2 ? 'stable' as const : 'down' as const,
+  })) || [];
 
   const allCampaigns = [...metaCampaigns, ...googleCampaigns];
 
@@ -470,19 +430,23 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({ platform: initial
         {/* Campaign Management Toolbar */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            <button className="btn-secondary-action flex items-center gap-2 px-4 py-2">
+            <button 
+              className="btn-secondary-action flex items-center gap-2 px-4 py-2 opacity-50 cursor-not-allowed" 
+              disabled
+              title="View-only mode - campaign creation disabled"
+            >
               <Plus className="h-4 w-4" />
               Create New Campaign
             </button>
 
             <div className="relative">
               <button
-                onClick={() => setBulkActionOpen(!bulkActionOpen)}
-                disabled={selectedCampaigns.size === 0}
-                className="btn-secondary-neutral flex items-center gap-2 px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled
+                className="btn-secondary-neutral flex items-center gap-2 px-4 py-2 opacity-50 cursor-not-allowed"
+                title="View-only mode - bulk actions disabled"
               >
                 <Settings className="h-4 w-4" />
-                Bulk Actions ({selectedCampaigns.size})
+                Bulk Actions (0)
                 <ChevronDown className="h-4 w-4" />
               </button>
 
@@ -516,9 +480,17 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({ platform: initial
               )}
             </div>
 
-            <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-              <RefreshCw className="h-4 w-4" />
-              Sync Now
+            <button 
+              onClick={syncAll}
+              disabled={campaignLoading}
+              className={`flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg transition-colors ${
+                campaignLoading 
+                  ? 'opacity-50 cursor-not-allowed bg-gray-100' 
+                  : 'hover:bg-gray-50'
+              }`}
+            >
+              <RefreshCw className={`h-4 w-4 ${campaignLoading ? 'animate-spin' : ''}`} />
+              {campaignLoading ? 'Syncing...' : 'Sync Now'}
             </button>
           </div>
 
@@ -594,10 +566,20 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({ platform: initial
         {/* Campaign Performance Table */}
         <div className="bg-gray-50/30 rounded-xl border border-gray-200/30 overflow-hidden mb-6">
           <div className="px-6 py-6 border-b border-gray-200">
-            <h3 className="text-lg font-semibold text-gray-900">Live Campaign Performance</h3>
-            <p className="text-sm text-gray-600 mt-0.5">
-              Real-time data synchronized from Meta Business Suite and Google Ads
-            </p>
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">Live Campaign Performance</h3>
+                <p className="text-sm text-gray-600 mt-0.5">
+                  Real-time data synchronized from Meta Business Suite and Google Ads
+                </p>
+              </div>
+              <div className="text-right">
+                <div className="text-sm font-medium text-gray-900">VIEW-ONLY MODE</div>
+                <div className="text-xs text-gray-500 mt-0.5">
+                  Last updated: {new Date().toLocaleTimeString()} • {new Date().toLocaleDateString()}
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="overflow-x-auto">
@@ -609,18 +591,10 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({ platform: initial
                   >
                     <input
                       type="checkbox"
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          setSelectedCampaigns(new Set(filteredCampaigns.map((c) => c.id)));
-                        } else {
-                          setSelectedCampaigns(new Set());
-                        }
-                      }}
-                      checked={
-                        selectedCampaigns.size === filteredCampaigns.length &&
-                        filteredCampaigns.length > 0
-                      }
-                      className="rounded border-gray-300"
+                      disabled
+                      checked={false}
+                      className="rounded border-gray-300 opacity-50 cursor-not-allowed"
+                      title="View-only mode - bulk selection disabled"
                     />
                   </th>
                   {visibleColumns.campaign && (
@@ -683,9 +657,10 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({ platform: initial
                     <td className={`${densityStyles.padding} sticky left-0 bg-white/95`}>
                       <input
                         type="checkbox"
-                        checked={selectedCampaigns.has(campaign.id)}
-                        onChange={() => toggleCampaignSelection(campaign.id)}
-                        className="rounded border-gray-300"
+                        disabled
+                        checked={false}
+                        className="rounded border-gray-300 opacity-50 cursor-not-allowed"
+                        title="View-only mode - campaign selection disabled"
                       />
                     </td>
                     {visibleColumns.campaign && (
@@ -800,8 +775,9 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({ platform: initial
                       >
                         <div className="flex items-center gap-2">
                           <button
-                            className="p-1.5 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded transition-colors"
-                            title={campaign.status === 'active' ? 'Pause' : 'Resume'}
+                            className="p-1.5 text-gray-400 cursor-not-allowed rounded transition-colors"
+                            title="View-only mode - editing disabled"
+                            disabled
                           >
                             {campaign.status === 'active' ? (
                               <Pause className="h-4 w-4" />
@@ -810,12 +786,17 @@ const PlatformAnalytics: React.FC<PlatformAnalyticsProps> = ({ platform: initial
                             )}
                           </button>
                           <button
-                            className="p-1.5 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded transition-colors"
-                            title="Edit Budget"
+                            className="p-1.5 text-gray-400 cursor-not-allowed rounded transition-colors"
+                            title="View-only mode - editing disabled"
+                            disabled
                           >
                             <Edit3 className="h-4 w-4" />
                           </button>
-                          <button className="px-4 py-2 text-sm font-medium text-purple-600 hover:text-purple-700 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors">
+                          <button 
+                            className="px-4 py-2 text-sm font-medium text-gray-400 bg-gray-100 rounded-lg cursor-not-allowed"
+                            disabled
+                            title="View-only mode - optimization disabled"
+                          >
                             AI Optimize
                           </button>
                         </div>

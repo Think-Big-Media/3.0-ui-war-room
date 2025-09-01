@@ -78,6 +78,7 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 1.25rem; /* 20px - consistent gap */
     width: 100%;
+    min-height: calc(100vh - 200px); /* Ensure sufficient height for column stretching */
     background: transparent;
     padding: 0.3125rem; /* Restore some padding - 5px */
   }
@@ -145,14 +146,10 @@
 
   /* Responsive Design - Tablet and Mobile */
   @media (max-width: 1024px) {
-    /* Hide swing state text on tablets */
+    /* Keep map data visible on tablets but adjust size */
     .map-data {
-      display: none !important;
-    }
-
-    /* Hide phrase cloud keywords section */
-    .keywords-section {
-      display: none !important;
+      font-size: 11px;  /* Slightly smaller text */
+      min-width: 120px; /* Reduce minimum width */
     }
 
     /* Show simplified keywords at bottom */
@@ -172,8 +169,8 @@
     }
   }
 
-  @media (max-width: 768px) {
-    /* Mobile optimizations */
+  @media (max-width: 640px) {
+    /* Mobile optimizations - changed from 768px to 640px */
     .dashboard {
       grid-template-columns: 1fr;
       gap: 8px;
@@ -189,8 +186,13 @@
       border-radius: 6px;
     }
 
-    /* Hide swing states completely on mobile */
+    /* Hide map data only on mobile (under 640px), not tablet */
     .political-map .map-data {
+      display: none !important;
+    }
+    
+    /* Hide SWOT data list on mobile too */
+    .swot-data {
       display: none !important;
     }
 
@@ -240,24 +242,35 @@
     height: 380px !important; /* Further reduced for better fit */
   }
 
-  /* Left Column Container - transparent */
+  /* Left Column Container - transparent with flexible height allocation */
   .left-column {
     display: flex;
     flex-direction: column;
     gap: 15px;
     background: transparent;
     min-width: 0;
+    height: 100%; /* Ensure full column height utilization */
   }
 
   /* Political Map - Top Left */
   .political-map {
-    height: 280px;
-    min-height: 280px;
+    height: 322px;      /* Increased from 280px (15% bigger) */
+    min-height: 322px;  /* Increased from 280px */
     display: flex;
     flex-direction: column;
     container-type: inline-size;
+    width: 100%;        /* Ensure full width */
+    overflow: hidden;   /* Prevent overflow */
     /* Let Tailwind bg-white/10 work properly */
     /* opacity and filter at default values */
+  }
+  
+  /* Ensure map stays large on desktop screens */
+  @media (min-width: 1025px) {
+    .political-map {
+      height: 322px !important;
+      min-height: 322px !important;
+    }
   }
 
   /* Container query for political map */
@@ -272,6 +285,7 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
+    padding-left: 50px;  /* Shift content right by 50px */
     /* No background override - let parent handle it */
   }
 
@@ -297,9 +311,12 @@
   .map-data {
     padding: 0;
     padding-left: 8px;
+    padding-right: 8px;  /* Add right padding */
     font-size: 12px;
     overflow-y: auto;
     text-align: left;
+    min-width: 140px;    /* Ensure space for text */
+    flex-shrink: 0;      /* Prevent shrinking */
   }
 
   .map-data-item {
@@ -437,7 +454,8 @@
   .live-intelligence {
     display: flex;
     flex-direction: column;
-    height: 380px;
+    flex: 1; /* Expand to fill available space in left column */
+    min-height: 380px; /* Maintain minimum height for content visibility */
     padding-left: 8px;
   }
 
@@ -542,6 +560,7 @@
     gap: 15px;
     background: transparent;
     min-width: 0;
+    height: 100%; /* Ensure full column height utilization */
   }
 
   /* Phrase Cloud */
@@ -550,49 +569,36 @@
     display: flex;
     flex-direction: column;
   }
+  
+  /* Removed conflicting phrase-container grid layout */
 
-  .phrase-container {
-    flex: 1;
-    display: grid;
-    grid-template-columns: 90px 1fr;
-    gap: 8px;
-  }
-
-  .keywords-section {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    font-size: 10px;
-    overflow: hidden;
-    max-height: 60px;
-  }
+  /* Removed conflicting keywords-section styles */
 
   .keyword-group {
     flex: 1;
   }
 
   .keyword-list {
-    line-height: 1.5;
+    line-height: 1.2;  /* Tighter line spacing */
     color: #94a3b8;
     font-size: 10px;
   }
 
   .phrase-3d {
-    padding: 10px 5px;
     position: relative;
     overflow: visible;
     perspective: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: translateY(10px);
+    height: 140px;
   }
 
   .phrase-carousel {
     position: absolute;
-    width: 110%;
+    width: 100%;
     height: 100%;
-    left: -5%;
+    left: 0;
     transform-style: preserve-3d;
   }
 
@@ -907,11 +913,57 @@
     }
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1024px) and (min-width: 769px) {
     /* Tablet landscape adjustments */
     .left-column,
     .right-column {
       width: 100%;
+    }
+    
+    /* Keep political map same size on tablets */
+    .political-map {
+      height: 322px;  /* Keep same as desktop */
+      min-height: 322px;
+    }
+    
+    /* Adjust map container for tablets */
+    .map-container {
+      padding-left: 15px;  /* Less padding on tablets */
+      gap: 15px;           /* More space between map and text */
+    }
+    
+    /* Ensure map data is visible and properly styled on tablets */
+    .map-data {
+      display: block !important;  /* Force visible on tablets */
+      padding-right: 10px;
+    }
+    
+    /* Also ensure SWOT data list is visible on tablets */
+    .swot-data {
+      display: block !important;
+      min-width: 140px;
+      padding-left: 12px;
+    }
+    
+    /* Keep phrase cloud visible and working on tablets */
+    .phrase-cloud {
+      display: flex !important;
+      flex-direction: column !important;
+      height: 188px !important;
+    }
+    
+    .phrase-cloud .phrase-container {
+      display: grid !important;
+      grid-template-columns: 90px 1fr !important;
+      gap: 8px !important;
+      flex: 1 !important;
+    }
+    
+    .phrase-cloud .keywords-section {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 2px !important;  /* Tighter spacing on tablets */
+      min-width: 90px !important;
     }
 
     /* Reduce SWOT radar size on tablets */
@@ -940,7 +992,39 @@
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 768px) and (min-width: 641px) {
+    /* Small tablet adjustments */
+    .dashboard {
+      gap: 10px;
+    }
+    
+    /* Keep reasonable map size on small tablets */
+    .political-map {
+      height: 300px;
+      min-height: 300px;
+    }
+    
+    /* Stack cards on small tablets */
+    .left-column,
+    .right-column {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    /* Keep phrase cloud visible on small tablets */
+    .phrase-cloud {
+      display: flex !important;
+      height: 160px !important;
+    }
+    
+    /* Hide IntelligencePanel (SWOT list) on small tablets too */
+    .intelligence-panel {
+      display: none !important;
+    }
+  }
+
+  @media (max-width: 640px) {
     /* Mobile phone adjustments */
     .dashboard {
       gap: 8px;
@@ -954,19 +1038,38 @@
       gap: 8px;
     }
 
-    /* Reduce political map height on mobile */
+    /* Make political map container taller on mobile */
     .political-map {
-      height: 200px;
+      height: 308px;      /* 10% taller (280 * 1.1) */
+      min-height: 308px;
+    }
+    
+    /* Reset map container padding on mobile */
+    .map-container {
+      padding-left: 10px;  /* Small padding on mobile */
     }
 
-    /* Simplify SWOT radar on mobile */
+    /* Keep SWOT radar visible but compact on mobile */
     .fresh-swot-radar {
       height: 280px;
     }
+    
+    /* Keep SWOT container visible */
+    .swot-radar {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Hide IntelligencePanel (SWOT list) on mobile to prevent overflow */
+    .intelligence-panel {
+      display: none !important;
+    }
 
-    /* Adjust phrase cloud for mobile */
-    .phrase-cloud {
-      height: 135px;
+    /* Hide entire phrase cloud container on mobile */
+    .phrase-cloud,
+    .phrase-cloud-container,
+    [class*="phrase-cloud"] {
+      display: none !important;
     }
 
     /* Simplify metrics grid on mobile */
@@ -1013,6 +1116,12 @@
     .card {
       padding: 6px;
       border-radius: 4px;
+    }
+    
+    /* Keep good height even on very small screens */
+    .political-map {
+      height: 290px;      /* Keep reasonable height for tiny screens too */
+      min-height: 290px;
     }
 
     /* Even smaller fonts for tiny screens */

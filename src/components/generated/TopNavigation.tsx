@@ -192,19 +192,19 @@ const TopNavigation: React.FC = () => {
             onClick={() => handleNavigation('/')}
             className="flex items-center ml-[25px] hover:opacity-80 transition-opacity duration-200 cursor-pointer"
           >
-            {/* Full logo for large screens */}
+            {/* Full logo for large screens - increased size */}
             <img
               src="/images/WarRoom_Logo_White.png"
               alt="War Room"
-              className="hidden lg:block h-[26px] w-auto"
+              className="hidden lg:block h-[32px] w-auto"
             />
-            {/* Logomark for tablet */}
+            {/* Logomark for tablet - increased size */}
             <img
               src="https://cdn.builder.io/api/v1/image/assets%2F8686f311497044c0932b7d2247296478%2Ff489a630137d4a28b75e743a04ae8f49?format=webp&width=800"
               alt="War Room"
-              className="hidden md:block lg:hidden h-[28px] w-auto"
+              className="hidden md:block lg:hidden h-[36px] w-auto"
             />
-            {/* Small logo for mobile header */}
+            {/* Small logo for mobile header - keep same size */}
             <img
               src="https://cdn.builder.io/api/v1/image/assets%2F8686f311497044c0932b7d2247296478%2Ff489a630137d4a28b75e743a04ae8f49?format=webp&width=800"
               alt="War Room"
